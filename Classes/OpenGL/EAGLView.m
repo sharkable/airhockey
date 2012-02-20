@@ -12,6 +12,7 @@
 #import "ES2Renderer.h"
 #import "GameEngine.h"
 #import "IsFree.h"
+#import "const.h"
 
 // TODO I don't like this. I'm using this for the static AdMob functions.
 EAGLView* __instance;
@@ -28,10 +29,9 @@ EAGLView* __instance;
     return [CAEAGLLayer class];
 }
 
-//The EAGL view is stored in the nib file. When it's unarchived it's sent -initWithCoder:
-- (id)initWithCoder:(NSCoder*)coder
-{    
-    if ((self = [super initWithCoder:coder]))
+- (id)initWithFrame:(CGRect)frame
+{  
+    if ((self = [super initWithFrame:frame]))
     {
 		__instance = self;
 		

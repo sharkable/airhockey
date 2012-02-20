@@ -9,6 +9,7 @@
 #import "MainMenuState.h"
 #import "Texture2D.h"
 #import "PlayState.h"
+#import "StoryState.h"
 #import "GameEngine.h"
 #import "EAGLView.h"
 #import "LocalStore.h"
@@ -63,11 +64,20 @@
 	Texture2D* feedbackButtonPressedImage = [[ResourceLoader instance] getTextureWithName:@"feedback_button_pressed"];
 	_feedbackButton = [[Button alloc] initWithNormalTexture:feedbackButtonImage
 											 pressedTexture:feedbackButtonPressedImage
-												   position:CGPointMake(486, 936)];
+												   position: isIPhone ? CGPointMake(440, 926) : CGPointMake(486, 936)];
 	_feedbackButton.delegate = self;
 	_feedbackButton.selector = @selector(pressedFeedback);
 	[self addEntity:_feedbackButton];	
 
+	Texture2D* storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story_button"];
+	Texture2D* storyButtonPressedImage = [[ResourceLoader instance] getTextureWithName:@"story_button_pressed"];
+	_storyButton = [[Button alloc] initWithNormalTexture:storyButtonImage
+											pressedTexture:storyButtonPressedImage
+												  position: isIPhone ? CGPointMake(86, 926) : CGPointMake(91, 936)];
+	_storyButton.delegate = self;
+	_storyButton.selector = @selector(pressedStory);
+	[self addEntity:_storyButton];		
+	
 	if (NO) {
 		Texture2D* upgradeButtonImage = [[ResourceLoader instance] getTextureWithName:@"upgrade_button"];
 		Texture2D* upgradeButtonPressedImage = [[ResourceLoader instance] getTextureWithName:@"upgrade_button_pressed"];
@@ -180,6 +190,7 @@
 - (void) dealloc {
 	[_startButton      release];
 	[_feedbackButton   release];
+	[_storyButton      release];
 	[_upgradeButton    release];
 	[_numPlayersSelect release];
 	[_numPucksSelect   release];
@@ -193,7 +204,11 @@
 
 - (void) stateIsShown {
 	if (IS_FREE) {
-		[EAGLView addAdAtPoint:CGPointMake(0, 0)];	
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+			[EAGLView addAdAtPoint:CGPointMake(0, 0)];	
+		} else {
+			[EAGLView addAdAtPoint:CGPointMake(45, 40)];	
+		}
 	}
 }
 
@@ -226,6 +241,8 @@
 	NSString* free;
 	NSString* device;
 	
+	[FlurryAPI logEvent:@"FEEDBACK_PRESSED"];
+
 	if (IS_FREE) {
 		free = @"%20Free";
 	} else {
@@ -241,6 +258,12 @@
 	NSString* url = [NSString stringWithFormat:@"mailto:feedback@sharkable.com?subject=Glide%%20Hockey%%20HD%@%%20feedback%%20(%@)", free, device];
 	
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
+- (void) pressedStory {
+	[FlurryAPI logEvent:@"STORY_PRESSED"];
+	[EAGLView removeAd];
+	[[GameEngine instance] pushState:[[[StoryState alloc] init] autorelease]];
 }
 
 - (void) pressedUpgrade {

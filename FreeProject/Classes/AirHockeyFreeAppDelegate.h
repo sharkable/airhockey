@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class EAGLView;
+#import "EAGLViewController.h"
 
 @interface AirHockeyFreeAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
-    EAGLView *glView;
+    UIWindow*           window;
+    EAGLViewController* glViewController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet EAGLView *glView;
+- (void) startGame;
+- (void) initAudio:(id)delegate;
+
+@property (nonatomic, retain) UIWindow*           window;
+@property (nonatomic, retain) EAGLViewController* glViewController;
 
 @end
 

@@ -16,6 +16,7 @@
 @interface MainMenuState : EngineState <UIAlertViewDelegate> {
 	Button*      _startButton; 
 	Button*      _feedbackButton; 
+	Button*      _storyButton; 
 	Button*      _upgradeButton; 
 	MultiSelect* _numPlayersSelect;
 	MultiSelect* _numPucksSelect;
@@ -26,6 +27,7 @@
 
 - (void) pressedStart;
 - (void) pressedFeedback;
+- (void) pressedStory;
 - (void) pressedUpgrade;
 
 @end

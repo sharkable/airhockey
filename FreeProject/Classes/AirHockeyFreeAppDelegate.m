@@ -17,7 +17,7 @@
 @implementation AirHockeyFreeAppDelegate
 
 @synthesize window;
-@synthesize glView;
+@synthesize glViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -26,36 +26,59 @@
 	} else {
 		[FlurryAPI startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
 	}
-	SplashState* rootState = [[[SplashState alloc] init] autorelease];
-    [glView startAnimation];
-	[[GameEngine instance] pushState:rootState];
-	[SoundPlayer syncAudioSessionForITunes];
-	[SoundPlayer initializeWithDelegate:rootState];
-	[SoundPlayer setSoundEffectsOn:YES];
+	
+	CGRect screenSize = [[UIScreen mainScreen] bounds];
+	self.window = [[UIWindow alloc] initWithFrame:screenSize];
+	
+	self.glViewController = [[EAGLViewController alloc] init];
+	[self.window addSubview:glViewController.view];
+	
+	[self startGame];
+	
+	[window makeKeyAndVisible];
+	
     return YES;
 }
 
+- (void) startGame {
+	SplashState* rootState = [[[SplashState alloc] init] autorelease];
+	[[GameEngine instance] pushState:rootState];
+	[NSThread detachNewThreadSelector:@selector(initAudio:) toTarget:self withObject:rootState];
+    [self.glViewController startAnimation];
+}	
+
+- (void) initAudio:(id)delegate;
+{
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	
+	[SoundPlayer syncAudioSessionForITunes];
+	[SoundPlayer initializeWithDelegate:delegate];
+	[SoundPlayer setSoundEffectsOn:YES];
+	
+	[pool release];
+}	
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    [glView stopAnimation];
+    [glViewController stopAnimation];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [glView startAnimation];
+	[glViewController startAnimation];
 	[[GameEngine instance] clearTouches];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [glView stopAnimation];
+    [glViewController stopAnimation];
 }
 
 - (void)dealloc
 {
     [window release];
-    [glView release];
-
+    [glViewController release];
+	
     [super dealloc];
 }
 
