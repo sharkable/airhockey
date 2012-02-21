@@ -11,11 +11,12 @@
 #import "Button.h"
 
 @interface StoryState : EngineState {
-  Button* storyButton_; 
-  Button* aboutButton_; 
+ @private
+  Button *storyButton_; 
+  Button *aboutButton_; 
 }
 
-- (void) pressedStory;
-- (void) pressedAbout;
+- (void)pressedStory;
+- (void)pressedAbout;
 
 @end

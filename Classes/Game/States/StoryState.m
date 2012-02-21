@@ -12,24 +12,26 @@
 
 @implementation StoryState
 
-- (id) init {
+- (id)init {
   [super init];
   
-  Texture2D* storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story"];
-  storyButton_ = [[Button alloc] initWithNormalTexture:storyButtonImage
-                      pressedTexture:storyButtonImage
-                        position:CGPointMake(0, 0)];
-  storyButton_.delegate = self;
-  storyButton_.selector = @selector(pressedStory);
-  [self addEntity:storyButton_];
+  if (self) {
+    Texture2D *storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story"];
+    storyButton_ = [[Button alloc] initWithNormalTexture:storyButtonImage
+                                          pressedTexture:storyButtonImage
+                                                position:CGPointMake(0, 0)];
+    storyButton_.delegate = self;
+    storyButton_.selector = @selector(pressedStory);
+    [self addEntity:storyButton_];
 
 
-  Texture2D* aboutButtonImage = [[ResourceLoader instance] getTextureWithName:@"about"];
-  aboutButton_ = [[Button alloc] initWithNormalTexture:aboutButtonImage
-                      pressedTexture:aboutButtonImage
-                        position:CGPointMake(0, 0)];  
-  aboutButton_.delegate = self;
-  aboutButton_.selector = @selector(pressedAbout);
+    Texture2D *aboutButtonImage = [[ResourceLoader instance] getTextureWithName:@"about"];
+    aboutButton_ = [[Button alloc] initWithNormalTexture:aboutButtonImage
+                                          pressedTexture:aboutButtonImage
+                                                position:CGPointMake(0, 0)];  
+    aboutButton_.delegate = self;
+    aboutButton_.selector = @selector(pressedAbout);
+  }
   
   return self;
 }

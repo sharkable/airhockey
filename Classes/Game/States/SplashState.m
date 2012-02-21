@@ -15,29 +15,32 @@
 
 @implementation SplashState
 
-- (id) init {
+- (id)init {
   [super init];
   
-  spinner_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  if (self) {
+      spinner_ = [[UIActivityIndicatorView alloc]
+                  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    spinner_.center = CGPointMake(320/2, 480/2);    
-  } else {
-    spinner_.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+      spinner_.center = CGPointMake(320 / 2, 480 / 2);
+    } else {
+      spinner_.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    }
+    [EAGLView addUIView:spinner_];
+    [spinner_ startAnimating];
   }
-  [EAGLView addUIView:spinner_];
-  [spinner_ startAnimating];
   
   return self;
 }
 
-- (void) dealloc {
+- (void)dealloc {
   [EAGLView removeUIView:spinner_];
   [spinner_ release];
   
   [super dealloc];
 }
 
-- (void) soundInitialized {
+- (void)soundInitialized {
   [[GameEngine instance] replaceTopState:[[[MainMenuState alloc] init] autorelease]];
 }
 

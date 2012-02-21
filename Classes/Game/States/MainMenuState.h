@@ -13,21 +13,22 @@
 #import "MultiSelect.h"
 #import "SoundSlider.h"
 
-@interface MainMenuState : EngineState <UIAlertViewDelegate> {
-  Button*      startButton_; 
-  Button*      feedbackButton_; 
-  Button*      storyButton_; 
-  Button*      upgradeButton_; 
-  MultiSelect* numPlayersSelect_;
-  MultiSelect* numPucksSelect_;
-  MultiSelect* difficultySelect_;
-  MultiSelect* paddleSizeSelect_;
-  SoundSlider* soundSlider_;
+@interface MainMenuState : EngineState<UIAlertViewDelegate> {
+ @private
+  Button *startButton_; 
+  Button *feedbackButton_; 
+  Button *storyButton_; 
+  Button *upgradeButton_; 
+  MultiSelect *numPlayersSelect_;
+  MultiSelect *numPucksSelect_;
+  MultiSelect *difficultySelect_;
+  MultiSelect *paddleSizeSelect_;
+  SoundSlider *soundSlider_;
 }
 
-- (void) pressedStart;
-- (void) pressedFeedback;
-- (void) pressedStory;
-- (void) pressedUpgrade;
+- (void)pressedStart;
+- (void)pressedFeedback;
+- (void)pressedStory;
+- (void)pressedUpgrade;
 
 @end

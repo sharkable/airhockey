@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "EngineState.h"
 #import "SimpleItem.h"
 #import "SoundInitializationDelegate.h"
 
-@interface SplashState : EngineState <SoundInitializationDelegate> {
+@interface SplashState : EngineState<SoundInitializationDelegate> {
+ @private
   UIActivityIndicatorView* spinner_;
 }
 

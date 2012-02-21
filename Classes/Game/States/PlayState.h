@@ -16,35 +16,36 @@
 #import "SoundSlider.h"
 #import "const.h"
 
-#define PLAY_STATE_GET_READY         0
-#define PLAY_STATE_PLAYING           1
+#define PLAY_STATE_GET_READY 0
+#define PLAY_STATE_PLAYING 1
 #define PLAY_STATE_WAITING_FOR_PUCKS 2
-#define PLAY_STATE_FINISHED          3
-#define PLAY_STATE_PAUSED            4
+#define PLAY_STATE_FINISHED 3
+#define PLAY_STATE_PAUSED 4
 
 @interface PlayState : EngineState {
+ @private
   int numPlayers_;
   int numPucks_;
   int numActivePucks_;
-  int numPlayer_1ScoresLastRound;
-  Rink* rink_;
-  Paddle* paddle_1;
-  Paddle* paddle_2;
-  NSMutableArray* pucks_;
-  NSMutableArray* roundThings_;
-  SimpleItem* player_1Score;
-  SimpleItem* player_2Score;
-  SimpleItem* win_;
-  SimpleItem* lose_;
-  SimpleItem* getReady_;
-  SimpleItem* go_;
-  SoundSlider* soundSlider_;
-  SimpleItem*  menuBackground_;
-  Button*      rematchButton_;
-  Button*      menuButton_;
-  Button*      continueButton_;
-  Button*      pauseButton_1;
-  Button*      pauseButton_2;
+  int numPlayer1ScoresLastRound_;
+  Rink *rink_;
+  Paddle *paddle1_;
+  Paddle *paddle2_;
+  NSMutableArray *pucks_;
+  NSMutableArray *roundThings_;
+  SimpleItem *player1Score_;
+  SimpleItem *player2Score_;
+  SimpleItem *win_;
+  SimpleItem *lose_;
+  SimpleItem *getReady_;
+  SimpleItem *go_;
+  SoundSlider *soundSlider_;
+  SimpleItem *menuBackground_;
+  Button *rematchButton_;
+  Button *menuButton_;
+  Button *continueButton_;
+  Button *pauseButton1_;
+  Button *pauseButton2_;
   
   int waitTicksLeft_;
   int getReadyTicksLeft_;
@@ -52,19 +53,22 @@
   int state_;
   int prePauseState_;
   int giveExtraPuckToPlayer_;
-  int player_1WinCount;
-  int player_2WinCount;
+  int player1WinCount_;
+  int player2WinCount_;
   
-  UILabel* player_1Wins;
-  UILabel* player_2Wins;
+  UILabel *player1Wins_;
+  UILabel *player2Wins_;
 }
 
-- (id) initWithNumPlayers:(int)numPlayers numPucks:(int)numPucks difficulty:(ComputerAI)difficulty paddleSize:(PaddleSize)paddleSize;
-- (void) setUpNewGame;
-- (void) finishGameWithWinner:(int)playerId;
-- (void) rematchPressed;
-- (void) menuPressed;
-- (void) continuePressed;
-- (void) pausePressed;
+- (id)initWithNumPlayers:(int)numPlayers
+                numPucks:(int)numPucks
+              difficulty:(ComputerAI)difficulty
+              paddleSize:(PaddleSize)paddleSize;
+- (void)setUpNewGame;
+- (void)finishGameWithWinner:(int)playerId;
+- (void)rematchPressed;
+- (void)menuPressed;
+- (void)continuePressed;
+- (void)pausePressed;
 
 @end
