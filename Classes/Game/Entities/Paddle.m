@@ -252,15 +252,15 @@
 
 - (BOOL) containsTouch:(Touch*)touch {
 	CGPoint p = touch.location;
-	if (p.x < RINK_LEFT_X || p.x >= RINK_RIGHT_X) {
+	if (p.x < 0 || p.x >= SCREEN_WIDTH) {
 		return NO;
 	}
 	switch (_playerId) {
 		case PLAYER_1:
-			return p.y >= SCREEN_HEIGHT/2 && p.y < RINK_BOTTOM_Y;
+			return p.y >= SCREEN_HEIGHT/2 && p.y < SCREEN_HEIGHT;
 			break;
 		case PLAYER_2:
-			return p.y < SCREEN_HEIGHT/2 && p.y >= RINK_TOP_Y;
+			return p.y < SCREEN_HEIGHT/2 && p.y >= 0;
 			break;
 	}
 	return NO;
