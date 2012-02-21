@@ -23,40 +23,40 @@
 #define PLAY_STATE_PAUSED            4
 
 @interface PlayState : EngineState {
-  int _numPlayers;
-  int _numPucks;
-  int _numActivePucks;
-  int _numPlayer1ScoresLastRound;
-  Rink* _rink;
-  Paddle* _paddle1;
-  Paddle* _paddle2;
-  NSMutableArray* _pucks;
-  NSMutableArray* _roundThings;
-  SimpleItem* _player1Score;
-  SimpleItem* _player2Score;
-  SimpleItem* _win;
-  SimpleItem* _lose;
-  SimpleItem* _getReady;
-  SimpleItem* _go;
-  SoundSlider* _soundSlider;
-  SimpleItem*  _menuBackground;
-  Button*      _rematchButton;
-  Button*      _menuButton;
-  Button*      _continueButton;
-  Button*      _pauseButton1;
-  Button*      _pauseButton2;
+  int numPlayers_;
+  int numPucks_;
+  int numActivePucks_;
+  int numPlayer_1ScoresLastRound;
+  Rink* rink_;
+  Paddle* paddle_1;
+  Paddle* paddle_2;
+  NSMutableArray* pucks_;
+  NSMutableArray* roundThings_;
+  SimpleItem* player_1Score;
+  SimpleItem* player_2Score;
+  SimpleItem* win_;
+  SimpleItem* lose_;
+  SimpleItem* getReady_;
+  SimpleItem* go_;
+  SoundSlider* soundSlider_;
+  SimpleItem*  menuBackground_;
+  Button*      rematchButton_;
+  Button*      menuButton_;
+  Button*      continueButton_;
+  Button*      pauseButton_1;
+  Button*      pauseButton_2;
   
-  int _waitTicksLeft;
-  int _getReadyTicksLeft;
-  int _goTicksLeft;
-  int _state;
-  int _prePauseState;
-  int _giveExtraPuckToPlayer;
-  int _player1WinCount;
-  int _player2WinCount;
+  int waitTicksLeft_;
+  int getReadyTicksLeft_;
+  int goTicksLeft_;
+  int state_;
+  int prePauseState_;
+  int giveExtraPuckToPlayer_;
+  int player_1WinCount;
+  int player_2WinCount;
   
-  UILabel* _player1Wins;
-  UILabel* _player2Wins;
+  UILabel* player_1Wins;
+  UILabel* player_2Wins;
 }
 
 - (id) initWithNumPlayers:(int)numPlayers numPucks:(int)numPucks difficulty:(ComputerAI)difficulty paddleSize:(PaddleSize)paddleSize;

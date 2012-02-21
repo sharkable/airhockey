@@ -10,7 +10,7 @@
 
 
 @interface Stack : NSObject {
-  NSMutableArray* _array;
+  NSMutableArray* array_;
 }
 
 - (void) push:(id)object;

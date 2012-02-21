@@ -12,14 +12,14 @@
 #import "const.h"
 
 @interface Paddle : RoundThing {
-  int        _playerId;
-  BOOL       _playerControlled;
-  ComputerAI _aiLevel;
-  NSArray*   _pucks;
-  Paddle*    _otherPaddle;
-  BOOL       _targetLeftCorner;
-  BOOL       _targetRightCorner;
-  BOOL       _targetAwayFromCorner;
+  int        playerId_;
+  BOOL       playerControlled_;
+  ComputerAI aiLevel_;
+  NSArray*   pucks_;
+  Paddle*    otherPaddle_;
+  BOOL       targetLeftCorner_;
+  BOOL       targetRightCorner_;
+  BOOL       targetAwayFromCorner_;
 }
 
 - (id) initWithPlayer:(int)playerId size:(PaddleSize)size playerControlled:(BOOL)playerControlled aiLevel:(ComputerAI)aiLevel;

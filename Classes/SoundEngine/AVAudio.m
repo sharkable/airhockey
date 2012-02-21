@@ -26,20 +26,20 @@
   if((self = [super init]) != nil)
   {
     NSError* error;
-    m_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    player_ = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 
-    if( m_player == nil )
+    if( player_ == nil )
     {
       NSLog( @"ERROR Initializing AVAudioPlayer in AVAudio::initWithURL \n\t%@\n\tURL [%@]\n", error, url );
     }
     else 
     {
-      NSLog( @"SUCCESS Initializing AVAudioPlayer [%x] in AVAudio::initWithURL \n\tURL [%@]\n", m_player,  url );
+      NSLog( @"SUCCESS Initializing AVAudioPlayer [%x] in AVAudio::initWithURL \n\tURL [%@]\n", player_,  url );
     }
 
     
     [self loop:NO];
-    [m_player prepareToPlay];
+    [player_ prepareToPlay];
   }
   
   return self;
@@ -49,38 +49,38 @@
 {
   [self stop];
   
-  [m_player release];
+  [player_ release];
   [super dealloc];
 }
 
 -(void) play
 {
-  if(m_player.playing) {
-    [m_player stop];
+  if(player_.playing) {
+    [player_ stop];
   }
-  [m_player play];
+  [player_ play];
 }
 
 -(void) stop
 {
-  if(m_player.playing == YES) {
-    [m_player stop];
+  if(player_.playing == YES) {
+    [player_ stop];
   }
 }
 
 -(void) rewind
 {
-  m_player.currentTime = 0.0f;
+  player_.currentTime = 0.0f;
 }
 
 -(bool)isPlaying
 {
-  return m_player.playing;
+  return player_.playing;
 }
 
 -(void)loop:(bool)flag
 {
-  m_player.numberOfLoops = (flag == YES ? -1 : 0);
+  player_.numberOfLoops = (flag == YES ? -1 : 0);
 }
 
 
@@ -88,27 +88,27 @@
 {
 //  if     (volume < 0.0f) { volume = 0.0f; }
 //  else if(volume > 1.0f) { volume = 1.0f; }
-  m_player.volume = volume;
+  player_.volume = volume;
 }
 
 -(void) pause
 {
-  if(m_player.playing == YES) {
-    [m_player pause];
+  if(player_.playing == YES) {
+    [player_ pause];
   }
 }
 
 -(void) seek:(NSTimeInterval)idx
 {
   if     (idx <              0.0f) { idx =              0.0f; }
-  else if(idx > m_player.duration) { idx = m_player.duration; }
-  m_player.currentTime = idx;
+  else if(idx > player_.duration) { idx = player_.duration; }
+  player_.currentTime = idx;
 }
 
 // Set the audio-session-interrupt handler
 -(void) setInterruptDelegate:(AudioInterruptDelegate*)delegate;
 {
-  m_player.delegate = delegate;
+  player_.delegate = delegate;
 }
 
 @end

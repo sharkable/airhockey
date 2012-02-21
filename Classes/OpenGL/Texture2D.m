@@ -77,13 +77,13 @@ GLfloat globalAlpha = 1.f;
 
 @implementation Texture2D
 
-@synthesize pixelFormat=_format, pixelsWide=_width, pixelsHigh=_height, name=_name, maxS=_maxS, maxT=_maxT, resourceName=_resourceName;
+@synthesize pixelFormat=format_, pixelsWide=width_, pixelsHigh=height_, name=name_, maxS=maxS_, maxT=maxT_, resourceName=resourceName_;
 
 - (CGSize) contentSize {
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    return _size;
+    return size_;
   } else {
-    return CGSizeMake(_size.width*(768.0/320.0), _size.height*(768.0/320.0));
+    return CGSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
   }
 }
 
@@ -95,11 +95,11 @@ GLfloat globalAlpha = 1.f;
 {
   GLint          saveName;
   if((self = [super init])) {
-    //glGenTextures(1, &_name);
-    _name = ++nameCounter;
+    //glGenTextures(1, &name_);
+    name_ = ++nameCounter;
     
     glGetIntegerv(GL_TEXTURE_BINDING_2D, &saveName);
-    glBindTexture(GL_TEXTURE_2D, _name);
+    glBindTexture(GL_TEXTURE_2D, name_);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     switch(pixelFormat) {
         
@@ -118,24 +118,24 @@ GLfloat globalAlpha = 1.f;
     }
     glBindTexture(GL_TEXTURE_2D, saveName);
     
-    _size = size;
-    _width = width;
-    _height = height;
-    _format = pixelFormat;
-    _maxS = size.width / (float)width;
-    _maxT = size.height / (float)height;
+    size_ = size;
+    width_ = width;
+    height_ = height;
+    format_ = pixelFormat;
+    maxS_ = size.width / (float)width;
+    maxT_ = size.height / (float)height;
   }
   
   coordinates[0] = 0;
-  coordinates[1] = _maxT;
+  coordinates[1] = maxT_;
   
-  coordinates[2] = _maxS;
-  coordinates[3] = _maxT;
+  coordinates[2] = maxS_;
+  coordinates[3] = maxT_;
   
   coordinates[4] = 0;
   coordinates[5] = 0;
   
-  coordinates[6] = _maxS;
+  coordinates[6] = maxS_;
   coordinates[7] = 0;
   
   
@@ -160,13 +160,13 @@ GLfloat globalAlpha = 1.f;
 
 - (id) initWithName:(GLuint)name size:(CGSize)size width:(NSUInteger)width height:(NSUInteger)height format:(Texture2DPixelFormat)format maxS:(GLfloat)maxS maxT:(GLfloat)maxT
 {
-  _name = name;
-  _size = size;
-  _width = width;
-  _height = height;
-  _format = format;
-  _maxS = maxS;
-  _maxT = maxT;
+  name_ = name;
+  size_ = size;
+  width_ = width;
+  height_ = height;
+  format_ = format;
+  maxS_ = maxS;
+  maxT_ = maxT;
   
   [super init];
   return self;
@@ -174,16 +174,16 @@ GLfloat globalAlpha = 1.f;
 
 - (void) dealloc
 {
-  if (_name) {
-    glDeleteTextures(1, &_name);
+  if (name_) {
+    glDeleteTextures(1, &name_);
   }
-  [_resourceName release];
+  [resourceName_ release];
   [super dealloc];
 }
 
 - (NSString*) description
 {
-  return [NSString stringWithFormat:@"<%@ = %08X | Name = %i | Dimensions = %ix%i | Coordinates = (%.2f, %.2f)>", [self class], self, _name, _width, _height, _maxS, _maxT];
+  return [NSString stringWithFormat:@"<%@ = %08X | Name = %i | Dimensions = %ix%i | Coordinates = (%.2f, %.2f)>", [self class], self, name_, width_, height_, maxS_, maxT_];
 }
 
 @end
@@ -203,8 +203,8 @@ GLfloat globalAlpha = 1.f;
 }
 
 - (id) initWithFilename:(NSString*)filename silhouette:(BOOL)silhouette lighten:(BOOL)lighten {
-  _resourceName = filename;
-  [_resourceName retain];
+  resourceName_ = filename;
+  [resourceName_ retain];
   NSString* filePath = [[NSBundle mainBundle] pathForResource:filename ofType:nil];
   NSData* data = [NSData dataWithContentsOfFile:filePath];
   unsigned char* byteData = (unsigned char*)[data bytes];
@@ -422,8 +422,8 @@ GLfloat globalAlpha = 1.f;
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
 
-  GLfloat    width = (GLfloat)_width * _maxS,
-  height = (GLfloat)_height * _maxT;
+  GLfloat    width = (GLfloat)width_ * maxS_,
+  height = (GLfloat)height_ * maxT_;
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
     point.x *= 320.0/768.0;
@@ -435,7 +435,7 @@ GLfloat globalAlpha = 1.f;
   }  
 
   glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, _name);
+  glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices);
   glTexCoordPointer(2, GL_FLOAT, 0, coordinates);
   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
@@ -451,10 +451,10 @@ GLfloat globalAlpha = 1.f;
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
   
-  GLfloat    width = (GLfloat)_width * _maxS * leftRatio,
-  height = (GLfloat)_height * _maxT;
+  GLfloat    width = (GLfloat)width_ * maxS_ * leftRatio,
+  height = (GLfloat)height_ * maxT_;
   
-  coordinates[2] = coordinates[6] = leftRatio * _maxS;
+  coordinates[2] = coordinates[6] = leftRatio * maxS_;
 
   vertices[0] = -width/2.0;
   vertices[1] = -height/2.0;
@@ -479,7 +479,7 @@ GLfloat globalAlpha = 1.f;
   }  
   
   glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, _name);
+  glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices);
   glTexCoordPointer(2, GL_FLOAT, 0, coordinates);
   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -493,10 +493,10 @@ GLfloat globalAlpha = 1.f;
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
   
-  GLfloat    width = (GLfloat)_width * _maxS * rightRatio,
-  height = (GLfloat)_height * _maxT;
+  GLfloat    width = (GLfloat)width_ * maxS_ * rightRatio,
+  height = (GLfloat)height_ * maxT_;
   
-  coordinates[0] = coordinates[4] = (1.0 - rightRatio) * _maxS;
+  coordinates[0] = coordinates[4] = (1.0 - rightRatio) * maxS_;
 
   vertices[0] = -width/2.0;
   vertices[1] = -height/2.0;
@@ -521,11 +521,11 @@ GLfloat globalAlpha = 1.f;
   }  
   
   glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, _name);
+  glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices);
   glTexCoordPointer(2, GL_FLOAT, 0, coordinates);
   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-  glTranslatef(point.x + width/2.0 + (1.0 - rightRatio) * (GLfloat)_width * _maxS, point.y - height/2.0, 0.0);
+  glTranslatef(point.x + width/2.0 + (1.0 - rightRatio) * (GLfloat)width_ * maxS_, point.y - height/2.0, 0.0);
   //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
@@ -536,8 +536,8 @@ GLfloat globalAlpha = 1.f;
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
   
-  GLfloat    width = (GLfloat)_width * _maxS,
-  height = (GLfloat)_height * _maxT;
+  GLfloat    width = (GLfloat)width_ * maxS_,
+  height = (GLfloat)height_ * maxT_;
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
     point.x *= 320.0/768.0;
@@ -550,7 +550,7 @@ GLfloat globalAlpha = 1.f;
   }
   
   glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, _name);
+  glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices);
   glTexCoordPointer(2, GL_FLOAT, 0, coordinates);
   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);

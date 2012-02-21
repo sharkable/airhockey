@@ -10,8 +10,8 @@
 
 
 @interface Touch : NSObject {
-  CGPoint  _location;
-  UITouch* _identifier;
+  CGPoint  location_;
+  UITouch* identifier_;
 }
 
 @property (assign) CGPoint  location;

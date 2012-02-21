@@ -11,11 +11,11 @@
 #import "Texture2D.h"
 
 @interface MultiSelect : NSObject <StateEntity> {
-  NSMutableArray* _normalTextures;
-  NSMutableArray* _selectedTextures;
-  NSMutableArray* _positionsX;
-  NSMutableArray* _positionsY;
-  int _selectedValue;
+  NSMutableArray* normalTextures_;
+  NSMutableArray* selectedTextures_;
+  NSMutableArray* positionsX_;
+  NSMutableArray* positionsY_;
+  int selectedValue_;
 }
 
 - (void) addValueWithNormalTexture:(Texture2D*)normalTexture selectedTexture:(Texture2D*)selectedTexture position:(CGPoint)position;

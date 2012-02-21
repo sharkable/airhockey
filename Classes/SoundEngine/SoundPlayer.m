@@ -11,7 +11,7 @@
 #import <AudioToolbox/AudioServices.h>
 #import <MediaPlayer/MPMusicPlayerController.h>
 
-static SoundPlayer* _soundInstance = nil;
+static SoundPlayer* soundInstance_ = nil;
 
 
 static const BOOL thisAppDoesDucking = NO; // if this gets changed to yes then it's all set up to duck the sound when iTunes is playing with Sound effects ON
@@ -74,26 +74,26 @@ static const BOOL thisAppDoesDucking = NO; // if this gets changed to yes then i
 
 @implementation SoundPlayer
 
-static AVAudioSession*    m_session = nil;
-static BOOL          m_musicIsPlayingInITunes = FALSE;
+static AVAudioSession*    session_ = nil;
+static BOOL          musicIsPlayingInITunes_ = FALSE;
 
-@synthesize sounds=_sounds, song=_song, musicOn=_musicOn, soundEffectsOn=_soundEffectsOn;
+@synthesize sounds=sounds_, song=song_, musicOn=musicOn_, soundEffectsOn=soundEffectsOn_;
 
 + (SoundPlayer*) instance {
-  if (_soundInstance == nil) {
-    _soundInstance = [[SoundPlayer alloc] init];
+  if (soundInstance_ == nil) {
+    soundInstance_ = [[SoundPlayer alloc] init];
   }
-  return _soundInstance;
+  return soundInstance_;
 }
 
 +(AVAudioSession*) session
 {
-  return m_session;
+  return session_;
 }
 
 +(BOOL) isMusicPlayingInITunes
 {
-  return m_musicIsPlayingInITunes;
+  return musicIsPlayingInITunes_;
 }
 
 
@@ -105,14 +105,14 @@ static BOOL          m_musicIsPlayingInITunes = FALSE;
   //      so here we set the session to inactive at the top of the function, and set to active at the end after setting the property
   // 
   NSError* activeErr = nil;
-  BOOL sessionActive = [m_session setActive:NO error:&activeErr ];
+  BOOL sessionActive = [session_ setActive:NO error:&activeErr ];
   if( !sessionActive )
   {
     NSLog( @"ERROR setting audio session active .... \n\tERROR: %@\n", activeErr );
   }
   
   // if the user want's the sound effects on while iTunes is playing , then we duck the iTunes so you can hear the sounds, if sounds are off, iTunes is full volume :P
-  UInt32 allowDuck = thisAppDoesDucking && duck && m_musicIsPlayingInITunes;    
+  UInt32 allowDuck = thisAppDoesDucking && duck && musicIsPlayingInITunes_;    
   OSStatus propertySetError = AudioSessionSetProperty (kAudioSessionProperty_OtherMixableAudioShouldDuck,sizeof (allowDuck),&allowDuck);  
   if( propertySetError != kAudioSessionNoError )
   {
@@ -121,7 +121,7 @@ static BOOL          m_musicIsPlayingInITunes = FALSE;
   }
   
   activeErr = nil;
-  sessionActive = [m_session setActive:YES error:&activeErr ];
+  sessionActive = [session_ setActive:YES error:&activeErr ];
   if( !sessionActive )
   {
     NSLog( @"ERROR setting audio session active .... \n\tERROR: %@\n", activeErr );
@@ -192,7 +192,7 @@ static BOOL          m_musicIsPlayingInITunes = FALSE;
   return ;
 
   // no game songs if iTunes is playing
-  if( m_musicIsPlayingInITunes )
+  if( musicIsPlayingInITunes_ )
     return;
   
   [SoundPlayer stopSong];
@@ -225,13 +225,13 @@ static BOOL          m_musicIsPlayingInITunes = FALSE;
 }
 
 - (id) init {
-  _sounds = [[NSMutableArray alloc] initWithCapacity:kNumSounds];
-  _song = nil;
+  sounds_ = [[NSMutableArray alloc] initWithCapacity:kNumSounds];
+  song_ = nil;
   
   AudioInterruptDelegate* delegate = [[AudioInterruptDelegate alloc] init];
   
-  m_delegate = delegate;
-  [m_delegate retain];
+  delegate_ = delegate;
+  [delegate_ retain];
   
   return self;
 }
@@ -239,15 +239,15 @@ static BOOL          m_musicIsPlayingInITunes = FALSE;
 - (void) loadSoundsWithDelegate:(NSObject <SoundInitializationDelegate> *)delegate {
   NSAutoreleasePool *subpool = [[NSAutoreleasePool alloc] init];
 
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"score" andExt:@"wav"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"score_final" andExt:@"mp3"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"paddle_hit" andExt:@"wav"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"puck_rink_bounce" andExt:@"wav"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"puck_puck_hit" andExt:@"wav"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"beep" andExt:@"wav"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"button_click" andExt:@"wav"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"get_ready" andExt:@"wav"]];
-  [_sounds addObject:[[ALAudio alloc] initWithFilename:@"start" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"score" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"score_final" andExt:@"mp3"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"paddle_hit" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"puck_rink_bounce" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"puck_puck_hit" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"beep" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"button_click" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"get_ready" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"start" andExt:@"wav"]];
 
   [delegate performSelector:@selector(soundInitialized)];
   
@@ -281,7 +281,7 @@ static BOOL          m_musicIsPlayingInITunes = FALSE;
   // we need to set the category of our audio session.
   //
   AVAudioSession* session = [AVAudioSession sharedInstance];
-  m_session = session;
+  session_ = session;
   NSError* sessionError = nil;
   BOOL success = [session setCategory:AVAudioSessionCategoryAmbient error:&sessionError];
   if( success == NO )
@@ -297,10 +297,10 @@ static BOOL          m_musicIsPlayingInITunes = FALSE;
     
     // we need to know if a song is playing, because if one is not playing then we will want
     // to turn on our music (if the user has the music enabled - which is done elsewhere using
-    // this 'm_musicIsPlayingInITunes' member )
+    // this 'musicIsPlayingInITunes_' member )
     MPMediaItem * currentlyPlayingItem = [iPodMusicPlayer nowPlayingItem];
     BOOL isPlayingITunes = (currentlyPlayingItem != nil ) && ( iPodMusicPlayer.playbackState == MPMusicPlaybackStatePlaying );
-    m_musicIsPlayingInITunes = isPlayingITunes;    
+    musicIsPlayingInITunes_ = isPlayingITunes;    
   }  
 }
 

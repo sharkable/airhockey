@@ -12,7 +12,7 @@
 #import "SoundInitializationDelegate.h"
 
 @interface SplashState : EngineState <SoundInitializationDelegate> {
-  UIActivityIndicatorView* _spinner;
+  UIActivityIndicatorView* spinner_;
 }
 
 @end

@@ -11,8 +11,8 @@
 #import "Button.h"
 
 @interface StoryState : EngineState {
-  Button* _storyButton; 
-  Button* _aboutButton; 
+  Button* storyButton_; 
+  Button* aboutButton_; 
 }
 
 - (void) pressedStory;

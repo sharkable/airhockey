@@ -12,23 +12,23 @@
 
 @implementation Button
 
-@synthesize delegate=_delegate, selector=_selector;
+@synthesize delegate=delegate_, selector=selector_;
 
 - (id) initWithNormalTexture:(Texture2D*)normalTexture pressedTexture:(Texture2D*)pressedTexture position:(CGPoint)position {
   [super init];
   
-  _normalTexture = normalTexture;  
-  _pressedTexture = pressedTexture;
+  normalTexture_ = normalTexture;  
+  pressedTexture_ = pressedTexture;
   
-  _position = position;
-  _state = BUTTON_STATE_NORMAL;
+  position_ = position;
+  state_ = BUTTON_STATE_NORMAL;
   
   return self;
 }
 
 - (void) dealloc {
-  [[ResourceLoader instance] releaseResource:_normalTexture];
-  [[ResourceLoader instance] releaseResource:_pressedTexture];
+  [[ResourceLoader instance] releaseResource:normalTexture_];
+  [[ResourceLoader instance] releaseResource:pressedTexture_];
   
   [super dealloc];
 }
@@ -37,23 +37,23 @@
 }
 
 - (void) render {
-  switch (_state) {
+  switch (state_) {
     case BUTTON_STATE_NORMAL: {
-      [_normalTexture drawAtPoint:_position];
+      [normalTexture_ drawAtPoint:position_];
       break;
     }
     case BUTTON_STATE_PRESSED: {
-      [_pressedTexture drawAtPoint:_position];
+      [pressedTexture_ drawAtPoint:position_];
       break;
     }
   }
 }
 
 - (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches {
-  if (_state == BUTTON_STATE_NORMAL) {
+  if (state_ == BUTTON_STATE_NORMAL) {
     for (int i = 0; i < numTouches; i++) {
       if ([self containsPoint:touches[i].location]) {
-        _state = BUTTON_STATE_PRESSED;
+        state_ = BUTTON_STATE_PRESSED;
         [SoundPlayer playSound:kSoundButton];
       }
     }
@@ -61,25 +61,25 @@
 }
 
 - (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
-  if (_state == BUTTON_STATE_PRESSED) {
-    _state = BUTTON_STATE_NORMAL;
+  if (state_ == BUTTON_STATE_PRESSED) {
+    state_ = BUTTON_STATE_NORMAL;
     for (int i = 0; i < numTouches; i++) {
       if ([self containsPoint:touches[i].location]) {
-        [_delegate performSelector:_selector];
+        [delegate_ performSelector:selector_];
       }
     }
   }
 }
 
 - (BOOL) containsPoint:(CGPoint)p {
-  return p.x >= _position.x &&
-       p.y >= _position.y &&
-       p.x < _position.x + _pressedTexture.contentSize.width &&
-         p.y < _position.y + _pressedTexture.contentSize.height;
+  return p.x >= position_.x &&
+       p.y >= position_.y &&
+       p.x < position_.x + pressedTexture_.contentSize.width &&
+         p.y < position_.y + pressedTexture_.contentSize.height;
 }
 
 - (CGSize) size {
-  return _normalTexture.contentSize;
+  return normalTexture_.contentSize;
 }
 
 @end

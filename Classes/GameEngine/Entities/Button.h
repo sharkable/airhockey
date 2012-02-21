@@ -14,12 +14,12 @@
 #define BUTTON_STATE_PRESSED 1
 
 @interface Button : NSObject <StateEntity> {
-  Texture2D* _normalTexture;
-  Texture2D* _pressedTexture;
-  CGPoint   _position;
-  int       _state;
-  id        _delegate;
-  SEL       _selector;
+  Texture2D* normalTexture_;
+  Texture2D* pressedTexture_;
+  CGPoint   position_;
+  int       state_;
+  id        delegate_;
+  SEL       selector_;
 }
 
 - (id) initWithNormalTexture:(Texture2D*)normalTexture pressedTexture:(Texture2D*)pressedTexture position:(CGPoint)position;

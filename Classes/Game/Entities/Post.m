@@ -16,8 +16,8 @@
 
   _x = x;
   _y = y;
-  _radius = 1;
-  _mass = 99999999999.99;
+  radius_ = 1;
+  mass_ = 99999999999.99;
   
   return self;
 }

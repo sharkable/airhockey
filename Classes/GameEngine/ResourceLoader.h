@@ -10,8 +10,8 @@
 #import "Texture2D.h"
 
 @interface ResourceLoader : NSObject {
-  NSMutableDictionary* _resources;
-  NSMutableDictionary* _resourceCounter;
+  NSMutableDictionary* resources_;
+  NSMutableDictionary* resourceCounter_;
 }
 
 + (ResourceLoader*) instance;

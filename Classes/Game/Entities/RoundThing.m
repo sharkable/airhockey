@@ -13,18 +13,18 @@
 
 @implementation RoundThing
 
-@synthesize x=_x, y=_y, vx=_vx, vy=_vy, radius=_radius, mass=_mass, friction=_friction, active=_active;
+@synthesize x=_x, y=_y, vx=vx_, vy=vy_, radius=radius_, mass=mass_, friction=friction_, active=active_;
 
 - (id) init {
   [super init];
   
-  _active = YES;
+  active_ = YES;
   
   return self;
 }
 
 - (void) dealloc {
-  [[ResourceLoader instance] releaseResource:_texture];
+  [[ResourceLoader instance] releaseResource:texture_];
   
   [super dealloc];
 }
@@ -34,27 +34,27 @@
     return;
   }
   
-  if (!_grabbed) {
-    _x += _vx;
-    _y += _vy;
+  if (!grabbed_) {
+    _x += vx_;
+    _y += vy_;
   } else {    
-    _vx = _vx * 0.75 + (_x - _oldX) * 0.25;
-    _vy = _vy * 0.75 + (_y - _oldY) * 0.25;
-    _oldX = _x;
-    _oldY = _y;
+    vx_ = vx_ * 0.75 + (_x - oldX_) * 0.25;
+    vy_ = vy_ * 0.75 + (_y - oldY_) * 0.25;
+    oldX_ = _x;
+    oldY_ = _y;
   }
 }
 
 - (void) applyFriction {
   if (!self.grabbed) {
-    _vx *= _friction;
-    _vy *= _friction;
+    vx_ *= friction_;
+    vy_ *= friction_;
   }
 }
 
 - (void) render {
-  if (_active) {
-    [_texture drawAtPoint:CGPointMake(_x - _texture.contentSize.width/2, _y - _texture.contentSize.height/2)];
+  if (active_) {
+    [texture_ drawAtPoint:CGPointMake(_x - texture_.contentSize.width/2, _y - texture_.contentSize.height/2)];
   }
 }
 
@@ -101,17 +101,17 @@
     double wx = self.vx - ux;
     double wy = self.vy - uy;
     
-    double other_vDn = other.vx*dx + other.vy*dy;
-    double other_ux = dx * other_vDn;
-    double other_uy = dy * other_vDn;
-    double other_wx = other.vx - other_ux;
-    double other_wy = other.vy - other_uy;
+    double othervDn_ = other.vx*dx + other.vy*dy;
+    double otherux_ = dx * othervDn_;
+    double otheruy_ = dy * othervDn_;
+    double otherwx_ = other.vx - otherux_;
+    double otherwy_ = other.vy - otheruy_;
     
-    double new_ux = (ux * (self.mass - other.mass) + 2.0 * other.mass * other_ux) / (self.mass + other.mass);
-    double new_uy = (uy * (self.mass - other.mass) + 2.0 * other.mass * other_uy) / (self.mass + other.mass);  
+    double newux_ = (ux * (self.mass - other.mass) + 2.0 * other.mass * otherux_) / (self.mass + other.mass);
+    double newuy_ = (uy * (self.mass - other.mass) + 2.0 * other.mass * otheruy_) / (self.mass + other.mass);  
     
-    double new_other_ux = (other_ux * (other.mass - self.mass) + 2.0 * self.mass * ux) / (self.mass + other.mass);
-    double new_other_uy = (other_uy * (other.mass - self.mass) + 2.0 * self.mass * uy) / (self.mass + other.mass);    
+    double newother_ux_ = (otherux_ * (other.mass - self.mass) + 2.0 * self.mass * ux) / (self.mass + other.mass);
+    double newother_uy_ = (otheruy_ * (other.mass - self.mass) + 2.0 * self.mass * uy) / (self.mass + other.mass);    
     
 //    if (!self.grabbed && !other.grabbed) {
 //      NSLog(@"\n");
@@ -119,13 +119,13 @@
 //    }
     
     if (!self.grabbed && self.movable) {
-      self.vx = new_ux + wx;
-      self.vy = new_uy + wy;
+      self.vx = newux_ + wx;
+      self.vy = newuy_ + wy;
     }
     
     if (!other.grabbed && other.movable) {
-      other.vx = new_other_ux + other_wx;
-      other.vy = new_other_uy + other_wy;
+      other.vx = newother_ux_ + otherwx_;
+      other.vy = newother_uy_ + otherwy_;
     }
 
     BOOL onePaddle = [self isKindOfClass:[Paddle class]] || [other isKindOfClass:[Paddle class]];
@@ -166,17 +166,17 @@
   }
   for (int i = 0; i < numTouches; i++) {
     if ([self containsTouch:touches[i]]) {
-      _grabbed = YES;
-      _grabbedTouch = touches[i].identifier;
+      grabbed_ = YES;
+      grabbedTouch_ = touches[i].identifier;
       [self touchesMoved:touches numTouches:numTouches];
-      _vx = 0;
-      _vy = 0;
-      // Set _oldX and _oldY here so that the velocity stays around 0.
+      vx_ = 0;
+      vy_ = 0;
+      // Set oldX_ and oldY_ here so that the velocity stays around 0.
       // This is when you touch the outside of the RoundThing and it
       // snaps to center on your touch, it doesn't have a really high
       // initial velocity.
-      _oldX = _x;
-      _oldY = _y;      
+      oldX_ = _x;
+      oldY_ = _y;      
     }
   }
 }
@@ -184,12 +184,12 @@
 - (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches {
   Touch* correctTouch = nil;
   for (int i = 0; i < numTouches; i++) {
-    if (touches[i].identifier == _grabbedTouch) {
+    if (touches[i].identifier == grabbedTouch_) {
       correctTouch = touches[i];
       break;
     }
   }
-  if (_grabbed && correctTouch != nil) {
+  if (grabbed_ && correctTouch != nil) {
     CGPoint p = correctTouch.location;
     _x = p.x;
     _y = p.y;
@@ -199,20 +199,20 @@
 - (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
   Touch* correctTouch = nil;
   for (int i = 0; i < numTouches; i++) {
-    if (touches[i].identifier == _grabbedTouch) {
+    if (touches[i].identifier == grabbedTouch_) {
       correctTouch = touches[i];
       break;
     }
   }
-  if (_grabbed && correctTouch != nil) {
-    _grabbed = NO;
-    _grabbedTouch = nil;
+  if (grabbed_ && correctTouch != nil) {
+    grabbed_ = NO;
+    grabbedTouch_ = nil;
   }
 }
 
 - (void) clearTouches {
-  _grabbed = NO;
-  _grabbedTouch = nil;
+  grabbed_ = NO;
+  grabbedTouch_ = nil;
 }
 
 - (BOOL) grabbable {
@@ -220,7 +220,7 @@
 }
 
 - (BOOL) grabbed {
-  return _grabbed;
+  return grabbed_;
 }
 
 - (BOOL) movable {
@@ -236,7 +236,7 @@
 - (BOOL) overlaps:(RoundThing*)thing {
   double dx = thing.x - _x;
   double dy = thing.y - _y;
-  double totalRadius = thing.radius + _radius;
+  double totalRadius = thing.radius + radius_;
   return (dx*dx + dy*dy <= totalRadius*totalRadius);
 }
 

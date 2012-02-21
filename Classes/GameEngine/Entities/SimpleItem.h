@@ -11,10 +11,10 @@
 #import "Texture2D.h"
 
 @interface SimpleItem : NSObject <StateEntity> {
-  NSMutableArray* _textures;
-  int             _texture;
-  CGPoint         _position;
-  double          _angle;
+  NSMutableArray* textures_;
+  int             texture_;
+  CGPoint         position_;
+  double          angle_;
 }
 
 - (id) initWithTexture:(Texture2D*)texture position:(CGPoint)position;

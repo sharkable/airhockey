@@ -16,13 +16,13 @@
 - (id) init {
   [super init];
   
-  _texture = [[ResourceLoader instance] getTextureWithName:@"rink_bg"];
-  _renderPoint = CGPointMake(0, 0);
+  texture_ = [[ResourceLoader instance] getTextureWithName:@"rink_bg"];
+  renderPoint_ = CGPointMake(0, 0);
   return self;
 }
 
 - (void) dealloc {
-  [[ResourceLoader instance] releaseResource:_texture];
+  [[ResourceLoader instance] releaseResource:texture_];
   
   [super dealloc];
 }
@@ -31,7 +31,7 @@
 }
 
 - (void) render {
-  [_texture drawAtPoint:_renderPoint];
+  [texture_ drawAtPoint:renderPoint_];
 }
 
 - (void) bounceOff:(RoundThing*)thing {

@@ -14,11 +14,11 @@
 - (id) init {
   [super init];
   
-  _texture = [[ResourceLoader instance] getTextureWithName:@"puck"];;  
-  _radius = PUCK_RADIUS;
-  _mass = PUCK_MASS;
-  _friction = PUCK_FRICTION;
-  _alpha = 1;
+  texture_ = [[ResourceLoader instance] getTextureWithName:@"puck"];;  
+  radius_ = PUCK_RADIUS;
+  mass_ = PUCK_MASS;
+  friction_ = PUCK_FRICTION;
+  alpha_ = 1;
   
   return self;
 }
@@ -33,16 +33,16 @@
     self.vy = PUCK_GOAL_MIN_DROP_SPEED;
   }
   
-  if (_fadeTicksLeft > 0) {
-    _fadeTicksLeft--;
-    _alpha = ((double)PUCK_FADE_TICKS - _fadeTicksLeft) / PUCK_FADE_TICKS;
+  if (fadeTicksLeft_ > 0) {
+    fadeTicksLeft_--;
+    alpha_ = ((double)PUCK_FADE_TICKS - fadeTicksLeft_) / PUCK_FADE_TICKS;
   }
 }
 
 - (void) render {
   if (self.active) {
-    [_texture drawAtPoint:CGPointMake(_x - _texture.contentSize.width/2, _y - _texture.contentSize.height/2)
-            alpha:_alpha
+    [texture_ drawAtPoint:CGPointMake(_x - texture_.contentSize.width/2, _y - texture_.contentSize.height/2)
+            alpha:alpha_
              zoom:1
             angle:0
               z:0];
@@ -57,8 +57,8 @@
   _x = startX;
   _y = playerId == PLAYER_1 ? PLAYER_1_PUCK_Y : PLAYER_2_PUCK_Y;
 
-  _vx = 0;
-  _vy = 0;
+  vx_ = 0;
+  vy_ = 0;
   
   BOOL goLeft = YES;
   int offset = 1;
@@ -83,8 +83,8 @@
 }
 
 - (void) fadeIn {
-  _fadeTicksLeft = PUCK_FADE_TICKS;
-  _alpha = 0;
+  fadeTicksLeft_ = PUCK_FADE_TICKS;
+  alpha_ = 0;
 }
 
 @end

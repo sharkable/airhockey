@@ -25,11 +25,11 @@ typedef enum {
 } Sound;
 
 @interface SoundPlayer : NSObject {
-  NSMutableArray* _sounds;
-  AVAudio* _song;
-  BOOL _musicOn;
-  BOOL _soundEffectsOn;
-  AudioInterruptDelegate* m_delegate;
+  NSMutableArray* sounds_;
+  AVAudio* song_;
+  BOOL musicOn_;
+  BOOL soundEffectsOn_;
+  AudioInterruptDelegate* delegate_;
 }
 
 +(AVAudioSession*) session;

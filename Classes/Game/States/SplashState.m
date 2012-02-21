@@ -18,21 +18,21 @@
 - (id) init {
   [super init];
   
-  _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  spinner_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    _spinner.center = CGPointMake(320/2, 480/2);    
+    spinner_.center = CGPointMake(320/2, 480/2);    
   } else {
-    _spinner.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+    spinner_.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
   }
-  [EAGLView addUIView:_spinner];
-  [_spinner startAnimating];
+  [EAGLView addUIView:spinner_];
+  [spinner_ startAnimating];
   
   return self;
 }
 
 - (void) dealloc {
-  [EAGLView removeUIView:_spinner];
-  [_spinner release];
+  [EAGLView removeUIView:spinner_];
+  [spinner_ release];
   
   [super dealloc];
 }

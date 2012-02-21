@@ -3,8 +3,8 @@
 
 @interface ALAudio : NSObject<Audio> {
  @private
-  ALuint m_buffer_id;
-  ALuint m_source_id;
+  ALuint buffer_id_;
+  ALuint source_id_;
 }
 
 - (ALAudio *)initWithFilename:(NSString *)filename andExt:(NSString *)ext;

@@ -12,8 +12,8 @@
 #import "Texture2D.h"
 
 @interface Rink : NSObject <StateEntity> {
-  Texture2D* _texture;
-  CGPoint _renderPoint;
+  Texture2D* texture_;
+  CGPoint renderPoint_;
 }
 
 - (void) bounceOff:(RoundThing*)thing;

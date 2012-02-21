@@ -12,19 +12,19 @@
 #import "ResourceLoader.h"
 
 @interface RoundThing : NSObject <StateEntity> {
-  Texture2D* _texture;
+  Texture2D* texture_;
   double   _x;
   double   _y;
-  double   _oldX;
-  double   _oldY;
-  double   _vx;
-  double   _vy;
-  double   _radius;
-  double   _mass;
-  double   _friction;
-  BOOL     _grabbed;
-  UITouch* _grabbedTouch;
-  BOOL     _active;
+  double   oldX_;
+  double   oldY_;
+  double   vx_;
+  double   vy_;
+  double   radius_;
+  double   mass_;
+  double   friction_;
+  BOOL     grabbed_;
+  UITouch* grabbedTouch_;
+  BOOL     active_;
 }
 
 - (void) applyFriction;

@@ -14,31 +14,31 @@
 - (id) init {
   [super init];
   
-  _array = [[NSMutableArray alloc] init];
+  array_ = [[NSMutableArray alloc] init];
   
   return self;
 }
 
 - (void) push:(id)object {
-  [_array addObject:object];
+  [array_ addObject:object];
 }
 
 - (id) pop {
-  id object = [_array lastObject];
-  [_array removeLastObject];
+  id object = [array_ lastObject];
+  [array_ removeLastObject];
   return object;
 }
 
 - (id) top {
-  return [_array lastObject];
+  return [array_ lastObject];
 }
 
 - (id) objectAtIndex:(int)index {
-  return [_array objectAtIndex:index];
+  return [array_ objectAtIndex:index];
 }
 
 - (int) count {
-  return _array.count;
+  return array_.count;
 }
 
 @end

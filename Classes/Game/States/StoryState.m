@@ -16,34 +16,34 @@
   [super init];
   
   Texture2D* storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story"];
-  _storyButton = [[Button alloc] initWithNormalTexture:storyButtonImage
+  storyButton_ = [[Button alloc] initWithNormalTexture:storyButtonImage
                       pressedTexture:storyButtonImage
                         position:CGPointMake(0, 0)];
-  _storyButton.delegate = self;
-  _storyButton.selector = @selector(pressedStory);
-  [self addEntity:_storyButton];
+  storyButton_.delegate = self;
+  storyButton_.selector = @selector(pressedStory);
+  [self addEntity:storyButton_];
 
 
   Texture2D* aboutButtonImage = [[ResourceLoader instance] getTextureWithName:@"about"];
-  _aboutButton = [[Button alloc] initWithNormalTexture:aboutButtonImage
+  aboutButton_ = [[Button alloc] initWithNormalTexture:aboutButtonImage
                       pressedTexture:aboutButtonImage
                         position:CGPointMake(0, 0)];  
-  _aboutButton.delegate = self;
-  _aboutButton.selector = @selector(pressedAbout);
+  aboutButton_.delegate = self;
+  aboutButton_.selector = @selector(pressedAbout);
   
   return self;
 }
 
 - (void) dealloc {
-  [_storyButton release];
-  [_aboutButton release];
+  [storyButton_ release];
+  [aboutButton_ release];
   
   [super dealloc];
 }
 
 - (void) pressedStory {
-  [self removeEntity:_storyButton];
-  [self addEntity:_aboutButton];
+  [self removeEntity:storyButton_];
+  [self addEntity:aboutButton_];
 }
 
 - (void) pressedAbout {

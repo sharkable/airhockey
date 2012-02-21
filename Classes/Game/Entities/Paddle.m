@@ -12,58 +12,58 @@
 
 @implementation Paddle
 
-@synthesize pucks=_pucks, otherPaddle=_otherPaddle;
+@synthesize pucks=pucks_, otherPaddle=otherPaddle_;
 
 - (id) initWithPlayer:(int)playerId size:(PaddleSize)size playerControlled:(BOOL)playerControlled aiLevel:(ComputerAI)aiLevel {
   [super init];
   
-  _playerId = playerId;
-  _playerControlled = playerControlled;
-  _aiLevel = aiLevel;
+  playerId_ = playerId;
+  playerControlled_ = playerControlled;
+  aiLevel_ = aiLevel;
 
   if (playerId == PLAYER_1) {
     switch (size) {
       case psSmall:
-        _texture = [[ResourceLoader instance] getTextureWithName:@"paddle_1_small"];
+        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_1_small"];
         break;
       case psMedium:
-        _texture = [[ResourceLoader instance] getTextureWithName:@"paddle_1_medium"];
+        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_1_medium"];
         break;
       case psLarge:
-        _texture = [[ResourceLoader instance] getTextureWithName:@"paddle_1_large"];
+        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_1_large"];
         break;
     }
   } else {
     switch (size) {
       case psSmall:
-        _texture = [[ResourceLoader instance] getTextureWithName:@"paddle_2_small"];
+        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_2_small"];
         break;
       case psMedium:
-        _texture = [[ResourceLoader instance] getTextureWithName:@"paddle_2_medium"];
+        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_2_medium"];
         break;
       case psLarge:
-        _texture = [[ResourceLoader instance] getTextureWithName:@"paddle_2_large"];
+        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_2_large"];
         break;
     }    
   }
-  [_texture retain];
+  [texture_ retain];
   
-  _radius = PADDLE_RADIUS[size];
-  _mass = PADDLE_MASS;
-  _friction = _playerControlled ? PADDLE_FRICTION : PADDLE_AI_FRICTION;
+  radius_ = PADDLE_RADIUS[size];
+  mass_ = PADDLE_MASS;
+  friction_ = playerControlled_ ? PADDLE_FRICTION : PADDLE_AI_FRICTION;
   
   return self;
 }
 
 - (void) dealloc {
-  [_pucks release];
-  [_otherPaddle release];
+  [pucks_ release];
+  [otherPaddle_ release];
   
   [super dealloc];
 }
 
 - (void) setInitialPositionForPlayer:(int)playerId {
-  switch (_playerId) {
+  switch (playerId_) {
     case PLAYER_1: {
       _x = PADDLE_1_X;
       _y = PADDLE_1_Y;      
@@ -78,7 +78,7 @@
 }
 
 - (void) keepInPlayerBounds {
-  switch (_playerId) {
+  switch (playerId_) {
     case PLAYER_1: {
       if (self.y + self.radius > RINK_BOTTOM_Y) {
         self.y = RINK_BOTTOM_Y - self.radius;
@@ -111,9 +111,9 @@
 
 - (void) update {
   // Computer AI
-  if (!_playerControlled) {
+  if (!playerControlled_) {
     double speed = 0;
-    switch (_aiLevel) {
+    switch (aiLevel_) {
       case caiBad:
         speed = 1;
         break;
@@ -132,7 +132,7 @@
     Puck* target = nil;    
     double bestTime;
     
-    for (Puck* puck in _pucks) {
+    for (Puck* puck in pucks_) {
       if (!puck.active) {
         continue;
       }
@@ -153,39 +153,39 @@
     }
     
     if (!target) {
-      _targetLeftCorner = _targetRightCorner = _targetAwayFromCorner = NO;
+      targetLeftCorner_ = targetRightCorner_ = targetAwayFromCorner_ = NO;
     }
     
     double targetX;
     double targetY;
     
-    if (!_targetAwayFromCorner && target && target.y <= RINK_TOP_Y + self.radius && fabs(target.vx) < 5 && fabs(target.vy) < 5) {
+    if (!targetAwayFromCorner_ && target && target.y <= RINK_TOP_Y + self.radius && fabs(target.vx) < 5 && fabs(target.vy) < 5) {
       if (target.x < SCREEN_WIDTH / 2) {
-        _targetLeftCorner = YES;
+        targetLeftCorner_ = YES;
       } else {
-        _targetRightCorner = YES;
+        targetRightCorner_ = YES;
       }
     }
     
-    if (_targetLeftCorner) {
+    if (targetLeftCorner_) {
       targetX = RINK_LEFT_X + self.radius;
       targetY = RINK_TOP_Y + self.radius;
       if ([self overlaps:target]) {
-        _targetLeftCorner = NO;
-        _targetAwayFromCorner = YES;
+        targetLeftCorner_ = NO;
+        targetAwayFromCorner_ = YES;
       }
-    } else if (_targetRightCorner) {
+    } else if (targetRightCorner_) {
       targetX = RINK_RIGHT_X - self.radius;
       targetY = RINK_TOP_Y + self.radius;
       if ([self overlaps:target]) {
-        _targetRightCorner = NO;
-        _targetAwayFromCorner = YES;
+        targetRightCorner_ = NO;
+        targetAwayFromCorner_ = YES;
       }
-    } else if (_targetAwayFromCorner) {
+    } else if (targetAwayFromCorner_) {
       targetX = SCREEN_WIDTH / 2;
       targetY = RINK_TOP_Y + self.radius;
       if (self.x >= SCREEN_WIDTH / 2 - 5 && self.x <= SCREEN_WIDTH / 2 + 5) {
-        _targetAwayFromCorner = NO;
+        targetAwayFromCorner_ = NO;
       }
     } else if (target) {
       if (target.y > self.y) {
@@ -199,10 +199,10 @@
           targetX = target.x - target.radius - self.radius - 20;
         }
       }
-    } else if (_aiLevel >= caiExcellent) {
+    } else if (aiLevel_ >= caiExcellent) {
       targetX = PADDLE_2_X;
       targetY = PADDLE_2_Y;
-    } else if (_aiLevel == caiGood) {
+    } else if (aiLevel_ == caiGood) {
       targetX = PADDLE_2_X;
       targetY = self.y;    
     } else {
@@ -239,15 +239,15 @@
 }
 
 - (void) render {
-  [_texture drawAtPoint:CGPointMake(_x - _texture.contentSize.width/2, _y - _texture.contentSize.height/2)
-          alpha:(self.grabbed || !_playerControlled ? 1.0 : 0.5)
+  [texture_ drawAtPoint:CGPointMake(_x - texture_.contentSize.width/2, _y - texture_.contentSize.height/2)
+          alpha:(self.grabbed || !playerControlled_ ? 1.0 : 0.5)
            zoom:1
           angle:0
             z:0];
 }
 
 - (BOOL) grabbable {
-  return _playerControlled;
+  return playerControlled_;
 }
 
 - (BOOL) containsTouch:(Touch*)touch {
@@ -255,7 +255,7 @@
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return NO;
   }
-  switch (_playerId) {
+  switch (playerId_) {
     case PLAYER_1:
       return p.y >= SCREEN_HEIGHT/2 && p.y < SCREEN_HEIGHT;
       break;

@@ -1,7 +1,7 @@
 #import "ALAudio.h"
 
-ALCcontext* m_context = nil;
-ALCdevice*  m_device  = nil; 
+ALCcontext* context_ = nil;
+ALCdevice*  device_  = nil; 
 
 
 @implementation ALAudio
@@ -10,13 +10,13 @@ ALCdevice*  m_device  = nil;
 {
   if((self = [self init]) != nil)
   {
-    if(m_device == nil)
+    if(device_ == nil)
     {
-      m_device = alcOpenDevice(NULL);
-      if (m_device) 
+      device_ = alcOpenDevice(NULL);
+      if (device_) 
       {
-        m_context = alcCreateContext(m_device,NULL);
-        alcMakeContextCurrent(m_context);
+        context_ = alcCreateContext(device_,NULL);
+        alcMakeContextCurrent(context_);
       }
     }
     
@@ -45,22 +45,22 @@ ALCdevice*  m_device  = nil;
     }
     
     // grab a buffer ID from openAL
-    alGenBuffers(1, &m_buffer_id);
+    alGenBuffers(1, &buffer_id_);
     
     // load the awaiting data blob into the openAL buffer.
-    alBufferData(m_buffer_id,format,audioData,size,freq); 
+    alBufferData(buffer_id_,format,audioData,size,freq); 
     
     // grab a source ID from openAL
-    alGenSources(1, &m_source_id); 
+    alGenSources(1, &source_id_); 
     
     // attach the buffer to the source
-    alSourcei(m_source_id, AL_BUFFER, m_buffer_id);
+    alSourcei(source_id_, AL_BUFFER, buffer_id_);
 
-    alSourcef(m_source_id, AL_PITCH, 1.0f);
-    alSourcef(m_source_id, AL_GAIN,  1.0f);
-    alSourcef(m_source_id, AL_MIN_GAIN,  0.0f);
-    alSourcef(m_source_id, AL_MAX_GAIN,  1.0f);
-    //    if (loops) alSourcei(m_source_id, AL_LOOPING, AL_TRUE);
+    alSourcef(source_id_, AL_PITCH, 1.0f);
+    alSourcef(source_id_, AL_GAIN,  1.0f);
+    alSourcef(source_id_, AL_MIN_GAIN,  0.0f);
+    alSourcef(source_id_, AL_MAX_GAIN,  1.0f);
+    //    if (loops) alSourcei(source_id_, AL_LOOPING, AL_TRUE);
     
     // clean up the buffer
     if (audioData)
@@ -76,46 +76,46 @@ ALCdevice*  m_device  = nil;
 
 -(void)dealloc
 {
-  alDeleteSources(1, &m_source_id);
-  alDeleteBuffers(1, &m_buffer_id);
+  alDeleteSources(1, &source_id_);
+  alDeleteBuffers(1, &buffer_id_);
   
-  alcDestroyContext(m_context);
-  alcCloseDevice(m_device);
+  alcDestroyContext(context_);
+  alcCloseDevice(device_);
   
   [super dealloc];
 }
 
 -(void)play
 {
-  alSourcePlay(m_source_id);
+  alSourcePlay(source_id_);
 }
 
 -(void)stop
 {
-  alSourceStop(m_source_id);
+  alSourceStop(source_id_);
 }
 
 -(void)rewind
 {
-  alSourceRewind(m_source_id);
+  alSourceRewind(source_id_);
 }
 
 -(bool)isPlaying
 {
   ALenum state;
-  alGetSourcei(m_source_id, AL_SOURCE_STATE, &state);
+  alGetSourcei(source_id_, AL_SOURCE_STATE, &state);
   return (state == AL_PLAYING);
 }
 
 -(void)loop:(bool)flag
 {
-  alSourcei(m_source_id, AL_LOOPING, (flag == YES) ? AL_TRUE : AL_FALSE);
+  alSourcei(source_id_, AL_LOOPING, (flag == YES) ? AL_TRUE : AL_FALSE);
 }
 
 -(void)setVolume:(float)volume
 {
   float gain = volume / 1.0f * 0.5f;
-  alSourcef(m_source_id, AL_GAIN, gain);
+  alSourcef(source_id_, AL_GAIN, gain);
 }
 
 @end

@@ -21,67 +21,67 @@
 - (id) initWithNumPlayers:(int)numPlayers numPucks:(int)numPucks difficulty:(ComputerAI)difficulty paddleSize:(PaddleSize)paddleSize {
   [super init];
   
-  _numPlayers = numPlayers;
-  _roundThings = [[NSMutableArray alloc] init];
-  _pucks = [[NSMutableArray alloc] init];
+  numPlayers_ = numPlayers;
+  roundThings_ = [[NSMutableArray alloc] init];
+  pucks_ = [[NSMutableArray alloc] init];
   
-  _rink = [[Rink alloc] init];
-  [self addEntity:_rink];
+  rink_ = [[Rink alloc] init];
+  [self addEntity:rink_];
   
   NSMutableArray* scoreTextures = [NSMutableArray arrayWithCapacity:WIN_SCORE + 1];
   for (int i = 0; i <= WIN_SCORE; i++) {
     Texture2D* texture = [[ResourceLoader instance] getTextureWithName:[NSString stringWithFormat:@"%d_points", i]];
     [scoreTextures addObject:texture];
   }
-  _player1Score = [[SimpleItem alloc] initWithTextures:scoreTextures position:CGPointMake(662, 526)];
-  _player2Score = [[SimpleItem alloc] initWithTextures:scoreTextures position:CGPointMake(662, 386)];
-  [self addEntity:_player1Score];
-  [self addEntity:_player2Score];
+  player_1Score = [[SimpleItem alloc] initWithTextures:scoreTextures position:CGPointMake(662, 526)];
+  player_2Score = [[SimpleItem alloc] initWithTextures:scoreTextures position:CGPointMake(662, 386)];
+  [self addEntity:player_1Score];
+  [self addEntity:player_2Score];
   
-  _numPucks = numPucks;
-  _numActivePucks = _numPucks;
-  for (int i = 0; i < _numPucks; i++) {
+  numPucks_ = numPucks;
+  numActivePucks_ = numPucks_;
+  for (int i = 0; i < numPucks_; i++) {
     Puck* puck = [[[Puck alloc] init] autorelease];
     
     [self addEntity:puck];
-    [_pucks addObject:puck];
-    [_roundThings addObject:puck];
+    [pucks_ addObject:puck];
+    [roundThings_ addObject:puck];
   }
   
-  _paddle1 = [[Paddle alloc] initWithPlayer:PLAYER_1
+  paddle_1 = [[Paddle alloc] initWithPlayer:PLAYER_1
                      size:paddleSize
                playerControlled:YES
                     aiLevel:0];
-  [self addEntity:_paddle1];
-  [_roundThings addObject:_paddle1];
+  [self addEntity:paddle_1];
+  [roundThings_ addObject:paddle_1];
 
-  _paddle2 = [[Paddle alloc] initWithPlayer:PLAYER_2
+  paddle_2 = [[Paddle alloc] initWithPlayer:PLAYER_2
                      size:paddleSize
                playerControlled:numPlayers == 2
                     aiLevel:difficulty];
-  [self addEntity:_paddle2];
-  [_roundThings addObject:_paddle2];
+  [self addEntity:paddle_2];
+  [roundThings_ addObject:paddle_2];
   
-  _paddle1.pucks = _pucks;
-  _paddle1.otherPaddle = _paddle2;
-  _paddle2.pucks = _pucks;
-  _paddle2.otherPaddle = _paddle1;
+  paddle_1.pucks = pucks_;
+  paddle_1.otherPaddle = paddle_2;
+  paddle_2.pucks = pucks_;
+  paddle_2.otherPaddle = paddle_1;
   
   Post* post1 = [[[Post alloc] initWithX:GOAL_LEFT_X y:RINK_TOP_Y] autorelease];
   [self addEntity:post1];
-  [_roundThings addObject:post1];
+  [roundThings_ addObject:post1];
 
   Post* post2 = [[[Post alloc] initWithX:GOAL_LEFT_X y:RINK_BOTTOM_Y + 1] autorelease];
   [self addEntity:post2];
-  [_roundThings addObject:post2];
+  [roundThings_ addObject:post2];
 
   Post* post3 = [[[Post alloc] initWithX:GOAL_RIGHT_X + 1 y:RINK_TOP_Y] autorelease];
   [self addEntity:post3];
-  [_roundThings addObject:post3];
+  [roundThings_ addObject:post3];
   
   Post* post4 = [[[Post alloc] initWithX:GOAL_RIGHT_X + 1 y:RINK_BOTTOM_Y + 1] autorelease];
   [self addEntity:post4];
-  [_roundThings addObject:post4];
+  [roundThings_ addObject:post4];
   
   // Add rink left and right pieces.
   Texture2D* leftRinkBorderTexture = [[ResourceLoader instance] getTextureWithName:@"rink_left"];
@@ -95,54 +95,54 @@
   [self addEntity:rightRinkBorder];
   
   Texture2D* winTexture = [[ResourceLoader instance] getTextureWithName:@"win"];
-  _win = [[SimpleItem alloc] initWithTexture:winTexture
+  win_ = [[SimpleItem alloc] initWithTexture:winTexture
                     position:CGPointMake(0, 0)];
 
   Texture2D* loseTexture = [[ResourceLoader instance] getTextureWithName:@"lose"];
-  _lose = [[SimpleItem alloc] initWithTexture:loseTexture
+  lose_ = [[SimpleItem alloc] initWithTexture:loseTexture
                      position:CGPointMake(0, 0)];
 
   Texture2D* getReadyTexture = [[ResourceLoader instance] getTextureWithName:@"get_ready"];
-  _getReady = [[SimpleItem alloc] initWithTexture:getReadyTexture
+  getReady_ = [[SimpleItem alloc] initWithTexture:getReadyTexture
                        position:CGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize.width) / 2, 
                                 (SCREEN_HEIGHT - getReadyTexture.contentSize.height) / 2)];
 
   Texture2D* goTexture = [[ResourceLoader instance] getTextureWithName:@"go"];
-  _go = [[SimpleItem alloc] initWithTexture:goTexture
+  go_ = [[SimpleItem alloc] initWithTexture:goTexture
                    position:CGPointMake((SCREEN_WIDTH - goTexture.contentSize.width) / 2, 
                               (SCREEN_HEIGHT - goTexture.contentSize.height) / 2)];
   
   Texture2D* rematchButtonTexture = [[ResourceLoader instance] getTextureWithName:@"rematch_button"];
   Texture2D* rematchButtonPressedTexture = [[ResourceLoader instance] getTextureWithName:@"rematch_button_pressed"];
   CGPoint rematchButtonPos = CGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize.width) / 2, 441);
-  _rematchButton = [[Button alloc] initWithNormalTexture:rematchButtonTexture
+  rematchButton_ = [[Button alloc] initWithNormalTexture:rematchButtonTexture
                       pressedTexture:rematchButtonPressedTexture
                           position:rematchButtonPos];
-  _rematchButton.delegate = self;
-  _rematchButton.selector = @selector(rematchPressed);
+  rematchButton_.delegate = self;
+  rematchButton_.selector = @selector(rematchPressed);
 
   Texture2D* menuButtonTexture = [[ResourceLoader instance] getTextureWithName:@"menu_button"];
   Texture2D* menuButtonPressedTexture = [[ResourceLoader instance] getTextureWithName:@"menu_button_pressed"];
   CGPoint menuButtonPos = CGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize.width) / 2, 546);
-  _menuButton = [[Button alloc] initWithNormalTexture:menuButtonTexture
+  menuButton_ = [[Button alloc] initWithNormalTexture:menuButtonTexture
                      pressedTexture:menuButtonPressedTexture
                          position:menuButtonPos];
-  _menuButton.delegate = self;
-  _menuButton.selector = @selector(menuPressed);
+  menuButton_.delegate = self;
+  menuButton_.selector = @selector(menuPressed);
 
   Texture2D* continueButtonTexture = [[ResourceLoader instance] getTextureWithName:@"continue_button"];
   Texture2D* continueButtonPressedTexture = [[ResourceLoader instance] getTextureWithName:@"continue_button_pressed"];
   CGPoint continueButtonPos = CGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize.width) / 2, 441);
-  _continueButton = [[Button alloc] initWithNormalTexture:continueButtonTexture
+  continueButton_ = [[Button alloc] initWithNormalTexture:continueButtonTexture
                        pressedTexture:continueButtonPressedTexture
                            position:continueButtonPos];
-  _continueButton.delegate = self;
-  _continueButton.selector = @selector(continuePressed);
+  continueButton_.delegate = self;
+  continueButton_.selector = @selector(continuePressed);
   
-  _soundSlider = [[SoundSlider alloc] initWithPosition:CGPointMake(331, 336)];
+  soundSlider_ = [[SoundSlider alloc] initWithPosition:CGPointMake(331, 336)];
   
   Texture2D* menuBackgroundTexture = [[ResourceLoader instance] getTextureWithName:@"game_menu_bg"];
-  _menuBackground = [[SimpleItem alloc] initWithTexture:menuBackgroundTexture
+  menuBackground_ = [[SimpleItem alloc] initWithTexture:menuBackgroundTexture
                          position:CGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize.width) / 2, 306)];
   
   Texture2D* pauseButtonTexture = [[ResourceLoader instance] getTextureWithName:@"pause_button"];
@@ -152,122 +152,122 @@
   
   if (!isIPhone) {
     CGPoint pauseButtonPos1 = CGPointMake(0, 0);
-    _pauseButton1 = [[Button alloc] initWithNormalTexture:pauseButtonTexture
+    pauseButton_1 = [[Button alloc] initWithNormalTexture:pauseButtonTexture
                          pressedTexture:pauseButtonPressedTexture
                            position:pauseButtonPos1];
 
-    _pauseButton1.delegate = self;
-    _pauseButton1.selector = @selector(pausePressed);
-    [self addEntity:_pauseButton1];    
+    pauseButton_1.delegate = self;
+    pauseButton_1.selector = @selector(pausePressed);
+    [self addEntity:pauseButton_1];    
   }
   
   CGPoint pauseButtonPos2 = CGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize.width,
                       SCREEN_HEIGHT - pauseButtonTexture.contentSize.height + (NO ? (27 * 768.0/320.0) : 0));
-  _pauseButton2 = [[Button alloc] initWithNormalTexture:pauseButtonTexture
+  pauseButton_2 = [[Button alloc] initWithNormalTexture:pauseButtonTexture
                        pressedTexture:pauseButtonPressedTexture
                          position:pauseButtonPos2];
-  _pauseButton2.delegate = self;
-  _pauseButton2.selector = @selector(pausePressed);
-  [self addEntity:_pauseButton2];
+  pauseButton_2.delegate = self;
+  pauseButton_2.selector = @selector(pausePressed);
+  [self addEntity:pauseButton_2];
     
   if (isIPhone) {
     if (IS_FREE) {
-      _player1Wins = [[UILabel alloc] initWithFrame:CGRectMake(47, 278 + 26, 150, 35)];
-      _player1Wins.textColor = [UIColor whiteColor];
+      player_1Wins = [[UILabel alloc] initWithFrame:CGRectMake(47, 278 + 26, 150, 35)];
+      player_1Wins.textColor = [UIColor whiteColor];
     } else {
-      _player1Wins = [[UILabel alloc] initWithFrame:CGRectMake(5, 448, 150, 35)];
-      _player1Wins.textColor = [UIColor grayColor];
+      player_1Wins = [[UILabel alloc] initWithFrame:CGRectMake(5, 448, 150, 35)];
+      player_1Wins.textColor = [UIColor grayColor];
     }
   } else {
-    _player1Wins = [[UILabel alloc] initWithFrame:CGRectMake(106, 644, 150, 35)];
-    _player1Wins.textColor = [UIColor whiteColor];
+    player_1Wins = [[UILabel alloc] initWithFrame:CGRectMake(106, 644, 150, 35)];
+    player_1Wins.textColor = [UIColor whiteColor];
   }
-  _player1Wins.backgroundColor = [UIColor clearColor];
-  _player1Wins.textAlignment = UITextAlignmentLeft;
+  player_1Wins.backgroundColor = [UIColor clearColor];
+  player_1Wins.textAlignment = UITextAlignmentLeft;
   if (isIPhone) {
-    _player1Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+    player_1Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
   } else {
-    _player1Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
+    player_1Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
   }
   
   if (isIPhone) {
     if (IS_FREE) {
-      _player2Wins = [[UILabel alloc] initWithFrame:CGRectMake(47, 155 + 26, 150, 35)];
-      _player2Wins.textColor = [UIColor whiteColor];
+      player_2Wins = [[UILabel alloc] initWithFrame:CGRectMake(47, 155 + 26, 150, 35)];
+      player_2Wins.textColor = [UIColor whiteColor];
     } else {
-      _player2Wins = [[UILabel alloc] initWithFrame:CGRectMake(5, -5, 150, 35)];
-      _player2Wins.textColor = [UIColor grayColor];
+      player_2Wins = [[UILabel alloc] initWithFrame:CGRectMake(5, -5, 150, 35)];
+      player_2Wins.textColor = [UIColor grayColor];
     }
   } else {
-    _player2Wins = [[UILabel alloc] initWithFrame:CGRectMake(106, 324, 150, 35)];
-    _player2Wins.textColor = [UIColor whiteColor];
+    player_2Wins = [[UILabel alloc] initWithFrame:CGRectMake(106, 324, 150, 35)];
+    player_2Wins.textColor = [UIColor whiteColor];
   }
-  _player2Wins.backgroundColor = [UIColor clearColor];
+  player_2Wins.backgroundColor = [UIColor clearColor];
   if (isIPhone) {
-    _player2Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+    player_2Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
   } else {
-    _player2Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
+    player_2Wins.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
   }
-  if (_numPlayers == 2) {
-    _player2Wins.transform = CGAffineTransformMakeRotation(M_PI); 
-    _player2Wins.textAlignment = UITextAlignmentRight;
+  if (numPlayers_ == 2) {
+    player_2Wins.transform = CGAffineTransformMakeRotation(M_PI); 
+    player_2Wins.textAlignment = UITextAlignmentRight;
   } else {
-    _player2Wins.textAlignment = UITextAlignmentLeft;
+    player_2Wins.textAlignment = UITextAlignmentLeft;
   }
   
   if (!IS_FREE && isIPhone) {
-    _player1Wins.text = @"0 wins";
-    _player2Wins.text = @"0 wins";
-    [EAGLView addUIView:_player1Wins];    
-    [EAGLView addUIView:_player2Wins];
+    player_1Wins.text = @"0 wins";
+    player_2Wins.text = @"0 wins";
+    [EAGLView addUIView:player_1Wins];    
+    [EAGLView addUIView:player_2Wins];
   }
   
-  _giveExtraPuckToPlayer = PLAYER_1;
-  _player1WinCount = 0;
-  _player2WinCount = 0;
+  giveExtraPuckToPlayer_ = PLAYER_1;
+  player_1WinCount = 0;
+  player_2WinCount = 0;
   [self setUpNewGame];
   
   return self;
 }
 
 - (void) dealloc {
-  [_rink           release];
-  [_paddle1        release];
-  [_paddle2        release];
-  [_pucks          release];
-  [_roundThings    release];
-  [_player1Score   release];
-  [_player2Score   release];
-  [_win            release];
-  [_lose           release];
-  [_getReady       release];
-  [_go             release];
-  [_rematchButton  release];
-  [_menuButton     release];
-  [_soundSlider    release];
-  [_menuBackground release];
-  [_continueButton release];
-  [_pauseButton1   release];
-  [_pauseButton2   release];
-  [_player1Wins    release];
-  [_player2Wins    release];
+  [rink_           release];
+  [paddle_1        release];
+  [paddle_2        release];
+  [pucks_          release];
+  [roundThings_    release];
+  [player_1Score   release];
+  [player_2Score   release];
+  [win_            release];
+  [lose_           release];
+  [getReady_       release];
+  [go_             release];
+  [rematchButton_  release];
+  [menuButton_     release];
+  [soundSlider_    release];
+  [menuBackground_ release];
+  [continueButton_ release];
+  [pauseButton_1   release];
+  [pauseButton_2   release];
+  [player_1Wins    release];
+  [player_2Wins    release];
   
   [super dealloc];
 }
 
 - (void) update {
-  if (_state == PLAY_STATE_PAUSED) {
+  if (state_ == PLAY_STATE_PAUSED) {
     return;
-  } else if (_state == PLAY_STATE_GET_READY) {
-    _getReadyTicksLeft--;
-    if (_getReadyTicksLeft == SHOW_GET_READY_MESSAGE_TICKS) {
-      [self addEntity:_getReady];
+  } else if (state_ == PLAY_STATE_GET_READY) {
+    getReadyTicksLeft_--;
+    if (getReadyTicksLeft_ == SHOW_GET_READY_MESSAGE_TICKS) {
+      [self addEntity:getReady_];
       [SoundPlayer playSound:kSoundGetReady];
-    } else if (_getReadyTicksLeft == 0) {
-      [self removeEntity:_getReady];
-      [self addEntity:_go];
-      _goTicksLeft = SHOW_GO_MESSAGE_TICKS;
-      _state = PLAY_STATE_PLAYING;
+    } else if (getReadyTicksLeft_ == 0) {
+      [self removeEntity:getReady_];
+      [self addEntity:go_];
+      goTicksLeft_ = SHOW_GO_MESSAGE_TICKS;
+      state_ = PLAY_STATE_PLAYING;
       [SoundPlayer playSound:kSoundStart];
     }
     
@@ -276,24 +276,24 @@
 
   [super update];
   
-  if (_goTicksLeft > 0) {
-    _goTicksLeft--;
-    if (_goTicksLeft == 0) {
-      [self removeEntity:_go];
+  if (goTicksLeft_ > 0) {
+    goTicksLeft_--;
+    if (goTicksLeft_ == 0) {
+      [self removeEntity:go_];
     }
   }
   
-  [_paddle1 keepInPlayerBounds];
-  [_paddle2 keepInPlayerBounds];
+  [paddle_1 keepInPlayerBounds];
+  [paddle_2 keepInPlayerBounds];
   
-  for (int i = 0; i < _roundThings.count; i++) {
-    RoundThing* thing = [_roundThings objectAtIndex:i];
+  for (int i = 0; i < roundThings_.count; i++) {
+    RoundThing* thing = [roundThings_ objectAtIndex:i];
     if (!thing.active) {
       continue;
     }
-    [_rink bounceOff:thing];
-    for (int j = i + 1; j < _roundThings.count; j++) {
-      RoundThing* otherThing = [_roundThings objectAtIndex:j];;
+    [rink_ bounceOff:thing];
+    for (int j = i + 1; j < roundThings_.count; j++) {
+      RoundThing* otherThing = [roundThings_ objectAtIndex:j];;
       if (otherThing.active) {
         [thing bounceOff:otherThing];
       }
@@ -302,71 +302,71 @@
     [thing applyFriction];
     
     // TODO If you grab item A and push item B into a corner,
-    // it only behaves if item A was added to _roundsThings
+    // it only behaves if item A was added to roundsThings_
     // after item B. This is OK for Air Hockey, but should be fixed
     // for other games.
-    [_rink moveInFromEdge:thing];
+    [rink_ moveInFromEdge:thing];
   }
 
-  for (int i = 0; i < _pucks.count; i++) {
-    Puck* puck = [_pucks objectAtIndex:i];
+  for (int i = 0; i < pucks_.count; i++) {
+    Puck* puck = [pucks_ objectAtIndex:i];
     if (!puck.active) {
       continue;
     }
     if (puck.y < -puck.radius) {
       puck.active = NO;
-      if (_player1Score.texture < WIN_SCORE && _state == PLAY_STATE_PLAYING) {
-        _player1Score.texture++;
+      if (player_1Score.texture < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+        player_1Score.texture++;
       }
-      if (_player1Score.texture == WIN_SCORE && _state == PLAY_STATE_PLAYING) {
+      if (player_1Score.texture == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
         [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         [SoundPlayer playSound:kSoundScore];
       }
-      _numPlayer1ScoresLastRound++;
-      _numActivePucks--;
+      numPlayer_1ScoresLastRound++;
+      numActivePucks_--;
     } else if (puck.y > SCREEN_HEIGHT + puck.radius) {
       puck.active = NO;
-      if (_player2Score.texture < WIN_SCORE && _state == PLAY_STATE_PLAYING) {
-        _player2Score.texture++;
+      if (player_2Score.texture < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+        player_2Score.texture++;
       }
-      if (_player2Score.texture == WIN_SCORE && _state == PLAY_STATE_PLAYING) {
+      if (player_2Score.texture == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
         [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         [SoundPlayer playSound:kSoundScore];
       }
       
-      _numActivePucks--;
+      numActivePucks_--;
     }
   }  
   
-  switch (_state) {
+  switch (state_) {
     case PLAY_STATE_PLAYING: {      
-      if (_player1Score.texture == WIN_SCORE) {
+      if (player_1Score.texture == WIN_SCORE) {
         [self finishGameWithWinner:PLAYER_1];
-      } else if (_player2Score.texture == WIN_SCORE) {
+      } else if (player_2Score.texture == WIN_SCORE) {
         [self finishGameWithWinner:PLAYER_2];
-      } else if (_numActivePucks == 0) {
-        _waitTicksLeft = WAIT_TICKS;
-        _state = PLAY_STATE_WAITING_FOR_PUCKS;
+      } else if (numActivePucks_ == 0) {
+        waitTicksLeft_ = WAIT_TICKS;
+        state_ = PLAY_STATE_WAITING_FOR_PUCKS;
       }
       break;
     }
     case PLAY_STATE_WAITING_FOR_PUCKS: {
-      if (_waitTicksLeft-- == 0) {
-        for (int i = 0; i < _numPucks; i++) {
-          Puck* puck = [_pucks objectAtIndex:i];
+      if (waitTicksLeft_-- == 0) {
+        for (int i = 0; i < numPucks_; i++) {
+          Puck* puck = [pucks_ objectAtIndex:i];
           puck.active = YES;
-          [puck placeForPlayer:(i < _numPlayer1ScoresLastRound ? PLAYER_2 : PLAYER_1)
-               roundThings:_roundThings
-                  center:(i < _numPlayer1ScoresLastRound ? (_numPlayer1ScoresLastRound % 2 == 1)
-                      : ((_numPucks - _numPlayer1ScoresLastRound) % 2 == 1))];
+          [puck placeForPlayer:(i < numPlayer_1ScoresLastRound ? PLAYER_2 : PLAYER_1)
+               roundThings:roundThings_
+                  center:(i < numPlayer_1ScoresLastRound ? (numPlayer_1ScoresLastRound % 2 == 1)
+                      : ((numPucks_ - numPlayer_1ScoresLastRound) % 2 == 1))];
           [puck fadeIn];
         }
-        _numActivePucks = _numPucks;
-        _numPlayer1ScoresLastRound = 0;
+        numActivePucks_ = numPucks_;
+        numPlayer_1ScoresLastRound = 0;
         
-        _state = PLAY_STATE_PLAYING;        
+        state_ = PLAY_STATE_PLAYING;        
 
         break;
       }
@@ -381,97 +381,97 @@
   }
 
   // Place paddles!
-  [_paddle1 setInitialPositionForPlayer:PLAYER_1];
-  [_paddle2 setInitialPositionForPlayer:PLAYER_2];
+  [paddle_1 setInitialPositionForPlayer:PLAYER_1];
+  [paddle_2 setInitialPositionForPlayer:PLAYER_2];
   
   // Place pucks!
   // First move them all out of the way. That way we can lay them out properly.
   // ([Puck placeForPlayer] avoids hitting other RoundThings objects.)
-  for (int i = 0; i < _numPucks; i++) {
-    Puck* puck = [_pucks objectAtIndex:i];
+  for (int i = 0; i < numPucks_; i++) {
+    Puck* puck = [pucks_ objectAtIndex:i];
     puck.x = 0;
     puck.y = 0;
   }
-  for (int i = 0; i < _numPucks; i++) {
-    Puck* puck = [_pucks objectAtIndex:i];
+  for (int i = 0; i < numPucks_; i++) {
+    Puck* puck = [pucks_ objectAtIndex:i];
     puck.active = YES;
-    int playerId = (i % 2 == 0) ? _giveExtraPuckToPlayer : 1 - _giveExtraPuckToPlayer;
-    BOOL center = !((playerId == _giveExtraPuckToPlayer && (_numPucks == 3 || _numPucks == 4 || _numPucks == 7)) ||
-            (playerId == 1 - _giveExtraPuckToPlayer && (_numPucks == 4 || _numPucks == 5)));
-    [puck placeForPlayer:playerId roundThings:_roundThings center:center];
+    int playerId = (i % 2 == 0) ? giveExtraPuckToPlayer_ : 1 - giveExtraPuckToPlayer_;
+    BOOL center = !((playerId == giveExtraPuckToPlayer_ && (numPucks_ == 3 || numPucks_ == 4 || numPucks_ == 7)) ||
+            (playerId == 1 - giveExtraPuckToPlayer_ && (numPucks_ == 4 || numPucks_ == 5)));
+    [puck placeForPlayer:playerId roundThings:roundThings_ center:center];
   }
   
-  _player1Score.texture = 0;
-  _player2Score.texture = 0;
-  [self removeEntity:_menuBackground];
-  [self removeEntity:_soundSlider];
-  [self removeEntity:_rematchButton];
-  [self removeEntity:_menuButton];
-  [self removeEntity:_win];
-  [self removeEntity:_lose];
+  player_1Score.texture = 0;
+  player_2Score.texture = 0;
+  [self removeEntity:menuBackground_];
+  [self removeEntity:soundSlider_];
+  [self removeEntity:rematchButton_];
+  [self removeEntity:menuButton_];
+  [self removeEntity:win_];
+  [self removeEntity:lose_];
   
-  _numActivePucks = _numPucks;
-  _numPlayer1ScoresLastRound = 0;
+  numActivePucks_ = numPucks_;
+  numPlayer_1ScoresLastRound = 0;
   
-  _state = PLAY_STATE_GET_READY;
-  _getReadyTicksLeft = GET_READY_TICKS_TOTAL;
+  state_ = PLAY_STATE_GET_READY;
+  getReadyTicksLeft_ = GET_READY_TICKS_TOTAL;
 }
 
 - (void) finishGameWithWinner:(int)playerId {
-  _state = PLAY_STATE_FINISHED;
+  state_ = PLAY_STATE_FINISHED;
   
-  double loseX = (SCREEN_WIDTH - _lose.size.width)/2;
-  double winX =  (SCREEN_WIDTH - _win.size.width)/2;
+  double loseX = (SCREEN_WIDTH - lose_.size.width)/2;
+  double winX =  (SCREEN_WIDTH - win_.size.width)/2;
   double topY = 70;
-  double bottomY = SCREEN_HEIGHT - topY - _lose.size.height;
+  double bottomY = SCREEN_HEIGHT - topY - lose_.size.height;
   switch (playerId) {
     case PLAYER_1: {
-      _player1WinCount++;
+      player_1WinCount++;
 
-      _win.position = CGPointMake(winX, bottomY);
-      _win.angle = 0;
-      [self addEntity:_win];
+      win_.position = CGPointMake(winX, bottomY);
+      win_.angle = 0;
+      [self addEntity:win_];
       
-      if (_numPlayers == 2) {
-        _lose.position = CGPointMake(loseX, topY);
-        _lose.angle = 180;
-        [self addEntity:_lose];
+      if (numPlayers_ == 2) {
+        lose_.position = CGPointMake(loseX, topY);
+        lose_.angle = 180;
+        [self addEntity:lose_];
       }
       
-      _giveExtraPuckToPlayer = PLAYER_2;
+      giveExtraPuckToPlayer_ = PLAYER_2;
       
       break;
     }
     case PLAYER_2: {
-      _player2WinCount++;
+      player_2WinCount++;
       
-      if (_numPlayers == 2) {
-        _win.position = CGPointMake(winX, topY);
-        _win.angle = 180;      
-        [self addEntity:_win];
+      if (numPlayers_ == 2) {
+        win_.position = CGPointMake(winX, topY);
+        win_.angle = 180;      
+        [self addEntity:win_];
       }
       
-      _lose.position = CGPointMake(loseX, bottomY);
-      _lose.angle = 0;
-      [self addEntity:_lose];
+      lose_.position = CGPointMake(loseX, bottomY);
+      lose_.angle = 0;
+      [self addEntity:lose_];
       
-      _giveExtraPuckToPlayer = PLAYER_1;
+      giveExtraPuckToPlayer_ = PLAYER_1;
       
       break;
     }
   }
 
-  _player1Wins.text = [NSString stringWithFormat:@"%d win%@", _player1WinCount, _player1WinCount == 1 ? @"" : @"s"];
-  _player2Wins.text = [NSString stringWithFormat:@"%d win%@", _player2WinCount, _player2WinCount == 1 ? @"" : @"s"];
+  player_1Wins.text = [NSString stringWithFormat:@"%d win%@", player_1WinCount, player_1WinCount == 1 ? @"" : @"s"];
+  player_2Wins.text = [NSString stringWithFormat:@"%d win%@", player_2WinCount, player_2WinCount == 1 ? @"" : @"s"];
   if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView addUIView:_player1Wins];
-    [EAGLView addUIView:_player2Wins];
+    [EAGLView addUIView:player_1Wins];
+    [EAGLView addUIView:player_2Wins];
   }
   
-  [self addEntity:_menuBackground];
-  [self addEntity:_soundSlider];
-  [self addEntity:_rematchButton];
-  [self addEntity:_menuButton];
+  [self addEntity:menuBackground_];
+  [self addEntity:soundSlider_];
+  [self addEntity:rematchButton_];
+  [self addEntity:menuButton_];
   
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     [EAGLView addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320)/2, 385)];
@@ -483,8 +483,8 @@
 - (void) rematchPressed {
   [FlurryAnalytics logEvent:@"REMATCH"];
   if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView removeUIView:_player1Wins];
-    [EAGLView removeUIView:_player2Wins];
+    [EAGLView removeUIView:player_1Wins];
+    [EAGLView removeUIView:player_2Wins];
   }
   [self setUpNewGame];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -494,8 +494,8 @@
 
 
 - (void) menuPressed {
-  [EAGLView removeUIView:_player1Wins];
-  [EAGLView removeUIView:_player2Wins];
+  [EAGLView removeUIView:player_1Wins];
+  [EAGLView removeUIView:player_2Wins];
   [[GameEngine instance] replaceTopState:[[[MainMenuState alloc] init] autorelease]];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     [EAGLView removeAd];
@@ -503,24 +503,24 @@
 }
 
 - (void) continuePressed {
-  _state = _prePauseState;
-  [self removeEntity:_menuBackground];
-  [self removeEntity:_soundSlider];
-  [self removeEntity:_menuButton];
-  [self removeEntity:_continueButton];
+  state_ = prePauseState_;
+  [self removeEntity:menuBackground_];
+  [self removeEntity:soundSlider_];
+  [self removeEntity:menuButton_];
+  [self removeEntity:continueButton_];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     [EAGLView removeAd];
   }
 }
 
 - (void) pausePressed {
-  if (_state != PLAY_STATE_FINISHED && _state != PLAY_STATE_PAUSED) {
-    _prePauseState = _state;
-    _state = PLAY_STATE_PAUSED;
-    [self addEntity:_menuBackground];
-    [self addEntity:_soundSlider];
-    [self addEntity:_menuButton];
-    [self addEntity:_continueButton];
+  if (state_ != PLAY_STATE_FINISHED && state_ != PLAY_STATE_PAUSED) {
+    prePauseState_ = state_;
+    state_ = PLAY_STATE_PAUSED;
+    [self addEntity:menuBackground_];
+    [self addEntity:soundSlider_];
+    [self addEntity:menuButton_];
+    [self addEntity:continueButton_];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
       [EAGLView addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320)/2, 385)];
     }
@@ -529,13 +529,13 @@
 
 - (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches {
   // When paused, only allow touches on the menu and continue buttons.
-  if (_state == PLAY_STATE_PAUSED) {
-    [_menuButton touchesBegan:touches numTouches:numTouches];
-    [_continueButton touchesBegan:touches numTouches:numTouches];
-    [_soundSlider touchesBegan:touches numTouches:numTouches];
-  } else if (_state == PLAY_STATE_GET_READY) {
-    [_pauseButton1 touchesBegan:touches numTouches:numTouches];
-    [_pauseButton2 touchesBegan:touches numTouches:numTouches];
+  if (state_ == PLAY_STATE_PAUSED) {
+    [menuButton_ touchesBegan:touches numTouches:numTouches];
+    [continueButton_ touchesBegan:touches numTouches:numTouches];
+    [soundSlider_ touchesBegan:touches numTouches:numTouches];
+  } else if (state_ == PLAY_STATE_GET_READY) {
+    [pauseButton_1 touchesBegan:touches numTouches:numTouches];
+    [pauseButton_2 touchesBegan:touches numTouches:numTouches];
   } else {
     [super touchesBegan:touches numTouches:numTouches];
   }
@@ -543,9 +543,9 @@
 
 - (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches {
   // When paused, only allow touches on the menu and continue buttons.
-  if (_state == PLAY_STATE_PAUSED) {
-    [_soundSlider touchesMoved:touches numTouches:numTouches];
-  } else if (_state == PLAY_STATE_GET_READY) {
+  if (state_ == PLAY_STATE_PAUSED) {
+    [soundSlider_ touchesMoved:touches numTouches:numTouches];
+  } else if (state_ == PLAY_STATE_GET_READY) {
   } else {
     [super touchesMoved:touches numTouches:numTouches];
   }
@@ -553,13 +553,13 @@
 
 - (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
   // When paused, only allow touches on the menu and continue buttons.
-  if (_state == PLAY_STATE_PAUSED) {
-    [_menuButton touchesEnded:touches numTouches:numTouches];
-    [_continueButton touchesEnded:touches numTouches:numTouches];    
-    [_soundSlider touchesEnded:touches numTouches:numTouches];
-  } else if (_state == PLAY_STATE_GET_READY) {
-    [_pauseButton1 touchesEnded:touches numTouches:numTouches];
-    [_pauseButton2 touchesEnded:touches numTouches:numTouches];    
+  if (state_ == PLAY_STATE_PAUSED) {
+    [menuButton_ touchesEnded:touches numTouches:numTouches];
+    [continueButton_ touchesEnded:touches numTouches:numTouches];    
+    [soundSlider_ touchesEnded:touches numTouches:numTouches];
+  } else if (state_ == PLAY_STATE_GET_READY) {
+    [pauseButton_1 touchesEnded:touches numTouches:numTouches];
+    [pauseButton_2 touchesEnded:touches numTouches:numTouches];    
   } else {
     [super touchesEnded:touches numTouches:numTouches];
   }

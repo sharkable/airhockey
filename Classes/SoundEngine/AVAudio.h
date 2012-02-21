@@ -22,7 +22,7 @@
  **/
 @interface AVAudio : NSObject <Audio>
 {
-  AVAudioPlayer* m_player;
+  AVAudioPlayer* player_;
 }
 
 -(AVAudio*) initWithURL:(NSURL*)url;

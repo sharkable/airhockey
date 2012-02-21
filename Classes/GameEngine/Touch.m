@@ -11,6 +11,6 @@
 
 @implementation Touch
 
-@synthesize location=_location, identifier=_identifier;
+@synthesize location=location_, identifier=identifier_;
 
 @end

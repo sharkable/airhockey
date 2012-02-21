@@ -26,11 +26,11 @@
   if (self) {
     init_genrand(time(NULL));
     
-    _states = [[Stack alloc] init];
+    states_ = [[Stack alloc] init];
     for (int i = 0; i < MAX_TOUCHES; i++) {
-      _touchesBegan[i] = [[Touch alloc] init];
-      _touchesMoved[i] = [[Touch alloc] init];
-      _touchesEnded[i] = [[Touch alloc] init];
+      touchesBegan_[i] = [[Touch alloc] init];
+      touchesMoved_[i] = [[Touch alloc] init];
+      touchesEnded_[i] = [[Touch alloc] init];
     }
   }
   
@@ -38,128 +38,128 @@
 }
 
 - (void)dealloc {
-  [_states release];
+  [states_ release];
   for (int i = 0; i < MAX_TOUCHES; i++) {
-    [_touchesBegan[i] release];
-    [_touchesMoved[i] release];
-    [_touchesEnded[i] release];
+    [touchesBegan_[i] release];
+    [touchesMoved_[i] release];
+    [touchesEnded_[i] release];
   }
   
   [super dealloc];
 }
 
 - (void)render {
-  for (int i = 0; i < _states.count; i++) {
-    EngineState *state = [_states objectAtIndex:i];
+  for (int i = 0; i < states_.count; i++) {
+    EngineState *state = [states_ objectAtIndex:i];
     [state render];
   }
 }
 
 - (void)update {
-  if (_popOnNext) {
-    [_states pop];
-    [[_states top] stateIsShown];
-    _popOnNext = NO;
-  } else if (_replaceOnNext) {
-    [_states pop];
-    [_states push:_nextState];
-    [_nextState release];
-    [_nextState stateIsShown];
-    _replaceOnNext = NO;
-    _nextState = nil;
+  if (popOnNext_) {
+    [states_ pop];
+    [[states_ top] stateIsShown];
+    popOnNext_ = NO;
+  } else if (replaceOnNext_) {
+    [states_ pop];
+    [states_ push:nextState_];
+    [nextState_ release];
+    [nextState_ stateIsShown];
+    replaceOnNext_ = NO;
+    nextState_ = nil;
   }
   
   // Process input.
-  EngineState* topState = [_states top];
-  if (_numTouchesBegan > 0) {
-    [topState touchesBegan:_touchesBegan numTouches:_numTouchesBegan];
-    _numTouchesBegan = 0;
+  EngineState* topState = [states_ top];
+  if (numTouchesBegan_ > 0) {
+    [topState touchesBegan:touchesBegan_ numTouches:numTouchesBegan_];
+    numTouchesBegan_ = 0;
   }
-  if (_numTouchesMoved > 0) {
-    [topState touchesMoved:_touchesMoved numTouches:_numTouchesMoved];
-    _numTouchesMoved = 0;
+  if (numTouchesMoved_ > 0) {
+    [topState touchesMoved:touchesMoved_ numTouches:numTouchesMoved_];
+    numTouchesMoved_ = 0;
   }
-  if (_numTouchesEnded > 0) {
-    [topState touchesEnded:_touchesEnded numTouches:_numTouchesEnded];
-    _numTouchesEnded = 0;
+  if (numTouchesEnded_ > 0) {
+    [topState touchesEnded:touchesEnded_ numTouches:numTouchesEnded_];
+    numTouchesEnded_ = 0;
   }
   
   // Update states.
-  for (int i = 0; i < _states.count; i++) {
-    EngineState* state = [_states objectAtIndex:i];
+  for (int i = 0; i < states_.count; i++) {
+    EngineState* state = [states_ objectAtIndex:i];
     [state update];
   }
 }
 
 - (void) pushState:(EngineState*)state {
-  [_states push:state];
+  [states_ push:state];
   [state stateIsShown];
 }
 
 - (void) popState {
-  _popOnNext = YES;
+  popOnNext_ = YES;
 }
 
 - (void) replaceTopState:(EngineState*)state {
-  _replaceOnNext = YES;
-  if (_nextState != state) {
-    [_nextState release];
-    _nextState = state;
-    [_nextState retain];
+  replaceOnNext_ = YES;
+  if (nextState_ != state) {
+    [nextState_ release];
+    nextState_ = state;
+    [nextState_ retain];
   }
 }
 
 - (void) setTouchesBegan:(NSSet*) touches {
-  _numTouchesBegan = touches.count;
+  numTouchesBegan_ = touches.count;
   int i = 0;
   for (UITouch* touch in touches) {
-    _touchesBegan[i].location = [touch locationInView:touch.view];
+    touchesBegan_[i].location = [touch locationInView:touch.view];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = _touchesBegan[i].location;
+      CGPoint p = touchesBegan_[i].location;
       p.x *= 768.0/320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0/320.0);
-      _touchesBegan[i].location = p;
+      touchesBegan_[i].location = p;
     }
-    _touchesBegan[i].identifier = touch;
+    touchesBegan_[i].identifier = touch;
     i++;
   }
 }
 
 - (void) setTouchesMoved:(NSSet*) touches {
-  _numTouchesMoved = touches.count;
+  numTouchesMoved_ = touches.count;
   int i = 0;
   for (UITouch* touch in touches) {
-    _touchesMoved[i].location = [touch locationInView:touch.view];
+    touchesMoved_[i].location = [touch locationInView:touch.view];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = _touchesMoved[i].location;
+      CGPoint p = touchesMoved_[i].location;
       p.x *= 768.0/320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0/320.0);
-      _touchesMoved[i].location = p;
+      touchesMoved_[i].location = p;
     }
-    _touchesMoved[i].identifier = touch;
+    touchesMoved_[i].identifier = touch;
     i++;
   }
 }
 
 - (void) setTouchesEnded:(NSSet*) touches {
-  _numTouchesEnded = touches.count;
+  numTouchesEnded_ = touches.count;
   int i = 0;
   for (UITouch* touch in touches) {
-    _touchesEnded[i].location = [touch locationInView:touch.view];
+    touchesEnded_[i].location = [touch locationInView:touch.view];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = _touchesEnded[i].location;
+      CGPoint p = touchesEnded_[i].location;
       p.x *= 768.0/320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0/320.0);
-      _touchesEnded[i].location = p;
+      touchesEnded_[i].location = p;
     }
-    _touchesEnded[i].identifier = touch;
+    touchesEnded_[i].identifier = touch;
     i++;
   }
 }
 
 - (void) clearTouches {
-  for (int i = 0; i < _states.count; i++) {
-    EngineState* state = [_states objectAtIndex:i];
+  for (int i = 0; i < states_.count; i++) {
+    EngineState *state = [states_ objectAtIndex:i];
     [state clearTouches];
   }
 }

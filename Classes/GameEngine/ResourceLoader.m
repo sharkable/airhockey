@@ -11,29 +11,29 @@
 
 @implementation ResourceLoader
 
-static ResourceLoader* _instance = nil;
+static ResourceLoader* instance_ = nil;
 
 + (ResourceLoader*) instance {
-  if (_instance == nil) {
-    _instance = [[ResourceLoader alloc] init];
+  if (instance_ == nil) {
+    instance_ = [[ResourceLoader alloc] init];
   }
-  return _instance;
+  return instance_;
 }
 
 - (ResourceLoader*) init {
-  _resources = [[NSMutableDictionary alloc] init];
-  _resourceCounter = [[NSMutableDictionary alloc] init];
+  resources_ = [[NSMutableDictionary alloc] init];
+  resourceCounter_ = [[NSMutableDictionary alloc] init];
   return self;
 }
 
 - (void) dealloc {
-  [_resources release];
-  [_resourceCounter release];
+  [resources_ release];
+  [resourceCounter_ release];
   [super dealloc];
 }
 
 - (Texture2D*) getTextureWithName:(NSString*)name {
-  NSNumber* count = [_resourceCounter objectForKey:name];
+  NSNumber* count = [resourceCounter_ objectForKey:name];
   if ([count intValue] == 0) {
     UIImage* image;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -43,14 +43,14 @@ static ResourceLoader* _instance = nil;
     }
     
     Texture2D* texture = [[[Texture2D alloc] initWithImage:image] autorelease];
-    [_resourceCounter setObject:[NSNumber numberWithInt:[count intValue] + 1] forKey:name];
-    [_resources setObject:texture forKey:name];
+    [resourceCounter_ setObject:[NSNumber numberWithInt:[count intValue] + 1] forKey:name];
+    [resources_ setObject:texture forKey:name];
     //NSLog(@"GOT: %@ fors the first time!", name);
     return texture;
   }
   
-  Texture2D* texture = [_resources objectForKey:name];
-  [_resourceCounter setObject:[NSNumber numberWithInt:[count intValue]+1] forKey:name];
+  Texture2D* texture = [resources_ objectForKey:name];
+  [resourceCounter_ setObject:[NSNumber numberWithInt:[count intValue]+1] forKey:name];
   //NSLog(@"GOT: %@ again", name);
   
   return texture;  
@@ -60,16 +60,16 @@ static ResourceLoader* _instance = nil;
   if (!name) {
     return;
   }
-  NSNumber* count = [_resourceCounter objectForKey:name];
+  NSNumber* count = [resourceCounter_ objectForKey:name];
   if (count == nil || [count intValue] == 0) {
     //NSLog(@"ERROR: %@ RELEASED BUT NOT THERE", name);
     return;
   } else if ([count intValue] == 1) {
-    [_resources removeObjectForKey:name];
-    [_resourceCounter removeObjectForKey:name];
+    [resources_ removeObjectForKey:name];
+    [resourceCounter_ removeObjectForKey:name];
     //NSLog(@"REMOVED: %@", name);
   } else {
-    [_resourceCounter setObject:[NSNumber numberWithInt:[count intValue]-1] forKey:name];
+    [resourceCounter_ setObject:[NSNumber numberWithInt:[count intValue]-1] forKey:name];
   }
 }
 
@@ -77,7 +77,7 @@ static ResourceLoader* _instance = nil;
   if (!resource) {
     return;
   }
-  NSArray* keys = [_resources allKeysForObject:resource];
+  NSArray* keys = [resources_ allKeysForObject:resource];
   if (keys.count == 1) {
     [self releaseResourceWithName:[keys objectAtIndex:0]];    
   } else {
