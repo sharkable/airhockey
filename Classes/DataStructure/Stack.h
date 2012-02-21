@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface Stack : NSObject {
-  NSMutableArray* array_;
+ @private
+  NSMutableArray *array_;
 }
 
-- (void) push:(id)object;
-- (id) pop;
-- (id) top;
-- (id) objectAtIndex:(int)index;
+- (void)push:(id)object;
+- (id)pop;
+- (id)top;
+- (id)objectAtIndex:(int)index;
 
-@property (readonly) int count;
+@property(nonatomic, readonly) int count;
 
 @end
