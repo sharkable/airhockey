@@ -17,6 +17,7 @@ extern void init_genrand(unsigned long s);
 extern long genrand_int31(void);
 
 @interface GameEngine : NSObject {
+ @private
   Stack *states_;
   Touch *touchesBegan_[MAX_TOUCHES];
   int numTouchesBegan_;

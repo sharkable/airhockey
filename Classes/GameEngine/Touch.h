@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface Touch : NSObject {
-  CGPoint  location_;
-  UITouch* identifier_;
+ @private
+  CGPoint location_;
+  UITouch *identifier_;
 }
 
-@property (assign) CGPoint  location;
-@property (assign) UITouch* identifier;
+@property(nonatomic, assign) CGPoint location;
+@property(nonatomic, retain) UITouch *identifier;
 
 @end

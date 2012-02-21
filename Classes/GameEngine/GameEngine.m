@@ -13,7 +13,7 @@
 @implementation GameEngine
 
 + (GameEngine *)instance {
-  static GameEngine* __instance = nil;
+  static GameEngine *__instance = nil;
   if (__instance == nil) {
     __instance = [[GameEngine alloc] init];
   }
@@ -70,7 +70,7 @@
   }
   
   // Process input.
-  EngineState* topState = [states_ top];
+  EngineState *topState = [states_ top];
   if (numTouchesBegan_ > 0) {
     [topState touchesBegan:touchesBegan_ numTouches:numTouchesBegan_];
     numTouchesBegan_ = 0;
@@ -86,12 +86,12 @@
   
   // Update states.
   for (int i = 0; i < states_.count; i++) {
-    EngineState* state = [states_ objectAtIndex:i];
+    EngineState *state = [states_ objectAtIndex:i];
     [state update];
   }
 }
 
-- (void) pushState:(EngineState*)state {
+- (void) pushState:(EngineState *)state {
   [states_ push:state];
   [state stateIsShown];
 }
@@ -100,7 +100,7 @@
   popOnNext_ = YES;
 }
 
-- (void) replaceTopState:(EngineState*)state {
+- (void) replaceTopState:(EngineState *)state {
   replaceOnNext_ = YES;
   if (nextState_ != state) {
     [nextState_ release];
@@ -109,15 +109,15 @@
   }
 }
 
-- (void) setTouchesBegan:(NSSet*) touches {
+- (void)setTouchesBegan:(NSSet *)touches {
   numTouchesBegan_ = touches.count;
   int i = 0;
-  for (UITouch* touch in touches) {
+  for (UITouch *touch in touches) {
     touchesBegan_[i].location = [touch locationInView:touch.view];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
       CGPoint p = touchesBegan_[i].location;
-      p.x *= 768.0/320.0;
-      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0/320.0);
+      p.x *= 768.0 / 320.0;
+      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
       touchesBegan_[i].location = p;
     }
     touchesBegan_[i].identifier = touch;
@@ -125,15 +125,15 @@
   }
 }
 
-- (void) setTouchesMoved:(NSSet*) touches {
+- (void)setTouchesMoved:(NSSet *)touches {
   numTouchesMoved_ = touches.count;
   int i = 0;
-  for (UITouch* touch in touches) {
+  for (UITouch *touch in touches) {
     touchesMoved_[i].location = [touch locationInView:touch.view];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
       CGPoint p = touchesMoved_[i].location;
-      p.x *= 768.0/320.0;
-      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0/320.0);
+      p.x *= 768.0 / 320.0;
+      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
       touchesMoved_[i].location = p;
     }
     touchesMoved_[i].identifier = touch;
@@ -141,15 +141,15 @@
   }
 }
 
-- (void) setTouchesEnded:(NSSet*) touches {
+- (void)setTouchesEnded:(NSSet *)touches {
   numTouchesEnded_ = touches.count;
   int i = 0;
   for (UITouch* touch in touches) {
     touchesEnded_[i].location = [touch locationInView:touch.view];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
       CGPoint p = touchesEnded_[i].location;
-      p.x *= 768.0/320.0;
-      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0/320.0);
+      p.x *= 768.0 / 320.0;
+      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
       touchesEnded_[i].location = p;
     }
     touchesEnded_[i].identifier = touch;

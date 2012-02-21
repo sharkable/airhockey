@@ -8,9 +8,15 @@
 
 #import "Touch.h"
 
-
 @implementation Touch
 
-@synthesize location=location_, identifier=identifier_;
+@synthesize location = location_;
+@synthesize identifier = identifier_;
+
+- (void)dealloc {
+  [identifier_ release];
+  
+  [super dealloc];
+}
 
 @end

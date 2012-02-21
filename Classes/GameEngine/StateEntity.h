@@ -7,18 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "Touch.h"
 
 @protocol StateEntity
 
-- (void) update;
-- (void) render;
+- (void)update;
+- (void)render;
 
 @optional
 
-- (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches;
-- (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches;
-- (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches;
-- (void) clearTouches;
+- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches;
+- (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches;
+- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches;
+- (void)clearTouches;
 
 @end

@@ -7,16 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "Texture2D.h"
 
 @interface ResourceLoader : NSObject {
-  NSMutableDictionary* resources_;
-  NSMutableDictionary* resourceCounter_;
+ @private
+  NSMutableDictionary *resources_;
+  NSMutableDictionary *resourceCounter_;
 }
 
-+ (ResourceLoader*) instance;
-- (Texture2D*) getTextureWithName:(NSString*) name;
-- (void) releaseResourceWithName:(NSString*)name;
-- (void) releaseResource:(id)resource;
++ (ResourceLoader *)instance;
+- (Texture2D *)getTextureWithName:(NSString *) name;
+- (void)releaseResourceWithName:(NSString *)name;
+- (void)releaseResource:(id)resource;
 
 @end

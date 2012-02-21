@@ -8,19 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@interface LocalStore : NSObject
 
-@interface LocalStore : NSObject {
-
-}
-
-+ (BOOL) hasEntryForKey:(NSString*)key;
-+ (BOOL) boolForKey:(NSString*)key;
-+ (void) setBool:(BOOL)value forKey:(NSString*)key;
-+ (int) integerForKey:(NSString*)key;
-+ (void) setInteger:(int)value forKey:(NSString*)key;
-+ (double) doubleForKey:(NSString*)key;
-+ (void) setDouble:(double)value forKey:(NSString*)key;
-+ (NSString*) stringForKey:(NSString*)key;
-+ (void) setString:(NSString*)value forKey:(NSString*)key;
++ (BOOL)hasEntryForKey:(NSString *)key;
++ (BOOL)boolForKey:(NSString *)key;
++ (void)setBool:(BOOL)value forKey:(NSString*)key;
++ (int)integerForKey:(NSString *)key;
++ (void)setInteger:(int)value forKey:(NSString *)key;
++ (double)doubleForKey:(NSString *)key;
++ (void)setDouble:(double)value forKey:(NSString *)key;
++ (NSString *)stringForKey:(NSString *)key;
++ (void)setString:(NSString *)value forKey:(NSString *)key;
 
 @end
