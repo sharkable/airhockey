@@ -31,11 +31,11 @@
     // isn't available.
     id displayLink;
     NSTimer *animationTimer;
-	
-	// AdMob
-	GADBannerView* ad;
-	long tickCount;
-	long lastAdRefresh;
+  
+  // AdMob
+  GADBannerView* ad;
+  long tickCount;
+  long lastAdRefresh;
   
   UIViewController *viewController_;
 }

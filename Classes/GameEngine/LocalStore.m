@@ -12,60 +12,60 @@
 @implementation LocalStore
 
 + (BOOL) hasEntryForKey:(NSString*)key {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	return [[[userDefaults dictionaryRepresentation] allKeys] containsObject:key];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  return [[[userDefaults dictionaryRepresentation] allKeys] containsObject:key];
 }
 
 + (BOOL) boolForKey:(NSString*)key
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	return [userDefaults boolForKey:key];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  return [userDefaults boolForKey:key];
 }
 
 + (void) setBool:(BOOL)value forKey:(NSString*)key
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	[userDefaults setBool:value forKey:key];
-	[userDefaults synchronize];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults setBool:value forKey:key];
+  [userDefaults synchronize];
 }
 
 + (int) integerForKey:(NSString*)key
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	return [userDefaults integerForKey:key];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  return [userDefaults integerForKey:key];
 }
 
 + (void) setInteger:(int)value forKey:(NSString*)key
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	[userDefaults setInteger:value forKey:key];
-	[userDefaults synchronize];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults setInteger:value forKey:key];
+  [userDefaults synchronize];
 }
 
 + (double) doubleForKey:(NSString*)key
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	return [userDefaults doubleForKey:key];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  return [userDefaults doubleForKey:key];
 }
 
 + (void) setDouble:(double)value forKey:(NSString*)key;
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	[userDefaults setDouble:value forKey:key];
-	[userDefaults synchronize];
-}	
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults setDouble:value forKey:key];
+  [userDefaults synchronize];
+}  
 
 + (NSString*) stringForKey:(NSString*)key
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	return [userDefaults stringForKey:key];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  return [userDefaults stringForKey:key];
 }
 
 + (void) setString:(NSString*)value forKey:(NSString*)key
 {
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-	[userDefaults setObject:value forKey:key];
-	[userDefaults synchronize];
+  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults setObject:value forKey:key];
+  [userDefaults synchronize];
 }
 
 @end

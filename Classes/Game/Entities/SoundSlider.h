@@ -11,13 +11,13 @@
 #import "Texture2D.h"
 
 @interface SoundSlider : NSObject <StateEntity> {
-	CGPoint    _position;
-	Texture2D* _emptyTexture;
-	Texture2D* _fullTexture;
-	Texture2D* _thumbTexture;
-	double     _value;
-	UITouch*   _grabbedTouch;
-	CGPoint    _lastTouchPosition;
+  CGPoint    _position;
+  Texture2D* _emptyTexture;
+  Texture2D* _fullTexture;
+  Texture2D* _thumbTexture;
+  double     _value;
+  UITouch*   _grabbedTouch;
+  CGPoint    _lastTouchPosition;
 }
 
 - (id) initWithPosition:(CGPoint)position;

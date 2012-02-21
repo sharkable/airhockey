@@ -3,7 +3,7 @@
 //  AirHockeyFree
 //
 //  Created by Jonathan Sharkey on 10-05-12.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Sharkable. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

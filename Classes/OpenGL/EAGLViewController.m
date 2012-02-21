@@ -3,7 +3,7 @@
 //  AirHockeyFree
 //
 //  Created by Jonathan Sharkey on 10-05-12.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Sharkable. All rights reserved.
 //
 
 #import "EAGLViewController.h"
@@ -23,8 +23,8 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void )loadView {
-	CGRect screenSize = [[UIScreen mainScreen] bounds];
-	self.view = [[[EAGLView alloc] initWithFrame:screenSize] autorelease];
+  CGRect screenSize = [[UIScreen mainScreen] bounds];
+  self.view = [[[EAGLView alloc] initWithFrame:screenSize] autorelease];
   ((EAGLView *)self.view).viewController = self;
 }
 
@@ -38,7 +38,7 @@
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+  return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,11 +60,11 @@
 }
 
 - (void) startAnimation {
-	[(EAGLView*)self.view startAnimation];
+  [(EAGLView*)self.view startAnimation];
 }
 
 - (void) stopAnimation {
-	[(EAGLView*)self.view stopAnimation];
+  [(EAGLView*)self.view stopAnimation];
 }
 
 @end

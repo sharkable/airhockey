@@ -232,7 +232,7 @@
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AirHockeyFreeAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockeyFreeAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* AirHockeyFreeAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirHockeyFreeAppDelegate.m; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* AirHockeyFreeAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AirHockeyFreeAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1D6058910D05DD3D006BFB54 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -265,7 +265,7 @@
 		FE45425611A1C3910085E47E /* StoryState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryState.h; sourceTree = "<group>"; };
 		FE45425711A1C3910085E47E /* StoryState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryState.m; sourceTree = "<group>"; };
 		FE8C91EF1196553200A85985 /* upgrade_for_more_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_for_more_iphone.png; path = iPhoneImages/MainMenu/upgrade_for_more_iphone.png; sourceTree = SOURCE_ROOT; };
-		FE98DF4C14F317DC00F27C9B /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
+		FE98DF4C14F317DC00F27C9B /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlurryAnalytics.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		FE98DF4D14F317DC00F27C9B /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		FEC66A011194A2AF003831EB /* const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = const.m; path = ../Classes/const.m; sourceTree = SOURCE_ROOT; };
 		FEC66A021194A2AF003831EB /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = const.h; path = ../Classes/const.h; sourceTree = SOURCE_ROOT; };
@@ -296,13 +296,13 @@
 		FEC66A221194A2CE003831EB /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
 		FEC66A231194A2CE003831EB /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture2D.h; sourceTree = "<group>"; };
 		FEC66A241194A2CE003831EB /* Texture2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture2D.m; sourceTree = "<group>"; };
-		FEC66A261194A2CE003831EB /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
-		FEC66A271194A2CE003831EB /* ALAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAudio.m; sourceTree = "<group>"; };
+		FEC66A261194A2CE003831EB /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ALAudio.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		FEC66A271194A2CE003831EB /* ALAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ALAudio.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FEC66A281194A2CE003831EB /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
 		FEC66A291194A2CE003831EB /* AVAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVAudio.h; sourceTree = "<group>"; };
 		FEC66A2A1194A2CE003831EB /* AVAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVAudio.m; sourceTree = "<group>"; };
 		FEC66A2B1194A2CE003831EB /* MyOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenALSupport.h; sourceTree = "<group>"; };
-		FEC66A2C1194A2CE003831EB /* MyOpenALSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOpenALSupport.m; sourceTree = "<group>"; };
+		FEC66A2C1194A2CE003831EB /* MyOpenALSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MyOpenALSupport.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FEC66A2D1194A2CE003831EB /* SoundInitializationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInitializationDelegate.h; sourceTree = "<group>"; };
 		FEC66A2E1194A2CE003831EB /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
 		FEC66A2F1194A2CE003831EB /* SoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundPlayer.m; sourceTree = "<group>"; };
@@ -495,7 +495,7 @@
 		FEC66FE211961318003831EB /* upgrade_for_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_for_more.png; path = iPadImages/MainMenu/upgrade_for_more.png; sourceTree = SOURCE_ROOT; };
 		FEC6701411961E96003831EB /* game_menu_bg_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_menu_bg_iphone.png; sourceTree = "<group>"; };
 		FEEB629F119B7B8900358E8A /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
-		FEEB62A0119B7B8900358E8A /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLViewController.m; sourceTree = "<group>"; };
+		FEEB62A0119B7B8900358E8A /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

@@ -70,9 +70,9 @@ enum {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-	[[GameEngine instance] update];
-	[[GameEngine instance] render];
-	
+  [[GameEngine instance] update];
+  [[GameEngine instance] render];
+  
     // This application only creates a single color renderbuffer which is already bound at this point.
     // This call is redundant, but needed if dealing with multiple renderbuffers.
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);

@@ -34,10 +34,10 @@ EAGLView* __instance;
 {  
     if ((self = [super initWithFrame:frame]))
     {
-		__instance = self;
-		
-		self.multipleTouchEnabled = YES;
-		
+    __instance = self;
+    
+    self.multipleTouchEnabled = YES;
+    
         // Get the layer
         CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
 
@@ -57,7 +57,7 @@ EAGLView* __instance;
                 return nil;
             }
         }
-		
+    
         animating = FALSE;
         displayLinkSupported = FALSE;
         animationFrameInterval = 1;
@@ -77,7 +77,7 @@ EAGLView* __instance;
 
 - (void)drawView:(id)sender
 {
-	tickCount++;
+  tickCount++;
     [renderer render];
 }
 
@@ -155,68 +155,68 @@ EAGLView* __instance;
 - (void)dealloc
 {
     [renderer release];
-	
+  
     [super dealloc];
 }
 
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
-	[[GameEngine instance] setTouchesBegan:touches];
+  [[GameEngine instance] setTouchesBegan:touches];
 }
 
 - (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-	[[GameEngine instance] setTouchesMoved:touches];
+  [[GameEngine instance] setTouchesMoved:touches];
 }
 
 - (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
-	[[GameEngine instance] setTouchesEnded:touches];
+  [[GameEngine instance] setTouchesEnded:touches];
 }
 
 - (void)__addAdAtPoint:(CGPoint)point {
   CGRect adFrame = CGRectZero;
   adFrame.origin = CGPointMake(point.x, point.y);
   adFrame.size = GAD_SIZE_320x50;
-	if (!ad) {
-		ad = [[GADBannerView alloc] initWithFrame:adFrame];
+  if (!ad) {
+    ad = [[GADBannerView alloc] initWithFrame:adFrame];
     ad.adUnitID = @"a14bdda6dfc895a";
     ad.rootViewController = viewController_;
     [ad loadRequest:nil];
-		[self addSubview:ad];
-		lastAdRefresh = tickCount;
-	} else {
-		ad.frame = adFrame;
-		if (![[self subviews] containsObject:ad]) {
-			[self addSubview:ad];
-		}
+    [self addSubview:ad];
+    lastAdRefresh = tickCount;
+  } else {
+    ad.frame = adFrame;
+    if (![[self subviews] containsObject:ad]) {
+      [self addSubview:ad];
+    }
     // TODO: what should happen here?
-//		if (tickCount - lastAdRefresh >= 60*60) {
-//			[ad loadRequest:nil];
-//			lastAdRefresh = tickCount;
-//		}
-	}
+//    if (tickCount - lastAdRefresh >= 60*60) {
+//      [ad loadRequest:nil];
+//      lastAdRefresh = tickCount;
+//    }
+  }
 }
 
 + (void)addAdAtPoint:(CGPoint)point {
-	if (IS_FREE) {
-		[__instance __addAdAtPoint:point];
-	}
+  if (IS_FREE) {
+    [__instance __addAdAtPoint:point];
+  }
 }
 
 - (void)__removeAd {
-	[ad removeFromSuperview];
+  [ad removeFromSuperview];
 }
 
 + (void)removeAd {
-	if (IS_FREE && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		[__instance __removeAd];
-	}
+  if (IS_FREE && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    [__instance __removeAd];
+  }
 }
 
 + (void)addUIView:(UIView*)view {
-	[__instance addSubview:view];
+  [__instance addSubview:view];
 }
 
 + (void)removeUIView:(UIView*)view {
-	[view removeFromSuperview];
+  [view removeFromSuperview];
 }
 
 @end

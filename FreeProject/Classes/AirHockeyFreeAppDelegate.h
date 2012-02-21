@@ -3,22 +3,22 @@
 //  AirHockeyFree
 //
 //  Created by Jonathan Sharkey on 10-05-07.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright Sharkable 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "EAGLViewController.h"
 
-@interface AirHockeyFreeAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow*           window;
-    EAGLViewController* glViewController;
+@interface AirHockeyFreeAppDelegate : NSObject<UIApplicationDelegate> {
+ @private
+  UIWindow *window_;
+  EAGLViewController *glViewController_;
 }
 
-- (void) startGame;
-- (void) initAudio:(id)delegate;
+- (void)startGame;
+- (void)initAudio:(id)delegate;
 
-@property (nonatomic, retain) UIWindow*           window;
-@property (nonatomic, retain) EAGLViewController* glViewController;
+@property(nonatomic, retain) UIWindow* window;
+@property(nonatomic, retain) EAGLViewController *glViewController;
 
 @end
-

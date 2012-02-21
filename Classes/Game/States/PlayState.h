@@ -23,40 +23,40 @@
 #define PLAY_STATE_PAUSED            4
 
 @interface PlayState : EngineState {
-	int _numPlayers;
-	int _numPucks;
-	int _numActivePucks;
-	int _numPlayer1ScoresLastRound;
-	Rink* _rink;
-	Paddle* _paddle1;
-	Paddle* _paddle2;
-	NSMutableArray* _pucks;
-	NSMutableArray* _roundThings;
-	SimpleItem* _player1Score;
-	SimpleItem* _player2Score;
-	SimpleItem* _win;
-	SimpleItem* _lose;
-	SimpleItem* _getReady;
-	SimpleItem* _go;
-	SoundSlider* _soundSlider;
-	SimpleItem*  _menuBackground;
-	Button*      _rematchButton;
-	Button*      _menuButton;
-	Button*      _continueButton;
-	Button*      _pauseButton1;
-	Button*      _pauseButton2;
-	
-	int _waitTicksLeft;
-	int _getReadyTicksLeft;
-	int _goTicksLeft;
-	int _state;
-	int _prePauseState;
-	int _giveExtraPuckToPlayer;
-	int _player1WinCount;
-	int _player2WinCount;
-	
-	UILabel* _player1Wins;
-	UILabel* _player2Wins;
+  int _numPlayers;
+  int _numPucks;
+  int _numActivePucks;
+  int _numPlayer1ScoresLastRound;
+  Rink* _rink;
+  Paddle* _paddle1;
+  Paddle* _paddle2;
+  NSMutableArray* _pucks;
+  NSMutableArray* _roundThings;
+  SimpleItem* _player1Score;
+  SimpleItem* _player2Score;
+  SimpleItem* _win;
+  SimpleItem* _lose;
+  SimpleItem* _getReady;
+  SimpleItem* _go;
+  SoundSlider* _soundSlider;
+  SimpleItem*  _menuBackground;
+  Button*      _rematchButton;
+  Button*      _menuButton;
+  Button*      _continueButton;
+  Button*      _pauseButton1;
+  Button*      _pauseButton2;
+  
+  int _waitTicksLeft;
+  int _getReadyTicksLeft;
+  int _goTicksLeft;
+  int _state;
+  int _prePauseState;
+  int _giveExtraPuckToPlayer;
+  int _player1WinCount;
+  int _player2WinCount;
+  
+  UILabel* _player1Wins;
+  UILabel* _player2Wins;
 }
 
 - (id) initWithNumPlayers:(int)numPlayers numPucks:(int)numPucks difficulty:(ComputerAI)difficulty paddleSize:(PaddleSize)paddleSize;

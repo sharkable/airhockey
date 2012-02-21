@@ -12,24 +12,24 @@
 #import "SoundInitializationDelegate.h"
 
 typedef enum {
-	kSoundScore = 0,
-	kSoundScoreFinal,
-	kSoundPaddleHit,
-	kSoundPuckRinkBounce,
-	kSoundTwoPuckHit,
-	kSoundButton,
-	kSoundMultiSelect,
-	kSoundGetReady,
-	kSoundStart,
-	kNumSounds
+  kSoundScore = 0,
+  kSoundScoreFinal,
+  kSoundPaddleHit,
+  kSoundPuckRinkBounce,
+  kSoundTwoPuckHit,
+  kSoundButton,
+  kSoundMultiSelect,
+  kSoundGetReady,
+  kSoundStart,
+  kNumSounds
 } Sound;
 
 @interface SoundPlayer : NSObject {
-	NSMutableArray* _sounds;
-	AVAudio* _song;
-	BOOL _musicOn;
-	BOOL _soundEffectsOn;
-	AudioInterruptDelegate* m_delegate;
+  NSMutableArray* _sounds;
+  AVAudio* _song;
+  BOOL _musicOn;
+  BOOL _soundEffectsOn;
+  AudioInterruptDelegate* m_delegate;
 }
 
 +(AVAudioSession*) session;

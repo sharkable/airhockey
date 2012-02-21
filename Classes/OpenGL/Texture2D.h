@@ -66,10 +66,10 @@
 //CONSTANTS:
 
 typedef enum {
-	kTexture2DPixelFormat_Automatic = 0,
-	kTexture2DPixelFormat_RGBA8888,
-	kTexture2DPixelFormat_RGB565,
-	kTexture2DPixelFormat_A8,
+  kTexture2DPixelFormat_Automatic = 0,
+  kTexture2DPixelFormat_RGBA8888,
+  kTexture2DPixelFormat_RGB565,
+  kTexture2DPixelFormat_A8,
 } Texture2DPixelFormat;
 
 #define LIGHTEN_AMOUNT 128
@@ -85,17 +85,17 @@ typedef enum {
 @interface Texture2D : NSObject
 {
 @private
-	GLuint						_name;
-	CGSize						_size;
-	NSUInteger					_width,
-	_height;
-	Texture2DPixelFormat		_format;
-	GLfloat						_maxS,
-	_maxT;
-	NSString*					_resourceName;
-	GLfloat		coordinates[8];
-	GLfloat     vertices[12];
-	
+  GLuint            _name;
+  CGSize            _size;
+  NSUInteger          _width,
+  _height;
+  Texture2DPixelFormat    _format;
+  GLfloat            _maxS,
+  _maxT;
+  NSString*          _resourceName;
+  GLfloat    coordinates[8];
+  GLfloat     vertices[12];
+  
 }
 + (void) setGlobalAlpha:(GLfloat)alpha;
 - (id) initWithData:(const void*)data pixelFormat:(Texture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size;

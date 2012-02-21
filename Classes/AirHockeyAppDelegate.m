@@ -21,17 +21,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	if (IS_FREE) {
-//		[FlurryAPI startSession:@"BGGPH5B2THWFSJHXEKRH"];
-	} else {
-//		[FlurryAPI startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
-	}
-	SplashState* rootState = [[[SplashState alloc] init] autorelease];
+  if (IS_FREE) {
+//    [FlurryAPI startSession:@"BGGPH5B2THWFSJHXEKRH"];
+  } else {
+//    [FlurryAPI startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
+  }
+  SplashState* rootState = [[[SplashState alloc] init] autorelease];
     [glView startAnimation];
-	[[GameEngine instance] pushState:rootState];
-	[SoundPlayer syncAudioSessionForITunes];
-	[SoundPlayer initializeWithDelegate:rootState];
-	[SoundPlayer setSoundEffectsOn:YES];
+  [[GameEngine instance] pushState:rootState];
+  [SoundPlayer syncAudioSessionForITunes];
+  [SoundPlayer initializeWithDelegate:rootState];
+  [SoundPlayer setSoundEffectsOn:YES];
     return YES;
 }
 
@@ -43,7 +43,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [glView startAnimation];
-	[[GameEngine instance] clearTouches];
+  [[GameEngine instance] clearTouches];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

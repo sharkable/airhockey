@@ -14,15 +14,15 @@
 #import "SoundSlider.h"
 
 @interface MainMenuState : EngineState <UIAlertViewDelegate> {
-	Button*      _startButton; 
-	Button*      _feedbackButton; 
-	Button*      _storyButton; 
-	Button*      _upgradeButton; 
-	MultiSelect* _numPlayersSelect;
-	MultiSelect* _numPucksSelect;
-	MultiSelect* _difficultySelect;
-	MultiSelect* _paddleSizeSelect;
-	SoundSlider* _soundSlider;
+  Button*      _startButton; 
+  Button*      _feedbackButton; 
+  Button*      _storyButton; 
+  Button*      _upgradeButton; 
+  MultiSelect* _numPlayersSelect;
+  MultiSelect* _numPucksSelect;
+  MultiSelect* _difficultySelect;
+  MultiSelect* _paddleSizeSelect;
+  SoundSlider* _soundSlider;
 }
 
 - (void) pressedStart;

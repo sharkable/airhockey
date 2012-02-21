@@ -5,7 +5,7 @@
 
 @interface AudioInterruptDelegate : NSObject <AVAudioPlayerDelegate> 
 {
-	
+  
 }
 
 /* audioPlayerEndInterruption: is called when the audio session interruption has ended and this player had been interrupted while playing. 
@@ -22,7 +22,7 @@
  **/
 @interface AVAudio : NSObject <Audio>
 {
-	AVAudioPlayer* m_player;
+  AVAudioPlayer* m_player;
 }
 
 -(AVAudio*) initWithURL:(NSURL*)url;

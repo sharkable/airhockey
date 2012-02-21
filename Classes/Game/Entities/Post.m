@@ -12,21 +12,21 @@
 @implementation Post
 
 - (id) initWithX:(double)x y:(double)y {
-	[super init];
+  [super init];
 
-	_x = x;
-	_y = y;
-	_radius = 1;
-	_mass = 99999999999.99;
-	
-	return self;
+  _x = x;
+  _y = y;
+  _radius = 1;
+  _mass = 99999999999.99;
+  
+  return self;
 }
 
 - (void) render {
 }
 
 - (BOOL) movable {
-	return NO;
+  return NO;
 }
 
 @end

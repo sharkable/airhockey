@@ -17,28 +17,28 @@ extern void init_genrand(unsigned long s);
 extern long genrand_int31(void);
 
 @interface GameEngine : NSObject {
-	Stack*       _states;
-	Touch*       _touchesBegan[MAX_TOUCHES];
-	int          _numTouchesBegan;
-	Touch*       _touchesMoved[MAX_TOUCHES];
-	int          _numTouchesMoved;
-	Touch*       _touchesEnded[MAX_TOUCHES];
-	int          _numTouchesEnded;
-	BOOL         _popOnNext;
-	BOOL         _replaceOnNext;
-	EngineState* _nextState;
+  Stack *_states;
+  Touch *_touchesBegan[MAX_TOUCHES];
+  int _numTouchesBegan;
+  Touch *_touchesMoved[MAX_TOUCHES];
+  int _numTouchesMoved;
+  Touch *_touchesEnded[MAX_TOUCHES];
+  int _numTouchesEnded;
+  BOOL _popOnNext;
+  BOOL _replaceOnNext;
+  EngineState *_nextState;
 }
 
-+ (GameEngine*) instance;
-- (void) render;
-- (void) update;
-- (void) pushState:(EngineState*)state;
-- (void) popState;
-- (void) replaceTopState:(EngineState*)state;
++ (GameEngine *)instance;
+- (void)render;
+- (void)update;
+- (void)pushState:(EngineState *)state;
+- (void)popState;
+- (void)replaceTopState:(EngineState *)state;
 
-- (void) setTouchesBegan:(NSSet*)touchesBegan;
-- (void) setTouchesMoved:(NSSet*)touchesMoved;
-- (void) setTouchesEnded:(NSSet*)touchesEnded;
-- (void) clearTouches;
+- (void)setTouchesBegan:(NSSet *)touchesBegan;
+- (void)setTouchesMoved:(NSSet *)touchesMoved;
+- (void)setTouchesEnded:(NSSet *)touchesEnded;
+- (void)clearTouches;
 
 @end

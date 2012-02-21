@@ -3,7 +3,7 @@
 //  AirHockeyFree
 //
 //  Created by Jonathan Sharkey on 10-05-17.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Sharkable. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,8 +11,8 @@
 #import "Button.h"
 
 @interface StoryState : EngineState {
-	Button* _storyButton; 
-	Button* _aboutButton; 
+  Button* _storyButton; 
+  Button* _aboutButton; 
 }
 
 - (void) pressedStory;

@@ -13,17 +13,18 @@
 @class GameEngine;
 
 @interface EngineState : NSObject {
-	NSMutableArray* _entities;
+ @private
+  NSMutableArray *entities_;
 }
 
-- (void) stateIsShown;
-- (void) update;
-- (void) render;
-- (void) addEntity:(id <StateEntity>)entity;
-- (void) removeEntity:(id <StateEntity>)entity;
-- (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches;
-- (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches;
-- (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches;
-- (void) clearTouches;
+- (void)stateIsShown;
+- (void)update;
+- (void)render;
+- (void)addEntity:(id<StateEntity>)entity;
+- (void)removeEntity:(id<StateEntity>)entity;
+- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches;
+- (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches;
+- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches;
+- (void)clearTouches;
 
 @end
