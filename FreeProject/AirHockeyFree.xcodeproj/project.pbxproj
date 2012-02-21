@@ -30,6 +30,7 @@
 		FE45425511A1C3720085E47E /* story.png in Resources */ = {isa = PBXBuildFile; fileRef = FE45425311A1C3720085E47E /* story.png */; };
 		FE45425811A1C3910085E47E /* StoryState.m in Sources */ = {isa = PBXBuildFile; fileRef = FE45425711A1C3910085E47E /* StoryState.m */; };
 		FE8C91F01196553200A85985 /* upgrade_for_more_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8C91EF1196553200A85985 /* upgrade_for_more_iphone.png */; };
+		FE98DF4E14F317DC00F27C9B /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE98DF4D14F317DC00F27C9B /* libFlurryAnalytics.a */; };
 		FEC66A041194A2AF003831EB /* const.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC66A011194A2AF003831EB /* const.m */; };
 		FEC66A441194A2CE003831EB /* Paddle.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC66A081194A2CE003831EB /* Paddle.m */; };
 		FEC66A451194A2CE003831EB /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC66A0A1194A2CE003831EB /* Post.m */; };
@@ -264,6 +265,8 @@
 		FE45425611A1C3910085E47E /* StoryState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryState.h; sourceTree = "<group>"; };
 		FE45425711A1C3910085E47E /* StoryState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryState.m; sourceTree = "<group>"; };
 		FE8C91EF1196553200A85985 /* upgrade_for_more_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_for_more_iphone.png; path = iPhoneImages/MainMenu/upgrade_for_more_iphone.png; sourceTree = SOURCE_ROOT; };
+		FE98DF4C14F317DC00F27C9B /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
+		FE98DF4D14F317DC00F27C9B /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		FEC66A011194A2AF003831EB /* const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = const.m; path = ../Classes/const.m; sourceTree = SOURCE_ROOT; };
 		FEC66A021194A2AF003831EB /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = const.h; path = ../Classes/const.h; sourceTree = SOURCE_ROOT; };
 		FEC66A071194A2CE003831EB /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
@@ -516,6 +519,7 @@
 				FEC66F8F11960B57003831EB /* CoreLocation.framework in Frameworks */,
 				FEC66F9311960B63003831EB /* libz.dylib in Frameworks */,
 				FEC66F9511960B83003831EB /* MapKit.framework in Frameworks */,
+				FE98DF4E14F317DC00F27C9B /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +613,7 @@
 		FE25636214F30DC100C574F1 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				FE98DF4B14F317DC00F27C9B /* FlurryAnalytics */,
 				FE25636314F30DC100C574F1 /* GoogleAdMobAdsSDKiOS-5.0.5 */,
 			);
 			name = ThirdParty;
@@ -628,6 +633,15 @@
 				FE25636B14F30DC100C574F1 /* README.txt */,
 			);
 			path = "GoogleAdMobAdsSDKiOS-5.0.5";
+			sourceTree = "<group>";
+		};
+		FE98DF4B14F317DC00F27C9B /* FlurryAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				FE98DF4C14F317DC00F27C9B /* FlurryAnalytics.h */,
+				FE98DF4D14F317DC00F27C9B /* libFlurryAnalytics.a */,
+			);
+			path = FlurryAnalytics;
 			sourceTree = "<group>";
 		};
 		FEC66A051194A2CE003831EB /* Game */ = {
@@ -1342,6 +1356,7 @@
 					"\"$(SRCROOT)/../../../../admob_iphone_sdk/AdMob\"",
 					"\"$(SRCROOT)/../../../../Flurry iPhone SDK v2.2/FlurryLib\"",
 					"\"$(SRCROOT)/../ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
+					"\"$(SRCROOT)/../ThirdParty/FlurryAnalytics\"",
 				);
 				PRODUCT_NAME = AirHockeyFree;
 			};
@@ -1364,6 +1379,7 @@
 					"\"$(SRCROOT)/../../../../admob_iphone_sdk/AdMob\"",
 					"\"$(SRCROOT)/../../../../Flurry iPhone SDK v2.2/FlurryLib\"",
 					"\"$(SRCROOT)/../ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
+					"\"$(SRCROOT)/../ThirdParty/FlurryAnalytics\"",
 				);
 				PRODUCT_NAME = AirHockeyFree;
 				VALIDATE_PRODUCT = YES;
