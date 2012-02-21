@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@interface EAGLViewController : UIViewController
 
-@interface EAGLViewController : UIViewController {
-
-}
-
-- (void) startAnimation;
-- (void) stopAnimation;
+- (void)startAnimation;
+- (void)stopAnimation;
 
 @end

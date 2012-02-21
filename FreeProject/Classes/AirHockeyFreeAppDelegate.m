@@ -41,14 +41,14 @@
   return YES;
 }
 
-- (void) startGame {
+- (void)startGame {
   SplashState *rootState = [[[SplashState alloc] init] autorelease];
   [[GameEngine instance] pushState:rootState];
   [NSThread detachNewThreadSelector:@selector(initAudio:) toTarget:self withObject:rootState];
   [self.glViewController startAnimation];
 }  
 
-- (void) initAudio:(id)delegate {
+- (void)initAudio:(id)delegate {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   
   [SoundPlayer syncAudioSessionForITunes];
@@ -59,7 +59,7 @@
 }  
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [glViewController_ stopAnimation];
+  [glViewController_ stopAnimation];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

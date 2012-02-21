@@ -11,7 +11,7 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/EAGLDrawable.h>
 
-@protocol ESRenderer <NSObject>
+@protocol ESRenderer<NSObject>
 
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;
