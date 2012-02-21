@@ -14,19 +14,23 @@
 
 @synthesize delegate=delegate_, selector=selector_;
 
-- (id) initWithNormalTexture:(Texture2D*)normalTexture pressedTexture:(Texture2D*)pressedTexture position:(CGPoint)position {
+- (id)initWithNormalTexture:(Texture2D *)normalTexture
+             pressedTexture:(Texture2D *)pressedTexture
+                   position:(CGPoint)position {
   [super init];
   
-  normalTexture_ = normalTexture;  
-  pressedTexture_ = pressedTexture;
-  
-  position_ = position;
-  state_ = BUTTON_STATE_NORMAL;
+  if (self) {
+    normalTexture_ = normalTexture;  
+    pressedTexture_ = pressedTexture;
+    
+    position_ = position;
+    state_ = BUTTON_STATE_NORMAL;
+  }
   
   return self;
 }
 
-- (void) dealloc {
+- (void)dealloc {
   [[ResourceLoader instance] releaseResource:normalTexture_];
   [[ResourceLoader instance] releaseResource:pressedTexture_];
   
@@ -36,7 +40,7 @@
 - (void) update {
 }
 
-- (void) render {
+- (void)render {
   switch (state_) {
     case BUTTON_STATE_NORMAL: {
       [normalTexture_ drawAtPoint:position_];
@@ -49,7 +53,7 @@
   }
 }
 
-- (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches {
+- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
   if (state_ == BUTTON_STATE_NORMAL) {
     for (int i = 0; i < numTouches; i++) {
       if ([self containsPoint:touches[i].location]) {
@@ -60,7 +64,7 @@
   }
 }
 
-- (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
+- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches {
   if (state_ == BUTTON_STATE_PRESSED) {
     state_ = BUTTON_STATE_NORMAL;
     for (int i = 0; i < numTouches; i++) {
@@ -71,11 +75,11 @@
   }
 }
 
-- (BOOL) containsPoint:(CGPoint)p {
+- (BOOL)containsPoint:(CGPoint)p {
   return p.x >= position_.x &&
        p.y >= position_.y &&
        p.x < position_.x + pressedTexture_.contentSize.width &&
-         p.y < position_.y + pressedTexture_.contentSize.height;
+       p.y < position_.y + pressedTexture_.contentSize.height;
 }
 
 - (CGSize) size {

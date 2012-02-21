@@ -10,20 +10,21 @@
 #import "StateEntity.h"
 #import "Texture2D.h"
 
-@interface SimpleItem : NSObject <StateEntity> {
-  NSMutableArray* textures_;
-  int             texture_;
-  CGPoint         position_;
-  double          angle_;
+@interface SimpleItem : NSObject<StateEntity> {
+ @private
+  NSMutableArray *textures_;
+  int texture_;
+  CGPoint position_;
+  double angle_;
 }
 
-- (id) initWithTexture:(Texture2D*)texture position:(CGPoint)position;
-- (id) initWithTextures:(NSArray*)textures position:(CGPoint)position;
+- (id)initWithTexture:(Texture2D *)texture position:(CGPoint)position;
+- (id)initWithTextures:(NSArray*)textures position:(CGPoint)position;
 
-@property (assign) int      texture;
-@property (assign) CGPoint  position;
-@property (assign) double   angle;
-@property (readonly) CGSize size;
+@property(nonatomic, assign) int texture;
+@property(nonatomic, assign) CGPoint position;
+@property(nonatomic, assign) double angle;
+@property(nonatomic, readonly) CGSize size;
 
 @end
 

@@ -12,24 +12,26 @@
 
 @implementation MultiSelect
 
-@synthesize selectedValue=selectedValue_;
+@synthesize selectedValue = selectedValue_;
 
-- (id) init {
+- (id)init {
   [super init];
   
-  normalTextures_ = [[NSMutableArray alloc] init];
-  selectedTextures_ = [[NSMutableArray alloc] init];
-  positionsX_ = [[NSMutableArray alloc] init];
-  positionsY_ = [[NSMutableArray alloc] init];
+  if (self) {
+    normalTextures_ = [[NSMutableArray alloc] init];
+    selectedTextures_ = [[NSMutableArray alloc] init];
+    positionsX_ = [[NSMutableArray alloc] init];
+    positionsY_ = [[NSMutableArray alloc] init];
+  }
   
   return self;
 }
 
-- (void) dealloc {
-  for (Texture2D* texture in normalTextures_) {
+- (void)dealloc {
+  for (Texture2D *texture in normalTextures_) {
     [[ResourceLoader instance] releaseResource:texture];
   }
-  for (Texture2D* texture in selectedTextures_) {
+  for (Texture2D *texture in selectedTextures_) {
     [[ResourceLoader instance] releaseResource:texture];
   }
   
@@ -41,13 +43,13 @@
   [super dealloc];
 }
 
-- (void) update {
+- (void)update {
 }
 
-- (void) render {
+- (void)render {
   for (int i = 0; i < normalTextures_.count; i++) {
     CGPoint p = CGPointMake([[positionsX_ objectAtIndex:i] doubleValue], 
-                [[positionsY_ objectAtIndex:i] doubleValue]);
+                            [[positionsY_ objectAtIndex:i] doubleValue]);
     if (i == selectedValue_) {
       [[selectedTextures_ objectAtIndex:i] drawAtPoint:p];
     } else {
@@ -56,21 +58,24 @@
   }
 }
 
-- (void) addValueWithNormalTexture:(Texture2D*)normalTexture selectedTexture:(Texture2D*)selectedTexture position:(CGPoint)position {
+- (void)addValueWithNormalTexture:(Texture2D *)normalTexture
+                  selectedTexture:(Texture2D *)selectedTexture
+                         position:(CGPoint)position {
   [normalTextures_ addObject:normalTexture];
   [selectedTextures_ addObject:selectedTexture];
   [positionsX_ addObject:[NSNumber numberWithDouble:position.x]];
   [positionsY_ addObject:[NSNumber numberWithDouble:position.y]];
 }
 
-- (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches {
+- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
   for (int i = 0; i < normalTextures_.count; i++) {
     double x = [[positionsX_ objectAtIndex:i] doubleValue];
     double y = [[positionsY_ objectAtIndex:i] doubleValue];
-    CGSize size = ((Texture2D*)[normalTextures_ objectAtIndex:i]).contentSize;
+    CGSize size = ((Texture2D *)[normalTextures_ objectAtIndex:i]).contentSize;
     for (int j = 0; j < numTouches; j++) {
       CGPoint touchPoint = touches[j].location;
-      if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width && touchPoint.y < y + size.height) {
+      if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&
+          touchPoint.y < y + size.height) {
         if (selectedValue_ != i) {
           selectedValue_ = i;
           [SoundPlayer playSound:kSoundMultiSelect];

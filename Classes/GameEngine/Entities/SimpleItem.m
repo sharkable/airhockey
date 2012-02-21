@@ -11,35 +11,41 @@
 
 @implementation SimpleItem
 
-@synthesize texture=texture_, position=position_, angle=angle_;
+@synthesize texture = texture_;
+@synthesize position = position_;
+@synthesize angle = angle_;
 
-- (id) initWithTexture:(Texture2D*)texture position:(CGPoint)position {
+- (id)initWithTexture:(Texture2D *)texture position:(CGPoint)position {
   [super init];
   
-  textures_ = [[NSMutableArray alloc] init];
-  [textures_ addObject:texture];
-  texture_ = 0;
-  angle_ = 0;
-  
-  position_ = position;
+  if (self) {
+    textures_ = [[NSMutableArray alloc] init];
+    [textures_ addObject:texture];
+    texture_ = 0;
+    angle_ = 0;
+    
+    position_ = position;
+  }
   
   return self;
 }
 
-- (id) initWithTextures:(NSArray*)textures position:(CGPoint)position {
+- (id)initWithTextures:(NSArray *)textures position:(CGPoint)position {
   [super init];
   
-  textures_ = [[NSMutableArray alloc] initWithArray:textures];
-  texture_ = 0;
-  angle_ = 0;
-  
-  position_ = position;
+  if (self) {
+    textures_ = [[NSMutableArray alloc] initWithArray:textures];
+    texture_ = 0;
+    angle_ = 0;
+    
+    position_ = position;
+  }
   
   return self;
 }
 
-- (void) dealloc {
-  for (Texture2D* texture in textures_) {
+- (void)dealloc {
+  for (Texture2D *texture in textures_) {
     [[ResourceLoader instance] releaseResource:texture];
   }
   [textures_ release];
@@ -47,17 +53,17 @@
   [super dealloc];
 }
 
-- (void) update {
+- (void)update {
 }
 
-- (void) render {
-  Texture2D* t = [textures_ objectAtIndex:texture_];
+- (void)render {
+  Texture2D *t = [textures_ objectAtIndex:texture_];
   [t drawAtPoint:CGPointMake(position_.x, position_.y)
-       angle:angle_];
+           angle:angle_];
 }
 
-- (CGSize) size {
-  Texture2D* t = [textures_ objectAtIndex:texture_];
+- (CGSize)size {
+  Texture2D *t = [textures_ objectAtIndex:texture_];
   return t.contentSize;
 }
 
