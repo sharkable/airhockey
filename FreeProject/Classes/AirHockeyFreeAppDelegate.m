@@ -12,7 +12,7 @@
 #import "SplashState.h"
 #import "GameEngine.h"
 #import "IsFree.h"
-#import "FlurryAPI.h"
+//#import "FlurryAPI.h"
 
 @implementation AirHockeyFreeAppDelegate
 
@@ -22,9 +22,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	if (IS_FREE) {
-		[FlurryAPI startSession:@"BGGPH5B2THWFSJHXEKRH"];
+		//[FlurryAPI startSession:@"BGGPH5B2THWFSJHXEKRH"];
 	} else {
-		[FlurryAPI startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
+		//[FlurryAPI startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
 	}
 	
 	CGRect screenSize = [[UIScreen mainScreen] bounds];

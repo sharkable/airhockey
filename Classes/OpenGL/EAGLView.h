@@ -12,8 +12,7 @@
 #import "ESRenderer.h"
 
 // AdMob
-#import "AdMobView.h"
-#import "AHAdMobDelegate.h"
+#import "GADBannerView.h"
 
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
 // The view content is basically an EAGL surface you render your OpenGL scene into.
@@ -32,16 +31,18 @@
     // isn't available.
     id displayLink;
     NSTimer *animationTimer;
-	AHAdMobDelegate* adMobDelegate;
 	
 	// AdMob
-	AdMobView* ad;
+	GADBannerView* ad;
 	long tickCount;
 	long lastAdRefresh;
+  
+  UIViewController *viewController_;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
+@property (nonatomic, assign) UIViewController *viewController;
 
 - (void)startAnimation;
 - (void)stopAnimation;

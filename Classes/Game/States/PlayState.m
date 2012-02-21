@@ -14,7 +14,7 @@
 #import "EAGLView.h"
 #import "ResourceLoader.h"
 #import "IsFree.h"
-#import "FlurryAPI.h"
+//#import "FlurryAPI.h"
 
 @implementation PlayState
 
@@ -481,7 +481,7 @@
 }
 
 - (void) rematchPressed {
-	[FlurryAPI logEvent:@"REMATCH"];
+//	[FlurryAPI logEvent:@"REMATCH"];
 	if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		[EAGLView removeUIView:_player1Wins];
 		[EAGLView removeUIView:_player2Wins];

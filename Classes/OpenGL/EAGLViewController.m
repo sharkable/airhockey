@@ -25,6 +25,7 @@
 - (void )loadView {
 	CGRect screenSize = [[UIScreen mainScreen] bounds];
 	self.view = [[[EAGLView alloc] initWithFrame:screenSize] autorelease];
+  ((EAGLView *)self.view).viewController = self;
 }
 
 /*

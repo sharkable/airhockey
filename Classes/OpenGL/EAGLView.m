@@ -20,6 +20,7 @@ EAGLView* __instance;
 @implementation EAGLView
 
 @synthesize animating;
+@synthesize viewController = viewController_;
 
 @dynamic animationFrameInterval;
 
@@ -57,8 +58,6 @@ EAGLView* __instance;
             }
         }
 		
-		adMobDelegate = [[AHAdMobDelegate alloc] init];
-
         animating = FALSE;
         displayLinkSupported = FALSE;
         animationFrameInterval = 1;
@@ -156,7 +155,6 @@ EAGLView* __instance;
 - (void)dealloc
 {
     [renderer release];
-	[adMobDelegate release];
 	
     [super dealloc];
 }
@@ -174,21 +172,26 @@ EAGLView* __instance;
 }
 
 - (void)__addAdAtPoint:(CGPoint)point {
+  CGRect adFrame = CGRectZero;
+  adFrame.origin = CGPointMake(point.x, point.y);
+  adFrame.size = GAD_SIZE_320x50;
 	if (!ad) {
-		ad = [AdMobView requestAdWithDelegate:adMobDelegate];
-		[ad retain];
-		ad.frame = CGRectMake(point.x, point.y, 320, 48);
+		ad = [[GADBannerView alloc] initWithFrame:adFrame];
+    ad.adUnitID = @"a14bdda6dfc895a";
+    ad.rootViewController = viewController_;
+    [ad loadRequest:nil];
 		[self addSubview:ad];
 		lastAdRefresh = tickCount;
 	} else {
-		ad.frame = CGRectMake(point.x, point.y, 320, 48);
+		ad.frame = adFrame;
 		if (![[self subviews] containsObject:ad]) {
 			[self addSubview:ad];
 		}
-		if (tickCount - lastAdRefresh >= 60*60) {
-			[ad requestFreshAd];
-			lastAdRefresh = tickCount;
-		}
+    // TODO: what should happen here?
+//		if (tickCount - lastAdRefresh >= 60*60) {
+//			[ad loadRequest:nil];
+//			lastAdRefresh = tickCount;
+//		}
 	}
 }
 

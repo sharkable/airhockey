@@ -16,7 +16,7 @@
 #import "ResourceLoader.h"
 #import "const.h"
 #import "IsFree.h"
-#import "FlurryAPI.h"
+//#import "FlurryAPI.h"
 
 @implementation MainMenuState
 
@@ -229,7 +229,7 @@
 	if (!isIPhone) {
 		[flurryData setObject:[NSNumber numberWithInt:[_paddleSizeSelect selectedValue]] forKey:@"PaddleSize"];
 	}
-	[FlurryAPI logEvent:@"START_GAME" withParameters:flurryData];
+//	[FlurryAPI logEvent:@"START_GAME" withParameters:flurryData];
 
 	[[GameEngine instance] replaceTopState:[[[PlayState alloc] initWithNumPlayers:[_numPlayersSelect selectedValue] + 1
 																		 numPucks:[_numPucksSelect selectedValue] + 1
@@ -241,7 +241,7 @@
 	NSString* free;
 	NSString* device;
 	
-	[FlurryAPI logEvent:@"FEEDBACK_PRESSED"];
+//	[FlurryAPI logEvent:@"FEEDBACK_PRESSED"];
 
 	if (IS_FREE) {
 		free = @"%20Free";
@@ -261,7 +261,7 @@
 }
 
 - (void) pressedStory {
-	[FlurryAPI logEvent:@"STORY_PRESSED"];
+//	[FlurryAPI logEvent:@"STORY_PRESSED"];
 	[EAGLView removeAd];
 	[[GameEngine instance] pushState:[[[StoryState alloc] init] autorelease]];
 }
