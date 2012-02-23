@@ -1350,11 +1350,6 @@
 				INFOPLIST_FILE = "AirHockeyFree-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../../../Flurry iPhone SDK v2.2/FlurryLib\"",
-					"\"$(SRCROOT)/../../../QuattroWirelessLib\"",
-					"\"$(SRCROOT)/../../../../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../../../../Flurry iPhone SDK v2.2/FlurryLib\"",
 					"\"$(SRCROOT)/../ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
 					"\"$(SRCROOT)/../ThirdParty/FlurryAnalytics\"",
 				);
@@ -1373,11 +1368,6 @@
 				INFOPLIST_FILE = "AirHockeyFree-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../../../Flurry iPhone SDK v2.2/FlurryLib\"",
-					"\"$(SRCROOT)/../../../QuattroWirelessLib\"",
-					"\"$(SRCROOT)/../../../../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../../../../Flurry iPhone SDK v2.2/FlurryLib\"",
 					"\"$(SRCROOT)/../ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
 					"\"$(SRCROOT)/../ThirdParty/FlurryAnalytics\"",
 				);

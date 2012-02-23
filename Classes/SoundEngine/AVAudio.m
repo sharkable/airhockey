@@ -34,7 +34,7 @@
     }
     else 
     {
-      NSLog( @"SUCCESS Initializing AVAudioPlayer [%x] in AVAudio::initWithURL \n\tURL [%@]\n", player_,  url );
+      NSLog( @"SUCCESS Initializing AVAudioPlayer [%p] in AVAudio::initWithURL \n\tURL [%@]\n", player_,  url );
     }
 
     
