@@ -16,29 +16,13 @@
 
 @implementation AirHockeyFreeAppDelegate
 
-@synthesize window = window_;
 @synthesize glViewController = glViewController_;
 
-- (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  // TODO: Set app version.
-  if (IS_FREE) {
-    [FlurryAnalytics startSession:@"BGGPH5B2THWFSJHXEKRH"];
-  } else {
-    [FlurryAnalytics startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
-  }
+- (void)dealloc {
+  [window_ release];
+  [glViewController_ release];
   
-  CGRect screenSize = [[UIScreen mainScreen] bounds];
-  self.window = [[UIWindow alloc] initWithFrame:screenSize];
-  
-  self.glViewController = [[EAGLViewController alloc] init];
-  [self.window addSubview:glViewController_.view];
-  
-  [self startGame];
-  
-  [window_ makeKeyAndVisible];
-  
-  return YES;
+  [super dealloc];
 }
 
 - (void)startGame {
@@ -58,6 +42,32 @@
   [pool release];
 }  
 
+#pragma mark - UIApplicationDelegate
+
+@synthesize window = window_;
+
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+  [FlurryAnalytics setAppVersion:appVersion];
+  if (IS_FREE) {
+    [FlurryAnalytics startSession:@"BGGPH5B2THWFSJHXEKRH"];
+  } else {
+    [FlurryAnalytics startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
+  }
+  
+  glViewController_ = [[EAGLViewController alloc] init];
+  
+  CGRect screenSize = [[UIScreen mainScreen] bounds];
+  window_ = [[UIWindow alloc] initWithFrame:screenSize];
+  [window_ addSubview:glViewController_.view];
+  [window_ makeKeyAndVisible];
+
+  [self startGame];
+
+  return YES;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
   [glViewController_ stopAnimation];
 }
@@ -69,13 +79,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   [glViewController_ stopAnimation];
-}
-
-- (void)dealloc {
-  [window_ release];
-  [glViewController_ release];
-  
-  [super dealloc];
 }
 
 @end

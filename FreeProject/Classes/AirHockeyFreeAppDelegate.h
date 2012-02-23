@@ -18,7 +18,6 @@
 - (void)startGame;
 - (void)initAudio:(id)delegate;
 
-@property(nonatomic, retain) UIWindow *window;
-@property(nonatomic, retain) EAGLViewController *glViewController;
+@property(nonatomic, readonly) EAGLViewController *glViewController;
 
 @end
