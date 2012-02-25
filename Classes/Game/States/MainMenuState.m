@@ -15,7 +15,6 @@
 #import "LocalStore.h"
 #import "ResourceLoader.h"
 #import "const.h"
-#import "IsFree.h"
 #import "FlurryAnalytics.h"
 
 @implementation MainMenuState

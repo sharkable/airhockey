@@ -11,7 +11,6 @@
 #import "ES1Renderer.h"
 #import "ES2Renderer.h"
 #import "GameEngine.h"
-#import "IsFree.h"
 #import "const.h"
 
 // TODO I don't like this. I'm using this for the static AdMob functions.

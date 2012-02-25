@@ -13,7 +13,6 @@
 #import "MainMenuState.h"
 #import "EAGLView.h"
 #import "ResourceLoader.h"
-#import "IsFree.h"
 #import "FlurryAnalytics.h"
 
 @implementation PlayState

@@ -1,16 +1,16 @@
 //
 //  main.m
-//  AirHockey
+//  AirHockeyFree
 //
-//  Created by Jonathan Sharkey on 10-04-10.
+//  Created by Jonathan Sharkey on 10-05-07.
 //  Copyright Sharkable 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 int main(int argc, char *argv[]) {
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, nil);
-    [pool release];
-    return retVal;
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  int retVal = UIApplicationMain(argc, argv, nil, @"AirHockeyAppDelegate");
+  [pool release];
+  return retVal;
 }

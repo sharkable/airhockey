@@ -2,21 +2,22 @@
 //  AirHockeyAppDelegate.h
 //  AirHockey
 //
-//  Created by Jonathan Sharkey on 10-04-10.
+//  Created by Jonathan Sharkey on 10-05-07.
 //  Copyright Sharkable 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "EAGLViewController.h"
 
-@class EAGLView;
-
-@interface AirHockeyAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
-    EAGLView *glView;
+@interface AirHockeyAppDelegate : NSObject<UIApplicationDelegate> {
+ @private
+  UIWindow *window_;
+  EAGLViewController *glViewController_;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet EAGLView *glView;
+- (void)startGame;
+- (void)initAudio:(id)delegate;
+
+@property(nonatomic, readonly) EAGLViewController *glViewController;
 
 @end
-

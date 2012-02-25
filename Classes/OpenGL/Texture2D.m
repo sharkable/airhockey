@@ -63,7 +63,6 @@
 #import <OpenGLES/ES1/glext.h>
 
 #import "Texture2D.h"
-#import "IsFree.h"
 #import "const.h"
 
 //CONSTANTS:

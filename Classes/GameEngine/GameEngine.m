@@ -8,7 +8,6 @@
 
 #import "const.h"
 #import "GameEngine.h"
-#import "IsFree.h"
 
 @implementation GameEngine
 
