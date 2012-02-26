@@ -12,10 +12,9 @@
 
 @class GameEngine;
 
-@interface EngineState : NSObject {
- @private
-  NSMutableArray *entities_;
-}
+@interface EngineState : NSObject 
+
+@property(nonatomic, assign) GameEngine *gameEngine;
 
 - (void)stateIsShown;
 - (void)update;

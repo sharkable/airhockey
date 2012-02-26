@@ -14,6 +14,8 @@
 // AdMob
 #import "GADBannerView.h"
 
+@class GameEngine;
+
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
 // The view content is basically an EAGL surface you render your OpenGL scene into.
 // Note that setting the view non-opaque will only work if the EAGL surface has an alpha channel.
@@ -36,12 +38,14 @@
   long tickCount;
   long lastAdRefresh;
   
+  GameEngine *gameEngine_;
   UIViewController *viewController_;
 }
 
 @property(nonatomic, readonly, getter=isAnimating) BOOL animating;
 @property(nonatomic) NSInteger animationFrameInterval;
 @property(nonatomic, assign) UIViewController *viewController;
+@property(nonatomic, assign) GameEngine *gameEngine;
 
 - (void)startAnimation;
 - (void)stopAnimation;

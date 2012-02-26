@@ -11,6 +11,8 @@
 
 @implementation ES1Renderer
 
+@synthesize gameEngine = gameEngine_;
+
 // Create an OpenGL ES 1.1 context
 - (id)init {
   self = [super init];
@@ -45,7 +47,7 @@
 }
 
 - (void)render {
-  [[GameEngine instance] update];
+  [gameEngine_ update];
 
   glViewport(0, 0, backingWidth, backingHeight);
   
@@ -58,7 +60,7 @@
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
   
-  [[GameEngine instance] render];
+  [gameEngine_ render];
   
   [context presentRenderbuffer:GL_RENDERBUFFER_OES];
 }

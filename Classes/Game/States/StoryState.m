@@ -49,7 +49,7 @@
 }
 
 - (void) pressedAbout {
-  [[GameEngine instance] popState];
+  [self.gameEngine popState];
 }
 
 @end

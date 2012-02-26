@@ -41,7 +41,7 @@
 }
 
 - (void)soundInitialized {
-  [[GameEngine instance] replaceTopState:[[[MainMenuState alloc] init] autorelease]];
+  [self.gameEngine replaceTopState:[[[MainMenuState alloc] init] autorelease]];
 }
 
 @end

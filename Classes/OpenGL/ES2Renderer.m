@@ -32,6 +32,8 @@ enum {
 
 @implementation ES2Renderer
 
+@synthesize gameEngine = gameEngine_;
+
 // Create an OpenGL ES 2.0 context
 - (id)init {
   self = [super init];
@@ -69,8 +71,8 @@ enum {
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  [[GameEngine instance] update];
-  [[GameEngine instance] render];
+  [gameEngine_ update];
+  [gameEngine_ render];
   
   // This application only creates a single color renderbuffer which is already bound at this point.
   // This call is redundant, but needed if dealing with multiple renderbuffers.

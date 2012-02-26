@@ -7,17 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EAGLViewController.h"
 
-@interface AirHockeyAppDelegate : NSObject<UIApplicationDelegate> {
- @private
-  UIWindow *window_;
-  EAGLViewController *glViewController_;
-}
-
-- (void)startGame;
-- (void)initAudio:(id)delegate;
-
-@property(nonatomic, readonly) EAGLViewController *glViewController;
+@interface AirHockeyAppDelegate : NSObject<UIApplicationDelegate>
 
 @end

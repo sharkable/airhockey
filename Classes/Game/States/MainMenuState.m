@@ -272,7 +272,7 @@
                                     numPucks:[numPucksSelect_ selectedValue] + 1
                                   difficulty:[difficultySelect_ selectedValue]
                                   paddleSize:paddleSize] autorelease];
-  [[GameEngine instance] replaceTopState:playState];
+  [self.gameEngine replaceTopState:playState];
 }
 
 - (void)pressedFeedback {
@@ -304,7 +304,7 @@
 - (void)pressedStory {
   [FlurryAnalytics logEvent:@"STORY_PRESSED"];
   [EAGLView removeAd];
-  [[GameEngine instance] pushState:[[[StoryState alloc] init] autorelease]];
+  [self.gameEngine pushState:[[[StoryState alloc] init] autorelease]];
 }
 
 - (void)pressedUpgrade {

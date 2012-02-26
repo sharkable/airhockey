@@ -153,15 +153,15 @@ EAGLView *__instance;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  [[GameEngine instance] setTouchesBegan:touches];
+  [gameEngine_ setTouchesBegan:touches];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-  [[GameEngine instance] setTouchesMoved:touches];
+  [gameEngine_ setTouchesMoved:touches];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-  [[GameEngine instance] setTouchesEnded:touches];
+  [gameEngine_ setTouchesEnded:touches];
 }
 
 - (void)__addAdAtPoint:(CGPoint)point {
@@ -210,6 +210,17 @@ EAGLView *__instance;
 
 + (void)removeUIView:(UIView*)view {
   [view removeFromSuperview];
+}
+
+#pragma mark - Accessors
+
+- (GameEngine *)gameEngine {
+  return gameEngine_;
+}
+
+- (void)setGameEngine:(GameEngine *)gameEngine {
+  gameEngine_ = gameEngine;
+  [renderer performSelector:@selector(setGameEngine:) withObject:gameEngine_];
 }
 
 @end

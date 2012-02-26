@@ -13,9 +13,6 @@
 
 #define MAX_TOUCHES 20
 
-extern void init_genrand(unsigned long s);
-extern long genrand_int31(void);
-
 @interface GameEngine : NSObject {
  @private
   Stack *states_;
@@ -30,7 +27,6 @@ extern long genrand_int31(void);
   EngineState *nextState_;
 }
 
-+ (GameEngine *)instance;
 - (void)render;
 - (void)update;
 - (void)pushState:(EngineState *)state;

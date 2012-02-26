@@ -11,6 +11,8 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+@class GameEngine;
+
 @interface ES2Renderer : NSObject<ESRenderer> {
  @private
   EAGLContext *context;
@@ -23,7 +25,11 @@
   GLuint defaultFramebuffer, colorRenderbuffer;
 
   GLuint program;
+  
+  GameEngine *gameEngine_;
 }
+
+@property(nonatomic, assign) GameEngine *gameEngine;
 
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;

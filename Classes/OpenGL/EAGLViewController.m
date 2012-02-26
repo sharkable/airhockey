@@ -51,4 +51,14 @@
   [(EAGLView *)self.view stopAnimation];
 }
 
+#pragma mark - Accessors
+
+- (GameEngine *)gameEngine {
+  return [(EAGLView *)self.view gameEngine];
+}
+
+- (void)setGameEngine:(GameEngine *)gameEngine {
+  return [(EAGLView *)self.view setGameEngine:gameEngine];
+}
+
 @end

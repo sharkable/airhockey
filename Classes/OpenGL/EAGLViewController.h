@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class GameEngine;
+
 @interface EAGLViewController : UIViewController
+
+@property(nonatomic, assign) GameEngine *gameEngine;
 
 - (void)startAnimation;
 - (void)stopAnimation;

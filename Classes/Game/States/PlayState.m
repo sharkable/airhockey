@@ -528,7 +528,7 @@
 - (void)menuPressed {
   [EAGLView removeUIView:player1Wins_];
   [EAGLView removeUIView:player2Wins_];
-  [[GameEngine instance] replaceTopState:[[[MainMenuState alloc] init] autorelease]];
+  [self.gameEngine replaceTopState:[[[MainMenuState alloc] init] autorelease]];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     [EAGLView removeAd];
   }

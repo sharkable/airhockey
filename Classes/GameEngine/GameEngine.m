@@ -9,15 +9,10 @@
 #import "const.h"
 #import "GameEngine.h"
 
-@implementation GameEngine
+extern void init_genrand(unsigned long s);
+extern long genrand_int31(void);
 
-+ (GameEngine *)instance {
-  static GameEngine *__instance = nil;
-  if (__instance == nil) {
-    __instance = [[GameEngine alloc] init];
-  }
-  return __instance;
-}
+@implementation GameEngine
 
 - (id)init {
   self = [super init];
@@ -91,6 +86,7 @@
 }
 
 - (void) pushState:(EngineState *)state {
+  state.gameEngine = self;
   [states_ push:state];
   [state stateIsShown];
 }
@@ -100,6 +96,7 @@
 }
 
 - (void) replaceTopState:(EngineState *)state {
+  state.gameEngine = self;
   replaceOnNext_ = YES;
   if (nextState_ != state) {
     [nextState_ release];

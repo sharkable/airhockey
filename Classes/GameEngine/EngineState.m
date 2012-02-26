@@ -9,7 +9,13 @@
 #import "EngineState.h"
 #import "GameEngine.h"
 
-@implementation EngineState
+@implementation EngineState {
+ @private
+  NSMutableArray *entities_;  // <id<StateEntity>>
+  GameEngine *gameEngine_;  // weak
+}
+
+@synthesize gameEngine = gameEngine_;
 
 - (id) init {
   [super init];
