@@ -3,7 +3,7 @@
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 2/25/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Sharkable. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
