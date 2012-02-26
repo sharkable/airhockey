@@ -11,7 +11,11 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/EAGLDrawable.h>
 
+@class GameEngine;
+
 @protocol ESRenderer<NSObject>
+
+@property(nonatomic, assign) GameEngine *gameEngine;
 
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;

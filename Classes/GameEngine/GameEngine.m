@@ -6,19 +6,42 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "const.h"
 #import "GameEngine.h"
+
+#import "AdEngine.h"
+#import "const.h"
+#import "EAGLView.h"
 
 extern void init_genrand(unsigned long s);
 extern long genrand_int31(void);
 
-@implementation GameEngine
+@implementation GameEngine {
+ @private
+  EAGLView *view_;
+  
+  AdEngine *adEngine_;
+  Stack *states_;
+  Touch *touchesBegan_[MAX_TOUCHES];
+  int numTouchesBegan_;
+  Touch *touchesMoved_[MAX_TOUCHES];
+  int numTouchesMoved_;
+  Touch *touchesEnded_[MAX_TOUCHES];
+  int numTouchesEnded_;
+  BOOL popOnNext_;
+  BOOL replaceOnNext_;
+  EngineState *nextState_;
+}
+
+@synthesize adEngine = adEngine_;
 
 - (id)init {
   self = [super init];
   
   if (self) {
     init_genrand(time(NULL));
+    
+    adEngine_ = [[AdEngine alloc] init];
+    adEngine_.gameEngine = self;
     
     states_ = [[Stack alloc] init];
     for (int i = 0; i < MAX_TOUCHES; i++) {
@@ -32,6 +55,8 @@ extern long genrand_int31(void);
 }
 
 - (void)dealloc {
+  [view_ release];
+  [adEngine_ release];
   [states_ release];
   for (int i = 0; i < MAX_TOUCHES; i++) {
     [touchesBegan_[i] release];
@@ -158,6 +183,32 @@ extern long genrand_int31(void);
     EngineState *state = [states_ objectAtIndex:i];
     [state clearTouches];
   }
+}
+
+- (void) startAnimation {
+  [view_ startAnimation];
+}
+
+- (void) stopAnimation {
+  [view_ stopAnimation];
+}
+
+- (void)addUIView:(UIView *)view {
+  [view_ addSubview:view];
+}
+
+#pragma mark - UIViewController
+
+- (void)loadView {
+  CGRect screenSize = [[UIScreen mainScreen] bounds];
+  view_ = [[EAGLView alloc] initWithFrame:screenSize];
+  view_.gameEngine = self;
+  self.view = view_;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return (interfaceOrientation == UIInterfaceOrientationPortrait ||
+          interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

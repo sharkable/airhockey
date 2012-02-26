@@ -8,7 +8,6 @@
 
 #import "AirHockeyAppDelegate.h"
 #import "EAGLView.h"
-#import "EAGLViewController.h"
 #import "FlurryAnalytics.h"
 #import "GameEngine.h"
 #import "SoundPlayer.h"
@@ -22,16 +21,12 @@
 @implementation AirHockeyAppDelegate {
  @private
   UIWindow *window_;
-  
   GameEngine *gameEngine_;
-  EAGLViewController *glViewController_;
 }
 
 - (void)dealloc {
-  [window_ release];
-  
+  [window_ release];  
   [gameEngine_ release];
-  [glViewController_ release];
   
   [super dealloc];
 }
@@ -40,7 +35,7 @@
   SplashState *rootState = [[[SplashState alloc] init] autorelease];
   [gameEngine_ pushState:rootState];
   [NSThread detachNewThreadSelector:@selector(initAudio:) toTarget:self withObject:rootState];
-  [glViewController_ startAnimation];
+  [gameEngine_ startAnimation];
 }  
 
 - (void)initAudio:(id)delegate {
@@ -68,12 +63,10 @@
   }
   
   gameEngine_ = [[GameEngine alloc] init];
-  glViewController_ = [[EAGLViewController alloc] init];
-  glViewController_.gameEngine = gameEngine_;
   
   CGRect screenSize = [[UIScreen mainScreen] bounds];
   window_ = [[UIWindow alloc] initWithFrame:screenSize];
-  [window_ addSubview:glViewController_.view];
+  [window_ addSubview:gameEngine_.view];
   [window_ makeKeyAndVisible];
 
   [self startGame];
@@ -82,16 +75,16 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-  [glViewController_ stopAnimation];
+  [gameEngine_ stopAnimation];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  [glViewController_ startAnimation];
+  [gameEngine_ startAnimation];
   [gameEngine_ clearTouches];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  [glViewController_ stopAnimation];
+  [gameEngine_ stopAnimation];
 }
 
 @end

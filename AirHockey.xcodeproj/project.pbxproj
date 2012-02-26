@@ -78,8 +78,6 @@
 		FEA8E65414F97CF00084E117 /* Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60214F97CF00084E117 /* Touch.m */; };
 		FEA8E65514F97CF00084E117 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60614F97CF00084E117 /* EAGLView.m */; };
 		FEA8E65614F97CF00084E117 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60614F97CF00084E117 /* EAGLView.m */; };
-		FEA8E65714F97CF00084E117 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60814F97CF00084E117 /* EAGLViewController.m */; };
-		FEA8E65814F97CF00084E117 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60814F97CF00084E117 /* EAGLViewController.m */; };
 		FEA8E65914F97CF00084E117 /* ES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60A14F97CF00084E117 /* ES1Renderer.m */; };
 		FEA8E65A14F97CF00084E117 /* ES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60A14F97CF00084E117 /* ES1Renderer.m */; };
 		FEA8E65B14F97CF00084E117 /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E60C14F97CF00084E117 /* ES2Renderer.m */; };
@@ -440,6 +438,8 @@
 		FEA8E8B614F97D320084E117 /* upgrade_for_more.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */; };
 		FEA8E8B714F97D320084E117 /* title_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B014F97D320084E117 /* title_iphone.png */; };
 		FEA8E8B814F97D320084E117 /* upgrade_for_more_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */; };
+		FEA8EB2D14F9D3DB00E147FB /* AdEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8EB2C14F9D3DB00E147FB /* AdEngine.m */; };
+		FEA8EB2E14F9D3DB00E147FB /* AdEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8EB2C14F9D3DB00E147FB /* AdEngine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -505,8 +505,6 @@
 		FEA8E60214F97CF00084E117 /* Touch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Touch.m; sourceTree = "<group>"; };
 		FEA8E60514F97CF00084E117 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		FEA8E60614F97CF00084E117 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		FEA8E60714F97CF00084E117 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
-		FEA8E60814F97CF00084E117 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLViewController.m; sourceTree = "<group>"; };
 		FEA8E60914F97CF00084E117 /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
 		FEA8E60A14F97CF00084E117 /* ES1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ES1Renderer.m; sourceTree = "<group>"; };
 		FEA8E60B14F97CF00084E117 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
@@ -712,6 +710,8 @@
 		FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more.png; sourceTree = "<group>"; };
 		FEA8E8B014F97D320084E117 /* title_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_iphone.png; sourceTree = "<group>"; };
 		FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more_iphone.png; sourceTree = "<group>"; };
+		FEA8EB2B14F9D3DA00E147FB /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
+		FEA8EB2C14F9D3DB00E147FB /* AdEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdEngine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -882,9 +882,11 @@
 		FEA8E5EF14F97CF00084E117 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				FEA8E5F214F97CF00084E117 /* Entities */,
+				FEA8EB2B14F9D3DA00E147FB /* AdEngine.h */,
+				FEA8EB2C14F9D3DB00E147FB /* AdEngine.m */,
 				FEA8E5F014F97CF00084E117 /* EngineState.h */,
 				FEA8E5F114F97CF00084E117 /* EngineState.m */,
-				FEA8E5F214F97CF00084E117 /* Entities */,
 				FEA8E5F914F97CF00084E117 /* GameEngine.h */,
 				FEA8E5FA14F97CF00084E117 /* GameEngine.m */,
 				FEA8E5FB14F97CF00084E117 /* LocalStore.h */,
@@ -917,8 +919,6 @@
 			children = (
 				FEA8E60514F97CF00084E117 /* EAGLView.h */,
 				FEA8E60614F97CF00084E117 /* EAGLView.m */,
-				FEA8E60714F97CF00084E117 /* EAGLViewController.h */,
-				FEA8E60814F97CF00084E117 /* EAGLViewController.m */,
 				FEA8E60914F97CF00084E117 /* ES1Renderer.h */,
 				FEA8E60A14F97CF00084E117 /* ES1Renderer.m */,
 				FEA8E60B14F97CF00084E117 /* ES2Renderer.h */,
@@ -1839,7 +1839,6 @@
 				FEA8E65114F97CF00084E117 /* ResourceLoader.m in Sources */,
 				FEA8E65314F97CF00084E117 /* Touch.m in Sources */,
 				FEA8E65514F97CF00084E117 /* EAGLView.m in Sources */,
-				FEA8E65714F97CF00084E117 /* EAGLViewController.m in Sources */,
 				FEA8E65914F97CF00084E117 /* ES1Renderer.m in Sources */,
 				FEA8E65B14F97CF00084E117 /* ES2Renderer.m in Sources */,
 				FEA8E65D14F97CF00084E117 /* Texture2D.m in Sources */,
@@ -1848,6 +1847,7 @@
 				FEA8E66314F97CF00084E117 /* MyOpenALSupport.m in Sources */,
 				FEA8E66514F97CF00084E117 /* SoundPlayer.m in Sources */,
 				FEA8E66714F97CF00084E117 /* main.m in Sources */,
+				FEA8EB2D14F9D3DB00E147FB /* AdEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1878,7 +1878,6 @@
 				FEA8E65214F97CF00084E117 /* ResourceLoader.m in Sources */,
 				FEA8E65414F97CF00084E117 /* Touch.m in Sources */,
 				FEA8E65614F97CF00084E117 /* EAGLView.m in Sources */,
-				FEA8E65814F97CF00084E117 /* EAGLViewController.m in Sources */,
 				FEA8E65A14F97CF00084E117 /* ES1Renderer.m in Sources */,
 				FEA8E65C14F97CF00084E117 /* ES2Renderer.m in Sources */,
 				FEA8E65E14F97CF00084E117 /* Texture2D.m in Sources */,
@@ -1887,6 +1886,7 @@
 				FEA8E66414F97CF00084E117 /* MyOpenALSupport.m in Sources */,
 				FEA8E66614F97CF00084E117 /* SoundPlayer.m in Sources */,
 				FEA8E66814F97CF00084E117 /* main.m in Sources */,
+				FEA8EB2E14F9D3DB00E147FB /* AdEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

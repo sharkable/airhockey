@@ -13,19 +13,11 @@
 
 #define MAX_TOUCHES 20
 
-@interface GameEngine : NSObject {
- @private
-  Stack *states_;
-  Touch *touchesBegan_[MAX_TOUCHES];
-  int numTouchesBegan_;
-  Touch *touchesMoved_[MAX_TOUCHES];
-  int numTouchesMoved_;
-  Touch *touchesEnded_[MAX_TOUCHES];
-  int numTouchesEnded_;
-  BOOL popOnNext_;
-  BOOL replaceOnNext_;
-  EngineState *nextState_;
-}
+@class AdEngine;
+
+@interface GameEngine : UIViewController
+
+@property(nonatomic, readonly) AdEngine *adEngine;
 
 - (void)render;
 - (void)update;
@@ -37,5 +29,10 @@
 - (void)setTouchesMoved:(NSSet *)touchesMoved;
 - (void)setTouchesEnded:(NSSet *)touchesEnded;
 - (void)clearTouches;
+
+- (void)startAnimation;
+- (void)stopAnimation;
+
+- (void)addUIView:(UIView *)view;
 
 @end

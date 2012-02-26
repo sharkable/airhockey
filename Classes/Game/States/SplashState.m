@@ -19,14 +19,14 @@
   [super init];
   
   if (self) {
-      spinner_ = [[UIActivityIndicatorView alloc]
-                  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    spinner_ = [[UIActivityIndicatorView alloc]
+                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
       spinner_.center = CGPointMake(320 / 2, 480 / 2);
     } else {
       spinner_.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     }
-    [EAGLView addUIView:spinner_];
+    [self.gameEngine addUIView:spinner_];
     [spinner_ startAnimating];
   }
   
@@ -34,7 +34,7 @@
 }
 
 - (void)dealloc {
-  [EAGLView removeUIView:spinner_];
+  [spinner_ removeFromSuperview];
   [spinner_ release];
   
   [super dealloc];

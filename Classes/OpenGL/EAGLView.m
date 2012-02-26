@@ -13,143 +13,122 @@
 #import "GameEngine.h"
 #import "const.h"
 
-// TODO I don't like this. I'm using this for the static AdMob functions.
-EAGLView *__instance;
-
-@implementation EAGLView
-
-@synthesize animating;
-@synthesize viewController = viewController_;
-
-@dynamic animationFrameInterval;
+@implementation EAGLView {    
+ @private
+  id<ESRenderer> renderer_;
+  
+  BOOL animating_;
+  BOOL displayLinkSupported_;
+  // Use of the CADisplayLink class is the preferred method for controlling your animation timing.
+  // CADisplayLink will link to the main display and fire every vsync when added to a given
+  // run-loop. The NSTimer class is used only as fallback when running on a pre 3.1 device where
+  // CADisplayLink isn't available.
+  id displayLink_;
+  NSTimer *animationTimer_;
+  
+  GameEngine *gameEngine_;  // weak
+}
 
 // You must implement this method
 + (Class)layerClass {
   return [CAEAGLLayer class];
 }
 
-- (id)initWithFrame:(CGRect)frame
-{  
+- (id)initWithFrame:(CGRect)frame {  
   self = [super initWithFrame:frame];
   if (self) {
-    __instance = self;
-    
     self.multipleTouchEnabled = YES;
     
     // Get the layer
     CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
 
-    eaglLayer.opaque = TRUE;
+    eaglLayer.opaque = YES;
     eaglLayer.drawableProperties =
         [NSDictionary dictionaryWithObjectsAndKeys:
-         [NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking,
+         [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking,
          kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat,
          nil];
 
-    renderer = nil; //[[ES2Renderer alloc] init];
+    renderer_ = [[ES2Renderer alloc] init];
 
-    if (!renderer) {
-      renderer = [[ES1Renderer alloc] init];
+    if (!renderer_) {
+      renderer_ = [[ES1Renderer alloc] init];
 
-      if (!renderer) {
+      if (!renderer_) {
         [self release];
         return nil;
       }
     }
 
-    animating = FALSE;
-    displayLinkSupported = FALSE;
-    animationFrameInterval = 1;
-    displayLink = nil;
-    animationTimer = nil;
+    animating_ = NO;
+    displayLinkSupported_ = NO;
+    displayLink_ = nil;
+    animationTimer_ = nil;
 
     // A system version of 3.1 or greater is required to use CADisplayLink. The NSTimer
     // class is used as fallback when it isn't available.
     NSString *reqSysVer = @"3.1";
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
-      displayLinkSupported = TRUE;
+      displayLinkSupported_ = YES;
     }
   }
 
   return self;
 }
 
-- (void)drawView:(id)sender {
-  tickCount++;
-  [renderer render];
+- (void)dealloc {
+  [renderer_ release];
+  [displayLink_ release];
+  [animationTimer_ release];
+  
+  [super dealloc];
 }
 
 - (void)layoutSubviews {
-  [renderer resizeFromLayer:(CAEAGLLayer *)self.layer];
-  [self drawView:nil];
-}
-
-- (NSInteger)animationFrameInterval {
-  return animationFrameInterval;
-}
-
-- (void)setAnimationFrameInterval:(NSInteger)frameInterval {
-  // Frame interval defines how many display frames must pass between each time the
-  // display link fires. The display link will only fire 30 times a second when the
-  // frame internal is two on a display that refreshes 60 times a second. The default
-  // frame interval setting of one will fire 60 times a second when the display refreshes
-  // at 60 times a second. A frame interval setting of less than one results in undefined
-  // behavior.
-  if (frameInterval >= 1) {
-    animationFrameInterval = frameInterval;
-
-    if (animating) {
-        [self stopAnimation];
-        [self startAnimation];
-    }
-  }
+  [renderer_ resizeFromLayer:(CAEAGLLayer *)self.layer];
 }
 
 - (void)startAnimation {
-  if (!animating) {
-    if (displayLinkSupported) {
+  if (!animating_) {
+    if (displayLinkSupported_) {
       // CADisplayLink is API new to iPhone SDK 3.1. Compiling against earlier versions will result
       // in a warning, but can be dismissed if the system version runtime check for CADisplayLink
       // exists in -initWithCoder:. The runtime check ensures this code will not be called in system
       // versions earlier than 3.1.
 
-      displayLink =
-          [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self
-                                                            selector:@selector(drawView:)];
-      [displayLink setFrameInterval:animationFrameInterval];
-      [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+      displayLink_ =
+          [[NSClassFromString(@"CADisplayLink") displayLinkWithTarget:renderer_
+                                                             selector:@selector(render)] retain];
+      [displayLink_ setFrameInterval:1];  // 60 fps
+      [displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     } else {
-      NSTimeInterval interval = (NSTimeInterval)((1.0 / 60.0) * animationFrameInterval);
-      animationTimer = [NSTimer scheduledTimerWithTimeInterval:interval
-                                                        target:self
-                                                      selector:@selector(drawView:)
-                                                      userInfo:nil
-                                                       repeats:TRUE];
+      NSTimeInterval interval = (NSTimeInterval)(1.0 / 60.0);
+      animationTimer_ = [[NSTimer scheduledTimerWithTimeInterval:interval
+                                                          target:renderer_
+                                                        selector:@selector(render)
+                                                        userInfo:nil
+                                                         repeats:YES] retain];
     }
 
-    animating = TRUE;
+    animating_ = YES;
   }
 }
 
 - (void)stopAnimation {
-  if (animating) {
-    if (displayLinkSupported) {
-      [displayLink invalidate];
-      displayLink = nil;
+  if (animating_) {
+    if (displayLinkSupported_) {
+      [displayLink_ invalidate];
+      [displayLink_ release];
+      displayLink_ = nil;
     } else {
-      [animationTimer invalidate];
-      animationTimer = nil;
+      [animationTimer_ invalidate];
+      [animationTimer_ release];
+      animationTimer_ = nil;
     }
 
-    animating = FALSE;
+    animating_ = NO;
   }
-}
-
-- (void)dealloc {
-  [renderer release];
-
-  [super dealloc];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -164,54 +143,6 @@ EAGLView *__instance;
   [gameEngine_ setTouchesEnded:touches];
 }
 
-- (void)__addAdAtPoint:(CGPoint)point {
-  CGRect adFrame = CGRectZero;
-  adFrame.origin = CGPointMake(point.x, point.y);
-  adFrame.size = GAD_SIZE_320x50;
-  if (!ad) {
-    ad = [[GADBannerView alloc] initWithFrame:adFrame];
-    ad.adUnitID = @"a14bdda6dfc895a";
-    ad.rootViewController = viewController_;
-    [ad loadRequest:nil];
-    [self addSubview:ad];
-    lastAdRefresh = tickCount;
-  } else {
-    ad.frame = adFrame;
-    if (![[self subviews] containsObject:ad]) {
-      [self addSubview:ad];
-    }
-    // TODO: what should happen here?
-//    if (tickCount - lastAdRefresh >= 60*60) {
-//      [ad loadRequest:nil];
-//      lastAdRefresh = tickCount;
-//    }
-  }
-}
-
-+ (void)addAdAtPoint:(CGPoint)point {
-  if (IS_FREE) {
-    [__instance __addAdAtPoint:point];
-  }
-}
-
-- (void)__removeAd {
-  [ad removeFromSuperview];
-}
-
-+ (void)removeAd {
-  if (IS_FREE && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [__instance __removeAd];
-  }
-}
-
-+ (void)addUIView:(UIView*)view {
-  [__instance addSubview:view];
-}
-
-+ (void)removeUIView:(UIView*)view {
-  [view removeFromSuperview];
-}
-
 #pragma mark - Accessors
 
 - (GameEngine *)gameEngine {
@@ -220,7 +151,7 @@ EAGLView *__instance;
 
 - (void)setGameEngine:(GameEngine *)gameEngine {
   gameEngine_ = gameEngine;
-  [renderer performSelector:@selector(setGameEngine:) withObject:gameEngine_];
+  renderer_.gameEngine = gameEngine_;
 }
 
 @end

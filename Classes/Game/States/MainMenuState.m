@@ -7,6 +7,8 @@
 //
 
 #import "MainMenuState.h"
+
+#import "AdEngine.h"
 #import "Texture2D.h"
 #import "PlayState.h"
 #import "StoryState.h"
@@ -236,9 +238,9 @@
 - (void)stateIsShown {
   if (IS_FREE) {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      [EAGLView addAdAtPoint:CGPointMake(0, 0)];  
+      [self.gameEngine.adEngine addAdAtPoint:CGPointMake(0, 0)];  
     } else {
-      [EAGLView addAdAtPoint:CGPointMake(45, 40)];  
+      [self.gameEngine.adEngine addAdAtPoint:CGPointMake(45, 40)];  
     }
   }
 }
@@ -303,7 +305,7 @@
 
 - (void)pressedStory {
   [FlurryAnalytics logEvent:@"STORY_PRESSED"];
-  [EAGLView removeAd];
+  [self.gameEngine.adEngine removeAd];
   [self.gameEngine pushState:[[[StoryState alloc] init] autorelease]];
 }
 

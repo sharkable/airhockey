@@ -75,7 +75,7 @@ static const BOOL thisAppDoesDucking = NO; // if this gets changed to yes then i
 @implementation SoundPlayer
 
 static AVAudioSession*    session_ = nil;
-static BOOL          musicIsPlayingInITunes_ = FALSE;
+static BOOL          musicIsPlayingInITunes_ = NO;
 
 @synthesize sounds=sounds_, song=song_, musicOn=musicOn_, soundEffectsOn=soundEffectsOn_;
 

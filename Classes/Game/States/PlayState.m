@@ -7,6 +7,8 @@
 //
 
 #import "PlayState.h"
+
+#import "AdEngine.h"
 #import "Post.h"
 #import "GameEngine.h"
 #import "SoundPlayer.h"
@@ -244,8 +246,8 @@
     if (!IS_FREE && isIPhone) {
       player1Wins_.text = @"0 wins";
       player2Wins_.text = @"0 wins";
-      [EAGLView addUIView:player1Wins_];
-      [EAGLView addUIView:player2Wins_];
+      [self.gameEngine addUIView:player1Wins_];
+      [self.gameEngine addUIView:player2Wins_];
     }
     
     giveExtraPuckToPlayer_ = PLAYER_1;
@@ -405,7 +407,7 @@
 - (void)setUpNewGame {
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
   } else {
-    [EAGLView removeAd];
+    [self.gameEngine.adEngine removeAd];
   }
 
   // Place paddles!
@@ -496,8 +498,8 @@
   player2Wins_.text =
       [NSString stringWithFormat:@"%d win%@", player2WinCount_, player2WinCount_ == 1 ? @"" : @"s"];
   if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView addUIView:player1Wins_];
-    [EAGLView addUIView:player2Wins_];
+    [self.gameEngine addUIView:player1Wins_];
+    [self.gameEngine addUIView:player2Wins_];
   }
   
   [self addEntity:menuBackground_];
@@ -506,31 +508,31 @@
   [self addEntity:menuButton_];
   
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
+    [self.gameEngine.adEngine addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
   } else {
-    [EAGLView addAdAtPoint:CGPointMake(0, 0)];
+    [self.gameEngine.adEngine addAdAtPoint:CGPointMake(0, 0)];
   }
 }
 
 - (void)rematchPressed {
   [FlurryAnalytics logEvent:@"REMATCH"];
   if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView removeUIView:player1Wins_];
-    [EAGLView removeUIView:player2Wins_];
+    [player1Wins_ removeFromSuperview];
+    [player2Wins_ removeFromSuperview];
   }
   [self setUpNewGame];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView removeAd];
+    [self.gameEngine.adEngine removeAd];
   }  
 }
 
 
 - (void)menuPressed {
-  [EAGLView removeUIView:player1Wins_];
-  [EAGLView removeUIView:player2Wins_];
+  [player1Wins_ removeFromSuperview];
+  [player2Wins_ removeFromSuperview];
   [self.gameEngine replaceTopState:[[[MainMenuState alloc] init] autorelease]];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView removeAd];
+    [self.gameEngine.adEngine removeAd];
   }
 }
 
@@ -541,7 +543,7 @@
   [self removeEntity:menuButton_];
   [self removeEntity:continueButton_];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [EAGLView removeAd];
+    [self.gameEngine.adEngine removeAd];
   }
 }
 
@@ -554,7 +556,7 @@
     [self addEntity:menuButton_];
     [self addEntity:continueButton_];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      [EAGLView addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320)/2, 385)];
+      [self.gameEngine.adEngine addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320)/2, 385)];
     }
   }
 }
