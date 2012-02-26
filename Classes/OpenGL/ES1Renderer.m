@@ -84,8 +84,6 @@
 @synthesize gameEngine = gameEngine_;
 
 - (void)render {
-  [gameEngine_ update];
-
   glViewport(0, 0, backingWidth_, backingHeight_);
   
   glMatrixMode(GL_PROJECTION);

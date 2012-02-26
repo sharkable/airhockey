@@ -104,8 +104,6 @@ enum {
 @synthesize gameEngine = gameEngine_;
 
 - (void)render {
-  [gameEngine_ update];
-
   // This application only creates a single context which is already set current at this point.
   // This call is redundant, but needed if dealing with multiple contexts.
   [EAGLContext setCurrentContext:context_];

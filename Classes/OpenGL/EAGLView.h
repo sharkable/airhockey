@@ -17,7 +17,6 @@
 
 @property(nonatomic, assign) GameEngine *gameEngine;
 
-- (void)startAnimation;
-- (void)stopAnimation;
+- (void)render;
 
 @end

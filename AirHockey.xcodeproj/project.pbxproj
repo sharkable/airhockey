@@ -27,6 +27,8 @@
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FE789BCC14F97B34007FCBC5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FE789BCE14F97B34007FCBC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FE93409214FADD5D004A9D0C /* GameTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93409114FADD5D004A9D0C /* GameTimer.m */; };
+		FE93409314FADD5D004A9D0C /* GameTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93409114FADD5D004A9D0C /* GameTimer.m */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -457,6 +459,8 @@
 		FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FE93409014FADD5D004A9D0C /* GameTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTimer.h; sourceTree = "<group>"; };
+		FE93409114FADD5D004A9D0C /* GameTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTimer.m; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		FEA8E5D114F97CF00084E117 /* AirHockeyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockeyAppDelegate.h; sourceTree = "<group>"; };
@@ -889,6 +893,8 @@
 				FEA8E5F114F97CF00084E117 /* EngineState.m */,
 				FEA8E5F914F97CF00084E117 /* GameEngine.h */,
 				FEA8E5FA14F97CF00084E117 /* GameEngine.m */,
+				FE93409014FADD5D004A9D0C /* GameTimer.h */,
+				FE93409114FADD5D004A9D0C /* GameTimer.m */,
 				FEA8E5FB14F97CF00084E117 /* LocalStore.h */,
 				FEA8E5FC14F97CF00084E117 /* LocalStore.m */,
 				FEA8E5FD14F97CF00084E117 /* mt19937ar.c */,
@@ -1848,6 +1854,7 @@
 				FEA8E66514F97CF00084E117 /* SoundPlayer.m in Sources */,
 				FEA8E66714F97CF00084E117 /* main.m in Sources */,
 				FEA8EB2D14F9D3DB00E147FB /* AdEngine.m in Sources */,
+				FE93409214FADD5D004A9D0C /* GameTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1887,6 +1894,7 @@
 				FEA8E66614F97CF00084E117 /* SoundPlayer.m in Sources */,
 				FEA8E66814F97CF00084E117 /* main.m in Sources */,
 				FEA8EB2E14F9D3DB00E147FB /* AdEngine.m in Sources */,
+				FE93409314FADD5D004A9D0C /* GameTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

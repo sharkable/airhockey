@@ -10,6 +10,7 @@
 
 #import "AdEngine.h"
 #import "const.h"
+#import "GameTimer.h"
 #import "EAGLView.h"
 
 extern void init_genrand(unsigned long s);
@@ -18,8 +19,9 @@ extern long genrand_int31(void);
 @implementation GameEngine {
  @private
   EAGLView *view_;
-  
+  GameTimer *gameTimer_;
   AdEngine *adEngine_;
+  
   Stack *states_;
   Touch *touchesBegan_[MAX_TOUCHES];
   int numTouchesBegan_;
@@ -43,6 +45,8 @@ extern long genrand_int31(void);
     adEngine_ = [[AdEngine alloc] init];
     adEngine_.gameEngine = self;
     
+    gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
+    
     states_ = [[Stack alloc] init];
     for (int i = 0; i < MAX_TOUCHES; i++) {
       touchesBegan_[i] = [[Touch alloc] init];
@@ -56,13 +60,16 @@ extern long genrand_int31(void);
 
 - (void)dealloc {
   [view_ release];
+  [gameTimer_ release];
   [adEngine_ release];
+  
   [states_ release];
   for (int i = 0; i < MAX_TOUCHES; i++) {
     [touchesBegan_[i] release];
     [touchesMoved_[i] release];
     [touchesEnded_[i] release];
   }
+  [nextState_ release];
   
   [super dealloc];
 }
@@ -108,6 +115,8 @@ extern long genrand_int31(void);
     EngineState *state = [states_ objectAtIndex:i];
     [state update];
   }
+  
+  [view_ render];
 }
 
 - (void) pushState:(EngineState *)state {
@@ -186,11 +195,11 @@ extern long genrand_int31(void);
 }
 
 - (void) startAnimation {
-  [view_ startAnimation];
+  [gameTimer_ start];
 }
 
 - (void) stopAnimation {
-  [view_ stopAnimation];
+  [gameTimer_ stop];
 }
 
 - (void)addUIView:(UIView *)view {
