@@ -10,15 +10,22 @@
 
 #import "AdEngine.h"
 #import "const.h"
-#import "GameTimer.h"
 #import "EAGLView.h"
+#import "GameTimer.h"
+#import "GameTouchWindow.h"
 
 extern void init_genrand(unsigned long s);
 extern long genrand_int31(void);
 
+@interface GameEngine ()
+- (void)update;
+- (void)render;
+@end
+
 @implementation GameEngine {
  @private
   EAGLView *view_;
+  GameTouchWindow *gameTouchWindow_;
   GameTimer *gameTimer_;
   AdEngine *adEngine_;
   
@@ -35,6 +42,7 @@ extern long genrand_int31(void);
 }
 
 @synthesize adEngine = adEngine_;
+@synthesize window = gameTouchWindow_;
 
 - (id)init {
   self = [super init];
@@ -44,6 +52,12 @@ extern long genrand_int31(void);
     
     adEngine_ = [[AdEngine alloc] init];
     adEngine_.gameEngine = self;
+    
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    gameTouchWindow_ = [[GameTouchWindow alloc] initWithFrame:screenSize];
+    gameTouchWindow_.gameEngine = self;
+    [gameTouchWindow_ addSubview:self.view];
+    [gameTouchWindow_ makeKeyAndVisible];
     
     gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
     
@@ -60,6 +74,7 @@ extern long genrand_int31(void);
 
 - (void)dealloc {
   [view_ release];
+  [gameTouchWindow_ release];
   [gameTimer_ release];
   [adEngine_ release];
   
@@ -74,62 +89,17 @@ extern long genrand_int31(void);
   [super dealloc];
 }
 
-- (void)render {
-  for (int i = 0; i < states_.count; i++) {
-    EngineState *state = [states_ objectAtIndex:i];
-    [state render];
-  }
-}
-
-- (void)update {
-  if (popOnNext_) {
-    [states_ pop];
-    [[states_ top] stateIsShown];
-    popOnNext_ = NO;
-  } else if (replaceOnNext_) {
-    [states_ pop];
-    [states_ push:nextState_];
-    [nextState_ release];
-    [nextState_ stateIsShown];
-    replaceOnNext_ = NO;
-    nextState_ = nil;
-  }
-  
-  // Process input.
-  EngineState *topState = [states_ top];
-  if (numTouchesBegan_ > 0) {
-    [topState touchesBegan:touchesBegan_ numTouches:numTouchesBegan_];
-    numTouchesBegan_ = 0;
-  }
-  if (numTouchesMoved_ > 0) {
-    [topState touchesMoved:touchesMoved_ numTouches:numTouchesMoved_];
-    numTouchesMoved_ = 0;
-  }
-  if (numTouchesEnded_ > 0) {
-    [topState touchesEnded:touchesEnded_ numTouches:numTouchesEnded_];
-    numTouchesEnded_ = 0;
-  }
-  
-  // Update states.
-  for (int i = 0; i < states_.count; i++) {
-    EngineState *state = [states_ objectAtIndex:i];
-    [state update];
-  }
-  
-  [view_ render];
-}
-
-- (void) pushState:(EngineState *)state {
+- (void)pushState:(EngineState *)state {
   state.gameEngine = self;
   [states_ push:state];
   [state stateIsShown];
 }
 
-- (void) popState {
+- (void)popState {
   popOnNext_ = YES;
 }
 
-- (void) replaceTopState:(EngineState *)state {
+- (void)replaceTopState:(EngineState *)state {
   state.gameEngine = self;
   replaceOnNext_ = YES;
   if (nextState_ != state) {
@@ -187,18 +157,18 @@ extern long genrand_int31(void);
   }
 }
 
-- (void) clearTouches {
+- (void)clearTouches {
   for (int i = 0; i < states_.count; i++) {
     EngineState *state = [states_ objectAtIndex:i];
     [state clearTouches];
   }
 }
 
-- (void) startAnimation {
+- (void)start {
   [gameTimer_ start];
 }
 
-- (void) stopAnimation {
+- (void)stop {
   [gameTimer_ stop];
 }
 
@@ -206,12 +176,60 @@ extern long genrand_int31(void);
   [view_ addSubview:view];
 }
 
+#pragma mark - Private
+
+- (void)update {
+  if (popOnNext_) {
+    [states_ pop];
+    [[states_ top] stateIsShown];
+    popOnNext_ = NO;
+  } else if (replaceOnNext_) {
+    [states_ pop];
+    [states_ push:nextState_];
+    [nextState_ release];
+    [nextState_ stateIsShown];
+    replaceOnNext_ = NO;
+    nextState_ = nil;
+  }
+  
+  // Process input.
+  EngineState *topState = [states_ top];
+  if (numTouchesBegan_ > 0) {
+    [topState touchesBegan:touchesBegan_ numTouches:numTouchesBegan_];
+    numTouchesBegan_ = 0;
+  }
+  if (numTouchesMoved_ > 0) {
+    [topState touchesMoved:touchesMoved_ numTouches:numTouchesMoved_];
+    numTouchesMoved_ = 0;
+  }
+  if (numTouchesEnded_ > 0) {
+    [topState touchesEnded:touchesEnded_ numTouches:numTouchesEnded_];
+    numTouchesEnded_ = 0;
+  }
+  
+  // Update states.
+  for (int i = 0; i < states_.count; i++) {
+    EngineState *state = [states_ objectAtIndex:i];
+    [state update];
+  }
+  
+  [view_ renderWithTarget:self renderSelector:@selector(render)];
+}
+
+- (void)render {
+  for (int i = 0; i < states_.count; i++) {
+    EngineState *state = [states_ objectAtIndex:i];
+    [state render];
+  }
+}
+
 #pragma mark - UIViewController
 
 - (void)loadView {
-  CGRect screenSize = [[UIScreen mainScreen] bounds];
-  view_ = [[EAGLView alloc] initWithFrame:screenSize];
-  view_.gameEngine = self;
+  // TODO: Consider handling viewDidUnload: to free memory.
+  if (!view_) {
+    view_ = [[EAGLView alloc] initWithFrame:gameTouchWindow_.frame];
+  }
   self.view = view_;
 }
 

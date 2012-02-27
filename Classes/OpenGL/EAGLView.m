@@ -10,13 +10,11 @@
 
 #import "ES1Renderer.h"
 #import "ES2Renderer.h"
-#import "GameEngine.h"
-#import "const.h"
+#import "ESRenderer.h"
 
 @implementation EAGLView {    
  @private
   id<ESRenderer> renderer_;
-  GameEngine *gameEngine_;  // weak
 }
 
 // You must implement this method
@@ -60,37 +58,14 @@
   [super dealloc];
 }
 
-- (void)render {
-  [renderer_ render];
+- (void)renderWithTarget:(id)target renderSelector:(SEL)selector {
+  [renderer_ renderWithTarget:target renderSelector:selector];
 }
 
 #pragma mark - UIView
 
 - (void)layoutSubviews {
   [renderer_ resizeFromLayer:(CAEAGLLayer *)self.layer];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  [gameEngine_ setTouchesBegan:touches];
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-  [gameEngine_ setTouchesMoved:touches];
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-  [gameEngine_ setTouchesEnded:touches];
-}
-
-#pragma mark - Accessors
-
-- (GameEngine *)gameEngine {
-  return gameEngine_;
-}
-
-- (void)setGameEngine:(GameEngine *)gameEngine {
-  gameEngine_ = gameEngine;
-  renderer_.gameEngine = gameEngine_;
 }
 
 @end

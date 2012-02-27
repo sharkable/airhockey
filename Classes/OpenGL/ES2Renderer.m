@@ -101,9 +101,7 @@ enum {
 
 #pragma mark - ESRenderer
 
-@synthesize gameEngine = gameEngine_;
-
-- (void)render {
+- (void)renderWithTarget:(id)target renderSelector:(SEL)selector {
   // This application only creates a single context which is already set current at this point.
   // This call is redundant, but needed if dealing with multiple contexts.
   [EAGLContext setCurrentContext:context_];
@@ -116,7 +114,7 @@ enum {
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  [gameEngine_ render];
+  [target performSelector:selector];
   
   // This application only creates a single color renderbuffer which is already bound at this point.
   // This call is redundant, but needed if dealing with multiple renderbuffers.

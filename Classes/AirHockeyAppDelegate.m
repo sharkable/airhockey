@@ -20,12 +20,10 @@
 
 @implementation AirHockeyAppDelegate {
  @private
-  UIWindow *window_;
   GameEngine *gameEngine_;
 }
 
 - (void)dealloc {
-  [window_ release];  
   [gameEngine_ release];
   
   [super dealloc];
@@ -49,8 +47,6 @@
 
 #pragma mark - UIApplicationDelegate
 
-@synthesize window = window_;
-
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -62,11 +58,6 @@
   }
   
   gameEngine_ = [[GameEngine alloc] init];
-  
-  CGRect screenSize = [[UIScreen mainScreen] bounds];
-  window_ = [[UIWindow alloc] initWithFrame:screenSize];
-  [window_ addSubview:gameEngine_.view];
-  [window_ makeKeyAndVisible];
 
   [self startGame];
 
@@ -74,16 +65,20 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-  [gameEngine_ stopAnimation];
+  [gameEngine_ stop];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  [gameEngine_ startAnimation];
+  [gameEngine_ start];
   [gameEngine_ clearTouches];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  [gameEngine_ stopAnimation];
+  [gameEngine_ stop];
+}
+
+- (UIWindow *)window {
+  return gameEngine_.window;
 }
 
 @end

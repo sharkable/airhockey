@@ -22,6 +22,8 @@
 		FE3CF95714F982A30063CCA5 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94414F980A40063CCA5 /* OpenAL.framework */; };
 		FE3CF95814F982A30063CCA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94214F9807E0063CCA5 /* QuartzCore.framework */; };
 		FE3CF95914F982A30063CCA5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94A14F9810B0063CCA5 /* SystemConfiguration.framework */; };
+		FE573D5614FAEE4F00154FC9 /* GameTouchWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FE573D5514FAEE4E00154FC9 /* GameTouchWindow.m */; };
+		FE573D5714FAEE4F00154FC9 /* GameTouchWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FE573D5514FAEE4E00154FC9 /* GameTouchWindow.m */; };
 		FE789BC614F97B34007FCBC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FE789BC814F97B34007FCBC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -453,6 +455,8 @@
 		FE3CF94C14F981400063CCA5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FE3CF94E14F981530063CCA5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FE3CF95014F9819E0063CCA5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FE573D5414FAEE4D00154FC9 /* GameTouchWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTouchWindow.h; sourceTree = "<group>"; };
+		FE573D5514FAEE4E00154FC9 /* GameTouchWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTouchWindow.m; sourceTree = "<group>"; };
 		FE789BC114F97B34007FCBC5 /* AirHockey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE789BC514F97B34007FCBC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FE789BC714F97B34007FCBC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -895,6 +899,8 @@
 				FEA8E5FA14F97CF00084E117 /* GameEngine.m */,
 				FE93409014FADD5D004A9D0C /* GameTimer.h */,
 				FE93409114FADD5D004A9D0C /* GameTimer.m */,
+				FE573D5414FAEE4D00154FC9 /* GameTouchWindow.h */,
+				FE573D5514FAEE4E00154FC9 /* GameTouchWindow.m */,
 				FEA8E5FB14F97CF00084E117 /* LocalStore.h */,
 				FEA8E5FC14F97CF00084E117 /* LocalStore.m */,
 				FEA8E5FD14F97CF00084E117 /* mt19937ar.c */,
@@ -1855,6 +1861,7 @@
 				FEA8E66714F97CF00084E117 /* main.m in Sources */,
 				FEA8EB2D14F9D3DB00E147FB /* AdEngine.m in Sources */,
 				FE93409214FADD5D004A9D0C /* GameTimer.m in Sources */,
+				FE573D5614FAEE4F00154FC9 /* GameTouchWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1895,6 +1902,7 @@
 				FEA8E66814F97CF00084E117 /* main.m in Sources */,
 				FEA8EB2E14F9D3DB00E147FB /* AdEngine.m in Sources */,
 				FE93409314FADD5D004A9D0C /* GameTimer.m in Sources */,
+				FE573D5714FAEE4F00154FC9 /* GameTouchWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

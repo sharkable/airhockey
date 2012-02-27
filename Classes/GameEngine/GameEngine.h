@@ -18,9 +18,8 @@
 @interface GameEngine : UIViewController
 
 @property(nonatomic, readonly) AdEngine *adEngine;
+@property(nonatomic, readonly) UIWindow *window;
 
-- (void)render;
-- (void)update;
 - (void)pushState:(EngineState *)state;
 - (void)popState;
 - (void)replaceTopState:(EngineState *)state;
@@ -30,8 +29,8 @@
 - (void)setTouchesEnded:(NSSet *)touchesEnded;
 - (void)clearTouches;
 
-- (void)startAnimation;
-- (void)stopAnimation;
+- (void)start;
+- (void)stop;
 
 - (void)addUIView:(UIView *)view;
 

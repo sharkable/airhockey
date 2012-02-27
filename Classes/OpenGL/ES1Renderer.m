@@ -7,7 +7,6 @@
 //
 
 #import "ES1Renderer.h"
-#import "GameEngine.h"
 
 @implementation ES1Renderer {
  @private
@@ -20,8 +19,6 @@
   // The OpenGL ES names for the framebuffer and renderbuffer used to render to this view
   GLuint defaultFramebuffer_;
   GLuint colorRenderbuffer_;
-  
-  GameEngine *gameEngine_;
 }
 
 // Create an OpenGL ES 1.1 context
@@ -81,9 +78,7 @@
 
 #pragma mark - ESRenderer
 
-@synthesize gameEngine = gameEngine_;
-
-- (void)render {
+- (void)renderWithTarget:(id)target renderSelector:(SEL)selector {
   glViewport(0, 0, backingWidth_, backingHeight_);
   
   glMatrixMode(GL_PROJECTION);
@@ -95,7 +90,7 @@
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
   
-  [gameEngine_ render];
+  [target performSelector:selector];
   
   [context_ presentRenderbuffer:GL_RENDERBUFFER_OES];
 }

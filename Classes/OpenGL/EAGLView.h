@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class GameEngine;
-
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
 // The view content is basically an EAGL surface you render your OpenGL scene into.
 // Note that setting the view non-opaque will only work if the EAGL surface has an alpha channel.
 @interface EAGLView : UIView
 
-@property(nonatomic, assign) GameEngine *gameEngine;
-
-- (void)render;
+// Render a frame. The target is called with the selector to render all of the objects within the
+// scene.
+// Before |selector| is called, the scene is cleared and the coordinate system is set up. After it
+// is called, the buffer is presented.
+- (void)renderWithTarget:(id)target renderSelector:(SEL)selector;
 
 @end

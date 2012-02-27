@@ -15,9 +15,7 @@
 
 @protocol ESRenderer<NSObject>
 
-@property(nonatomic, assign) GameEngine *gameEngine;
-
-- (void)render;
+- (void)renderWithTarget:(id)target renderSelector:(SEL)selector;
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;
 
 @end
