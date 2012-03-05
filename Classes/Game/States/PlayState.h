@@ -60,7 +60,8 @@
   UILabel *player2Wins_;
 }
 
-- (id)initWithNumPlayers:(int)numPlayers
+- (id)initWithGameEngine:(GameEngine *)gameEngine
+              numPlayers:(int)numPlayers
                 numPucks:(int)numPucks
               difficulty:(ComputerAI)difficulty
               paddleSize:(PaddleSize)paddleSize;

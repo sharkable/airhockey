@@ -14,7 +14,9 @@
 
 @interface EngineState : NSObject 
 
-@property(nonatomic, assign) GameEngine *gameEngine;
+@property(nonatomic, readonly) GameEngine *gameEngine;
+
+- (id)initWithGameEngine:(GameEngine *)gameEngine;
 
 - (void)stateIsShown;
 - (void)update;

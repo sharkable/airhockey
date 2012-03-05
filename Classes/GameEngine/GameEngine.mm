@@ -85,7 +85,6 @@
 }
 
 - (void)pushState:(EngineState *)state {
-  state.gameEngine = self;
   [states_ push:state];
   [state stateIsShown];
 }
@@ -95,7 +94,6 @@
 }
 
 - (void)replaceTopState:(EngineState *)state {
-  state.gameEngine = self;
   replaceOnNext_ = YES;
   if (nextState_ != state) {
     [nextState_ release];

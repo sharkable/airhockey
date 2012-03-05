@@ -17,17 +17,18 @@
 
 @synthesize gameEngine = gameEngine_;
 
-- (id) init {
+- (id)initWithGameEngine:(GameEngine *)gameEngine {
   [super init];
   
   if (self) {
+    gameEngine_ = gameEngine;
     entities_ = [[NSMutableArray alloc] init];
   }
   
   return self;
 }
 
-- (void) dealloc {
+- (void)dealloc {
   [entities_ release];
   
   [super dealloc];
@@ -48,15 +49,15 @@
   }
 }
 
-- (void) addEntity:(id<StateEntity>)entity {
+- (void)addEntity:(id<StateEntity>)entity {
   [entities_ addObject:entity];
 }
 
-- (void) removeEntity:(id<StateEntity>)entity {
+- (void)removeEntity:(id<StateEntity>)entity {
   [entities_ removeObject:entity];
 }
 
-- (void) touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
+- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
   for (NSObject<StateEntity> *entity in entities_) {
     if ([entity respondsToSelector:@selector(touchesBegan:numTouches:)]) {
       [entity touchesBegan:touches numTouches:numTouches];
@@ -64,7 +65,7 @@
   }
 }
 
-- (void) touchesMoved:(Touch *[])touches numTouches:(int)numTouches {
+- (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches {
   for (NSObject<StateEntity> *entity in entities_) {
     if ([entity respondsToSelector:@selector(touchesMoved:numTouches:)]) {
       [entity touchesMoved:touches numTouches:numTouches];
@@ -72,7 +73,7 @@
   }
 }
 
-- (void) touchesEnded:(Touch *[])touches numTouches:(int)numTouches {
+- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches {
   for (NSObject<StateEntity> *entity in entities_) {
     if ([entity respondsToSelector:@selector(touchesEnded:numTouches:)]) {
       [entity touchesEnded:touches numTouches:numTouches];
@@ -80,7 +81,7 @@
   }
 }
 
-- (void) clearTouches {
+- (void)clearTouches {
   for (NSObject<StateEntity> *entity in entities_) {
     if ([entity respondsToSelector:@selector(clearTouches)]) {
       [entity clearTouches];

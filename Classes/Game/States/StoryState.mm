@@ -12,8 +12,8 @@
 
 @implementation StoryState
 
-- (id)init {
-  [super init];
+- (id)initWithGameEngine:(GameEngine *)gameEngine {
+  self = [super initWithGameEngine:gameEngine];
   
   if (self) {
     Texture2D *storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story"];
