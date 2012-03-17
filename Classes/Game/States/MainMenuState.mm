@@ -121,7 +121,7 @@
     [numPlayersSelect_ addValueWithNormalTexture:twoPlayerImage
                                  selectedTexture:twoPlayerSelectedImage
                                         position:CGPointMake(SCREEN_WIDTH/2, playersY)];
-    numPlayersSelect_.selectedValue = [LocalStore integerForKey:LS_NUM_PLAYERS];
+    numPlayersSelect_.selectedValue = LocalStore::integerForKey(LS_NUM_PLAYERS);
     [self addEntity:numPlayersSelect_];
     
     double pucksY = isIPhone ? 706 : 627;
@@ -141,7 +141,7 @@
                                  selectedTexture:numPucksSelectedImage
                                         position:numPucksSelectPosition];
     }
-    numPucksSelect_.selectedValue = [LocalStore integerForKey:LS_NUM_PUCKS];
+    numPucksSelect_.selectedValue = LocalStore::integerForKey(LS_NUM_PUCKS);
     [self addEntity:numPucksSelect_];
     
     if (NO) {
@@ -179,8 +179,8 @@
     [difficultySelect_ addValueWithNormalTexture:amazingImage
                                  selectedTexture:amazingImageSelected
                                         position:CGPointMake(isIPhone ? 543 : 502, difficultyY)];
-    if ([LocalStore hasEntryForKey:LS_DIFFICULTY]) {
-      difficultySelect_.selectedValue = [LocalStore integerForKey:LS_DIFFICULTY];
+    if (LocalStore::hasEntryForKey(LS_DIFFICULTY)) {
+      difficultySelect_.selectedValue = LocalStore::integerForKey(LS_DIFFICULTY);
     } else {
       difficultySelect_.selectedValue = caiGood;
     }
@@ -206,8 +206,8 @@
       [paddleSizeSelect_ addValueWithNormalTexture:largeImage
                                    selectedTexture:largeImageSelected
                                           position:CGPointMake(464, 842)];
-      if ([LocalStore hasEntryForKey:LS_PADDLE_SIZE]) {
-        paddleSizeSelect_.selectedValue = [LocalStore integerForKey:LS_PADDLE_SIZE];
+      if (LocalStore::hasEntryForKey(LS_PADDLE_SIZE)) {
+        paddleSizeSelect_.selectedValue = LocalStore::integerForKey(LS_PADDLE_SIZE);
       } else {
         paddleSizeSelect_.selectedValue = psMedium;
       }
@@ -248,11 +248,11 @@
 - (void)pressedStart {
   BOOL isIPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
-  [LocalStore setInteger:numPlayersSelect_.selectedValue forKey:LS_NUM_PLAYERS];
-  [LocalStore setInteger:numPucksSelect_.selectedValue forKey:LS_NUM_PUCKS];
-  [LocalStore setInteger:difficultySelect_.selectedValue forKey:LS_DIFFICULTY];
+  LocalStore::setInteger(numPlayersSelect_.selectedValue, LS_NUM_PLAYERS);
+  LocalStore::setInteger(numPucksSelect_.selectedValue, LS_NUM_PUCKS);
+  LocalStore::setInteger(difficultySelect_.selectedValue, LS_DIFFICULTY);
   if (!isIPhone) {
-    [LocalStore setInteger:paddleSizeSelect_.selectedValue forKey:LS_PADDLE_SIZE];
+    LocalStore::setInteger(paddleSizeSelect_.selectedValue, LS_PADDLE_SIZE);
   }
 
   NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
@@ -268,11 +268,11 @@
   }
   [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
 
-  PaddleSize paddleSize = isIPhone ? psLarge : [paddleSizeSelect_ selectedValue];
+  PaddleSize paddleSize = PaddleSize(isIPhone ? psLarge : [paddleSizeSelect_ selectedValue]);
   PlayState *playState =
       [[[PlayState alloc] initWithNumPlayers:[numPlayersSelect_ selectedValue] + 1
                                     numPucks:[numPucksSelect_ selectedValue] + 1
-                                  difficulty:[difficultySelect_ selectedValue]
+                                  difficulty:ComputerAI([difficultySelect_ selectedValue])
                                   paddleSize:paddleSize] autorelease];
   [self.gameEngine replaceTopState:playState];
 }

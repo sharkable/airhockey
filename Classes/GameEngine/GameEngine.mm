@@ -14,9 +14,6 @@
 #import "GameTimer.h"
 #import "GameTouchWindow.h"
 
-extern void init_genrand(unsigned long s);
-extern long genrand_int31(void);
-
 @interface GameEngine ()
 - (void)update;
 - (void)render;
@@ -48,8 +45,6 @@ extern long genrand_int31(void);
   self = [super init];
   
   if (self) {
-    init_genrand(time(NULL));
-    
     adEngine_ = [[AdEngine alloc] init];
     adEngine_.gameEngine = self;
     
@@ -63,9 +58,9 @@ extern long genrand_int31(void);
     
     states_ = [[Stack alloc] init];
     for (int i = 0; i < MAX_TOUCHES; i++) {
-      touchesBegan_[i] = [[Touch alloc] init];
-      touchesMoved_[i] = [[Touch alloc] init];
-      touchesEnded_[i] = [[Touch alloc] init];
+      touchesBegan_[i] = new Touch();
+      touchesMoved_[i] = new Touch();
+      touchesEnded_[i] = new Touch();
     }
   }
   
@@ -80,9 +75,9 @@ extern long genrand_int31(void);
   
   [states_ release];
   for (int i = 0; i < MAX_TOUCHES; i++) {
-    [touchesBegan_[i] release];
-    [touchesMoved_[i] release];
-    [touchesEnded_[i] release];
+    delete touchesBegan_[i];
+    delete touchesMoved_[i];
+    delete touchesEnded_[i];
   }
   [nextState_ release];
   
@@ -113,14 +108,14 @@ extern long genrand_int31(void);
   numTouchesBegan_ = touches.count;
   int i = 0;
   for (UITouch *touch in touches) {
-    touchesBegan_[i].location = [touch locationInView:touch.view];
+    touchesBegan_[i]->setLocation([touch locationInView:touch.view]);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = touchesBegan_[i].location;
+      CGPoint p = touchesBegan_[i]->getLocation();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
-      touchesBegan_[i].location = p;
+      touchesBegan_[i]->setLocation(p);
     }
-    touchesBegan_[i].identifier = touch;
+    touchesBegan_[i]->setIdentifier(touch);
     i++;
   }
 }
@@ -129,14 +124,14 @@ extern long genrand_int31(void);
   numTouchesMoved_ = touches.count;
   int i = 0;
   for (UITouch *touch in touches) {
-    touchesMoved_[i].location = [touch locationInView:touch.view];
+    touchesMoved_[i]->setLocation([touch locationInView:touch.view]);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = touchesMoved_[i].location;
+      CGPoint p = touchesMoved_[i]->getLocation();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
-      touchesMoved_[i].location = p;
+      touchesMoved_[i]->setLocation(p);
     }
-    touchesMoved_[i].identifier = touch;
+    touchesMoved_[i]->setIdentifier(touch);
     i++;
   }
 }
@@ -145,14 +140,14 @@ extern long genrand_int31(void);
   numTouchesEnded_ = touches.count;
   int i = 0;
   for (UITouch* touch in touches) {
-    touchesEnded_[i].location = [touch locationInView:touch.view];
+    touchesEnded_[i]->setLocation([touch locationInView:touch.view]);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = touchesEnded_[i].location;
+      CGPoint p = touchesEnded_[i]->getLocation();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
-      touchesEnded_[i].location = p;
+      touchesEnded_[i]->setLocation(p);
     }
-    touchesEnded_[i].identifier = touch;
+    touchesEnded_[i]->setIdentifier(touch);
     i++;
   }
 }

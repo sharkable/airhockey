@@ -101,33 +101,35 @@ void* MyGetOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *out
   thePropertySize = sizeof(theFileLengthInFrames);
   err = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileLengthFrames, &thePropertySize, &theFileLengthInFrames);
   if(err) { printf("MyGetOpenALAudioData: ExtAudioFileGetProperty(kExtAudioFileProperty_FileLengthFrames) FAILED, Error = %ld\n", err); goto Exit; }
-  
-  // Read all the data into memory
-  UInt32    dataSize = theFileLengthInFrames * theOutputFormat.mBytesPerFrame;;
-  theData = malloc(dataSize);
-  if (theData)
-  {
-    AudioBufferList    theDataBuffer;
-    theDataBuffer.mNumberBuffers = 1;
-    theDataBuffer.mBuffers[0].mDataByteSize = dataSize;
-    theDataBuffer.mBuffers[0].mNumberChannels = theOutputFormat.mChannelsPerFrame;
-    theDataBuffer.mBuffers[0].mData = theData;
-    
-    // Read the data into an AudioBufferList
-    err = ExtAudioFileRead(extRef, (UInt32*)&theFileLengthInFrames, &theDataBuffer);
-    if(err == noErr)
+
+  {  
+    // Read all the data into memory
+    UInt32    dataSize = theFileLengthInFrames * theOutputFormat.mBytesPerFrame;;
+    theData = malloc(dataSize);
+    if (theData)
     {
-      // success
-      *outDataSize = (ALsizei)dataSize;
-      *outDataFormat = (theOutputFormat.mChannelsPerFrame > 1) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
-      *outSampleRate = (ALsizei)theOutputFormat.mSampleRate;
-    }
-    else
-    {
-      // failure
-      free (theData);
-      theData = NULL; // make sure to return NULL
-      printf("MyGetOpenALAudioData: ExtAudioFileRead FAILED, Error = %ld\n", err); goto Exit;
+      AudioBufferList    theDataBuffer;
+      theDataBuffer.mNumberBuffers = 1;
+      theDataBuffer.mBuffers[0].mDataByteSize = dataSize;
+      theDataBuffer.mBuffers[0].mNumberChannels = theOutputFormat.mChannelsPerFrame;
+      theDataBuffer.mBuffers[0].mData = theData;
+      
+      // Read the data into an AudioBufferList
+      err = ExtAudioFileRead(extRef, (UInt32*)&theFileLengthInFrames, &theDataBuffer);
+      if(err == noErr)
+      {
+        // success
+        *outDataSize = (ALsizei)dataSize;
+        *outDataFormat = (theOutputFormat.mChannelsPerFrame > 1) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
+        *outSampleRate = (ALsizei)theOutputFormat.mSampleRate;
+      }
+      else
+      {
+        // failure
+        free (theData);
+        theData = NULL; // make sure to return NULL
+        printf("MyGetOpenALAudioData: ExtAudioFileRead FAILED, Error = %ld\n", err); goto Exit;
+      }
     }
   }
   

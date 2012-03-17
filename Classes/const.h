@@ -69,11 +69,11 @@ typedef enum {
 } PaddleSize;
 
 // Locale Store keys
-#define LS_NUM_PLAYERS @"ls_num_players"
-#define LS_DIFFICULTY @"ls_difficulty"
-#define LS_NUM_PUCKS @"ls_num_pucks"
-#define LS_PADDLE_SIZE @"ls_paddle_size"
-#define LS_VOLUME @"ls_volume"
+#define LS_NUM_PLAYERS "ls_num_players"
+#define LS_DIFFICULTY "ls_difficulty"
+#define LS_NUM_PUCKS "ls_num_pucks"
+#define LS_PADDLE_SIZE "ls_paddle_size"
+#define LS_VOLUME "ls_volume"
 
 
 #if (__IPHONE_OS_VERSION_MAX_ALLOWED < 30200)

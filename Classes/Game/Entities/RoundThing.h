@@ -23,7 +23,7 @@
   double   mass_;
   double   friction_;
   BOOL     grabbed_;
-  UITouch* grabbedTouch_;
+  void *grabbedTouch_;
   BOOL     active_;
 }
 

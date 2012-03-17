@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "StateEntity.h"
-#import "Touch.h"
+#include "Touch.h"
 
 @class GameEngine;
 

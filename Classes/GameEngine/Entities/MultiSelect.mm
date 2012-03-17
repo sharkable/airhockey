@@ -9,6 +9,7 @@
 #import "MultiSelect.h"
 #import "SoundPlayer.h"
 #import "ResourceLoader.h"
+#include "Touch.h"
 
 @implementation MultiSelect
 
@@ -73,7 +74,7 @@
     double y = [[positionsY_ objectAtIndex:i] doubleValue];
     CGSize size = ((Texture2D *)[normalTextures_ objectAtIndex:i]).contentSize;
     for (int j = 0; j < numTouches; j++) {
-      CGPoint touchPoint = touches[j].location;
+      CGPoint touchPoint = touches[j]->getLocation();
       if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&
           touchPoint.y < y + size.height) {
         if (selectedValue_ != i) {

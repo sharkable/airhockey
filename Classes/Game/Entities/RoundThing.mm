@@ -8,6 +8,7 @@
 
 #import "RoundThing.h"
 #import "SoundPlayer.h"
+#include "Touch.h"
 #import "Paddle.h"
 #import "Puck.h"
 
@@ -167,7 +168,7 @@
   for (int i = 0; i < numTouches; i++) {
     if ([self containsTouch:touches[i]]) {
       grabbed_ = YES;
-      grabbedTouch_ = touches[i].identifier;
+      grabbedTouch_ = touches[i]->getIdentifier();
       [self touchesMoved:touches numTouches:numTouches];
       vx_ = 0;
       vy_ = 0;
@@ -184,13 +185,13 @@
 - (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches {
   Touch* correctTouch = nil;
   for (int i = 0; i < numTouches; i++) {
-    if (touches[i].identifier == grabbedTouch_) {
+    if (touches[i]->getIdentifier() == grabbedTouch_) {
       correctTouch = touches[i];
       break;
     }
   }
   if (grabbed_ && correctTouch != nil) {
-    CGPoint p = correctTouch.location;
+    CGPoint p = correctTouch->getLocation();
     _x = p.x;
     _y = p.y;
   }
@@ -199,7 +200,7 @@
 - (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
   Touch* correctTouch = nil;
   for (int i = 0; i < numTouches; i++) {
-    if (touches[i].identifier == grabbedTouch_) {
+    if (touches[i]->getIdentifier() == grabbedTouch_) {
       correctTouch = touches[i];
       break;
     }
@@ -228,8 +229,8 @@
 }
    
 - (BOOL) containsTouch:(Touch*)touch {
-  double dx = touch.location.x - _x;
-  double dy = touch.location.y - _y;
+  double dx = touch->getLocation().x - _x;
+  double dy = touch->getLocation().y - _y;
   return (dx*dx + dy*dy <= self.radius*self.radius);
 }
 

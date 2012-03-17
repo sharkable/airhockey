@@ -10,6 +10,7 @@
 #import "SoundPlayer.h"
 #import "ResourceLoader.h"
 #import "LocalStore.h"
+#include "Touch.h"
 #import "const.h"
 
 @implementation SoundSlider
@@ -23,8 +24,8 @@
   fullTexture_  = [[ResourceLoader instance] getTextureWithName:@"sound_full"];
   thumbTexture_ = [[ResourceLoader instance] getTextureWithName:@"sound_thumb"];
   
-  if ([LocalStore hasEntryForKey:LS_VOLUME]) {
-    value_ = [LocalStore doubleForKey:LS_VOLUME];
+  if (LocalStore::hasEntryForKey(LS_VOLUME)) {
+    value_ = LocalStore::doubleForKey(LS_VOLUME);
   } else {
     value_ = 0.75;
   }
@@ -49,14 +50,14 @@
 
 - (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches {
   for (int i = 0; i < numTouches; i++) {
-    CGPoint touchP = touches[i].location;
+    CGPoint touchP = touches[i]->getLocation();
     CGPoint thumbP = [self thumbPoint];
     double thumbWidth = thumbTexture_.contentSize.width;
     double thumbHeight = thumbTexture_.contentSize.height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
           touchP.x < thumbP.x + 2 * thumbWidth &&
           touchP.y < thumbP.y + 2 * thumbHeight) {
-      grabbedTouch_ = touches[i].identifier;
+      grabbedTouch_ = touches[i]->getIdentifier();
       lastTouchPosition_ = touchP;
       return;
     }
@@ -65,8 +66,8 @@
 
 - (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches {
   for (int i = 0; i < numTouches; i++) {
-    if (touches[i].identifier == grabbedTouch_) {
-      CGPoint touchP = touches[i].location;
+    if (touches[i]->getIdentifier() == grabbedTouch_) {
+      CGPoint touchP = touches[i]->getLocation();
       value_ += (touchP.x - lastTouchPosition_.x) / (269 - thumbTexture_.contentSize.width);
       lastTouchPosition_ = touchP;
       if (lastTouchPosition_.x < position_.x + 19) {
@@ -86,9 +87,9 @@
 
 - (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
   for (int i = 0; i < numTouches; i++) {
-    if (touches[i].identifier == grabbedTouch_) {
+    if (touches[i]->getIdentifier() == grabbedTouch_) {
       [SoundPlayer setGlobalVolume:value_];
-      [LocalStore setDouble:value_ forKey:LS_VOLUME];
+      LocalStore::setDouble(value_, LS_VOLUME);
       grabbedTouch_ = nil;
       return;
     }

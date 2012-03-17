@@ -16,7 +16,7 @@
   Texture2D* fullTexture_;
   Texture2D* thumbTexture_;
   double     value_;
-  UITouch*   grabbedTouch_;
+  void *grabbedTouch_;
   CGPoint    lastTouchPosition_;
 }
 

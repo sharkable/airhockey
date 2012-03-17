@@ -59,7 +59,7 @@
     paddle1_ = [[Paddle alloc] initWithPlayer:PLAYER_1
                                          size:paddleSize
                              playerControlled:YES
-                                      aiLevel:0];
+                                      aiLevel:caiBad];
     [self addEntity:paddle1_];
     [roundThings_ addObject:paddle1_];
 

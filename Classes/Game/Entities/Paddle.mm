@@ -251,7 +251,7 @@
 }
 
 - (BOOL) containsTouch:(Touch*)touch {
-  CGPoint p = touch.location;
+  CGPoint p = touch->getLocation();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return NO;
   }

@@ -6,15 +6,19 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef AirHockey_Touch_h
+#define AirHockey_Touch_h
 
-@interface Touch : NSObject {
- @private
+class Touch {
+ private:
   CGPoint location_;
-  UITouch *identifier_;
-}
+  void *identifier_;
 
-@property(nonatomic, assign) CGPoint location;
-@property(nonatomic, retain) UITouch *identifier;
+ public:
+  CGPoint getLocation() const { return location_; }
+  void setLocation(CGPoint location) { location_ = location; }
+  void *getIdentifier() const { return identifier_; }
+  void setIdentifier(void *identifier) { identifier_ = identifier; }
+};
 
-@end
+#endif

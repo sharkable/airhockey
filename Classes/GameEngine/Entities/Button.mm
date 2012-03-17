@@ -9,6 +9,7 @@
 #import "Button.h"
 #import "SoundPlayer.h"
 #import "ResourceLoader.h"
+#include "Touch.h"
 
 @implementation Button
 
@@ -56,7 +57,7 @@
 - (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
   if (state_ == BUTTON_STATE_NORMAL) {
     for (int i = 0; i < numTouches; i++) {
-      if ([self containsPoint:touches[i].location]) {
+      if ([self containsPoint:touches[i]->getLocation()]) {
         state_ = BUTTON_STATE_PRESSED;
         [SoundPlayer playSound:kSoundButton];
       }
@@ -68,7 +69,7 @@
   if (state_ == BUTTON_STATE_PRESSED) {
     state_ = BUTTON_STATE_NORMAL;
     for (int i = 0; i < numTouches; i++) {
-      if ([self containsPoint:touches[i].location]) {
+      if ([self containsPoint:touches[i]->getLocation()]) {
         [delegate_ performSelector:selector_];
       }
     }
