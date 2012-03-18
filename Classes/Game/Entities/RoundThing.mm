@@ -12,60 +12,51 @@
 #import "Paddle.h"
 #import "Puck.h"
 
-@implementation RoundThing
-
-@synthesize x=_x, y=_y, vx=vx_, vy=vy_, radius=radius_, mass=mass_, friction=friction_, active=active_;
-
-- (id) init {
-  [super init];
-  
+RoundThing::RoundThing() {
   active_ = YES;
-  
-  return self;
+  texture_ = nil;
 }
 
-- (void) dealloc {
+RoundThing::~RoundThing() {
   [[ResourceLoader instance] releaseResource:texture_];
-  
-  [super dealloc];
 }
 
-- (void) update {
-  if (!self.movable || !self.active) {
+void RoundThing::update() {
+  if (!isMovable() || !isActive()) {
     return;
   }
   
   if (!grabbed_) {
-    _x += vx_;
-    _y += vy_;
+    x_ += vx_;
+    y_ += vy_;
   } else {    
-    vx_ = vx_ * 0.75 + (_x - oldX_) * 0.25;
-    vy_ = vy_ * 0.75 + (_y - oldY_) * 0.25;
-    oldX_ = _x;
-    oldY_ = _y;
+    vx_ = vx_ * 0.75 + (x_ - oldX_) * 0.25;
+    vy_ = vy_ * 0.75 + (y_ - oldY_) * 0.25;
+    oldX_ = x_;
+    oldY_ = y_;
   }
 }
 
-- (void) applyFriction {
-  if (!self.grabbed) {
+void RoundThing::applyFriction() {
+  if (!isGrabbed()) {
     vx_ *= friction_;
     vy_ *= friction_;
   }
 }
 
-- (void) render {
+void RoundThing::render() {
   if (active_) {
-    [texture_ drawAtPoint:CGPointMake(_x - texture_.contentSize.width/2, _y - texture_.contentSize.height/2)];
+    [texture_ drawAtPoint:CGPointMake(x_ - texture_.contentSize.width/2, y_ - texture_.contentSize.height/2)];
   }
 }
 
-- (void) bounceOff:(RoundThing*)other {
+void RoundThing::bounceOff(RoundThing *other) {
   // TODO optimize this function.
   // For now I'm just getting it to work.
   
-  double dxFull = self.x - other.x;
-  double dyFull = self.y - other.y;
-  double radiusTotal = other.radius + self.radius;
+  double dxFull = x_ - other->getX();
+  double dyFull = y_ - other->getY();
+  double radiusTotal = other->getRadius() + radius_;
 //  double v = sqrt(self.vx * self.vx + self.vy * self.vy);
 //  double otherV = sqrt(other.vx * other.vx + other.vy * other.vy);
   
@@ -76,113 +67,113 @@
     double dy = dyFull / nL;
     
     // *** Move the round things outside of each other. ***
-    double vFraction = self.mass / (other.mass + self.mass);
+    double vFraction = mass_ / (other->getMass() + mass_);
     
-    if ((self.grabbed && !other.grabbed && other.movable) || !self.movable) {
+    if ((grabbed_ && !other->isGrabbed() && other->isMovable()) || !isMovable()) {
       vFraction = 1;
-    } else if ((!self.grabbed && other.grabbed) || !other.movable) {
+    } else if ((!grabbed_ && other->isGrabbed()) || !other->isMovable()) {
       vFraction = 0;
     }
     
     double diff = sqrt(radiusTotal*radiusTotal) - nL;
-    other.x -= dx * diff * vFraction;
-    other.y -= dy * diff * vFraction;
+    other->setX(other->getX() - dx * diff * vFraction);
+    other->setY(other->getY() - dy * diff * vFraction);
     vFraction = 1 - vFraction;
-    self.x += dx * diff * vFraction;
-    self.y += dy * diff * vFraction;
+    x_ += dx * diff * vFraction;
+    y_ += dy * diff * vFraction;
     
     // *** Now change the direction based on the bounce. ***
     
     // Based on this: http://stackoverflow.com/questions/573084/how-to-calculate-bounce-angle
     // But it had some problems.
     // Looked at Wikipedia dot product article to help.
-    double vDn = self.vx*dx + self.vy*dy;
+    double vDn = vx_ * dx + vy_ * dy;
     double ux = dx * vDn;
     double uy = dy * vDn;
-    double wx = self.vx - ux;
-    double wy = self.vy - uy;
+    double wx = vx_ - ux;
+    double wy = vy_ - uy;
     
-    double othervDn_ = other.vx*dx + other.vy*dy;
+    double othervDn_ = other->getVX() * dx + other->getVY() * dy;
     double otherux_ = dx * othervDn_;
     double otheruy_ = dy * othervDn_;
-    double otherwx_ = other.vx - otherux_;
-    double otherwy_ = other.vy - otheruy_;
+    double otherwx_ = other->getVX() - otherux_;
+    double otherwy_ = other->getVY() - otheruy_;
     
-    double newux_ = (ux * (self.mass - other.mass) + 2.0 * other.mass * otherux_) / (self.mass + other.mass);
-    double newuy_ = (uy * (self.mass - other.mass) + 2.0 * other.mass * otheruy_) / (self.mass + other.mass);  
+    double newux_ = (ux * (mass_ - other->getMass()) + 2.0 * other->getMass() * otherux_) / (mass_ + other->getMass());
+    double newuy_ = (uy * (mass_ - other->getMass()) + 2.0 * other->getMass() * otheruy_) / (mass_ + other->getMass());  
     
-    double newother_ux_ = (otherux_ * (other.mass - self.mass) + 2.0 * self.mass * ux) / (self.mass + other.mass);
-    double newother_uy_ = (otheruy_ * (other.mass - self.mass) + 2.0 * self.mass * uy) / (self.mass + other.mass);    
+    double newother_ux_ = (otherux_ * (other->getMass() - mass_) + 2.0 * mass_ * ux) / (mass_ + other->getMass());
+    double newother_uy_ = (otheruy_ * (other->getMass() - mass_) + 2.0 * mass_ * uy) / (mass_ + other->getMass());    
     
 //    if (!self.grabbed && !other.grabbed) {
 //      NSLog(@"\n");
 //      NSLog(@"Before total: %f", v * self.mass + otherV * other.mass);
 //    }
     
-    if (!self.grabbed && self.movable) {
-      self.vx = newux_ + wx;
-      self.vy = newuy_ + wy;
+    if (!isGrabbed() && isMovable()) {
+      vx_ = newux_ + wx;
+      vy_ = newuy_ + wy;
     }
     
-    if (!other.grabbed && other.movable) {
-      other.vx = newother_ux_ + otherwx_;
-      other.vy = newother_uy_ + otherwy_;
+    if (!other->isGrabbed() && other->isMovable()) {
+      other->setVX(newother_ux_ + otherwx_);
+      other->setVY(newother_uy_ + otherwy_);
     }
 
-    BOOL onePaddle = [self isKindOfClass:[Paddle class]] || [other isKindOfClass:[Paddle class]];
-    BOOL twoPucks  = [self isKindOfClass:[Puck class]] && [other isKindOfClass:[Puck class]];
-    BOOL onePuck   = !twoPucks && ([self isKindOfClass:[Puck class]] || [other isKindOfClass:[Puck class]]);
+    // TODO: haha, this is soooo terrible.
+//    BOOL onePaddle = [self isKindOfClass:[Paddle class]] || [other isKindOfClass:[Paddle class]];
+//    BOOL twoPucks = [self isKindOfClass:[Puck class]] && [other isKindOfClass:[Puck class]];
+//    BOOL onePuck = !twoPucks && ([self isKindOfClass:[Puck class]] || [other isKindOfClass:[Puck class]]);
+//    
+//    if (onePaddle && onePuck) {
+//      [SoundPlayer playSound:kSoundPaddleHit];
+//    } else if (onePuck) {
+//      // The puck hit a post.
+//      [SoundPlayer playSound:kSoundPuckRinkBounce];
+//    } else if (twoPucks) {
+//      [SoundPlayer playSound:kSoundTwoPuckHit];
+//    }
     
-    if (onePaddle && onePuck) {
-      [SoundPlayer playSound:kSoundPaddleHit];
-    } else if (onePuck) {
-      // The puck hit a post.
-      [SoundPlayer playSound:kSoundPuckRinkBounce];
-    } else if (twoPucks) {
-      [SoundPlayer playSound:kSoundTwoPuckHit];
-    }
-    
-    double newVSquared = self.vx * self.vx + self.vy * self.vy;
-    double newOtherVSquared = other.vx * other.vx + other.vy * other.vy;
+    double newVSquared = vx_ * vx_ + vy_ * vy_;
+    double newOtherVSquared = other->getVX() * other->getVX() + other->getVY() * other->getVY();
     
     if (newVSquared > (MAX_SPEED*MAX_SPEED)) {
       double newV = sqrt(newVSquared);
       double newRatio = MAX_SPEED / newV;
-      self.vx *= newRatio;
-      self.vy *= newRatio;
+      vx_ *= newRatio;
+      vy_ *= newRatio;
     }
     if (newOtherVSquared > (MAX_SPEED*MAX_SPEED)) {
       double newOtherV = sqrt(newOtherVSquared);
       double newRatio = MAX_SPEED / newOtherV;
-      other.vx *= newRatio;
-      other.vy *= newRatio;
+      other->setVX(other->getVX() * newRatio);
+      other->setVY(other->getVY() * newRatio);
     }    
   }  
 }
 
-
-- (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches {
-  if (!self.grabbable || !self.active || self.grabbed) {
+void RoundThing::touchesBegan(Touch *touches[], int numTouches) {
+  if (!isGrabbable() || !isActive() || isGrabbed()) {
     return;
   }
   for (int i = 0; i < numTouches; i++) {
-    if ([self containsTouch:touches[i]]) {
+    if (containsTouch(touches[i])) {
       grabbed_ = YES;
       grabbedTouch_ = touches[i]->getIdentifier();
-      [self touchesMoved:touches numTouches:numTouches];
+      touchesMoved(touches, numTouches);
       vx_ = 0;
       vy_ = 0;
       // Set oldX_ and oldY_ here so that the velocity stays around 0.
       // This is when you touch the outside of the RoundThing and it
       // snaps to center on your touch, it doesn't have a really high
       // initial velocity.
-      oldX_ = _x;
-      oldY_ = _y;      
+      oldX_ = x_;
+      oldY_ = y_;      
     }
   }
 }
 
-- (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches {
+void RoundThing::touchesMoved(Touch *touches[], int numTouches) {
   Touch* correctTouch = nil;
   for (int i = 0; i < numTouches; i++) {
     if (touches[i]->getIdentifier() == grabbedTouch_) {
@@ -192,12 +183,12 @@
   }
   if (grabbed_ && correctTouch != nil) {
     CGPoint p = correctTouch->getLocation();
-    _x = p.x;
-    _y = p.y;
+    x_ = p.x;
+    y_ = p.y;
   }
 }
 
-- (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
+void RoundThing::touchesEnded(Touch *touches[], int numTouches) {
   Touch* correctTouch = nil;
   for (int i = 0; i < numTouches; i++) {
     if (touches[i]->getIdentifier() == grabbedTouch_) {
@@ -211,34 +202,28 @@
   }
 }
 
-- (void) clearTouches {
+void RoundThing::clearTouches() {
   grabbed_ = NO;
   grabbedTouch_ = nil;
 }
 
-- (BOOL) grabbable {
-  return NO;
+bool RoundThing::isGrabbable() {
+  return false;
 }
 
-- (BOOL) grabbed {
-  return grabbed_;
-}
-
-- (BOOL) movable {
+bool RoundThing::isMovable() {
   return YES;
 }
    
-- (BOOL) containsTouch:(Touch*)touch {
-  double dx = touch->getLocation().x - _x;
-  double dy = touch->getLocation().y - _y;
-  return (dx*dx + dy*dy <= self.radius*self.radius);
+bool RoundThing::containsTouch(Touch *touch) {
+  double dx = touch->getLocation().x - x_;
+  double dy = touch->getLocation().y - y_;
+  return (dx*dx + dy*dy <= radius_*radius_);
 }
 
-- (BOOL) overlaps:(RoundThing*)thing {
-  double dx = thing.x - _x;
-  double dy = thing.y - _y;
-  double totalRadius = thing.radius + radius_;
+bool RoundThing::overlaps(RoundThing * thing) {
+  double dx = thing->getX() - x_;
+  double dy = thing->getY() - y_;
+  double totalRadius = thing->getRadius() + radius_;
   return (dx*dx + dy*dy <= totalRadius*totalRadius);
 }
-
-@end

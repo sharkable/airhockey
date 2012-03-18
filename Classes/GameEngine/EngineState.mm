@@ -9,83 +9,67 @@
 #import "EngineState.h"
 #import "GameEngine.h"
 
+#include <vector>
+using namespace std;
+
 @implementation EngineState {
  @private
-  NSMutableArray *entities_;  // <id<StateEntity>>
+  vector<StateEntity *> entities_;  // TODO can I do this in Objective-C?
+                                    // will it be initialized?
   GameEngine *gameEngine_;  // weak
 }
 
 @synthesize gameEngine = gameEngine_;
 
-- (id) init {
-  [super init];
-  
-  if (self) {
-    entities_ = [[NSMutableArray alloc] init];
-  }
-  
-  return self;
-}
-
-- (void) dealloc {
-  [entities_ release];
-  
-  [super dealloc];
-}
-
 - (void)stateIsShown {
 }
 
 - (void)update {
-  for (id<StateEntity> entity in entities_) {
-    [entity update];
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->update();
   }
 }
 
 - (void)render {
-  for (id<StateEntity> entity in entities_) {
-    [entity render];
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->render();
   }
 }
 
-- (void) addEntity:(id<StateEntity>)entity {
-  [entities_ addObject:entity];
+- (void)addEntity:(StateEntity *)entity {
+  entities_.push_back(entity);
 }
 
-- (void) removeEntity:(id<StateEntity>)entity {
-  [entities_ removeObject:entity];
-}
-
-- (void) touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
-  for (NSObject<StateEntity> *entity in entities_) {
-    if ([entity respondsToSelector:@selector(touchesBegan:numTouches:)]) {
-      [entity touchesBegan:touches numTouches:numTouches];
+- (void)removeEntity:(StateEntity *)entity {
+  for (vector<StateEntity *>::iterator i = entities_.begin();
+      i != entities_.end(); i++) {
+    if (*i == entity) {
+      entities_.erase(i);
     }
   }
 }
 
-- (void) touchesMoved:(Touch *[])touches numTouches:(int)numTouches {
-  for (NSObject<StateEntity> *entity in entities_) {
-    if ([entity respondsToSelector:@selector(touchesMoved:numTouches:)]) {
-      [entity touchesMoved:touches numTouches:numTouches];
-    }
+- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->touchesBegan(touches, numTouches);
   }
 }
 
-- (void) touchesEnded:(Touch *[])touches numTouches:(int)numTouches {
-  for (NSObject<StateEntity> *entity in entities_) {
-    if ([entity respondsToSelector:@selector(touchesEnded:numTouches:)]) {
-      [entity touchesEnded:touches numTouches:numTouches];
-    }
+- (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches {
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->touchesMoved(touches, numTouches);
+  }
+}
+
+- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches {
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->touchesEnded(touches, numTouches);
   }
 }
 
 - (void) clearTouches {
-  for (NSObject<StateEntity> *entity in entities_) {
-    if ([entity respondsToSelector:@selector(clearTouches)]) {
-      [entity clearTouches];
-    }
-  }
-}
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->clearTouches();
+}}
 
 @end

@@ -27,10 +27,8 @@
   
   if (self) {
     numPlayers_ = numPlayers;
-    roundThings_ = [[NSMutableArray alloc] init];
-    pucks_ = [[NSMutableArray alloc] init];
     
-    rink_ = [[Rink alloc] init];
+    rink_ = new Rink();
     [self addEntity:rink_];
     
     NSMutableArray *scoreTextures = [NSMutableArray arrayWithCapacity:WIN_SCORE + 1];
@@ -39,92 +37,77 @@
                             getTextureWithName:[NSString stringWithFormat:@"%d_points", i]];
       [scoreTextures addObject:texture];
     }
-    player1Score_ = [[SimpleItem alloc] initWithTextures:scoreTextures
-                                                position:CGPointMake(662, 526)];
-    player2Score_ = [[SimpleItem alloc] initWithTextures:scoreTextures
-                                                position:CGPointMake(662, 386)];
+    player1Score_ = new SimpleItem(scoreTextures, CGPointMake(662, 526));
+    player2Score_ = new SimpleItem(scoreTextures, CGPointMake(662, 386));
     [self addEntity:player1Score_];
     [self addEntity:player2Score_];
     
     numPucks_ = numPucks;
     numActivePucks_ = numPucks_;
     for (int i = 0; i < numPucks_; i++) {
-      Puck* puck = [[[Puck alloc] init] autorelease];
+      Puck* puck = new Puck();
       
       [self addEntity:puck];
-      [pucks_ addObject:puck];
-      [roundThings_ addObject:puck];
+      pucks_.push_back(puck);
+      roundThings_.push_back(puck);
     }
     
-    paddle1_ = [[Paddle alloc] initWithPlayer:PLAYER_1
-                                         size:paddleSize
-                             playerControlled:YES
-                                      aiLevel:caiBad];
+    paddle1_ = new Paddle(PLAYER_1, paddleSize, true, caiBad);
     [self addEntity:paddle1_];
-    [roundThings_ addObject:paddle1_];
+    roundThings_.push_back(paddle1_);
 
-    paddle2_ = [[Paddle alloc] initWithPlayer:PLAYER_2
-                                         size:paddleSize
-                             playerControlled:numPlayers == 2
-                                      aiLevel:difficulty];
+    paddle2_ = new Paddle(PLAYER_2, paddleSize, numPlayers == 2, difficulty);
     [self addEntity:paddle2_];
-    [roundThings_ addObject:paddle2_];
+    roundThings_.push_back(paddle2_);
     
-    paddle1_.pucks = pucks_;
-    paddle1_.otherPaddle = paddle2_;
-    paddle2_.pucks = pucks_;
-    paddle2_.otherPaddle = paddle1_;
+    paddle1_->setPucks(pucks_);
+    paddle1_->setOtherPaddle(paddle2_);
+    paddle2_->setPucks(pucks_);
+    paddle2_->setOtherPaddle(paddle1_);
     
-    Post *post1 = [[[Post alloc] initWithX:GOAL_LEFT_X y:RINK_TOP_Y] autorelease];
+    Post *post1 = new Post(GOAL_LEFT_X, RINK_TOP_Y);
     [self addEntity:post1];
-    [roundThings_ addObject:post1];
+    roundThings_.push_back(post1);
 
-    Post *post2 = [[[Post alloc] initWithX:GOAL_LEFT_X y:RINK_BOTTOM_Y + 1] autorelease];
+    Post *post2 = new Post(GOAL_LEFT_X, RINK_BOTTOM_Y + 1);
     [self addEntity:post2];
-    [roundThings_ addObject:post2];
+    roundThings_.push_back(post2);
 
-    Post *post3 = [[[Post alloc] initWithX:GOAL_RIGHT_X + 1 y:RINK_TOP_Y] autorelease];
+    Post *post3 = new Post(GOAL_RIGHT_X + 1, RINK_TOP_Y);
     [self addEntity:post3];
-    [roundThings_ addObject:post3];
+    roundThings_.push_back(post3);
     
-    Post *post4 = [[[Post alloc] initWithX:GOAL_RIGHT_X + 1 y:RINK_BOTTOM_Y + 1] autorelease];
+    Post *post4 = new Post(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1);
     [self addEntity:post4];
-    [roundThings_ addObject:post4];
+    roundThings_.push_back(post4);
     
     // Add rink left and right pieces.
     Texture2D *leftRinkBorderTexture = [[ResourceLoader instance] getTextureWithName:@"rink_left"];
-    SimpleItem *leftRinkBorder = [[[SimpleItem alloc] initWithTexture:leftRinkBorderTexture
-                                                             position:CGPointMake(0, 0)]
-                                  autorelease];
+    SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, CGPointMake(0, 0));
     [self addEntity:leftRinkBorder];
     Texture2D *rightRinkBorderTexture =
         [[ResourceLoader instance] getTextureWithName:@"rink_right"];
     CGPoint leftRinkBorderPos = CGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize.width,
                                             0);
-    SimpleItem *rightRinkBorder = [[[SimpleItem alloc] initWithTexture:rightRinkBorderTexture
-                                   position:leftRinkBorderPos] autorelease];
+    SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
     [self addEntity:rightRinkBorder];
     
     Texture2D *winTexture = [[ResourceLoader instance] getTextureWithName:@"win"];
-    win_ = [[SimpleItem alloc] initWithTexture:winTexture
-                                      position:CGPointMake(0, 0)];
+    win_ = new SimpleItem(winTexture, CGPointMake(0, 0));
 
     Texture2D *loseTexture = [[ResourceLoader instance] getTextureWithName:@"lose"];
-    lose_ = [[SimpleItem alloc] initWithTexture:loseTexture
-                                       position:CGPointMake(0, 0)];
+    lose_ = new SimpleItem(loseTexture, CGPointMake(0, 0));
 
     Texture2D *getReadyTexture = [[ResourceLoader instance] getTextureWithName:@"get_ready"];
     CGPoint getReadyPosition =
         CGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize.width) / 2, 
                     (SCREEN_HEIGHT - getReadyTexture.contentSize.height) / 2);
-    getReady_ = [[SimpleItem alloc] initWithTexture:getReadyTexture
-                                           position:getReadyPosition];
+    getReady_ = new SimpleItem(getReadyTexture, getReadyPosition);
 
     Texture2D *goTexture = [[ResourceLoader instance] getTextureWithName:@"go"];
     CGPoint goPosition = CGPointMake((SCREEN_WIDTH - goTexture.contentSize.width) / 2, 
                                      (SCREEN_HEIGHT - goTexture.contentSize.height) / 2);
-    go_ = [[SimpleItem alloc] initWithTexture:goTexture
-                                     position:goPosition];
+    go_ = new SimpleItem(goTexture, goPosition);
     
     Texture2D *rematchButtonTexture =
         [[ResourceLoader instance] getTextureWithName:@"rematch_button"];
@@ -132,22 +115,18 @@
         [[ResourceLoader instance] getTextureWithName:@"rematch_button_pressed"];
     CGPoint rematchButtonPos =
         CGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize.width) / 2, 441);
-    rematchButton_ = [[Button alloc] initWithNormalTexture:rematchButtonTexture
-                                            pressedTexture:rematchButtonPressedTexture
-                                                  position:rematchButtonPos];
-    rematchButton_.delegate = self;
-    rematchButton_.selector = @selector(rematchPressed);
+    rematchButton_ = new Button(rematchButtonTexture, rematchButtonPressedTexture, rematchButtonPos);
+    rematchButton_->setDelegate(self);
+    rematchButton_->setSelector(@selector(rematchPressed));
 
     Texture2D *menuButtonTexture = [[ResourceLoader instance] getTextureWithName:@"menu_button"];
     Texture2D *menuButtonPressedTexture =
         [[ResourceLoader instance] getTextureWithName:@"menu_button_pressed"];
     CGPoint menuButtonPos = CGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize.width) / 2,
                                         546);
-    menuButton_ = [[Button alloc] initWithNormalTexture:menuButtonTexture
-                                         pressedTexture:menuButtonPressedTexture
-                                               position:menuButtonPos];
-    menuButton_.delegate = self;
-    menuButton_.selector = @selector(menuPressed);
+    menuButton_ = new Button(menuButtonTexture, menuButtonPressedTexture, menuButtonPos);
+    menuButton_->setDelegate(self);
+    menuButton_->setSelector(@selector(menuPressed));
 
     Texture2D *continueButtonTexture =
         [[ResourceLoader instance] getTextureWithName:@"continue_button"];
@@ -155,20 +134,17 @@
         [[ResourceLoader instance] getTextureWithName:@"continue_button_pressed"];
     CGPoint continueButtonPos =
         CGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize.width) / 2, 441);
-    continueButton_ = [[Button alloc] initWithNormalTexture:continueButtonTexture
-                                             pressedTexture:continueButtonPressedTexture
-                                                   position:continueButtonPos];
-    continueButton_.delegate = self;
-    continueButton_.selector = @selector(continuePressed);
+    continueButton_ = new Button(continueButtonTexture, continueButtonPressedTexture, continueButtonPos);
+    continueButton_->setDelegate(self);
+    continueButton_->setSelector(@selector(continuePressed));
     
-    soundSlider_ = [[SoundSlider alloc] initWithPosition:CGPointMake(331, 336)];
+    soundSlider_ = new SoundSlider(CGPointMake(331, 336));
     
     Texture2D *menuBackgroundTexture =
         [[ResourceLoader instance] getTextureWithName:@"game_menu_bg"];
     CGPoint menuBackgroundPosition =
         CGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize.width) / 2, 306);
-    menuBackground_ = [[SimpleItem alloc] initWithTexture:menuBackgroundTexture
-                                                 position:menuBackgroundPosition];
+    menuBackground_ = new SimpleItem(menuBackgroundTexture, menuBackgroundPosition);
     
     Texture2D *pauseButtonTexture = [[ResourceLoader instance] getTextureWithName:@"pause_button"];
     Texture2D *pauseButtonPressedTexture =
@@ -178,12 +154,10 @@
     
     if (!isIPhone) {
       CGPoint pauseButtonPos1 = CGPointMake(0, 0);
-      pauseButton1_ = [[Button alloc] initWithNormalTexture:pauseButtonTexture
-                                             pressedTexture:pauseButtonPressedTexture
-                                                   position:pauseButtonPos1];
+      pauseButton1_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos1);
 
-      pauseButton1_.delegate = self;
-      pauseButton1_.selector = @selector(pausePressed);
+      pauseButton1_->setDelegate(self);
+      pauseButton1_->setSelector(@selector(pausePressed));
       [self addEntity:pauseButton1_];    
     }
     
@@ -191,11 +165,9 @@
         CGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize.width,
                     SCREEN_HEIGHT - pauseButtonTexture.contentSize.height +
                         (NO ? (27 * 768.0/320.0) : 0));
-    pauseButton2_ = [[Button alloc] initWithNormalTexture:pauseButtonTexture
-                                           pressedTexture:pauseButtonPressedTexture
-                                                 position:pauseButtonPos2];
-    pauseButton2_.delegate = self;
-    pauseButton2_.selector = @selector(pausePressed);
+    pauseButton2_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos2);
+    pauseButton2_->setDelegate(self);
+    pauseButton2_->setSelector(@selector(pausePressed));
     [self addEntity:pauseButton2_];
       
     if (isIPhone) {
@@ -260,24 +232,6 @@
 }
 
 - (void)dealloc {
-  [rink_ release];
-  [paddle1_ release];
-  [paddle2_ release];
-  [pucks_ release];
-  [roundThings_ release];
-  [player1Score_ release];
-  [player2Score_ release];
-  [win_ release];
-  [lose_ release];
-  [getReady_ release];
-  [go_ release];
-  [rematchButton_ release];
-  [menuButton_ release];
-  [soundSlider_  release];
-  [menuBackground_ release];
-  [continueButton_ release];
-  [pauseButton1_ release];
-  [pauseButton2_ release];
   [player1Wins_ release];
   [player2Wins_ release];
   
@@ -312,54 +266,54 @@
     }
   }
   
-  [paddle1_ keepInPlayerBounds];
-  [paddle2_ keepInPlayerBounds];
+  paddle1_->keepInPlayerBounds();
+  paddle2_->keepInPlayerBounds();
   
-  for (int i = 0; i < roundThings_.count; i++) {
-    RoundThing *thing = [roundThings_ objectAtIndex:i];
-    if (!thing.active) {
+  for (int i = 0; i < roundThings_.size(); i++) {
+    RoundThing *thing = roundThings_[i];
+    if (!thing->isActive()) {
       continue;
     }
-    [rink_ bounceOff:thing];
-    for (int j = i + 1; j < roundThings_.count; j++) {
-      RoundThing *otherThing = [roundThings_ objectAtIndex:j];;
-      if (otherThing.active) {
-        [thing bounceOff:otherThing];
+    rink_->bounceOff(thing);
+    for (int j = i + 1; j < roundThings_.size(); j++) {
+      RoundThing *otherThing = roundThings_[j];
+      if (otherThing->isActive()) {
+        thing->bounceOff(otherThing);
       }
     }
     
-    [thing applyFriction];
+    thing->applyFriction();
     
     // TODO If you grab item A and push item B into a corner,
     // it only behaves if item A was added to roundsThings_
     // after item B. This is OK for Air Hockey, but should be fixed
     // for other games.
-    [rink_ moveInFromEdge:thing];
+    rink_->moveInFromEdge(thing);
   }
 
-  for (int i = 0; i < pucks_.count; i++) {
-    Puck *puck = [pucks_ objectAtIndex:i];
-    if (!puck.active) {
+  for (int i = 0; i < pucks_.size(); i++) {
+    Puck *puck = pucks_[i];
+    if (!puck->isActive()) {
       continue;
     }
-    if (puck.y < -puck.radius) {
-      puck.active = NO;
-      if (player1Score_.texture < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
-        player1Score_.texture++;
+    if (puck->getY() < -puck->getRadius()) {
+      puck->setIsActive(false);
+      if (player1Score_->getTexture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+        player1Score_->setTexture(player1Score_->getTexture() + 1);
       }
-      if (player1Score_.texture == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player1Score_->getTexture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
         [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         [SoundPlayer playSound:kSoundScore];
       }
       numPlayer1ScoresLastRound_++;
       numActivePucks_--;
-    } else if (puck.y > SCREEN_HEIGHT + puck.radius) {
-      puck.active = NO;
-      if (player2Score_.texture < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
-        player2Score_.texture++;
+    } else if (puck->getY() > SCREEN_HEIGHT + puck->getRadius()) {
+      puck->setIsActive(false);
+      if (player2Score_->getTexture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+        player2Score_->setTexture(player2Score_->getTexture() + 1);
       }
-      if (player2Score_.texture == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player2Score_->getTexture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
         [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         [SoundPlayer playSound:kSoundScore];
@@ -371,9 +325,9 @@
   
   switch (state_) {
     case PLAY_STATE_PLAYING: {      
-      if (player1Score_.texture == WIN_SCORE) {
+      if (player1Score_->getTexture() == WIN_SCORE) {
         [self finishGameWithWinner:PLAYER_1];
-      } else if (player2Score_.texture == WIN_SCORE) {
+      } else if (player2Score_->getTexture() == WIN_SCORE) {
         [self finishGameWithWinner:PLAYER_2];
       } else if (numActivePucks_ == 0) {
         waitTicksLeft_ = WAIT_TICKS;
@@ -384,14 +338,14 @@
     case PLAY_STATE_WAITING_FOR_PUCKS: {
       if (waitTicksLeft_-- == 0) {
         for (int i = 0; i < numPucks_; i++) {
-          Puck *puck = [pucks_ objectAtIndex:i];
-          puck.active = YES;
-          [puck placeForPlayer:(i < numPlayer1ScoresLastRound_ ? PLAYER_2 : PLAYER_1)
-                   roundThings:roundThings_
-                        center:(i < numPlayer1ScoresLastRound_ ?
-                                (numPlayer1ScoresLastRound_ % 2 == 1) :
-                                ((numPucks_ - numPlayer1ScoresLastRound_) % 2 == 1))];
-          [puck fadeIn];
+          Puck *puck = pucks_[i];
+          puck->setIsActive(true);
+          puck->placeForPlayer(i < numPlayer1ScoresLastRound_ ? PLAYER_2 : PLAYER_1,
+                               roundThings_,
+                                (i < numPlayer1ScoresLastRound_ ?
+                                    (numPlayer1ScoresLastRound_ % 2 == 1) :
+                                    ((numPucks_ - numPlayer1ScoresLastRound_) % 2 == 1)));
+          puck->fadeIn();
         }
         numActivePucks_ = numPucks_;
         numPlayer1ScoresLastRound_ = 0;
@@ -411,30 +365,30 @@
   }
 
   // Place paddles!
-  [paddle1_ setInitialPositionForPlayer:PLAYER_1];
-  [paddle2_ setInitialPositionForPlayer:PLAYER_2];
+  paddle1_->setInitialPositionForPlayer(PLAYER_1);
+  paddle2_->setInitialPositionForPlayer(PLAYER_2);
   
   // Place pucks!
   // First move them all out of the way. That way we can lay them out properly.
   // ([Puck placeForPlayer] avoids hitting other RoundThings objects.)
   for (int i = 0; i < numPucks_; i++) {
-    Puck *puck = [pucks_ objectAtIndex:i];
-    puck.x = 0;
-    puck.y = 0;
+    Puck *puck = pucks_[i];
+    puck->setX(0);
+    puck->setY(0);
   }
   for (int i = 0; i < numPucks_; i++) {
-    Puck *puck = [pucks_ objectAtIndex:i];
-    puck.active = YES;
+    Puck *puck = pucks_[i];
+    puck->setIsActive(true);
     int playerId = (i % 2 == 0) ? giveExtraPuckToPlayer_ : 1 - giveExtraPuckToPlayer_;
     BOOL center = !((playerId == giveExtraPuckToPlayer_ &&
                       (numPucks_ == 3 || numPucks_ == 4 || numPucks_ == 7)) ||
                       (playerId == 1 - giveExtraPuckToPlayer_ &&
                       (numPucks_ == 4 || numPucks_ == 5)));
-    [puck placeForPlayer:playerId roundThings:roundThings_ center:center];
+    puck->placeForPlayer(playerId, roundThings_, center);
   }
   
-  player1Score_.texture = 0;
-  player2Score_.texture = 0;
+  player1Score_->setTexture(0);
+  player2Score_->setTexture(0);
   [self removeEntity:menuBackground_];
   [self removeEntity:soundSlider_];
   [self removeEntity:rematchButton_];
@@ -452,21 +406,21 @@
 - (void)finishGameWithWinner:(int)playerId {
   state_ = PLAY_STATE_FINISHED;
   
-  double loseX = (SCREEN_WIDTH - lose_.size.width)/2;
-  double winX =  (SCREEN_WIDTH - win_.size.width)/2;
+  double loseX = (SCREEN_WIDTH - lose_->getSize().width)/2;
+  double winX =  (SCREEN_WIDTH - win_->getSize().width)/2;
   double topY = 70;
-  double bottomY = SCREEN_HEIGHT - topY - lose_.size.height;
+  double bottomY = SCREEN_HEIGHT - topY - lose_->getSize().height;
   switch (playerId) {
     case PLAYER_1: {
       player1WinCount_++;
 
-      win_.position = CGPointMake(winX, bottomY);
-      win_.angle = 0;
+      win_->setPosition(CGPointMake(winX, bottomY));
+      win_->setAngle(0);
       [self addEntity:win_];
       
       if (numPlayers_ == 2) {
-        lose_.position = CGPointMake(loseX, topY);
-        lose_.angle = 180;
+        lose_->setPosition(CGPointMake(loseX, topY));
+        lose_->setAngle(180);
         [self addEntity:lose_];
       }
       
@@ -478,13 +432,13 @@
       player2WinCount_++;
       
       if (numPlayers_ == 2) {
-        win_.position = CGPointMake(winX, topY);
-        win_.angle = 180;      
+        win_->setPosition(CGPointMake(winX, topY));
+        win_->setAngle(180);
         [self addEntity:win_];
       }
       
-      lose_.position = CGPointMake(loseX, bottomY);
-      lose_.angle = 0;
+      lose_->setPosition(CGPointMake(loseX, bottomY));
+      lose_->setAngle(0);
       [self addEntity:lose_];
       
       giveExtraPuckToPlayer_ = PLAYER_1;
@@ -564,12 +518,12 @@
 - (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    [menuButton_ touchesBegan:touches numTouches:numTouches];
-    [continueButton_ touchesBegan:touches numTouches:numTouches];
-    [soundSlider_ touchesBegan:touches numTouches:numTouches];
+    menuButton_->touchesBegan(touches, numTouches);
+    continueButton_->touchesBegan(touches, numTouches);
+    soundSlider_->touchesBegan(touches, numTouches);
   } else if (state_ == PLAY_STATE_GET_READY) {
-    [pauseButton1_ touchesBegan:touches numTouches:numTouches];
-    [pauseButton2_ touchesBegan:touches numTouches:numTouches];
+    pauseButton1_->touchesBegan(touches, numTouches);
+    pauseButton2_->touchesBegan(touches, numTouches);
   } else {
     [super touchesBegan:touches numTouches:numTouches];
   }
@@ -578,7 +532,7 @@
 - (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    [soundSlider_ touchesMoved:touches numTouches:numTouches];
+    soundSlider_->touchesMoved(touches, numTouches);
   } else if (state_ == PLAY_STATE_GET_READY) {
   } else {
     [super touchesMoved:touches numTouches:numTouches];
@@ -588,12 +542,12 @@
 - (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    [menuButton_ touchesEnded:touches numTouches:numTouches];
-    [continueButton_ touchesEnded:touches numTouches:numTouches];    
-    [soundSlider_ touchesEnded:touches numTouches:numTouches];
+    menuButton_->touchesEnded(touches, numTouches);
+    continueButton_->touchesEnded(touches, numTouches);
+    soundSlider_->touchesEnded(touches, numTouches);
   } else if (state_ == PLAY_STATE_GET_READY) {
-    [pauseButton1_ touchesEnded:touches numTouches:numTouches];
-    [pauseButton2_ touchesEnded:touches numTouches:numTouches];    
+    pauseButton1_->touchesEnded(touches, numTouches);
+    pauseButton2_->touchesEnded(touches, numTouches);    
   } else {
     [super touchesEnded:touches numTouches:numTouches];
   }

@@ -822,11 +822,11 @@
 		D4B1F4DC1515291500620EF2 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				D4B1F4E11515291500620EF2 /* Entities */,
 				D4B1F4DD1515291500620EF2 /* AdEngine.h */,
 				D4B1F4DE1515291500620EF2 /* AdEngine.mm */,
 				D4B1F4DF1515291500620EF2 /* EngineState.h */,
 				D4B1F4E01515291500620EF2 /* EngineState.mm */,
-				D4B1F4E11515291500620EF2 /* Entities */,
 				D4B1F4E81515291500620EF2 /* GameEngine.h */,
 				D4B1F4E91515291500620EF2 /* GameEngine.mm */,
 				D4B1F4EA1515291500620EF2 /* GameTimer.h */,

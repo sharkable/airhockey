@@ -16,6 +16,9 @@
 #import "SoundSlider.h"
 #import "const.h"
 
+#include <vector>
+using namespace std;
+
 #define PLAY_STATE_GET_READY 0
 #define PLAY_STATE_PLAYING 1
 #define PLAY_STATE_WAITING_FOR_PUCKS 2
@@ -31,8 +34,8 @@
   Rink *rink_;
   Paddle *paddle1_;
   Paddle *paddle2_;
-  NSMutableArray *pucks_;
-  NSMutableArray *roundThings_;
+  vector<Puck *> pucks_;
+  vector<RoundThing *> roundThings_;
   SimpleItem *player1Score_;
   SimpleItem *player2Score_;
   SimpleItem *win_;

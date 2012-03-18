@@ -6,13 +6,16 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
+#ifndef AirHockey_Post_h
+#define AirHockey_Post_h
+
 #import <Foundation/Foundation.h>
 #import "RoundThing.h"
 
-@interface Post : RoundThing {
+class Post : public RoundThing {
+ public:
+  Post(double x, double y);
+  virtual bool isMovable();
+};
 
-}
-
-- (id) initWithX:(double)x y:(double)y;
-
-@end
+#endif

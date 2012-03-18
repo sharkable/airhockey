@@ -11,24 +11,19 @@
 #import "ResourceLoader.h"
 #include "Touch.h"
 
-@implementation MultiSelect
-
-@synthesize selectedValue = selectedValue_;
-
-- (id)init {
-  [super init];
-  
-  if (self) {
-    normalTextures_ = [[NSMutableArray alloc] init];
-    selectedTextures_ = [[NSMutableArray alloc] init];
-    positionsX_ = [[NSMutableArray alloc] init];
-    positionsY_ = [[NSMutableArray alloc] init];
-  }
-  
-  return self;
+MultiSelect::MultiSelect() {
+  normalTextures_ = [[NSMutableArray alloc] init];
+  selectedTextures_ = [[NSMutableArray alloc] init];
+  positionsX_ = [[NSMutableArray alloc] init];
+  positionsY_ = [[NSMutableArray alloc] init];
 }
 
-- (void)dealloc {
+MultiSelect::MultiSelect(Texture2D *normalTexture, Texture2D *selectedTexture,
+              CGPoint position) {
+  MultiSelect();
+}
+
+MultiSelect::~MultiSelect() {
   for (Texture2D *texture in normalTextures_) {
     [[ResourceLoader instance] releaseResource:texture];
   }
@@ -40,14 +35,12 @@
   [selectedTextures_ release];
   [positionsX_ release];
   [positionsY_ release];
-  
-  [super dealloc];
 }
 
-- (void)update {
+void MultiSelect::update() {
 }
 
-- (void)render {
+void MultiSelect::render() {
   for (int i = 0; i < normalTextures_.count; i++) {
     CGPoint p = CGPointMake([[positionsX_ objectAtIndex:i] doubleValue], 
                             [[positionsY_ objectAtIndex:i] doubleValue]);
@@ -59,16 +52,15 @@
   }
 }
 
-- (void)addValueWithNormalTexture:(Texture2D *)normalTexture
-                  selectedTexture:(Texture2D *)selectedTexture
-                         position:(CGPoint)position {
+void MultiSelect::add(Texture2D *normalTexture, Texture2D *selectedTexture,
+                      CGPoint position) {
   [normalTextures_ addObject:normalTexture];
   [selectedTextures_ addObject:selectedTexture];
   [positionsX_ addObject:[NSNumber numberWithDouble:position.x]];
   [positionsY_ addObject:[NSNumber numberWithDouble:position.y]];
 }
 
-- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
+void MultiSelect::touchesBegan(Touch *touches[], int numTouches) {
   for (int i = 0; i < normalTextures_.count; i++) {
     double x = [[positionsX_ objectAtIndex:i] doubleValue];
     double y = [[positionsY_ objectAtIndex:i] doubleValue];
@@ -86,5 +78,3 @@
     }
   }
 }
-
-@end

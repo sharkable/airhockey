@@ -9,24 +9,15 @@
 #import "Post.h"
 #import "Rink.h"
 
-@implementation Post
+Post::Post(double x, double y) {
+// TODO  super();
 
-- (id) initWithX:(double)x y:(double)y {
-  [super init];
-
-  _x = x;
-  _y = y;
-  radius_ = 1;
-  mass_ = 99999999999.99;
-  
-  return self;
+  setX(x);
+  setY(y);
+  setRadius(1);
+  setMass(99999999999.99);  
 }
 
-- (void) render {
-}
-
-- (BOOL) movable {
+bool Post::isMovable() {
   return NO;
 }
-
-@end

@@ -6,15 +6,18 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef AirHockey_RoundThing_h
+#define AirHockey_RoundThing_h
+
 #import "StateEntity.h"
 #import "Texture2D.h"
 #import "ResourceLoader.h"
 
-@interface RoundThing : NSObject <StateEntity> {
+class RoundThing : public StateEntity {
+ protected:
   Texture2D* texture_;
-  double   _x;
-  double   _y;
+  double   x_;
+  double   y_;
   double   oldX_;
   double   oldY_;
   double   vx_;
@@ -25,23 +28,40 @@
   BOOL     grabbed_;
   void *grabbedTouch_;
   BOOL     active_;
-}
 
-- (void) applyFriction;
-- (void) bounceOff:(RoundThing*)other;
-- (BOOL) containsTouch:(Touch*)touch;
-- (BOOL) overlaps:(RoundThing*)thing;
+ public:
+  RoundThing();
+  ~RoundThing();
+  void update();
+  void render();
+  void touchesBegan(Touch *touches[], int numTouches);
+  void touchesMoved(Touch *touches[], int numTouches);
+  void touchesEnded(Touch *touches[], int numTouches);
+  void clearTouches();
+  
+  void applyFriction();
+  void bounceOff(RoundThing *other);
+  bool containsTouch(Touch *touch);
+  bool overlaps(RoundThing *thing);
 
-@property (assign)   double x;
-@property (assign)   double y;
-@property (assign)   double vx;
-@property (assign)   double vy;
-@property (readonly) double radius;
-@property (readonly) double mass;
-@property (readonly) double friction;
-@property (readonly) BOOL   grabbable;
-@property (readonly) BOOL   grabbed;
-@property (readonly) BOOL   movable;
-@property (assign)   BOOL   active;
+  double getX() { return x_; }
+  void setX(double x) { x_ = x; }
+  double getY() { return y_; }
+  void setY(double y) { y_ = y; }
+  double getVX() { return vx_; }
+  void setVX(double vx) { vx_ = vx; }
+  double getVY() { return vy_; }
+  void setVY(double vy) { vy_ = vy; }
+  double getRadius() { return radius_; }
+  void setRadius(double radius) { radius_ = radius; }
+  double getMass() { return mass_; }
+  void setMass(double mass) { mass_ = mass; }
+  double getFriction() { return friction_; }
+  virtual bool isGrabbable();
+  bool isGrabbed() { return grabbed_; }
+  virtual bool isMovable();
+  bool isActive() { return active_; }
+  void setIsActive(bool active) { active_ = active; }
+};
 
-@end
+#endif

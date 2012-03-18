@@ -28,35 +28,28 @@
     BOOL isIPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
     
     Texture2D *backgroundTexture = [[ResourceLoader instance] getTextureWithName:@"rink_bg"];
-    SimpleItem *background = [[[SimpleItem alloc] initWithTexture:backgroundTexture
-                                                         position:CGPointMake(0, 0)] autorelease];
+    SimpleItem *background = new SimpleItem(backgroundTexture, CGPointMake(0, 0));
     [self addEntity:background];
 
     // Add rink left and right pieces.
     Texture2D *leftRinkBorderTexture = [[ResourceLoader instance] getTextureWithName:@"rink_left"];
-    SimpleItem *leftRinkBorder = [[[SimpleItem alloc] initWithTexture:leftRinkBorderTexture
-                                                             position:CGPointMake(0, 0)]
-                                  autorelease];
+    SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, CGPointMake(0, 0));
     [self addEntity:leftRinkBorder];
     Texture2D* rightRinkBorderTexture =
         [[ResourceLoader instance] getTextureWithName:@"rink_right"];
     CGPoint leftRinkBorderPos = CGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize.width,
                                             0);
-    SimpleItem *rightRinkBorder = [[[SimpleItem alloc] initWithTexture:rightRinkBorderTexture
-                                                              position:leftRinkBorderPos]
-                                   autorelease];
+    SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
     [self addEntity:rightRinkBorder];
 
     Texture2D *titleTexture = [[ResourceLoader instance] getTextureWithName:@"title"];
-    SimpleItem *title = [[[SimpleItem alloc] initWithTexture:titleTexture
-                                                    position:CGPointMake(81, 53)] autorelease];
+    SimpleItem *title = new SimpleItem(titleTexture, CGPointMake(81, 53));
     [self addEntity:title];  
     
-    Texture2D* mainMenuTexture = [[ResourceLoader instance] getTextureWithName:@"main_menu"];
+    Texture2D *mainMenuTexture = [[ResourceLoader instance] getTextureWithName:@"main_menu"];
     CGPoint mainMenuPosition = CGPointMake((SCREEN_WIDTH - mainMenuTexture.contentSize.width) / 2,
                                            339);
-    SimpleItem* mainMenu = [[[SimpleItem alloc] initWithTexture:mainMenuTexture
-                                                       position:mainMenuPosition] autorelease];
+    SimpleItem *mainMenu = new SimpleItem(mainMenuTexture, mainMenuPosition);
     [self addEntity:mainMenu];  
     
     Texture2D* startButtonImage = [[ResourceLoader instance] getTextureWithName:@"start_button"];
@@ -64,32 +57,28 @@
         [[ResourceLoader instance] getTextureWithName:@"start_button_pressed"];
     CGPoint startButtonPosition =
         CGPointMake((SCREEN_WIDTH - startButtonImage.contentSize.width) / 2, 392);
-    startButton_ = [[Button alloc] initWithNormalTexture:startButtonImage
-                        pressedTexture:startButtonPressedImage
-                          position:startButtonPosition];
-    startButton_.delegate = self;
-    startButton_.selector = @selector(pressedStart);
+    startButton_ = new Button(startButtonImage, startButtonPressedImage, startButtonPosition);
+    startButton_->setDelegate(self);
+    startButton_->setSelector(@selector(pressedStart));
     [self addEntity:startButton_];
     
     Texture2D *feedbackButtonImage =
         [[ResourceLoader instance] getTextureWithName:@"feedback_button"];
     Texture2D *feedbackButtonPressedImage =
         [[ResourceLoader instance] getTextureWithName:@"feedback_button_pressed"];
-    feedbackButton_ = [[Button alloc] initWithNormalTexture:feedbackButtonImage
-                         pressedTexture:feedbackButtonPressedImage
-                             position: isIPhone ? CGPointMake(440, 926) : CGPointMake(486, 936)];
-    feedbackButton_.delegate = self;
-    feedbackButton_.selector = @selector(pressedFeedback);
+    feedbackButton_ = new Button(feedbackButtonImage, feedbackButtonPressedImage,
+                                 isIPhone ? CGPointMake(440, 926) : CGPointMake(486, 936));
+    feedbackButton_->setDelegate(self);
+    feedbackButton_->setSelector(@selector(pressedFeedback));
     [self addEntity:feedbackButton_];  
 
     Texture2D *storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story_button"];
     Texture2D *storyButtonPressedImage =
         [[ResourceLoader instance] getTextureWithName:@"story_button_pressed"];
-    storyButton_ = [[Button alloc] initWithNormalTexture:storyButtonImage
-                        pressedTexture:storyButtonPressedImage
-                            position: isIPhone ? CGPointMake(86, 926) : CGPointMake(91, 936)];
-    storyButton_.delegate = self;
-    storyButton_.selector = @selector(pressedStory);
+    storyButton_ = new Button(storyButtonImage, storyButtonPressedImage,
+                              isIPhone ? CGPointMake(86, 926) : CGPointMake(91, 936));
+    storyButton_->setDelegate(self);
+    storyButton_->setSelector(@selector(pressedStory));
     [self addEntity:storyButton_];    
     
     if (NO) {
@@ -97,15 +86,13 @@
           [[ResourceLoader instance] getTextureWithName:@"upgrade_button"];
       Texture2D *upgradeButtonPressedImage =
           [[ResourceLoader instance] getTextureWithName:@"upgrade_button_pressed"];
-      upgradeButton_ = [[Button alloc] initWithNormalTexture:upgradeButtonImage
-                          pressedTexture:upgradeButtonPressedImage
-                              position:CGPointMake(91, 936)];
-      upgradeButton_.delegate = self;
-      upgradeButton_.selector = @selector(pressedUpgrade);
+      upgradeButton_ = new Button(upgradeButtonImage, upgradeButtonPressedImage, CGPointMake(91, 936));
+      upgradeButton_->setDelegate(self);
+      upgradeButton_->setSelector(@selector(pressedUpgrade));
       [self addEntity:upgradeButton_];    
     }
     
-    numPlayersSelect_ = [[MultiSelect alloc] init];
+    numPlayersSelect_ = new MultiSelect();
     double playersY = isIPhone ? 570 : 511;
     Texture2D *onePlayerImage = [[ResourceLoader instance] getTextureWithName:@"1_player"];
     Texture2D *twoPlayerImage = [[ResourceLoader instance] getTextureWithName:@"2_player"];
@@ -115,20 +102,16 @@
         [[ResourceLoader instance] getTextureWithName:@"2_player_selected"];
     CGPoint numPlayersSelectPosition =
         CGPointMake(SCREEN_WIDTH / 2 - onePlayerImage.contentSize.width, playersY);
-    [numPlayersSelect_ addValueWithNormalTexture:onePlayerImage
-                                 selectedTexture:onePlayerSelectedImage
-                                        position:numPlayersSelectPosition];
-    [numPlayersSelect_ addValueWithNormalTexture:twoPlayerImage
-                                 selectedTexture:twoPlayerSelectedImage
-                                        position:CGPointMake(SCREEN_WIDTH/2, playersY)];
-    numPlayersSelect_.selectedValue = LocalStore::integerForKey(LS_NUM_PLAYERS);
+    numPlayersSelect_->add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
+    numPlayersSelect_->add(twoPlayerImage, twoPlayerSelectedImage, CGPointMake(SCREEN_WIDTH/2, playersY));
+    numPlayersSelect_->setSelectedValue(LocalStore::integerForKey(LS_NUM_PLAYERS));
     [self addEntity:numPlayersSelect_];
     
     double pucksY = isIPhone ? 706 : 627;
     double pucks1X = isIPhone ? 40 : 138.5;
     double pucks2X = isIPhone ? 45 : 142.5;
     double pucksXSpread = isIPhone ? 96 : 69;
-    numPucksSelect_ = [[MultiSelect alloc] init];
+    numPucksSelect_ = new MultiSelect();
     for (int i = 1; i <= (NO ? 4 : MAX_NUM_PUCKS); i++) {
       Texture2D *numPucksImage = [[ResourceLoader instance]
                                   getTextureWithName:[NSString stringWithFormat:@"%i", i]];
@@ -137,26 +120,22 @@
            getTextureWithName:[NSString stringWithFormat:@"%i_selected", i]];
       CGPoint numPucksSelectPosition =
           CGPointMake(i == 1 ? pucks1X : pucks2X + pucksXSpread * (i - 1), pucksY);
-      [numPucksSelect_ addValueWithNormalTexture:numPucksImage
-                                 selectedTexture:numPucksSelectedImage
-                                        position:numPucksSelectPosition];
+      numPucksSelect_->add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
     }
-    numPucksSelect_.selectedValue = LocalStore::integerForKey(LS_NUM_PUCKS);
+    numPucksSelect_->setSelectedValue(LocalStore::integerForKey(LS_NUM_PUCKS));
     [self addEntity:numPucksSelect_];
     
     if (NO) {
       Texture2D *upgradeForMoreTexture =
           [[ResourceLoader instance] getTextureWithName:@"upgrade_for_more"];
       CGPoint upgradeForMorePosition = CGPointMake(pucks2X + pucksXSpread * 4, pucksY);
-      SimpleItem *upgradeForMore = [[[SimpleItem alloc] initWithTexture:upgradeForMoreTexture
-                                                               position:upgradeForMorePosition]
-                                    autorelease];
+      SimpleItem *upgradeForMore = new SimpleItem(upgradeForMoreTexture, upgradeForMorePosition);
       [self addEntity:upgradeForMore];
     }
     
     
     double difficultyY = isIPhone ? 839 : 734;
-    difficultySelect_ = [[MultiSelect alloc] init];
+    difficultySelect_ = new MultiSelect();
     Texture2D *badImage = [[ResourceLoader instance] getTextureWithName:@"bad"];
     Texture2D *badImageSelected = [[ResourceLoader instance] getTextureWithName:@"bad_selected"];
     Texture2D *goodImage = [[ResourceLoader instance] getTextureWithName:@"good"];
@@ -167,27 +146,19 @@
     Texture2D *amazingImage = [[ResourceLoader instance] getTextureWithName:@"amazing"];
     Texture2D *amazingImageSelected =
         [[ResourceLoader instance] getTextureWithName:@"amazing_selected"];
-    [difficultySelect_ addValueWithNormalTexture:badImage
-                                 selectedTexture:badImageSelected
-                                        position:CGPointMake(isIPhone ? 38 : 138, difficultyY)];
-    [difficultySelect_ addValueWithNormalTexture:goodImage
-                                 selectedTexture:goodImageSelected
-                                        position:CGPointMake(isIPhone ? 216 : 266, difficultyY)];
-    [difficultySelect_ addValueWithNormalTexture:excellentImage
-                                 selectedTexture:excellentImageSelected
-                                        position:CGPointMake(isIPhone ? 380 : 384, difficultyY)];
-    [difficultySelect_ addValueWithNormalTexture:amazingImage
-                                 selectedTexture:amazingImageSelected
-                                        position:CGPointMake(isIPhone ? 543 : 502, difficultyY)];
+    difficultySelect_->add(badImage, badImageSelected, CGPointMake(isIPhone ? 38 : 138, difficultyY));
+    difficultySelect_->add(goodImage, goodImageSelected, CGPointMake(isIPhone ? 216 : 266, difficultyY));
+    difficultySelect_->add(excellentImage, excellentImageSelected, CGPointMake(isIPhone ? 380 : 384, difficultyY));
+    difficultySelect_->add(amazingImage, amazingImageSelected, CGPointMake(isIPhone ? 543 : 502, difficultyY));
     if (LocalStore::hasEntryForKey(LS_DIFFICULTY)) {
-      difficultySelect_.selectedValue = LocalStore::integerForKey(LS_DIFFICULTY);
+      difficultySelect_->setSelectedValue(LocalStore::integerForKey(LS_DIFFICULTY));
     } else {
-      difficultySelect_.selectedValue = caiGood;
+      difficultySelect_->setSelectedValue(caiGood);
     }
     [self addEntity:difficultySelect_];
     
     if (!isIPhone) {
-      paddleSizeSelect_ = [[MultiSelect alloc] init];
+      paddleSizeSelect_ = new MultiSelect();
       Texture2D* smallImage = [[ResourceLoader instance] getTextureWithName:@"small"];
       Texture2D* smallImageSelected =
           [[ResourceLoader instance] getTextureWithName:@"small_selected"];
@@ -197,42 +168,22 @@
       Texture2D* largeImage = [[ResourceLoader instance] getTextureWithName:@"large"];
       Texture2D* largeImageSelected =
           [[ResourceLoader instance] getTextureWithName:@"large_selected"];
-      [paddleSizeSelect_ addValueWithNormalTexture:smallImage
-                                   selectedTexture:smallImageSelected
-                                          position:CGPointMake(139, 842)];
-      [paddleSizeSelect_ addValueWithNormalTexture:mediumImage
-                                   selectedTexture:mediumImageSelected
-                                          position:CGPointMake(305, 842)];
-      [paddleSizeSelect_ addValueWithNormalTexture:largeImage
-                                   selectedTexture:largeImageSelected
-                                          position:CGPointMake(464, 842)];
+      paddleSizeSelect_->add(smallImage, smallImageSelected, CGPointMake(139, 842));
+      paddleSizeSelect_->add(mediumImage, mediumImageSelected, CGPointMake(305, 842));
+      paddleSizeSelect_->add(largeImage, largeImageSelected, CGPointMake(464, 842));
       if (LocalStore::hasEntryForKey(LS_PADDLE_SIZE)) {
-        paddleSizeSelect_.selectedValue = LocalStore::integerForKey(LS_PADDLE_SIZE);
+        paddleSizeSelect_->setSelectedValue(LocalStore::integerForKey(LS_PADDLE_SIZE));
       } else {
-        paddleSizeSelect_.selectedValue = psMedium;
+        paddleSizeSelect_->setSelectedValue(psMedium);
       }
       [self addEntity:paddleSizeSelect_];
     }
     
-    soundSlider_ = [[SoundSlider alloc] initWithPosition:CGPointMake(400, 50)];
+    soundSlider_ = new SoundSlider(CGPointMake(400, 50));
     [self addEntity:soundSlider_];
   }
   
   return self;
-}
-
-- (void)dealloc {
-  [startButton_ release];
-  [feedbackButton_ release];
-  [storyButton_ release];
-  [upgradeButton_ release];
-  [numPlayersSelect_ release];
-  [numPucksSelect_ release];
-  [difficultySelect_ release];
-  [paddleSizeSelect_ release];
-  [soundSlider_ release];
-  
-  [super dealloc];
 }
 
 - (void)stateIsShown {
@@ -248,31 +199,31 @@
 - (void)pressedStart {
   BOOL isIPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
-  LocalStore::setInteger(numPlayersSelect_.selectedValue, LS_NUM_PLAYERS);
-  LocalStore::setInteger(numPucksSelect_.selectedValue, LS_NUM_PUCKS);
-  LocalStore::setInteger(difficultySelect_.selectedValue, LS_DIFFICULTY);
+  LocalStore::setInteger(numPlayersSelect_->getSelectedValue(), LS_NUM_PLAYERS);
+  LocalStore::setInteger(numPucksSelect_->getSelectedValue(), LS_NUM_PUCKS);
+  LocalStore::setInteger(difficultySelect_->getSelectedValue(), LS_DIFFICULTY);
   if (!isIPhone) {
-    LocalStore::setInteger(paddleSizeSelect_.selectedValue, LS_PADDLE_SIZE);
+    LocalStore::setInteger(paddleSizeSelect_->getSelectedValue(), LS_PADDLE_SIZE);
   }
 
   NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
-  [flurryData setObject:[NSNumber numberWithInt:[numPlayersSelect_ selectedValue] + 1]
+  [flurryData setObject:[NSNumber numberWithInt:numPlayersSelect_->getSelectedValue() + 1]
                  forKey:@"NumPlayers"];
-  [flurryData setObject:[NSNumber numberWithInt:[numPucksSelect_ selectedValue] + 1]
+  [flurryData setObject:[NSNumber numberWithInt:numPucksSelect_->getSelectedValue() + 1]
                  forKey:@"NumPucks"];
-  [flurryData setObject:[NSNumber numberWithInt:[difficultySelect_ selectedValue]]
+  [flurryData setObject:[NSNumber numberWithInt:difficultySelect_->getSelectedValue()]
                  forKey:@"Difficulty"];
   if (!isIPhone) {
-    [flurryData setObject:[NSNumber numberWithInt:[paddleSizeSelect_ selectedValue]]
+    [flurryData setObject:[NSNumber numberWithInt:paddleSizeSelect_->getSelectedValue()]
                    forKey:@"PaddleSize"];
   }
   [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
 
-  PaddleSize paddleSize = PaddleSize(isIPhone ? psLarge : [paddleSizeSelect_ selectedValue]);
+  PaddleSize paddleSize = PaddleSize(isIPhone ? psLarge : paddleSizeSelect_->getSelectedValue());
   PlayState *playState =
-      [[[PlayState alloc] initWithNumPlayers:[numPlayersSelect_ selectedValue] + 1
-                                    numPucks:[numPucksSelect_ selectedValue] + 1
-                                  difficulty:ComputerAI([difficultySelect_ selectedValue])
+      [[[PlayState alloc] initWithNumPlayers:numPlayersSelect_->getSelectedValue() + 1
+                                    numPucks:numPucksSelect_->getSelectedValue() + 1
+                                  difficulty:ComputerAI(difficultySelect_->getSelectedValue())
                                   paddleSize:paddleSize] autorelease];
   [self.gameEngine replaceTopState:playState];
 }

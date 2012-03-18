@@ -6,20 +6,19 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#ifndef AirHockey_StateEntity_h
+#define AirHockey_StateEntity_h
 
 class Touch;
 
-@protocol StateEntity
+class StateEntity {
+ public:
+  virtual void update() = 0;
+  virtual void render() = 0;
+  virtual void touchesBegan(Touch *touches[], int numTouches) {}
+  virtual void touchesMoved(Touch *touches[], int numTouches) {}
+  virtual void touchesEnded(Touch *touches[], int numTouches) {}
+  virtual void clearTouches() {}
+};
 
-- (void)update;
-- (void)render;
-
-@optional
-
-- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches;
-- (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches;
-- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches;
-- (void)clearTouches;
-
-@end
+#endif

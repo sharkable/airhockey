@@ -6,17 +6,25 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
+#ifndef AirHockey_Rink_h
+#define AirHockey_Rink_h
+
 #import <Foundation/Foundation.h>
 #import "StateEntity.h"
 #import "RoundThing.h"
 #import "Texture2D.h"
 
-@interface Rink : NSObject <StateEntity> {
+class Rink : public StateEntity {
+ private:
   Texture2D* texture_;
   CGPoint renderPoint_;
-}
+ public:
+  Rink();
+  ~Rink();
+  void update();
+  void render();
+  void bounceOff(RoundThing *thing);
+  void moveInFromEdge(RoundThing *thing);
+};
 
-- (void) bounceOff:(RoundThing*)thing;
-- (void) moveInFromEdge:(RoundThing*)thing;
-
-@end
+#endif

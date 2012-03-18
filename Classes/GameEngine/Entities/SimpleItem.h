@@ -6,25 +6,34 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
+#ifndef AirHockey_SimpleItem_h
+#define AirHockey_SimpleItem_h
+
 #import <Foundation/Foundation.h>
 #import "StateEntity.h"
 #import "Texture2D.h"
 
-@interface SimpleItem : NSObject<StateEntity> {
- @private
+class SimpleItem : public StateEntity {
+ private:
   NSMutableArray *textures_;
   int texture_;
   CGPoint position_;
   double angle_;
-}
 
-- (id)initWithTexture:(Texture2D *)texture position:(CGPoint)position;
-- (id)initWithTextures:(NSArray*)textures position:(CGPoint)position;
+ public:
+  SimpleItem(Texture2D *texture, CGPoint position);
+  SimpleItem(NSArray *textures, CGPoint position);
+  ~SimpleItem();
+  void update();
+  void render();
 
-@property(nonatomic, assign) int texture;
-@property(nonatomic, assign) CGPoint position;
-@property(nonatomic, assign) double angle;
-@property(nonatomic, readonly) CGSize size;
+  int getTexture() { return texture_; }
+  void setTexture(int texture) { texture_ = texture; }
+  CGPoint getPosition() { return position_; }
+  void setPosition(CGPoint position) { position_ = position; }
+  double getAngle() { return angle_; }
+  void setAngle(double angle) { angle_ = angle; }
+  CGSize getSize();
+};
 
-@end
-
+#endif

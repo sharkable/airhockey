@@ -10,13 +10,7 @@
 #import "Puck.h"
 #import "GameEngine.h"
 
-@implementation Paddle
-
-@synthesize pucks=pucks_, otherPaddle=otherPaddle_;
-
-- (id) initWithPlayer:(int)playerId size:(PaddleSize)size playerControlled:(BOOL)playerControlled aiLevel:(ComputerAI)aiLevel {
-  [super init];
-  
+Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel) {
   playerId_ = playerId;
   playerControlled_ = playerControlled;
   aiLevel_ = aiLevel;
@@ -51,65 +45,59 @@
   radius_ = PADDLE_RADIUS[size];
   mass_ = PADDLE_MASS;
   friction_ = playerControlled_ ? PADDLE_FRICTION : PADDLE_AI_FRICTION;
-  
-  return self;
 }
 
-- (void) dealloc {
-  [pucks_ release];
-  [otherPaddle_ release];
-  
-  [super dealloc];
+Paddle::~Paddle() {
 }
 
-- (void) setInitialPositionForPlayer:(int)playerId {
+void Paddle::setInitialPositionForPlayer(int playerId) {
   switch (playerId_) {
     case PLAYER_1: {
-      _x = PADDLE_1_X;
-      _y = PADDLE_1_Y;      
+      x_ = PADDLE_1_X;
+      y_ = PADDLE_1_Y;      
       break;
     }
     case PLAYER_2: {
-      _x = PADDLE_2_X;
-      _y = PADDLE_2_Y;      
+      x_ = PADDLE_2_X;
+      y_ = PADDLE_2_Y;      
       break;
     }
   }  
 }
 
-- (void) keepInPlayerBounds {
+void Paddle::keepInPlayerBounds() {
   switch (playerId_) {
     case PLAYER_1: {
-      if (self.y + self.radius > RINK_BOTTOM_Y) {
-        self.y = RINK_BOTTOM_Y - self.radius;
-        self.vy = 0;
-      } else if (self.y - self.radius < SCREEN_HEIGHT/2+1) {
-        self.y = SCREEN_HEIGHT/2+1 + self.radius;
-        self.vy = 0;
+      if (y_ + radius_ > RINK_BOTTOM_Y) {
+        y_ = RINK_BOTTOM_Y - radius_;
+        vy_ = 0;
+      } else if (y_ - radius_ < SCREEN_HEIGHT/2+1) {
+        y_ = SCREEN_HEIGHT/2+1 + radius_;
+        vy_ = 0;
       }
       break;
     }
     case PLAYER_2: {
-      if (self.y - self.radius < RINK_TOP_Y) {
-        self.y = RINK_TOP_Y + self.radius;
-        self.vy = 0;
-      } else if (self.y + self.radius > SCREEN_HEIGHT/2-1) {
-        self.y = SCREEN_HEIGHT/2-1 - self.radius;
-        self.vy = 0;
+      if (y_ - radius_ < RINK_TOP_Y) {
+        y_ = RINK_TOP_Y + radius_;
+        vy_ = 0;
+      } else if (y_ + radius_ > SCREEN_HEIGHT/2-1) {
+        y_ = SCREEN_HEIGHT/2-1 - radius_;
+        vy_ = 0;
       }
       break;
     }
   }
-  if (self.x - self.radius < RINK_LEFT_X) {
-    self.x = RINK_LEFT_X + self.radius;
-    self.vx = 0;
-  } else if (self.x + self.radius > RINK_RIGHT_X) {
-    self.x = RINK_RIGHT_X - self.radius;
-    self.vx = 0;
+  if (x_ - radius_ < RINK_LEFT_X) {
+    x_ = RINK_LEFT_X + radius_;
+    vx_ = 0;
+  } else if (x_ + radius_ > RINK_RIGHT_X) {
+    x_ = RINK_RIGHT_X - radius_;
+    vx_ = 0;
   }
 }
 
-- (void) update {
+void Paddle::update() {
   // Computer AI
   if (!playerControlled_) {
     double speed = 0;
@@ -132,21 +120,22 @@
     Puck* target = nil;    
     double bestTime;
     
-    for (Puck* puck in pucks_) {
-      if (!puck.active) {
+    for (int i = 0; i < pucks_.size(); i++) {
+    Puck *puck = pucks_[i];
+      if (!puck->isActive()) {
         continue;
       }
-      if (puck.vy > 4) {
+      if (puck->getVY() > 4) {
         continue;
       }
       double timeToReach = 999999;
-      if (puck.vy < 0) {
-        timeToReach = fabs((self.y - puck.y) / puck.vy);
+      if (puck->getVY() < 0) {
+        timeToReach = fabs((y_ - puck->getY()) / puck->getVY());
       }
-      if (puck.y - puck.radius > SCREEN_HEIGHT/2) {
+      if (puck->getY() - puck->getRadius() > SCREEN_HEIGHT/2) {
         continue;
       }
-      if (target == nil || timeToReach < bestTime || (timeToReach == bestTime && puck.y < target.y)) {
+      if (target == nil || timeToReach < bestTime || (timeToReach == bestTime && puck->getY() < target->getY())) {
         target = puck;
         bestTime = timeToReach;
       }
@@ -159,8 +148,8 @@
     double targetX;
     double targetY;
     
-    if (!targetAwayFromCorner_ && target && target.y <= RINK_TOP_Y + self.radius && fabs(target.vx) < 5 && fabs(target.vy) < 5) {
-      if (target.x < SCREEN_WIDTH / 2) {
+    if (!targetAwayFromCorner_ && target && target->getY() <= RINK_TOP_Y + radius_ && fabs(target->getVX()) < 5 && fabs(target->getVY()) < 5) {
+      if (target->getX() < SCREEN_WIDTH / 2) {
         targetLeftCorner_ = YES;
       } else {
         targetRightCorner_ = YES;
@@ -168,35 +157,35 @@
     }
     
     if (targetLeftCorner_) {
-      targetX = RINK_LEFT_X + self.radius;
-      targetY = RINK_TOP_Y + self.radius;
-      if ([self overlaps:target]) {
+      targetX = RINK_LEFT_X + radius_;
+      targetY = RINK_TOP_Y + radius_;
+      if (overlaps(target)) {
         targetLeftCorner_ = NO;
         targetAwayFromCorner_ = YES;
       }
     } else if (targetRightCorner_) {
-      targetX = RINK_RIGHT_X - self.radius;
-      targetY = RINK_TOP_Y + self.radius;
-      if ([self overlaps:target]) {
+      targetX = RINK_RIGHT_X - radius_;
+      targetY = RINK_TOP_Y + radius_;
+      if (overlaps(target)) {
         targetRightCorner_ = NO;
         targetAwayFromCorner_ = YES;
       }
     } else if (targetAwayFromCorner_) {
       targetX = SCREEN_WIDTH / 2;
-      targetY = RINK_TOP_Y + self.radius;
-      if (self.x >= SCREEN_WIDTH / 2 - 5 && self.x <= SCREEN_WIDTH / 2 + 5) {
+      targetY = RINK_TOP_Y + radius_;
+      if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
         targetAwayFromCorner_ = NO;
       }
     } else if (target) {
-      if (target.y > self.y) {
-        targetX = target.x;
-        targetY = target.y - target.radius;
+      if (target->getY() > y_) {
+        targetX = target->getX();
+        targetY = target->getY() - target->getRadius();
       } else {
-        targetY = target.y - target.radius - self.radius - 20;
-        if (target.x < self.x) {
-          targetX = target.x + target.radius + self.radius + 20;
+        targetY = target->getY() - target->getRadius() - radius_ - 20;
+        if (target->getX() < x_) {
+          targetX = target->getX() + target->getRadius() + radius_ + 20;
         } else {
-          targetX = target.x - target.radius - self.radius - 20;
+          targetX = target->getX() - target->getRadius() - radius_ - 20;
         }
       }
     } else if (aiLevel_ >= caiExcellent) {
@@ -204,53 +193,53 @@
       targetY = PADDLE_2_Y;
     } else if (aiLevel_ == caiGood) {
       targetX = PADDLE_2_X;
-      targetY = self.y;    
+      targetY = y_;
     } else {
-      targetX = self.x;
-      targetY = self.y;
+      targetX = x_;
+      targetY = y_;
     }
     
     // Get direction of target.
-    double dx = targetX - self.x;
-    double dy = targetY - self.y;
+    double dx = targetX - x_;
+    double dy = targetY - y_;
     double adx = fabs(dx);
     double ady = fabs(dy);
     
     if (adx <= speed && ady <= speed) {
-      self.vx = 0;
-      self.vy = 0;
-      self.x = targetX;
-      self.y = targetY;
+      vx_ = 0;
+      vy_ = 0;
+      x_ = targetX;
+      y_ = targetY;
     } else {
-      if (fabs(dx) < fabs(self.vx)) {
-        self.vx = dx;
-      } else if (fabs(dy) < fabs(self.vy)) {
-        self.vy = dy;
+      if (fabs(dx) < fabs(vx_)) {
+        vx_ = dx;
+      } else if (fabs(dy) < fabs(vy_)) {
+        vy_ = dy;
       }
       
       double dL = sqrt(dx*dx + dy*dy);
       double nx = dx / dL;
       double ny = dy / dL;
-      self.vx += speed * nx;
-      self.vy += speed * ny;
+      vx_ += speed * nx;
+      vy_ += speed * ny;
     }
   }
-  [super update];
+  RoundThing::update();
 }
 
-- (void) render {
-  [texture_ drawAtPoint:CGPointMake(_x - texture_.contentSize.width/2, _y - texture_.contentSize.height/2)
-          alpha:(self.grabbed || !playerControlled_ ? 1.0 : 0.5)
+void Paddle::render() {
+  [texture_ drawAtPoint:CGPointMake(x_ - texture_.contentSize.width/2, y_ - texture_.contentSize.height/2)
+          alpha:(isGrabbed() || !playerControlled_ ? 1.0 : 0.5)
            zoom:1
           angle:0
             z:0];
 }
 
-- (BOOL) grabbable {
+bool Paddle::isGrabbable() {
   return playerControlled_;
 }
 
-- (BOOL) containsTouch:(Touch*)touch {
+bool Paddle::containsTouch(Touch *touch) {
   CGPoint p = touch->getLocation();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return NO;
@@ -265,5 +254,3 @@
   }
   return NO;
 }
-
-@end

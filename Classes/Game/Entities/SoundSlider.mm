@@ -13,11 +13,7 @@
 #include "Touch.h"
 #import "const.h"
 
-@implementation SoundSlider
-
-- (id) initWithPosition:(CGPoint)position {
-  [super init];
-  
+SoundSlider::SoundSlider(CGPoint position) {
   position_ = position;
   
   emptyTexture_ = [[ResourceLoader instance] getTextureWithName:@"sound_empty"];
@@ -30,28 +26,26 @@
     value_ = 0.75;
   }
   [SoundPlayer setGlobalVolume:value_];
-  
-  return self;
 }
 
-- (void) update {
+void SoundSlider::update() {
 }
 
-- (void) render {
+void SoundSlider::render() {
   double drawRatio = (269.0 - thumbTexture_.contentSize.width)/320.0 * value_ + (19.0 + thumbTexture_.contentSize.width/2)/320.0;
   [fullTexture_ drawAtPoint:position_ leftRatio:drawRatio];
   [emptyTexture_ drawAtPoint:position_ rightRatio:1.0-drawRatio];
-  [thumbTexture_ drawAtPoint:self.thumbPoint];
+  [thumbTexture_ drawAtPoint:getThumbPoint()];
 }
 
-- (CGPoint) thumbPoint {
+CGPoint SoundSlider::getThumbPoint() {
   return CGPointMake(position_.x + 19 + (269.0 - thumbTexture_.contentSize.width)*value_, position_.y);
 }
 
-- (void) touchesBegan:(Touch*[])touches numTouches:(int)numTouches {
+void SoundSlider::touchesBegan(Touch *touches[], int numTouches) {
   for (int i = 0; i < numTouches; i++) {
     CGPoint touchP = touches[i]->getLocation();
-    CGPoint thumbP = [self thumbPoint];
+    CGPoint thumbP = getThumbPoint();
     double thumbWidth = thumbTexture_.contentSize.width;
     double thumbHeight = thumbTexture_.contentSize.height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
@@ -64,7 +58,7 @@
   }
 }
 
-- (void) touchesMoved:(Touch*[])touches numTouches:(int)numTouches {
+void SoundSlider::touchesMoved(Touch *touches[], int numTouches) {
   for (int i = 0; i < numTouches; i++) {
     if (touches[i]->getIdentifier() == grabbedTouch_) {
       CGPoint touchP = touches[i]->getLocation();
@@ -85,7 +79,7 @@
   }
 }
 
-- (void) touchesEnded:(Touch*[])touches numTouches:(int)numTouches {
+void SoundSlider::touchesEnded(Touch *touches[], int numTouches) {
   for (int i = 0; i < numTouches; i++) {
     if (touches[i]->getIdentifier() == grabbedTouch_) {
       [SoundPlayer setGlobalVolume:value_];
@@ -95,5 +89,3 @@
     }
   }
 }
-
-@end

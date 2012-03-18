@@ -6,17 +6,24 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
+#ifndef AirHockey_Puck_h
+#define AirHockey_Puck_h
+
 #import <Foundation/Foundation.h>
 #import "RoundThing.h"
 #import "Texture2D.h"
 #import "Paddle.h"
 
-@interface Puck : RoundThing {
+class Puck : public RoundThing {
+ private:
   int fadeTicksLeft_;
   double alpha_;
-}
+ public:
+  Puck();
+  void update();
+  void render();
+  void placeForPlayer(int playerId, const vector<RoundThing *> &roundThings, bool center);
+  void fadeIn();
+};
 
-- (void) placeForPlayer:(int)playerId roundThings:(NSArray*)roundThings center:(BOOL)center;
-- (void) fadeIn;
-
-@end
+#endif
