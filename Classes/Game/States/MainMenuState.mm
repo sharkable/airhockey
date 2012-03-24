@@ -21,8 +21,8 @@
 
 @implementation MainMenuState
 
-- (id)init {
-  [super init];
+- (id)initWithGameEngine:(GameEngine *)gameEngine {
+  self = [super initWithGameEngine:gameEngine];
   
   if (self) {
     BOOL isIPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
@@ -257,7 +257,7 @@
 - (void)pressedStory {
   [FlurryAnalytics logEvent:@"STORY_PRESSED"];
   [self.gameEngine.adEngine removeAd];
-  [self.gameEngine pushState:[[[StoryState alloc] init] autorelease]];
+  [self.gameEngine pushState:[[[StoryState alloc] initWithGameEngine:self.gameEngine] autorelease]];
 }
 
 - (void)pressedUpgrade {

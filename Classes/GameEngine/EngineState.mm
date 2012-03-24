@@ -21,6 +21,23 @@ using namespace std;
 
 @synthesize gameEngine = gameEngine_;
 
+- (id)initWithGameEngine:(GameEngine *)gameEngine {
+  [super init];
+  
+  if (self) {
+    gameEngine_ = gameEngine;
+    entities_ = [[NSMutableArray alloc] init];
+  }
+  
+  return self;
+}
+
+- (void)dealloc {
+  [entities_ release];
+  
+  [super dealloc];
+}
+
 - (void)stateIsShown {
 }
 
@@ -71,6 +88,7 @@ using namespace std;
 - (void) clearTouches {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->clearTouches();
-}}
+  }
+}
 
 @end

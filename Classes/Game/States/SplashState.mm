@@ -15,8 +15,8 @@
 
 @implementation SplashState
 
-- (id)init {
-  [super init];
+- (id)initWithGameEngine:(GameEngine *)gameEngine {
+  self = [super initWithGameEngine:gameEngine];
   
   if (self) {
     spinner_ = [[UIActivityIndicatorView alloc]
@@ -41,7 +41,8 @@
 }
 
 - (void)soundInitialized {
-  [self.gameEngine replaceTopState:[[[MainMenuState alloc] init] autorelease]];
+  [self.gameEngine replaceTopState:[[[MainMenuState alloc] initWithGameEngine:self.gameEngine]
+                                    autorelease]];
 }
 
 @end

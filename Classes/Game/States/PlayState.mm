@@ -19,11 +19,12 @@
 
 @implementation PlayState
 
-- (id)initWithNumPlayers:(int)numPlayers
+- (id)initWithGameEngine:(GameEngine *)gameEngine
+              numPlayers:(int)numPlayers
                 numPucks:(int)numPucks
               difficulty:(ComputerAI)difficulty
               paddleSize:(PaddleSize)paddleSize {
-  [super init];
+  self = [super initWithGameEngine:gameEngine];
   
   if (self) {
     numPlayers_ = numPlayers;
@@ -484,7 +485,8 @@
 - (void)menuPressed {
   [player1Wins_ removeFromSuperview];
   [player2Wins_ removeFromSuperview];
-  [self.gameEngine replaceTopState:[[[MainMenuState alloc] init] autorelease]];
+  [self.gameEngine replaceTopState:[[[MainMenuState alloc] initWithGameEngine:self.gameEngine]
+                                    autorelease]];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     [self.gameEngine.adEngine removeAd];
   }

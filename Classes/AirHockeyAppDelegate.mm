@@ -30,7 +30,7 @@
 }
 
 - (void)startGame {
-  SplashState *rootState = [[[SplashState alloc] init] autorelease];
+  SplashState *rootState = [[[SplashState alloc] initWithGameEngine:gameEngine_] autorelease];
   [gameEngine_ pushState:rootState];
   [NSThread detachNewThreadSelector:@selector(initAudio:) toTarget:self withObject:rootState];
 }  
