@@ -45,6 +45,7 @@ using namespace std;
       i != entities_.end(); i++) {
     if (*i == entity) {
       entities_.erase(i);
+      break;
     }
   }
 }

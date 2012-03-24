@@ -22,14 +22,14 @@ using namespace std;
 
 class Paddle : public RoundThing {
  private:
-  int        playerId_;
-  BOOL       playerControlled_;
+  int playerId_;
+  BOOL playerControlled_;
   ComputerAI aiLevel_;
   vector<Puck *> pucks_;
-  Paddle*    otherPaddle_;
-  BOOL       targetLeftCorner_;
-  BOOL       targetRightCorner_;
-  BOOL       targetAwayFromCorner_;
+  Paddle *otherPaddle_;
+  BOOL targetLeftCorner_;
+  BOOL targetRightCorner_;
+  BOOL targetAwayFromCorner_;
 
  public:
   Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel);
