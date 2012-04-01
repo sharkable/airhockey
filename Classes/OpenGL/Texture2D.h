@@ -100,12 +100,13 @@ class Texture2D {
 
  public:
   Texture2D() {}
-  Texture2D(const void *data, Texture2DPixelFormat pixelFormat, NSUInteger width, NSUInteger height,
+  void init(const void *data, Texture2DPixelFormat pixelFormat, NSUInteger width, NSUInteger height,
             CGSize size);
   Texture2D(GLuint name, CGSize size, NSUInteger width, NSUInteger height,
             Texture2DPixelFormat format, GLfloat maxS, GLfloat maxT);
   Texture2D(string filename);
   Texture2D(string filename, bool silhouette, bool lighten);
+  void init(string filename, bool silhouette, bool lighten);
   Texture2D(UIImage *uiImage);
   Texture2D(string str, CGSize dimensions, UITextAlignment alignment, UIFont *font);
   ~Texture2D();

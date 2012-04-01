@@ -8,7 +8,8 @@
  the technologies and programming interfaces described herein. This information
  is subject to change, and software implemented based on this sample code should
  be tested with final operating system software and final documentation. Newer
- versions of this sample code may be provided with future seeds of the API or
+ versions of this sample code may be provid
+ ed with future seeds of the API or
  technology. For information about updates to this and other developer
  documentation, view the New & Updated sidebars in subsequent documentation
  seeds.
@@ -80,8 +81,10 @@ void Texture2D::setGlobalAlpha(GLfloat alpha) {
   globalAlpha__ = alpha;
 }
 
-Texture2D::Texture2D(const void *data, Texture2DPixelFormat pixelFormat, NSUInteger width,
+void Texture2D::init(const void *data, Texture2DPixelFormat pixelFormat, NSUInteger width,
                      NSUInteger height, CGSize size) {
+  NSLog(@"HERE B: %p", this);
+
   GLint saveName;
 
   //glGenTextures(1, &name_);
@@ -156,10 +159,14 @@ Texture2D::Texture2D(GLuint name, CGSize size, NSUInteger width, NSUInteger heig
 }
 
 Texture2D::Texture2D(string filename) {
-  Texture2D(filename, false, false);
+  init(filename, false, false);
 }
 
 Texture2D::Texture2D(string filename, bool silhouette, bool lighten) {
+  init(filename, silhouette, lighten);
+}
+
+void Texture2D::init(string filename, bool silhouette, bool lighten) {
   resourceName_ = filename;
 
   NSString* filePath = [[NSBundle mainBundle] pathForResource:TypeUtil::string2NSString(filename)
@@ -191,8 +198,8 @@ Texture2D::Texture2D(string filename, bool silhouette, bool lighten) {
       }  
     }
   }
-  Texture2D(byteData+16, kTexture2DPixelFormat_RGBA8888, textureWidth, textureHeight,
-            CGSizeMake(originalWidth, originalHeight));
+  init(byteData+16, kTexture2DPixelFormat_RGBA8888, textureWidth, textureHeight,
+       CGSizeMake(originalWidth, originalHeight));
 }
 
 Texture2D::Texture2D(UIImage *uiImage) {
@@ -301,7 +308,8 @@ Texture2D::Texture2D(UIImage *uiImage) {
     data = tempData;
     
   }
-  Texture2D(data, pixelFormat, width, height, imageSize);
+  NSLog(@"HERE A: %p", this);
+  init(data, pixelFormat, width, height, imageSize);
 
   CGContextRelease(context);
   free(data);
@@ -341,7 +349,7 @@ Texture2D::Texture2D(string str, CGSize dimensions, UITextAlignment alignment, U
   [TypeUtil::string2NSString(str) drawInRect:CGRectMake(0, 0, dimensions.width, dimensions.height) withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:alignment];
   UIGraphicsPopContext();
   
-  Texture2D(data, kTexture2DPixelFormat_A8, width, height, dimensions);
+  init(data, kTexture2DPixelFormat_A8, width, height, dimensions);
   
   CGContextRelease(context);
   free(data);
@@ -349,7 +357,7 @@ Texture2D::Texture2D(string str, CGSize dimensions, UITextAlignment alignment, U
 
 Texture2D::~Texture2D() {
   if (name_) {
-    glDeleteTextures(1, &name_);
+    // TODO glDeleteTextures(1, &name_);
   }
 }
   
