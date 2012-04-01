@@ -25,8 +25,24 @@ using namespace std;
 #define PLAY_STATE_FINISHED 3
 #define PLAY_STATE_PAUSED 4
 
-@interface PlayState : EngineState {
- @private
+class PlayState : public EngineState {
+ public:
+  PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, ComputerAI difficulty,
+            PaddleSize paddleSize);
+  ~PlayState();
+  void update();
+  void touchesBegan(Touch *touches[], int numTouches);
+  void touchesMoved(Touch *touches[], int numTouches);
+  void touchesEnded(Touch *touches[], int numTouches);
+  void clearTouches();
+  void setUpNewGame();
+  void finishGameWithWinner(int playerId);
+  void rematchPressed();
+  void menuPressed();
+  void continuePressed();
+  void pausePressed();
+ 
+ private:
   int numPlayers_;
   int numPucks_;
   int numActivePucks_;
@@ -61,18 +77,4 @@ using namespace std;
   
   UILabel *player1Wins_;
   UILabel *player2Wins_;
-}
-
-- (id)initWithGameEngine:(GameEngine *)gameEngine
-              numPlayers:(int)numPlayers
-                numPucks:(int)numPucks
-              difficulty:(ComputerAI)difficulty
-              paddleSize:(PaddleSize)paddleSize;
-- (void)setUpNewGame;
-- (void)finishGameWithWinner:(int)playerId;
-- (void)rematchPressed;
-- (void)menuPressed;
-- (void)continuePressed;
-- (void)pausePressed;
-
-@end
+};

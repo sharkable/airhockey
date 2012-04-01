@@ -6,17 +6,17 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "EngineState.h"
 #import "Button.h"
 
-@interface StoryState : EngineState {
- @private
+class StoryState : public EngineState {
+ public:
+  StoryState(GameEngine *gameEngine);
+  ~StoryState();
+  void pressedStory();
+  void pressedAbout();
+
+ private:
   Button *storyButton_; 
   Button *aboutButton_; 
-}
-
-- (void)pressedStory;
-- (void)pressedAbout;
-
-@end
+};

@@ -13,10 +13,11 @@
 
 Button::Button(Texture2D *normalTexture, Texture2D *pressedTexture,
                CGPoint position) {
-  normalTexture_ = normalTexture;  
+  normalTexture_ = normalTexture;
   pressedTexture_ = pressedTexture;
   position_ = position;
   state_ = BUTTON_STATE_NORMAL;
+  delegate_ = NULL;
 }
 
 Button::~Button() {
@@ -56,7 +57,7 @@ void Button::touchesEnded(Touch *touches[], int numTouches) {
     state_ = BUTTON_STATE_NORMAL;
     for (int i = 0; i < numTouches; i++) {
       if (containsPoint(touches[i]->getLocation())) {
-        [delegate_ performSelector:selector_];
+        delegate_->buttonPressed(this);
       }
     }
   }

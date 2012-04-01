@@ -6,26 +6,31 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#include <vector>
+using namespace std;
+
 #import "StateEntity.h"
 #include "Touch.h"
 
 @class GameEngine;
 
-@interface EngineState : NSObject 
+class EngineState {
+ public:
+  GameEngine *getGameEngine() { return gameEngine_; }
+  virtual void stateIsShown();
+  virtual void update();
+  virtual void render();
+  void addEntity(StateEntity *entity);
+  void removeEntity(StateEntity *entity);
+  virtual void touchesBegan(Touch *touches[], int numTouches);
+  virtual void touchesMoved(Touch *touches[], int numTouches);
+  virtual void touchesEnded(Touch *touches[], int numTouches);
+  virtual void clearTouches();
 
-@property(nonatomic, readonly) GameEngine *gameEngine;
+ protected:
+  EngineState(GameEngine *gameEngine);
 
-- (id)initWithGameEngine:(GameEngine *)gameEngine;
-
-- (void)stateIsShown;
-- (void)update;
-- (void)render;
-- (void)addEntity:(StateEntity *)entity;
-- (void)removeEntity:(StateEntity *)entity;
-- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches;
-- (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches;
-- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches;
-- (void)clearTouches;
-
-@end
+ private:
+  vector<StateEntity *> entities_;
+  GameEngine *gameEngine_;
+};

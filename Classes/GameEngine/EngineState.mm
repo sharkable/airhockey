@@ -9,55 +9,30 @@
 #import "EngineState.h"
 #import "GameEngine.h"
 
-#include <vector>
-using namespace std;
-
-@implementation EngineState {
- @private
-  vector<StateEntity *> entities_;  // TODO can I do this in Objective-C?
-                                    // will it be initialized?
-  GameEngine *gameEngine_;  // weak
+EngineState::EngineState(GameEngine *gameEngine) {
+  gameEngine_ = gameEngine;
 }
 
-@synthesize gameEngine = gameEngine_;
-
-- (id)initWithGameEngine:(GameEngine *)gameEngine {
-  [super init];
-  
-  if (self) {
-    gameEngine_ = gameEngine;
-    entities_ = [[NSMutableArray alloc] init];
-  }
-  
-  return self;
+void EngineState::stateIsShown() {
 }
 
-- (void)dealloc {
-  [entities_ release];
-  
-  [super dealloc];
-}
-
-- (void)stateIsShown {
-}
-
-- (void)update {
+void EngineState::update() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->update();
   }
 }
 
-- (void)render {
+void EngineState::render() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->render();
   }
 }
 
-- (void)addEntity:(StateEntity *)entity {
+void EngineState::addEntity(StateEntity *entity) {
   entities_.push_back(entity);
 }
 
-- (void)removeEntity:(StateEntity *)entity {
+void EngineState::removeEntity(StateEntity *entity) {
   for (vector<StateEntity *>::iterator i = entities_.begin();
       i != entities_.end(); i++) {
     if (*i == entity) {
@@ -67,28 +42,26 @@ using namespace std;
   }
 }
 
-- (void)touchesBegan:(Touch *[])touches numTouches:(int)numTouches {
+void EngineState::touchesBegan(Touch *touches[], int numTouches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->touchesBegan(touches, numTouches);
   }
 }
 
-- (void)touchesMoved:(Touch *[])touches numTouches:(int)numTouches {
+void EngineState::touchesMoved(Touch *touches[], int numTouches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->touchesMoved(touches, numTouches);
   }
 }
 
-- (void)touchesEnded:(Touch *[])touches numTouches:(int)numTouches {
+void EngineState::touchesEnded(Touch *touches[], int numTouches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->touchesEnded(touches, numTouches);
   }
 }
 
-- (void) clearTouches {
+void EngineState::clearTouches() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->clearTouches();
   }
 }
-
-@end

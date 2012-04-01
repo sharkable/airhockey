@@ -13,36 +13,24 @@
 #import "EAGLView.h"
 #import "const.h"
 
-@implementation SplashState
-
-- (id)initWithGameEngine:(GameEngine *)gameEngine {
-  self = [super initWithGameEngine:gameEngine];
-  
-  if (self) {
-    spinner_ = [[UIActivityIndicatorView alloc]
+SplashState::SplashState(GameEngine *gameEngine) : EngineState(gameEngine) {
+  spinner_ = [[UIActivityIndicatorView alloc]
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      spinner_.center = CGPointMake(320 / 2, 480 / 2);
-    } else {
-      spinner_.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    }
-    [self.gameEngine addUIView:spinner_];
-    [spinner_ startAnimating];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    spinner_.center = CGPointMake(320 / 2, 480 / 2);
+  } else {
+    spinner_.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
   }
-  
-  return self;
+  [getGameEngine() addUIView:spinner_];
+  [spinner_ startAnimating];
+  soundInitialized();  // TODO temporary until we actually can load sound.
 }
 
-- (void)dealloc {
+SplashState::~SplashState() {
   [spinner_ removeFromSuperview];
   [spinner_ release];
-  
-  [super dealloc];
 }
 
-- (void)soundInitialized {
-  [self.gameEngine replaceTopState:[[[MainMenuState alloc] initWithGameEngine:self.gameEngine]
-                                    autorelease]];
+void SplashState::soundInitialized() {
+  [getGameEngine() replaceTopState:new MainMenuState(getGameEngine())];
 }
-
-@end

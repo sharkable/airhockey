@@ -6,15 +6,15 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "EngineState.h"
 #import "SimpleItem.h"
 #import "SoundInitializationDelegate.h"
 
-@interface SplashState : EngineState<SoundInitializationDelegate> {
- @private
-  UIActivityIndicatorView* spinner_;
-}
-
-@end
+class SplashState : public EngineState {
+public:
+  SplashState(GameEngine *gameEngine);
+  ~SplashState();
+  void soundInitialized();
+ private:
+  UIActivityIndicatorView *spinner_;
+};
