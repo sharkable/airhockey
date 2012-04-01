@@ -55,12 +55,6 @@
 		D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F21515291500620EF2 /* ResourceLoader.mm */; };
 		D4B1F53C1515291500620EF2 /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F61515291500620EF2 /* TypeUtil.mm */; };
 		D4B1F53D1515291500620EF2 /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F61515291500620EF2 /* TypeUtil.mm */; };
-		D4B1F53E1515291500620EF2 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F91515291500620EF2 /* EAGLView.mm */; };
-		D4B1F53F1515291500620EF2 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F91515291500620EF2 /* EAGLView.mm */; };
-		D4B1F5401515291500620EF2 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4FB1515291500620EF2 /* ES1Renderer.mm */; };
-		D4B1F5411515291500620EF2 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4FB1515291500620EF2 /* ES1Renderer.mm */; };
-		D4B1F5421515291500620EF2 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4FD1515291500620EF2 /* ES2Renderer.mm */; };
-		D4B1F5431515291500620EF2 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4FD1515291500620EF2 /* ES2Renderer.mm */; };
 		D4B1F5441515291500620EF2 /* Texture2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5001515291500620EF2 /* Texture2D.mm */; };
 		D4B1F5451515291500620EF2 /* Texture2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5001515291500620EF2 /* Texture2D.mm */; };
 		D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
@@ -442,6 +436,12 @@
 		FEA8E8B614F97D320084E117 /* upgrade_for_more.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */; };
 		FEA8E8B714F97D320084E117 /* title_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B014F97D320084E117 /* title_iphone.png */; };
 		FEA8E8B814F97D320084E117 /* upgrade_for_more_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */; };
+		FEB73B7C1528150C004886B9 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B761528150C004886B9 /* EAGLView.mm */; };
+		FEB73B7D1528150C004886B9 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B761528150C004886B9 /* EAGLView.mm */; };
+		FEB73B7E1528150C004886B9 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B781528150C004886B9 /* ES1Renderer.mm */; };
+		FEB73B7F1528150C004886B9 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B781528150C004886B9 /* ES1Renderer.mm */; };
+		FEB73B801528150C004886B9 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B7A1528150C004886B9 /* ES2Renderer.mm */; };
+		FEB73B811528150C004886B9 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B7A1528150C004886B9 /* ES2Renderer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -495,13 +495,6 @@
 		D4B1F4F41515291500620EF2 /* Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Touch.h; sourceTree = "<group>"; };
 		D4B1F4F51515291500620EF2 /* TypeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeUtil.h; sourceTree = "<group>"; };
 		D4B1F4F61515291500620EF2 /* TypeUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TypeUtil.mm; sourceTree = "<group>"; };
-		D4B1F4F81515291500620EF2 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
-		D4B1F4F91515291500620EF2 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
-		D4B1F4FA1515291500620EF2 /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
-		D4B1F4FB1515291500620EF2 /* ES1Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES1Renderer.mm; sourceTree = "<group>"; };
-		D4B1F4FC1515291500620EF2 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
-		D4B1F4FD1515291500620EF2 /* ES2Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES2Renderer.mm; sourceTree = "<group>"; };
-		D4B1F4FE1515291500620EF2 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
 		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture2D.h; sourceTree = "<group>"; };
 		D4B1F5001515291500620EF2 /* Texture2D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture2D.mm; sourceTree = "<group>"; };
 		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
@@ -718,6 +711,13 @@
 		FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more.png; sourceTree = "<group>"; };
 		FEA8E8B014F97D320084E117 /* title_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_iphone.png; sourceTree = "<group>"; };
 		FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more_iphone.png; sourceTree = "<group>"; };
+		FEB73B751528150C004886B9 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		FEB73B761528150C004886B9 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
+		FEB73B771528150C004886B9 /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
+		FEB73B781528150C004886B9 /* ES1Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES1Renderer.mm; sourceTree = "<group>"; };
+		FEB73B791528150C004886B9 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
+		FEB73B7A1528150C004886B9 /* ES2Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES2Renderer.mm; sourceTree = "<group>"; };
+		FEB73B7B1528150C004886B9 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -861,13 +861,7 @@
 		D4B1F4F71515291500620EF2 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				D4B1F4F81515291500620EF2 /* EAGLView.h */,
-				D4B1F4F91515291500620EF2 /* EAGLView.mm */,
-				D4B1F4FA1515291500620EF2 /* ES1Renderer.h */,
-				D4B1F4FB1515291500620EF2 /* ES1Renderer.mm */,
-				D4B1F4FC1515291500620EF2 /* ES2Renderer.h */,
-				D4B1F4FD1515291500620EF2 /* ES2Renderer.mm */,
-				D4B1F4FE1515291500620EF2 /* ESRenderer.h */,
+				FEB73B741528150C004886B9 /* iOS */,
 				D4B1F4FF1515291500620EF2 /* Texture2D.h */,
 				D4B1F5001515291500620EF2 /* Texture2D.mm */,
 			);
@@ -1401,6 +1395,20 @@
 			path = MainMenu;
 			sourceTree = "<group>";
 		};
+		FEB73B741528150C004886B9 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				FEB73B751528150C004886B9 /* EAGLView.h */,
+				FEB73B761528150C004886B9 /* EAGLView.mm */,
+				FEB73B771528150C004886B9 /* ES1Renderer.h */,
+				FEB73B781528150C004886B9 /* ES1Renderer.mm */,
+				FEB73B791528150C004886B9 /* ES2Renderer.h */,
+				FEB73B7A1528150C004886B9 /* ES2Renderer.mm */,
+				FEB73B7B1528150C004886B9 /* ESRenderer.h */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1851,14 +1859,14 @@
 				D4B1F5361515291500620EF2 /* LocalStore.mm in Sources */,
 				D4B1F53A1515291500620EF2 /* ResourceLoader.mm in Sources */,
 				D4B1F53C1515291500620EF2 /* TypeUtil.mm in Sources */,
-				D4B1F53E1515291500620EF2 /* EAGLView.mm in Sources */,
-				D4B1F5401515291500620EF2 /* ES1Renderer.mm in Sources */,
-				D4B1F5421515291500620EF2 /* ES2Renderer.mm in Sources */,
 				D4B1F5441515291500620EF2 /* Texture2D.mm in Sources */,
 				D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */,
+				FEB73B7C1528150C004886B9 /* EAGLView.mm in Sources */,
+				FEB73B7E1528150C004886B9 /* ES1Renderer.mm in Sources */,
+				FEB73B801528150C004886B9 /* ES2Renderer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1891,14 +1899,14 @@
 				D4B1F5371515291500620EF2 /* LocalStore.mm in Sources */,
 				D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */,
 				D4B1F53D1515291500620EF2 /* TypeUtil.mm in Sources */,
-				D4B1F53F1515291500620EF2 /* EAGLView.mm in Sources */,
-				D4B1F5411515291500620EF2 /* ES1Renderer.mm in Sources */,
-				D4B1F5431515291500620EF2 /* ES2Renderer.mm in Sources */,
 				D4B1F5451515291500620EF2 /* Texture2D.mm in Sources */,
 				D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5491515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */,
+				FEB73B7D1528150C004886B9 /* EAGLView.mm in Sources */,
+				FEB73B7F1528150C004886B9 /* ES1Renderer.mm in Sources */,
+				FEB73B811528150C004886B9 /* ES2Renderer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
