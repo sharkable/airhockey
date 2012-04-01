@@ -108,9 +108,14 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   double pucks2X = isIPhone ? 45 : 142.5;
   double pucksXSpread = isIPhone ? 96 : 69;
   for (int i = 1; i <= (NO ? 4 : MAX_NUM_PUCKS); i++) {
-    Texture2D numPucksImage = ResourceLoader::instance()->getTextureWithName(string("%i", i));
+    char pucksstr[15];
+    sprintf(pucksstr, "%d", i);
+    char pucksselectedstr[15];
+    sprintf(pucksselectedstr, "%d_selected", i);
+
+    Texture2D numPucksImage = ResourceLoader::instance()->getTextureWithName(pucksstr);
     Texture2D numPucksSelectedImage =
-        ResourceLoader::instance()->getTextureWithName(string("%i_selected", i));
+        ResourceLoader::instance()->getTextureWithName(pucksselectedstr);
     CGPoint numPucksSelectPosition =
         CGPointMake(i == 1 ? pucks1X : pucks2X + pucksXSpread * (i - 1), pucksY);
     numPucksSelect_.add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);

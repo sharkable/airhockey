@@ -26,7 +26,9 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   
   vector<Texture2D> scoreTextures;
   for (int i = 0; i <= WIN_SCORE; i++) {
-    Texture2D texture = ResourceLoader::instance()->getTextureWithName(string("%d_points", i));
+    char pointsstr[15];
+    sprintf(pointsstr, "%d_points", i);
+    Texture2D texture = ResourceLoader::instance()->getTextureWithName(pointsstr);
     scoreTextures.push_back(texture);
   }
   player1Score_ = new SimpleItem(scoreTextures, CGPointMake(662, 526));
