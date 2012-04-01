@@ -12,23 +12,26 @@
 #import "StateEntity.h"
 #import "Texture2D.h"
 
+#include <vector>
+using namespace std;
+
 class MultiSelect : public StateEntity {
  private:
-  NSMutableArray *normalTextures_;
-  NSMutableArray *selectedTextures_;
-  NSMutableArray *positionsX_;
-  NSMutableArray *positionsY_;
+  vector<Texture2D> normalTextures_;
+  vector<Texture2D> selectedTextures_;
+  vector<double> positionsX_;
+  vector<double> positionsY_;
   int selectedValue_;
 
  public:
-  MultiSelect();
-  MultiSelect(Texture2D *normalTexture, Texture2D *selectedTexture,
+  MultiSelect() {}
+  MultiSelect(Texture2D normalTexture, Texture2D selectedTexture,
               CGPoint position);
   ~MultiSelect();
   void update();
   void render();
   void touchesBegan(Touch *touches[], int numTouches);
-  void add(Texture2D *normalTexture, Texture2D *selectedTexture,
+  void add(Texture2D normalTexture, Texture2D selectedTexture,
            CGPoint position);
   int getSelectedValue() { return selectedValue_; };
   void setSelectedValue(int selectedValue) { selectedValue_ = selectedValue; }

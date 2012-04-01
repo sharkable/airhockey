@@ -7,24 +7,26 @@
 //
 
 #import "Rink.h"
+
 #import "Puck.h"
+#import "ResourceLoader.h"
 #import "SoundPlayer.h"
 #import "const.h"
 
 Rink::Rink() {
-  texture_ = [[ResourceLoader instance] getTextureWithName:@"rink_bg"];
+  texture_ = ResourceLoader::instance()->getTextureWithName("rink_bg");
   renderPoint_ = CGPointMake(0, 0);
 }
 
 Rink::~Rink() {
-  [[ResourceLoader instance] releaseResource:texture_];
+  ResourceLoader::instance()->releaseResource(texture_);
 }
 
 void Rink::update() {
 }
 
 void Rink::render() {
-  [texture_ drawAtPoint:renderPoint_];
+  texture_.drawAtPoint(renderPoint_);
 }
 
 void Rink::bounceOff(RoundThing *thing) {

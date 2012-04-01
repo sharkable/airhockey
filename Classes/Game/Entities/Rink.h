@@ -16,7 +16,7 @@
 
 class Rink : public StateEntity {
  private:
-  Texture2D* texture_;
+  Texture2D texture_;
   CGPoint renderPoint_;
  public:
   Rink();

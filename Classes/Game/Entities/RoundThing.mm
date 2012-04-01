@@ -18,7 +18,7 @@ RoundThing::RoundThing() {
 }
 
 RoundThing::~RoundThing() {
-  [[ResourceLoader instance] releaseResource:texture_];
+  ResourceLoader::instance()->releaseResource(texture_);
 }
 
 void RoundThing::update() {
@@ -46,7 +46,7 @@ void RoundThing::applyFriction() {
 
 void RoundThing::render() {
   if (active_) {
-    [texture_ drawAtPoint:CGPointMake(x_ - texture_.contentSize.width/2, y_ - texture_.contentSize.height/2)];
+    texture_.drawAtPoint(CGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2));
   }
 }
 

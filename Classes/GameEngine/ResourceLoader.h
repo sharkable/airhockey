@@ -8,17 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+#import <map>
+using namespace std;
+
 #import "Texture2D.h"
 
-@interface ResourceLoader : NSObject {
- @private
-  NSMutableDictionary *resources_;
-  NSMutableDictionary *resourceCounter_;
-}
+class ResourceLoader {
+ private:
+  map<string, Texture2D> resources_;
+  map<string, int> resourceCounter_;
 
-+ (ResourceLoader *)instance;
-- (Texture2D *)getTextureWithName:(NSString *) name;
-- (void)releaseResourceWithName:(NSString *)name;
-- (void)releaseResource:(id)resource;
-
-@end
+ public:
+  static ResourceLoader *instance();
+  Texture2D getTextureWithName(string name);
+  void releaseResourceWithName(string name);
+  void releaseResource(Texture2D resource);
+};

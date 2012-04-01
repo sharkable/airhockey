@@ -15,7 +15,7 @@
 
 class RoundThing : public StateEntity {
  protected:
-  Texture2D* texture_;
+  Texture2D texture_;
   double   x_;
   double   y_;
   double   oldX_;

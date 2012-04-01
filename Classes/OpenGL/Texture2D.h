@@ -63,6 +63,9 @@
 #import <UIKit/UIKit.h>
 #import <OpenGLES/ES1/gl.h>
 
+#import <string>
+using namespace std;
+
 //CONSTANTS:
 
 typedef enum {
@@ -82,73 +85,52 @@ typedef enum {
  Depending on how you create the Texture2D object, the actual image area of the texture might be smaller than the texture dimensions i.e. "contentSize" != (pixelsWide, pixelsHigh) and (maxS, maxT) != (1.0, 1.0).
  Be aware that the content of the generated textures will be upside-down!
  */
-@interface Texture2D : NSObject
-{
-@private
-  GLuint            name_;
-  CGSize            size_;
-  NSUInteger          width_,
-  height_;
-  Texture2DPixelFormat    format_;
-  GLfloat            maxS_,
-  maxT_;
-  NSString*          resourceName_;
-  GLfloat    coordinates[8];
-  GLfloat     vertices[12];
+class Texture2D {
+ private:
+  GLuint name_;
+  CGSize size_;
+  UInt32 width_;
+  UInt32 height_;
+  Texture2DPixelFormat format_;
+  GLfloat maxS_;
+  GLfloat maxT_;
+  string resourceName_;
+  GLfloat coordinates_[8];
+  GLfloat vertices_[12];
+
+ public:
+  Texture2D() {}
+  Texture2D(const void *data, Texture2DPixelFormat pixelFormat, NSUInteger width, NSUInteger height,
+            CGSize size);
+  Texture2D(GLuint name, CGSize size, NSUInteger width, NSUInteger height,
+            Texture2DPixelFormat format, GLfloat maxS, GLfloat maxT);
+  Texture2D(string filename);
+  Texture2D(string filename, bool silhouette, bool lighten);
+  Texture2D(UIImage *uiImage);
+  Texture2D(string str, CGSize dimensions, UITextAlignment alignment, UIFont *font);
+  ~Texture2D();
+
+  static void setGlobalAlpha(GLfloat alpha);
   
-}
-+ (void) setGlobalAlpha:(GLfloat)alpha;
-- (id) initWithData:(const void*)data pixelFormat:(Texture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size;
-- (id) initWithName:(GLuint)name size:(CGSize)size width:(NSUInteger)width height:(NSUInteger)height format:(Texture2DPixelFormat)format maxS:(GLfloat)maxS maxT:(GLfloat)maxT;
+  Texture2DPixelFormat pixelFormat() { return format_; }
+  NSUInteger pixelsWide() { return width_; }
+  NSUInteger pixelsHigh() { return height_; }
+  GLuint name() { return name_; }
+  CGSize contentSize() {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      return size_;
+    } else {
+      return CGSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
+    }
+  }
+  GLfloat maxS() { return maxS_; }
+  GLfloat maxT() { return maxT_; }
 
-@property(readonly) Texture2DPixelFormat pixelFormat;
-@property(readonly) NSUInteger pixelsWide;
-@property(readonly) NSUInteger pixelsHigh;
-
-@property(readonly) GLuint name;
-
-@property(readonly, nonatomic) CGSize contentSize;
-@property(readonly) GLfloat maxS;
-@property(readonly) GLfloat maxT;
-
-@property(readonly) NSString* resourceName;
-@end
-
-/*
- Drawing extensions to make it easy to draw basic quads using a Texture2D object.
- These functions require GL_TEXTURE_2D and both GL_VERTEX_ARRAY and GL_TEXTURE_COORD_ARRAY client states to be enabled.
- */
-@interface Texture2D (Drawing)
-- (void) drawAtPoint:(CGPoint)point;
-- (void) drawAtPoint:(CGPoint)point alpha:(GLfloat)alpha zoom:(GLfloat)zoom angle:(GLfloat)angle z:(GLfloat)z;
-- (void) drawAtPoint:(CGPoint)point leftRatio:(CGFloat)leftRatio;
-- (void) drawAtPoint:(CGPoint)point rightRatio:(CGFloat)rightRatio;
-- (void) drawAtPoint:(CGPoint)point angle:(GLfloat)angle;
-@end
-
-/*
- Extensions to make it easy to create a Texture2D object from an binary file with bitmap data.
- The format is [width] (4 bytes) [height] (4 bytes) {[R8G8B8A8] ... } (4 bytes * width * height)
- */
-@interface Texture2D (File)
-- (id) initWithFilename:(NSString*)filename;
-- (id) initWithFilename:(NSString*)filename silhouette:(BOOL)silhouette;
-- (id) initWithFilename:(NSString*)filename lighten:(BOOL)lighten;
-- (id) initWithFilename:(NSString*)filename silhouette:(BOOL)silhouette lighten:(BOOL)lighten;
-@end
-
-/*
- Extensions to make it easy to create a Texture2D object from an image file.
- Note that RGBA type textures will have their alpha premultiplied - use the blending mode (GL_ONE, GL_ONE_MINUS_SRC_ALPHA).
- */
-@interface Texture2D (Image)
-- (id) initWithImage:(UIImage *)uiImage;
-@end
-
-/*
- Extensions to make it easy to create a Texture2D object from a string of text.
- Note that the generated textures are of type A8 - use the blending mode (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA).
- */
-@interface Texture2D (Text)
-- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions alignment:(UITextAlignment)alignment font:(UIFont*)font;
-@end
+  string resourceName();
+  
+  void drawAtPoint(CGPoint point);
+  void drawAtPoint(CGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z);
+  void drawAtPointLeftRatio(CGPoint point, CGFloat leftRatio);
+  void drawAtPointRightRatio(CGPoint point, CGFloat rightRatio);
+  void drawAtPointAngle(CGPoint point, GLfloat angle);
+};

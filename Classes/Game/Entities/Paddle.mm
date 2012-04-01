@@ -18,30 +18,29 @@ Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI 
   if (playerId == PLAYER_1) {
     switch (size) {
       case psSmall:
-        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_1_small"];
+        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_1_small");
         break;
       case psMedium:
-        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_1_medium"];
+        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_1_medium");
         break;
       case psLarge:
-        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_1_large"];
+        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_1_large");
         break;
     }
   } else {
     switch (size) {
       case psSmall:
-        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_2_small"];
+        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_2_small");
         break;
       case psMedium:
-        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_2_medium"];
+        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_2_medium");
         break;
       case psLarge:
-        texture_ = [[ResourceLoader instance] getTextureWithName:@"paddle_2_large"];
+        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_2_large");
         break;
     }    
   }
-  [texture_ retain];
-  
+
   radius_ = PADDLE_RADIUS[size];
   mass_ = PADDLE_MASS;
   friction_ = playerControlled_ ? PADDLE_FRICTION : PADDLE_AI_FRICTION;
@@ -228,11 +227,8 @@ void Paddle::update() {
 }
 
 void Paddle::render() {
-  [texture_ drawAtPoint:CGPointMake(x_ - texture_.contentSize.width/2, y_ - texture_.contentSize.height/2)
-          alpha:(isGrabbed() || !playerControlled_ ? 1.0 : 0.5)
-           zoom:1
-          angle:0
-            z:0];
+  texture_.drawAtPoint(CGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
+                       (isGrabbed() || !playerControlled_ ? 1.0 : 0.5), 1, 0, 0);
 }
 
 bool Paddle::isGrabbable() {

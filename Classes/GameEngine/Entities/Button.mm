@@ -21,8 +21,8 @@ Button::Button(Texture2D *normalTexture, Texture2D *pressedTexture,
 }
 
 Button::~Button() {
-  [[ResourceLoader instance] releaseResource:normalTexture_];
-  [[ResourceLoader instance] releaseResource:pressedTexture_];
+  ResourceLoader::instance()->releaseResource(*normalTexture_);
+  ResourceLoader::instance()->releaseResource(*pressedTexture_);
 }
 
 void Button::update() {
@@ -31,11 +31,11 @@ void Button::update() {
 void Button::render() {
   switch (state_) {
     case BUTTON_STATE_NORMAL: {
-      [normalTexture_ drawAtPoint:position_];
+      normalTexture_->drawAtPoint(position_);
       break;
     }
     case BUTTON_STATE_PRESSED: {
-      [pressedTexture_ drawAtPoint:position_];
+      pressedTexture_->drawAtPoint(position_);
       break;
     }
   }
@@ -66,10 +66,10 @@ void Button::touchesEnded(Touch *touches[], int numTouches) {
 bool Button::containsPoint(CGPoint p) {
   return p.x >= position_.x &&
        p.y >= position_.y &&
-       p.x < position_.x + pressedTexture_.contentSize.width &&
-       p.y < position_.y + pressedTexture_.contentSize.height;
+       p.x < position_.x + pressedTexture_->contentSize().width &&
+       p.y < position_.y + pressedTexture_->contentSize().height;
 }
 
 CGSize Button::getSize() {
-  return normalTexture_.contentSize;
+  return normalTexture_->contentSize();
 }

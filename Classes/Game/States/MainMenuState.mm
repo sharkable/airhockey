@@ -22,82 +22,82 @@
 MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), soundSlider_(CGPointMake(400, 50)) {
   BOOL isIPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
-  Texture2D *backgroundTexture = [[ResourceLoader instance] getTextureWithName:@"rink_bg"];
+  Texture2D backgroundTexture = ResourceLoader::instance()->getTextureWithName("rink_bg");
   SimpleItem *background = new SimpleItem(backgroundTexture, CGPointMake(0, 0));
   addEntity(background);
 
   // Add rink left and right pieces.
-  Texture2D *leftRinkBorderTexture = [[ResourceLoader instance] getTextureWithName:@"rink_left"];
+  Texture2D leftRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_left");
   SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, CGPointMake(0, 0));
   addEntity(leftRinkBorder);
-  Texture2D* rightRinkBorderTexture =
-      [[ResourceLoader instance] getTextureWithName:@"rink_right"];
-  CGPoint leftRinkBorderPos = CGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize.width,
+  Texture2D rightRinkBorderTexture =
+      ResourceLoader::instance()->getTextureWithName("rink_right");
+  CGPoint leftRinkBorderPos = CGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
   addEntity(rightRinkBorder);
 
-  Texture2D *titleTexture = [[ResourceLoader instance] getTextureWithName:@"title"];
+  Texture2D titleTexture = ResourceLoader::instance()->getTextureWithName("title");
   SimpleItem *title = new SimpleItem(titleTexture, CGPointMake(81, 53));
   addEntity(title);
   
-  Texture2D *mainMenuTexture = [[ResourceLoader instance] getTextureWithName:@"main_menu"];
-  CGPoint mainMenuPosition = CGPointMake((SCREEN_WIDTH - mainMenuTexture.contentSize.width) / 2,
+  Texture2D mainMenuTexture = ResourceLoader::instance()->getTextureWithName("main_menu");
+  CGPoint mainMenuPosition = CGPointMake((SCREEN_WIDTH - mainMenuTexture.contentSize().width) / 2,
                                          339);
   SimpleItem *mainMenu = new SimpleItem(mainMenuTexture, mainMenuPosition);
   addEntity(mainMenu);
   
-  Texture2D* startButtonImage = [[ResourceLoader instance] getTextureWithName:@"start_button"];
-  Texture2D* startButtonPressedImage =
-      [[ResourceLoader instance] getTextureWithName:@"start_button_pressed"];
+  Texture2D startButtonImage = ResourceLoader::instance()->getTextureWithName("start_button");
+  Texture2D startButtonPressedImage =
+      ResourceLoader::instance()->getTextureWithName("start_button_pressed");
   CGPoint startButtonPosition =
-      CGPointMake((SCREEN_WIDTH - startButtonImage.contentSize.width) / 2, 392);
-  startButton_.setNormalTexture(startButtonImage);
-  startButton_.setPressedTexture(startButtonPressedImage);
+      CGPointMake((SCREEN_WIDTH - startButtonImage.contentSize().width) / 2, 392);
+  startButton_.setNormalTexture(&startButtonImage);
+  startButton_.setPressedTexture(&startButtonPressedImage);
   startButton_.setPosition(startButtonPosition);
   startButton_.setDelegate(this);
   addEntity(&startButton_);
   
-  Texture2D *feedbackButtonImage =
-      [[ResourceLoader instance] getTextureWithName:@"feedback_button"];
-  Texture2D *feedbackButtonPressedImage =
-      [[ResourceLoader instance] getTextureWithName:@"feedback_button_pressed"];
-  feedbackButton_.setNormalTexture(feedbackButtonImage);
-  feedbackButton_.setPressedTexture(feedbackButtonPressedImage);
+  Texture2D feedbackButtonImage =
+      ResourceLoader::instance()->getTextureWithName("feedback_button");
+  Texture2D feedbackButtonPressedImage =
+      ResourceLoader::instance()->getTextureWithName("feedback_button_pressed");
+  feedbackButton_.setNormalTexture(&feedbackButtonImage);
+  feedbackButton_.setPressedTexture(&feedbackButtonPressedImage);
   feedbackButton_.setPosition(isIPhone ? CGPointMake(440, 926) : CGPointMake(486, 936));
   feedbackButton_.setDelegate(this);
   addEntity(&feedbackButton_);
 
-  Texture2D *storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story_button"];
-  Texture2D *storyButtonPressedImage =
-      [[ResourceLoader instance] getTextureWithName:@"story_button_pressed"];
-  storyButton_.setNormalTexture(storyButtonImage);
-  storyButton_.setPressedTexture(storyButtonPressedImage);
+  Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story_button");
+  Texture2D storyButtonPressedImage =
+      ResourceLoader::instance()->getTextureWithName("story_button_pressed");
+  storyButton_.setNormalTexture(&storyButtonImage);
+  storyButton_.setPressedTexture(&storyButtonPressedImage);
   storyButton_.setPosition(isIPhone ? CGPointMake(86, 926) : CGPointMake(91, 936));
   storyButton_.setDelegate(this);
   addEntity(&storyButton_);
   
   if (NO) {
-    Texture2D *upgradeButtonImage =
-        [[ResourceLoader instance] getTextureWithName:@"upgrade_button"];
-    Texture2D *upgradeButtonPressedImage =
-        [[ResourceLoader instance] getTextureWithName:@"upgrade_button_pressed"];
-    upgradeButton_.setNormalTexture(upgradeButtonImage);
-    upgradeButton_.setPressedTexture(upgradeButtonPressedImage);
+    Texture2D upgradeButtonImage =
+        ResourceLoader::instance()->getTextureWithName("upgrade_button");
+    Texture2D upgradeButtonPressedImage =
+        ResourceLoader::instance()->getTextureWithName("upgrade_button_pressed");
+    upgradeButton_.setNormalTexture(&upgradeButtonImage);
+    upgradeButton_.setPressedTexture(&upgradeButtonPressedImage);
     upgradeButton_.setPosition(CGPointMake(91, 936));
     upgradeButton_.setDelegate(this);
     addEntity(&upgradeButton_);
   }
   
   double playersY = isIPhone ? 570 : 511;
-  Texture2D *onePlayerImage = [[ResourceLoader instance] getTextureWithName:@"1_player"];
-  Texture2D *twoPlayerImage = [[ResourceLoader instance] getTextureWithName:@"2_player"];
-  Texture2D *onePlayerSelectedImage =
-      [[ResourceLoader instance] getTextureWithName:@"1_player_selected"];
-  Texture2D *twoPlayerSelectedImage =
-      [[ResourceLoader instance] getTextureWithName:@"2_player_selected"];
+  Texture2D onePlayerImage = ResourceLoader::instance()->getTextureWithName("1_player");
+  Texture2D twoPlayerImage = ResourceLoader::instance()->getTextureWithName("2_player");
+  Texture2D onePlayerSelectedImage =
+      ResourceLoader::instance()->getTextureWithName("1_player_selected");
+  Texture2D twoPlayerSelectedImage =
+      ResourceLoader::instance()->getTextureWithName("2_player_selected");
   CGPoint numPlayersSelectPosition =
-      CGPointMake(SCREEN_WIDTH / 2 - onePlayerImage.contentSize.width, playersY);
+      CGPointMake(SCREEN_WIDTH / 2 - onePlayerImage.contentSize().width, playersY);
   numPlayersSelect_.add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
   numPlayersSelect_.add(twoPlayerImage, twoPlayerSelectedImage, CGPointMake(SCREEN_WIDTH/2, playersY));
   numPlayersSelect_.setSelectedValue(LocalStore::integerForKey(LS_NUM_PLAYERS));
@@ -108,11 +108,9 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   double pucks2X = isIPhone ? 45 : 142.5;
   double pucksXSpread = isIPhone ? 96 : 69;
   for (int i = 1; i <= (NO ? 4 : MAX_NUM_PUCKS); i++) {
-    Texture2D *numPucksImage = [[ResourceLoader instance]
-                                getTextureWithName:[NSString stringWithFormat:@"%i", i]];
-    Texture2D *numPucksSelectedImage =
-        [[ResourceLoader instance]
-         getTextureWithName:[NSString stringWithFormat:@"%i_selected", i]];
+    Texture2D numPucksImage = ResourceLoader::instance()->getTextureWithName(string("%i", i));
+    Texture2D numPucksSelectedImage =
+        ResourceLoader::instance()->getTextureWithName(string("%i_selected", i));
     CGPoint numPucksSelectPosition =
         CGPointMake(i == 1 ? pucks1X : pucks2X + pucksXSpread * (i - 1), pucksY);
     numPucksSelect_.add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
@@ -121,8 +119,8 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   addEntity(&numPucksSelect_);
   
   if (NO) {
-    Texture2D *upgradeForMoreTexture =
-        [[ResourceLoader instance] getTextureWithName:@"upgrade_for_more"];
+    Texture2D upgradeForMoreTexture =
+        ResourceLoader::instance()->getTextureWithName("upgrade_for_more");
     CGPoint upgradeForMorePosition = CGPointMake(pucks2X + pucksXSpread * 4, pucksY);
     SimpleItem *upgradeForMore = new SimpleItem(upgradeForMoreTexture, upgradeForMorePosition);
     addEntity(upgradeForMore);
@@ -130,16 +128,16 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   
   
   double difficultyY = isIPhone ? 839 : 734;
-  Texture2D *badImage = [[ResourceLoader instance] getTextureWithName:@"bad"];
-  Texture2D *badImageSelected = [[ResourceLoader instance] getTextureWithName:@"bad_selected"];
-  Texture2D *goodImage = [[ResourceLoader instance] getTextureWithName:@"good"];
-  Texture2D *goodImageSelected = [[ResourceLoader instance] getTextureWithName:@"good_selected"];
-  Texture2D *excellentImage = [[ResourceLoader instance] getTextureWithName:@"excellent"];
-  Texture2D *excellentImageSelected =
-      [[ResourceLoader instance] getTextureWithName:@"excellent_selected"];
-  Texture2D *amazingImage = [[ResourceLoader instance] getTextureWithName:@"amazing"];
-  Texture2D *amazingImageSelected =
-      [[ResourceLoader instance] getTextureWithName:@"amazing_selected"];
+  Texture2D badImage = ResourceLoader::instance()->getTextureWithName("bad");
+  Texture2D badImageSelected = ResourceLoader::instance()->getTextureWithName("bad_selected");
+  Texture2D goodImage = ResourceLoader::instance()->getTextureWithName("good");
+  Texture2D goodImageSelected = ResourceLoader::instance()->getTextureWithName("good_selected");
+  Texture2D excellentImage = ResourceLoader::instance()->getTextureWithName("excellent");
+  Texture2D excellentImageSelected =
+      ResourceLoader::instance()->getTextureWithName("excellent_selected");
+  Texture2D amazingImage = ResourceLoader::instance()->getTextureWithName("amazing");
+  Texture2D amazingImageSelected =
+      ResourceLoader::instance()->getTextureWithName("amazing_selected");
   difficultySelect_.add(badImage, badImageSelected, CGPointMake(isIPhone ? 38 : 138, difficultyY));
   difficultySelect_.add(goodImage, goodImageSelected, CGPointMake(isIPhone ? 216 : 266, difficultyY));
   difficultySelect_.add(excellentImage, excellentImageSelected, CGPointMake(isIPhone ? 380 : 384, difficultyY));
@@ -152,15 +150,15 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   addEntity(&difficultySelect_);
   
   if (!isIPhone) {
-    Texture2D* smallImage = [[ResourceLoader instance] getTextureWithName:@"small"];
-    Texture2D* smallImageSelected =
-        [[ResourceLoader instance] getTextureWithName:@"small_selected"];
-    Texture2D* mediumImage = [[ResourceLoader instance] getTextureWithName:@"medium"];
-    Texture2D* mediumImageSelected =
-        [[ResourceLoader instance] getTextureWithName:@"medium_selected"];
-    Texture2D* largeImage = [[ResourceLoader instance] getTextureWithName:@"large"];
-    Texture2D* largeImageSelected =
-        [[ResourceLoader instance] getTextureWithName:@"large_selected"];
+    Texture2D smallImage = ResourceLoader::instance()->getTextureWithName("small");
+    Texture2D smallImageSelected =
+        ResourceLoader::instance()->getTextureWithName("small_selected");
+    Texture2D mediumImage = ResourceLoader::instance()->getTextureWithName("medium");
+    Texture2D mediumImageSelected =
+        ResourceLoader::instance()->getTextureWithName("medium_selected");
+    Texture2D largeImage = ResourceLoader::instance()->getTextureWithName("large");
+    Texture2D largeImageSelected =
+        ResourceLoader::instance()->getTextureWithName("large_selected");
     paddleSizeSelect_.add(smallImage, smallImageSelected, CGPointMake(139, 842));
     paddleSizeSelect_.add(mediumImage, mediumImageSelected, CGPointMake(305, 842));
     paddleSizeSelect_.add(largeImage, largeImageSelected, CGPointMake(464, 842));

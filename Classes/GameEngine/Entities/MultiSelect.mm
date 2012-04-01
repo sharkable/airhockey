@@ -11,60 +11,46 @@
 #import "ResourceLoader.h"
 #include "Touch.h"
 
-MultiSelect::MultiSelect() {
-  normalTextures_ = [[NSMutableArray alloc] init];
-  selectedTextures_ = [[NSMutableArray alloc] init];
-  positionsX_ = [[NSMutableArray alloc] init];
-  positionsY_ = [[NSMutableArray alloc] init];
-}
-
-MultiSelect::MultiSelect(Texture2D *normalTexture, Texture2D *selectedTexture,
+MultiSelect::MultiSelect(Texture2D normalTexture, Texture2D selectedTexture,
               CGPoint position) {
-  MultiSelect();
 }
 
 MultiSelect::~MultiSelect() {
-  for (Texture2D *texture in normalTextures_) {
-    [[ResourceLoader instance] releaseResource:texture];
+  for (int i = 0; i < normalTextures_.size(); i++) {
+    ResourceLoader::instance()->releaseResource(normalTextures_[i]);
   }
-  for (Texture2D *texture in selectedTextures_) {
-    [[ResourceLoader instance] releaseResource:texture];
+  for (int i = 0; i < selectedTextures_.size(); i++) {
+    ResourceLoader::instance()->releaseResource(selectedTextures_[i]);
   }
-  
-  [normalTextures_ release];
-  [selectedTextures_ release];
-  [positionsX_ release];
-  [positionsY_ release];
 }
 
 void MultiSelect::update() {
 }
 
 void MultiSelect::render() {
-  for (int i = 0; i < normalTextures_.count; i++) {
-    CGPoint p = CGPointMake([[positionsX_ objectAtIndex:i] doubleValue], 
-                            [[positionsY_ objectAtIndex:i] doubleValue]);
+  for (int i = 0; i < normalTextures_.size(); i++) {
+    CGPoint p = CGPointMake(positionsX_[i], positionsY_[i]);
     if (i == selectedValue_) {
-      [[selectedTextures_ objectAtIndex:i] drawAtPoint:p];
+      selectedTextures_[i].drawAtPoint(p);
     } else {
-      [[normalTextures_ objectAtIndex:i] drawAtPoint:p];  
+      normalTextures_[i].drawAtPoint(p);
     }
   }
 }
 
-void MultiSelect::add(Texture2D *normalTexture, Texture2D *selectedTexture,
+void MultiSelect::add(Texture2D normalTexture, Texture2D selectedTexture,
                       CGPoint position) {
-  [normalTextures_ addObject:normalTexture];
-  [selectedTextures_ addObject:selectedTexture];
-  [positionsX_ addObject:[NSNumber numberWithDouble:position.x]];
-  [positionsY_ addObject:[NSNumber numberWithDouble:position.y]];
+  normalTextures_.push_back(normalTexture);
+  selectedTextures_.push_back(selectedTexture);
+  positionsX_.push_back(position.x);
+  positionsY_.push_back(position.y);
 }
 
 void MultiSelect::touchesBegan(Touch *touches[], int numTouches) {
-  for (int i = 0; i < normalTextures_.count; i++) {
-    double x = [[positionsX_ objectAtIndex:i] doubleValue];
-    double y = [[positionsY_ objectAtIndex:i] doubleValue];
-    CGSize size = ((Texture2D *)[normalTextures_ objectAtIndex:i]).contentSize;
+  for (int i = 0; i < normalTextures_.size(); i++) {
+    double x = positionsX_[i];
+    double y = positionsY_[i];
+    CGSize size = normalTextures_[i].contentSize();
     for (int j = 0; j < numTouches; j++) {
       CGPoint touchPoint = touches[j]->getLocation();
       if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&

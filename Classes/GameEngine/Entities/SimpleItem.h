@@ -13,16 +13,19 @@
 #import "StateEntity.h"
 #import "Texture2D.h"
 
+#include <vector>
+using namespace std;
+
 class SimpleItem : public StateEntity {
  private:
-  NSMutableArray *textures_;
+  vector<Texture2D> textures_;
   int texture_;
   CGPoint position_;
   double angle_;
 
  public:
-  SimpleItem(Texture2D *texture, CGPoint position);
-  SimpleItem(NSArray *textures, CGPoint position);
+  SimpleItem(Texture2D texture, CGPoint position);
+  SimpleItem(vector<Texture2D> textures, CGPoint position);
   ~SimpleItem();
   void update();
   void render();

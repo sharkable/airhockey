@@ -16,9 +16,9 @@
 class SoundSlider : public StateEntity {
  private:
   CGPoint    position_;
-  Texture2D* emptyTexture_;
-  Texture2D* fullTexture_;
-  Texture2D* thumbTexture_;
+  Texture2D emptyTexture_;
+  Texture2D fullTexture_;
+  Texture2D thumbTexture_;
   double     value_;
   void *grabbedTouch_;
   CGPoint    lastTouchPosition_;

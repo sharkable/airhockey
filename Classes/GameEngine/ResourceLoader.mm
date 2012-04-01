@@ -9,80 +9,52 @@
 #import "ResourceLoader.h"
 #import "const.h"
 
-@implementation ResourceLoader
+#import "TypeUtil.h"
 
-static ResourceLoader *instance_ = nil;
+ResourceLoader instance__;
 
-+ (ResourceLoader *)instance {
-  if (instance_ == nil) {
-    instance_ = [[ResourceLoader alloc] init];
-  }
-  return instance_;
+ResourceLoader *ResourceLoader::instance() {
+  return &instance__;          
 }
 
-- (ResourceLoader *)init {
-  self = [super init];
-  if (self) {
-    resources_ = [[NSMutableDictionary alloc] init];
-    resourceCounter_ = [[NSMutableDictionary alloc] init];
-  }
-  return self;
-}
-
-- (void)dealloc {
-  [resources_ release];
-  [resourceCounter_ release];
-  
-  [super dealloc];
-}
-
-- (Texture2D *)getTextureWithName:(NSString *)name {
-  NSNumber *count = [resourceCounter_ objectForKey:name];
-  if ([count intValue] == 0) {
+Texture2D ResourceLoader::getTextureWithName(string name) {
+  int count = resourceCounter_[name];
+  if (count == 0) {
     UIImage *image;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", name]];
+      image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", TypeUtil::string2NSString(name)]];
     } else {
-      image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", name]];
+      image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", TypeUtil::string2NSString(name)]];
     }
     
-    Texture2D *texture = [[[Texture2D alloc] initWithImage:image] autorelease];
-    [resourceCounter_ setObject:[NSNumber numberWithInt:[count intValue] + 1] forKey:name];
-    [resources_ setObject:texture forKey:name];
+    Texture2D texture(image);
+    resourceCounter_[name] = count + 1;
+    resources_[name] = texture;
     return texture;
   }
   
-  Texture2D *texture = [resources_ objectForKey:name];
-  [resourceCounter_ setObject:[NSNumber numberWithInt:[count intValue]+1] forKey:name];
+  Texture2D texture = resources_[name];
+  resourceCounter_[name] = count + 1;
   
   return texture;  
 }
 
-- (void)releaseResourceWithName:(NSString *)name {
-  if (!name) {
+void ResourceLoader::releaseResourceWithName(string name) {
+  int count = resourceCounter_[name];
+  if (count == 0) {
     return;
-  }
-  NSNumber *count = [resourceCounter_ objectForKey:name];
-  if (count == nil || [count intValue] == 0) {
-    return;
-  } else if ([count intValue] == 1) {
-    [resources_ removeObjectForKey:name];
-    [resourceCounter_ removeObjectForKey:name];
+  } else if (count == 1) {
+    resources_.erase(name);
+    resourceCounter_.erase(name);
   } else {
-    [resourceCounter_ setObject:[NSNumber numberWithInt:[count intValue] - 1] forKey:name];
+    resourceCounter_[name] = count - 1;
   }
 }
 
-- (void)releaseResource:(id)resource {
-  if (!resource) {
-    return;
-  }
-  NSArray *keys = [resources_ allKeysForObject:resource];
-  if (keys.count == 1) {
-    [self releaseResourceWithName:[keys objectAtIndex:0]];    
-  } else {
-    // TODO assert
+void ResourceLoader::releaseResource(Texture2D resource) {
+  for (map<string, Texture2D>::iterator i = resources_.begin(); i != resources_.end(); i++) {
+    if (i->second.name() == resource.name()) {
+      releaseResourceWithName(i->first);
+    }
   }
 }
-
-@end

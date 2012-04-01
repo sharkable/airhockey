@@ -11,8 +11,8 @@
 #import "GameEngine.h"
 
 StoryState::StoryState(GameEngine *gameEngine) : EngineState(gameEngine) {
-  Texture2D *storyButtonImage = [[ResourceLoader instance] getTextureWithName:@"story"];
-  storyButton_ = new Button(storyButtonImage, storyButtonImage,
+  Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story");
+  storyButton_ = new Button(&storyButtonImage, &storyButtonImage,
                             CGPointMake(0, 0));
 // TODO
 //  storyButton_->setDelegate(self);
@@ -20,8 +20,8 @@ StoryState::StoryState(GameEngine *gameEngine) : EngineState(gameEngine) {
   addEntity(storyButton_);
 
 
-  Texture2D *aboutButtonImage = [[ResourceLoader instance] getTextureWithName:@"about"];
-  aboutButton_ = new Button(aboutButtonImage, aboutButtonImage, CGPointMake(0, 0));
+  Texture2D aboutButtonImage = ResourceLoader::instance()->getTextureWithName("about");
+  aboutButton_ = new Button(&aboutButtonImage, &aboutButtonImage, CGPointMake(0, 0));
 // TODO
 //  aboutButton_->setDelegate(self);
 //  aboutButton_->setSelector(@selector(pressedAbout));;

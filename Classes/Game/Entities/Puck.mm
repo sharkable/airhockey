@@ -13,7 +13,7 @@
 using namespace std;
 
 Puck::Puck() {
-  texture_ = [[ResourceLoader instance] getTextureWithName:@"puck"];
+  texture_ = ResourceLoader::instance()->getTextureWithName("puck");
   radius_ = PUCK_RADIUS;
   mass_ = PUCK_MASS;
   friction_ = PUCK_FRICTION;
@@ -38,11 +38,8 @@ void Puck::update() {
 
 void Puck::render() {
   if (isActive()) {
-    [texture_ drawAtPoint:CGPointMake(x_ - texture_.contentSize.width/2, y_ - texture_.contentSize.height/2)
-           alpha:alpha_
-            zoom:1
-           angle:0
-               z:0];
+    texture_.drawAtPoint(CGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
+                         alpha_, 1, 0, 0);
   }
 }
 

@@ -9,17 +9,16 @@
 #import "SimpleItem.h"
 #import "ResourceLoader.h"
 
-SimpleItem::SimpleItem(Texture2D *texture, CGPoint position) {
-  textures_ = [[NSMutableArray alloc] init];
-  [textures_ addObject:texture];
+SimpleItem::SimpleItem(Texture2D texture, CGPoint position) {
+  textures_.push_back(texture);
   texture_ = 0;
   angle_ = 0;
   
   position_ = position;
 }
 
-SimpleItem::SimpleItem(NSArray *textures, CGPoint position) {
-  textures_ = [[NSMutableArray alloc] initWithArray:textures];
+SimpleItem::SimpleItem(vector<Texture2D> textures, CGPoint position) {
+  textures_ = textures;
   texture_ = 0;
   angle_ = 0;
   
@@ -27,22 +26,18 @@ SimpleItem::SimpleItem(NSArray *textures, CGPoint position) {
 }
 
 SimpleItem::~SimpleItem() {
-  for (Texture2D *texture in textures_) {
-    [[ResourceLoader instance] releaseResource:texture];
+  for (int i = 0; i < textures_.size(); i++) {
+    ResourceLoader::instance()->releaseResource(textures_[i]);
   }
-  [textures_ release];
 }
 
 void SimpleItem::update() {
 }
 
 void SimpleItem::render() {
-  Texture2D *t = [textures_ objectAtIndex:texture_];
-  [t drawAtPoint:CGPointMake(position_.x, position_.y)
-           angle:angle_];
+  textures_[texture_].drawAtPointAngle(CGPointMake(position_.x, position_.y), angle_);
 }
 
 CGSize SimpleItem::getSize() {
-  Texture2D *t = [textures_ objectAtIndex:texture_];
-  return t.contentSize;
+  return textures_[texture_].contentSize();
 }

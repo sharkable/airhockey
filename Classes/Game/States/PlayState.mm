@@ -24,11 +24,10 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   rink_ = new Rink();
   addEntity(rink_);
   
-  NSMutableArray *scoreTextures = [NSMutableArray arrayWithCapacity:WIN_SCORE + 1];
+  vector<Texture2D> scoreTextures;
   for (int i = 0; i <= WIN_SCORE; i++) {
-    Texture2D *texture = [[ResourceLoader instance]
-                          getTextureWithName:[NSString stringWithFormat:@"%d_points", i]];
-    [scoreTextures addObject:texture];
+    Texture2D texture = ResourceLoader::instance()->getTextureWithName(string("%d_points", i));
+    scoreTextures.push_back(texture);
   }
   player1Score_ = new SimpleItem(scoreTextures, CGPointMake(662, 526));
   player2Score_ = new SimpleItem(scoreTextures, CGPointMake(662, 386));
@@ -75,82 +74,81 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   roundThings_.push_back(post4);
   
   // Add rink left and right pieces.
-  Texture2D *leftRinkBorderTexture = [[ResourceLoader instance] getTextureWithName:@"rink_left"];
+  Texture2D leftRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_left");
   SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, CGPointMake(0, 0));
   addEntity(leftRinkBorder);
-  Texture2D *rightRinkBorderTexture =
-      [[ResourceLoader instance] getTextureWithName:@"rink_right"];
-  CGPoint leftRinkBorderPos = CGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize.width,
+  Texture2D rightRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_right");
+  CGPoint leftRinkBorderPos = CGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
   addEntity(rightRinkBorder);
   
-  Texture2D *winTexture = [[ResourceLoader instance] getTextureWithName:@"win"];
+  Texture2D winTexture = ResourceLoader::instance()->getTextureWithName("win");
   win_ = new SimpleItem(winTexture, CGPointMake(0, 0));
 
-  Texture2D *loseTexture = [[ResourceLoader instance] getTextureWithName:@"lose"];
+  Texture2D loseTexture = ResourceLoader::instance()->getTextureWithName("lose");
   lose_ = new SimpleItem(loseTexture, CGPointMake(0, 0));
 
-  Texture2D *getReadyTexture = [[ResourceLoader instance] getTextureWithName:@"get_ready"];
+  Texture2D getReadyTexture = ResourceLoader::instance()->getTextureWithName("get_ready");
   CGPoint getReadyPosition =
-      CGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize.width) / 2, 
-                  (SCREEN_HEIGHT - getReadyTexture.contentSize.height) / 2);
+      CGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize().width) / 2, 
+                  (SCREEN_HEIGHT - getReadyTexture.contentSize().height) / 2);
   getReady_ = new SimpleItem(getReadyTexture, getReadyPosition);
 
-  Texture2D *goTexture = [[ResourceLoader instance] getTextureWithName:@"go"];
-  CGPoint goPosition = CGPointMake((SCREEN_WIDTH - goTexture.contentSize.width) / 2, 
-                                   (SCREEN_HEIGHT - goTexture.contentSize.height) / 2);
+  Texture2D goTexture = ResourceLoader::instance()->getTextureWithName("go");
+  CGPoint goPosition = CGPointMake((SCREEN_WIDTH - goTexture.contentSize().width) / 2, 
+                                   (SCREEN_HEIGHT - goTexture.contentSize().height) / 2);
   go_ = new SimpleItem(goTexture, goPosition);
   
-  Texture2D *rematchButtonTexture =
-      [[ResourceLoader instance] getTextureWithName:@"rematch_button"];
-  Texture2D *rematchButtonPressedTexture =
-      [[ResourceLoader instance] getTextureWithName:@"rematch_button_pressed"];
+  Texture2D rematchButtonTexture =
+      ResourceLoader::instance()->getTextureWithName("rematch_button");
+  Texture2D rematchButtonPressedTexture =
+      ResourceLoader::instance()->getTextureWithName("rematch_button_pressed");
   CGPoint rematchButtonPos =
-      CGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize.width) / 2, 441);
-  rematchButton_ = new Button(rematchButtonTexture, rematchButtonPressedTexture, rematchButtonPos);
+      CGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
+  rematchButton_ = new Button(&rematchButtonTexture, &rematchButtonPressedTexture, rematchButtonPos);
 // TODO
 //  rematchButton_->setDelegate(self);
 //  rematchButton_->setSelector(@selector(rematchPressed));
 
-  Texture2D *menuButtonTexture = [[ResourceLoader instance] getTextureWithName:@"menu_button"];
-  Texture2D *menuButtonPressedTexture =
-      [[ResourceLoader instance] getTextureWithName:@"menu_button_pressed"];
-  CGPoint menuButtonPos = CGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize.width) / 2,
+  Texture2D menuButtonTexture = ResourceLoader::instance()->getTextureWithName("menu_button");
+  Texture2D menuButtonPressedTexture =
+      ResourceLoader::instance()->getTextureWithName("menu_button_pressed");
+  CGPoint menuButtonPos = CGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize().width) / 2,
                                       546);
-  menuButton_ = new Button(menuButtonTexture, menuButtonPressedTexture, menuButtonPos);
+  menuButton_ = new Button(&menuButtonTexture, &menuButtonPressedTexture, menuButtonPos);
 // TODO
 //  menuButton_->setDelegate(self);
 //  menuButton_->setSelector(@selector(menuPressed));
 
-  Texture2D *continueButtonTexture =
-      [[ResourceLoader instance] getTextureWithName:@"continue_button"];
-  Texture2D *continueButtonPressedTexture =
-      [[ResourceLoader instance] getTextureWithName:@"continue_button_pressed"];
+  Texture2D continueButtonTexture =
+      ResourceLoader::instance()->getTextureWithName("continue_button");
+  Texture2D continueButtonPressedTexture =
+      ResourceLoader::instance()->getTextureWithName("continue_button_pressed");
   CGPoint continueButtonPos =
-      CGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize.width) / 2, 441);
-  continueButton_ = new Button(continueButtonTexture, continueButtonPressedTexture, continueButtonPos);
+      CGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
+  continueButton_ = new Button(&continueButtonTexture, &continueButtonPressedTexture, continueButtonPos);
 // TODO
 //  continueButton_->setDelegate(self);
 //  continueButton_->setSelector(@selector(continuePressed));
   
   soundSlider_ = new SoundSlider(CGPointMake(331, 336));
   
-  Texture2D *menuBackgroundTexture =
-      [[ResourceLoader instance] getTextureWithName:@"game_menu_bg"];
+  Texture2D menuBackgroundTexture =
+      ResourceLoader::instance()->getTextureWithName("game_menu_bg");
   CGPoint menuBackgroundPosition =
-      CGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize.width) / 2, 306);
+      CGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize().width) / 2, 306);
   menuBackground_ = new SimpleItem(menuBackgroundTexture, menuBackgroundPosition);
   
-  Texture2D *pauseButtonTexture = [[ResourceLoader instance] getTextureWithName:@"pause_button"];
-  Texture2D *pauseButtonPressedTexture =
-      [[ResourceLoader instance] getTextureWithName:@"pause_button_pressed"];
+  Texture2D pauseButtonTexture = ResourceLoader::instance()->getTextureWithName("pause_button");
+  Texture2D pauseButtonPressedTexture =
+      ResourceLoader::instance()->getTextureWithName("pause_button_pressed");
   
   BOOL isIPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
   
   if (!isIPhone) {
     CGPoint pauseButtonPos1 = CGPointMake(0, 0);
-    pauseButton1_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos1);
+    pauseButton1_ = new Button(&pauseButtonTexture, &pauseButtonPressedTexture, pauseButtonPos1);
 // TODO
 //    pauseButton1_->setDelegate(self);
 //    pauseButton1_->setSelector(@selector(pausePressed));
@@ -158,10 +156,10 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   }
   
   CGPoint pauseButtonPos2 =
-      CGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize.width,
-                  SCREEN_HEIGHT - pauseButtonTexture.contentSize.height +
+      CGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize().width,
+                  SCREEN_HEIGHT - pauseButtonTexture.contentSize().height +
                       (NO ? (27 * 768.0/320.0) : 0));
-  pauseButton2_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos2);
+  pauseButton2_ = new Button(&pauseButtonTexture, &pauseButtonPressedTexture, pauseButtonPos2);
 // TODO
 //  pauseButton2_->setDelegate(self);
 //  pauseButton2_->setSelector(@selector(pausePressed));
