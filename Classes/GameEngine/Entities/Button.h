@@ -26,22 +26,22 @@ class ButtonDelegate {
 class Button : public StateEntity {
  public:
   Button() {}
-  Button(Texture2D *normalTexture, Texture2D *pressedTexture, CGPoint position);
+  Button(Texture2D normalTexture, Texture2D pressedTexture, CGPoint position);
   ~Button();
   void update();
   void render();
   void touchesBegan(Touch *touches[], int numTouches);
   void touchesEnded(Touch *touches[], int numTouches);
   bool containsPoint(CGPoint p);
-  void setNormalTexture(Texture2D *normalTexture) { normalTexture_ = normalTexture; }
-  void setPressedTexture(Texture2D *pressedTexture) { pressedTexture_ = pressedTexture; }
+  void setNormalTexture(Texture2D normalTexture) { normalTexture_ = normalTexture; }
+  void setPressedTexture(Texture2D pressedTexture) { pressedTexture_ = pressedTexture; }
   void setPosition(CGPoint position) { position_ = position; }
   void setDelegate(ButtonDelegate *delegate) { delegate_ = delegate; }
   CGSize getSize();
  
  private:
-  Texture2D *normalTexture_;
-  Texture2D *pressedTexture_;
+  Texture2D normalTexture_;
+  Texture2D pressedTexture_;
   CGPoint position_;
   int state_;
   ButtonDelegate *delegate_;

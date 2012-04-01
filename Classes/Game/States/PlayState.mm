@@ -108,7 +108,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
       ResourceLoader::instance()->getTextureWithName("rematch_button_pressed");
   CGPoint rematchButtonPos =
       CGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
-  rematchButton_ = new Button(&rematchButtonTexture, &rematchButtonPressedTexture, rematchButtonPos);
+  rematchButton_ = new Button(rematchButtonTexture, rematchButtonPressedTexture, rematchButtonPos);
 // TODO
 //  rematchButton_->setDelegate(self);
 //  rematchButton_->setSelector(@selector(rematchPressed));
@@ -118,7 +118,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
       ResourceLoader::instance()->getTextureWithName("menu_button_pressed");
   CGPoint menuButtonPos = CGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize().width) / 2,
                                       546);
-  menuButton_ = new Button(&menuButtonTexture, &menuButtonPressedTexture, menuButtonPos);
+  menuButton_ = new Button(menuButtonTexture, menuButtonPressedTexture, menuButtonPos);
 // TODO
 //  menuButton_->setDelegate(self);
 //  menuButton_->setSelector(@selector(menuPressed));
@@ -129,7 +129,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
       ResourceLoader::instance()->getTextureWithName("continue_button_pressed");
   CGPoint continueButtonPos =
       CGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
-  continueButton_ = new Button(&continueButtonTexture, &continueButtonPressedTexture, continueButtonPos);
+  continueButton_ = new Button(continueButtonTexture, continueButtonPressedTexture, continueButtonPos);
 // TODO
 //  continueButton_->setDelegate(self);
 //  continueButton_->setSelector(@selector(continuePressed));
@@ -150,7 +150,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   
   if (!isIPhone) {
     CGPoint pauseButtonPos1 = CGPointMake(0, 0);
-    pauseButton1_ = new Button(&pauseButtonTexture, &pauseButtonPressedTexture, pauseButtonPos1);
+    pauseButton1_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos1);
 // TODO
 //    pauseButton1_->setDelegate(self);
 //    pauseButton1_->setSelector(@selector(pausePressed));
@@ -161,7 +161,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
       CGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize().width,
                   SCREEN_HEIGHT - pauseButtonTexture.contentSize().height +
                       (NO ? (27 * 768.0/320.0) : 0));
-  pauseButton2_ = new Button(&pauseButtonTexture, &pauseButtonPressedTexture, pauseButtonPos2);
+  pauseButton2_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos2);
 // TODO
 //  pauseButton2_->setDelegate(self);
 //  pauseButton2_->setSelector(@selector(pausePressed));

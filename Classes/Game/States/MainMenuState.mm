@@ -52,8 +52,8 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
       ResourceLoader::instance()->getTextureWithName("start_button_pressed");
   CGPoint startButtonPosition =
       CGPointMake((SCREEN_WIDTH - startButtonImage.contentSize().width) / 2, 392);
-  startButton_.setNormalTexture(&startButtonImage);
-  startButton_.setPressedTexture(&startButtonPressedImage);
+  startButton_.setNormalTexture(startButtonImage);
+  startButton_.setPressedTexture(startButtonPressedImage);
   startButton_.setPosition(startButtonPosition);
   startButton_.setDelegate(this);
   addEntity(&startButton_);
@@ -62,8 +62,8 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
       ResourceLoader::instance()->getTextureWithName("feedback_button");
   Texture2D feedbackButtonPressedImage =
       ResourceLoader::instance()->getTextureWithName("feedback_button_pressed");
-  feedbackButton_.setNormalTexture(&feedbackButtonImage);
-  feedbackButton_.setPressedTexture(&feedbackButtonPressedImage);
+  feedbackButton_.setNormalTexture(feedbackButtonImage);
+  feedbackButton_.setPressedTexture(feedbackButtonPressedImage);
   feedbackButton_.setPosition(isIPhone ? CGPointMake(440, 926) : CGPointMake(486, 936));
   feedbackButton_.setDelegate(this);
   addEntity(&feedbackButton_);
@@ -71,8 +71,8 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story_button");
   Texture2D storyButtonPressedImage =
       ResourceLoader::instance()->getTextureWithName("story_button_pressed");
-  storyButton_.setNormalTexture(&storyButtonImage);
-  storyButton_.setPressedTexture(&storyButtonPressedImage);
+  storyButton_.setNormalTexture(storyButtonImage);
+  storyButton_.setPressedTexture(storyButtonPressedImage);
   storyButton_.setPosition(isIPhone ? CGPointMake(86, 926) : CGPointMake(91, 936));
   storyButton_.setDelegate(this);
   addEntity(&storyButton_);
@@ -82,8 +82,8 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
         ResourceLoader::instance()->getTextureWithName("upgrade_button");
     Texture2D upgradeButtonPressedImage =
         ResourceLoader::instance()->getTextureWithName("upgrade_button_pressed");
-    upgradeButton_.setNormalTexture(&upgradeButtonImage);
-    upgradeButton_.setPressedTexture(&upgradeButtonPressedImage);
+    upgradeButton_.setNormalTexture(upgradeButtonImage);
+    upgradeButton_.setPressedTexture(upgradeButtonPressedImage);
     upgradeButton_.setPosition(CGPointMake(91, 936));
     upgradeButton_.setDelegate(this);
     addEntity(&upgradeButton_);
