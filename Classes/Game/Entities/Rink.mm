@@ -15,7 +15,7 @@
 
 Rink::Rink() {
   texture_ = ResourceLoader::instance()->getTextureWithName("rink_bg");
-  renderPoint_ = CGPointMake(0, 0);
+  renderPoint_ = SGPointMake(0, 0);
 }
 
 Rink::~Rink() {

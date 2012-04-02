@@ -9,8 +9,8 @@
 #ifndef AirHockey_Button_h
 #define AirHockey_Button_h
 
-#import "StateEntity.h"
-#import "Texture2D.h"
+#include "StateEntity.h"
+#include "Texture2D.h"
 
 class Button;
 class MainMenuState;
@@ -26,23 +26,23 @@ class ButtonDelegate {
 class Button : public StateEntity {
  public:
   Button() {}
-  Button(Texture2D normalTexture, Texture2D pressedTexture, CGPoint position);
+  Button(Texture2D normalTexture, Texture2D pressedTexture, SGPoint position);
   ~Button();
   void update();
   void render();
   void touchesBegan(Touch *touches[], int numTouches);
   void touchesEnded(Touch *touches[], int numTouches);
-  bool containsPoint(CGPoint p);
+  bool containsPoint(SGPoint p);
   void setNormalTexture(Texture2D normalTexture) { normalTexture_ = normalTexture; }
   void setPressedTexture(Texture2D pressedTexture) { pressedTexture_ = pressedTexture; }
-  void setPosition(CGPoint position) { position_ = position; }
+  void setPosition(SGPoint position) { position_ = position; }
   void setDelegate(ButtonDelegate *delegate) { delegate_ = delegate; }
-  CGSize getSize();
+  SGSize getSize();
  
  private:
   Texture2D normalTexture_;
   Texture2D pressedTexture_;
-  CGPoint position_;
+  SGPoint position_;
   int state_;
   ButtonDelegate *delegate_;
 };

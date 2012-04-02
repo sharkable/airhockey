@@ -227,7 +227,7 @@ void Paddle::update() {
 }
 
 void Paddle::render() {
-  texture_.drawAtPoint(CGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
+  texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
                        (isGrabbed() || !playerControlled_ ? 1.0 : 0.5), 1, 0, 0);
 }
 
@@ -236,7 +236,7 @@ bool Paddle::isGrabbable() {
 }
 
 bool Paddle::containsTouch(Touch *touch) {
-  CGPoint p = touch->getLocation();
+  SGPoint p = touch->getLocation();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return NO;
   }

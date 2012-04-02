@@ -31,8 +31,8 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
     Texture2D texture = ResourceLoader::instance()->getTextureWithName(pointsstr);
     scoreTextures.push_back(texture);
   }
-  player1Score_ = new SimpleItem(scoreTextures, CGPointMake(662, 526));
-  player2Score_ = new SimpleItem(scoreTextures, CGPointMake(662, 386));
+  player1Score_ = new SimpleItem(scoreTextures, SGPointMake(662, 526));
+  player2Score_ = new SimpleItem(scoreTextures, SGPointMake(662, 386));
   addEntity(player1Score_);
   addEntity(player2Score_);
   
@@ -77,28 +77,28 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   
   // Add rink left and right pieces.
   Texture2D leftRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_left");
-  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, CGPointMake(0, 0));
+  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
   addEntity(leftRinkBorder);
   Texture2D rightRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_right");
-  CGPoint leftRinkBorderPos = CGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
+  SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
   addEntity(rightRinkBorder);
   
   Texture2D winTexture = ResourceLoader::instance()->getTextureWithName("win");
-  win_ = new SimpleItem(winTexture, CGPointMake(0, 0));
+  win_ = new SimpleItem(winTexture, SGPointMake(0, 0));
 
   Texture2D loseTexture = ResourceLoader::instance()->getTextureWithName("lose");
-  lose_ = new SimpleItem(loseTexture, CGPointMake(0, 0));
+  lose_ = new SimpleItem(loseTexture, SGPointMake(0, 0));
 
   Texture2D getReadyTexture = ResourceLoader::instance()->getTextureWithName("get_ready");
-  CGPoint getReadyPosition =
-      CGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize().width) / 2, 
+  SGPoint getReadyPosition =
+      SGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize().width) / 2, 
                   (SCREEN_HEIGHT - getReadyTexture.contentSize().height) / 2);
   getReady_ = new SimpleItem(getReadyTexture, getReadyPosition);
 
   Texture2D goTexture = ResourceLoader::instance()->getTextureWithName("go");
-  CGPoint goPosition = CGPointMake((SCREEN_WIDTH - goTexture.contentSize().width) / 2, 
+  SGPoint goPosition = SGPointMake((SCREEN_WIDTH - goTexture.contentSize().width) / 2, 
                                    (SCREEN_HEIGHT - goTexture.contentSize().height) / 2);
   go_ = new SimpleItem(goTexture, goPosition);
   
@@ -106,8 +106,8 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
       ResourceLoader::instance()->getTextureWithName("rematch_button");
   Texture2D rematchButtonPressedTexture =
       ResourceLoader::instance()->getTextureWithName("rematch_button_pressed");
-  CGPoint rematchButtonPos =
-      CGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
+  SGPoint rematchButtonPos =
+      SGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
   rematchButton_ = new Button(rematchButtonTexture, rematchButtonPressedTexture, rematchButtonPos);
 // TODO
 //  rematchButton_->setDelegate(self);
@@ -116,7 +116,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   Texture2D menuButtonTexture = ResourceLoader::instance()->getTextureWithName("menu_button");
   Texture2D menuButtonPressedTexture =
       ResourceLoader::instance()->getTextureWithName("menu_button_pressed");
-  CGPoint menuButtonPos = CGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize().width) / 2,
+  SGPoint menuButtonPos = SGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize().width) / 2,
                                       546);
   menuButton_ = new Button(menuButtonTexture, menuButtonPressedTexture, menuButtonPos);
 // TODO
@@ -127,19 +127,19 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
       ResourceLoader::instance()->getTextureWithName("continue_button");
   Texture2D continueButtonPressedTexture =
       ResourceLoader::instance()->getTextureWithName("continue_button_pressed");
-  CGPoint continueButtonPos =
-      CGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
+  SGPoint continueButtonPos =
+      SGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
   continueButton_ = new Button(continueButtonTexture, continueButtonPressedTexture, continueButtonPos);
 // TODO
 //  continueButton_->setDelegate(self);
 //  continueButton_->setSelector(@selector(continuePressed));
   
-  soundSlider_ = new SoundSlider(CGPointMake(331, 336));
+  soundSlider_ = new SoundSlider(SGPointMake(331, 336));
   
   Texture2D menuBackgroundTexture =
       ResourceLoader::instance()->getTextureWithName("game_menu_bg");
-  CGPoint menuBackgroundPosition =
-      CGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize().width) / 2, 306);
+  SGPoint menuBackgroundPosition =
+      SGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize().width) / 2, 306);
   menuBackground_ = new SimpleItem(menuBackgroundTexture, menuBackgroundPosition);
   
   Texture2D pauseButtonTexture = ResourceLoader::instance()->getTextureWithName("pause_button");
@@ -149,7 +149,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   BOOL isIPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
   
   if (!isIPhone) {
-    CGPoint pauseButtonPos1 = CGPointMake(0, 0);
+    SGPoint pauseButtonPos1 = SGPointMake(0, 0);
     pauseButton1_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos1);
 // TODO
 //    pauseButton1_->setDelegate(self);
@@ -157,8 +157,8 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
     addEntity(pauseButton1_);
   }
   
-  CGPoint pauseButtonPos2 =
-      CGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize().width,
+  SGPoint pauseButtonPos2 =
+      SGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize().width,
                   SCREEN_HEIGHT - pauseButtonTexture.contentSize().height +
                       (NO ? (27 * 768.0/320.0) : 0));
   pauseButton2_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos2);
@@ -406,12 +406,12 @@ void PlayState::finishGameWithWinner(int playerId) {
     case PLAYER_1: {
       player1WinCount_++;
 
-      win_->setPosition(CGPointMake(winX, bottomY));
+      win_->setPosition(SGPointMake(winX, bottomY));
       win_->setAngle(0);
       addEntity(win_);
       
       if (numPlayers_ == 2) {
-        lose_->setPosition(CGPointMake(loseX, topY));
+        lose_->setPosition(SGPointMake(loseX, topY));
         lose_->setAngle(180);
         addEntity(lose_);
       }
@@ -424,12 +424,12 @@ void PlayState::finishGameWithWinner(int playerId) {
       player2WinCount_++;
       
       if (numPlayers_ == 2) {
-        win_->setPosition(CGPointMake(winX, topY));
+        win_->setPosition(SGPointMake(winX, topY));
         win_->setAngle(180);
         addEntity(win_);
       }
       
-      lose_->setPosition(CGPointMake(loseX, bottomY));
+      lose_->setPosition(SGPointMake(loseX, bottomY));
       lose_->setAngle(0);
       addEntity(lose_);
       
@@ -454,9 +454,9 @@ void PlayState::finishGameWithWinner(int playerId) {
   addEntity(menuButton_);
   
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [getGameEngine().adEngine addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
+    [getGameEngine().adEngine addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
   } else {
-    [getGameEngine().adEngine addAdAtPoint:CGPointMake(0, 0)];
+    [getGameEngine().adEngine addAdAtPoint:SGPointMake(0, 0)];
   }
 }
 
@@ -502,7 +502,7 @@ void PlayState::pausePressed() {
     addEntity(menuButton_);
     addEntity(continueButton_);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      [getGameEngine().adEngine addAdAtPoint:CGPointMake((SCREEN_WIDTH - 320)/2, 385)];
+      [getGameEngine().adEngine addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320)/2, 385)];
     }
   }
 }

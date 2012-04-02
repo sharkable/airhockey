@@ -6,12 +6,10 @@
 //  Copyright 2009 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import <map>
 using namespace std;
 
-#import "Texture2D.h"
+#include "Texture2D.h"
 
 class ResourceLoader {
  private:

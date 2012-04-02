@@ -9,14 +9,16 @@
 #ifndef AirHockey_Touch_h
 #define AirHockey_Touch_h
 
+#include "Texture2D.h"
+
 class Touch {
  private:
-  CGPoint location_;
+  SGPoint location_;
   void *identifier_;
 
  public:
-  CGPoint getLocation() const { return location_; }
-  void setLocation(CGPoint location) { location_ = location; }
+  SGPoint getLocation() const { return location_; }
+  void setLocation(SGPoint location) { location_ = location; }
   void *getIdentifier() const { return identifier_; }
   void setIdentifier(void *identifier) { identifier_ = identifier; }
 };

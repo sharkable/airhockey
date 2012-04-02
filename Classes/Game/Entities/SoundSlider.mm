@@ -13,7 +13,7 @@
 #include "Touch.h"
 #import "const.h"
 
-SoundSlider::SoundSlider(CGPoint position) {
+SoundSlider::SoundSlider(SGPoint position) {
   position_ = position;
   
   emptyTexture_ = ResourceLoader::instance()->getTextureWithName("sound_empty");
@@ -38,14 +38,14 @@ void SoundSlider::render() {
   thumbTexture_.drawAtPoint(getThumbPoint());
 }
 
-CGPoint SoundSlider::getThumbPoint() {
-  return CGPointMake(position_.x + 19 + (269.0 - thumbTexture_.contentSize().width)*value_, position_.y);
+SGPoint SoundSlider::getThumbPoint() {
+  return SGPointMake(position_.x + 19 + (269.0 - thumbTexture_.contentSize().width)*value_, position_.y);
 }
 
 void SoundSlider::touchesBegan(Touch *touches[], int numTouches) {
   for (int i = 0; i < numTouches; i++) {
-    CGPoint touchP = touches[i]->getLocation();
-    CGPoint thumbP = getThumbPoint();
+    SGPoint touchP = touches[i]->getLocation();
+    SGPoint thumbP = getThumbPoint();
     double thumbWidth = thumbTexture_.contentSize().width;
     double thumbHeight = thumbTexture_.contentSize().height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
@@ -61,7 +61,7 @@ void SoundSlider::touchesBegan(Touch *touches[], int numTouches) {
 void SoundSlider::touchesMoved(Touch *touches[], int numTouches) {
   for (int i = 0; i < numTouches; i++) {
     if (touches[i]->getIdentifier() == grabbedTouch_) {
-      CGPoint touchP = touches[i]->getLocation();
+      SGPoint touchP = touches[i]->getLocation();
       value_ += (touchP.x - lastTouchPosition_.x) / (269 - thumbTexture_.contentSize().width);
       lastTouchPosition_ = touchP;
       if (lastTouchPosition_.x < position_.x + 19) {

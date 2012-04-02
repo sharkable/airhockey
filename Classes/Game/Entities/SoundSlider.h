@@ -15,22 +15,22 @@
 
 class SoundSlider : public StateEntity {
  private:
-  CGPoint    position_;
+  SGPoint    position_;
   Texture2D emptyTexture_;
   Texture2D fullTexture_;
   Texture2D thumbTexture_;
   double     value_;
   void *grabbedTouch_;
-  CGPoint    lastTouchPosition_;
+  SGPoint    lastTouchPosition_;
 
  public:
-  SoundSlider(CGPoint position);
+  SoundSlider(SGPoint position);
   void update();
   void render();
   void touchesBegan(Touch *touches[], int numTouches);
   void touchesMoved(Touch *touches[], int numTouches);
   void touchesEnded(Touch *touches[], int numTouches);
-  CGPoint getThumbPoint();
+  SGPoint getThumbPoint();
 };
 
 #endif

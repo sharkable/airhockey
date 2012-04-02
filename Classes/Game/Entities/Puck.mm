@@ -38,7 +38,7 @@ void Puck::update() {
 
 void Puck::render() {
   if (isActive()) {
-    texture_.drawAtPoint(CGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
+    texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
                          alpha_, 1, 0, 0);
   }
 }

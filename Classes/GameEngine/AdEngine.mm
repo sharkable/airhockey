@@ -21,7 +21,7 @@
 
 @synthesize gameEngine = gameEngine_;
 
-- (void)addAdAtPoint:(CGPoint)point {
+- (void)addAdAtPoint:(SGPoint)point {
   CGRect adFrame = CGRectZero;
   adFrame.origin = CGPointMake(point.x, point.y);
   adFrame.size = GAD_SIZE_320x50;

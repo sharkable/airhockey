@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#include "Texture2D.h"
+
 @class GameEngine;
 
 @interface AdEngine : NSObject
 
 @property(nonatomic, assign) GameEngine *gameEngine;
 
-- (void)addAdAtPoint:(CGPoint)point;
+- (void)addAdAtPoint:(SGPoint)point;
 - (void)removeAd;
 
 @end

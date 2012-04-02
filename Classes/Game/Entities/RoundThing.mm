@@ -14,7 +14,6 @@
 
 RoundThing::RoundThing() {
   active_ = YES;
-  texture_ = nil;
 }
 
 RoundThing::~RoundThing() {
@@ -46,7 +45,7 @@ void RoundThing::applyFriction() {
 
 void RoundThing::render() {
   if (active_) {
-    texture_.drawAtPoint(CGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2));
+    texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2));
   }
 }
 
@@ -182,7 +181,7 @@ void RoundThing::touchesMoved(Touch *touches[], int numTouches) {
     }
   }
   if (grabbed_ && correctTouch != nil) {
-    CGPoint p = correctTouch->getLocation();
+    SGPoint p = correctTouch->getLocation();
     x_ = p.x;
     y_ = p.y;
   }

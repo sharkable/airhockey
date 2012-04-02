@@ -7,11 +7,11 @@
 //
 
 #include "Button.h"
-#import "SoundPlayer.h"
-#import "ResourceLoader.h"
+//#import "SoundPlayer.h"
+#include "ResourceLoader.h"
 #include "Touch.h"
 
-Button::Button(Texture2D normalTexture, Texture2D pressedTexture, CGPoint position) {
+Button::Button(Texture2D normalTexture, Texture2D pressedTexture, SGPoint position) {
   normalTexture_ = normalTexture;
   pressedTexture_ = pressedTexture;
   position_ = position;
@@ -45,7 +45,7 @@ void Button::touchesBegan(Touch *touches[], int numTouches) {
     for (int i = 0; i < numTouches; i++) {
       if (containsPoint(touches[i]->getLocation())) {
         state_ = BUTTON_STATE_PRESSED;
-        [SoundPlayer playSound:kSoundButton];
+//        [SoundPlayer playSound:kSoundButton];
       }
     }
   }
@@ -62,13 +62,13 @@ void Button::touchesEnded(Touch *touches[], int numTouches) {
   }
 }
 
-bool Button::containsPoint(CGPoint p) {
+bool Button::containsPoint(SGPoint p) {
   return p.x >= position_.x &&
        p.y >= position_.y &&
        p.x < position_.x + pressedTexture_.contentSize().width &&
        p.y < position_.y + pressedTexture_.contentSize().height;
 }
 
-CGSize Button::getSize() {
+SGSize Button::getSize() {
   return normalTexture_.contentSize();
 }

@@ -99,9 +99,11 @@
   numTouchesBegan_ = touches.count;
   int i = 0;
   for (UITouch *touch in touches) {
-    touchesBegan_[i]->setLocation([touch locationInView:touch.view]);
+    CGPoint location = [touch locationInView:touch.view];
+    SGPoint l = SGPointMake(location.x, location.y);
+    touchesBegan_[i]->setLocation(l);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = touchesBegan_[i]->getLocation();
+      SGPoint p = touchesBegan_[i]->getLocation();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
       touchesBegan_[i]->setLocation(p);
@@ -115,9 +117,11 @@
   numTouchesMoved_ = touches.count;
   int i = 0;
   for (UITouch *touch in touches) {
-    touchesMoved_[i]->setLocation([touch locationInView:touch.view]);
+    CGPoint location = [touch locationInView:touch.view];
+    SGPoint l = SGPointMake(location.x, location.y);
+    touchesMoved_[i]->setLocation(l);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = touchesMoved_[i]->getLocation();
+      SGPoint p = touchesMoved_[i]->getLocation();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
       touchesMoved_[i]->setLocation(p);
@@ -131,9 +135,11 @@
   numTouchesEnded_ = touches.count;
   int i = 0;
   for (UITouch* touch in touches) {
-    touchesEnded_[i]->setLocation([touch locationInView:touch.view]);
+    CGPoint location = [touch locationInView:touch.view];
+    SGPoint l = SGPointMake(location.x, location.y);
+    touchesEnded_[i]->setLocation(l);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      CGPoint p = touchesEnded_[i]->getLocation();
+      SGPoint p = touchesEnded_[i]->getLocation();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
       touchesEnded_[i]->setLocation(p);

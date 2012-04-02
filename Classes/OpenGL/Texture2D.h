@@ -60,13 +60,16 @@
  
  */
 
-#import <UIKit/UIKit.h>
+#ifndef AirHockey_Texture2D_h
+#define AirHockey_Texture2D_h
+
 #import <OpenGLES/ES1/gl.h>
 
 #import <string>
 using namespace std;
 
 //CONSTANTS:
+#define kMaxTextureSize   1024
 
 typedef enum {
   kTexture2DPixelFormat_Automatic = 0,
@@ -74,6 +77,18 @@ typedef enum {
   kTexture2DPixelFormat_RGB565,
   kTexture2DPixelFormat_A8,
 } Texture2DPixelFormat;
+
+struct SGSize {
+  double width;
+  double height;
+};
+SGSize SGSizeMake(double width, double height);
+
+struct SGPoint {
+  double x;
+  double y;
+};
+SGPoint SGPointMake(double x, double y);
 
 #define LIGHTEN_AMOUNT 128
 
@@ -88,9 +103,9 @@ typedef enum {
 class Texture2D {
  private:
   GLuint name_;
-  CGSize size_;
-  UInt32 width_;
-  UInt32 height_;
+  SGSize size_;
+  uint32_t width_;
+  uint32_t height_;
   Texture2DPixelFormat format_;
   GLfloat maxS_;
   GLfloat maxT_;
@@ -100,38 +115,42 @@ class Texture2D {
 
  public:
   Texture2D() {}
-  void init(const void *data, Texture2DPixelFormat pixelFormat, NSUInteger width, NSUInteger height,
-            CGSize size);
-  Texture2D(GLuint name, CGSize size, NSUInteger width, NSUInteger height,
+  Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
+            SGSize size);
+  void init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
+            SGSize size);
+  Texture2D(GLuint name, SGSize size, uint32_t width, uint32_t height,
             Texture2DPixelFormat format, GLfloat maxS, GLfloat maxT);
   Texture2D(string filename);
   Texture2D(string filename, bool silhouette, bool lighten);
   void init(string filename, bool silhouette, bool lighten);
-  Texture2D(UIImage *uiImage);
-  Texture2D(string str, CGSize dimensions, UITextAlignment alignment, UIFont *font);
+  // Texture2D(UIImage *uiImage);
+  // Texture2D(string str, SGSize dimensions, UITextAlignment alignment, UIFont *font);
   ~Texture2D();
 
   static void setGlobalAlpha(GLfloat alpha);
   
   Texture2DPixelFormat pixelFormat() { return format_; }
-  NSUInteger pixelsWide() { return width_; }
-  NSUInteger pixelsHigh() { return height_; }
+  uint32_t pixelsWide() { return width_; }
+  uint32_t pixelsHigh() { return height_; }
   GLuint name() { return name_; }
-  CGSize contentSize() {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      return size_;
-    } else {
-      return CGSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
-    }
+  SGSize contentSize() {
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//      return size_;
+//    } else {
+      return SGSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
+//    }
   }
   GLfloat maxS() { return maxS_; }
   GLfloat maxT() { return maxT_; }
 
   string resourceName();
   
-  void drawAtPoint(CGPoint point);
-  void drawAtPoint(CGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z);
-  void drawAtPointLeftRatio(CGPoint point, CGFloat leftRatio);
-  void drawAtPointRightRatio(CGPoint point, CGFloat rightRatio);
-  void drawAtPointAngle(CGPoint point, GLfloat angle);
+  void drawAtPoint(SGPoint point);
+  void drawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z);
+  void drawAtPointLeftRatio(SGPoint point, GLfloat leftRatio);
+  void drawAtPointRightRatio(SGPoint point, GLfloat rightRatio);
+  void drawAtPointAngle(SGPoint point, GLfloat angle);
 };
+
+#endif

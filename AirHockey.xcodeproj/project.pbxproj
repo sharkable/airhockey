@@ -37,8 +37,6 @@
 		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4B1F5281515291500620EF2 /* EngineState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E01515291500620EF2 /* EngineState.mm */; };
 		D4B1F5291515291500620EF2 /* EngineState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E01515291500620EF2 /* EngineState.mm */; };
-		D4B1F52A1515291500620EF2 /* Button.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E31515291500620EF2 /* Button.mm */; };
-		D4B1F52B1515291500620EF2 /* Button.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E31515291500620EF2 /* Button.mm */; };
 		D4B1F52C1515291500620EF2 /* MultiSelect.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E51515291500620EF2 /* MultiSelect.mm */; };
 		D4B1F52D1515291500620EF2 /* MultiSelect.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E51515291500620EF2 /* MultiSelect.mm */; };
 		D4B1F52E1515291500620EF2 /* SimpleItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E71515291500620EF2 /* SimpleItem.mm */; };
@@ -55,8 +53,6 @@
 		D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F21515291500620EF2 /* ResourceLoader.mm */; };
 		D4B1F53C1515291500620EF2 /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F61515291500620EF2 /* TypeUtil.mm */; };
 		D4B1F53D1515291500620EF2 /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F61515291500620EF2 /* TypeUtil.mm */; };
-		D4B1F5441515291500620EF2 /* Texture2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5001515291500620EF2 /* Texture2D.mm */; };
-		D4B1F5451515291500620EF2 /* Texture2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5001515291500620EF2 /* Texture2D.mm */; };
 		D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
 		D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
 		D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5061515291500620EF2 /* AVAudio.mm */; };
@@ -85,6 +81,10 @@
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FE789BCC14F97B34007FCBC5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FE789BCE14F97B34007FCBC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FE96BDDF152927570018441C /* Button.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE96BDDE152927570018441C /* Button.cc */; };
+		FE96BDE0152927570018441C /* Button.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE96BDDE152927570018441C /* Button.cc */; };
+		FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894B15293BBB00431C4F /* Texture2D.cc */; };
+		FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894B15293BBB00431C4F /* Texture2D.cc */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -476,11 +476,10 @@
 		D4B1F4DF1515291500620EF2 /* EngineState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineState.h; sourceTree = "<group>"; };
 		D4B1F4E01515291500620EF2 /* EngineState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EngineState.mm; sourceTree = "<group>"; };
 		D4B1F4E21515291500620EF2 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
-		D4B1F4E31515291500620EF2 /* Button.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Button.mm; sourceTree = "<group>"; };
 		D4B1F4E41515291500620EF2 /* MultiSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelect.h; sourceTree = "<group>"; };
-		D4B1F4E51515291500620EF2 /* MultiSelect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MultiSelect.mm; sourceTree = "<group>"; };
-		D4B1F4E61515291500620EF2 /* SimpleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleItem.h; sourceTree = "<group>"; };
-		D4B1F4E71515291500620EF2 /* SimpleItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleItem.mm; sourceTree = "<group>"; };
+		D4B1F4E51515291500620EF2 /* MultiSelect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MultiSelect.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		D4B1F4E61515291500620EF2 /* SimpleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleItem.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		D4B1F4E71515291500620EF2 /* SimpleItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SimpleItem.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4E81515291500620EF2 /* GameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
 		D4B1F4E91515291500620EF2 /* GameEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameEngine.mm; sourceTree = "<group>"; };
 		D4B1F4EA1515291500620EF2 /* GameTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTimer.h; sourceTree = "<group>"; };
@@ -490,13 +489,12 @@
 		D4B1F4EE1515291500620EF2 /* LocalStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalStore.h; sourceTree = "<group>"; };
 		D4B1F4EF1515291500620EF2 /* LocalStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalStore.mm; sourceTree = "<group>"; };
 		D4B1F4F11515291500620EF2 /* ResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceLoader.h; sourceTree = "<group>"; };
-		D4B1F4F21515291500620EF2 /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourceLoader.mm; sourceTree = "<group>"; };
+		D4B1F4F21515291500620EF2 /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ResourceLoader.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4F31515291500620EF2 /* StateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateEntity.h; sourceTree = "<group>"; };
 		D4B1F4F41515291500620EF2 /* Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Touch.h; sourceTree = "<group>"; };
 		D4B1F4F51515291500620EF2 /* TypeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeUtil.h; sourceTree = "<group>"; };
 		D4B1F4F61515291500620EF2 /* TypeUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TypeUtil.mm; sourceTree = "<group>"; };
-		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture2D.h; sourceTree = "<group>"; };
-		D4B1F5001515291500620EF2 /* Texture2D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture2D.mm; sourceTree = "<group>"; };
+		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Texture2D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
 		D4B1F5031515291500620EF2 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
 		D4B1F5041515291500620EF2 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
@@ -521,6 +519,8 @@
 		FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FE96BDDE152927570018441C /* Button.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Button.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		FE9F894B15293BBB00431C4F /* Texture2D.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture2D.cc; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		FEA8E61B14F97CF00084E117 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
@@ -849,7 +849,7 @@
 			isa = PBXGroup;
 			children = (
 				D4B1F4E21515291500620EF2 /* Button.h */,
-				D4B1F4E31515291500620EF2 /* Button.mm */,
+				FE96BDDE152927570018441C /* Button.cc */,
 				D4B1F4E41515291500620EF2 /* MultiSelect.h */,
 				D4B1F4E51515291500620EF2 /* MultiSelect.mm */,
 				D4B1F4E61515291500620EF2 /* SimpleItem.h */,
@@ -863,7 +863,7 @@
 			children = (
 				FEB73B741528150C004886B9 /* iOS */,
 				D4B1F4FF1515291500620EF2 /* Texture2D.h */,
-				D4B1F5001515291500620EF2 /* Texture2D.mm */,
+				FE9F894B15293BBB00431C4F /* Texture2D.cc */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -1850,7 +1850,6 @@
 				D4B1F5241515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
 				D4B1F5281515291500620EF2 /* EngineState.mm in Sources */,
-				D4B1F52A1515291500620EF2 /* Button.mm in Sources */,
 				D4B1F52C1515291500620EF2 /* MultiSelect.mm in Sources */,
 				D4B1F52E1515291500620EF2 /* SimpleItem.mm in Sources */,
 				D4B1F5301515291500620EF2 /* GameEngine.mm in Sources */,
@@ -1859,7 +1858,6 @@
 				D4B1F5361515291500620EF2 /* LocalStore.mm in Sources */,
 				D4B1F53A1515291500620EF2 /* ResourceLoader.mm in Sources */,
 				D4B1F53C1515291500620EF2 /* TypeUtil.mm in Sources */,
-				D4B1F5441515291500620EF2 /* Texture2D.mm in Sources */,
 				D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
@@ -1867,6 +1865,8 @@
 				FEB73B7C1528150C004886B9 /* EAGLView.mm in Sources */,
 				FEB73B7E1528150C004886B9 /* ES1Renderer.mm in Sources */,
 				FEB73B801528150C004886B9 /* ES2Renderer.mm in Sources */,
+				FE96BDDF152927570018441C /* Button.cc in Sources */,
+				FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1890,7 +1890,6 @@
 				D4B1F5251515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
 				D4B1F5291515291500620EF2 /* EngineState.mm in Sources */,
-				D4B1F52B1515291500620EF2 /* Button.mm in Sources */,
 				D4B1F52D1515291500620EF2 /* MultiSelect.mm in Sources */,
 				D4B1F52F1515291500620EF2 /* SimpleItem.mm in Sources */,
 				D4B1F5311515291500620EF2 /* GameEngine.mm in Sources */,
@@ -1899,7 +1898,6 @@
 				D4B1F5371515291500620EF2 /* LocalStore.mm in Sources */,
 				D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */,
 				D4B1F53D1515291500620EF2 /* TypeUtil.mm in Sources */,
-				D4B1F5451515291500620EF2 /* Texture2D.mm in Sources */,
 				D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5491515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
@@ -1907,6 +1905,8 @@
 				FEB73B7D1528150C004886B9 /* EAGLView.mm in Sources */,
 				FEB73B7F1528150C004886B9 /* ES1Renderer.mm in Sources */,
 				FEB73B811528150C004886B9 /* ES2Renderer.mm in Sources */,
+				FE96BDE0152927570018441C /* Button.cc in Sources */,
+				FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1966,7 +1966,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"IS_FREE=NO",
+					"IS_FREE=false",
 					"$(inherited)",
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
@@ -1988,7 +1988,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=NO";
+				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=false";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Resources/PaidResources/AirHockey-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
@@ -2009,7 +2009,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"IS_FREE=YES",
+					"IS_FREE=true",
 					"$(inherited)",
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
@@ -2030,7 +2030,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=YES";
+				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=true";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Resources/FreeResources/AirHockeyFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;

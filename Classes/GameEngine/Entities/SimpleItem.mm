@@ -9,7 +9,7 @@
 #import "SimpleItem.h"
 #import "ResourceLoader.h"
 
-SimpleItem::SimpleItem(Texture2D texture, CGPoint position) {
+SimpleItem::SimpleItem(Texture2D texture, SGPoint position) {
   textures_.push_back(texture);
   texture_ = 0;
   angle_ = 0;
@@ -17,7 +17,7 @@ SimpleItem::SimpleItem(Texture2D texture, CGPoint position) {
   position_ = position;
 }
 
-SimpleItem::SimpleItem(vector<Texture2D> textures, CGPoint position) {
+SimpleItem::SimpleItem(vector<Texture2D> textures, SGPoint position) {
   textures_ = textures;
   texture_ = 0;
   angle_ = 0;
@@ -35,9 +35,9 @@ void SimpleItem::update() {
 }
 
 void SimpleItem::render() {
-  textures_[texture_].drawAtPointAngle(CGPointMake(position_.x, position_.y), angle_);
+  textures_[texture_].drawAtPointAngle(SGPointMake(position_.x, position_.y), angle_);
 }
 
-CGSize SimpleItem::getSize() {
+SGSize SimpleItem::getSize() {
   return textures_[texture_].contentSize();
 }
