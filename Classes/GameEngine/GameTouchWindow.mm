@@ -8,7 +8,15 @@
 
 #import "GameTouchWindow.h"
 
+#include <vector>
+using namespace std;
+
 #import "GameEngine.h"
+#import "Touch.h"
+
+@interface GameTouchWindow ()
+- (vector<Touch>)convertTouches:(NSSet *)touches;
+@end
 
 @implementation GameTouchWindow {
  @private
@@ -20,15 +28,36 @@
 #pragma mark - UIWindow
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  [gameEngine_ setTouchesBegan:touches];
+  gameEngine_->setTouchesBegan([self convertTouches:touches]);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-  [gameEngine_ setTouchesMoved:touches];
+  gameEngine_->setTouchesMoved([self convertTouches:touches]);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-  [gameEngine_ setTouchesEnded:touches];
+  gameEngine_->setTouchesEnded([self convertTouches:touches]);
+}
+
+#pragma mark - Private
+
+- (vector<Touch>)convertTouches:(NSSet *)touches {
+  vector<Touch> converted_touches;
+  for (UITouch *touch in touches) {
+    Touch converted_touch;
+    CGPoint location = [touch locationInView:touch.view];
+    SGPoint l = SGPointMake(location.x, location.y);
+    converted_touch.setLocation(l);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+      SGPoint p = converted_touch.getLocation();
+      p.x *= 768.0 / 320.0;
+      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
+      converted_touch.setLocation(p);
+    }
+    converted_touch.setIdentifier(touch);
+    converted_touches.push_back(converted_touch);
+  }
+  return converted_touches;
 }
 
 @end

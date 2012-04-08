@@ -38,5 +38,5 @@ void StoryState::pressedStory() {
 }
 
 void StoryState::pressedAbout() {
-  [getGameEngine() popState];
+  getGameEngine()->popState();
 }

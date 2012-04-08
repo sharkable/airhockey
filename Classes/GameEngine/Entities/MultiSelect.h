@@ -30,7 +30,7 @@ class MultiSelect : public StateEntity {
   ~MultiSelect();
   void update();
   void render();
-  void touchesBegan(Touch *touches[], int numTouches);
+  void touchesBegan(vector<Touch> touches);
   void add(Texture2D normalTexture, Texture2D selectedTexture,
            SGPoint position);
   int getSelectedValue() { return selectedValue_; };

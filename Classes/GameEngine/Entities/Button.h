@@ -30,8 +30,8 @@ class Button : public StateEntity {
   ~Button();
   void update();
   void render();
-  void touchesBegan(Touch *touches[], int numTouches);
-  void touchesEnded(Touch *touches[], int numTouches);
+  void touchesBegan(vector<Touch> touches);
+  void touchesEnded(vector<Touch> touches);
   bool containsPoint(SGPoint p);
   void setNormalTexture(Texture2D normalTexture) { normalTexture_ = normalTexture; }
   void setPressedTexture(Texture2D pressedTexture) { pressedTexture_ = pressedTexture; }

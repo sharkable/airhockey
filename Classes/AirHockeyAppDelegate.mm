@@ -12,28 +12,22 @@
 #import "GameEngine.h"
 #import "SoundPlayer.h"
 #import "SplashState.h"
+#import "ViewController.h"
 
 @interface AirHockeyAppDelegate ()
-- (void)startGame;
 - (void)initAudio:(id)delegate;
 @end
 
 @implementation AirHockeyAppDelegate {
  @private
-  GameEngine *gameEngine_;
+  ViewController *viewController_;
 }
 
 - (void)dealloc {
-  [gameEngine_ release];
-  
+  [viewController_ release];
+
   [super dealloc];
 }
-
-- (void)startGame {
-  SplashState *rootState = new SplashState(gameEngine_);
-  [gameEngine_ pushState:rootState];
-//  [NSThread detachNewThreadSelector:@selector(initAudio:) toTarget:self withObject:rootState];
-}  
 
 - (void)initAudio:(id)delegate {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -57,28 +51,26 @@
     [FlurryAnalytics startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
   }
   
-  gameEngine_ = [[GameEngine alloc] init];
-
-  [self startGame];
-
+  viewController_ = [[ViewController alloc] init];
+  
   return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-  [gameEngine_ stop];
+  [viewController_ stop];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  [gameEngine_ start];
-  [gameEngine_ clearTouches];
+  [viewController_ start];
+  viewController_.game_engine->clearTouches();
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  [gameEngine_ stop];
+  [viewController_ stop];
 }
 
 - (UIWindow *)window {
-  return gameEngine_.window;
+  return viewController_.window;
 }
 
 @end

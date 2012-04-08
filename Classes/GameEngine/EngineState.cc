@@ -42,21 +42,21 @@ void EngineState::removeEntity(StateEntity *entity) {
   }
 }
 
-void EngineState::touchesBegan(Touch *touches[], int numTouches) {
+void EngineState::touchesBegan(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->touchesBegan(touches, numTouches);
+    entities_[i]->touchesBegan(touches);
   }
 }
 
-void EngineState::touchesMoved(Touch *touches[], int numTouches) {
+void EngineState::touchesMoved(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->touchesMoved(touches, numTouches);
+    entities_[i]->touchesMoved(touches);
   }
 }
 
-void EngineState::touchesEnded(Touch *touches[], int numTouches) {
+void EngineState::touchesEnded(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->touchesEnded(touches, numTouches);
+    entities_[i]->touchesEnded(touches);
   }
 }
 

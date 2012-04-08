@@ -215,8 +215,8 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   if (!IS_FREE && isIPhone) {
     player1Wins_.text = @"0 wins";
     player2Wins_.text = @"0 wins";
-    [getGameEngine() addUIView:player1Wins_];
-    [getGameEngine() addUIView:player2Wins_];
+//    getGameEngine()->addUIView(player1Wins_);
+//    getGameEngine()->addUIView(player2Wins_);
   }
   
   giveExtraPuckToPlayer_ = PLAYER_1;
@@ -353,7 +353,7 @@ void PlayState::update() {
 void PlayState::setUpNewGame() {
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
   } else {
-    [getGameEngine().adEngine removeAd];
+//    [getGameEngine()->adEngine() removeAd];
   }
 
   // Place paddles!
@@ -444,8 +444,8 @@ void PlayState::finishGameWithWinner(int playerId) {
   player2Wins_.text =
       [NSString stringWithFormat:@"%d win%@", player2WinCount_, player2WinCount_ == 1 ? @"" : @"s"];
   if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [getGameEngine() addUIView:player1Wins_];
-    [getGameEngine() addUIView:player2Wins_];
+//    getGameEngine()->addUIView(player1Wins_);
+//    getGameEngine()->addUIView(player2Wins_);
   }
   
   addEntity(menuBackground_);
@@ -454,9 +454,9 @@ void PlayState::finishGameWithWinner(int playerId) {
   addEntity(menuButton_);
   
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [getGameEngine().adEngine addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
+//    [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
   } else {
-    [getGameEngine().adEngine addAdAtPoint:SGPointMake(0, 0)];
+//    [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(0, 0)];
   }
 }
 
@@ -468,7 +468,7 @@ void PlayState::rematchPressed() {
   }
   setUpNewGame();
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [getGameEngine().adEngine removeAd];
+//    [getGameEngine()->adEngine() removeAd];
   }  
 }
 
@@ -476,9 +476,9 @@ void PlayState::rematchPressed() {
 void PlayState::menuPressed() {
   [player1Wins_ removeFromSuperview];
   [player2Wins_ removeFromSuperview];
-  [getGameEngine() replaceTopState:new MainMenuState(getGameEngine())];
+  getGameEngine()->replaceTopState(new MainMenuState(getGameEngine()));
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [getGameEngine().adEngine removeAd];
+//    [getGameEngine()->adEngine() removeAd];
   }
 }
 
@@ -489,7 +489,7 @@ void PlayState::continuePressed() {
   removeEntity(menuButton_);
   removeEntity(continueButton_);
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [getGameEngine().adEngine removeAd];
+//    [getGameEngine()->adEngine() removeAd];
   }
 }
 
@@ -502,46 +502,46 @@ void PlayState::pausePressed() {
     addEntity(menuButton_);
     addEntity(continueButton_);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      [getGameEngine().adEngine addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320)/2, 385)];
+//      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320)/2, 385)];
     }
   }
 }
 
-void PlayState::touchesBegan(Touch *touches[], int numTouches) {
+void PlayState::touchesBegan(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    menuButton_->touchesBegan(touches, numTouches);
-    continueButton_->touchesBegan(touches, numTouches);
-    soundSlider_->touchesBegan(touches, numTouches);
+    menuButton_->touchesBegan(touches);
+    continueButton_->touchesBegan(touches);
+    soundSlider_->touchesBegan(touches);
   } else if (state_ == PLAY_STATE_GET_READY) {
-    pauseButton1_->touchesBegan(touches, numTouches);
-    pauseButton2_->touchesBegan(touches, numTouches);
+    pauseButton1_->touchesBegan(touches);
+    pauseButton2_->touchesBegan(touches);
   } else {
-    EngineState::touchesBegan(touches, numTouches);
+    EngineState::touchesBegan(touches);
   }
 }
 
-void PlayState::touchesMoved(Touch *touches[], int numTouches) {
+void PlayState::touchesMoved(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    soundSlider_->touchesMoved(touches, numTouches);
+    soundSlider_->touchesMoved(touches);
   } else if (state_ == PLAY_STATE_GET_READY) {
   } else {
-    EngineState::touchesMoved(touches, numTouches);
+    EngineState::touchesMoved(touches);
   }
 }
 
-void PlayState::touchesEnded(Touch *touches[], int numTouches) {
+void PlayState::touchesEnded(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    menuButton_->touchesEnded(touches, numTouches);
-    continueButton_->touchesEnded(touches, numTouches);
-    soundSlider_->touchesEnded(touches, numTouches);
+    menuButton_->touchesEnded(touches);
+    continueButton_->touchesEnded(touches);
+    soundSlider_->touchesEnded(touches);
   } else if (state_ == PLAY_STATE_GET_READY) {
-    pauseButton1_->touchesEnded(touches, numTouches);
-    pauseButton2_->touchesEnded(touches, numTouches);    
+    pauseButton1_->touchesEnded(touches);
+    pauseButton2_->touchesEnded(touches);
   } else {
-    EngineState::touchesEnded(touches, numTouches);
+    EngineState::touchesEnded(touches);
   }
 }
 

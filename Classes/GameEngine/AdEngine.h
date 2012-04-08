@@ -10,7 +10,7 @@
 
 #include "Texture2D.h"
 
-@class GameEngine;
+class GameEngine;
 
 @interface AdEngine : NSObject
 

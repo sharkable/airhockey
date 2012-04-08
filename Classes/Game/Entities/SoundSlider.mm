@@ -42,26 +42,26 @@ SGPoint SoundSlider::getThumbPoint() {
   return SGPointMake(position_.x + 19 + (269.0 - thumbTexture_.contentSize().width)*value_, position_.y);
 }
 
-void SoundSlider::touchesBegan(Touch *touches[], int numTouches) {
-  for (int i = 0; i < numTouches; i++) {
-    SGPoint touchP = touches[i]->getLocation();
+void SoundSlider::touchesBegan(vector<Touch> touches) {
+  for (int i = 0; i < touches.size(); i++) {
+    SGPoint touchP = touches[i].getLocation();
     SGPoint thumbP = getThumbPoint();
     double thumbWidth = thumbTexture_.contentSize().width;
     double thumbHeight = thumbTexture_.contentSize().height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
           touchP.x < thumbP.x + 2 * thumbWidth &&
           touchP.y < thumbP.y + 2 * thumbHeight) {
-      grabbedTouch_ = touches[i]->getIdentifier();
+      grabbedTouch_ = touches[i].getIdentifier();
       lastTouchPosition_ = touchP;
       return;
     }
   }
 }
 
-void SoundSlider::touchesMoved(Touch *touches[], int numTouches) {
-  for (int i = 0; i < numTouches; i++) {
-    if (touches[i]->getIdentifier() == grabbedTouch_) {
-      SGPoint touchP = touches[i]->getLocation();
+void SoundSlider::touchesMoved(vector<Touch> touches) {
+  for (int i = 0; i < touches.size(); i++) {
+    if (touches[i].getIdentifier() == grabbedTouch_) {
+      SGPoint touchP = touches[i].getLocation();
       value_ += (touchP.x - lastTouchPosition_.x) / (269 - thumbTexture_.contentSize().width);
       lastTouchPosition_ = touchP;
       if (lastTouchPosition_.x < position_.x + 19) {
@@ -79,9 +79,9 @@ void SoundSlider::touchesMoved(Touch *touches[], int numTouches) {
   }
 }
 
-void SoundSlider::touchesEnded(Touch *touches[], int numTouches) {
-  for (int i = 0; i < numTouches; i++) {
-    if (touches[i]->getIdentifier() == grabbedTouch_) {
+void SoundSlider::touchesEnded(vector<Touch> touches) {
+  for (int i = 0; i < touches.size(); i++) {
+    if (touches[i].getIdentifier() == grabbedTouch_) {
       [SoundPlayer setGlobalVolume:value_];
       LocalStore::setDouble(value_, LS_VOLUME);
       grabbedTouch_ = nil;

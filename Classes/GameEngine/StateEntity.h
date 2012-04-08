@@ -9,15 +9,18 @@
 #ifndef AirHockey_StateEntity_h
 #define AirHockey_StateEntity_h
 
+#include <vector>
+using namespace std;
+
 class Touch;
 
 class StateEntity {
  public:
   virtual void update() = 0;
   virtual void render() = 0;
-  virtual void touchesBegan(Touch *touches[], int numTouches) {}
-  virtual void touchesMoved(Touch *touches[], int numTouches) {}
-  virtual void touchesEnded(Touch *touches[], int numTouches) {}
+  virtual void touchesBegan(vector<Touch> touches) {}
+  virtual void touchesMoved(vector<Touch> touches) {}
+  virtual void touchesEnded(vector<Touch> touches) {}
   virtual void clearTouches() {}
 };
 

@@ -181,9 +181,9 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
 void MainMenuState::stateIsShown() {
   if (IS_FREE) {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      [getGameEngine().adEngine addAdAtPoint:SGPointMake(0, 0)];  
+//      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(0, 0)];  
     } else {
-      [getGameEngine().adEngine addAdAtPoint:SGPointMake(45, 40)];  
+//      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(45, 40)];  
     }
   }
 }
@@ -217,7 +217,7 @@ void MainMenuState::pressedStart() {
                                        numPucksSelect_.getSelectedValue() + 1,
                                        ComputerAI(difficultySelect_.getSelectedValue()),
                                        paddleSize);
-  [getGameEngine() replaceTopState:playState];
+  getGameEngine()->replaceTopState(playState);
 }
 
 void MainMenuState::pressedFeedback() {
@@ -248,8 +248,8 @@ void MainMenuState::pressedFeedback() {
 
 void MainMenuState::pressedStory() {
   [FlurryAnalytics logEvent:@"STORY_PRESSED"];
-  [getGameEngine().adEngine removeAd];
-  [getGameEngine() pushState:new StoryState(getGameEngine())];
+//  [getGameEngine()->adEngine() removeAd];
+  getGameEngine()->pushState(new StoryState(getGameEngine()));
 }
 
 void MainMenuState::pressedUpgrade() {

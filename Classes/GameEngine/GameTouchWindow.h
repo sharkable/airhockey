@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameEngine;
+class GameEngine;
 
 @interface GameTouchWindow : UIWindow
 

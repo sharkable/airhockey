@@ -78,20 +78,20 @@
 
 #pragma mark - ESRenderer
 
-- (void)renderWithTarget:(id)target renderSelector:(SEL)selector {
+- (void)setUpRender {
   glViewport(0, 0, backingWidth_, backingHeight_);
-  
+
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrthof(0, backingWidth_, 0, backingHeight_, -1, 1);  
-  
+
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
-  
-  [target performSelector:selector];
-  
+}
+
+- (void)finishRender {
   [context_ presentRenderbuffer:GL_RENDERBUFFER_OES];
 }
 

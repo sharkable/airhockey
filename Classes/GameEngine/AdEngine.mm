@@ -28,13 +28,13 @@
   if (!ad_) {
     ad_ = [[GADBannerView alloc] initWithFrame:adFrame];
     ad_.adUnitID = @"a14bdda6dfc895a";
-    ad_.rootViewController = gameEngine_;
+// TODO    ad_.rootViewController = gameEngine_;
     [ad_ loadRequest:nil];
-    [self.gameEngine addUIView:ad_];
+//    self.gameEngine->addUIView(ad_);
     lastAdRefresh_ = tickCount_;
   } else {
     ad_.frame = adFrame;
-    [self.gameEngine addUIView:ad_];
+//    self.gameEngine->addUIView(ad_);
     // TODO: what should happen here?
     //    if (tickCount - lastAdRefresh >= 60*60) {
     //      [ad loadRequest:nil];

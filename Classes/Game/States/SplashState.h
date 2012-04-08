@@ -15,6 +15,7 @@ public:
   SplashState(GameEngine *gameEngine);
   ~SplashState();
   void soundInitialized();
+  void update();
  private:
   UIActivityIndicatorView *spinner_;
 };

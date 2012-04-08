@@ -151,15 +151,15 @@ void RoundThing::bounceOff(RoundThing *other) {
   }  
 }
 
-void RoundThing::touchesBegan(Touch *touches[], int numTouches) {
+void RoundThing::touchesBegan(vector<Touch> touches) {
   if (!isGrabbable() || !isActive() || isGrabbed()) {
     return;
   }
-  for (int i = 0; i < numTouches; i++) {
-    if (containsTouch(touches[i])) {
+  for (int i = 0; i < touches.size(); i++) {
+    if (containsTouch(&touches[i])) {
       grabbed_ = YES;
-      grabbedTouch_ = touches[i]->getIdentifier();
-      touchesMoved(touches, numTouches);
+      grabbedTouch_ = touches[i].getIdentifier();
+      touchesMoved(touches);
       vx_ = 0;
       vy_ = 0;
       // Set oldX_ and oldY_ here so that the velocity stays around 0.
@@ -172,11 +172,11 @@ void RoundThing::touchesBegan(Touch *touches[], int numTouches) {
   }
 }
 
-void RoundThing::touchesMoved(Touch *touches[], int numTouches) {
+void RoundThing::touchesMoved(vector<Touch> touches) {
   Touch* correctTouch = nil;
-  for (int i = 0; i < numTouches; i++) {
-    if (touches[i]->getIdentifier() == grabbedTouch_) {
-      correctTouch = touches[i];
+  for (int i = 0; i < touches.size(); i++) {
+    if (touches[i].getIdentifier() == grabbedTouch_) {
+      correctTouch = &touches[i];
       break;
     }
   }
@@ -187,11 +187,11 @@ void RoundThing::touchesMoved(Touch *touches[], int numTouches) {
   }
 }
 
-void RoundThing::touchesEnded(Touch *touches[], int numTouches) {
+void RoundThing::touchesEnded(vector<Touch> touches) {
   Touch* correctTouch = nil;
-  for (int i = 0; i < numTouches; i++) {
-    if (touches[i]->getIdentifier() == grabbedTouch_) {
-      correctTouch = touches[i];
+  for (int i = 0; i < touches.size(); i++) {
+    if (touches[i].getIdentifier() == grabbedTouch_) {
+      correctTouch = &touches[i];
       break;
     }
   }

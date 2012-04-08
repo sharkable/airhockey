@@ -27,9 +27,9 @@ class SoundSlider : public StateEntity {
   SoundSlider(SGPoint position);
   void update();
   void render();
-  void touchesBegan(Touch *touches[], int numTouches);
-  void touchesMoved(Touch *touches[], int numTouches);
-  void touchesEnded(Touch *touches[], int numTouches);
+  void touchesBegan(vector<Touch> touches);
+  void touchesMoved(vector<Touch> touches);
+  void touchesEnded(vector<Touch> touches);
   SGPoint getThumbPoint();
 };
 

@@ -58,8 +58,12 @@
   [super dealloc];
 }
 
-- (void)renderWithTarget:(id)target renderSelector:(SEL)selector {
-  [renderer_ renderWithTarget:target renderSelector:selector];
+- (void)setUpRender {
+  [renderer_ setUpRender];
+}
+
+- (void)finishRender {
+  [renderer_ finishRender];
 }
 
 #pragma mark - UIView

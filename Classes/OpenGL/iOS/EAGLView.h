@@ -13,10 +13,11 @@
 // Note that setting the view non-opaque will only work if the EAGL surface has an alpha channel.
 @interface EAGLView : UIView
 
-// Render a frame. The target is called with the selector to render all of the objects within the
-// scene.
-// Before |selector| is called, the scene is cleared and the coordinate system is set up. After it
-// is called, the buffer is presented.
-- (void)renderWithTarget:(id)target renderSelector:(SEL)selector;
+// Call these at the start and end of rendering a frame.
+// Call |setUpRender| to clear the scene and set up the coordinate system.
+// After that, make OpenGL calls to render all of the objects within the scene.
+// Call |finishRender| to present the buffer.
+- (void)setUpRender;
+- (void)finishRender;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "MultiSelect.h"
-#import "SoundPlayer.h"
+//#import "SoundPlayer.h"
 #import "ResourceLoader.h"
 #include "Touch.h"
 
@@ -46,18 +46,18 @@ void MultiSelect::add(Texture2D normalTexture, Texture2D selectedTexture,
   positionsY_.push_back(position.y);
 }
 
-void MultiSelect::touchesBegan(Touch *touches[], int numTouches) {
+void MultiSelect::touchesBegan(vector<Touch> touches) {
   for (int i = 0; i < normalTextures_.size(); i++) {
     double x = positionsX_[i];
     double y = positionsY_[i];
     SGSize size = normalTextures_[i].contentSize();
-    for (int j = 0; j < numTouches; j++) {
-      SGPoint touchPoint = touches[j]->getLocation();
+    for (int j = 0; j < touches.size(); j++) {
+      SGPoint touchPoint = touches[j].getLocation();
       if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&
           touchPoint.y < y + size.height) {
         if (selectedValue_ != i) {
           selectedValue_ = i;
-          [SoundPlayer playSound:kSoundMultiSelect];
+          // TODO [SoundPlayer playSound:kSoundMultiSelect];
         };
         return;
       }

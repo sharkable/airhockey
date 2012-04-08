@@ -9,7 +9,6 @@
 #ifndef AirHockey_SimpleItem_h
 #define AirHockey_SimpleItem_h
 
-#import <Foundation/Foundation.h>
 #import "StateEntity.h"
 #import "Texture2D.h"
 

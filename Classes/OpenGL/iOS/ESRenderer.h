@@ -11,11 +11,12 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/EAGLDrawable.h>
 
-@class GameEngine;
+class GameEngine;
 
 @protocol ESRenderer<NSObject>
 
-- (void)renderWithTarget:(id)target renderSelector:(SEL)selector;
+- (void)setUpRender;
+- (void)finishRender;
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;
 
 @end

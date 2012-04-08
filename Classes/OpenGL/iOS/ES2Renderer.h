@@ -11,8 +11,6 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@class GameEngine;
-
 @interface ES2Renderer : NSObject<ESRenderer>
 
 @end

@@ -35,12 +35,6 @@
 		D4B1F5251515291500620EF2 /* StoryState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DB1515291500620EF2 /* StoryState.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
-		D4B1F5281515291500620EF2 /* EngineState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E01515291500620EF2 /* EngineState.mm */; };
-		D4B1F5291515291500620EF2 /* EngineState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E01515291500620EF2 /* EngineState.mm */; };
-		D4B1F52C1515291500620EF2 /* MultiSelect.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E51515291500620EF2 /* MultiSelect.mm */; };
-		D4B1F52D1515291500620EF2 /* MultiSelect.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E51515291500620EF2 /* MultiSelect.mm */; };
-		D4B1F52E1515291500620EF2 /* SimpleItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E71515291500620EF2 /* SimpleItem.mm */; };
-		D4B1F52F1515291500620EF2 /* SimpleItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E71515291500620EF2 /* SimpleItem.mm */; };
 		D4B1F5301515291500620EF2 /* GameEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E91515291500620EF2 /* GameEngine.mm */; };
 		D4B1F5311515291500620EF2 /* GameEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E91515291500620EF2 /* GameEngine.mm */; };
 		D4B1F5321515291500620EF2 /* GameTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4EB1515291500620EF2 /* GameTimer.mm */; };
@@ -85,6 +79,10 @@
 		FE96BDE0152927570018441C /* Button.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE96BDDE152927570018441C /* Button.cc */; };
 		FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894B15293BBB00431C4F /* Texture2D.cc */; };
 		FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894B15293BBB00431C4F /* Texture2D.cc */; };
+		FE9F894F1529507A00431C4F /* EngineState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894E1529507A00431C4F /* EngineState.cc */; };
+		FE9F89501529507A00431C4F /* EngineState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894E1529507A00431C4F /* EngineState.cc */; };
+		FE9F89561529769100431C4F /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE9F89551529769000431C4F /* ViewController.mm */; };
+		FE9F89571529769100431C4F /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE9F89551529769000431C4F /* ViewController.mm */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -442,6 +440,10 @@
 		FEB73B7F1528150C004886B9 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B781528150C004886B9 /* ES1Renderer.mm */; };
 		FEB73B801528150C004886B9 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B7A1528150C004886B9 /* ES2Renderer.mm */; };
 		FEB73B811528150C004886B9 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B7A1528150C004886B9 /* ES2Renderer.mm */; };
+		FEF7DD971531374D007F7A4C /* MultiSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD951531374D007F7A4C /* MultiSelect.cc */; };
+		FEF7DD981531374D007F7A4C /* MultiSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD951531374D007F7A4C /* MultiSelect.cc */; };
+		FEF7DD991531374D007F7A4C /* SimpleItem.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD961531374D007F7A4C /* SimpleItem.cc */; };
+		FEF7DD9A1531374D007F7A4C /* SimpleItem.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD961531374D007F7A4C /* SimpleItem.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -474,12 +476,9 @@
 		D4B1F4DD1515291500620EF2 /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
 		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
 		D4B1F4DF1515291500620EF2 /* EngineState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineState.h; sourceTree = "<group>"; };
-		D4B1F4E01515291500620EF2 /* EngineState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EngineState.mm; sourceTree = "<group>"; };
 		D4B1F4E21515291500620EF2 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
 		D4B1F4E41515291500620EF2 /* MultiSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelect.h; sourceTree = "<group>"; };
-		D4B1F4E51515291500620EF2 /* MultiSelect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MultiSelect.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4E61515291500620EF2 /* SimpleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleItem.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		D4B1F4E71515291500620EF2 /* SimpleItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SimpleItem.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4E81515291500620EF2 /* GameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
 		D4B1F4E91515291500620EF2 /* GameEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameEngine.mm; sourceTree = "<group>"; };
 		D4B1F4EA1515291500620EF2 /* GameTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTimer.h; sourceTree = "<group>"; };
@@ -521,6 +520,9 @@
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		FE96BDDE152927570018441C /* Button.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Button.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		FE9F894B15293BBB00431C4F /* Texture2D.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture2D.cc; sourceTree = "<group>"; };
+		FE9F894E1529507A00431C4F /* EngineState.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineState.cc; sourceTree = "<group>"; };
+		FE9F89511529542600431C4F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FE9F89551529769000431C4F /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		FEA8E61B14F97CF00084E117 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
@@ -718,6 +720,8 @@
 		FEB73B791528150C004886B9 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
 		FEB73B7A1528150C004886B9 /* ES2Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES2Renderer.mm; sourceTree = "<group>"; };
 		FEB73B7B1528150C004886B9 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
+		FEF7DD951531374D007F7A4C /* MultiSelect.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiSelect.cc; sourceTree = "<group>"; };
+		FEF7DD961531374D007F7A4C /* SimpleItem.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleItem.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -826,7 +830,7 @@
 				D4B1F4DD1515291500620EF2 /* AdEngine.h */,
 				D4B1F4DE1515291500620EF2 /* AdEngine.mm */,
 				D4B1F4DF1515291500620EF2 /* EngineState.h */,
-				D4B1F4E01515291500620EF2 /* EngineState.mm */,
+				FE9F894E1529507A00431C4F /* EngineState.cc */,
 				D4B1F4E81515291500620EF2 /* GameEngine.h */,
 				D4B1F4E91515291500620EF2 /* GameEngine.mm */,
 				D4B1F4EA1515291500620EF2 /* GameTimer.h */,
@@ -841,6 +845,8 @@
 				D4B1F4F41515291500620EF2 /* Touch.h */,
 				D4B1F4F51515291500620EF2 /* TypeUtil.h */,
 				D4B1F4F61515291500620EF2 /* TypeUtil.mm */,
+				FE9F89511529542600431C4F /* ViewController.h */,
+				FE9F89551529769000431C4F /* ViewController.mm */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -851,9 +857,9 @@
 				D4B1F4E21515291500620EF2 /* Button.h */,
 				FE96BDDE152927570018441C /* Button.cc */,
 				D4B1F4E41515291500620EF2 /* MultiSelect.h */,
-				D4B1F4E51515291500620EF2 /* MultiSelect.mm */,
+				FEF7DD951531374D007F7A4C /* MultiSelect.cc */,
 				D4B1F4E61515291500620EF2 /* SimpleItem.h */,
-				D4B1F4E71515291500620EF2 /* SimpleItem.mm */,
+				FEF7DD961531374D007F7A4C /* SimpleItem.cc */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1849,9 +1855,6 @@
 				D4B1F5221515291500620EF2 /* SplashState.mm in Sources */,
 				D4B1F5241515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5281515291500620EF2 /* EngineState.mm in Sources */,
-				D4B1F52C1515291500620EF2 /* MultiSelect.mm in Sources */,
-				D4B1F52E1515291500620EF2 /* SimpleItem.mm in Sources */,
 				D4B1F5301515291500620EF2 /* GameEngine.mm in Sources */,
 				D4B1F5321515291500620EF2 /* GameTimer.mm in Sources */,
 				D4B1F5341515291500620EF2 /* GameTouchWindow.mm in Sources */,
@@ -1867,6 +1870,10 @@
 				FEB73B801528150C004886B9 /* ES2Renderer.mm in Sources */,
 				FE96BDDF152927570018441C /* Button.cc in Sources */,
 				FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */,
+				FE9F894F1529507A00431C4F /* EngineState.cc in Sources */,
+				FE9F89561529769100431C4F /* ViewController.mm in Sources */,
+				FEF7DD971531374D007F7A4C /* MultiSelect.cc in Sources */,
+				FEF7DD991531374D007F7A4C /* SimpleItem.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1889,9 +1896,6 @@
 				D4B1F5231515291500620EF2 /* SplashState.mm in Sources */,
 				D4B1F5251515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5291515291500620EF2 /* EngineState.mm in Sources */,
-				D4B1F52D1515291500620EF2 /* MultiSelect.mm in Sources */,
-				D4B1F52F1515291500620EF2 /* SimpleItem.mm in Sources */,
 				D4B1F5311515291500620EF2 /* GameEngine.mm in Sources */,
 				D4B1F5331515291500620EF2 /* GameTimer.mm in Sources */,
 				D4B1F5351515291500620EF2 /* GameTouchWindow.mm in Sources */,
@@ -1907,6 +1911,10 @@
 				FEB73B811528150C004886B9 /* ES2Renderer.mm in Sources */,
 				FE96BDE0152927570018441C /* Button.cc in Sources */,
 				FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */,
+				FE9F89501529507A00431C4F /* EngineState.cc in Sources */,
+				FE9F89571529769100431C4F /* ViewController.mm in Sources */,
+				FEF7DD981531374D007F7A4C /* MultiSelect.cc in Sources */,
+				FEF7DD9A1531374D007F7A4C /* SimpleItem.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

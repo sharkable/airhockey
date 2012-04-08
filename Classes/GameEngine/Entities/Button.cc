@@ -40,10 +40,10 @@ void Button::render() {
   }
 }
 
-void Button::touchesBegan(Touch *touches[], int numTouches) {
+void Button::touchesBegan(vector<Touch> touches) {
   if (state_ == BUTTON_STATE_NORMAL) {
-    for (int i = 0; i < numTouches; i++) {
-      if (containsPoint(touches[i]->getLocation())) {
+    for (int i = 0; i < touches.size(); i++) {
+      if (containsPoint(touches[i].getLocation())) {
         state_ = BUTTON_STATE_PRESSED;
 //        [SoundPlayer playSound:kSoundButton];
       }
@@ -51,11 +51,11 @@ void Button::touchesBegan(Touch *touches[], int numTouches) {
   }
 }
 
-void Button::touchesEnded(Touch *touches[], int numTouches) {
+void Button::touchesEnded(vector<Touch> touches) {
   if (state_ == BUTTON_STATE_PRESSED) {
     state_ = BUTTON_STATE_NORMAL;
-    for (int i = 0; i < numTouches; i++) {
-      if (containsPoint(touches[i]->getLocation())) {
+    for (int i = 0; i < touches.size(); i++) {
+      if (containsPoint(touches[i].getLocation())) {
         delegate_->buttonPressed(this);
       }
     }

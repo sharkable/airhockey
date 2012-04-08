@@ -9,10 +9,10 @@
 #include <vector>
 using namespace std;
 
-#import "StateEntity.h"
+#include "StateEntity.h"
 #include "Touch.h"
 
-@class GameEngine;
+class GameEngine;
 
 class EngineState {
  public:
@@ -22,9 +22,9 @@ class EngineState {
   virtual void render();
   void addEntity(StateEntity *entity);
   void removeEntity(StateEntity *entity);
-  virtual void touchesBegan(Touch *touches[], int numTouches);
-  virtual void touchesMoved(Touch *touches[], int numTouches);
-  virtual void touchesEnded(Touch *touches[], int numTouches);
+  virtual void touchesBegan(vector<Touch> touches);
+  virtual void touchesMoved(vector<Touch> touches);
+  virtual void touchesEnded(vector<Touch> touches);
   virtual void clearTouches();
 
  protected:

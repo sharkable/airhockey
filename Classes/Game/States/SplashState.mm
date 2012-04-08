@@ -21,9 +21,9 @@ SplashState::SplashState(GameEngine *gameEngine) : EngineState(gameEngine) {
   } else {
     spinner_.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
   }
-  [getGameEngine() addUIView:spinner_];
+//  getGameEngine()->addUIView(spinner_);
   [spinner_ startAnimating];
-  soundInitialized();  // TODO temporary until we actually can load sound.
+//  soundInitialized();  // TODO temporary until we actually can load sound.
 }
 
 SplashState::~SplashState() {
@@ -32,5 +32,14 @@ SplashState::~SplashState() {
 }
 
 void SplashState::soundInitialized() {
-  [getGameEngine() replaceTopState:new MainMenuState(getGameEngine())];
+  getGameEngine()->replaceTopState(new MainMenuState(getGameEngine()));
+}
+
+
+void SplashState::update() {
+  static int c = 0;
+  EngineState::update();
+  if (++c == 2) {
+    soundInitialized();
+  }
 }

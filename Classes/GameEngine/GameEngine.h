@@ -6,32 +6,38 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "Stack.h"
 #import "Touch.h"
 #import "EngineState.h"
 
 #define MAX_TOUCHES 20
 
-@class AdEngine;
+//@class AdEngine;
 
-@interface GameEngine : UIViewController
+class GameEngine {
+ private:
+//  AdEngine *adEngine_;
+  
+  vector<EngineState *> states_;
+  vector<Touch> touchesBegan_;
+  vector<Touch> touchesMoved_;
+  vector<Touch> touchesEnded_;
+  bool popOnNext_;
+  bool replaceOnNext_;
+  EngineState *nextState_;
 
-@property(nonatomic, readonly) AdEngine *adEngine;
-@property(nonatomic, readonly) UIWindow *window;
+ public:
+  void update();  
+  void render();
 
-- (void)pushState:(EngineState *)state;
-- (void)popState;
-- (void)replaceTopState:(EngineState *)state;
-
-- (void)setTouchesBegan:(NSSet *)touchesBegan;
-- (void)setTouchesMoved:(NSSet *)touchesMoved;
-- (void)setTouchesEnded:(NSSet *)touchesEnded;
-- (void)clearTouches;
-
-- (void)start;
-- (void)stop;
-
-- (void)addUIView:(UIView *)view;
-
-@end
+//  AdEngine *adEngine() { return adEngine_; }
+  
+  void pushState(EngineState *state);
+  void popState();
+  void replaceTopState(EngineState *state);
+  
+  void setTouchesBegan(vector<Touch> touchesBegan) { touchesBegan_ = touchesBegan; }
+  void setTouchesMoved(vector<Touch> touchesMoved) { touchesMoved_ = touchesMoved; }
+  void setTouchesEnded(vector<Touch> touchesEnded) { touchesEnded_ = touchesEnded; }
+  void clearTouches();
+//  void addUIView(UIView *view);
+};

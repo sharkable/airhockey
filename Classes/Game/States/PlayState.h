@@ -31,9 +31,9 @@ class PlayState : public EngineState {
             PaddleSize paddleSize);
   ~PlayState();
   void update();
-  void touchesBegan(Touch *touches[], int numTouches);
-  void touchesMoved(Touch *touches[], int numTouches);
-  void touchesEnded(Touch *touches[], int numTouches);
+  void touchesBegan(vector<Touch> touches);
+  void touchesMoved(vector<Touch> touches);
+  void touchesEnded(vector<Touch> touches);
   void clearTouches();
   void setUpNewGame();
   void finishGameWithWinner(int playerId);
