@@ -11,8 +11,6 @@
 		D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
-		D4B1F5101515291500620EF2 /* Stack.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C41515291500620EF2 /* Stack.mm */; };
-		D4B1F5111515291500620EF2 /* Stack.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C41515291500620EF2 /* Stack.mm */; };
 		D4B1F5121515291500620EF2 /* Paddle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C81515291500620EF2 /* Paddle.mm */; };
 		D4B1F5131515291500620EF2 /* Paddle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C81515291500620EF2 /* Paddle.mm */; };
 		D4B1F5141515291500620EF2 /* Post.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4CA1515291500620EF2 /* Post.mm */; };
@@ -451,8 +449,6 @@
 		D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AirHockeyAppDelegate.mm; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
-		D4B1F4C31515291500620EF2 /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
-		D4B1F4C41515291500620EF2 /* Stack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Stack.mm; sourceTree = "<group>"; };
 		D4B1F4C71515291500620EF2 /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
 		D4B1F4C81515291500620EF2 /* Paddle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paddle.mm; sourceTree = "<group>"; };
 		D4B1F4C91515291500620EF2 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
@@ -771,15 +767,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D4B1F4C21515291500620EF2 /* DataStructure */ = {
-			isa = PBXGroup;
-			children = (
-				D4B1F4C31515291500620EF2 /* Stack.h */,
-				D4B1F4C41515291500620EF2 /* Stack.mm */,
-			);
-			path = DataStructure;
-			sourceTree = "<group>";
-		};
 		D4B1F4C51515291500620EF2 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -948,7 +935,6 @@
 				D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */,
 				D4B1F4C01515291500620EF2 /* const.h */,
 				D4B1F4C11515291500620EF2 /* const.mm */,
-				D4B1F4C21515291500620EF2 /* DataStructure */,
 				D4B1F4C51515291500620EF2 /* Game */,
 				D4B1F4DC1515291500620EF2 /* GameEngine */,
 				D4B1F4F71515291500620EF2 /* OpenGL */,
@@ -1843,7 +1829,6 @@
 				FEA8E66714F97CF00084E117 /* main.m in Sources */,
 				D4B1F50C1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5101515291500620EF2 /* Stack.mm in Sources */,
 				D4B1F5121515291500620EF2 /* Paddle.mm in Sources */,
 				D4B1F5141515291500620EF2 /* Post.mm in Sources */,
 				D4B1F5161515291500620EF2 /* Puck.mm in Sources */,
@@ -1884,7 +1869,6 @@
 				FEA8E66814F97CF00084E117 /* main.m in Sources */,
 				D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5111515291500620EF2 /* Stack.mm in Sources */,
 				D4B1F5131515291500620EF2 /* Paddle.mm in Sources */,
 				D4B1F5151515291500620EF2 /* Post.mm in Sources */,
 				D4B1F5171515291500620EF2 /* Puck.mm in Sources */,
