@@ -8,7 +8,6 @@
 
 #import "EngineState.h"
 #import "SimpleItem.h"
-#import "SoundInitializationDelegate.h"
 
 class SplashState : public EngineState {
 public:
@@ -17,5 +16,5 @@ public:
   void soundInitialized();
   void update();
  private:
-  UIActivityIndicatorView *spinner_;
+  // UIActivityIndicatorView *spinner_;
 };
