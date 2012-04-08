@@ -25,7 +25,7 @@ class ButtonDelegate {
 
 class Button : public StateEntity {
  public:
-  Button() {}
+  Button() : state_(BUTTON_STATE_NORMAL) {}
   Button(Texture2D normalTexture, Texture2D pressedTexture, SGPoint position);
   ~Button();
   void update();
