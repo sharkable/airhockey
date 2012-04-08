@@ -25,9 +25,9 @@ class RoundThing : public StateEntity {
   double   radius_;
   double   mass_;
   double   friction_;
-  BOOL     grabbed_;
+  bool     grabbed_;
   void *grabbedTouch_;
-  BOOL     active_;
+  bool     active_;
 
  public:
   RoundThing();

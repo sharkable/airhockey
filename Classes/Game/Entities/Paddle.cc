@@ -7,6 +7,9 @@
 //
 
 #import "Paddle.h"
+
+#include <cmath>
+
 #import "Puck.h"
 #import "GameEngine.h"
 
@@ -116,7 +119,7 @@ void Paddle::update() {
     }
     
     // Find the puck that will reach the paddle first.
-    Puck* target = nil;    
+    Puck* target = NULL;    
     double bestTime;
     
     for (int i = 0; i < pucks_.size(); i++) {
@@ -134,14 +137,14 @@ void Paddle::update() {
       if (puck->getY() - puck->getRadius() > SCREEN_HEIGHT/2) {
         continue;
       }
-      if (target == nil || timeToReach < bestTime || (timeToReach == bestTime && puck->getY() < target->getY())) {
+      if (target == NULL || timeToReach < bestTime || (timeToReach == bestTime && puck->getY() < target->getY())) {
         target = puck;
         bestTime = timeToReach;
       }
     }
     
     if (!target) {
-      targetLeftCorner_ = targetRightCorner_ = targetAwayFromCorner_ = NO;
+      targetLeftCorner_ = targetRightCorner_ = targetAwayFromCorner_ = false;
     }
     
     double targetX;
@@ -149,9 +152,9 @@ void Paddle::update() {
     
     if (!targetAwayFromCorner_ && target && target->getY() <= RINK_TOP_Y + radius_ && fabs(target->getVX()) < 5 && fabs(target->getVY()) < 5) {
       if (target->getX() < SCREEN_WIDTH / 2) {
-        targetLeftCorner_ = YES;
+        targetLeftCorner_ = true;
       } else {
-        targetRightCorner_ = YES;
+        targetRightCorner_ = true;
       }
     }
     
@@ -159,21 +162,21 @@ void Paddle::update() {
       targetX = RINK_LEFT_X + radius_;
       targetY = RINK_TOP_Y + radius_;
       if (overlaps(target)) {
-        targetLeftCorner_ = NO;
-        targetAwayFromCorner_ = YES;
+        targetLeftCorner_ = false;
+        targetAwayFromCorner_ = true;
       }
     } else if (targetRightCorner_) {
       targetX = RINK_RIGHT_X - radius_;
       targetY = RINK_TOP_Y + radius_;
       if (overlaps(target)) {
-        targetRightCorner_ = NO;
-        targetAwayFromCorner_ = YES;
+        targetRightCorner_ = false;
+        targetAwayFromCorner_ = true;
       }
     } else if (targetAwayFromCorner_) {
       targetX = SCREEN_WIDTH / 2;
       targetY = RINK_TOP_Y + radius_;
       if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
-        targetAwayFromCorner_ = NO;
+        targetAwayFromCorner_ = false;
       }
     } else if (target) {
       if (target->getY() > y_) {
@@ -238,7 +241,7 @@ bool Paddle::isGrabbable() {
 bool Paddle::containsTouch(Touch *touch) {
   SGPoint p = touch->getLocation();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
-    return NO;
+    return false;
   }
   switch (playerId_) {
     case PLAYER_1:
@@ -248,5 +251,5 @@ bool Paddle::containsTouch(Touch *touch) {
       return p.y < SCREEN_HEIGHT/2 && p.y >= 0;
       break;
   }
-  return NO;
+  return false;
 }

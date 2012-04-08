@@ -11,18 +11,6 @@
 		D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
-		D4B1F5121515291500620EF2 /* Paddle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C81515291500620EF2 /* Paddle.mm */; };
-		D4B1F5131515291500620EF2 /* Paddle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C81515291500620EF2 /* Paddle.mm */; };
-		D4B1F5141515291500620EF2 /* Post.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4CA1515291500620EF2 /* Post.mm */; };
-		D4B1F5151515291500620EF2 /* Post.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4CA1515291500620EF2 /* Post.mm */; };
-		D4B1F5161515291500620EF2 /* Puck.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4CC1515291500620EF2 /* Puck.mm */; };
-		D4B1F5171515291500620EF2 /* Puck.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4CC1515291500620EF2 /* Puck.mm */; };
-		D4B1F5181515291500620EF2 /* Rink.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4CE1515291500620EF2 /* Rink.mm */; };
-		D4B1F5191515291500620EF2 /* Rink.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4CE1515291500620EF2 /* Rink.mm */; };
-		D4B1F51A1515291500620EF2 /* RoundThing.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D01515291500620EF2 /* RoundThing.mm */; };
-		D4B1F51B1515291500620EF2 /* RoundThing.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D01515291500620EF2 /* RoundThing.mm */; };
-		D4B1F51C1515291500620EF2 /* SoundSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D21515291500620EF2 /* SoundSlider.mm */; };
-		D4B1F51D1515291500620EF2 /* SoundSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D21515291500620EF2 /* SoundSlider.mm */; };
 		D4B1F51E1515291500620EF2 /* MainMenuState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D51515291500620EF2 /* MainMenuState.mm */; };
 		D4B1F51F1515291500620EF2 /* MainMenuState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D51515291500620EF2 /* MainMenuState.mm */; };
 		D4B1F5201515291500620EF2 /* PlayState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D71515291500620EF2 /* PlayState.mm */; };
@@ -442,6 +430,18 @@
 		FEF7DD9A1531374D007F7A4C /* SimpleItem.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD961531374D007F7A4C /* SimpleItem.cc */; };
 		FEF7DD9C1531384E007F7A4C /* GameEngine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD9B1531384D007F7A4C /* GameEngine.cc */; };
 		FEF7DD9D1531384E007F7A4C /* GameEngine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD9B1531384D007F7A4C /* GameEngine.cc */; };
+		FEF7DDAD15313B11007F7A4C /* Paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA115313B11007F7A4C /* Paddle.cc */; };
+		FEF7DDAE15313B11007F7A4C /* Paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA115313B11007F7A4C /* Paddle.cc */; };
+		FEF7DDAF15313B11007F7A4C /* Post.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA315313B11007F7A4C /* Post.cc */; };
+		FEF7DDB015313B11007F7A4C /* Post.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA315313B11007F7A4C /* Post.cc */; };
+		FEF7DDB115313B11007F7A4C /* Puck.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA515313B11007F7A4C /* Puck.cc */; };
+		FEF7DDB215313B11007F7A4C /* Puck.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA515313B11007F7A4C /* Puck.cc */; };
+		FEF7DDB315313B11007F7A4C /* Rink.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA715313B11007F7A4C /* Rink.cc */; };
+		FEF7DDB415313B11007F7A4C /* Rink.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA715313B11007F7A4C /* Rink.cc */; };
+		FEF7DDB515313B11007F7A4C /* RoundThing.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA915313B11007F7A4C /* RoundThing.cc */; };
+		FEF7DDB615313B11007F7A4C /* RoundThing.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA915313B11007F7A4C /* RoundThing.cc */; };
+		FEF7DDB715313B11007F7A4C /* SoundSlider.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */; };
+		FEF7DDB815313B11007F7A4C /* SoundSlider.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -449,18 +449,6 @@
 		D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AirHockeyAppDelegate.mm; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
-		D4B1F4C71515291500620EF2 /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
-		D4B1F4C81515291500620EF2 /* Paddle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paddle.mm; sourceTree = "<group>"; };
-		D4B1F4C91515291500620EF2 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
-		D4B1F4CA1515291500620EF2 /* Post.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Post.mm; sourceTree = "<group>"; };
-		D4B1F4CB1515291500620EF2 /* Puck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Puck.h; sourceTree = "<group>"; };
-		D4B1F4CC1515291500620EF2 /* Puck.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Puck.mm; sourceTree = "<group>"; };
-		D4B1F4CD1515291500620EF2 /* Rink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rink.h; sourceTree = "<group>"; };
-		D4B1F4CE1515291500620EF2 /* Rink.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Rink.mm; sourceTree = "<group>"; };
-		D4B1F4CF1515291500620EF2 /* RoundThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundThing.h; sourceTree = "<group>"; };
-		D4B1F4D01515291500620EF2 /* RoundThing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RoundThing.mm; sourceTree = "<group>"; };
-		D4B1F4D11515291500620EF2 /* SoundSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundSlider.h; sourceTree = "<group>"; };
-		D4B1F4D21515291500620EF2 /* SoundSlider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundSlider.mm; sourceTree = "<group>"; };
 		D4B1F4D41515291500620EF2 /* MainMenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuState.h; sourceTree = "<group>"; };
 		D4B1F4D51515291500620EF2 /* MainMenuState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainMenuState.mm; sourceTree = "<group>"; };
 		D4B1F4D61515291500620EF2 /* PlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayState.h; sourceTree = "<group>"; };
@@ -718,6 +706,18 @@
 		FEF7DD951531374D007F7A4C /* MultiSelect.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiSelect.cc; sourceTree = "<group>"; };
 		FEF7DD961531374D007F7A4C /* SimpleItem.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleItem.cc; sourceTree = "<group>"; };
 		FEF7DD9B1531384D007F7A4C /* GameEngine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameEngine.cc; sourceTree = "<group>"; };
+		FEF7DDA115313B11007F7A4C /* Paddle.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Paddle.cc; sourceTree = "<group>"; };
+		FEF7DDA215313B11007F7A4C /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
+		FEF7DDA315313B11007F7A4C /* Post.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Post.cc; sourceTree = "<group>"; };
+		FEF7DDA415313B11007F7A4C /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		FEF7DDA515313B11007F7A4C /* Puck.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Puck.cc; sourceTree = "<group>"; };
+		FEF7DDA615313B11007F7A4C /* Puck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Puck.h; sourceTree = "<group>"; };
+		FEF7DDA715313B11007F7A4C /* Rink.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rink.cc; sourceTree = "<group>"; };
+		FEF7DDA815313B11007F7A4C /* Rink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rink.h; sourceTree = "<group>"; };
+		FEF7DDA915313B11007F7A4C /* RoundThing.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoundThing.cc; sourceTree = "<group>"; };
+		FEF7DDAA15313B11007F7A4C /* RoundThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundThing.h; sourceTree = "<group>"; };
+		FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundSlider.cc; sourceTree = "<group>"; };
+		FEF7DDAC15313B11007F7A4C /* SoundSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundSlider.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -779,18 +779,18 @@
 		D4B1F4C61515291500620EF2 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				D4B1F4C71515291500620EF2 /* Paddle.h */,
-				D4B1F4C81515291500620EF2 /* Paddle.mm */,
-				D4B1F4C91515291500620EF2 /* Post.h */,
-				D4B1F4CA1515291500620EF2 /* Post.mm */,
-				D4B1F4CB1515291500620EF2 /* Puck.h */,
-				D4B1F4CC1515291500620EF2 /* Puck.mm */,
-				D4B1F4CD1515291500620EF2 /* Rink.h */,
-				D4B1F4CE1515291500620EF2 /* Rink.mm */,
-				D4B1F4CF1515291500620EF2 /* RoundThing.h */,
-				D4B1F4D01515291500620EF2 /* RoundThing.mm */,
-				D4B1F4D11515291500620EF2 /* SoundSlider.h */,
-				D4B1F4D21515291500620EF2 /* SoundSlider.mm */,
+				FEF7DDA215313B11007F7A4C /* Paddle.h */,
+				FEF7DDA115313B11007F7A4C /* Paddle.cc */,
+				FEF7DDA415313B11007F7A4C /* Post.h */,
+				FEF7DDA315313B11007F7A4C /* Post.cc */,
+				FEF7DDA615313B11007F7A4C /* Puck.h */,
+				FEF7DDA515313B11007F7A4C /* Puck.cc */,
+				FEF7DDA815313B11007F7A4C /* Rink.h */,
+				FEF7DDA715313B11007F7A4C /* Rink.cc */,
+				FEF7DDAA15313B11007F7A4C /* RoundThing.h */,
+				FEF7DDA915313B11007F7A4C /* RoundThing.cc */,
+				FEF7DDAC15313B11007F7A4C /* SoundSlider.h */,
+				FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1829,12 +1829,6 @@
 				FEA8E66714F97CF00084E117 /* main.m in Sources */,
 				D4B1F50C1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5121515291500620EF2 /* Paddle.mm in Sources */,
-				D4B1F5141515291500620EF2 /* Post.mm in Sources */,
-				D4B1F5161515291500620EF2 /* Puck.mm in Sources */,
-				D4B1F5181515291500620EF2 /* Rink.mm in Sources */,
-				D4B1F51A1515291500620EF2 /* RoundThing.mm in Sources */,
-				D4B1F51C1515291500620EF2 /* SoundSlider.mm in Sources */,
 				D4B1F51E1515291500620EF2 /* MainMenuState.mm in Sources */,
 				D4B1F5201515291500620EF2 /* PlayState.mm in Sources */,
 				D4B1F5221515291500620EF2 /* SplashState.mm in Sources */,
@@ -1859,6 +1853,12 @@
 				FEF7DD971531374D007F7A4C /* MultiSelect.cc in Sources */,
 				FEF7DD991531374D007F7A4C /* SimpleItem.cc in Sources */,
 				FEF7DD9C1531384E007F7A4C /* GameEngine.cc in Sources */,
+				FEF7DDAD15313B11007F7A4C /* Paddle.cc in Sources */,
+				FEF7DDAF15313B11007F7A4C /* Post.cc in Sources */,
+				FEF7DDB115313B11007F7A4C /* Puck.cc in Sources */,
+				FEF7DDB315313B11007F7A4C /* Rink.cc in Sources */,
+				FEF7DDB515313B11007F7A4C /* RoundThing.cc in Sources */,
+				FEF7DDB715313B11007F7A4C /* SoundSlider.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1869,12 +1869,6 @@
 				FEA8E66814F97CF00084E117 /* main.m in Sources */,
 				D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5131515291500620EF2 /* Paddle.mm in Sources */,
-				D4B1F5151515291500620EF2 /* Post.mm in Sources */,
-				D4B1F5171515291500620EF2 /* Puck.mm in Sources */,
-				D4B1F5191515291500620EF2 /* Rink.mm in Sources */,
-				D4B1F51B1515291500620EF2 /* RoundThing.mm in Sources */,
-				D4B1F51D1515291500620EF2 /* SoundSlider.mm in Sources */,
 				D4B1F51F1515291500620EF2 /* MainMenuState.mm in Sources */,
 				D4B1F5211515291500620EF2 /* PlayState.mm in Sources */,
 				D4B1F5231515291500620EF2 /* SplashState.mm in Sources */,
@@ -1899,6 +1893,12 @@
 				FEF7DD981531374D007F7A4C /* MultiSelect.cc in Sources */,
 				FEF7DD9A1531374D007F7A4C /* SimpleItem.cc in Sources */,
 				FEF7DD9D1531384E007F7A4C /* GameEngine.cc in Sources */,
+				FEF7DDAE15313B11007F7A4C /* Paddle.cc in Sources */,
+				FEF7DDB015313B11007F7A4C /* Post.cc in Sources */,
+				FEF7DDB215313B11007F7A4C /* Puck.cc in Sources */,
+				FEF7DDB415313B11007F7A4C /* Rink.cc in Sources */,
+				FEF7DDB615313B11007F7A4C /* RoundThing.cc in Sources */,
+				FEF7DDB815313B11007F7A4C /* SoundSlider.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

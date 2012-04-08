@@ -9,6 +9,8 @@
 #import "Puck.h"
 #import "const.h"
 
+#include <cmath>
+
 #include <vector>
 using namespace std;
 
@@ -54,22 +56,22 @@ void Puck::placeForPlayer(int playerId, const vector<RoundThing *> &roundThings,
   vx_ = 0;
   vy_ = 0;
   
-  BOOL goLeft = YES;
+  bool goLeft = true;
   int offset = 1;
-  BOOL overlapping;
+  bool overlapping;
   do {
-    overlapping = NO;
+    overlapping = false;
     for (int i = 0; i < roundThings.size(); i++) {
       RoundThing *thing = roundThings[i];
       if (thing != this && overlaps(thing)) {
-        overlapping = YES;
+        overlapping = true;
         if (goLeft) {
           x_ = startX - offset * PUCK_X_SEPARATION;
-          goLeft = NO;
+          goLeft = false;
         } else {
           x_ = startX + offset * PUCK_X_SEPARATION;
           offset++;
-          goLeft = YES;
+          goLeft = true;
         }
         break;
       }

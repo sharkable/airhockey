@@ -9,7 +9,6 @@
 #ifndef AirHockey_Post_h
 #define AirHockey_Post_h
 
-#import <Foundation/Foundation.h>
 #import "RoundThing.h"
 
 class Post : public RoundThing {

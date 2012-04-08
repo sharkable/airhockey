@@ -9,7 +9,6 @@
 #ifndef AirHockey_Paddle_h
 #define AirHockey_Paddle_h
 
-#import <Foundation/Foundation.h>
 #import "Paddle.h"
 #import "RoundThing.h"
 #import "Texture2D.h"
@@ -23,13 +22,13 @@ using namespace std;
 class Paddle : public RoundThing {
  private:
   int playerId_;
-  BOOL playerControlled_;
+  bool playerControlled_;
   ComputerAI aiLevel_;
   vector<Puck *> pucks_;
   Paddle *otherPaddle_;
-  BOOL targetLeftCorner_;
-  BOOL targetRightCorner_;
-  BOOL targetAwayFromCorner_;
+  bool targetLeftCorner_;
+  bool targetRightCorner_;
+  bool targetAwayFromCorner_;
 
  public:
   Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel);

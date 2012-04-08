@@ -19,5 +19,5 @@ Post::Post(double x, double y) {
 }
 
 bool Post::isMovable() {
-  return NO;
+  return false;
 }

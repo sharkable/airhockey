@@ -7,7 +7,6 @@
 //
 
 #import "SoundSlider.h"
-#import "SoundPlayer.h"
 #import "ResourceLoader.h"
 #import "LocalStore.h"
 #include "Touch.h"
@@ -25,7 +24,7 @@ SoundSlider::SoundSlider(SGPoint position) {
   } else {
     value_ = 0.75;
   }
-  [SoundPlayer setGlobalVolume:value_];
+  // TODO [SoundPlayer setGlobalVolume:value_];
 }
 
 void SoundSlider::update() {
@@ -82,9 +81,9 @@ void SoundSlider::touchesMoved(vector<Touch> touches) {
 void SoundSlider::touchesEnded(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].getIdentifier() == grabbedTouch_) {
-      [SoundPlayer setGlobalVolume:value_];
+      // TODO [SoundPlayer setGlobalVolume:value_];
       LocalStore::setDouble(value_, LS_VOLUME);
-      grabbedTouch_ = nil;
+      grabbedTouch_ = NULL;
       return;
     }
   }

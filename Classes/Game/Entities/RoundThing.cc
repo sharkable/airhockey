@@ -7,13 +7,15 @@
 //
 
 #import "RoundThing.h"
-#import "SoundPlayer.h"
+
+#include <cmath>
+
 #include "Touch.h"
 #import "Paddle.h"
 #import "Puck.h"
 
 RoundThing::RoundThing() {
-  active_ = YES;
+  active_ = true;
 }
 
 RoundThing::~RoundThing() {
@@ -157,7 +159,7 @@ void RoundThing::touchesBegan(vector<Touch> touches) {
   }
   for (int i = 0; i < touches.size(); i++) {
     if (containsTouch(&touches[i])) {
-      grabbed_ = YES;
+      grabbed_ = true;
       grabbedTouch_ = touches[i].getIdentifier();
       touchesMoved(touches);
       vx_ = 0;
@@ -173,14 +175,14 @@ void RoundThing::touchesBegan(vector<Touch> touches) {
 }
 
 void RoundThing::touchesMoved(vector<Touch> touches) {
-  Touch* correctTouch = nil;
+  Touch* correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].getIdentifier() == grabbedTouch_) {
       correctTouch = &touches[i];
       break;
     }
   }
-  if (grabbed_ && correctTouch != nil) {
+  if (grabbed_ && correctTouch != NULL) {
     SGPoint p = correctTouch->getLocation();
     x_ = p.x;
     y_ = p.y;
@@ -188,22 +190,22 @@ void RoundThing::touchesMoved(vector<Touch> touches) {
 }
 
 void RoundThing::touchesEnded(vector<Touch> touches) {
-  Touch* correctTouch = nil;
+  Touch* correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].getIdentifier() == grabbedTouch_) {
       correctTouch = &touches[i];
       break;
     }
   }
-  if (grabbed_ && correctTouch != nil) {
-    grabbed_ = NO;
-    grabbedTouch_ = nil;
+  if (grabbed_ && correctTouch != NULL) {
+    grabbed_ = false;
+    grabbedTouch_ = NULL;
   }
 }
 
 void RoundThing::clearTouches() {
-  grabbed_ = NO;
-  grabbedTouch_ = nil;
+  grabbed_ = false;
+  grabbedTouch_ = NULL;
 }
 
 bool RoundThing::isGrabbable() {
@@ -211,7 +213,7 @@ bool RoundThing::isGrabbable() {
 }
 
 bool RoundThing::isMovable() {
-  return YES;
+  return true;
 }
    
 bool RoundThing::containsTouch(Touch *touch) {

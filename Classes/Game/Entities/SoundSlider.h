@@ -9,7 +9,6 @@
 #ifndef AirHockey_SoundSlider_h
 #define AirHockey_SoundSlider_h
 
-#import <Foundation/Foundation.h>
 #import "StateEntity.h"
 #import "Texture2D.h"
 

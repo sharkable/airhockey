@@ -9,7 +9,6 @@
 #ifndef AirHockey_Puck_h
 #define AirHockey_Puck_h
 
-#import <Foundation/Foundation.h>
 #import "RoundThing.h"
 #import "Texture2D.h"
 #import "Paddle.h"

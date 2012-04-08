@@ -9,7 +9,6 @@
 #ifndef AirHockey_Rink_h
 #define AirHockey_Rink_h
 
-#import <Foundation/Foundation.h>
 #import "StateEntity.h"
 #import "RoundThing.h"
 #import "Texture2D.h"
