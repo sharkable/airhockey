@@ -8,10 +8,7 @@
 
 #import "GameEngine.h"
 
-#import "AdEngine.h"
-#import "const.h"
-#import "EAGLView.h"
-#import "GameTouchWindow.h"
+#include "const.h"
 
 void GameEngine::pushState(EngineState *state) {
   states_.push_back(state);
@@ -19,11 +16,11 @@ void GameEngine::pushState(EngineState *state) {
 }
 
 void GameEngine::popState() {
-  popOnNext_ = YES;
+  popOnNext_ = true;
 }
 
 void GameEngine::replaceTopState(EngineState *state) {
-  replaceOnNext_ = YES;
+  replaceOnNext_ = true;
   nextState_ = state;
 }
 
@@ -42,13 +39,13 @@ void GameEngine::update() {
   if (popOnNext_) {
     states_.pop_back();
     states_.back()->stateIsShown();
-    popOnNext_ = NO;
+    popOnNext_ = false;
   } else if (replaceOnNext_) {
     states_.pop_back();
     states_.push_back(nextState_);
     nextState_->stateIsShown();
-    replaceOnNext_ = NO;
-    nextState_ = nil;
+    replaceOnNext_ = false;
+    nextState_ = NULL;
   }
   
   // Process input.

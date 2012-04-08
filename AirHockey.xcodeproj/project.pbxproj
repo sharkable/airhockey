@@ -35,8 +35,6 @@
 		D4B1F5251515291500620EF2 /* StoryState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DB1515291500620EF2 /* StoryState.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
-		D4B1F5301515291500620EF2 /* GameEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E91515291500620EF2 /* GameEngine.mm */; };
-		D4B1F5311515291500620EF2 /* GameEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4E91515291500620EF2 /* GameEngine.mm */; };
 		D4B1F5321515291500620EF2 /* GameTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4EB1515291500620EF2 /* GameTimer.mm */; };
 		D4B1F5331515291500620EF2 /* GameTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4EB1515291500620EF2 /* GameTimer.mm */; };
 		D4B1F5341515291500620EF2 /* GameTouchWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4ED1515291500620EF2 /* GameTouchWindow.mm */; };
@@ -444,6 +442,8 @@
 		FEF7DD981531374D007F7A4C /* MultiSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD951531374D007F7A4C /* MultiSelect.cc */; };
 		FEF7DD991531374D007F7A4C /* SimpleItem.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD961531374D007F7A4C /* SimpleItem.cc */; };
 		FEF7DD9A1531374D007F7A4C /* SimpleItem.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD961531374D007F7A4C /* SimpleItem.cc */; };
+		FEF7DD9C1531384E007F7A4C /* GameEngine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD9B1531384D007F7A4C /* GameEngine.cc */; };
+		FEF7DD9D1531384E007F7A4C /* GameEngine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD9B1531384D007F7A4C /* GameEngine.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -480,7 +480,6 @@
 		D4B1F4E41515291500620EF2 /* MultiSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelect.h; sourceTree = "<group>"; };
 		D4B1F4E61515291500620EF2 /* SimpleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleItem.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4E81515291500620EF2 /* GameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
-		D4B1F4E91515291500620EF2 /* GameEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameEngine.mm; sourceTree = "<group>"; };
 		D4B1F4EA1515291500620EF2 /* GameTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTimer.h; sourceTree = "<group>"; };
 		D4B1F4EB1515291500620EF2 /* GameTimer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTimer.mm; sourceTree = "<group>"; };
 		D4B1F4EC1515291500620EF2 /* GameTouchWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTouchWindow.h; sourceTree = "<group>"; };
@@ -722,6 +721,7 @@
 		FEB73B7B1528150C004886B9 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
 		FEF7DD951531374D007F7A4C /* MultiSelect.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiSelect.cc; sourceTree = "<group>"; };
 		FEF7DD961531374D007F7A4C /* SimpleItem.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleItem.cc; sourceTree = "<group>"; };
+		FEF7DD9B1531384D007F7A4C /* GameEngine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameEngine.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -832,7 +832,7 @@
 				D4B1F4DF1515291500620EF2 /* EngineState.h */,
 				FE9F894E1529507A00431C4F /* EngineState.cc */,
 				D4B1F4E81515291500620EF2 /* GameEngine.h */,
-				D4B1F4E91515291500620EF2 /* GameEngine.mm */,
+				FEF7DD9B1531384D007F7A4C /* GameEngine.cc */,
 				D4B1F4EA1515291500620EF2 /* GameTimer.h */,
 				D4B1F4EB1515291500620EF2 /* GameTimer.mm */,
 				D4B1F4EC1515291500620EF2 /* GameTouchWindow.h */,
@@ -1855,7 +1855,6 @@
 				D4B1F5221515291500620EF2 /* SplashState.mm in Sources */,
 				D4B1F5241515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5301515291500620EF2 /* GameEngine.mm in Sources */,
 				D4B1F5321515291500620EF2 /* GameTimer.mm in Sources */,
 				D4B1F5341515291500620EF2 /* GameTouchWindow.mm in Sources */,
 				D4B1F5361515291500620EF2 /* LocalStore.mm in Sources */,
@@ -1874,6 +1873,7 @@
 				FE9F89561529769100431C4F /* ViewController.mm in Sources */,
 				FEF7DD971531374D007F7A4C /* MultiSelect.cc in Sources */,
 				FEF7DD991531374D007F7A4C /* SimpleItem.cc in Sources */,
+				FEF7DD9C1531384E007F7A4C /* GameEngine.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1896,7 +1896,6 @@
 				D4B1F5231515291500620EF2 /* SplashState.mm in Sources */,
 				D4B1F5251515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5311515291500620EF2 /* GameEngine.mm in Sources */,
 				D4B1F5331515291500620EF2 /* GameTimer.mm in Sources */,
 				D4B1F5351515291500620EF2 /* GameTouchWindow.mm in Sources */,
 				D4B1F5371515291500620EF2 /* LocalStore.mm in Sources */,
@@ -1915,6 +1914,7 @@
 				FE9F89571529769100431C4F /* ViewController.mm in Sources */,
 				FEF7DD981531374D007F7A4C /* MultiSelect.cc in Sources */,
 				FEF7DD9A1531374D007F7A4C /* SimpleItem.cc in Sources */,
+				FEF7DD9D1531384E007F7A4C /* GameEngine.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
