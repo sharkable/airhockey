@@ -6,7 +6,6 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "EngineState.h"
 #import "SimpleItem.h"
 #import "Button.h"

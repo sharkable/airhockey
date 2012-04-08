@@ -167,57 +167,57 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
 //  pauseButton2_->setSelector(@selector(pausePressed));
   addEntity(pauseButton2_);
     
-  if (isIPhone) {
-    if (IS_FREE) {
-      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 278 + 26, 150, 35)];
-      player1Wins_.textColor = [UIColor whiteColor];
-    } else {
-      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, 448, 150, 35)];
-      player1Wins_.textColor = [UIColor grayColor];
-    }
-  } else {
-    player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 644, 150, 35)];
-    player1Wins_.textColor = [UIColor whiteColor];
-  }
-  player1Wins_.backgroundColor = [UIColor clearColor];
-  player1Wins_.textAlignment = UITextAlignmentLeft;
-  if (isIPhone) {
-    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-  } else {
-    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
-  }
-  
-  if (isIPhone) {
-    if (IS_FREE) {
-      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 155 + 26, 150, 35)];
-      player2Wins_.textColor = [UIColor whiteColor];
-    } else {
-      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, -5, 150, 35)];
-      player2Wins_.textColor = [UIColor grayColor];
-    }
-  } else {
-    player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 324, 150, 35)];
-    player2Wins_.textColor = [UIColor whiteColor];
-  }
-  player2Wins_.backgroundColor = [UIColor clearColor];
-  if (isIPhone) {
-    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-  } else {
-    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
-  }
-  if (numPlayers_ == 2) {
-    player2Wins_.transform = CGAffineTransformMakeRotation(M_PI); 
-    player2Wins_.textAlignment = UITextAlignmentRight;
-  } else {
-    player2Wins_.textAlignment = UITextAlignmentLeft;
-  }
-  
-  if (!IS_FREE && isIPhone) {
-    player1Wins_.text = @"0 wins";
-    player2Wins_.text = @"0 wins";
+//  if (isIPhone) {
+//    if (IS_FREE) {
+//      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 278 + 26, 150, 35)];
+//      player1Wins_.textColor = [UIColor whiteColor];
+//    } else {
+//      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, 448, 150, 35)];
+//      player1Wins_.textColor = [UIColor grayColor];
+//    }
+//  } else {
+//    player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 644, 150, 35)];
+//    player1Wins_.textColor = [UIColor whiteColor];
+//  }
+//  player1Wins_.backgroundColor = [UIColor clearColor];
+//  player1Wins_.textAlignment = UITextAlignmentLeft;
+//  if (isIPhone) {
+//    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+//  } else {
+//    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
+//  }
+//  
+//  if (isIPhone) {
+//    if (IS_FREE) {
+//      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 155 + 26, 150, 35)];
+//      player2Wins_.textColor = [UIColor whiteColor];
+//    } else {
+//      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, -5, 150, 35)];
+//      player2Wins_.textColor = [UIColor grayColor];
+//    }
+//  } else {
+//    player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 324, 150, 35)];
+//    player2Wins_.textColor = [UIColor whiteColor];
+//  }
+//  player2Wins_.backgroundColor = [UIColor clearColor];
+//  if (isIPhone) {
+//    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+//  } else {
+//    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
+//  }
+//  if (numPlayers_ == 2) {
+//    player2Wins_.transform = CGAffineTransformMakeRotation(M_PI); 
+//    player2Wins_.textAlignment = UITextAlignmentRight;
+//  } else {
+//    player2Wins_.textAlignment = UITextAlignmentLeft;
+//  }
+//  
+//  if (!IS_FREE && isIPhone) {
+//    player1Wins_.text = @"0 wins";
+//    player2Wins_.text = @"0 wins";
 //    getGameEngine()->addUIView(player1Wins_);
 //    getGameEngine()->addUIView(player2Wins_);
-  }
+//  }
   
   giveExtraPuckToPlayer_ = PLAYER_1;
   player1WinCount_ = 0;
@@ -226,8 +226,8 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
 }
 
 PlayState::~PlayState() {
-  [player1Wins_ release];
-  [player2Wins_ release];
+//  [player1Wins_ release];
+//  [player2Wins_ release];
 }
 
 void PlayState::update() {
@@ -439,9 +439,9 @@ void PlayState::finishGameWithWinner(int playerId) {
     }
   }
 
-  player1Wins_.text =
-      [NSString stringWithFormat:@"%d win%@", player1WinCount_, player1WinCount_ == 1 ? @"" : @"s"];
-  player2Wins_.text =
+//  player1Wins_.text =
+//      [NSString stringWithFormat:@"%d win%@", player1WinCount_, player1WinCount_ == 1 ? @"" : @"s"];
+//  player2Wins_.text =
       [NSString stringWithFormat:@"%d win%@", player2WinCount_, player2WinCount_ == 1 ? @"" : @"s"];
   if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    getGameEngine()->addUIView(player1Wins_);
@@ -463,8 +463,8 @@ void PlayState::finishGameWithWinner(int playerId) {
 void PlayState::rematchPressed() {
   [FlurryAnalytics logEvent:@"REMATCH"];
   if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    [player1Wins_ removeFromSuperview];
-    [player2Wins_ removeFromSuperview];
+//    [player1Wins_ removeFromSuperview];
+//    [player2Wins_ removeFromSuperview];
   }
   setUpNewGame();
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -474,8 +474,8 @@ void PlayState::rematchPressed() {
 
 
 void PlayState::menuPressed() {
-  [player1Wins_ removeFromSuperview];
-  [player2Wins_ removeFromSuperview];
+//  [player1Wins_ removeFromSuperview];
+//  [player2Wins_ removeFromSuperview];
   getGameEngine()->replaceTopState(new MainMenuState(getGameEngine()));
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];

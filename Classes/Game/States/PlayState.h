@@ -6,7 +6,6 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "EngineState.h"
 #import "Rink.h"
 #import "Puck.h"
@@ -75,6 +74,6 @@ class PlayState : public EngineState {
   int player1WinCount_;
   int player2WinCount_;
   
-  UILabel *player1Wins_;
-  UILabel *player2Wins_;
+// TODO UILabel *player1Wins_;
+//  UILabel *player2Wins_;
 };

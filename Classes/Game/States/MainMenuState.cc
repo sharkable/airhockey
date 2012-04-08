@@ -8,19 +8,16 @@
 
 #import "MainMenuState.h"
 
-#import "AdEngine.h"
 #import "Texture2D.h"
 #import "PlayState.h"
 #import "StoryState.h"
 #import "GameEngine.h"
-#import "EAGLView.h"
 #import "LocalStore.h"
 #import "ResourceLoader.h"
 #import "const.h"
-#import "FlurryAnalytics.h"
 
 MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), soundSlider_(SGPointMake(400, 50)) {
-  BOOL isIPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+  bool isIPhone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
   Texture2D backgroundTexture = ResourceLoader::instance()->getTextureWithName("rink_bg");
   SimpleItem *background = new SimpleItem(backgroundTexture, SGPointMake(0, 0));
@@ -77,7 +74,7 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   storyButton_.setDelegate(this);
   addEntity(&storyButton_);
   
-  if (NO) {
+  if (false) {
     Texture2D upgradeButtonImage =
         ResourceLoader::instance()->getTextureWithName("upgrade_button");
     Texture2D upgradeButtonPressedImage =
@@ -107,7 +104,7 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   double pucks1X = isIPhone ? 40 : 138.5;
   double pucks2X = isIPhone ? 45 : 142.5;
   double pucksXSpread = isIPhone ? 96 : 69;
-  for (int i = 1; i <= (NO ? 4 : MAX_NUM_PUCKS); i++) {
+  for (int i = 1; i <= (false ? 4 : MAX_NUM_PUCKS); i++) {
     char pucksstr[15];
     sprintf(pucksstr, "%d", i);
     char pucksselectedstr[15];
@@ -123,7 +120,7 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
   numPucksSelect_.setSelectedValue(LocalStore::integerForKey(LS_NUM_PUCKS));
   addEntity(&numPucksSelect_);
   
-  if (NO) {
+  if (false) {
     Texture2D upgradeForMoreTexture =
         ResourceLoader::instance()->getTextureWithName("upgrade_for_more");
     SGPoint upgradeForMorePosition = SGPointMake(pucks2X + pucksXSpread * 4, pucksY);
@@ -180,16 +177,16 @@ MainMenuState::MainMenuState(GameEngine *gameEngine) : EngineState(gameEngine), 
 
 void MainMenuState::stateIsShown() {
   if (IS_FREE) {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(0, 0)];  
-    } else {
+//    } else {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(45, 40)];  
-    }
+//    }
   }
 }
 
 void MainMenuState::pressedStart() {
-  BOOL isIPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+  bool isIPhone = true; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
   LocalStore::setInteger(numPlayersSelect_.getSelectedValue(), LS_NUM_PLAYERS);
   LocalStore::setInteger(numPucksSelect_.getSelectedValue(), LS_NUM_PUCKS);
@@ -198,18 +195,18 @@ void MainMenuState::pressedStart() {
     LocalStore::setInteger(paddleSizeSelect_.getSelectedValue(), LS_PADDLE_SIZE);
   }
 
-  NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
-  [flurryData setObject:[NSNumber numberWithInt:numPlayersSelect_.getSelectedValue() + 1]
-                 forKey:@"NumPlayers"];
-  [flurryData setObject:[NSNumber numberWithInt:numPucksSelect_.getSelectedValue() + 1]
-                 forKey:@"NumPucks"];
-  [flurryData setObject:[NSNumber numberWithInt:difficultySelect_.getSelectedValue()]
-                 forKey:@"Difficulty"];
-  if (!isIPhone) {
-    [flurryData setObject:[NSNumber numberWithInt:paddleSizeSelect_.getSelectedValue()]
-                   forKey:@"PaddleSize"];
-  }
-  [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
+//  NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
+//  [flurryData setObject:[NSNumber numberWithInt:numPlayersSelect_.getSelectedValue() + 1]
+//                 forKey:@"NumPlayers"];
+//  [flurryData setObject:[NSNumber numberWithInt:numPucksSelect_.getSelectedValue() + 1]
+//                 forKey:@"NumPucks"];
+//  [flurryData setObject:[NSNumber numberWithInt:difficultySelect_.getSelectedValue()]
+//                 forKey:@"Difficulty"];
+//  if (!isIPhone) {
+//    [flurryData setObject:[NSNumber numberWithInt:paddleSizeSelect_.getSelectedValue()]
+//                   forKey:@"PaddleSize"];
+//  }
+//  [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
 
   PaddleSize paddleSize = PaddleSize(isIPhone ? psLarge : paddleSizeSelect_.getSelectedValue());
   PlayState *playState = new PlayState(getGameEngine(),
@@ -221,33 +218,33 @@ void MainMenuState::pressedStart() {
 }
 
 void MainMenuState::pressedFeedback() {
-  NSString *free;
-  NSString *device;
-  
-  [FlurryAnalytics logEvent:@"FEEDBACK_PRESSED"];
-
-  if (IS_FREE) {
-    free = @"%20Free";
-  } else {
-    free = @"";
-  }
-  
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    device = @"iPad";
-  } else {
-    device = @"iPhone/iPod";
-  }
-
-  NSString *url =
-      [NSString stringWithFormat:@"mailto:feedback@sharkable.com?"
-                                  "subject=Glide%%20Hockey%%20HD%@%%20feedback%%20(%@)",
-                                     free, device];
-  
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+//  NSString *free;
+//  NSString *device;
+//  
+//  [FlurryAnalytics logEvent:@"FEEDBACK_PRESSED"];
+//
+//  if (IS_FREE) {
+//    free = @"%20Free";
+//  } else {
+//    free = @"";
+//  }
+//  
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//    device = @"iPad";
+//  } else {
+//    device = @"iPhone/iPod";
+//  }
+//
+//  NSString *url =
+//      [NSString stringWithFormat:@"mailto:feedback@sharkable.com?"
+//                                  "subject=Glide%%20Hockey%%20HD%@%%20feedback%%20(%@)",
+//                                     free, device];
+//  
+//  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 void MainMenuState::pressedStory() {
-  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
+//  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
 //  [getGameEngine()->adEngine() removeAd];
   getGameEngine()->pushState(new StoryState(getGameEngine()));
 }
