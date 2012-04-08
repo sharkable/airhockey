@@ -11,8 +11,6 @@
 		D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
-		D4B1F5201515291500620EF2 /* PlayState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D71515291500620EF2 /* PlayState.mm */; };
-		D4B1F5211515291500620EF2 /* PlayState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D71515291500620EF2 /* PlayState.mm */; };
 		D4B1F5221515291500620EF2 /* SplashState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D91515291500620EF2 /* SplashState.mm */; };
 		D4B1F5231515291500620EF2 /* SplashState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4D91515291500620EF2 /* SplashState.mm */; };
 		D4B1F5241515291500620EF2 /* StoryState.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DB1515291500620EF2 /* StoryState.mm */; };
@@ -442,6 +440,8 @@
 		FEF7DDB815313B11007F7A4C /* SoundSlider.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */; };
 		FEF7DDBA15313CAA007F7A4C /* MainMenuState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDB915313CAA007F7A4C /* MainMenuState.cc */; };
 		FEF7DDBB15313CAA007F7A4C /* MainMenuState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDB915313CAA007F7A4C /* MainMenuState.cc */; };
+		FEF7DDBD15313DD5007F7A4C /* PlayState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDBC15313DD4007F7A4C /* PlayState.cc */; };
+		FEF7DDBE15313DD5007F7A4C /* PlayState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDBC15313DD4007F7A4C /* PlayState.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -451,7 +451,6 @@
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4D41515291500620EF2 /* MainMenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuState.h; sourceTree = "<group>"; };
 		D4B1F4D61515291500620EF2 /* PlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayState.h; sourceTree = "<group>"; };
-		D4B1F4D71515291500620EF2 /* PlayState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayState.mm; sourceTree = "<group>"; };
 		D4B1F4D81515291500620EF2 /* SplashState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashState.h; sourceTree = "<group>"; };
 		D4B1F4D91515291500620EF2 /* SplashState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SplashState.mm; sourceTree = "<group>"; };
 		D4B1F4DA1515291500620EF2 /* StoryState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryState.h; sourceTree = "<group>"; };
@@ -718,6 +717,7 @@
 		FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundSlider.cc; sourceTree = "<group>"; };
 		FEF7DDAC15313B11007F7A4C /* SoundSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundSlider.h; sourceTree = "<group>"; };
 		FEF7DDB915313CAA007F7A4C /* MainMenuState.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuState.cc; sourceTree = "<group>"; };
+		FEF7DDBC15313DD4007F7A4C /* PlayState.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayState.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -801,7 +801,7 @@
 				D4B1F4D41515291500620EF2 /* MainMenuState.h */,
 				FEF7DDB915313CAA007F7A4C /* MainMenuState.cc */,
 				D4B1F4D61515291500620EF2 /* PlayState.h */,
-				D4B1F4D71515291500620EF2 /* PlayState.mm */,
+				FEF7DDBC15313DD4007F7A4C /* PlayState.cc */,
 				D4B1F4D81515291500620EF2 /* SplashState.h */,
 				D4B1F4D91515291500620EF2 /* SplashState.mm */,
 				D4B1F4DA1515291500620EF2 /* StoryState.h */,
@@ -1829,7 +1829,6 @@
 				FEA8E66714F97CF00084E117 /* main.m in Sources */,
 				D4B1F50C1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5201515291500620EF2 /* PlayState.mm in Sources */,
 				D4B1F5221515291500620EF2 /* SplashState.mm in Sources */,
 				D4B1F5241515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
@@ -1859,6 +1858,7 @@
 				FEF7DDB515313B11007F7A4C /* RoundThing.cc in Sources */,
 				FEF7DDB715313B11007F7A4C /* SoundSlider.cc in Sources */,
 				FEF7DDBA15313CAA007F7A4C /* MainMenuState.cc in Sources */,
+				FEF7DDBD15313DD5007F7A4C /* PlayState.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1869,7 +1869,6 @@
 				FEA8E66814F97CF00084E117 /* main.m in Sources */,
 				D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5211515291500620EF2 /* PlayState.mm in Sources */,
 				D4B1F5231515291500620EF2 /* SplashState.mm in Sources */,
 				D4B1F5251515291500620EF2 /* StoryState.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
@@ -1899,6 +1898,7 @@
 				FEF7DDB615313B11007F7A4C /* RoundThing.cc in Sources */,
 				FEF7DDB815313B11007F7A4C /* SoundSlider.cc in Sources */,
 				FEF7DDBB15313CAA007F7A4C /* MainMenuState.cc in Sources */,
+				FEF7DDBE15313DD5007F7A4C /* PlayState.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

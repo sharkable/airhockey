@@ -8,14 +8,10 @@
 
 #import "PlayState.h"
 
-#import "AdEngine.h"
 #import "Post.h"
 #import "GameEngine.h"
-#import "SoundPlayer.h"
 #import "MainMenuState.h"
-#import "EAGLView.h"
 #import "ResourceLoader.h"
-#import "FlurryAnalytics.h"
 
 PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, ComputerAI difficulty,
                      PaddleSize paddleSize) : EngineState(gameEngine) {
@@ -146,7 +142,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   Texture2D pauseButtonPressedTexture =
       ResourceLoader::instance()->getTextureWithName("pause_button_pressed");
   
-  BOOL isIPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+  bool isIPhone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
   
   if (!isIPhone) {
     SGPoint pauseButtonPos1 = SGPointMake(0, 0);
@@ -160,7 +156,7 @@ PlayState::PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, Compu
   SGPoint pauseButtonPos2 =
       SGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize().width,
                   SCREEN_HEIGHT - pauseButtonTexture.contentSize().height +
-                      (NO ? (27 * 768.0/320.0) : 0));
+                      (false ? (27 * 768.0/320.0) : 0));
   pauseButton2_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos2);
 // TODO
 //  pauseButton2_->setDelegate(self);
@@ -237,13 +233,13 @@ void PlayState::update() {
     getReadyTicksLeft_--;
     if (getReadyTicksLeft_ == SHOW_GET_READY_MESSAGE_TICKS) {
       addEntity(getReady_);
-      [SoundPlayer playSound:kSoundGetReady];
+      // TODO [SoundPlayer playSound:kSoundGetReady];
     } else if (getReadyTicksLeft_ == 0) {
     removeEntity(getReady_);
       addEntity(go_);
       goTicksLeft_ = SHOW_GO_MESSAGE_TICKS;
       state_ = PLAY_STATE_PLAYING;
-      [SoundPlayer playSound:kSoundStart];
+      // TODO [SoundPlayer playSound:kSoundStart];
     }
     
     return;
@@ -294,9 +290,9 @@ void PlayState::update() {
         player1Score_->setTexture(player1Score_->getTexture() + 1);
       }
       if (player1Score_->getTexture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
-        [SoundPlayer playSound:kSoundScoreFinal];  
+        // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
-        [SoundPlayer playSound:kSoundScore];
+        // TODO [SoundPlayer playSound:kSoundScore];
       }
       numPlayer1ScoresLastRound_++;
       numActivePucks_--;
@@ -306,9 +302,9 @@ void PlayState::update() {
         player2Score_->setTexture(player2Score_->getTexture() + 1);
       }
       if (player2Score_->getTexture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
-        [SoundPlayer playSound:kSoundScoreFinal];  
+        // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
-        [SoundPlayer playSound:kSoundScore];
+        // TODO [SoundPlayer playSound:kSoundScore];
       }
       
       numActivePucks_--;
@@ -351,10 +347,10 @@ void PlayState::update() {
 }
 
 void PlayState::setUpNewGame() {
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-  } else {
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+//  } else {
 //    [getGameEngine()->adEngine() removeAd];
-  }
+//  }
 
   // Place paddles!
   paddle1_->setInitialPositionForPlayer(PLAYER_1);
@@ -372,7 +368,7 @@ void PlayState::setUpNewGame() {
     Puck *puck = pucks_[i];
     puck->setIsActive(true);
     int playerId = (i % 2 == 0) ? giveExtraPuckToPlayer_ : 1 - giveExtraPuckToPlayer_;
-    BOOL center = !((playerId == giveExtraPuckToPlayer_ &&
+    bool center = !((playerId == giveExtraPuckToPlayer_ &&
                       (numPucks_ == 3 || numPucks_ == 4 || numPucks_ == 7)) ||
                       (playerId == 1 - giveExtraPuckToPlayer_ &&
                       (numPucks_ == 4 || numPucks_ == 5)));
@@ -442,34 +438,34 @@ void PlayState::finishGameWithWinner(int playerId) {
 //  player1Wins_.text =
 //      [NSString stringWithFormat:@"%d win%@", player1WinCount_, player1WinCount_ == 1 ? @"" : @"s"];
 //  player2Wins_.text =
-      [NSString stringWithFormat:@"%d win%@", player2WinCount_, player2WinCount_ == 1 ? @"" : @"s"];
-  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//      [NSString stringWithFormat:@"%d win%@", player2WinCount_, player2WinCount_ == 1 ? @"" : @"s"];
+//  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    getGameEngine()->addUIView(player1Wins_);
 //    getGameEngine()->addUIView(player2Wins_);
-  }
+//  }
   
   addEntity(menuBackground_);
   addEntity(soundSlider_);
   addEntity(rematchButton_);
   addEntity(menuButton_);
   
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
-  } else {
+//  } else {
 //    [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(0, 0)];
-  }
+//  }
 }
 
 void PlayState::rematchPressed() {
-  [FlurryAnalytics logEvent:@"REMATCH"];
-  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//  [FlurryAnalytics logEvent:@"REMATCH"];
+//  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [player1Wins_ removeFromSuperview];
 //    [player2Wins_ removeFromSuperview];
-  }
+//  }
   setUpNewGame();
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
-  }  
+//  }  
 }
 
 
@@ -477,9 +473,9 @@ void PlayState::menuPressed() {
 //  [player1Wins_ removeFromSuperview];
 //  [player2Wins_ removeFromSuperview];
   getGameEngine()->replaceTopState(new MainMenuState(getGameEngine()));
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
-  }
+//  }
 }
 
 void PlayState::continuePressed() {
@@ -488,9 +484,9 @@ void PlayState::continuePressed() {
   removeEntity(soundSlider_);
   removeEntity(menuButton_);
   removeEntity(continueButton_);
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
-  }
+//  }
 }
 
 void PlayState::pausePressed() {
@@ -501,9 +497,9 @@ void PlayState::pausePressed() {
     addEntity(soundSlider_);
     addEntity(menuButton_);
     addEntity(continueButton_);
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320)/2, 385)];
-    }
+//    }
   }
 }
 
