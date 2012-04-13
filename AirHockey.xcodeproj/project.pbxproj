@@ -7,22 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D4B1F50C1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */; };
-		D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */; };
+		D484897B15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484896A15387DBC006CE9AD /* AirHockeyAppDelegate.mm */; };
+		D484897C15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484896A15387DBC006CE9AD /* AirHockeyAppDelegate.mm */; };
+		D484897D15387DBC006CE9AD /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484896C15387DBC006CE9AD /* EAGLView.mm */; };
+		D484897E15387DBC006CE9AD /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484896C15387DBC006CE9AD /* EAGLView.mm */; };
+		D484897F15387DBC006CE9AD /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484896E15387DBC006CE9AD /* ES1Renderer.mm */; };
+		D484898015387DBC006CE9AD /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484896E15387DBC006CE9AD /* ES1Renderer.mm */; };
+		D484898115387DBC006CE9AD /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897015387DBC006CE9AD /* ES2Renderer.mm */; };
+		D484898215387DBC006CE9AD /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897015387DBC006CE9AD /* ES2Renderer.mm */; };
+		D484898315387DBC006CE9AD /* GameTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897315387DBC006CE9AD /* GameTimer.mm */; };
+		D484898415387DBC006CE9AD /* GameTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897315387DBC006CE9AD /* GameTimer.mm */; };
+		D484898515387DBC006CE9AD /* GameTouchWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897515387DBC006CE9AD /* GameTouchWindow.mm */; };
+		D484898615387DBC006CE9AD /* GameTouchWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897515387DBC006CE9AD /* GameTouchWindow.mm */; };
+		D484898715387DBC006CE9AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D484897615387DBC006CE9AD /* main.m */; };
+		D484898815387DBC006CE9AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D484897615387DBC006CE9AD /* main.m */; };
+		D484898915387DBC006CE9AD /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897815387DBC006CE9AD /* TypeUtil.mm */; };
+		D484898A15387DBC006CE9AD /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897815387DBC006CE9AD /* TypeUtil.mm */; };
+		D484898B15387DBC006CE9AD /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897A15387DBC006CE9AD /* ViewController.mm */; };
+		D484898C15387DBC006CE9AD /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D484897A15387DBC006CE9AD /* ViewController.mm */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
-		D4B1F5321515291500620EF2 /* GameTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4EB1515291500620EF2 /* GameTimer.mm */; };
-		D4B1F5331515291500620EF2 /* GameTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4EB1515291500620EF2 /* GameTimer.mm */; };
-		D4B1F5341515291500620EF2 /* GameTouchWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4ED1515291500620EF2 /* GameTouchWindow.mm */; };
-		D4B1F5351515291500620EF2 /* GameTouchWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4ED1515291500620EF2 /* GameTouchWindow.mm */; };
 		D4B1F5361515291500620EF2 /* LocalStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4EF1515291500620EF2 /* LocalStore.mm */; };
 		D4B1F5371515291500620EF2 /* LocalStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4EF1515291500620EF2 /* LocalStore.mm */; };
 		D4B1F53A1515291500620EF2 /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F21515291500620EF2 /* ResourceLoader.mm */; };
 		D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F21515291500620EF2 /* ResourceLoader.mm */; };
-		D4B1F53C1515291500620EF2 /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F61515291500620EF2 /* TypeUtil.mm */; };
-		D4B1F53D1515291500620EF2 /* TypeUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F61515291500620EF2 /* TypeUtil.mm */; };
 		D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
 		D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
 		D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5061515291500620EF2 /* AVAudio.mm */; };
@@ -57,15 +67,11 @@
 		FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894B15293BBB00431C4F /* Texture2D.cc */; };
 		FE9F894F1529507A00431C4F /* EngineState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894E1529507A00431C4F /* EngineState.cc */; };
 		FE9F89501529507A00431C4F /* EngineState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894E1529507A00431C4F /* EngineState.cc */; };
-		FE9F89561529769100431C4F /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE9F89551529769000431C4F /* ViewController.mm */; };
-		FE9F89571529769100431C4F /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE9F89551529769000431C4F /* ViewController.mm */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FEA8E5C714F97CB00084E117 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FEA8E5C814F97CB00084E117 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
-		FEA8E66714F97CF00084E117 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E61B14F97CF00084E117 /* main.m */; };
-		FEA8E66814F97CF00084E117 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA8E61B14F97CF00084E117 /* main.m */; };
 		FEA8E66914F97CF00084E117 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA8E61F14F97CF00084E117 /* libFlurryAnalytics.a */; };
 		FEA8E66A14F97CF00084E117 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA8E61F14F97CF00084E117 /* libFlurryAnalytics.a */; };
 		FEA8E66B14F97CF00084E117 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA8E62714F97CF00084E117 /* libGoogleAdMobAds.a */; };
@@ -410,12 +416,6 @@
 		FEA8E8B614F97D320084E117 /* upgrade_for_more.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */; };
 		FEA8E8B714F97D320084E117 /* title_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B014F97D320084E117 /* title_iphone.png */; };
 		FEA8E8B814F97D320084E117 /* upgrade_for_more_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */; };
-		FEB73B7C1528150C004886B9 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B761528150C004886B9 /* EAGLView.mm */; };
-		FEB73B7D1528150C004886B9 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B761528150C004886B9 /* EAGLView.mm */; };
-		FEB73B7E1528150C004886B9 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B781528150C004886B9 /* ES1Renderer.mm */; };
-		FEB73B7F1528150C004886B9 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B781528150C004886B9 /* ES1Renderer.mm */; };
-		FEB73B801528150C004886B9 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B7A1528150C004886B9 /* ES2Renderer.mm */; };
-		FEB73B811528150C004886B9 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEB73B7A1528150C004886B9 /* ES2Renderer.mm */; };
 		FEF7DD971531374D007F7A4C /* MultiSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD951531374D007F7A4C /* MultiSelect.cc */; };
 		FEF7DD981531374D007F7A4C /* MultiSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD951531374D007F7A4C /* MultiSelect.cc */; };
 		FEF7DD991531374D007F7A4C /* SimpleItem.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DD961531374D007F7A4C /* SimpleItem.cc */; };
@@ -445,8 +445,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D4B1F4BE1515291500620EF2 /* AirHockeyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockeyAppDelegate.h; sourceTree = "<group>"; };
-		D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AirHockeyAppDelegate.mm; sourceTree = "<group>"; };
+		D484896915387DBC006CE9AD /* AirHockeyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockeyAppDelegate.h; sourceTree = "<group>"; };
+		D484896A15387DBC006CE9AD /* AirHockeyAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AirHockeyAppDelegate.mm; sourceTree = "<group>"; };
+		D484896B15387DBC006CE9AD /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		D484896C15387DBC006CE9AD /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
+		D484896D15387DBC006CE9AD /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
+		D484896E15387DBC006CE9AD /* ES1Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES1Renderer.mm; sourceTree = "<group>"; };
+		D484896F15387DBC006CE9AD /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
+		D484897015387DBC006CE9AD /* ES2Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES2Renderer.mm; sourceTree = "<group>"; };
+		D484897115387DBC006CE9AD /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
+		D484897215387DBC006CE9AD /* GameTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTimer.h; sourceTree = "<group>"; };
+		D484897315387DBC006CE9AD /* GameTimer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTimer.mm; sourceTree = "<group>"; };
+		D484897415387DBC006CE9AD /* GameTouchWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTouchWindow.h; sourceTree = "<group>"; };
+		D484897515387DBC006CE9AD /* GameTouchWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTouchWindow.mm; sourceTree = "<group>"; };
+		D484897615387DBC006CE9AD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D484897715387DBC006CE9AD /* TypeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeUtil.h; sourceTree = "<group>"; };
+		D484897815387DBC006CE9AD /* TypeUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TypeUtil.mm; sourceTree = "<group>"; };
+		D484897915387DBC006CE9AD /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D484897A15387DBC006CE9AD /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4D41515291500620EF2 /* MainMenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuState.h; sourceTree = "<group>"; };
@@ -460,18 +476,12 @@
 		D4B1F4E41515291500620EF2 /* MultiSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelect.h; sourceTree = "<group>"; };
 		D4B1F4E61515291500620EF2 /* SimpleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleItem.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4E81515291500620EF2 /* GameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
-		D4B1F4EA1515291500620EF2 /* GameTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTimer.h; sourceTree = "<group>"; };
-		D4B1F4EB1515291500620EF2 /* GameTimer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTimer.mm; sourceTree = "<group>"; };
-		D4B1F4EC1515291500620EF2 /* GameTouchWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTouchWindow.h; sourceTree = "<group>"; };
-		D4B1F4ED1515291500620EF2 /* GameTouchWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTouchWindow.mm; sourceTree = "<group>"; };
 		D4B1F4EE1515291500620EF2 /* LocalStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalStore.h; sourceTree = "<group>"; };
 		D4B1F4EF1515291500620EF2 /* LocalStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalStore.mm; sourceTree = "<group>"; };
 		D4B1F4F11515291500620EF2 /* ResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceLoader.h; sourceTree = "<group>"; };
 		D4B1F4F21515291500620EF2 /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ResourceLoader.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4F31515291500620EF2 /* StateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateEntity.h; sourceTree = "<group>"; };
 		D4B1F4F41515291500620EF2 /* Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Touch.h; sourceTree = "<group>"; };
-		D4B1F4F51515291500620EF2 /* TypeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeUtil.h; sourceTree = "<group>"; };
-		D4B1F4F61515291500620EF2 /* TypeUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TypeUtil.mm; sourceTree = "<group>"; };
 		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Texture2D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
 		D4B1F5031515291500620EF2 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
@@ -500,11 +510,8 @@
 		FE96BDDE152927570018441C /* Button.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Button.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		FE9F894B15293BBB00431C4F /* Texture2D.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture2D.cc; sourceTree = "<group>"; };
 		FE9F894E1529507A00431C4F /* EngineState.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineState.cc; sourceTree = "<group>"; };
-		FE9F89511529542600431C4F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FE9F89551529769000431C4F /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
-		FEA8E61B14F97CF00084E117 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
 		FEA8E61E14F97CF00084E117 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		FEA8E61F14F97CF00084E117 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		FEA8E62114F97CF00084E117 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
@@ -692,13 +699,6 @@
 		FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more.png; sourceTree = "<group>"; };
 		FEA8E8B014F97D320084E117 /* title_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_iphone.png; sourceTree = "<group>"; };
 		FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more_iphone.png; sourceTree = "<group>"; };
-		FEB73B751528150C004886B9 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
-		FEB73B761528150C004886B9 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
-		FEB73B771528150C004886B9 /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
-		FEB73B781528150C004886B9 /* ES1Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES1Renderer.mm; sourceTree = "<group>"; };
-		FEB73B791528150C004886B9 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
-		FEB73B7A1528150C004886B9 /* ES2Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES2Renderer.mm; sourceTree = "<group>"; };
-		FEB73B7B1528150C004886B9 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
 		FEF7DD951531374D007F7A4C /* MultiSelect.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiSelect.cc; sourceTree = "<group>"; };
 		FEF7DD961531374D007F7A4C /* SimpleItem.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleItem.cc; sourceTree = "<group>"; };
 		FEF7DD9B1531384D007F7A4C /* GameEngine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameEngine.cc; sourceTree = "<group>"; };
@@ -767,6 +767,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D484896815387DBC006CE9AD /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				D484896915387DBC006CE9AD /* AirHockeyAppDelegate.h */,
+				D484896A15387DBC006CE9AD /* AirHockeyAppDelegate.mm */,
+				D484896B15387DBC006CE9AD /* EAGLView.h */,
+				D484896C15387DBC006CE9AD /* EAGLView.mm */,
+				D484896D15387DBC006CE9AD /* ES1Renderer.h */,
+				D484896E15387DBC006CE9AD /* ES1Renderer.mm */,
+				D484896F15387DBC006CE9AD /* ES2Renderer.h */,
+				D484897015387DBC006CE9AD /* ES2Renderer.mm */,
+				D484897115387DBC006CE9AD /* ESRenderer.h */,
+				D484897215387DBC006CE9AD /* GameTimer.h */,
+				D484897315387DBC006CE9AD /* GameTimer.mm */,
+				D484897415387DBC006CE9AD /* GameTouchWindow.h */,
+				D484897515387DBC006CE9AD /* GameTouchWindow.mm */,
+				D484897615387DBC006CE9AD /* main.m */,
+				D484897715387DBC006CE9AD /* TypeUtil.h */,
+				D484897815387DBC006CE9AD /* TypeUtil.mm */,
+				D484897915387DBC006CE9AD /* ViewController.h */,
+				D484897A15387DBC006CE9AD /* ViewController.mm */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 		D4B1F4C51515291500620EF2 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -820,20 +845,12 @@
 				FE9F894E1529507A00431C4F /* EngineState.cc */,
 				D4B1F4E81515291500620EF2 /* GameEngine.h */,
 				FEF7DD9B1531384D007F7A4C /* GameEngine.cc */,
-				D4B1F4EA1515291500620EF2 /* GameTimer.h */,
-				D4B1F4EB1515291500620EF2 /* GameTimer.mm */,
-				D4B1F4EC1515291500620EF2 /* GameTouchWindow.h */,
-				D4B1F4ED1515291500620EF2 /* GameTouchWindow.mm */,
 				D4B1F4EE1515291500620EF2 /* LocalStore.h */,
 				D4B1F4EF1515291500620EF2 /* LocalStore.mm */,
 				D4B1F4F11515291500620EF2 /* ResourceLoader.h */,
 				D4B1F4F21515291500620EF2 /* ResourceLoader.mm */,
 				D4B1F4F31515291500620EF2 /* StateEntity.h */,
 				D4B1F4F41515291500620EF2 /* Touch.h */,
-				D4B1F4F51515291500620EF2 /* TypeUtil.h */,
-				D4B1F4F61515291500620EF2 /* TypeUtil.mm */,
-				FE9F89511529542600431C4F /* ViewController.h */,
-				FE9F89551529769000431C4F /* ViewController.mm */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -854,7 +871,6 @@
 		D4B1F4F71515291500620EF2 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				FEB73B741528150C004886B9 /* iOS */,
 				D4B1F4FF1515291500620EF2 /* Texture2D.h */,
 				FE9F894B15293BBB00431C4F /* Texture2D.cc */,
 			);
@@ -921,7 +937,6 @@
 			children = (
 				FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */,
 				FEA8E5D014F97CF00084E117 /* Classes */,
-				FEA8E61B14F97CF00084E117 /* main.m */,
 				FEA8E61C14F97CF00084E117 /* ThirdParty */,
 				FEA8E66F14F97CF80084E117 /* Resources */,
 			);
@@ -931,12 +946,11 @@
 		FEA8E5D014F97CF00084E117 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D4B1F4BE1515291500620EF2 /* AirHockeyAppDelegate.h */,
-				D4B1F4BF1515291500620EF2 /* AirHockeyAppDelegate.mm */,
 				D4B1F4C01515291500620EF2 /* const.h */,
 				D4B1F4C11515291500620EF2 /* const.mm */,
 				D4B1F4C51515291500620EF2 /* Game */,
 				D4B1F4DC1515291500620EF2 /* GameEngine */,
+				D484896815387DBC006CE9AD /* ios */,
 				D4B1F4F71515291500620EF2 /* OpenGL */,
 				D4B1F5011515291500620EF2 /* SoundEngine */,
 			);
@@ -1387,20 +1401,6 @@
 			path = MainMenu;
 			sourceTree = "<group>";
 		};
-		FEB73B741528150C004886B9 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				FEB73B751528150C004886B9 /* EAGLView.h */,
-				FEB73B761528150C004886B9 /* EAGLView.mm */,
-				FEB73B771528150C004886B9 /* ES1Renderer.h */,
-				FEB73B781528150C004886B9 /* ES1Renderer.mm */,
-				FEB73B791528150C004886B9 /* ES2Renderer.h */,
-				FEB73B7A1528150C004886B9 /* ES2Renderer.mm */,
-				FEB73B7B1528150C004886B9 /* ESRenderer.h */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1826,26 +1826,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEA8E66714F97CF00084E117 /* main.m in Sources */,
-				D4B1F50C1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5321515291500620EF2 /* GameTimer.mm in Sources */,
-				D4B1F5341515291500620EF2 /* GameTouchWindow.mm in Sources */,
 				D4B1F5361515291500620EF2 /* LocalStore.mm in Sources */,
 				D4B1F53A1515291500620EF2 /* ResourceLoader.mm in Sources */,
-				D4B1F53C1515291500620EF2 /* TypeUtil.mm in Sources */,
 				D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */,
-				FEB73B7C1528150C004886B9 /* EAGLView.mm in Sources */,
-				FEB73B7E1528150C004886B9 /* ES1Renderer.mm in Sources */,
-				FEB73B801528150C004886B9 /* ES2Renderer.mm in Sources */,
 				FE96BDDF152927570018441C /* Button.cc in Sources */,
 				FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */,
 				FE9F894F1529507A00431C4F /* EngineState.cc in Sources */,
-				FE9F89561529769100431C4F /* ViewController.mm in Sources */,
 				FEF7DD971531374D007F7A4C /* MultiSelect.cc in Sources */,
 				FEF7DD991531374D007F7A4C /* SimpleItem.cc in Sources */,
 				FEF7DD9C1531384E007F7A4C /* GameEngine.cc in Sources */,
@@ -1859,6 +1850,15 @@
 				FEF7DDBD15313DD5007F7A4C /* PlayState.cc in Sources */,
 				FEF7DDC015313EA1007F7A4C /* SplashState.cc in Sources */,
 				FEF7DDC315313EF8007F7A4C /* StoryState.cc in Sources */,
+				D484897B15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
+				D484897D15387DBC006CE9AD /* EAGLView.mm in Sources */,
+				D484897F15387DBC006CE9AD /* ES1Renderer.mm in Sources */,
+				D484898115387DBC006CE9AD /* ES2Renderer.mm in Sources */,
+				D484898315387DBC006CE9AD /* GameTimer.mm in Sources */,
+				D484898515387DBC006CE9AD /* GameTouchWindow.mm in Sources */,
+				D484898715387DBC006CE9AD /* main.m in Sources */,
+				D484898915387DBC006CE9AD /* TypeUtil.mm in Sources */,
+				D484898B15387DBC006CE9AD /* ViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1866,26 +1866,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEA8E66814F97CF00084E117 /* main.m in Sources */,
-				D4B1F50D1515291500620EF2 /* AirHockeyAppDelegate.mm in Sources */,
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5331515291500620EF2 /* GameTimer.mm in Sources */,
-				D4B1F5351515291500620EF2 /* GameTouchWindow.mm in Sources */,
 				D4B1F5371515291500620EF2 /* LocalStore.mm in Sources */,
 				D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */,
-				D4B1F53D1515291500620EF2 /* TypeUtil.mm in Sources */,
 				D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5491515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */,
-				FEB73B7D1528150C004886B9 /* EAGLView.mm in Sources */,
-				FEB73B7F1528150C004886B9 /* ES1Renderer.mm in Sources */,
-				FEB73B811528150C004886B9 /* ES2Renderer.mm in Sources */,
 				FE96BDE0152927570018441C /* Button.cc in Sources */,
 				FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */,
 				FE9F89501529507A00431C4F /* EngineState.cc in Sources */,
-				FE9F89571529769100431C4F /* ViewController.mm in Sources */,
 				FEF7DD981531374D007F7A4C /* MultiSelect.cc in Sources */,
 				FEF7DD9A1531374D007F7A4C /* SimpleItem.cc in Sources */,
 				FEF7DD9D1531384E007F7A4C /* GameEngine.cc in Sources */,
@@ -1899,6 +1890,15 @@
 				FEF7DDBE15313DD5007F7A4C /* PlayState.cc in Sources */,
 				FEF7DDC115313EA1007F7A4C /* SplashState.cc in Sources */,
 				FEF7DDC415313EF8007F7A4C /* StoryState.cc in Sources */,
+				D484897C15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
+				D484897E15387DBC006CE9AD /* EAGLView.mm in Sources */,
+				D484898015387DBC006CE9AD /* ES1Renderer.mm in Sources */,
+				D484898215387DBC006CE9AD /* ES2Renderer.mm in Sources */,
+				D484898415387DBC006CE9AD /* GameTimer.mm in Sources */,
+				D484898615387DBC006CE9AD /* GameTouchWindow.mm in Sources */,
+				D484898815387DBC006CE9AD /* main.m in Sources */,
+				D484898A15387DBC006CE9AD /* TypeUtil.mm in Sources */,
+				D484898C15387DBC006CE9AD /* ViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
