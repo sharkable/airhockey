@@ -7,7 +7,7 @@
 //
 
 #import "Touch.h"
-#import "EngineState.h"
+#import "engine_state.h"
 
 #define MAX_TOUCHES 20
 

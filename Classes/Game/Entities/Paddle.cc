@@ -11,7 +11,7 @@
 #include <cmath>
 
 #import "Puck.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 
 Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel) {
   playerId_ = playerId;

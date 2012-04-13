@@ -9,7 +9,7 @@
 #import "PlayState.h"
 
 #import "Post.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 #import "MainMenuState.h"
 #import "ResourceLoader.h"
 

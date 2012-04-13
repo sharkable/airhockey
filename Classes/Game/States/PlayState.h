@@ -6,12 +6,12 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "EngineState.h"
+#import "engine_state.h"
 #import "Rink.h"
 #import "Puck.h"
 #import "Paddle.h"
-#import "SimpleItem.h"
-#import "Button.h"
+#import "simple_item.h"
+#import "button.h"
 #import "SoundSlider.h"
 #import "const.h"
 

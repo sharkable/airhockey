@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "SimpleItem.h"
+#import "simple_item.h"
 #import "ResourceLoader.h"
 
 SimpleItem::SimpleItem(Texture2D texture, SGPoint position) {

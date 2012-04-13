@@ -11,7 +11,7 @@
 #import "Texture2D.h"
 #import "PlayState.h"
 #import "StoryState.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 #import "LocalStore.h"
 #import "ResourceLoader.h"
 #import "const.h"

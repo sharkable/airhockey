@@ -9,7 +9,7 @@
 #import "ViewController.h"
 
 #import "EAGLView.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 #import "GameTimer.h"
 #import "GameTouchWindow.h"
 #import "SplashState.h"

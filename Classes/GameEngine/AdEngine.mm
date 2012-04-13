@@ -9,7 +9,7 @@
 #import "AdEngine.h"
 
 #import "GADBannerView.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 
 @implementation AdEngine {
  @private

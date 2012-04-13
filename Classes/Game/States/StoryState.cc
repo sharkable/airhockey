@@ -8,7 +8,7 @@
 
 #import "StoryState.h"
 #import "ResourceLoader.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 
 StoryState::StoryState(GameEngine *gameEngine) : EngineState(gameEngine) {
   Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story");

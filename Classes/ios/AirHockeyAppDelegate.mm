@@ -9,7 +9,7 @@
 #import "AirHockeyAppDelegate.h"
 #import "EAGLView.h"
 #import "FlurryAnalytics.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 #import "SoundPlayer.h"
 #import "SplashState.h"
 #import "ViewController.h"

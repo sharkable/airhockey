@@ -7,7 +7,7 @@
 //
 
 #import "ES2Renderer.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 
 // uniform index
 enum {

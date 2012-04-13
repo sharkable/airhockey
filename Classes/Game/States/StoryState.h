@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "EngineState.h"
-#import "Button.h"
+#import "engine_state.h"
+#import "button.h"
 
 class StoryState : public EngineState {
  public:

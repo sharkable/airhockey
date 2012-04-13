@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "EngineState.h"
-#import "SimpleItem.h"
+#import "engine_state.h"
+#import "simple_item.h"
 
 class SplashState : public EngineState {
 public:

@@ -9,7 +9,7 @@
 #import "SplashState.h"
 #import "ResourceLoader.h"
 #import "MainMenuState.h"
-#import "GameEngine.h"
+#import "game_engine.h"
 #import "const.h"
 
 SplashState::SplashState(GameEngine *gameEngine) : EngineState(gameEngine) {

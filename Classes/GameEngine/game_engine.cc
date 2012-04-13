@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "GameEngine.h"
+#import "game_engine.h"
 
 #include "const.h"
 

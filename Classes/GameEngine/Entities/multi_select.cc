@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "MultiSelect.h"
+#import "multi_select.h"
 //#import "SoundPlayer.h"
 #import "ResourceLoader.h"
 #include "Touch.h"

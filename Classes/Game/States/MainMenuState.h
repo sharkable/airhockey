@@ -6,10 +6,10 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "EngineState.h"
-#import "SimpleItem.h"
-#import "Button.h"
-#import "MultiSelect.h"
+#import "engine_state.h"
+#import "simple_item.h"
+#import "button.h"
+#import "multi_select.h"
 #import "SoundSlider.h"
 
 class MainMenuState : public EngineState, private ButtonDelegate {
