@@ -936,14 +936,14 @@
 			isa = PBXGroup;
 			children = (
 				FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */,
-				FEA8E5D014F97CF00084E117 /* Classes */,
+				FEA8E5D014F97CF00084E117 /* classes */,
 				FEA8E61C14F97CF00084E117 /* ThirdParty */,
 				FEA8E66F14F97CF80084E117 /* Resources */,
 			);
 			path = AirHockey;
 			sourceTree = "<group>";
 		};
-		FEA8E5D014F97CF00084E117 /* Classes */ = {
+		FEA8E5D014F97CF00084E117 /* classes */ = {
 			isa = PBXGroup;
 			children = (
 				D4B1F4C01515291500620EF2 /* const.h */,
@@ -954,6 +954,7 @@
 				D4B1F4F71515291500620EF2 /* OpenGL */,
 				D4B1F5011515291500620EF2 /* SoundEngine */,
 			);
+			name = classes;
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
 		};
