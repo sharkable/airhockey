@@ -21,28 +21,28 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   
   Texture2D backgroundTexture = ResourceLoader::instance()->getTextureWithName("rink_bg");
   SimpleItem *background = new SimpleItem(backgroundTexture, SGPointMake(0, 0));
-  AddEntity(background);
+  AddEntity(*background);
 
   // Add rink left and right pieces.
   Texture2D leftRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_left");
   SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
-  AddEntity(leftRinkBorder);
+  AddEntity(*leftRinkBorder);
   Texture2D rightRinkBorderTexture =
       ResourceLoader::instance()->getTextureWithName("rink_right");
   SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
-  AddEntity(rightRinkBorder);
+  AddEntity(*rightRinkBorder);
 
   Texture2D titleTexture = ResourceLoader::instance()->getTextureWithName("title");
   SimpleItem *title = new SimpleItem(titleTexture, SGPointMake(81, 53));
-  AddEntity(title);
+  AddEntity(*title);
   
   Texture2D mainMenuTexture = ResourceLoader::instance()->getTextureWithName("main_menu");
   SGPoint mainMenuPosition = SGPointMake((SCREEN_WIDTH - mainMenuTexture.contentSize().width) / 2,
                                          339);
   SimpleItem *mainMenu = new SimpleItem(mainMenuTexture, mainMenuPosition);
-  AddEntity(mainMenu);
+  AddEntity(*mainMenu);
   
   Texture2D startButtonImage = ResourceLoader::instance()->getTextureWithName("start_button");
   Texture2D startButtonPressedImage =
@@ -53,7 +53,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   startButton_.setPressedTexture(startButtonPressedImage);
   startButton_.setPosition(startButtonPosition);
   startButton_.setDelegate(this);
-  AddEntity(&startButton_);
+  AddEntity(startButton_);
   
   Texture2D feedbackButtonImage =
       ResourceLoader::instance()->getTextureWithName("feedback_button");
@@ -63,7 +63,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   feedbackButton_.setPressedTexture(feedbackButtonPressedImage);
   feedbackButton_.setPosition(isIPhone ? SGPointMake(440, 926) : SGPointMake(486, 936));
   feedbackButton_.setDelegate(this);
-  AddEntity(&feedbackButton_);
+  AddEntity(feedbackButton_);
 
   Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story_button");
   Texture2D storyButtonPressedImage =
@@ -72,7 +72,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   storyButton_.setPressedTexture(storyButtonPressedImage);
   storyButton_.setPosition(isIPhone ? SGPointMake(86, 926) : SGPointMake(91, 936));
   storyButton_.setDelegate(this);
-  AddEntity(&storyButton_);
+  AddEntity(storyButton_);
   
   if (false) {
     Texture2D upgradeButtonImage =
@@ -83,7 +83,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
     upgradeButton_.setPressedTexture(upgradeButtonPressedImage);
     upgradeButton_.setPosition(SGPointMake(91, 936));
     upgradeButton_.setDelegate(this);
-    AddEntity(&upgradeButton_);
+    AddEntity(upgradeButton_);
   }
   
   double playersY = isIPhone ? 570 : 511;
@@ -98,7 +98,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   numPlayersSelect_.add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
   numPlayersSelect_.add(twoPlayerImage, twoPlayerSelectedImage, SGPointMake(SCREEN_WIDTH/2, playersY));
   numPlayersSelect_.setSelectedValue(LocalStore::integerForKey(LS_NUM_PLAYERS));
-  AddEntity(&numPlayersSelect_);
+  AddEntity(numPlayersSelect_);
   
   double pucksY = isIPhone ? 706 : 627;
   double pucks1X = isIPhone ? 40 : 138.5;
@@ -118,14 +118,14 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
     numPucksSelect_.add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
   }
   numPucksSelect_.setSelectedValue(LocalStore::integerForKey(LS_NUM_PUCKS));
-  AddEntity(&numPucksSelect_);
+  AddEntity(numPucksSelect_);
   
   if (false) {
     Texture2D upgradeForMoreTexture =
         ResourceLoader::instance()->getTextureWithName("upgrade_for_more");
     SGPoint upgradeForMorePosition = SGPointMake(pucks2X + pucksXSpread * 4, pucksY);
     SimpleItem *upgradeForMore = new SimpleItem(upgradeForMoreTexture, upgradeForMorePosition);
-    AddEntity(upgradeForMore);
+    AddEntity(*upgradeForMore);
   }
   
   
@@ -149,7 +149,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   } else {
     difficultySelect_.setSelectedValue(caiGood);
   }
-  AddEntity(&difficultySelect_);
+  AddEntity(difficultySelect_);
   
   if (!isIPhone) {
     Texture2D smallImage = ResourceLoader::instance()->getTextureWithName("small");
@@ -169,10 +169,10 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
     } else {
       paddleSizeSelect_.setSelectedValue(psMedium);
     }
-    AddEntity(&paddleSizeSelect_);
+    AddEntity(paddleSizeSelect_);
   }
   
-  AddEntity(&soundSlider_);
+  AddEntity(soundSlider_);
 }
 
 void MainMenuState::stateIsShown() {

@@ -28,8 +28,8 @@ class EngineState {
   virtual void TouchesMoved(vector<Touch> touches);
   virtual void TouchesEnded(vector<Touch> touches);
   virtual void ClearTouches();
-  void AddEntity(StateEntity *entity);
-  void RemoveEntity(StateEntity *entity);
+  void AddEntity(StateEntity &entity);
+  void RemoveEntity(StateEntity &entity);
 
   GameEngine &game_engine() { return game_engine_; }
 

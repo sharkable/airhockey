@@ -18,7 +18,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
   numPlayers_ = numPlayers;
   
   rink_ = new Rink();
-  AddEntity(rink_);
+  AddEntity(*rink_);
   
   vector<Texture2D> scoreTextures;
   for (int i = 0; i <= WIN_SCORE; i++) {
@@ -29,25 +29,25 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
   }
   player1Score_ = new SimpleItem(scoreTextures, SGPointMake(662, 526));
   player2Score_ = new SimpleItem(scoreTextures, SGPointMake(662, 386));
-  AddEntity(player1Score_);
-  AddEntity(player2Score_);
+  AddEntity(*player1Score_);
+  AddEntity(*player2Score_);
   
   numPucks_ = numPucks;
   numActivePucks_ = numPucks_;
   for (int i = 0; i < numPucks_; i++) {
     Puck* puck = new Puck();
     
-    AddEntity(puck);
+    AddEntity(*puck);
     pucks_.push_back(puck);
     roundThings_.push_back(puck);
   }
   
   paddle1_ = new Paddle(PLAYER_1, paddleSize, true, caiBad);
-  AddEntity(paddle1_);
+  AddEntity(*paddle1_);
   roundThings_.push_back(paddle1_);
 
   paddle2_ = new Paddle(PLAYER_2, paddleSize, numPlayers == 2, difficulty);
-  AddEntity(paddle2_);
+  AddEntity(*paddle2_);
   roundThings_.push_back(paddle2_);
   
   paddle1_->setPucks(pucks_);
@@ -56,30 +56,30 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
   paddle2_->setOtherPaddle(paddle1_);
   
   Post *post1 = new Post(GOAL_LEFT_X, RINK_TOP_Y);
-  AddEntity(post1);
+  AddEntity(*post1);
   roundThings_.push_back(post1);
 
   Post *post2 = new Post(GOAL_LEFT_X, RINK_BOTTOM_Y + 1);
-  AddEntity(post2);
+  AddEntity(*post2);
   roundThings_.push_back(post2);
 
   Post *post3 = new Post(GOAL_RIGHT_X + 1, RINK_TOP_Y);
-  AddEntity(post3);
+  AddEntity(*post3);
   roundThings_.push_back(post3);
   
   Post *post4 = new Post(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1);
-  AddEntity(post4);
+  AddEntity(*post4);
   roundThings_.push_back(post4);
   
   // Add rink left and right pieces.
   Texture2D leftRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_left");
   SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
-  AddEntity(leftRinkBorder);
+  AddEntity(*leftRinkBorder);
   Texture2D rightRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_right");
   SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
-  AddEntity(rightRinkBorder);
+  AddEntity(*rightRinkBorder);
   
   Texture2D winTexture = ResourceLoader::instance()->getTextureWithName("win");
   win_ = new SimpleItem(winTexture, SGPointMake(0, 0));
@@ -150,7 +150,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
 // TODO
 //    pauseButton1_->setDelegate(self);
 //    pauseButton1_->setSelector(@selector(pausePressed));
-    AddEntity(pauseButton1_);
+    AddEntity(*pauseButton1_);
   }
   
   SGPoint pauseButtonPos2 =
@@ -161,7 +161,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
 // TODO
 //  pauseButton2_->setDelegate(self);
 //  pauseButton2_->setSelector(@selector(pausePressed));
-  AddEntity(pauseButton2_);
+  AddEntity(*pauseButton2_);
     
 //  if (isIPhone) {
 //    if (IS_FREE) {
@@ -232,11 +232,11 @@ void PlayState::Update() {
   } else if (state_ == PLAY_STATE_GET_READY) {
     getReadyTicksLeft_--;
     if (getReadyTicksLeft_ == SHOW_GET_READY_MESSAGE_TICKS) {
-      AddEntity(getReady_);
+      AddEntity(*getReady_);
       // TODO [SoundPlayer playSound:kSoundGetReady];
     } else if (getReadyTicksLeft_ == 0) {
-    RemoveEntity(getReady_);
-      AddEntity(go_);
+    RemoveEntity(*getReady_);
+      AddEntity(*go_);
       goTicksLeft_ = SHOW_GO_MESSAGE_TICKS;
       state_ = PLAY_STATE_PLAYING;
       // TODO [SoundPlayer playSound:kSoundStart];
@@ -250,7 +250,7 @@ void PlayState::Update() {
   if (goTicksLeft_ > 0) {
     goTicksLeft_--;
     if (goTicksLeft_ == 0) {
-      RemoveEntity(go_);
+      RemoveEntity(*go_);
     }
   }
   
@@ -377,12 +377,12 @@ void PlayState::setUpNewGame() {
   
   player1Score_->setTexture(0);
   player2Score_->setTexture(0);
-  RemoveEntity(menuBackground_);
-  RemoveEntity(soundSlider_);
-  RemoveEntity(rematchButton_);
-  RemoveEntity(menuButton_);
-  RemoveEntity(win_);
-  RemoveEntity(lose_);
+  RemoveEntity(*menuBackground_);
+  RemoveEntity(*soundSlider_);
+  RemoveEntity(*rematchButton_);
+  RemoveEntity(*menuButton_);
+  RemoveEntity(*win_);
+  RemoveEntity(*lose_);
   
   numActivePucks_ = numPucks_;
   numPlayer1ScoresLastRound_ = 0;
@@ -404,12 +404,12 @@ void PlayState::finishGameWithWinner(int playerId) {
 
       win_->setPosition(SGPointMake(winX, bottomY));
       win_->setAngle(0);
-      AddEntity(win_);
+      AddEntity(*win_);
       
       if (numPlayers_ == 2) {
         lose_->setPosition(SGPointMake(loseX, topY));
         lose_->setAngle(180);
-        AddEntity(lose_);
+        AddEntity(*lose_);
       }
       
       giveExtraPuckToPlayer_ = PLAYER_2;
@@ -422,12 +422,12 @@ void PlayState::finishGameWithWinner(int playerId) {
       if (numPlayers_ == 2) {
         win_->setPosition(SGPointMake(winX, topY));
         win_->setAngle(180);
-        AddEntity(win_);
+        AddEntity(*win_);
       }
       
       lose_->setPosition(SGPointMake(loseX, bottomY));
       lose_->setAngle(0);
-      AddEntity(lose_);
+      AddEntity(*lose_);
       
       giveExtraPuckToPlayer_ = PLAYER_1;
       
@@ -444,10 +444,10 @@ void PlayState::finishGameWithWinner(int playerId) {
 //    getGameEngine()->addUIView(player2Wins_);
 //  }
   
-  AddEntity(menuBackground_);
-  AddEntity(soundSlider_);
-  AddEntity(rematchButton_);
-  AddEntity(menuButton_);
+  AddEntity(*menuBackground_);
+  AddEntity(*soundSlider_);
+  AddEntity(*rematchButton_);
+  AddEntity(*menuButton_);
   
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
@@ -480,10 +480,10 @@ void PlayState::menuPressed() {
 
 void PlayState::continuePressed() {
   state_ = prePauseState_;
-  RemoveEntity(menuBackground_);
-  RemoveEntity(soundSlider_);
-  RemoveEntity(menuButton_);
-  RemoveEntity(continueButton_);
+  RemoveEntity(*menuBackground_);
+  RemoveEntity(*soundSlider_);
+  RemoveEntity(*menuButton_);
+  RemoveEntity(*continueButton_);
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
 //  }
@@ -493,10 +493,10 @@ void PlayState::pausePressed() {
   if (state_ != PLAY_STATE_FINISHED && state_ != PLAY_STATE_PAUSED) {
     prePauseState_ = state_;
     state_ = PLAY_STATE_PAUSED;
-    AddEntity(menuBackground_);
-    AddEntity(soundSlider_);
-    AddEntity(menuButton_);
-    AddEntity(continueButton_);
+    AddEntity(*menuBackground_);
+    AddEntity(*soundSlider_);
+    AddEntity(*menuButton_);
+    AddEntity(*continueButton_);
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320)/2, 385)];
 //    }

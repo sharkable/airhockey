@@ -29,14 +29,14 @@ void EngineState::Render() {
   }
 }
 
-void EngineState::AddEntity(StateEntity *entity) {
-  entities_.push_back(entity);
+void EngineState::AddEntity(StateEntity &entity) {
+  entities_.push_back(&entity);
 }
 
-void EngineState::RemoveEntity(StateEntity *entity) {
+void EngineState::RemoveEntity(StateEntity &entity) {
   for (vector<StateEntity *>::iterator i = entities_.begin();
       i != entities_.end(); i++) {
-    if (*i == entity) {
+    if (*i == &entity) {
       entities_.erase(i);
       break;
     }
