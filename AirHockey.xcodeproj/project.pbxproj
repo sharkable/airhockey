@@ -473,6 +473,7 @@
 		D484899A1538836C006CE9AD /* engine_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine_state.h; sourceTree = "<group>"; };
 		D484899B1538836C006CE9AD /* game_engine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_engine.cc; sourceTree = "<group>"; };
 		D484899C1538836C006CE9AD /* game_engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_engine.h; sourceTree = "<group>"; };
+		D48489A11538A451006CE9AD /* touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = touch.h; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4D41515291500620EF2 /* MainMenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuState.h; sourceTree = "<group>"; };
@@ -486,7 +487,6 @@
 		D4B1F4F11515291500620EF2 /* ResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceLoader.h; sourceTree = "<group>"; };
 		D4B1F4F21515291500620EF2 /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ResourceLoader.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4F31515291500620EF2 /* StateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateEntity.h; sourceTree = "<group>"; };
-		D4B1F4F41515291500620EF2 /* Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Touch.h; sourceTree = "<group>"; };
 		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Texture2D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
 		D4B1F5031515291500620EF2 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
@@ -839,10 +839,10 @@
 			isa = PBXGroup;
 			children = (
 				D4B1F4E11515291500620EF2 /* Entities */,
-				D48489991538836C006CE9AD /* engine_state.cc */,
 				D484899A1538836C006CE9AD /* engine_state.h */,
-				D484899B1538836C006CE9AD /* game_engine.cc */,
+				D48489991538836C006CE9AD /* engine_state.cc */,
 				D484899C1538836C006CE9AD /* game_engine.h */,
+				D484899B1538836C006CE9AD /* game_engine.cc */,
 				D4B1F4DD1515291500620EF2 /* AdEngine.h */,
 				D4B1F4DE1515291500620EF2 /* AdEngine.mm */,
 				D4B1F4EE1515291500620EF2 /* LocalStore.h */,
@@ -850,7 +850,7 @@
 				D4B1F4F11515291500620EF2 /* ResourceLoader.h */,
 				D4B1F4F21515291500620EF2 /* ResourceLoader.mm */,
 				D4B1F4F31515291500620EF2 /* StateEntity.h */,
-				D4B1F4F41515291500620EF2 /* Touch.h */,
+				D48489A11538A451006CE9AD /* touch.h */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -858,12 +858,12 @@
 		D4B1F4E11515291500620EF2 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				D484898D1538835F006CE9AD /* button.cc */,
 				D484898E1538835F006CE9AD /* button.h */,
-				D484898F1538835F006CE9AD /* multi_select.cc */,
+				D484898D1538835F006CE9AD /* button.cc */,
 				D48489901538835F006CE9AD /* multi_select.h */,
-				D48489911538835F006CE9AD /* simple_item.cc */,
+				D484898F1538835F006CE9AD /* multi_select.cc */,
 				D48489921538835F006CE9AD /* simple_item.h */,
+				D48489911538835F006CE9AD /* simple_item.cc */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1926,6 +1926,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = Classes;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1945,6 +1946,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = Classes;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;

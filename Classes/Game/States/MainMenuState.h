@@ -14,7 +14,7 @@
 
 class MainMenuState : public EngineState, private ButtonDelegate {
  public:
-  MainMenuState(GameEngine *gameEngine);
+  MainMenuState(GameEngine &gameEngine);
   void stateIsShown();
   void pressedStart();
   void pressedFeedback();

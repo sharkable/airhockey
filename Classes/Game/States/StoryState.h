@@ -11,7 +11,7 @@
 
 class StoryState : public EngineState {
  public:
-  StoryState(GameEngine *gameEngine);
+  StoryState(GameEngine &gameEngine);
   ~StoryState();
   void pressedStory();
   void pressedAbout();

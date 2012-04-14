@@ -6,70 +6,66 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "game_engine.h"
+#import "gameengine/game_engine.h"
 
-#include "const.h"
+#include "gameengine/engine_state.h"
 
-void GameEngine::pushState(EngineState *state) {
+void GameEngine::PushState(EngineState *state) {
   states_.push_back(state);
-  state->stateIsShown();
+  state->StateIsShown();
 }
 
-void GameEngine::popState() {
-  popOnNext_ = true;
+void GameEngine::PopState() {
+  pop_on_next_ = true;
 }
 
-void GameEngine::replaceTopState(EngineState *state) {
-  replaceOnNext_ = true;
-  nextState_ = state;
+void GameEngine::ReplaceTopState(EngineState *state) {
+  replace_on_next_ = true;
+  next_state_ = state;
 }
 
-void GameEngine::clearTouches() {
+void GameEngine::ClearTouches() {
   for (int i = 0; i < states_.size(); i++) {
     EngineState *state = states_[i];
-    state->clearTouches();
+    state->ClearTouches();
   }
 }
 
-//void GameEngine::addUIView(UIView *view) {
-//  [view_ addSubview:view];
-//}
-
-void GameEngine::update() {
-  if (popOnNext_) {
+void GameEngine::Update() {
+  if (pop_on_next_) {
     states_.pop_back();
-    states_.back()->stateIsShown();
-    popOnNext_ = false;
-  } else if (replaceOnNext_) {
+    states_.back()->StateIsShown();
+    pop_on_next_ = false;
+  } else if (replace_on_next_) {
     states_.pop_back();
-    states_.push_back(nextState_);
-    nextState_->stateIsShown();
-    replaceOnNext_ = false;
-    nextState_ = NULL;
+    states_.push_back(next_state_);
+    next_state_->StateIsShown();
+    replace_on_next_ = false;
+    next_state_ = NULL;
   }
   
   // Process input.
-  EngineState *topState = states_.back();
-  if (touchesBegan_.size() > 0) {
-    topState->touchesBegan(touchesBegan_);
+  EngineState *top_state = states_.back();
+  if (touches_began_.size() > 0) {
+    top_state->TouchesBegan(touches_began_);
   }
-  if (touchesMoved_.size() > 0) {
-    topState->touchesMoved(touchesMoved_);
+  if (touches_moved_.size() > 0) {
+    top_state->TouchesMoved(touches_moved_);
   }
-  if (touchesEnded_.size() > 0) {
-    topState->touchesEnded(touchesEnded_);
+  if (touches_ended_.size() > 0) {
+    top_state->TouchesEnded(touches_ended_);
   }
   
   // Update states.
   for (int i = 0; i < states_.size(); i++) {
     EngineState *state = states_[i];
-    state->update();
+    state->Update();
   }  
 }
 
-void GameEngine::render() {
+void GameEngine::Render() {
   for (int i = 0; i < states_.size(); i++) {
     EngineState *state = states_[i];
-    state->render();
+    state->Render();
   }
 }

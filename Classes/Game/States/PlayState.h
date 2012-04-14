@@ -26,14 +26,14 @@ using namespace std;
 
 class PlayState : public EngineState {
  public:
-  PlayState(GameEngine *gameEngine, int numPlayers, int numPucks, ComputerAI difficulty,
+  PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, ComputerAI difficulty,
             PaddleSize paddleSize);
   ~PlayState();
-  void update();
-  void touchesBegan(vector<Touch> touches);
-  void touchesMoved(vector<Touch> touches);
-  void touchesEnded(vector<Touch> touches);
-  void clearTouches();
+  void Update();
+  void TouchesBegan(vector<Touch> touches);
+  void TouchesMoved(vector<Touch> touches);
+  void TouchesEnded(vector<Touch> touches);
+  void ClearTouches();
   void setUpNewGame();
   void finishGameWithWinner(int playerId);
   void rematchPressed();

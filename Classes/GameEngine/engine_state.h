@@ -6,31 +6,38 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
+#ifndef AIRHOCKEY_GAMEENGINE_ENGINESTATE_H_
+#define AIRHOCKEY_GAMEENGINE_ENGINESTATE_H_
+
 #include <vector>
 using namespace std;
 
-#include "StateEntity.h"
-#include "Touch.h"
+#include "gameengine/touch.h"
 
 class GameEngine;
+class StateEntity;
 
 class EngineState {
  public:
-  GameEngine *getGameEngine() { return gameEngine_; }
-  virtual void stateIsShown();
-  virtual void update();
-  virtual void render();
-  void addEntity(StateEntity *entity);
-  void removeEntity(StateEntity *entity);
-  virtual void touchesBegan(vector<Touch> touches);
-  virtual void touchesMoved(vector<Touch> touches);
-  virtual void touchesEnded(vector<Touch> touches);
-  virtual void clearTouches();
+  EngineState(GameEngine &game_engine);
+
+  virtual void StateIsShown();
+  virtual void Update();
+  virtual void Render();
+  virtual void TouchesBegan(vector<Touch> touches);
+  virtual void TouchesMoved(vector<Touch> touches);
+  virtual void TouchesEnded(vector<Touch> touches);
+  virtual void ClearTouches();
+  void AddEntity(StateEntity *entity);
+  void RemoveEntity(StateEntity *entity);
+
+  GameEngine &game_engine() { return game_engine_; }
 
  protected:
-  EngineState(GameEngine *gameEngine);
 
  private:
+  GameEngine &game_engine_;
   vector<StateEntity *> entities_;
-  GameEngine *gameEngine_;
 };
+
+#endif

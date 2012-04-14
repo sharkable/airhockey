@@ -28,15 +28,15 @@ using namespace std;
 #pragma mark - UIWindow
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  gameEngine_->setTouchesBegan([self convertTouches:touches]);
+  gameEngine_->set_touches_began([self convertTouches:touches]);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-  gameEngine_->setTouchesMoved([self convertTouches:touches]);
+  gameEngine_->set_touches_moved([self convertTouches:touches]);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-  gameEngine_->setTouchesEnded([self convertTouches:touches]);
+  gameEngine_->set_touches_ended([self convertTouches:touches]);
 }
 
 #pragma mark - Private

@@ -12,7 +12,7 @@
 #import "game_engine.h"
 #import "const.h"
 
-SplashState::SplashState(GameEngine *gameEngine) : EngineState(gameEngine) {
+SplashState::SplashState(GameEngine &gameEngine) : EngineState(gameEngine) {
 //  spinner_ = [[UIActivityIndicatorView alloc]
 //                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -31,13 +31,13 @@ SplashState::~SplashState() {
 }
 
 void SplashState::soundInitialized() {
-  getGameEngine()->replaceTopState(new MainMenuState(getGameEngine()));
+  game_engine().ReplaceTopState(new MainMenuState(game_engine()));
 }
 
 
-void SplashState::update() {
+void SplashState::Update() {
   static int c = 0;
-  EngineState::update();
+  EngineState::Update();
   if (++c == 2) {
     soundInitialized();
   }

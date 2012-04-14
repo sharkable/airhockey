@@ -11,10 +11,10 @@
 
 class SplashState : public EngineState {
 public:
-  SplashState(GameEngine *gameEngine);
+  SplashState(GameEngine &gameEngine);
   ~SplashState();
   void soundInitialized();
-  void update();
+  void Update();
  private:
   // UIActivityIndicatorView *spinner_;
 };

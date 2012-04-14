@@ -62,7 +62,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [viewController_ start];
-  viewController_.game_engine->clearTouches();
+  viewController_.game_engine->ClearTouches();
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

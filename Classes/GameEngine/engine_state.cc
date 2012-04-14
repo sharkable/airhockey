@@ -6,33 +6,34 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "engine_state.h"
-#import "game_engine.h"
+#import "gameengine/engine_state.h"
 
-EngineState::EngineState(GameEngine *gameEngine) {
-  gameEngine_ = gameEngine;
+#import "gameengine/game_engine.h"
+#import "gameengine/StateEntity.h"
+
+EngineState::EngineState(GameEngine &game_engine) : game_engine_(game_engine) {
 }
 
-void EngineState::stateIsShown() {
+void EngineState::StateIsShown() {
 }
 
-void EngineState::update() {
+void EngineState::Update() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->update();
   }
 }
 
-void EngineState::render() {
+void EngineState::Render() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->render();
   }
 }
 
-void EngineState::addEntity(StateEntity *entity) {
+void EngineState::AddEntity(StateEntity *entity) {
   entities_.push_back(entity);
 }
 
-void EngineState::removeEntity(StateEntity *entity) {
+void EngineState::RemoveEntity(StateEntity *entity) {
   for (vector<StateEntity *>::iterator i = entities_.begin();
       i != entities_.end(); i++) {
     if (*i == entity) {
@@ -42,25 +43,25 @@ void EngineState::removeEntity(StateEntity *entity) {
   }
 }
 
-void EngineState::touchesBegan(vector<Touch> touches) {
+void EngineState::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->touchesBegan(touches);
   }
 }
 
-void EngineState::touchesMoved(vector<Touch> touches) {
+void EngineState::TouchesMoved(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->touchesMoved(touches);
   }
 }
 
-void EngineState::touchesEnded(vector<Touch> touches) {
+void EngineState::TouchesEnded(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->touchesEnded(touches);
   }
 }
 
-void EngineState::clearTouches() {
+void EngineState::ClearTouches() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->clearTouches();
   }

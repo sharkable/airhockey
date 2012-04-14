@@ -31,8 +31,8 @@
   if (self) {
     //[self view];
     game_engine_ = new GameEngine();
-    root_state_ = new SplashState(game_engine_);
-    game_engine_->pushState(root_state_);
+    root_state_ = new SplashState(*game_engine_);
+    game_engine_->PushState(root_state_);
     gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
 
     CGRect screenSize = [[UIScreen mainScreen] bounds];
@@ -81,9 +81,9 @@
 #pragma mark - Private
 
 - (void)update {
-  game_engine_->update();
+  game_engine_->Update();
   [view_ setUpRender];
-  game_engine_->render();
+  game_engine_->Render();
   [view_ finishRender];
 }
 

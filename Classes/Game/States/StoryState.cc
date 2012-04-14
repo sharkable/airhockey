@@ -10,14 +10,14 @@
 #import "ResourceLoader.h"
 #import "game_engine.h"
 
-StoryState::StoryState(GameEngine *gameEngine) : EngineState(gameEngine) {
+StoryState::StoryState(GameEngine &gameEngine) : EngineState(gameEngine) {
   Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story");
   storyButton_ = new Button(storyButtonImage, storyButtonImage,
                             SGPointMake(0, 0));
 // TODO
 //  storyButton_->setDelegate(self);
 //  storyButton_->setSelector(@selector(pressedStory));
-  addEntity(storyButton_);
+  AddEntity(storyButton_);
 
 
   Texture2D aboutButtonImage = ResourceLoader::instance()->getTextureWithName("about");
@@ -33,10 +33,10 @@ StoryState::~StoryState() {
 }
 
 void StoryState::pressedStory() {
-  removeEntity(storyButton_);
-  addEntity(aboutButton_);
+  RemoveEntity(storyButton_);
+  AddEntity(aboutButton_);
 }
 
 void StoryState::pressedAbout() {
-  getGameEngine()->popState();
+  game_engine().PopState();
 }
