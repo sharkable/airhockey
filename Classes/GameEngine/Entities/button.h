@@ -12,8 +12,10 @@
 #include "gameengine/StateEntity.h"
 #include "OpenGL/Texture2D.h"
 
-#define BUTTON_STATE_NORMAL 0
-#define BUTTON_STATE_PRESSED 1
+typedef enum {
+  kButtonStateNormal,
+  kButtonStatePressed
+} ButtonState;
 
 class Button;
 class MainMenuState;
@@ -25,7 +27,7 @@ class ButtonDelegate {
 
 class Button : public StateEntity {
  public:
-  Button() : state_(BUTTON_STATE_NORMAL) {}
+  Button() : state_(kButtonStateNormal) {}
   Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position);
   ~Button();
   

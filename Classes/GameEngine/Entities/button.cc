@@ -6,18 +6,17 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "button.h"
+#include "gameengine/entities/button.h"
 
-//#import "SoundPlayer.h"
-#include "ResourceLoader.h"
-#include "Touch.h"
+#include "gameengine/ResourceLoader.h"
+#include "gameengine/touch.h"
 
-Button::Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position) {
-  normal_texture_ = normal_texture;
-  pressed_texture_ = pressed_texture;
-  position_ = position;
-  state_ = BUTTON_STATE_NORMAL;
-  delegate_ = NULL;
+Button::Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position)
+    : normal_texture_(normal_texture),
+      pressed_texture_(pressed_texture),
+      position_(position),
+      state_(kButtonStateNormal),
+      delegate_(NULL) {
 }
 
 Button::~Button() {
@@ -34,18 +33,18 @@ bool Button::ContainsPoint(SGPoint p) {
 }
 
 
-// State Entity
+// StateEntity
 
 void Button::Update() {
 }
 
 void Button::Render() {
   switch (state_) {
-    case BUTTON_STATE_NORMAL: {
+    case kButtonStateNormal: {
       normal_texture_.drawAtPoint(position_);
       break;
     }
-    case BUTTON_STATE_PRESSED: {
+    case kButtonStatePressed: {
       pressed_texture_.drawAtPoint(position_);
       break;
     }
@@ -53,10 +52,10 @@ void Button::Render() {
 }
 
 void Button::TouchesBegan(vector<Touch> touches) {
-  if (state_ == BUTTON_STATE_NORMAL) {
+  if (state_ == kButtonStateNormal) {
     for (int i = 0; i < touches.size(); i++) {
       if (ContainsPoint(touches[i].location())) {
-        state_ = BUTTON_STATE_PRESSED;
+        state_ = kButtonStatePressed;
 //        [SoundPlayer playSound:kSoundButton];
       }
     }
@@ -64,8 +63,8 @@ void Button::TouchesBegan(vector<Touch> touches) {
 }
 
 void Button::TouchesEnded(vector<Touch> touches) {
-  if (state_ == BUTTON_STATE_PRESSED) {
-    state_ = BUTTON_STATE_NORMAL;
+  if (state_ == kButtonStatePressed) {
+    state_ = kButtonStateNormal;
     for (int i = 0; i < touches.size(); i++) {
       if (ContainsPoint(touches[i].location())) {
         delegate_->ButtonPressed(this);
