@@ -286,10 +286,10 @@ void PlayState::Update() {
     }
     if (puck->getY() < -puck->getRadius()) {
       puck->setIsActive(false);
-      if (player1Score_->getTexture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
-        player1Score_->setTexture(player1Score_->getTexture() + 1);
+      if (player1Score_->texture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+        player1Score_->set_texture(player1Score_->texture() + 1);
       }
-      if (player1Score_->getTexture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player1Score_->texture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
         // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         // TODO [SoundPlayer playSound:kSoundScore];
@@ -298,10 +298,10 @@ void PlayState::Update() {
       numActivePucks_--;
     } else if (puck->getY() > SCREEN_HEIGHT + puck->getRadius()) {
       puck->setIsActive(false);
-      if (player2Score_->getTexture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
-        player2Score_->setTexture(player2Score_->getTexture() + 1);
+      if (player2Score_->texture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+        player2Score_->set_texture(player2Score_->texture() + 1);
       }
-      if (player2Score_->getTexture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player2Score_->texture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
         // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         // TODO [SoundPlayer playSound:kSoundScore];
@@ -313,9 +313,9 @@ void PlayState::Update() {
   
   switch (state_) {
     case PLAY_STATE_PLAYING: {      
-      if (player1Score_->getTexture() == WIN_SCORE) {
+      if (player1Score_->texture() == WIN_SCORE) {
         finishGameWithWinner(PLAYER_1);
-      } else if (player2Score_->getTexture() == WIN_SCORE) {
+      } else if (player2Score_->texture() == WIN_SCORE) {
         finishGameWithWinner(PLAYER_2);
       } else if (numActivePucks_ == 0) {
         waitTicksLeft_ = WAIT_TICKS;
@@ -375,8 +375,8 @@ void PlayState::setUpNewGame() {
     puck->placeForPlayer(playerId, roundThings_, center);
   }
   
-  player1Score_->setTexture(0);
-  player2Score_->setTexture(0);
+  player1Score_->set_texture(0);
+  player2Score_->set_texture(0);
   RemoveEntity(*menuBackground_);
   RemoveEntity(*soundSlider_);
   RemoveEntity(*rematchButton_);
@@ -394,21 +394,21 @@ void PlayState::setUpNewGame() {
 void PlayState::finishGameWithWinner(int playerId) {
   state_ = PLAY_STATE_FINISHED;
   
-  double loseX = (SCREEN_WIDTH - lose_->getSize().width)/2;
-  double winX =  (SCREEN_WIDTH - win_->getSize().width)/2;
+  double loseX = (SCREEN_WIDTH - lose_->size().width)/2;
+  double winX =  (SCREEN_WIDTH - win_->size().width)/2;
   double topY = 70;
-  double bottomY = SCREEN_HEIGHT - topY - lose_->getSize().height;
+  double bottomY = SCREEN_HEIGHT - topY - lose_->size().height;
   switch (playerId) {
     case PLAYER_1: {
       player1WinCount_++;
 
       win_->set_position(SGPointMake(winX, bottomY));
-      win_->setAngle(0);
+      win_->set_angle(0);
       AddEntity(*win_);
       
       if (numPlayers_ == 2) {
         lose_->set_position(SGPointMake(loseX, topY));
-        lose_->setAngle(180);
+        lose_->set_angle(180);
         AddEntity(*lose_);
       }
       
@@ -421,12 +421,12 @@ void PlayState::finishGameWithWinner(int playerId) {
       
       if (numPlayers_ == 2) {
         win_->set_position(SGPointMake(winX, topY));
-        win_->setAngle(180);
+        win_->set_angle(180);
         AddEntity(*win_);
       }
       
       lose_->set_position(SGPointMake(loseX, bottomY));
-      lose_->setAngle(0);
+      lose_->set_angle(0);
       AddEntity(*lose_);
       
       giveExtraPuckToPlayer_ = PLAYER_1;

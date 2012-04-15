@@ -6,23 +6,23 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "simple_item.h"
-#import "ResourceLoader.h"
+#import "gameengine/entities/simple_item.h"
 
-SimpleItem::SimpleItem(Texture2D texture, SGPoint position) {
+#import "gameengine/ResourceLoader.h"
+
+SimpleItem::SimpleItem(Texture2D texture, SGPoint position)
+    : textures_(1),
+      texture_(0),
+      position_(position),
+      angle_(0) {
   textures_.push_back(texture);
-  texture_ = 0;
-  angle_ = 0;
-  
-  position_ = position;
 }
 
-SimpleItem::SimpleItem(vector<Texture2D> textures, SGPoint position) {
-  textures_ = textures;
-  texture_ = 0;
-  angle_ = 0;
-  
-  position_ = position;
+SimpleItem::SimpleItem(vector<Texture2D> textures, SGPoint position)
+    : textures_(textures),
+      texture_(0),
+      position_(position),
+      angle_(0) {
 }
 
 SimpleItem::~SimpleItem() {
@@ -31,13 +31,9 @@ SimpleItem::~SimpleItem() {
   }
 }
 
-void SimpleItem::Update() {
-}
+
+// StateEntity
 
 void SimpleItem::Render() {
   textures_[texture_].drawAtPointAngle(SGPointMake(position_.x, position_.y), angle_);
-}
-
-SGSize SimpleItem::getSize() {
-  return textures_[texture_].contentSize();
 }

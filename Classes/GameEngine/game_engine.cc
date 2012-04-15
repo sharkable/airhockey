@@ -10,27 +10,6 @@
 
 #include "gameengine/engine_state.h"
 
-void GameEngine::PushState(EngineState *state) {
-  states_.push_back(state);
-  state->StateIsShown();
-}
-
-void GameEngine::PopState() {
-  pop_on_next_ = true;
-}
-
-void GameEngine::ReplaceTopState(EngineState *state) {
-  replace_on_next_ = true;
-  next_state_ = state;
-}
-
-void GameEngine::ClearTouches() {
-  for (int i = 0; i < states_.size(); i++) {
-    EngineState *state = states_[i];
-    state->ClearTouches();
-  }
-}
-
 void GameEngine::Update() {
   if (pop_on_next_) {
     delete(states_.back());
@@ -70,4 +49,26 @@ void GameEngine::Render() {
     EngineState *state = states_[i];
     state->Render();
   }
+}
+
+void GameEngine::ClearTouches() {
+  for (int i = 0; i < states_.size(); i++) {
+    EngineState *state = states_[i];
+    state->ClearTouches();
+  }
+}
+
+
+void GameEngine::PushState(EngineState *state) {
+  states_.push_back(state);
+  state->StateIsShown();
+}
+
+void GameEngine::PopState() {
+  pop_on_next_ = true;
+}
+
+void GameEngine::ReplaceTopState(EngineState *state) {
+  replace_on_next_ = true;
+  next_state_ = state;
 }

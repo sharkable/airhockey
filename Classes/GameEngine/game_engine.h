@@ -20,7 +20,8 @@ class GameEngine {
  public:
   void Update();
   void Render();
-
+  void ClearTouches();
+  
   void PushState(EngineState *state);
   void PopState();
   void ReplaceTopState(EngineState *state);
@@ -28,7 +29,6 @@ class GameEngine {
   void set_touches_began(vector<Touch> touches_began) { touches_began_ = touches_began; }
   void set_touches_moved(vector<Touch> touches_moved) { touches_moved_ = touches_moved; }
   void set_touches_ended(vector<Touch> touches_ended) { touches_ended_ = touches_ended; }
-  void ClearTouches();
  
  private:
   vector<EngineState *> states_;
