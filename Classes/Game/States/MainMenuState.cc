@@ -12,7 +12,7 @@
 #import "PlayState.h"
 #import "StoryState.h"
 #import "game_engine.h"
-#import "LocalStore.h"
+#import "gameengine/local_store.h"
 #import "ResourceLoader.h"
 #import "const.h"
 

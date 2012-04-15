@@ -8,7 +8,7 @@
 
 #import "SoundSlider.h"
 #import "ResourceLoader.h"
-#import "LocalStore.h"
+#import "gameengine/local_store.h"
 #include "Touch.h"
 #import "const.h"
 

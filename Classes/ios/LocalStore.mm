@@ -6,9 +6,9 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "LocalStore.h"
+#include "gameengine/local_store.h"
 
-#include "TypeUtil.h"
+#include "ios/TypeUtil.h"
 
 bool LocalStore::HasEntryForKey(string key) {
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
