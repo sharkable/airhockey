@@ -1,5 +1,5 @@
 //
-//  GameEngine.h
+//  game_engine.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.

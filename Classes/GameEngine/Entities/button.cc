@@ -1,5 +1,5 @@
 //
-//  Button.m
+//  button.m
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-30.

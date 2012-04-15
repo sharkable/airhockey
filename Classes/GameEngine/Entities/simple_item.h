@@ -1,5 +1,5 @@
 //
-//  SimpleItem.h
+//  simple_item.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-30.

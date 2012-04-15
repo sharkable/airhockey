@@ -1,5 +1,5 @@
 //
-//  LocalStore.h
+//  local_store.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-05-02.

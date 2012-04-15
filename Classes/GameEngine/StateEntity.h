@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AirHockey_StateEntity_h
-#define AirHockey_StateEntity_h
+#ifndef AIRHOCKEY_GAMEENGINE_STATEENTITY_H_
+#define AIRHOCKEY_GAMEENGINE_STATEENTITY_H_
 
 #include <vector>
 using namespace std;

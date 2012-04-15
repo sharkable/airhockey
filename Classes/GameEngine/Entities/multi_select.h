@@ -1,5 +1,5 @@
 //
-//  MultiSelect.h
+//  multi_select.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-30.

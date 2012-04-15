@@ -1,5 +1,5 @@
 //
-//  EngineState.h
+//  engine_state.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.
