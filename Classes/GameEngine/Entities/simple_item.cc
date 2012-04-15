@@ -11,8 +11,7 @@
 #import "gameengine/ResourceLoader.h"
 
 SimpleItem::SimpleItem(Texture2D texture, SGPoint position)
-    : textures_(1),
-      texture_(0),
+    : texture_(0),
       position_(position),
       angle_(0) {
   textures_.push_back(texture);
