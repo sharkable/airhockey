@@ -6,35 +6,39 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AirHockey_MutliSelect_h
-#define AirHockey_MultiSelect_h
-
-#import "StateEntity.h"
-#import "Texture2D.h"
+#ifndef AIRHOCKEY_GAMEENGINE_ENTITIES_MULTISELECT_H_
+#define AIRHOCKEY_GAMEENGINE_ENTITIES_MULTISELECT_H_
 
 #include <vector>
 using namespace std;
 
-class MultiSelect : public StateEntity {
- private:
-  vector<Texture2D> normalTextures_;
-  vector<Texture2D> selectedTextures_;
-  vector<double> positionsX_;
-  vector<double> positionsY_;
-  int selectedValue_;
+#include "gameengine/StateEntity.h"
 
+class Texture2D;
+struct SGPoint;
+
+class MultiSelect : public StateEntity {
  public:
   MultiSelect() {}
-  MultiSelect(Texture2D normalTexture, Texture2D selectedTexture,
-              SGPoint position);
   ~MultiSelect();
-  void Update();
+
+  void Add(Texture2D normal_texture, Texture2D selected_texture, SGPoint position);
+
+  // StateEntity
+  void Update() {}
   void Render();
   void TouchesBegan(vector<Touch> touches);
-  void add(Texture2D normalTexture, Texture2D selectedTexture,
-           SGPoint position);
-  int getSelectedValue() { return selectedValue_; };
-  void setSelectedValue(int selectedValue) { selectedValue_ = selectedValue; }
+  
+  // Accessors
+  int selected_value() { return selected_value_; };
+  void set_selected_value(int selected_value) { selected_value_ = selected_value; }
+
+ private:
+  vector<Texture2D> normal_textures_;
+  vector<Texture2D> selected_textures_;
+  vector<double> positions_x_;
+  vector<double> positions_y_;
+  int selected_value_;
 };
 
 #endif

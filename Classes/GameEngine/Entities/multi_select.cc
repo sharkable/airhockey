@@ -6,57 +6,52 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "multi_select.h"
-//#import "SoundPlayer.h"
-#import "ResourceLoader.h"
-#include "Touch.h"
+#include "gameengine/entities/multi_select.h"
 
-MultiSelect::MultiSelect(Texture2D normalTexture, Texture2D selectedTexture,
-              SGPoint position) {
-}
+#include "gameengine/ResourceLoader.h"
+#include "gameengine/touch.h"
 
 MultiSelect::~MultiSelect() {
-  for (int i = 0; i < normalTextures_.size(); i++) {
-    ResourceLoader::instance()->releaseResource(normalTextures_[i]);
+  for (int i = 0; i < normal_textures_.size(); i++) {
+    ResourceLoader::instance()->releaseResource(normal_textures_[i]);
   }
-  for (int i = 0; i < selectedTextures_.size(); i++) {
-    ResourceLoader::instance()->releaseResource(selectedTextures_[i]);
+  for (int i = 0; i < selected_textures_.size(); i++) {
+    ResourceLoader::instance()->releaseResource(selected_textures_[i]);
   }
 }
 
-void MultiSelect::Update() {
+void MultiSelect::Add(Texture2D normal_texture, Texture2D selected_texture, SGPoint position) {
+  normal_textures_.push_back(normal_texture);
+  selected_textures_.push_back(selected_texture);
+  positions_x_.push_back(position.x);
+  positions_y_.push_back(position.y);
 }
+
+
+// StateEntity
 
 void MultiSelect::Render() {
-  for (int i = 0; i < normalTextures_.size(); i++) {
-    SGPoint p = SGPointMake(positionsX_[i], positionsY_[i]);
-    if (i == selectedValue_) {
-      selectedTextures_[i].drawAtPoint(p);
+  for (int i = 0; i < normal_textures_.size(); i++) {
+    SGPoint p = SGPointMake(positions_x_[i], positions_y_[i]);
+    if (i == selected_value_) {
+      selected_textures_[i].drawAtPoint(p);
     } else {
-      normalTextures_[i].drawAtPoint(p);
+      normal_textures_[i].drawAtPoint(p);
     }
   }
 }
 
-void MultiSelect::add(Texture2D normalTexture, Texture2D selectedTexture,
-                      SGPoint position) {
-  normalTextures_.push_back(normalTexture);
-  selectedTextures_.push_back(selectedTexture);
-  positionsX_.push_back(position.x);
-  positionsY_.push_back(position.y);
-}
-
 void MultiSelect::TouchesBegan(vector<Touch> touches) {
-  for (int i = 0; i < normalTextures_.size(); i++) {
-    double x = positionsX_[i];
-    double y = positionsY_[i];
-    SGSize size = normalTextures_[i].contentSize();
+  for (int i = 0; i < normal_textures_.size(); i++) {
+    double x = positions_x_[i];
+    double y = positions_y_[i];
+    SGSize size = normal_textures_[i].contentSize();
     for (int j = 0; j < touches.size(); j++) {
       SGPoint touchPoint = touches[j].location();
       if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&
           touchPoint.y < y + size.height) {
-        if (selectedValue_ != i) {
-          selectedValue_ = i;
+        if (selected_value_ != i) {
+          selected_value_ = i;
           // TODO [SoundPlayer playSound:kSoundMultiSelect];
         };
         return;

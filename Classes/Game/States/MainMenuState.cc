@@ -95,9 +95,9 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
       ResourceLoader::instance()->getTextureWithName("2_player_selected");
   SGPoint numPlayersSelectPosition =
       SGPointMake(SCREEN_WIDTH / 2 - onePlayerImage.contentSize().width, playersY);
-  numPlayersSelect_.add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
-  numPlayersSelect_.add(twoPlayerImage, twoPlayerSelectedImage, SGPointMake(SCREEN_WIDTH/2, playersY));
-  numPlayersSelect_.setSelectedValue(LocalStore::integerForKey(LS_NUM_PLAYERS));
+  numPlayersSelect_.Add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
+  numPlayersSelect_.Add(twoPlayerImage, twoPlayerSelectedImage, SGPointMake(SCREEN_WIDTH/2, playersY));
+  numPlayersSelect_.set_selected_value(LocalStore::integerForKey(LS_NUM_PLAYERS));
   AddEntity(numPlayersSelect_);
   
   double pucksY = isIPhone ? 706 : 627;
@@ -115,9 +115,9 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
         ResourceLoader::instance()->getTextureWithName(pucksselectedstr);
     SGPoint numPucksSelectPosition =
         SGPointMake(i == 1 ? pucks1X : pucks2X + pucksXSpread * (i - 1), pucksY);
-    numPucksSelect_.add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
+    numPucksSelect_.Add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
   }
-  numPucksSelect_.setSelectedValue(LocalStore::integerForKey(LS_NUM_PUCKS));
+  numPucksSelect_.set_selected_value(LocalStore::integerForKey(LS_NUM_PUCKS));
   AddEntity(numPucksSelect_);
   
   if (false) {
@@ -140,14 +140,14 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   Texture2D amazingImage = ResourceLoader::instance()->getTextureWithName("amazing");
   Texture2D amazingImageSelected =
       ResourceLoader::instance()->getTextureWithName("amazing_selected");
-  difficultySelect_.add(badImage, badImageSelected, SGPointMake(isIPhone ? 38 : 138, difficultyY));
-  difficultySelect_.add(goodImage, goodImageSelected, SGPointMake(isIPhone ? 216 : 266, difficultyY));
-  difficultySelect_.add(excellentImage, excellentImageSelected, SGPointMake(isIPhone ? 380 : 384, difficultyY));
-  difficultySelect_.add(amazingImage, amazingImageSelected, SGPointMake(isIPhone ? 543 : 502, difficultyY));
+  difficultySelect_.Add(badImage, badImageSelected, SGPointMake(isIPhone ? 38 : 138, difficultyY));
+  difficultySelect_.Add(goodImage, goodImageSelected, SGPointMake(isIPhone ? 216 : 266, difficultyY));
+  difficultySelect_.Add(excellentImage, excellentImageSelected, SGPointMake(isIPhone ? 380 : 384, difficultyY));
+  difficultySelect_.Add(amazingImage, amazingImageSelected, SGPointMake(isIPhone ? 543 : 502, difficultyY));
   if (LocalStore::hasEntryForKey(LS_DIFFICULTY)) {
-    difficultySelect_.setSelectedValue(LocalStore::integerForKey(LS_DIFFICULTY));
+    difficultySelect_.set_selected_value(LocalStore::integerForKey(LS_DIFFICULTY));
   } else {
-    difficultySelect_.setSelectedValue(caiGood);
+    difficultySelect_.set_selected_value(caiGood);
   }
   AddEntity(difficultySelect_);
   
@@ -161,13 +161,13 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
     Texture2D largeImage = ResourceLoader::instance()->getTextureWithName("large");
     Texture2D largeImageSelected =
         ResourceLoader::instance()->getTextureWithName("large_selected");
-    paddleSizeSelect_.add(smallImage, smallImageSelected, SGPointMake(139, 842));
-    paddleSizeSelect_.add(mediumImage, mediumImageSelected, SGPointMake(305, 842));
-    paddleSizeSelect_.add(largeImage, largeImageSelected, SGPointMake(464, 842));
+    paddleSizeSelect_.Add(smallImage, smallImageSelected, SGPointMake(139, 842));
+    paddleSizeSelect_.Add(mediumImage, mediumImageSelected, SGPointMake(305, 842));
+    paddleSizeSelect_.Add(largeImage, largeImageSelected, SGPointMake(464, 842));
     if (LocalStore::hasEntryForKey(LS_PADDLE_SIZE)) {
-      paddleSizeSelect_.setSelectedValue(LocalStore::integerForKey(LS_PADDLE_SIZE));
+      paddleSizeSelect_.set_selected_value(LocalStore::integerForKey(LS_PADDLE_SIZE));
     } else {
-      paddleSizeSelect_.setSelectedValue(psMedium);
+      paddleSizeSelect_.set_selected_value(psMedium);
     }
     AddEntity(paddleSizeSelect_);
   }
@@ -188,31 +188,31 @@ void MainMenuState::stateIsShown() {
 void MainMenuState::pressedStart() {
   bool isIPhone = true; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
-  LocalStore::setInteger(numPlayersSelect_.getSelectedValue(), LS_NUM_PLAYERS);
-  LocalStore::setInteger(numPucksSelect_.getSelectedValue(), LS_NUM_PUCKS);
-  LocalStore::setInteger(difficultySelect_.getSelectedValue(), LS_DIFFICULTY);
+  LocalStore::setInteger(numPlayersSelect_.selected_value(), LS_NUM_PLAYERS);
+  LocalStore::setInteger(numPucksSelect_.selected_value(), LS_NUM_PUCKS);
+  LocalStore::setInteger(difficultySelect_.selected_value(), LS_DIFFICULTY);
   if (!isIPhone) {
-    LocalStore::setInteger(paddleSizeSelect_.getSelectedValue(), LS_PADDLE_SIZE);
+    LocalStore::setInteger(paddleSizeSelect_.selected_value(), LS_PADDLE_SIZE);
   }
 
 //  NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
-//  [flurryData setObject:[NSNumber numberWithInt:numPlayersSelect_.getSelectedValue() + 1]
+//  [flurryData setObject:[NSNumber numberWithInt:numPlayersSelect_.selected_value() + 1]
 //                 forKey:@"NumPlayers"];
-//  [flurryData setObject:[NSNumber numberWithInt:numPucksSelect_.getSelectedValue() + 1]
+//  [flurryData setObject:[NSNumber numberWithInt:numPucksSelect_.selected_value() + 1]
 //                 forKey:@"NumPucks"];
-//  [flurryData setObject:[NSNumber numberWithInt:difficultySelect_.getSelectedValue()]
+//  [flurryData setObject:[NSNumber numberWithInt:difficultySelect_.selected_value()]
 //                 forKey:@"Difficulty"];
 //  if (!isIPhone) {
-//    [flurryData setObject:[NSNumber numberWithInt:paddleSizeSelect_.getSelectedValue()]
+//    [flurryData setObject:[NSNumber numberWithInt:paddleSizeSelect_.selected_value()]
 //                   forKey:@"PaddleSize"];
 //  }
 //  [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
 
-  PaddleSize paddleSize = PaddleSize(isIPhone ? psLarge : paddleSizeSelect_.getSelectedValue());
+  PaddleSize paddleSize = PaddleSize(isIPhone ? psLarge : paddleSizeSelect_.selected_value());
   PlayState *playState = new PlayState(game_engine(),
-                                       numPlayersSelect_.getSelectedValue() + 1,
-                                       numPucksSelect_.getSelectedValue() + 1,
-                                       ComputerAI(difficultySelect_.getSelectedValue()),
+                                       numPlayersSelect_.selected_value() + 1,
+                                       numPucksSelect_.selected_value() + 1,
+                                       ComputerAI(difficultySelect_.selected_value()),
                                        paddleSize);
   game_engine().ReplaceTopState(playState);
 }
