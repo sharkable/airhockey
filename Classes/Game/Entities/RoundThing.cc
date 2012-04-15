@@ -160,7 +160,7 @@ void RoundThing::touchesBegan(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (containsTouch(&touches[i])) {
       grabbed_ = true;
-      grabbedTouch_ = touches[i].getIdentifier();
+      grabbedTouch_ = touches[i].identifier();
       touchesMoved(touches);
       vx_ = 0;
       vy_ = 0;
@@ -177,13 +177,13 @@ void RoundThing::touchesBegan(vector<Touch> touches) {
 void RoundThing::touchesMoved(vector<Touch> touches) {
   Touch* correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].getIdentifier() == grabbedTouch_) {
+    if (touches[i].identifier() == grabbedTouch_) {
       correctTouch = &touches[i];
       break;
     }
   }
   if (grabbed_ && correctTouch != NULL) {
-    SGPoint p = correctTouch->getLocation();
+    SGPoint p = correctTouch->location();
     x_ = p.x;
     y_ = p.y;
   }
@@ -192,7 +192,7 @@ void RoundThing::touchesMoved(vector<Touch> touches) {
 void RoundThing::touchesEnded(vector<Touch> touches) {
   Touch* correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].getIdentifier() == grabbedTouch_) {
+    if (touches[i].identifier() == grabbedTouch_) {
       correctTouch = &touches[i];
       break;
     }
@@ -217,8 +217,8 @@ bool RoundThing::isMovable() {
 }
    
 bool RoundThing::containsTouch(Touch *touch) {
-  double dx = touch->getLocation().x - x_;
-  double dy = touch->getLocation().y - y_;
+  double dx = touch->location().x - x_;
+  double dy = touch->location().y - y_;
   return (dx*dx + dy*dy <= radius_*radius_);
 }
 

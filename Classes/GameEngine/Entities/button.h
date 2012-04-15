@@ -6,42 +6,47 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AirHockey_Button_h
-#define AirHockey_Button_h
+#ifndef AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
+#define AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 
-#include "StateEntity.h"
-#include "Texture2D.h"
-
-class Button;
-class MainMenuState;
+#include "gameengine/StateEntity.h"
+#include "OpenGL/Texture2D.h"
 
 #define BUTTON_STATE_NORMAL 0
 #define BUTTON_STATE_PRESSED 1
 
+class Button;
+class MainMenuState;
+
 class ButtonDelegate {
  public:
-  virtual void buttonPressed(Button *button) = 0;
+  virtual void ButtonPressed(Button *button) = 0;
 };
 
 class Button : public StateEntity {
  public:
   Button() : state_(BUTTON_STATE_NORMAL) {}
-  Button(Texture2D normalTexture, Texture2D pressedTexture, SGPoint position);
+  Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position);
   ~Button();
+  
+  bool ContainsPoint(SGPoint p);
+
+  // StateEntity
   void Update();
   void Render();
   void TouchesBegan(vector<Touch> touches);
   void TouchesEnded(vector<Touch> touches);
-  bool containsPoint(SGPoint p);
-  void setNormalTexture(Texture2D normalTexture) { normalTexture_ = normalTexture; }
-  void setPressedTexture(Texture2D pressedTexture) { pressedTexture_ = pressedTexture; }
-  void setPosition(SGPoint position) { position_ = position; }
-  void setDelegate(ButtonDelegate *delegate) { delegate_ = delegate; }
-  SGSize getSize();
+
+  // Accessors
+  void set_normal_texture(Texture2D normal_texture) { normal_texture_ = normal_texture; }
+  void set_pressed_texture(Texture2D pressed_texture) { pressed_texture_ = pressed_texture; }
+  void set_position(SGPoint position) { position_ = position; }
+  void set_delegate(ButtonDelegate *delegate) { delegate_ = delegate; }
+  SGSize size() { return normal_texture_.contentSize(); }
  
  private:
-  Texture2D normalTexture_;
-  Texture2D pressedTexture_;
+  Texture2D normal_texture_;
+  Texture2D pressed_texture_;
   SGPoint position_;
   int state_;
   ButtonDelegate *delegate_;

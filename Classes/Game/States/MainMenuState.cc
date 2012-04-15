@@ -49,29 +49,29 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
       ResourceLoader::instance()->getTextureWithName("start_button_pressed");
   SGPoint startButtonPosition =
       SGPointMake((SCREEN_WIDTH - startButtonImage.contentSize().width) / 2, 392);
-  startButton_.setNormalTexture(startButtonImage);
-  startButton_.setPressedTexture(startButtonPressedImage);
-  startButton_.setPosition(startButtonPosition);
-  startButton_.setDelegate(this);
+  startButton_.set_normal_texture(startButtonImage);
+  startButton_.set_pressed_texture(startButtonPressedImage);
+  startButton_.set_position(startButtonPosition);
+  startButton_.set_delegate(this);
   AddEntity(startButton_);
   
   Texture2D feedbackButtonImage =
       ResourceLoader::instance()->getTextureWithName("feedback_button");
   Texture2D feedbackButtonPressedImage =
       ResourceLoader::instance()->getTextureWithName("feedback_button_pressed");
-  feedbackButton_.setNormalTexture(feedbackButtonImage);
-  feedbackButton_.setPressedTexture(feedbackButtonPressedImage);
-  feedbackButton_.setPosition(isIPhone ? SGPointMake(440, 926) : SGPointMake(486, 936));
-  feedbackButton_.setDelegate(this);
+  feedbackButton_.set_normal_texture(feedbackButtonImage);
+  feedbackButton_.set_pressed_texture(feedbackButtonPressedImage);
+  feedbackButton_.set_position(isIPhone ? SGPointMake(440, 926) : SGPointMake(486, 936));
+  feedbackButton_.set_delegate(this);
   AddEntity(feedbackButton_);
 
   Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story_button");
   Texture2D storyButtonPressedImage =
       ResourceLoader::instance()->getTextureWithName("story_button_pressed");
-  storyButton_.setNormalTexture(storyButtonImage);
-  storyButton_.setPressedTexture(storyButtonPressedImage);
-  storyButton_.setPosition(isIPhone ? SGPointMake(86, 926) : SGPointMake(91, 936));
-  storyButton_.setDelegate(this);
+  storyButton_.set_normal_texture(storyButtonImage);
+  storyButton_.set_pressed_texture(storyButtonPressedImage);
+  storyButton_.set_position(isIPhone ? SGPointMake(86, 926) : SGPointMake(91, 936));
+  storyButton_.set_delegate(this);
   AddEntity(storyButton_);
   
   if (false) {
@@ -79,10 +79,10 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
         ResourceLoader::instance()->getTextureWithName("upgrade_button");
     Texture2D upgradeButtonPressedImage =
         ResourceLoader::instance()->getTextureWithName("upgrade_button_pressed");
-    upgradeButton_.setNormalTexture(upgradeButtonImage);
-    upgradeButton_.setPressedTexture(upgradeButtonPressedImage);
-    upgradeButton_.setPosition(SGPointMake(91, 936));
-    upgradeButton_.setDelegate(this);
+    upgradeButton_.set_normal_texture(upgradeButtonImage);
+    upgradeButton_.set_pressed_texture(upgradeButtonPressedImage);
+    upgradeButton_.set_position(SGPointMake(91, 936));
+    upgradeButton_.set_delegate(this);
     AddEntity(upgradeButton_);
   }
   
@@ -271,7 +271,7 @@ void MainMenuState::pressedUpgrade() {
 
 #pragma mark - ButtonDelegate
 
-void MainMenuState::buttonPressed(Button *button) {
+void MainMenuState::ButtonPressed(Button *button) {
   if (button == &startButton_) {
     pressedStart();
   } else if (button == &feedbackButton_) {

@@ -15,7 +15,7 @@ StoryState::StoryState(GameEngine &gameEngine) : EngineState(gameEngine) {
   storyButton_ = new Button(storyButtonImage, storyButtonImage,
                             SGPointMake(0, 0));
 // TODO
-//  storyButton_->setDelegate(self);
+//  storyButton_->set_delegate(self);
 //  storyButton_->setSelector(@selector(pressedStory));
   AddEntity(*storyButton_);
 
@@ -23,7 +23,7 @@ StoryState::StoryState(GameEngine &gameEngine) : EngineState(gameEngine) {
   Texture2D aboutButtonImage = ResourceLoader::instance()->getTextureWithName("about");
   aboutButton_ = new Button(aboutButtonImage, aboutButtonImage, SGPointMake(0, 0));
 // TODO
-//  aboutButton_->setDelegate(self);
+//  aboutButton_->set_delegate(self);
 //  aboutButton_->setSelector(@selector(pressedAbout));;
 }
 

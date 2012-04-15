@@ -52,7 +52,7 @@ void MultiSelect::TouchesBegan(vector<Touch> touches) {
     double y = positionsY_[i];
     SGSize size = normalTextures_[i].contentSize();
     for (int j = 0; j < touches.size(); j++) {
-      SGPoint touchPoint = touches[j].getLocation();
+      SGPoint touchPoint = touches[j].location();
       if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&
           touchPoint.y < y + size.height) {
         if (selectedValue_ != i) {

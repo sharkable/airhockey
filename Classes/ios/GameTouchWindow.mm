@@ -47,14 +47,14 @@ using namespace std;
     Touch converted_touch;
     CGPoint location = [touch locationInView:touch.view];
     SGPoint l = SGPointMake(location.x, location.y);
-    converted_touch.setLocation(l);
+    converted_touch.set_location(l);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      SGPoint p = converted_touch.getLocation();
+      SGPoint p = converted_touch.location();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
-      converted_touch.setLocation(p);
+      converted_touch.set_location(p);
     }
-    converted_touch.setIdentifier(touch);
+    converted_touch.set_identifier(touch);
     converted_touches.push_back(converted_touch);
   }
   return converted_touches;

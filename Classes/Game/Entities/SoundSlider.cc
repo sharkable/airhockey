@@ -43,14 +43,14 @@ SGPoint SoundSlider::getThumbPoint() {
 
 void SoundSlider::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
-    SGPoint touchP = touches[i].getLocation();
+    SGPoint touchP = touches[i].location();
     SGPoint thumbP = getThumbPoint();
     double thumbWidth = thumbTexture_.contentSize().width;
     double thumbHeight = thumbTexture_.contentSize().height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
           touchP.x < thumbP.x + 2 * thumbWidth &&
           touchP.y < thumbP.y + 2 * thumbHeight) {
-      grabbedTouch_ = touches[i].getIdentifier();
+      grabbedTouch_ = touches[i].identifier();
       lastTouchPosition_ = touchP;
       return;
     }
@@ -59,8 +59,8 @@ void SoundSlider::TouchesBegan(vector<Touch> touches) {
 
 void SoundSlider::TouchesMoved(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].getIdentifier() == grabbedTouch_) {
-      SGPoint touchP = touches[i].getLocation();
+    if (touches[i].identifier() == grabbedTouch_) {
+      SGPoint touchP = touches[i].location();
       value_ += (touchP.x - lastTouchPosition_.x) / (269 - thumbTexture_.contentSize().width);
       lastTouchPosition_ = touchP;
       if (lastTouchPosition_.x < position_.x + 19) {
@@ -80,7 +80,7 @@ void SoundSlider::TouchesMoved(vector<Touch> touches) {
 
 void SoundSlider::TouchesEnded(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].getIdentifier() == grabbedTouch_) {
+    if (touches[i].identifier() == grabbedTouch_) {
       // TODO [SoundPlayer setGlobalVolume:value_];
       LocalStore::setDouble(value_, LS_VOLUME);
       grabbedTouch_ = NULL;

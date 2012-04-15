@@ -106,7 +106,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
       SGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
   rematchButton_ = new Button(rematchButtonTexture, rematchButtonPressedTexture, rematchButtonPos);
 // TODO
-//  rematchButton_->setDelegate(self);
+//  rematchButton_->set_delegate(self);
 //  rematchButton_->setSelector(@selector(rematchPressed));
 
   Texture2D menuButtonTexture = ResourceLoader::instance()->getTextureWithName("menu_button");
@@ -116,7 +116,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
                                       546);
   menuButton_ = new Button(menuButtonTexture, menuButtonPressedTexture, menuButtonPos);
 // TODO
-//  menuButton_->setDelegate(self);
+//  menuButton_->set_delegate(self);
 //  menuButton_->setSelector(@selector(menuPressed));
 
   Texture2D continueButtonTexture =
@@ -127,7 +127,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
       SGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
   continueButton_ = new Button(continueButtonTexture, continueButtonPressedTexture, continueButtonPos);
 // TODO
-//  continueButton_->setDelegate(self);
+//  continueButton_->set_delegate(self);
 //  continueButton_->setSelector(@selector(continuePressed));
   
   soundSlider_ = new SoundSlider(SGPointMake(331, 336));
@@ -148,7 +148,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
     SGPoint pauseButtonPos1 = SGPointMake(0, 0);
     pauseButton1_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos1);
 // TODO
-//    pauseButton1_->setDelegate(self);
+//    pauseButton1_->set_delegate(self);
 //    pauseButton1_->setSelector(@selector(pausePressed));
     AddEntity(*pauseButton1_);
   }
@@ -159,7 +159,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
                       (false ? (27 * 768.0/320.0) : 0));
   pauseButton2_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos2);
 // TODO
-//  pauseButton2_->setDelegate(self);
+//  pauseButton2_->set_delegate(self);
 //  pauseButton2_->setSelector(@selector(pausePressed));
   AddEntity(*pauseButton2_);
     
@@ -402,12 +402,12 @@ void PlayState::finishGameWithWinner(int playerId) {
     case PLAYER_1: {
       player1WinCount_++;
 
-      win_->setPosition(SGPointMake(winX, bottomY));
+      win_->set_position(SGPointMake(winX, bottomY));
       win_->setAngle(0);
       AddEntity(*win_);
       
       if (numPlayers_ == 2) {
-        lose_->setPosition(SGPointMake(loseX, topY));
+        lose_->set_position(SGPointMake(loseX, topY));
         lose_->setAngle(180);
         AddEntity(*lose_);
       }
@@ -420,12 +420,12 @@ void PlayState::finishGameWithWinner(int playerId) {
       player2WinCount_++;
       
       if (numPlayers_ == 2) {
-        win_->setPosition(SGPointMake(winX, topY));
+        win_->set_position(SGPointMake(winX, topY));
         win_->setAngle(180);
         AddEntity(*win_);
       }
       
-      lose_->setPosition(SGPointMake(loseX, bottomY));
+      lose_->set_position(SGPointMake(loseX, bottomY));
       lose_->setAngle(0);
       AddEntity(*lose_);
       

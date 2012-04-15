@@ -100,13 +100,13 @@ typedef enum {
 // However do not use Core Location just for advertising, make sure it is used
 // for more beneficial reasons as well.  It is both a good idea and part of
 // Apple's guidelines.
-- (void)setLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude
+- (void)set_locationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude
                        accuracy:(CGFloat)accuracyInMeters;
 
 // When Core Location isn't available but the user's location is known supplying
 // it here may deliver more relevant ads.  It can be any free-form text such as
 // @"Champs-Elysees Paris" or @"94041 US".
-- (void)setLocationWithDescription:(NSString *)locationDescription;
+- (void)set_locationWithDescription:(NSString *)locationDescription;
 
 #pragma mark Contextual Information
 

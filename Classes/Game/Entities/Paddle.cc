@@ -239,7 +239,7 @@ bool Paddle::isGrabbable() {
 }
 
 bool Paddle::containsTouch(Touch *touch) {
-  SGPoint p = touch->getLocation();
+  SGPoint p = touch->location();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return false;
   }

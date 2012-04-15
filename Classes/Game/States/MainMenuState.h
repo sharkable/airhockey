@@ -20,7 +20,7 @@ class MainMenuState : public EngineState, private ButtonDelegate {
   void pressedFeedback();
   void pressedStory();
   void pressedUpgrade();
-  void buttonPressed(Button *button);
+  void ButtonPressed(Button *button);
 
  private:
   Button startButton_; 

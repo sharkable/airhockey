@@ -32,7 +32,7 @@ class SimpleItem : public StateEntity {
   int getTexture() { return texture_; }
   void setTexture(int texture) { texture_ = texture; }
   SGPoint getPosition() { return position_; }
-  void setPosition(SGPoint position) { position_ = position; }
+  void set_position(SGPoint position) { position_ = position; }
   double getAngle() { return angle_; }
   void setAngle(double angle) { angle_ = angle; }
   SGSize getSize();
