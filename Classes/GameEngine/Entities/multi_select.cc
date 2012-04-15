@@ -13,10 +13,10 @@
 
 MultiSelect::~MultiSelect() {
   for (int i = 0; i < normal_textures_.size(); i++) {
-    ResourceLoader::instance()->releaseResource(normal_textures_[i]);
+    ResourceLoader::Instance().ReleaseResource(normal_textures_[i]);
   }
   for (int i = 0; i < selected_textures_.size(); i++) {
-    ResourceLoader::instance()->releaseResource(selected_textures_[i]);
+    ResourceLoader::Instance().ReleaseResource(selected_textures_[i]);
   }
 }
 

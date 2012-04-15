@@ -6,21 +6,21 @@
 //  Copyright 2009 Sharkable. All rights reserved.
 //
 
-#import "ResourceLoader.h"
-#import "const.h"
+#include "gameengine/ResourceLoader.h"
 
-#import "TypeUtil.h"
+#include "const.h"
+#include "ios/TypeUtil.h"
 
 Texture2D texture(UIImage *uiImage);
 
 ResourceLoader instance__;
 
-ResourceLoader *ResourceLoader::instance() {
-  return &instance__;          
+ResourceLoader &ResourceLoader::Instance() {
+  return instance__;          
 }
 
-Texture2D ResourceLoader::getTextureWithName(string name) {
-  int count = resourceCounter_[name];
+Texture2D ResourceLoader::TextureWithName(string name) {
+  int count = resource_counter_[name];
   if (count == 0) {
     UIImage *image;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -30,33 +30,33 @@ Texture2D ResourceLoader::getTextureWithName(string name) {
     }
     
     Texture2D tex = texture(image);
-    resourceCounter_[name] = count + 1;
+    resource_counter_[name] = count + 1;
     resources_[name] = tex;
     return tex;
   }
   
   Texture2D texture = resources_[name];
-  resourceCounter_[name] = count + 1;
+  resource_counter_[name] = count + 1;
   
   return texture;  
 }
 
-void ResourceLoader::releaseResourceWithName(string name) {
-  int count = resourceCounter_[name];
+void ResourceLoader::ReleaseResource(string name) {
+  int count = resource_counter_[name];
   if (count == 0) {
     return;
   } else if (count == 1) {
     resources_.erase(name);
-    resourceCounter_.erase(name);
+    resource_counter_.erase(name);
   } else {
-    resourceCounter_[name] = count - 1;
+    resource_counter_[name] = count - 1;
   }
 }
 
-void ResourceLoader::releaseResource(Texture2D resource) {
+void ResourceLoader::ReleaseResource(Texture2D resource) {
   for (map<string, Texture2D>::iterator i = resources_.begin(); i != resources_.end(); i++) {
     if (i->second.name() == resource.name()) {
-      releaseResourceWithName(i->first);
+      ReleaseResource(i->first);
     }
   }
 }

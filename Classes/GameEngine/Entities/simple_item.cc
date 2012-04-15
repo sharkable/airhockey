@@ -27,7 +27,7 @@ SimpleItem::SimpleItem(vector<Texture2D> textures, SGPoint position)
 
 SimpleItem::~SimpleItem() {
   for (int i = 0; i < textures_.size(); i++) {
-    ResourceLoader::instance()->releaseResource(textures_[i]);
+    ResourceLoader::Instance().ReleaseResource(textures_[i]);
   }
 }
 

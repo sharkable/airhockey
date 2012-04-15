@@ -15,7 +15,7 @@
 using namespace std;
 
 Puck::Puck() {
-  texture_ = ResourceLoader::instance()->getTextureWithName("puck");
+  texture_ = ResourceLoader::Instance().TextureWithName("puck");
   radius_ = PUCK_RADIUS;
   mass_ = PUCK_MASS;
   friction_ = PUCK_FRICTION;

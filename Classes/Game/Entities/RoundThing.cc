@@ -19,7 +19,7 @@ RoundThing::RoundThing() {
 }
 
 RoundThing::~RoundThing() {
-  ResourceLoader::instance()->releaseResource(texture_);
+  ResourceLoader::Instance().ReleaseResource(texture_);
 }
 
 void RoundThing::Update() {

@@ -19,34 +19,34 @@
 MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), soundSlider_(SGPointMake(400, 50)) {
   bool isIPhone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
-  Texture2D backgroundTexture = ResourceLoader::instance()->getTextureWithName("rink_bg");
+  Texture2D backgroundTexture = ResourceLoader::Instance().TextureWithName("rink_bg");
   SimpleItem *background = new SimpleItem(backgroundTexture, SGPointMake(0, 0));
   AddEntity(*background);
 
   // Add rink left and right pieces.
-  Texture2D leftRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_left");
+  Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
   SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
   AddEntity(*leftRinkBorder);
   Texture2D rightRinkBorderTexture =
-      ResourceLoader::instance()->getTextureWithName("rink_right");
+      ResourceLoader::Instance().TextureWithName("rink_right");
   SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
   AddEntity(*rightRinkBorder);
 
-  Texture2D titleTexture = ResourceLoader::instance()->getTextureWithName("title");
+  Texture2D titleTexture = ResourceLoader::Instance().TextureWithName("title");
   SimpleItem *title = new SimpleItem(titleTexture, SGPointMake(81, 53));
   AddEntity(*title);
   
-  Texture2D mainMenuTexture = ResourceLoader::instance()->getTextureWithName("main_menu");
+  Texture2D mainMenuTexture = ResourceLoader::Instance().TextureWithName("main_menu");
   SGPoint mainMenuPosition = SGPointMake((SCREEN_WIDTH - mainMenuTexture.contentSize().width) / 2,
                                          339);
   SimpleItem *mainMenu = new SimpleItem(mainMenuTexture, mainMenuPosition);
   AddEntity(*mainMenu);
   
-  Texture2D startButtonImage = ResourceLoader::instance()->getTextureWithName("start_button");
+  Texture2D startButtonImage = ResourceLoader::Instance().TextureWithName("start_button");
   Texture2D startButtonPressedImage =
-      ResourceLoader::instance()->getTextureWithName("start_button_pressed");
+      ResourceLoader::Instance().TextureWithName("start_button_pressed");
   SGPoint startButtonPosition =
       SGPointMake((SCREEN_WIDTH - startButtonImage.contentSize().width) / 2, 392);
   startButton_.set_normal_texture(startButtonImage);
@@ -56,18 +56,18 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   AddEntity(startButton_);
   
   Texture2D feedbackButtonImage =
-      ResourceLoader::instance()->getTextureWithName("feedback_button");
+      ResourceLoader::Instance().TextureWithName("feedback_button");
   Texture2D feedbackButtonPressedImage =
-      ResourceLoader::instance()->getTextureWithName("feedback_button_pressed");
+      ResourceLoader::Instance().TextureWithName("feedback_button_pressed");
   feedbackButton_.set_normal_texture(feedbackButtonImage);
   feedbackButton_.set_pressed_texture(feedbackButtonPressedImage);
   feedbackButton_.set_position(isIPhone ? SGPointMake(440, 926) : SGPointMake(486, 936));
   feedbackButton_.set_delegate(this);
   AddEntity(feedbackButton_);
 
-  Texture2D storyButtonImage = ResourceLoader::instance()->getTextureWithName("story_button");
+  Texture2D storyButtonImage = ResourceLoader::Instance().TextureWithName("story_button");
   Texture2D storyButtonPressedImage =
-      ResourceLoader::instance()->getTextureWithName("story_button_pressed");
+      ResourceLoader::Instance().TextureWithName("story_button_pressed");
   storyButton_.set_normal_texture(storyButtonImage);
   storyButton_.set_pressed_texture(storyButtonPressedImage);
   storyButton_.set_position(isIPhone ? SGPointMake(86, 926) : SGPointMake(91, 936));
@@ -76,9 +76,9 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   
   if (false) {
     Texture2D upgradeButtonImage =
-        ResourceLoader::instance()->getTextureWithName("upgrade_button");
+        ResourceLoader::Instance().TextureWithName("upgrade_button");
     Texture2D upgradeButtonPressedImage =
-        ResourceLoader::instance()->getTextureWithName("upgrade_button_pressed");
+        ResourceLoader::Instance().TextureWithName("upgrade_button_pressed");
     upgradeButton_.set_normal_texture(upgradeButtonImage);
     upgradeButton_.set_pressed_texture(upgradeButtonPressedImage);
     upgradeButton_.set_position(SGPointMake(91, 936));
@@ -87,12 +87,12 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   }
   
   double playersY = isIPhone ? 570 : 511;
-  Texture2D onePlayerImage = ResourceLoader::instance()->getTextureWithName("1_player");
-  Texture2D twoPlayerImage = ResourceLoader::instance()->getTextureWithName("2_player");
+  Texture2D onePlayerImage = ResourceLoader::Instance().TextureWithName("1_player");
+  Texture2D twoPlayerImage = ResourceLoader::Instance().TextureWithName("2_player");
   Texture2D onePlayerSelectedImage =
-      ResourceLoader::instance()->getTextureWithName("1_player_selected");
+      ResourceLoader::Instance().TextureWithName("1_player_selected");
   Texture2D twoPlayerSelectedImage =
-      ResourceLoader::instance()->getTextureWithName("2_player_selected");
+      ResourceLoader::Instance().TextureWithName("2_player_selected");
   SGPoint numPlayersSelectPosition =
       SGPointMake(SCREEN_WIDTH / 2 - onePlayerImage.contentSize().width, playersY);
   numPlayersSelect_.Add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
@@ -110,9 +110,9 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
     char pucksselectedstr[15];
     sprintf(pucksselectedstr, "%d_selected", i);
 
-    Texture2D numPucksImage = ResourceLoader::instance()->getTextureWithName(pucksstr);
+    Texture2D numPucksImage = ResourceLoader::Instance().TextureWithName(pucksstr);
     Texture2D numPucksSelectedImage =
-        ResourceLoader::instance()->getTextureWithName(pucksselectedstr);
+        ResourceLoader::Instance().TextureWithName(pucksselectedstr);
     SGPoint numPucksSelectPosition =
         SGPointMake(i == 1 ? pucks1X : pucks2X + pucksXSpread * (i - 1), pucksY);
     numPucksSelect_.Add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
@@ -122,7 +122,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   
   if (false) {
     Texture2D upgradeForMoreTexture =
-        ResourceLoader::instance()->getTextureWithName("upgrade_for_more");
+        ResourceLoader::Instance().TextureWithName("upgrade_for_more");
     SGPoint upgradeForMorePosition = SGPointMake(pucks2X + pucksXSpread * 4, pucksY);
     SimpleItem *upgradeForMore = new SimpleItem(upgradeForMoreTexture, upgradeForMorePosition);
     AddEntity(*upgradeForMore);
@@ -130,16 +130,16 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   
   
   double difficultyY = isIPhone ? 839 : 734;
-  Texture2D badImage = ResourceLoader::instance()->getTextureWithName("bad");
-  Texture2D badImageSelected = ResourceLoader::instance()->getTextureWithName("bad_selected");
-  Texture2D goodImage = ResourceLoader::instance()->getTextureWithName("good");
-  Texture2D goodImageSelected = ResourceLoader::instance()->getTextureWithName("good_selected");
-  Texture2D excellentImage = ResourceLoader::instance()->getTextureWithName("excellent");
+  Texture2D badImage = ResourceLoader::Instance().TextureWithName("bad");
+  Texture2D badImageSelected = ResourceLoader::Instance().TextureWithName("bad_selected");
+  Texture2D goodImage = ResourceLoader::Instance().TextureWithName("good");
+  Texture2D goodImageSelected = ResourceLoader::Instance().TextureWithName("good_selected");
+  Texture2D excellentImage = ResourceLoader::Instance().TextureWithName("excellent");
   Texture2D excellentImageSelected =
-      ResourceLoader::instance()->getTextureWithName("excellent_selected");
-  Texture2D amazingImage = ResourceLoader::instance()->getTextureWithName("amazing");
+      ResourceLoader::Instance().TextureWithName("excellent_selected");
+  Texture2D amazingImage = ResourceLoader::Instance().TextureWithName("amazing");
   Texture2D amazingImageSelected =
-      ResourceLoader::instance()->getTextureWithName("amazing_selected");
+      ResourceLoader::Instance().TextureWithName("amazing_selected");
   difficultySelect_.Add(badImage, badImageSelected, SGPointMake(isIPhone ? 38 : 138, difficultyY));
   difficultySelect_.Add(goodImage, goodImageSelected, SGPointMake(isIPhone ? 216 : 266, difficultyY));
   difficultySelect_.Add(excellentImage, excellentImageSelected, SGPointMake(isIPhone ? 380 : 384, difficultyY));
@@ -152,15 +152,15 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   AddEntity(difficultySelect_);
   
   if (!isIPhone) {
-    Texture2D smallImage = ResourceLoader::instance()->getTextureWithName("small");
+    Texture2D smallImage = ResourceLoader::Instance().TextureWithName("small");
     Texture2D smallImageSelected =
-        ResourceLoader::instance()->getTextureWithName("small_selected");
-    Texture2D mediumImage = ResourceLoader::instance()->getTextureWithName("medium");
+        ResourceLoader::Instance().TextureWithName("small_selected");
+    Texture2D mediumImage = ResourceLoader::Instance().TextureWithName("medium");
     Texture2D mediumImageSelected =
-        ResourceLoader::instance()->getTextureWithName("medium_selected");
-    Texture2D largeImage = ResourceLoader::instance()->getTextureWithName("large");
+        ResourceLoader::Instance().TextureWithName("medium_selected");
+    Texture2D largeImage = ResourceLoader::Instance().TextureWithName("large");
     Texture2D largeImageSelected =
-        ResourceLoader::instance()->getTextureWithName("large_selected");
+        ResourceLoader::Instance().TextureWithName("large_selected");
     paddleSizeSelect_.Add(smallImage, smallImageSelected, SGPointMake(139, 842));
     paddleSizeSelect_.Add(mediumImage, mediumImageSelected, SGPointMake(305, 842));
     paddleSizeSelect_.Add(largeImage, largeImageSelected, SGPointMake(464, 842));

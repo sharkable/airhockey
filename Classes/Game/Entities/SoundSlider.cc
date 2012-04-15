@@ -15,9 +15,9 @@
 SoundSlider::SoundSlider(SGPoint position) {
   position_ = position;
   
-  emptyTexture_ = ResourceLoader::instance()->getTextureWithName("sound_empty");
-  fullTexture_ = ResourceLoader::instance()->getTextureWithName("sound_full");
-  thumbTexture_ = ResourceLoader::instance()->getTextureWithName("sound_thumb");
+  emptyTexture_ = ResourceLoader::Instance().TextureWithName("sound_empty");
+  fullTexture_ = ResourceLoader::Instance().TextureWithName("sound_full");
+  thumbTexture_ = ResourceLoader::Instance().TextureWithName("sound_thumb");
   
   if (LocalStore::HasEntryForKey(LS_VOLUME)) {
     value_ = LocalStore::DoubleForKey(LS_VOLUME);

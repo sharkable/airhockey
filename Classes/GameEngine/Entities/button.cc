@@ -20,8 +20,8 @@ Button::Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint posi
 }
 
 Button::~Button() {
-  ResourceLoader::instance()->releaseResource(normal_texture_);
-  ResourceLoader::instance()->releaseResource(pressed_texture_);
+  ResourceLoader::Instance().ReleaseResource(normal_texture_);
+  ResourceLoader::Instance().ReleaseResource(pressed_texture_);
 }
 
 

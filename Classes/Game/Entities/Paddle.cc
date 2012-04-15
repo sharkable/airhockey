@@ -21,25 +21,25 @@ Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI 
   if (playerId == PLAYER_1) {
     switch (size) {
       case psSmall:
-        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_1_small");
+        texture_ = ResourceLoader::Instance().TextureWithName("paddle_1_small");
         break;
       case psMedium:
-        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_1_medium");
+        texture_ = ResourceLoader::Instance().TextureWithName("paddle_1_medium");
         break;
       case psLarge:
-        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_1_large");
+        texture_ = ResourceLoader::Instance().TextureWithName("paddle_1_large");
         break;
     }
   } else {
     switch (size) {
       case psSmall:
-        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_2_small");
+        texture_ = ResourceLoader::Instance().TextureWithName("paddle_2_small");
         break;
       case psMedium:
-        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_2_medium");
+        texture_ = ResourceLoader::Instance().TextureWithName("paddle_2_medium");
         break;
       case psLarge:
-        texture_ = ResourceLoader::instance()->getTextureWithName("paddle_2_large");
+        texture_ = ResourceLoader::Instance().TextureWithName("paddle_2_large");
         break;
     }    
   }

@@ -1,24 +1,29 @@
 //
-//  ResourceLoader.h
+//  resource_loader.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 09-09-28.
 //  Copyright 2009 Sharkable. All rights reserved.
 //
 
-#import <map>
+#ifndef AIRHOCKEY_GAMEENGINE_RESOURCELOADER_H_
+#define AIRHOCKEY_GAMEENGINE_RESOURCELOADER_H_
+
+#include <map>
 using namespace std;
 
-#include "Texture2D.h"
+#include "opengl/Texture2D.h"
 
 class ResourceLoader {
+ public:
+  static ResourceLoader &Instance();
+  Texture2D TextureWithName(string name);
+  void ReleaseResource(string name);
+  void ReleaseResource(Texture2D resource);
+
  private:
   map<string, Texture2D> resources_;
-  map<string, int> resourceCounter_;
-
- public:
-  static ResourceLoader *instance();
-  Texture2D getTextureWithName(string name);
-  void releaseResourceWithName(string name);
-  void releaseResource(Texture2D resource);
+  map<string, int> resource_counter_;  
 };
+
+#endif

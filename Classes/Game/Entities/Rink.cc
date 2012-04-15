@@ -13,12 +13,12 @@
 #import "const.h"
 
 Rink::Rink() {
-  texture_ = ResourceLoader::instance()->getTextureWithName("rink_bg");
+  texture_ = ResourceLoader::Instance().TextureWithName("rink_bg");
   renderPoint_ = SGPointMake(0, 0);
 }
 
 Rink::~Rink() {
-  ResourceLoader::instance()->releaseResource(texture_);
+  ResourceLoader::Instance().ReleaseResource(texture_);
 }
 
 void Rink::Update() {

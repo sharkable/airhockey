@@ -24,7 +24,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
   for (int i = 0; i <= WIN_SCORE; i++) {
     char pointsstr[15];
     sprintf(pointsstr, "%d_points", i);
-    Texture2D texture = ResourceLoader::instance()->getTextureWithName(pointsstr);
+    Texture2D texture = ResourceLoader::Instance().TextureWithName(pointsstr);
     scoreTextures.push_back(texture);
   }
   player1Score_ = new SimpleItem(scoreTextures, SGPointMake(662, 526));
@@ -72,36 +72,36 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
   roundThings_.push_back(post4);
   
   // Add rink left and right pieces.
-  Texture2D leftRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_left");
+  Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
   SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
   AddEntity(*leftRinkBorder);
-  Texture2D rightRinkBorderTexture = ResourceLoader::instance()->getTextureWithName("rink_right");
+  Texture2D rightRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_right");
   SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
   AddEntity(*rightRinkBorder);
   
-  Texture2D winTexture = ResourceLoader::instance()->getTextureWithName("win");
+  Texture2D winTexture = ResourceLoader::Instance().TextureWithName("win");
   win_ = new SimpleItem(winTexture, SGPointMake(0, 0));
 
-  Texture2D loseTexture = ResourceLoader::instance()->getTextureWithName("lose");
+  Texture2D loseTexture = ResourceLoader::Instance().TextureWithName("lose");
   lose_ = new SimpleItem(loseTexture, SGPointMake(0, 0));
 
-  Texture2D getReadyTexture = ResourceLoader::instance()->getTextureWithName("get_ready");
+  Texture2D getReadyTexture = ResourceLoader::Instance().TextureWithName("get_ready");
   SGPoint getReadyPosition =
       SGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize().width) / 2, 
                   (SCREEN_HEIGHT - getReadyTexture.contentSize().height) / 2);
   getReady_ = new SimpleItem(getReadyTexture, getReadyPosition);
 
-  Texture2D goTexture = ResourceLoader::instance()->getTextureWithName("go");
+  Texture2D goTexture = ResourceLoader::Instance().TextureWithName("go");
   SGPoint goPosition = SGPointMake((SCREEN_WIDTH - goTexture.contentSize().width) / 2, 
                                    (SCREEN_HEIGHT - goTexture.contentSize().height) / 2);
   go_ = new SimpleItem(goTexture, goPosition);
   
   Texture2D rematchButtonTexture =
-      ResourceLoader::instance()->getTextureWithName("rematch_button");
+      ResourceLoader::Instance().TextureWithName("rematch_button");
   Texture2D rematchButtonPressedTexture =
-      ResourceLoader::instance()->getTextureWithName("rematch_button_pressed");
+      ResourceLoader::Instance().TextureWithName("rematch_button_pressed");
   SGPoint rematchButtonPos =
       SGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
   rematchButton_ = new Button(rematchButtonTexture, rematchButtonPressedTexture, rematchButtonPos);
@@ -109,9 +109,9 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
 //  rematchButton_->set_delegate(self);
 //  rematchButton_->setSelector(@selector(rematchPressed));
 
-  Texture2D menuButtonTexture = ResourceLoader::instance()->getTextureWithName("menu_button");
+  Texture2D menuButtonTexture = ResourceLoader::Instance().TextureWithName("menu_button");
   Texture2D menuButtonPressedTexture =
-      ResourceLoader::instance()->getTextureWithName("menu_button_pressed");
+      ResourceLoader::Instance().TextureWithName("menu_button_pressed");
   SGPoint menuButtonPos = SGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize().width) / 2,
                                       546);
   menuButton_ = new Button(menuButtonTexture, menuButtonPressedTexture, menuButtonPos);
@@ -120,9 +120,9 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
 //  menuButton_->setSelector(@selector(menuPressed));
 
   Texture2D continueButtonTexture =
-      ResourceLoader::instance()->getTextureWithName("continue_button");
+      ResourceLoader::Instance().TextureWithName("continue_button");
   Texture2D continueButtonPressedTexture =
-      ResourceLoader::instance()->getTextureWithName("continue_button_pressed");
+      ResourceLoader::Instance().TextureWithName("continue_button_pressed");
   SGPoint continueButtonPos =
       SGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
   continueButton_ = new Button(continueButtonTexture, continueButtonPressedTexture, continueButtonPos);
@@ -133,14 +133,14 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
   soundSlider_ = new SoundSlider(SGPointMake(331, 336));
   
   Texture2D menuBackgroundTexture =
-      ResourceLoader::instance()->getTextureWithName("game_menu_bg");
+      ResourceLoader::Instance().TextureWithName("game_menu_bg");
   SGPoint menuBackgroundPosition =
       SGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize().width) / 2, 306);
   menuBackground_ = new SimpleItem(menuBackgroundTexture, menuBackgroundPosition);
   
-  Texture2D pauseButtonTexture = ResourceLoader::instance()->getTextureWithName("pause_button");
+  Texture2D pauseButtonTexture = ResourceLoader::Instance().TextureWithName("pause_button");
   Texture2D pauseButtonPressedTexture =
-      ResourceLoader::instance()->getTextureWithName("pause_button_pressed");
+      ResourceLoader::Instance().TextureWithName("pause_button_pressed");
   
   bool isIPhone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
   
