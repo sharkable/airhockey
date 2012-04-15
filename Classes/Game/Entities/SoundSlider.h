@@ -9,7 +9,7 @@
 #ifndef AirHockey_SoundSlider_h
 #define AirHockey_SoundSlider_h
 
-#import "StateEntity.h"
+#include "gameengine/state_entity.h"
 #import "Texture2D.h"
 
 class SoundSlider : public StateEntity {

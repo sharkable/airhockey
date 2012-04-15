@@ -9,7 +9,7 @@
 #ifndef AirHockey_RoundThing_h
 #define AirHockey_RoundThing_h
 
-#import "StateEntity.h"
+#include "gameengine/state_entity.h"
 #import "Texture2D.h"
 #import "ResourceLoader.h"
 

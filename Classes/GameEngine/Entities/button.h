@@ -9,7 +9,7 @@
 #ifndef AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 #define AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 
-#include "gameengine/StateEntity.h"
+#include "gameengine/state_entity.h"
 #include "OpenGL/Texture2D.h"
 
 typedef enum {

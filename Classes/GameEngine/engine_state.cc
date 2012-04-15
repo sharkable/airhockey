@@ -6,10 +6,10 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "gameengine/engine_state.h"
+#include "gameengine/engine_state.h"
 
-#import "gameengine/game_engine.h"
-#import "gameengine/StateEntity.h"
+#include "gameengine/game_engine.h"
+#include "gameengine/state_entity.h"
 
 EngineState::EngineState(GameEngine &game_engine) : game_engine_(game_engine) {
 }

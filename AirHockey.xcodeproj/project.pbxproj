@@ -484,7 +484,6 @@
 		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
 		D4B1F4F11515291500620EF2 /* ResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceLoader.h; sourceTree = "<group>"; };
 		D4B1F4F21515291500620EF2 /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ResourceLoader.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		D4B1F4F31515291500620EF2 /* StateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateEntity.h; sourceTree = "<group>"; };
 		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Texture2D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
 		D4B1F5031515291500620EF2 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
@@ -498,6 +497,7 @@
 		D4B1F50B1515291500620EF2 /* SoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundPlayer.mm; sourceTree = "<group>"; };
 		D4FE0271153B85E0001DB2C0 /* LocalStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalStore.mm; sourceTree = "<group>"; };
 		D4FE0274153B85F8001DB2C0 /* local_store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_store.h; sourceTree = "<group>"; };
+		D4FE0275153B88F9001DB2C0 /* state_entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state_entity.h; sourceTree = "<group>"; };
 		FE3CF94214F9807E0063CCA5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FE3CF94414F980A40063CCA5 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		FE3CF94614F980AC0063CCA5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -845,12 +845,12 @@
 				D484899C1538836C006CE9AD /* game_engine.h */,
 				D484899B1538836C006CE9AD /* game_engine.cc */,
 				D4FE0274153B85F8001DB2C0 /* local_store.h */,
+				D4FE0275153B88F9001DB2C0 /* state_entity.h */,
+				D48489A11538A451006CE9AD /* touch.h */,
 				D4B1F4DD1515291500620EF2 /* AdEngine.h */,
 				D4B1F4DE1515291500620EF2 /* AdEngine.mm */,
 				D4B1F4F11515291500620EF2 /* ResourceLoader.h */,
 				D4B1F4F21515291500620EF2 /* ResourceLoader.mm */,
-				D4B1F4F31515291500620EF2 /* StateEntity.h */,
-				D48489A11538A451006CE9AD /* touch.h */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";

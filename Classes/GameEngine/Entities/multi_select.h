@@ -12,7 +12,7 @@
 #include <vector>
 using namespace std;
 
-#include "gameengine/StateEntity.h"
+#include "gameengine/state_entity.h"
 
 class Texture2D;
 struct SGPoint;

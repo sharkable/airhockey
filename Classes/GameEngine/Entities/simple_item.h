@@ -12,8 +12,8 @@
 #include <vector>
 using namespace std;
 
-#import "gameengine/StateEntity.h"
-#import "opengl/Texture2D.h"
+#include "gameengine/state_entity.h"
+#include "opengl/Texture2D.h"
 
 class SimpleItem : public StateEntity {
  public:
