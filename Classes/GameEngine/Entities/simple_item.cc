@@ -31,10 +31,10 @@ SimpleItem::~SimpleItem() {
   }
 }
 
-void SimpleItem::update() {
+void SimpleItem::Update() {
 }
 
-void SimpleItem::render() {
+void SimpleItem::Render() {
   textures_[texture_].drawAtPointAngle(SGPointMake(position_.x, position_.y), angle_);
 }
 

@@ -24,11 +24,11 @@ class SoundSlider : public StateEntity {
 
  public:
   SoundSlider(SGPoint position);
-  void update();
-  void render();
-  void touchesBegan(vector<Touch> touches);
-  void touchesMoved(vector<Touch> touches);
-  void touchesEnded(vector<Touch> touches);
+  void Update();
+  void Render();
+  void TouchesBegan(vector<Touch> touches);
+  void TouchesMoved(vector<Touch> touches);
+  void TouchesEnded(vector<Touch> touches);
   SGPoint getThumbPoint();
 };
 

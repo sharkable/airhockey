@@ -12,15 +12,15 @@
 #include "Texture2D.h"
 
 class Touch {
+ public:
+  SGPoint location() const { return location_; }
+  void set_location(SGPoint location) { location_ = location; }
+  void *identifier() const { return identifier_; }
+  void set_identifier(void *identifier) { identifier_ = identifier; }
+
  private:
   SGPoint location_;
   void *identifier_;
-
- public:
-  SGPoint getLocation() const { return location_; }
-  void setLocation(SGPoint location) { location_ = location; }
-  void *getIdentifier() const { return identifier_; }
-  void setIdentifier(void *identifier) { identifier_ = identifier; }
 };
 
 #endif

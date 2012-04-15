@@ -19,8 +19,8 @@ class Puck : public RoundThing {
   double alpha_;
  public:
   Puck();
-  void update();
-  void render();
+  void Update();
+  void Render();
   void placeForPlayer(int playerId, const vector<RoundThing *> &roundThings, bool center);
   void fadeIn();
 };

@@ -22,7 +22,7 @@ RoundThing::~RoundThing() {
   ResourceLoader::instance()->releaseResource(texture_);
 }
 
-void RoundThing::update() {
+void RoundThing::Update() {
   if (!isMovable() || !isActive()) {
     return;
   }
@@ -45,7 +45,7 @@ void RoundThing::applyFriction() {
   }
 }
 
-void RoundThing::render() {
+void RoundThing::Render() {
   if (active_) {
     texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2));
   }

@@ -26,8 +26,8 @@ class SimpleItem : public StateEntity {
   SimpleItem(Texture2D texture, SGPoint position);
   SimpleItem(vector<Texture2D> textures, SGPoint position);
   ~SimpleItem();
-  void update();
-  void render();
+  void Update();
+  void Render();
 
   int getTexture() { return texture_; }
   void setTexture(int texture) { texture_ = texture; }

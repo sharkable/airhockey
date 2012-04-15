@@ -32,8 +32,8 @@ class RoundThing : public StateEntity {
  public:
   RoundThing();
   ~RoundThing();
-  void update();
-  void render();
+  void Update();
+  void Render();
   void touchesBegan(vector<Touch> touches);
   void touchesMoved(vector<Touch> touches);
   void touchesEnded(vector<Touch> touches);

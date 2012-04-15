@@ -22,8 +22,8 @@ Puck::Puck() {
   alpha_ = 1;
 }
 
-void Puck::update() {
-  RoundThing::update();
+void Puck::Update() {
+  RoundThing::Update();
   
   // Stop the puck from getting stuck in the goal.
   if (getY() < RINK_TOP_Y && fabs(getVY()) < PUCK_GOAL_MIN_DROP_SPEED) {
@@ -38,7 +38,7 @@ void Puck::update() {
   }
 }
 
-void Puck::render() {
+void Puck::Render() {
   if (isActive()) {
     texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
                          alpha_, 1, 0, 0);

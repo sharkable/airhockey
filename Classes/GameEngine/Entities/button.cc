@@ -24,10 +24,10 @@ Button::~Button() {
   ResourceLoader::instance()->releaseResource(pressedTexture_);
 }
 
-void Button::update() {
+void Button::Update() {
 }
 
-void Button::render() {
+void Button::Render() {
   switch (state_) {
     case BUTTON_STATE_NORMAL: {
       normalTexture_.drawAtPoint(position_);
@@ -40,7 +40,7 @@ void Button::render() {
   }
 }
 
-void Button::touchesBegan(vector<Touch> touches) {
+void Button::TouchesBegan(vector<Touch> touches) {
   if (state_ == BUTTON_STATE_NORMAL) {
     for (int i = 0; i < touches.size(); i++) {
       if (containsPoint(touches[i].getLocation())) {
@@ -51,7 +51,7 @@ void Button::touchesBegan(vector<Touch> touches) {
   }
 }
 
-void Button::touchesEnded(vector<Touch> touches) {
+void Button::TouchesEnded(vector<Touch> touches) {
   if (state_ == BUTTON_STATE_PRESSED) {
     state_ = BUTTON_STATE_NORMAL;
     for (int i = 0; i < touches.size(); i++) {

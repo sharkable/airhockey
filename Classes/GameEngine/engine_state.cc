@@ -14,18 +14,39 @@
 EngineState::EngineState(GameEngine &game_engine) : game_engine_(game_engine) {
 }
 
-void EngineState::StateIsShown() {
-}
-
 void EngineState::Update() {
   for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->update();
+    entities_[i]->Update();
   }
 }
 
 void EngineState::Render() {
   for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->render();
+    entities_[i]->Render();
+  }
+}
+
+void EngineState::TouchesBegan(vector<Touch> touches) {
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->TouchesBegan(touches);
+  }
+}
+
+void EngineState::TouchesMoved(vector<Touch> touches) {
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->TouchesMoved(touches);
+  }
+}
+
+void EngineState::TouchesEnded(vector<Touch> touches) {
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->TouchesEnded(touches);
+  }
+}
+
+void EngineState::ClearTouches() {
+  for (int i = 0; i < entities_.size(); i++) {
+    entities_[i]->ClearTouches();
   }
 }
 
@@ -34,35 +55,10 @@ void EngineState::AddEntity(StateEntity &entity) {
 }
 
 void EngineState::RemoveEntity(StateEntity &entity) {
-  for (vector<StateEntity *>::iterator i = entities_.begin();
-      i != entities_.end(); i++) {
+  for (vector<StateEntity *>::iterator i = entities_.begin(); i != entities_.end(); i++) {
     if (*i == &entity) {
       entities_.erase(i);
       break;
     }
-  }
-}
-
-void EngineState::TouchesBegan(vector<Touch> touches) {
-  for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->touchesBegan(touches);
-  }
-}
-
-void EngineState::TouchesMoved(vector<Touch> touches) {
-  for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->touchesMoved(touches);
-  }
-}
-
-void EngineState::TouchesEnded(vector<Touch> touches) {
-  for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->touchesEnded(touches);
-  }
-}
-
-void EngineState::ClearTouches() {
-  for (int i = 0; i < entities_.size(); i++) {
-    entities_[i]->clearTouches();
   }
 }

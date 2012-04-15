@@ -33,8 +33,8 @@ class Paddle : public RoundThing {
  public:
   Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel);
   ~Paddle();
-  void update();
-  void render();
+  void Update();
+  void Render();
   bool isGrabbable();
   bool containsTouch(Touch *touch);
   void setInitialPositionForPlayer(int playerId);

@@ -33,10 +33,12 @@ void GameEngine::ClearTouches() {
 
 void GameEngine::Update() {
   if (pop_on_next_) {
+    delete(states_.back());
     states_.pop_back();
     states_.back()->StateIsShown();
     pop_on_next_ = false;
   } else if (replace_on_next_) {
+    delete(states_.back());
     states_.pop_back();
     states_.push_back(next_state_);
     next_state_->StateIsShown();

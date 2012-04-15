@@ -20,8 +20,8 @@ class Rink : public StateEntity {
  public:
   Rink();
   ~Rink();
-  void update();
-  void render();
+  void Update();
+  void Render();
   void bounceOff(RoundThing *thing);
   void moveInFromEdge(RoundThing *thing);
 };

@@ -16,12 +16,12 @@ class Touch;
 
 class StateEntity {
  public:
-  virtual void update() = 0;
-  virtual void render() = 0;
-  virtual void touchesBegan(vector<Touch> touches) {}
-  virtual void touchesMoved(vector<Touch> touches) {}
-  virtual void touchesEnded(vector<Touch> touches) {}
-  virtual void clearTouches() {}
+  virtual void Update() = 0;
+  virtual void Render() = 0;
+  virtual void TouchesBegan(vector<Touch> touches) {}
+  virtual void TouchesMoved(vector<Touch> touches) {}
+  virtual void TouchesEnded(vector<Touch> touches) {}
+  virtual void ClearTouches() {}
 };
 
 #endif

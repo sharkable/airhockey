@@ -28,10 +28,10 @@ class Button : public StateEntity {
   Button() : state_(BUTTON_STATE_NORMAL) {}
   Button(Texture2D normalTexture, Texture2D pressedTexture, SGPoint position);
   ~Button();
-  void update();
-  void render();
-  void touchesBegan(vector<Touch> touches);
-  void touchesEnded(vector<Touch> touches);
+  void Update();
+  void Render();
+  void TouchesBegan(vector<Touch> touches);
+  void TouchesEnded(vector<Touch> touches);
   bool containsPoint(SGPoint p);
   void setNormalTexture(Texture2D normalTexture) { normalTexture_ = normalTexture; }
   void setPressedTexture(Texture2D pressedTexture) { pressedTexture_ = pressedTexture; }

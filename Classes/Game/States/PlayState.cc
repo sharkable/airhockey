@@ -506,12 +506,12 @@ void PlayState::pausePressed() {
 void PlayState::TouchesBegan(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    menuButton_->touchesBegan(touches);
-    continueButton_->touchesBegan(touches);
-    soundSlider_->touchesBegan(touches);
+    menuButton_->TouchesBegan(touches);
+    continueButton_->TouchesBegan(touches);
+    soundSlider_->TouchesBegan(touches);
   } else if (state_ == PLAY_STATE_GET_READY) {
-    pauseButton1_->touchesBegan(touches);
-    pauseButton2_->touchesBegan(touches);
+    pauseButton1_->TouchesBegan(touches);
+    pauseButton2_->TouchesBegan(touches);
   } else {
     EngineState::TouchesBegan(touches);
   }
@@ -520,7 +520,7 @@ void PlayState::TouchesBegan(vector<Touch> touches) {
 void PlayState::TouchesMoved(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    soundSlider_->touchesMoved(touches);
+    soundSlider_->TouchesMoved(touches);
   } else if (state_ == PLAY_STATE_GET_READY) {
   } else {
     EngineState::TouchesMoved(touches);
@@ -530,12 +530,12 @@ void PlayState::TouchesMoved(vector<Touch> touches) {
 void PlayState::TouchesEnded(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
   if (state_ == PLAY_STATE_PAUSED) {
-    menuButton_->touchesEnded(touches);
-    continueButton_->touchesEnded(touches);
-    soundSlider_->touchesEnded(touches);
+    menuButton_->TouchesEnded(touches);
+    continueButton_->TouchesEnded(touches);
+    soundSlider_->TouchesEnded(touches);
   } else if (state_ == PLAY_STATE_GET_READY) {
-    pauseButton1_->touchesEnded(touches);
-    pauseButton2_->touchesEnded(touches);
+    pauseButton1_->TouchesEnded(touches);
+    pauseButton2_->TouchesEnded(touches);
   } else {
     EngineState::TouchesEnded(touches);
   }

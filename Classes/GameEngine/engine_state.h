@@ -21,7 +21,7 @@ class EngineState {
  public:
   EngineState(GameEngine &game_engine);
 
-  virtual void StateIsShown();
+  virtual void StateIsShown() {}
   virtual void Update();
   virtual void Render();
   virtual void TouchesBegan(vector<Touch> touches);

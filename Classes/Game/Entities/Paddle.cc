@@ -99,7 +99,7 @@ void Paddle::keepInPlayerBounds() {
   }
 }
 
-void Paddle::update() {
+void Paddle::Update() {
   // Computer AI
   if (!playerControlled_) {
     double speed = 0;
@@ -226,10 +226,10 @@ void Paddle::update() {
       vy_ += speed * ny;
     }
   }
-  RoundThing::update();
+  RoundThing::Update();
 }
 
-void Paddle::render() {
+void Paddle::Render() {
   texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
                        (isGrabbed() || !playerControlled_ ? 1.0 : 0.5), 1, 0, 0);
 }

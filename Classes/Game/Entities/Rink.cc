@@ -21,10 +21,10 @@ Rink::~Rink() {
   ResourceLoader::instance()->releaseResource(texture_);
 }
 
-void Rink::update() {
+void Rink::Update() {
 }
 
-void Rink::render() {
+void Rink::Render() {
   texture_.drawAtPoint(renderPoint_);
 }
 

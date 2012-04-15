@@ -24,10 +24,10 @@ MultiSelect::~MultiSelect() {
   }
 }
 
-void MultiSelect::update() {
+void MultiSelect::Update() {
 }
 
-void MultiSelect::render() {
+void MultiSelect::Render() {
   for (int i = 0; i < normalTextures_.size(); i++) {
     SGPoint p = SGPointMake(positionsX_[i], positionsY_[i]);
     if (i == selectedValue_) {
@@ -46,7 +46,7 @@ void MultiSelect::add(Texture2D normalTexture, Texture2D selectedTexture,
   positionsY_.push_back(position.y);
 }
 
-void MultiSelect::touchesBegan(vector<Touch> touches) {
+void MultiSelect::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < normalTextures_.size(); i++) {
     double x = positionsX_[i];
     double y = positionsY_[i];

@@ -28,9 +28,9 @@ class MultiSelect : public StateEntity {
   MultiSelect(Texture2D normalTexture, Texture2D selectedTexture,
               SGPoint position);
   ~MultiSelect();
-  void update();
-  void render();
-  void touchesBegan(vector<Touch> touches);
+  void Update();
+  void Render();
+  void TouchesBegan(vector<Touch> touches);
   void add(Texture2D normalTexture, Texture2D selectedTexture,
            SGPoint position);
   int getSelectedValue() { return selectedValue_; };
