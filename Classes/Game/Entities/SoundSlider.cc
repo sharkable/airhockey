@@ -19,8 +19,8 @@ SoundSlider::SoundSlider(SGPoint position) {
   fullTexture_ = ResourceLoader::instance()->getTextureWithName("sound_full");
   thumbTexture_ = ResourceLoader::instance()->getTextureWithName("sound_thumb");
   
-  if (LocalStore::hasEntryForKey(LS_VOLUME)) {
-    value_ = LocalStore::doubleForKey(LS_VOLUME);
+  if (LocalStore::HasEntryForKey(LS_VOLUME)) {
+    value_ = LocalStore::DoubleForKey(LS_VOLUME);
   } else {
     value_ = 0.75;
   }
@@ -82,7 +82,7 @@ void SoundSlider::TouchesEnded(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbedTouch_) {
       // TODO [SoundPlayer setGlobalVolume:value_];
-      LocalStore::setDouble(value_, LS_VOLUME);
+      LocalStore::SetDouble(value_, LS_VOLUME);
       grabbedTouch_ = NULL;
       return;
     }

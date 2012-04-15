@@ -97,7 +97,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
       SGPointMake(SCREEN_WIDTH / 2 - onePlayerImage.contentSize().width, playersY);
   numPlayersSelect_.Add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
   numPlayersSelect_.Add(twoPlayerImage, twoPlayerSelectedImage, SGPointMake(SCREEN_WIDTH/2, playersY));
-  numPlayersSelect_.set_selected_value(LocalStore::integerForKey(LS_NUM_PLAYERS));
+  numPlayersSelect_.set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
   AddEntity(numPlayersSelect_);
   
   double pucksY = isIPhone ? 706 : 627;
@@ -117,7 +117,7 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
         SGPointMake(i == 1 ? pucks1X : pucks2X + pucksXSpread * (i - 1), pucksY);
     numPucksSelect_.Add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
   }
-  numPucksSelect_.set_selected_value(LocalStore::integerForKey(LS_NUM_PUCKS));
+  numPucksSelect_.set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
   AddEntity(numPucksSelect_);
   
   if (false) {
@@ -144,8 +144,8 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
   difficultySelect_.Add(goodImage, goodImageSelected, SGPointMake(isIPhone ? 216 : 266, difficultyY));
   difficultySelect_.Add(excellentImage, excellentImageSelected, SGPointMake(isIPhone ? 380 : 384, difficultyY));
   difficultySelect_.Add(amazingImage, amazingImageSelected, SGPointMake(isIPhone ? 543 : 502, difficultyY));
-  if (LocalStore::hasEntryForKey(LS_DIFFICULTY)) {
-    difficultySelect_.set_selected_value(LocalStore::integerForKey(LS_DIFFICULTY));
+  if (LocalStore::HasEntryForKey(LS_DIFFICULTY)) {
+    difficultySelect_.set_selected_value(LocalStore::IntegerForKey(LS_DIFFICULTY));
   } else {
     difficultySelect_.set_selected_value(caiGood);
   }
@@ -164,8 +164,8 @@ MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), 
     paddleSizeSelect_.Add(smallImage, smallImageSelected, SGPointMake(139, 842));
     paddleSizeSelect_.Add(mediumImage, mediumImageSelected, SGPointMake(305, 842));
     paddleSizeSelect_.Add(largeImage, largeImageSelected, SGPointMake(464, 842));
-    if (LocalStore::hasEntryForKey(LS_PADDLE_SIZE)) {
-      paddleSizeSelect_.set_selected_value(LocalStore::integerForKey(LS_PADDLE_SIZE));
+    if (LocalStore::HasEntryForKey(LS_PADDLE_SIZE)) {
+      paddleSizeSelect_.set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
     } else {
       paddleSizeSelect_.set_selected_value(psMedium);
     }
@@ -188,11 +188,11 @@ void MainMenuState::stateIsShown() {
 void MainMenuState::pressedStart() {
   bool isIPhone = true; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
-  LocalStore::setInteger(numPlayersSelect_.selected_value(), LS_NUM_PLAYERS);
-  LocalStore::setInteger(numPucksSelect_.selected_value(), LS_NUM_PUCKS);
-  LocalStore::setInteger(difficultySelect_.selected_value(), LS_DIFFICULTY);
+  LocalStore::SetInteger(numPlayersSelect_.selected_value(), LS_NUM_PLAYERS);
+  LocalStore::SetInteger(numPucksSelect_.selected_value(), LS_NUM_PUCKS);
+  LocalStore::SetInteger(difficultySelect_.selected_value(), LS_DIFFICULTY);
   if (!isIPhone) {
-    LocalStore::setInteger(paddleSizeSelect_.selected_value(), LS_PADDLE_SIZE);
+    LocalStore::SetInteger(paddleSizeSelect_.selected_value(), LS_PADDLE_SIZE);
   }
 
 //  NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
