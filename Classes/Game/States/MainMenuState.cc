@@ -6,15 +6,15 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "MainMenuState.h"
+#import "game/states/MainMenuState.h"
 
-#import "Texture2D.h"
-#import "PlayState.h"
-#import "StoryState.h"
-#import "game_engine.h"
-#import "gameengine/local_store.h"
-#import "ResourceLoader.h"
 #import "const.h"
+#import "game/states/PlayState.h"
+#import "game/states/StoryState.h"
+#import "gameengine/game_engine.h"
+#import "gameengine/local_store.h"
+#import "gameengine/ResourceLoader.h"
+#import "opengl/Texture2D.h"
 
 MainMenuState::MainMenuState(GameEngine &game_engine)
     : EngineState(game_engine),
