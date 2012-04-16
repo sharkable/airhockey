@@ -17,6 +17,7 @@ using namespace std;
 
 class SimpleItem : public StateEntity {
  public:
+  SimpleItem() {}
   SimpleItem(Texture2D texture, SGPoint position);
   SimpleItem(vector<Texture2D> textures, SGPoint position);
   ~SimpleItem();
@@ -26,8 +27,10 @@ class SimpleItem : public StateEntity {
   void Render();
 
   // Accessors
+  void set_textures(vector<Texture2D> textures) { textures_ = textures; }
   int texture() { return texture_; }
   void set_texture(int texture) { texture_ = texture; }
+  void add_texture(Texture2D texture) { textures_.push_back(texture); }
   SGPoint position() { return position_; }
   void set_position(SGPoint position) { position_ = position; }
   double angle() { return angle_; }

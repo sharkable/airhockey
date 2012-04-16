@@ -13,12 +13,15 @@
 #import "MainMenuState.h"
 #import "ResourceLoader.h"
 
-PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, ComputerAI difficulty,
-                     PaddleSize paddleSize) : EngineState(gameEngine) {
-  numPlayers_ = numPlayers;
+PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
+                     PaddleSize paddle_size)
+    : EngineState(game_engine),
+      paddle_1_(PLAYER_1, paddle_size, true, caiBad),
+      paddle_2_(PLAYER_2, paddle_size, num_players == 2, difficulty),
+      sound_slider_(SGPointMake(331, 336)) {
+  num_players_ = num_players;
   
-  rink_ = new Rink();
-  AddEntity(*rink_);
+  AddEntity(rink_);
   
   vector<Texture2D> scoreTextures;
   for (int i = 0; i <= WIN_SCORE; i++) {
@@ -27,49 +30,49 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
     Texture2D texture = ResourceLoader::Instance().TextureWithName(pointsstr);
     scoreTextures.push_back(texture);
   }
-  player1Score_ = new SimpleItem(scoreTextures, SGPointMake(662, 526));
-  player2Score_ = new SimpleItem(scoreTextures, SGPointMake(662, 386));
-  AddEntity(*player1Score_);
-  AddEntity(*player2Score_);
+  player_1_score_.set_textures(scoreTextures);
+  player_1_score_.set_position(SGPointMake(662, 526));
+  player_2_score_.set_textures(scoreTextures);
+  player_2_score_.set_position(SGPointMake(662, 386));
+  AddEntity(player_1_score_);
+  AddEntity(player_2_score_);
   
-  numPucks_ = numPucks;
-  numActivePucks_ = numPucks_;
-  for (int i = 0; i < numPucks_; i++) {
+  num_pucks_ = num_pucks;
+  num_active_pucks_ = num_pucks_;
+  for (int i = 0; i < num_pucks_; i++) {
     Puck* puck = new Puck();
     
     AddEntity(*puck);
     pucks_.push_back(puck);
-    roundThings_.push_back(puck);
+    round_things_.push_back(puck);
   }
   
-  paddle1_ = new Paddle(PLAYER_1, paddleSize, true, caiBad);
-  AddEntity(*paddle1_);
-  roundThings_.push_back(paddle1_);
+  AddEntity(paddle_1_);
+  round_things_.push_back(&paddle_1_);
 
-  paddle2_ = new Paddle(PLAYER_2, paddleSize, numPlayers == 2, difficulty);
-  AddEntity(*paddle2_);
-  roundThings_.push_back(paddle2_);
+  AddEntity(paddle_2_);
+  round_things_.push_back(&paddle_2_);
   
-  paddle1_->setPucks(pucks_);
-  paddle1_->setOtherPaddle(paddle2_);
-  paddle2_->setPucks(pucks_);
-  paddle2_->setOtherPaddle(paddle1_);
+  paddle_1_.setPucks(pucks_);
+  paddle_1_.setOtherPaddle(&paddle_2_);
+  paddle_2_.setPucks(pucks_);
+  paddle_2_.setOtherPaddle(&paddle_1_);
   
   Post *post1 = new Post(GOAL_LEFT_X, RINK_TOP_Y);
   AddEntity(*post1);
-  roundThings_.push_back(post1);
+  round_things_.push_back(post1);
 
   Post *post2 = new Post(GOAL_LEFT_X, RINK_BOTTOM_Y + 1);
   AddEntity(*post2);
-  roundThings_.push_back(post2);
+  round_things_.push_back(post2);
 
   Post *post3 = new Post(GOAL_RIGHT_X + 1, RINK_TOP_Y);
   AddEntity(*post3);
-  roundThings_.push_back(post3);
+  round_things_.push_back(post3);
   
   Post *post4 = new Post(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1);
   AddEntity(*post4);
-  roundThings_.push_back(post4);
+  round_things_.push_back(post4);
   
   // Add rink left and right pieces.
   Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
@@ -82,21 +85,25 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
   AddEntity(*rightRinkBorder);
   
   Texture2D winTexture = ResourceLoader::Instance().TextureWithName("win");
-  win_ = new SimpleItem(winTexture, SGPointMake(0, 0));
+  win_.add_texture(winTexture);
+  win_.set_position(SGPointMake(0, 0));
 
   Texture2D loseTexture = ResourceLoader::Instance().TextureWithName("lose");
-  lose_ = new SimpleItem(loseTexture, SGPointMake(0, 0));
+  lose_.add_texture(loseTexture);
+  lose_.set_position(SGPointMake(0, 0));
 
   Texture2D getReadyTexture = ResourceLoader::Instance().TextureWithName("get_ready");
   SGPoint getReadyPosition =
       SGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize().width) / 2, 
                   (SCREEN_HEIGHT - getReadyTexture.contentSize().height) / 2);
-  getReady_ = new SimpleItem(getReadyTexture, getReadyPosition);
+  get_ready_.add_texture(getReadyTexture);
+  get_ready_.set_position(getReadyPosition);
 
   Texture2D goTexture = ResourceLoader::Instance().TextureWithName("go");
   SGPoint goPosition = SGPointMake((SCREEN_WIDTH - goTexture.contentSize().width) / 2, 
                                    (SCREEN_HEIGHT - goTexture.contentSize().height) / 2);
-  go_ = new SimpleItem(goTexture, goPosition);
+  go_.add_texture(goTexture);
+  go_.set_position(goPosition);
   
   Texture2D rematchButtonTexture =
       ResourceLoader::Instance().TextureWithName("rematch_button");
@@ -104,20 +111,20 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
       ResourceLoader::Instance().TextureWithName("rematch_button_pressed");
   SGPoint rematchButtonPos =
       SGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
-  rematchButton_ = new Button(rematchButtonTexture, rematchButtonPressedTexture, rematchButtonPos);
-// TODO
-//  rematchButton_->set_delegate(self);
-//  rematchButton_->setSelector(@selector(rematchPressed));
+  rematch_button_.set_normal_texture(rematchButtonTexture);
+  rematch_button_.set_pressed_texture(rematchButtonPressedTexture);
+  rematch_button_.set_position(rematchButtonPos);
+  rematch_button_.set_delegate(this);
 
   Texture2D menuButtonTexture = ResourceLoader::Instance().TextureWithName("menu_button");
   Texture2D menuButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("menu_button_pressed");
   SGPoint menuButtonPos = SGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize().width) / 2,
                                       546);
-  menuButton_ = new Button(menuButtonTexture, menuButtonPressedTexture, menuButtonPos);
-// TODO
-//  menuButton_->set_delegate(self);
-//  menuButton_->setSelector(@selector(menuPressed));
+  continue_button_.set_normal_texture(menuButtonTexture);
+  continue_button_.set_pressed_texture(menuButtonPressedTexture);
+  continue_button_.set_position(menuButtonPos);
+  continue_button_.set_delegate(this);
 
   Texture2D continueButtonTexture =
       ResourceLoader::Instance().TextureWithName("continue_button");
@@ -125,43 +132,42 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
       ResourceLoader::Instance().TextureWithName("continue_button_pressed");
   SGPoint continueButtonPos =
       SGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
-  continueButton_ = new Button(continueButtonTexture, continueButtonPressedTexture, continueButtonPos);
-// TODO
-//  continueButton_->set_delegate(self);
-//  continueButton_->setSelector(@selector(continuePressed));
-  
-  soundSlider_ = new SoundSlider(SGPointMake(331, 336));
+  continue_button_.set_normal_texture(continueButtonTexture);
+  continue_button_.set_pressed_texture(continueButtonPressedTexture);
+  continue_button_.set_position(continueButtonPos);
+  continue_button_.set_delegate(this);
   
   Texture2D menuBackgroundTexture =
       ResourceLoader::Instance().TextureWithName("game_menu_bg");
   SGPoint menuBackgroundPosition =
       SGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize().width) / 2, 306);
-  menuBackground_ = new SimpleItem(menuBackgroundTexture, menuBackgroundPosition);
+  menu_background_.add_texture(menuBackgroundTexture);
+  menu_background_.set_position(menuBackgroundPosition);
   
   Texture2D pauseButtonTexture = ResourceLoader::Instance().TextureWithName("pause_button");
   Texture2D pauseButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("pause_button_pressed");
   
-  bool isIPhone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+  bool is_iphone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
   
-  if (!isIPhone) {
+  if (!is_iphone) {
     SGPoint pauseButtonPos1 = SGPointMake(0, 0);
-    pauseButton1_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos1);
-// TODO
-//    pauseButton1_->set_delegate(self);
-//    pauseButton1_->setSelector(@selector(pausePressed));
-    AddEntity(*pauseButton1_);
+    pause_button_1_.set_normal_texture(pauseButtonTexture);
+    pause_button_1_.set_pressed_texture(pauseButtonPressedTexture);
+    pause_button_1_.set_position(pauseButtonPos1);
+    pause_button_1_.set_delegate(this);
+    AddEntity(pause_button_1_);
   }
   
   SGPoint pauseButtonPos2 =
       SGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize().width,
                   SCREEN_HEIGHT - pauseButtonTexture.contentSize().height +
                       (false ? (27 * 768.0/320.0) : 0));
-  pauseButton2_ = new Button(pauseButtonTexture, pauseButtonPressedTexture, pauseButtonPos2);
-// TODO
-//  pauseButton2_->set_delegate(self);
-//  pauseButton2_->setSelector(@selector(pausePressed));
-  AddEntity(*pauseButton2_);
+  pause_button_2_.set_normal_texture(pauseButtonTexture);
+  pause_button_2_.set_pressed_texture(pauseButtonPressedTexture);
+  pause_button_2_.set_position(pauseButtonPos2);
+  pause_button_2_.set_delegate(this);
+  AddEntity(pause_button_2_);
     
 //  if (isIPhone) {
 //    if (IS_FREE) {
@@ -201,7 +207,7 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
 //  } else {
 //    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
 //  }
-//  if (numPlayers_ == 2) {
+//  if (num_players_ == 2) {
 //    player2Wins_.transform = CGAffineTransformMakeRotation(M_PI); 
 //    player2Wins_.textAlignment = UITextAlignmentRight;
 //  } else {
@@ -215,10 +221,10 @@ PlayState::PlayState(GameEngine &gameEngine, int numPlayers, int numPucks, Compu
 //    getGameEngine()->addUIView(player2Wins_);
 //  }
   
-  giveExtraPuckToPlayer_ = PLAYER_1;
-  player1WinCount_ = 0;
-  player2WinCount_ = 0;
-  setUpNewGame();
+  give_extra_puck_to_player_ = PLAYER_1;
+  player_1_win_count_ = 0;
+  player_2_win_count_ = 0;
+  SetUpNewGame();
 }
 
 PlayState::~PlayState() {
@@ -226,18 +232,21 @@ PlayState::~PlayState() {
 //  [player2Wins_ release];
 }
 
+
+// EngineState
+
 void PlayState::Update() {
   if (state_ == kPlayStateStatePaused) {
     return;
   } else if (state_ == kPlayStateStateGetReady) {
-    getReadyTicksLeft_--;
-    if (getReadyTicksLeft_ == SHOW_GET_READY_MESSAGE_TICKS) {
-      AddEntity(*getReady_);
+    get_ready_ticks_left_--;
+    if (get_ready_ticks_left_ == SHOW_GET_READY_MESSAGE_TICKS) {
+      AddEntity(get_ready_);
       // TODO [SoundPlayer playSound:kSoundGetReady];
-    } else if (getReadyTicksLeft_ == 0) {
-    RemoveEntity(*getReady_);
-      AddEntity(*go_);
-      goTicksLeft_ = SHOW_GO_MESSAGE_TICKS;
+    } else if (get_ready_ticks_left_ == 0) {
+    RemoveEntity(get_ready_);
+      AddEntity(go_);
+      go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
       state_ = kPlayStateStatePlaying;
       // TODO [SoundPlayer playSound:kSoundStart];
     }
@@ -247,24 +256,24 @@ void PlayState::Update() {
 
   EngineState::Update();
   
-  if (goTicksLeft_ > 0) {
-    goTicksLeft_--;
-    if (goTicksLeft_ == 0) {
-      RemoveEntity(*go_);
+  if (go_ticks_left_ > 0) {
+    go_ticks_left_--;
+    if (go_ticks_left_ == 0) {
+      RemoveEntity(go_);
     }
   }
   
-  paddle1_->keepInPlayerBounds();
-  paddle2_->keepInPlayerBounds();
+  paddle_1_.keepInPlayerBounds();
+  paddle_2_.keepInPlayerBounds();
   
-  for (int i = 0; i < roundThings_.size(); i++) {
-    RoundThing *thing = roundThings_[i];
+  for (int i = 0; i < round_things_.size(); i++) {
+    RoundThing *thing = round_things_[i];
     if (!thing->isActive()) {
       continue;
     }
-    rink_->bounceOff(thing);
-    for (int j = i + 1; j < roundThings_.size(); j++) {
-      RoundThing *otherThing = roundThings_[j];
+    rink_.bounceOff(thing);
+    for (int j = i + 1; j < round_things_.size(); j++) {
+      RoundThing *otherThing = round_things_[j];
       if (otherThing->isActive()) {
         thing->bounceOff(otherThing);
       }
@@ -276,7 +285,7 @@ void PlayState::Update() {
     // it only behaves if item A was added to roundsThings_
     // after item B. This is OK for Air Hockey, but should be fixed
     // for other games.
-    rink_->moveInFromEdge(thing);
+    rink_.moveInFromEdge(thing);
   }
 
   for (int i = 0; i < pucks_.size(); i++) {
@@ -286,57 +295,57 @@ void PlayState::Update() {
     }
     if (puck->getY() < -puck->getRadius()) {
       puck->setIsActive(false);
-      if (player1Score_->texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
-        player1Score_->set_texture(player1Score_->texture() + 1);
+      if (player_1_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
+        player_1_score_.set_texture(player_1_score_.texture() + 1);
       }
-      if (player1Score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
+      if (player_1_score_.texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
         // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         // TODO [SoundPlayer playSound:kSoundScore];
       }
-      numPlayer1ScoresLastRound_++;
-      numActivePucks_--;
+      num_player_1_scores_last_round_++;
+      num_active_pucks_--;
     } else if (puck->getY() > SCREEN_HEIGHT + puck->getRadius()) {
       puck->setIsActive(false);
-      if (player2Score_->texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
-        player2Score_->set_texture(player2Score_->texture() + 1);
+      if (player_2_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
+        player_2_score_.set_texture(player_2_score_.texture() + 1);
       }
-      if (player2Score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
+      if (player_2_score_.texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
         // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         // TODO [SoundPlayer playSound:kSoundScore];
       }
       
-      numActivePucks_--;
+      num_active_pucks_--;
     }
   }  
   
   switch (state_) {
     case kPlayStateStatePlaying: {      
-      if (player1Score_->texture() == WIN_SCORE) {
-        finishGameWithWinner(PLAYER_1);
-      } else if (player2Score_->texture() == WIN_SCORE) {
-        finishGameWithWinner(PLAYER_2);
-      } else if (numActivePucks_ == 0) {
-        waitTicksLeft_ = WAIT_TICKS;
+      if (player_1_score_.texture() == WIN_SCORE) {
+        FinishGameWithWinner(PLAYER_1);
+      } else if (player_2_score_.texture() == WIN_SCORE) {
+        FinishGameWithWinner(PLAYER_2);
+      } else if (num_active_pucks_ == 0) {
+        wait_ticks_left_ = WAIT_TICKS;
         state_ = kPlayStateStateWaitingForPucks;
       }
       break;
     }
     case kPlayStateStateWaitingForPucks: {
-      if (waitTicksLeft_-- == 0) {
-        for (int i = 0; i < numPucks_; i++) {
+      if (wait_ticks_left_-- == 0) {
+        for (int i = 0; i < num_pucks_; i++) {
           Puck *puck = pucks_[i];
           puck->setIsActive(true);
-          puck->placeForPlayer(i < numPlayer1ScoresLastRound_ ? PLAYER_2 : PLAYER_1,
-                               roundThings_,
-                                (i < numPlayer1ScoresLastRound_ ?
-                                    (numPlayer1ScoresLastRound_ % 2 == 1) :
-                                    ((numPucks_ - numPlayer1ScoresLastRound_) % 2 == 1)));
+          puck->placeForPlayer(i < num_player_1_scores_last_round_ ? PLAYER_2 : PLAYER_1,
+                               round_things_,
+                                (i < num_player_1_scores_last_round_ ?
+                                    (num_player_1_scores_last_round_ % 2 == 1) :
+                                    ((num_pucks_ - num_player_1_scores_last_round_) % 2 == 1)));
           puck->fadeIn();
         }
-        numActivePucks_ = numPucks_;
-        numPlayer1ScoresLastRound_ = 0;
+        num_active_pucks_ = num_pucks_;
+        num_player_1_scores_last_round_ = 0;
         
         state_ = kPlayStateStatePlaying;        
 
@@ -346,108 +355,117 @@ void PlayState::Update() {
   }
 }
 
-void PlayState::setUpNewGame() {
+
+// ButtonDelegate
+
+void PlayState::ButtonPressed(Button *button) {
+}
+
+
+// private
+
+void PlayState::SetUpNewGame() {
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 //  } else {
 //    [getGameEngine()->adEngine() removeAd];
 //  }
 
   // Place paddles!
-  paddle1_->setInitialPositionForPlayer(PLAYER_1);
-  paddle2_->setInitialPositionForPlayer(PLAYER_2);
+  paddle_1_.setInitialPositionForPlayer(PLAYER_1);
+  paddle_2_.setInitialPositionForPlayer(PLAYER_2);
   
   // Place pucks!
   // First move them all out of the way. That way we can lay them out properly.
   // ([Puck placeForPlayer] avoids hitting other RoundThings objects.)
-  for (int i = 0; i < numPucks_; i++) {
+  for (int i = 0; i < num_pucks_; i++) {
     Puck *puck = pucks_[i];
     puck->setX(0);
     puck->setY(0);
   }
-  for (int i = 0; i < numPucks_; i++) {
+  for (int i = 0; i < num_pucks_; i++) {
     Puck *puck = pucks_[i];
     puck->setIsActive(true);
-    int playerId = (i % 2 == 0) ? giveExtraPuckToPlayer_ : 1 - giveExtraPuckToPlayer_;
-    bool center = !((playerId == giveExtraPuckToPlayer_ &&
-                      (numPucks_ == 3 || numPucks_ == 4 || numPucks_ == 7)) ||
-                      (playerId == 1 - giveExtraPuckToPlayer_ &&
-                      (numPucks_ == 4 || numPucks_ == 5)));
-    puck->placeForPlayer(playerId, roundThings_, center);
+    int playerId = (i % 2 == 0) ? give_extra_puck_to_player_ : 1 - give_extra_puck_to_player_;
+    bool center = !((playerId == give_extra_puck_to_player_ &&
+                      (num_pucks_ == 3 || num_pucks_ == 4 || num_pucks_ == 7)) ||
+                      (playerId == 1 - give_extra_puck_to_player_ &&
+                      (num_pucks_ == 4 || num_pucks_ == 5)));
+    puck->placeForPlayer(playerId, round_things_, center);
   }
   
-  player1Score_->set_texture(0);
-  player2Score_->set_texture(0);
-  RemoveEntity(*menuBackground_);
-  RemoveEntity(*soundSlider_);
-  RemoveEntity(*rematchButton_);
-  RemoveEntity(*menuButton_);
-  RemoveEntity(*win_);
-  RemoveEntity(*lose_);
+  player_1_score_.set_texture(0);
+  player_2_score_.set_texture(0);
+  RemoveEntity(menu_background_);
+  RemoveEntity(sound_slider_);
+  RemoveEntity(rematch_button_);
+  RemoveEntity(continue_button_);
+  RemoveEntity(win_);
+  RemoveEntity(lose_);
   
-  numActivePucks_ = numPucks_;
-  numPlayer1ScoresLastRound_ = 0;
+  num_active_pucks_ = num_pucks_;
+  num_player_1_scores_last_round_ = 0;
   
   state_ = kPlayStateStateGetReady;
-  getReadyTicksLeft_ = GET_READY_TICKS_TOTAL;
+  get_ready_ticks_left_ = GET_READY_TICKS_TOTAL;
 }
 
-void PlayState::finishGameWithWinner(int playerId) {
+void PlayState::FinishGameWithWinner(int playerId) {
   state_ = kPlayStateStateFinished;
   
-  double loseX = (SCREEN_WIDTH - lose_->size().width)/2;
-  double winX =  (SCREEN_WIDTH - win_->size().width)/2;
+  double loseX = (SCREEN_WIDTH - lose_.size().width)/2;
+  double winX =  (SCREEN_WIDTH - win_.size().width)/2;
   double topY = 70;
-  double bottomY = SCREEN_HEIGHT - topY - lose_->size().height;
+  double bottomY = SCREEN_HEIGHT - topY - lose_.size().height;
   switch (playerId) {
     case PLAYER_1: {
-      player1WinCount_++;
+      player_1_win_count_++;
 
-      win_->set_position(SGPointMake(winX, bottomY));
-      win_->set_angle(0);
-      AddEntity(*win_);
+      win_.set_position(SGPointMake(winX, bottomY));
+      win_.set_angle(0);
+      AddEntity(win_);
       
-      if (numPlayers_ == 2) {
-        lose_->set_position(SGPointMake(loseX, topY));
-        lose_->set_angle(180);
-        AddEntity(*lose_);
+      if (num_players_ == 2) {
+        lose_.set_position(SGPointMake(loseX, topY));
+        lose_.set_angle(180);
+        AddEntity(lose_);
       }
       
-      giveExtraPuckToPlayer_ = PLAYER_2;
+      give_extra_puck_to_player_ = PLAYER_2;
       
       break;
     }
     case PLAYER_2: {
-      player2WinCount_++;
+      player_2_win_count_++;
       
-      if (numPlayers_ == 2) {
-        win_->set_position(SGPointMake(winX, topY));
-        win_->set_angle(180);
-        AddEntity(*win_);
+      if (num_players_ == 2) {
+        win_.set_position(SGPointMake(winX, topY));
+        win_.set_angle(180);
+        AddEntity(win_);
       }
       
-      lose_->set_position(SGPointMake(loseX, bottomY));
-      lose_->set_angle(0);
-      AddEntity(*lose_);
+      lose_.set_position(SGPointMake(loseX, bottomY));
+      lose_.set_angle(0);
+      AddEntity(lose_);
       
-      giveExtraPuckToPlayer_ = PLAYER_1;
+      give_extra_puck_to_player_ = PLAYER_1;
       
       break;
     }
   }
 
 //  player1Wins_.text =
-//      [NSString stringWithFormat:@"%d win%@", player1WinCount_, player1WinCount_ == 1 ? @"" : @"s"];
+//      [NSString stringWithFormat:@"%d win%@", player_1_win_count_, player_1_win_count_ == 1 ? @"" : @"s"];
 //  player2Wins_.text =
-//      [NSString stringWithFormat:@"%d win%@", player2WinCount_, player2WinCount_ == 1 ? @"" : @"s"];
+//      [NSString stringWithFormat:@"%d win%@", player_2_win_count_, player_2_win_count_ == 1 ? @"" : @"s"];
 //  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    getGameEngine()->addUIView(player1Wins_);
 //    getGameEngine()->addUIView(player2Wins_);
 //  }
   
-  AddEntity(*menuBackground_);
-  AddEntity(*soundSlider_);
-  AddEntity(*rematchButton_);
-  AddEntity(*menuButton_);
+  AddEntity(menu_background_);
+  AddEntity(sound_slider_);
+  AddEntity(rematch_button_);
+  AddEntity(continue_button_);
   
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320) / 2, 385)];
@@ -456,20 +474,20 @@ void PlayState::finishGameWithWinner(int playerId) {
 //  }
 }
 
-void PlayState::rematchPressed() {
+void PlayState::RematchPressed() {
 //  [FlurryAnalytics logEvent:@"REMATCH"];
 //  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [player1Wins_ removeFromSuperview];
 //    [player2Wins_ removeFromSuperview];
 //  }
-  setUpNewGame();
+  SetUpNewGame();
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
 //  }  
 }
 
 
-void PlayState::menuPressed() {
+void PlayState::MenuPressed() {
 //  [player1Wins_ removeFromSuperview];
 //  [player2Wins_ removeFromSuperview];
   game_engine().ReplaceTopState(new MainMenuState(game_engine()));
@@ -478,70 +496,27 @@ void PlayState::menuPressed() {
 //  }
 }
 
-void PlayState::continuePressed() {
-  state_ = prePauseState_;
-  RemoveEntity(*menuBackground_);
-  RemoveEntity(*soundSlider_);
-  RemoveEntity(*menuButton_);
-  RemoveEntity(*continueButton_);
+void PlayState::ContinuePressed() {
+  state_ = pre_pause_state_;
+  RemoveEntity(menu_background_);
+  RemoveEntity(sound_slider_);
+  RemoveEntity(continue_button_);
+  RemoveEntity(continue_button_);
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
 //  }
 }
 
-void PlayState::pausePressed() {
+void PlayState::PausePressed() {
   if (state_ != kPlayStateStateFinished && state_ != kPlayStateStatePaused) {
-    prePauseState_ = state_;
+    pre_pause_state_ = state_;
     state_ = kPlayStateStatePaused;
-    AddEntity(*menuBackground_);
-    AddEntity(*soundSlider_);
-    AddEntity(*menuButton_);
-    AddEntity(*continueButton_);
+    AddEntity(menu_background_);
+    AddEntity(sound_slider_);
+    AddEntity(continue_button_);
+    AddEntity(continue_button_);
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320)/2, 385)];
 //    }
   }
-}
-
-void PlayState::TouchesBegan(vector<Touch> touches) {
-  // When paused, only allow touches on the menu and continue buttons.
-  if (state_ == kPlayStateStatePaused) {
-    menuButton_->TouchesBegan(touches);
-    continueButton_->TouchesBegan(touches);
-    soundSlider_->TouchesBegan(touches);
-  } else if (state_ == kPlayStateStateGetReady) {
-    pauseButton1_->TouchesBegan(touches);
-    pauseButton2_->TouchesBegan(touches);
-  } else {
-    EngineState::TouchesBegan(touches);
-  }
-}
-
-void PlayState::TouchesMoved(vector<Touch> touches) {
-  // When paused, only allow touches on the menu and continue buttons.
-  if (state_ == kPlayStateStatePaused) {
-    soundSlider_->TouchesMoved(touches);
-  } else if (state_ == kPlayStateStateGetReady) {
-  } else {
-    EngineState::TouchesMoved(touches);
-  }
-}
-
-void PlayState::TouchesEnded(vector<Touch> touches) {
-  // When paused, only allow touches on the menu and continue buttons.
-  if (state_ == kPlayStateStatePaused) {
-    menuButton_->TouchesEnded(touches);
-    continueButton_->TouchesEnded(touches);
-    soundSlider_->TouchesEnded(touches);
-  } else if (state_ == kPlayStateStateGetReady) {
-    pauseButton1_->TouchesEnded(touches);
-    pauseButton2_->TouchesEnded(touches);
-  } else {
-    EngineState::TouchesEnded(touches);
-  }
-}
-
-void PlayState::ClearTouches() {
-  EngineState::ClearTouches();
-  pausePressed();
 }
