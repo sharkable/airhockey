@@ -14,6 +14,8 @@
 #import "Paddle.h"
 #import "Puck.h"
 
+#include "gameengine/ResourceLoader.h"
+
 RoundThing::RoundThing() {
   active_ = true;
 }
@@ -31,14 +33,14 @@ void RoundThing::Update() {
     x_ += vx_;
     y_ += vy_;
   } else {    
-    vx_ = vx_ * 0.75 + (x_ - oldX_) * 0.25;
-    vy_ = vy_ * 0.75 + (y_ - oldY_) * 0.25;
-    oldX_ = x_;
-    oldY_ = y_;
+    vx_ = vx_ * 0.75 + (x_ - old_x_) * 0.25;
+    vy_ = vy_ * 0.75 + (y_ - old_y_) * 0.25;
+    old_x_ = x_;
+    old_y_ = y_;
   }
 }
 
-void RoundThing::applyFriction() {
+void RoundThing::ApplyFriction() {
   if (!isGrabbed()) {
     vx_ *= friction_;
     vy_ *= friction_;
@@ -51,12 +53,12 @@ void RoundThing::Render() {
   }
 }
 
-void RoundThing::bounceOff(RoundThing *other) {
+void RoundThing::BounceOff(RoundThing *other) {
   // TODO optimize this function.
   // For now I'm just getting it to work.
   
-  double dxFull = x_ - other->getX();
-  double dyFull = y_ - other->getY();
+  double dxFull = x_ - other->x();
+  double dyFull = y_ - other->y();
   double radiusTotal = other->getRadius() + radius_;
 //  double v = sqrt(self.vx * self.vx + self.vy * self.vy);
 //  double otherV = sqrt(other.vx * other.vx + other.vy * other.vy);
@@ -77,8 +79,8 @@ void RoundThing::bounceOff(RoundThing *other) {
     }
     
     double diff = sqrt(radiusTotal*radiusTotal) - nL;
-    other->setX(other->getX() - dx * diff * vFraction);
-    other->setY(other->getY() - dy * diff * vFraction);
+    other->set_x(other->x() - dx * diff * vFraction);
+    other->set_y(other->y() - dy * diff * vFraction);
     vFraction = 1 - vFraction;
     x_ += dx * diff * vFraction;
     y_ += dy * diff * vFraction;
@@ -94,11 +96,11 @@ void RoundThing::bounceOff(RoundThing *other) {
     double wx = vx_ - ux;
     double wy = vy_ - uy;
     
-    double othervDn_ = other->getVX() * dx + other->getVY() * dy;
+    double othervDn_ = other->vx() * dx + other->vy() * dy;
     double otherux_ = dx * othervDn_;
     double otheruy_ = dy * othervDn_;
-    double otherwx_ = other->getVX() - otherux_;
-    double otherwy_ = other->getVY() - otheruy_;
+    double otherwx_ = other->vx() - otherux_;
+    double otherwy_ = other->vy() - otheruy_;
     
     double newux_ = (ux * (mass_ - other->getMass()) + 2.0 * other->getMass() * otherux_) / (mass_ + other->getMass());
     double newuy_ = (uy * (mass_ - other->getMass()) + 2.0 * other->getMass() * otheruy_) / (mass_ + other->getMass());  
@@ -117,8 +119,8 @@ void RoundThing::bounceOff(RoundThing *other) {
     }
     
     if (!other->isGrabbed() && other->isMovable()) {
-      other->setVX(newother_ux_ + otherwx_);
-      other->setVY(newother_uy_ + otherwy_);
+      other->set_vx(newother_ux_ + otherwx_);
+      other->set_vy(newother_uy_ + otherwy_);
     }
 
     // TODO: haha, this is soooo terrible.
@@ -136,7 +138,7 @@ void RoundThing::bounceOff(RoundThing *other) {
 //    }
     
     double newVSquared = vx_ * vx_ + vy_ * vy_;
-    double newOtherVSquared = other->getVX() * other->getVX() + other->getVY() * other->getVY();
+    double newOtherVSquared = other->vx() * other->vx() + other->vy() * other->vy();
     
     if (newVSquared > (MAX_SPEED*MAX_SPEED)) {
       double newV = sqrt(newVSquared);
@@ -147,37 +149,37 @@ void RoundThing::bounceOff(RoundThing *other) {
     if (newOtherVSquared > (MAX_SPEED*MAX_SPEED)) {
       double newOtherV = sqrt(newOtherVSquared);
       double newRatio = MAX_SPEED / newOtherV;
-      other->setVX(other->getVX() * newRatio);
-      other->setVY(other->getVY() * newRatio);
+      other->set_vx(other->vx() * newRatio);
+      other->set_vy(other->vy() * newRatio);
     }    
   }  
 }
 
-void RoundThing::touchesBegan(vector<Touch> touches) {
+void RoundThing::TouchesBegan(vector<Touch> touches) {
   if (!isGrabbable() || !isActive() || isGrabbed()) {
     return;
   }
   for (int i = 0; i < touches.size(); i++) {
-    if (containsTouch(&touches[i])) {
+    if (ContainsTouch(&touches[i])) {
       grabbed_ = true;
-      grabbedTouch_ = touches[i].identifier();
-      touchesMoved(touches);
+      grabbed_touch_ = touches[i].identifier();
+      TouchesMoved(touches);
       vx_ = 0;
       vy_ = 0;
       // Set oldX_ and oldY_ here so that the velocity stays around 0.
       // This is when you touch the outside of the RoundThing and it
       // snaps to center on your touch, it doesn't have a really high
       // initial velocity.
-      oldX_ = x_;
-      oldY_ = y_;      
+      old_x_ = x_;
+      old_y_ = y_;      
     }
   }
 }
 
-void RoundThing::touchesMoved(vector<Touch> touches) {
+void RoundThing::TouchesMoved(vector<Touch> touches) {
   Touch* correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].identifier() == grabbedTouch_) {
+    if (touches[i].identifier() == grabbed_touch_) {
       correctTouch = &touches[i];
       break;
     }
@@ -189,23 +191,23 @@ void RoundThing::touchesMoved(vector<Touch> touches) {
   }
 }
 
-void RoundThing::touchesEnded(vector<Touch> touches) {
+void RoundThing::TouchesEnded(vector<Touch> touches) {
   Touch* correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].identifier() == grabbedTouch_) {
+    if (touches[i].identifier() == grabbed_touch_) {
       correctTouch = &touches[i];
       break;
     }
   }
   if (grabbed_ && correctTouch != NULL) {
     grabbed_ = false;
-    grabbedTouch_ = NULL;
+    grabbed_touch_ = NULL;
   }
 }
 
-void RoundThing::clearTouches() {
+void RoundThing::ClearTouches() {
   grabbed_ = false;
-  grabbedTouch_ = NULL;
+  grabbed_touch_ = NULL;
 }
 
 bool RoundThing::isGrabbable() {
@@ -216,15 +218,15 @@ bool RoundThing::isMovable() {
   return true;
 }
    
-bool RoundThing::containsTouch(Touch *touch) {
+bool RoundThing::ContainsTouch(Touch *touch) {
   double dx = touch->location().x - x_;
   double dy = touch->location().y - y_;
   return (dx*dx + dy*dy <= radius_*radius_);
 }
 
-bool RoundThing::overlaps(RoundThing * thing) {
-  double dx = thing->getX() - x_;
-  double dy = thing->getY() - y_;
+bool RoundThing::Overlaps(RoundThing * thing) {
+  double dx = thing->x() - x_;
+  double dy = thing->y() - y_;
   double totalRadius = thing->getRadius() + radius_;
   return (dx*dx + dy*dy <= totalRadius*totalRadius);
 }

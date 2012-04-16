@@ -14,6 +14,8 @@
 #include <vector>
 using namespace std;
 
+#include "gameengine/ResourceLoader.h"
+
 Puck::Puck() {
   texture_ = ResourceLoader::Instance().TextureWithName("puck");
   radius_ = PUCK_RADIUS;
@@ -26,8 +28,8 @@ void Puck::Update() {
   RoundThing::Update();
   
   // Stop the puck from getting stuck in the goal.
-  if (getY() < RINK_TOP_Y && fabs(getVY()) < PUCK_GOAL_MIN_DROP_SPEED) {
-    setVY(-PUCK_GOAL_MIN_DROP_SPEED);
+  if (y() < RINK_TOP_Y && fabs(vy()) < PUCK_GOAL_MIN_DROP_SPEED) {
+    set_vy(-PUCK_GOAL_MIN_DROP_SPEED);
   } else if (y_ > RINK_BOTTOM_Y && fabs(vy_) < PUCK_GOAL_MIN_DROP_SPEED) {
     vy_ = PUCK_GOAL_MIN_DROP_SPEED;
   }
@@ -63,7 +65,7 @@ void Puck::placeForPlayer(int playerId, const vector<RoundThing *> &roundThings,
     overlapping = false;
     for (int i = 0; i < roundThings.size(); i++) {
       RoundThing *thing = roundThings[i];
-      if (thing != this && overlaps(thing)) {
+      if (thing != this && Overlaps(thing)) {
         overlapping = true;
         if (goLeft) {
           x_ = startX - offset * PUCK_X_SEPARATION;

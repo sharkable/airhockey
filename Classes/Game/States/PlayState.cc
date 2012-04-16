@@ -6,19 +6,24 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "PlayState.h"
+#include "game/states/PlayState.h"
 
-#import "Post.h"
-#import "game_engine.h"
-#import "MainMenuState.h"
-#import "ResourceLoader.h"
+#include "game/entities/Puck.h"
+#include "game/states/MainMenuState.h"
+#include "gameengine/game_engine.h"
+#include "gameengine/ResourceLoader.h"
 
 PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                      PaddleSize paddle_size)
     : EngineState(game_engine),
-      paddle_1_(PLAYER_1, paddle_size, true, caiBad),
-      paddle_2_(PLAYER_2, paddle_size, num_players == 2, difficulty),
-      sound_slider_(SGPointMake(331, 336)) {
+      paddle_1_(PLAYER_1, paddle_size, true, caiBad, pucks_),
+      post_1_(GOAL_LEFT_X, RINK_TOP_Y),
+      post_2_(GOAL_LEFT_X, RINK_BOTTOM_Y + 1),
+      post_3_(GOAL_RIGHT_X + 1, RINK_TOP_Y),
+      post_4_(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1),
+      paddle_2_(PLAYER_2, paddle_size, num_players == 2, difficulty, pucks_),
+      sound_slider_(SGPointMake(331, 336)),
+      pucks_(num_pucks) {
   num_players_ = num_players;
   
   AddEntity(rink_);
@@ -40,11 +45,8 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   num_pucks_ = num_pucks;
   num_active_pucks_ = num_pucks_;
   for (int i = 0; i < num_pucks_; i++) {
-    Puck* puck = new Puck();
-    
-    AddEntity(*puck);
-    pucks_.push_back(puck);
-    round_things_.push_back(puck);
+    AddEntity(pucks_[i]);
+    round_things_.push_back(&pucks_[i]);
   }
   
   AddEntity(paddle_1_);
@@ -53,26 +55,20 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   AddEntity(paddle_2_);
   round_things_.push_back(&paddle_2_);
   
-  paddle_1_.setPucks(pucks_);
   paddle_1_.setOtherPaddle(&paddle_2_);
-  paddle_2_.setPucks(pucks_);
   paddle_2_.setOtherPaddle(&paddle_1_);
   
-  Post *post1 = new Post(GOAL_LEFT_X, RINK_TOP_Y);
-  AddEntity(*post1);
-  round_things_.push_back(post1);
+  AddEntity(post_1_);
+  round_things_.push_back(&post_1_);
 
-  Post *post2 = new Post(GOAL_LEFT_X, RINK_BOTTOM_Y + 1);
-  AddEntity(*post2);
-  round_things_.push_back(post2);
+  AddEntity(post_2_);
+  round_things_.push_back(&post_2_);
 
-  Post *post3 = new Post(GOAL_RIGHT_X + 1, RINK_TOP_Y);
-  AddEntity(*post3);
-  round_things_.push_back(post3);
+  AddEntity(post_3_);
+  round_things_.push_back(&post_3_);
   
-  Post *post4 = new Post(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1);
-  AddEntity(*post4);
-  round_things_.push_back(post4);
+  AddEntity(post_4_);
+  round_things_.push_back(&post_4_);
   
   // Add rink left and right pieces.
   Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
@@ -275,11 +271,11 @@ void PlayState::Update() {
     for (int j = i + 1; j < round_things_.size(); j++) {
       RoundThing *otherThing = round_things_[j];
       if (otherThing->isActive()) {
-        thing->bounceOff(otherThing);
+        thing->BounceOff(otherThing);
       }
     }
     
-    thing->applyFriction();
+    thing->ApplyFriction();
     
     // TODO If you grab item A and push item B into a corner,
     // it only behaves if item A was added to roundsThings_
@@ -289,11 +285,11 @@ void PlayState::Update() {
   }
 
   for (int i = 0; i < pucks_.size(); i++) {
-    Puck *puck = pucks_[i];
+    Puck *puck = &pucks_[i];
     if (!puck->isActive()) {
       continue;
     }
-    if (puck->getY() < -puck->getRadius()) {
+    if (puck->y() < -puck->getRadius()) {
       puck->setIsActive(false);
       if (player_1_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player_1_score_.set_texture(player_1_score_.texture() + 1);
@@ -305,7 +301,7 @@ void PlayState::Update() {
       }
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
-    } else if (puck->getY() > SCREEN_HEIGHT + puck->getRadius()) {
+    } else if (puck->y() > SCREEN_HEIGHT + puck->getRadius()) {
       puck->setIsActive(false);
       if (player_2_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player_2_score_.set_texture(player_2_score_.texture() + 1);
@@ -335,7 +331,7 @@ void PlayState::Update() {
     case kPlayStateStateWaitingForPucks: {
       if (wait_ticks_left_-- == 0) {
         for (int i = 0; i < num_pucks_; i++) {
-          Puck *puck = pucks_[i];
+          Puck *puck = &pucks_[i];
           puck->setIsActive(true);
           puck->placeForPlayer(i < num_player_1_scores_last_round_ ? PLAYER_2 : PLAYER_1,
                                round_things_,
@@ -378,12 +374,12 @@ void PlayState::SetUpNewGame() {
   // First move them all out of the way. That way we can lay them out properly.
   // ([Puck placeForPlayer] avoids hitting other RoundThings objects.)
   for (int i = 0; i < num_pucks_; i++) {
-    Puck *puck = pucks_[i];
-    puck->setX(0);
-    puck->setY(0);
+    Puck *puck = &pucks_[i];
+    puck->set_x(0);
+    puck->set_y(0);
   }
   for (int i = 0; i < num_pucks_; i++) {
-    Puck *puck = pucks_[i];
+    Puck *puck = &pucks_[i];
     puck->setIsActive(true);
     int playerId = (i % 2 == 0) ? give_extra_puck_to_player_ : 1 - give_extra_puck_to_player_;
     bool center = !((playerId == give_extra_puck_to_player_ &&

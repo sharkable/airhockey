@@ -13,7 +13,10 @@
 #import "Puck.h"
 #import "game_engine.h"
 
-Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel) {
+#include "gameengine/ResourceLoader.h"
+
+Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel,
+               vector<Puck> &pucks) : pucks_(pucks) {
   playerId_ = playerId;
   playerControlled_ = playerControlled;
   aiLevel_ = aiLevel;
@@ -123,21 +126,21 @@ void Paddle::Update() {
     double bestTime;
     
     for (int i = 0; i < pucks_.size(); i++) {
-    Puck *puck = pucks_[i];
+    Puck *puck = &pucks_[i];
       if (!puck->isActive()) {
         continue;
       }
-      if (puck->getVY() > 4) {
+      if (puck->vy() > 4) {
         continue;
       }
       double timeToReach = 999999;
-      if (puck->getVY() < 0) {
-        timeToReach = fabs((y_ - puck->getY()) / puck->getVY());
+      if (puck->vy() < 0) {
+        timeToReach = fabs((y_ - puck->y()) / puck->vy());
       }
-      if (puck->getY() - puck->getRadius() > SCREEN_HEIGHT/2) {
+      if (puck->y() - puck->getRadius() > SCREEN_HEIGHT/2) {
         continue;
       }
-      if (target == NULL || timeToReach < bestTime || (timeToReach == bestTime && puck->getY() < target->getY())) {
+      if (target == NULL || timeToReach < bestTime || (timeToReach == bestTime && puck->y() < target->y())) {
         target = puck;
         bestTime = timeToReach;
       }
@@ -150,8 +153,8 @@ void Paddle::Update() {
     double targetX;
     double targetY;
     
-    if (!targetAwayFromCorner_ && target && target->getY() <= RINK_TOP_Y + radius_ && fabs(target->getVX()) < 5 && fabs(target->getVY()) < 5) {
-      if (target->getX() < SCREEN_WIDTH / 2) {
+    if (!targetAwayFromCorner_ && target && target->y() <= RINK_TOP_Y + radius_ && fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
+      if (target->x() < SCREEN_WIDTH / 2) {
         targetLeftCorner_ = true;
       } else {
         targetRightCorner_ = true;
@@ -161,14 +164,14 @@ void Paddle::Update() {
     if (targetLeftCorner_) {
       targetX = RINK_LEFT_X + radius_;
       targetY = RINK_TOP_Y + radius_;
-      if (overlaps(target)) {
+      if (Overlaps(target)) {
         targetLeftCorner_ = false;
         targetAwayFromCorner_ = true;
       }
     } else if (targetRightCorner_) {
       targetX = RINK_RIGHT_X - radius_;
       targetY = RINK_TOP_Y + radius_;
-      if (overlaps(target)) {
+      if (Overlaps(target)) {
         targetRightCorner_ = false;
         targetAwayFromCorner_ = true;
       }
@@ -179,15 +182,15 @@ void Paddle::Update() {
         targetAwayFromCorner_ = false;
       }
     } else if (target) {
-      if (target->getY() > y_) {
-        targetX = target->getX();
-        targetY = target->getY() - target->getRadius();
+      if (target->y() > y_) {
+        targetX = target->x();
+        targetY = target->y() - target->getRadius();
       } else {
-        targetY = target->getY() - target->getRadius() - radius_ - 20;
-        if (target->getX() < x_) {
-          targetX = target->getX() + target->getRadius() + radius_ + 20;
+        targetY = target->y() - target->getRadius() - radius_ - 20;
+        if (target->x() < x_) {
+          targetX = target->x() + target->getRadius() + radius_ + 20;
         } else {
-          targetX = target->getX() - target->getRadius() - radius_ - 20;
+          targetX = target->x() - target->getRadius() - radius_ - 20;
         }
       }
     } else if (aiLevel_ >= caiExcellent) {

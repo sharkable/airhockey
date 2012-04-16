@@ -34,80 +34,80 @@ void Rink::bounceOff(RoundThing *thing) {
   }
   
   bool dampen = false;
-  if (thing->getX() + thing->getRadius() > RINK_RIGHT_X) {
-    thing->setVX(-thing->getX());
-    thing->setX(2*(RINK_RIGHT_X - thing->getRadius()) - thing->getX());
+  if (thing->x() + thing->getRadius() > RINK_RIGHT_X) {
+    thing->set_vx(-thing->x());
+    thing->set_x(2*(RINK_RIGHT_X - thing->getRadius()) - thing->x());
     dampen = true;
   }
-  if (thing->getX() - thing->getRadius() < RINK_LEFT_X) {
-    thing->setVX(-thing->getVX());
-    thing->setX(2*(RINK_LEFT_X + thing->getRadius()) - thing->getX());
+  if (thing->x() - thing->getRadius() < RINK_LEFT_X) {
+    thing->set_vx(-thing->vx());
+    thing->set_x(2*(RINK_LEFT_X + thing->getRadius()) - thing->x());
     dampen = true;
   }
-  if (thing->getY() + thing->getRadius() > RINK_BOTTOM_Y) {
+  if (thing->y() + thing->getRadius() > RINK_BOTTOM_Y) {
     // Interpolate circle x (hx) when the circle reached the edge of the goal.
-    double oldX = thing->getX() - thing->getVX();
-    double oldY = thing->getY() - thing->getVY();
+    double oldX = thing->x() - thing->vx();
+    double oldY = thing->y() - thing->vy();
     if (oldY + thing->getRadius() <= RINK_BOTTOM_Y) {
-      double topFraction = (thing->getY() - (RINK_BOTTOM_Y - thing->getRadius())) / (thing->getY() - oldY);
-      double hx = thing->getX() - (thing->getX() - oldX) * topFraction;
+      double topFraction = (thing->y() - (RINK_BOTTOM_Y - thing->getRadius())) / (thing->y() - oldY);
+      double hx = thing->x() - (thing->x() - oldX) * topFraction;
       if (hx < GOAL_LEFT_X || hx >= GOAL_RIGHT_X) {
-        thing->setVY(-thing->getVY());
-        thing->setY(2*(RINK_BOTTOM_Y - thing->getRadius()) - thing->getY());
+        thing->set_vy(-thing->vy());
+        thing->set_y(2*(RINK_BOTTOM_Y - thing->getRadius()) - thing->y());
         dampen = true;        
       }
-    } else if (thing->getVX() < 0 && thing->getX() - thing->getRadius() < GOAL_LEFT_X) {
-      double outsideFraction = ((GOAL_LEFT_X + thing->getRadius()) - thing->getX()) / (oldX - thing->getX());
-      double hy = thing->getY() - (thing->getY() - oldY) * outsideFraction;
+    } else if (thing->vx() < 0 && thing->x() - thing->getRadius() < GOAL_LEFT_X) {
+      double outsideFraction = ((GOAL_LEFT_X + thing->getRadius()) - thing->x()) / (oldX - thing->x());
+      double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
       if (hy >= RINK_BOTTOM_Y) {
-        thing->setVX(-thing->getVX());
-        thing->setX(2*(GOAL_LEFT_X + thing->getRadius()) - thing->getX());
+        thing->set_vx(-thing->vx());
+        thing->set_x(2*(GOAL_LEFT_X + thing->getRadius()) - thing->x());
         dampen = true;          
       }
-    } else if (thing->getVX() > 0 && thing->getX() + thing->getRadius() > GOAL_RIGHT_X) {
-      double outsideFraction = (thing->getX() - (GOAL_RIGHT_X - thing->getRadius())) / (thing->getX() - oldX);
-      double hy = thing->getY() - (thing->getY() - oldY) * outsideFraction;
+    } else if (thing->vx() > 0 && thing->x() + thing->getRadius() > GOAL_RIGHT_X) {
+      double outsideFraction = (thing->x() - (GOAL_RIGHT_X - thing->getRadius())) / (thing->x() - oldX);
+      double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
       if (hy >= RINK_BOTTOM_Y) {
-        thing->setVX(-thing->getVX());
-        thing->setX(2*(GOAL_RIGHT_X - thing->getRadius()) - thing->getX());
+        thing->set_vx(-thing->vx());
+        thing->set_x(2*(GOAL_RIGHT_X - thing->getRadius()) - thing->x());
         dampen = true;          
       }
     }
   }
-  if (thing->getY() - thing->getRadius() < RINK_TOP_Y) {
+  if (thing->y() - thing->getRadius() < RINK_TOP_Y) {
     // Interpolate circle x (hx) when the circle reached the edge of the goal.
-    double oldX = thing->getX() - thing->getVX();
-    double oldY = thing->getY() - thing->getVY();
+    double oldX = thing->x() - thing->vx();
+    double oldY = thing->y() - thing->vy();
     if (oldY - thing->getRadius() >= RINK_TOP_Y) {
-      double topFraction = ((RINK_TOP_Y + thing->getRadius()) - thing->getY()) / (oldY - thing->getY());
-      double hx = thing->getX() - (thing->getX() - oldX) * topFraction;
+      double topFraction = ((RINK_TOP_Y + thing->getRadius()) - thing->y()) / (oldY - thing->y());
+      double hx = thing->x() - (thing->x() - oldX) * topFraction;
       if (hx < GOAL_LEFT_X || hx >= GOAL_RIGHT_X) {
-        thing->setVY(-thing->getVY());
-        thing->setY(2*(RINK_TOP_Y + thing->getRadius()) - thing->getY());
+        thing->set_vy(-thing->vy());
+        thing->set_y(2*(RINK_TOP_Y + thing->getRadius()) - thing->y());
         dampen = true;        
       }
-    } else if (thing->getVX() < 0 && thing->getX() - thing->getRadius() < GOAL_LEFT_X) {
-      double outsideFraction = ((GOAL_LEFT_X + thing->getRadius()) - thing->getX()) / (oldX - thing->getX());
-      double hy = thing->getY() - (thing->getY() - oldY) * outsideFraction;
+    } else if (thing->vx() < 0 && thing->x() - thing->getRadius() < GOAL_LEFT_X) {
+      double outsideFraction = ((GOAL_LEFT_X + thing->getRadius()) - thing->x()) / (oldX - thing->x());
+      double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
       if (hy <= RINK_TOP_Y) {
-        thing->setVX(-thing->getVX());
-        thing->setX(2*(GOAL_LEFT_X + thing->getRadius()) - thing->getX());
+        thing->set_vx(-thing->vx());
+        thing->set_x(2*(GOAL_LEFT_X + thing->getRadius()) - thing->x());
         dampen = true;          
       }
-    } else if (thing->getVX() > 0 && thing->getX() + thing->getRadius() > GOAL_RIGHT_X) {
-      double outsideFraction = (thing->getX() - (GOAL_RIGHT_X - thing->getRadius())) / (thing->getX() - oldX);
-      double hy = thing->getY() - (thing->getY() - oldY) * outsideFraction;
+    } else if (thing->vx() > 0 && thing->x() + thing->getRadius() > GOAL_RIGHT_X) {
+      double outsideFraction = (thing->x() - (GOAL_RIGHT_X - thing->getRadius())) / (thing->x() - oldX);
+      double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
       if (hy <= RINK_TOP_Y) {
-        thing->setVX(-thing->getVX());
-        thing->setX(2*(GOAL_RIGHT_X - thing->getRadius()) - thing->getX());
+        thing->set_vx(-thing->vx());
+        thing->set_x(2*(GOAL_RIGHT_X - thing->getRadius()) - thing->x());
         dampen = true;          
       }
     }
   }
   
   if (dampen) {
-    thing->setVX(thing->getVX() * 0.7);
-    thing->setVY(thing->getVY() * 0.7);
+    thing->set_vx(thing->vx() * 0.7);
+    thing->set_vy(thing->vy() * 0.7);
     // TODO: haha, again.
 //    if ([thing isKindOfClass:[Puck class]]) {
 //      [SoundPlayer playSound:kSoundPuckRinkBounce];
@@ -119,14 +119,14 @@ void Rink::moveInFromEdge(RoundThing *thing) {
   if (!thing->isMovable()) {
     return;
   }
-  if (thing->getX() - thing->getRadius() < RINK_LEFT_X) {
-    thing->setX(RINK_LEFT_X + thing->getRadius());
-  } else if (thing->getX() + thing->getRadius() > RINK_RIGHT_X) {
-    thing->setX(RINK_RIGHT_X - thing->getRadius());
+  if (thing->x() - thing->getRadius() < RINK_LEFT_X) {
+    thing->set_x(RINK_LEFT_X + thing->getRadius());
+  } else if (thing->x() + thing->getRadius() > RINK_RIGHT_X) {
+    thing->set_x(RINK_RIGHT_X - thing->getRadius());
   }
-  if (thing->getY() - thing->getRadius() < RINK_TOP_Y && (thing->getX() < GOAL_LEFT_X || thing->getX() >= GOAL_RIGHT_X)) {
-    thing->setY(RINK_TOP_Y + thing->getRadius());
-  } else if (thing->getY() + thing->getRadius() > RINK_BOTTOM_Y && (thing->getX() < GOAL_LEFT_X || thing->getX() >= GOAL_RIGHT_X)) {
-    thing->setY(RINK_BOTTOM_Y - thing->getRadius());
+  if (thing->y() - thing->getRadius() < RINK_TOP_Y && (thing->x() < GOAL_LEFT_X || thing->x() >= GOAL_RIGHT_X)) {
+    thing->set_y(RINK_TOP_Y + thing->getRadius());
+  } else if (thing->y() + thing->getRadius() > RINK_BOTTOM_Y && (thing->x() < GOAL_LEFT_X || thing->x() >= GOAL_RIGHT_X)) {
+    thing->set_y(RINK_BOTTOM_Y - thing->getRadius());
   }
 }

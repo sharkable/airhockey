@@ -24,14 +24,15 @@ class Paddle : public RoundThing {
   int playerId_;
   bool playerControlled_;
   ComputerAI aiLevel_;
-  vector<Puck *> pucks_;
+  vector<Puck> &pucks_;
   Paddle *otherPaddle_;
   bool targetLeftCorner_;
   bool targetRightCorner_;
   bool targetAwayFromCorner_;
 
  public:
-  Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel);
+  Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel,
+         vector<Puck> &pucks);
   ~Paddle();
   void Update();
   void Render();
@@ -40,8 +41,7 @@ class Paddle : public RoundThing {
   void setInitialPositionForPlayer(int playerId);
   void keepInPlayerBounds();
 
-  vector<Puck *> getPucks() { return pucks_; }
-  void setPucks(vector<Puck *> pucks) { pucks_ = pucks; }
+  vector<Puck> &getPucks() { return pucks_; }
   Paddle *getOtherPaddle() { return otherPaddle_; }
   void setOtherPaddle(Paddle *otherPaddle) { otherPaddle_ = otherPaddle; }
 };

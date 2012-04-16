@@ -9,17 +9,21 @@
 #ifndef AIRHOCKEY_GAME_STATES_PLAYSTATE_H_
 #define AIRHOCKEY_GAME_STATES_PLAYSTATE_H_
 
-#import "const.h"
-#import "game/entities/Paddle.h"
-#import "game/entities/Puck.h"
-#import "game/entities/Rink.h"
-#import "game/entities/SoundSlider.h"
-#import "gameengine/entities/button.h"
-#import "gameengine/entities/simple_item.h"
-#import "gameengine/engine_state.h"
-
 #include <vector>
 using namespace std;
+
+#include "const.h"
+#include "game/entities/Paddle.h"
+#include "game/entities/Post.h"
+#include "game/entities/Rink.h"
+#include "game/entities/SoundSlider.h"
+#include "gameengine/entities/button.h"
+#include "gameengine/entities/simple_item.h"
+#include "gameengine/engine_state.h"
+
+class GameEngine;
+class Puck;
+class RoundThing;
 
 typedef enum {
   kPlayStateStateGetReady,
@@ -54,9 +58,13 @@ class PlayState : public EngineState, private ButtonDelegate {
   int num_active_pucks_;
   int num_player_1_scores_last_round_;
   Rink rink_;
+  Post post_1_;
+  Post post_2_;
+  Post post_3_;
+  Post post_4_;
   Paddle paddle_1_;
   Paddle paddle_2_;
-  vector<Puck *> pucks_;
+  vector<Puck> pucks_;
   vector<RoundThing *> round_things_;
   SimpleItem player_1_score_;
   SimpleItem player_2_score_;

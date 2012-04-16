@@ -12,8 +12,8 @@
 Post::Post(double x, double y) {
 // TODO  super();
 
-  setX(x);
-  setY(y);
+  set_x(x);
+  set_y(y);
   setRadius(1);
   setMass(99999999999.99);  
 }
