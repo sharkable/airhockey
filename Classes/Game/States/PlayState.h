@@ -18,11 +18,13 @@
 #include <vector>
 using namespace std;
 
-#define PLAY_STATE_GET_READY 0
-#define PLAY_STATE_PLAYING 1
-#define PLAY_STATE_WAITING_FOR_PUCKS 2
-#define PLAY_STATE_FINISHED 3
-#define PLAY_STATE_PAUSED 4
+typedef enum {
+  kPlayStateStateGetReady,
+  kPlayStateStatePlaying,
+  kPlayStateStateWaitingForPucks,
+  kPlayStateStateFinished,
+  kPlayStateStatePaused
+} PlayStateState;
 
 class PlayState : public EngineState {
  public:

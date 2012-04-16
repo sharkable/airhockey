@@ -227,9 +227,9 @@ PlayState::~PlayState() {
 }
 
 void PlayState::Update() {
-  if (state_ == PLAY_STATE_PAUSED) {
+  if (state_ == kPlayStateStatePaused) {
     return;
-  } else if (state_ == PLAY_STATE_GET_READY) {
+  } else if (state_ == kPlayStateStateGetReady) {
     getReadyTicksLeft_--;
     if (getReadyTicksLeft_ == SHOW_GET_READY_MESSAGE_TICKS) {
       AddEntity(*getReady_);
@@ -238,7 +238,7 @@ void PlayState::Update() {
     RemoveEntity(*getReady_);
       AddEntity(*go_);
       goTicksLeft_ = SHOW_GO_MESSAGE_TICKS;
-      state_ = PLAY_STATE_PLAYING;
+      state_ = kPlayStateStatePlaying;
       // TODO [SoundPlayer playSound:kSoundStart];
     }
     
@@ -286,10 +286,10 @@ void PlayState::Update() {
     }
     if (puck->getY() < -puck->getRadius()) {
       puck->setIsActive(false);
-      if (player1Score_->texture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player1Score_->texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player1Score_->set_texture(player1Score_->texture() + 1);
       }
-      if (player1Score_->texture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player1Score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
         // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         // TODO [SoundPlayer playSound:kSoundScore];
@@ -298,10 +298,10 @@ void PlayState::Update() {
       numActivePucks_--;
     } else if (puck->getY() > SCREEN_HEIGHT + puck->getRadius()) {
       puck->setIsActive(false);
-      if (player2Score_->texture() < WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player2Score_->texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player2Score_->set_texture(player2Score_->texture() + 1);
       }
-      if (player2Score_->texture() == WIN_SCORE && state_ == PLAY_STATE_PLAYING) {
+      if (player2Score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
         // TODO [SoundPlayer playSound:kSoundScoreFinal];  
       } else {
         // TODO [SoundPlayer playSound:kSoundScore];
@@ -312,18 +312,18 @@ void PlayState::Update() {
   }  
   
   switch (state_) {
-    case PLAY_STATE_PLAYING: {      
+    case kPlayStateStatePlaying: {      
       if (player1Score_->texture() == WIN_SCORE) {
         finishGameWithWinner(PLAYER_1);
       } else if (player2Score_->texture() == WIN_SCORE) {
         finishGameWithWinner(PLAYER_2);
       } else if (numActivePucks_ == 0) {
         waitTicksLeft_ = WAIT_TICKS;
-        state_ = PLAY_STATE_WAITING_FOR_PUCKS;
+        state_ = kPlayStateStateWaitingForPucks;
       }
       break;
     }
-    case PLAY_STATE_WAITING_FOR_PUCKS: {
+    case kPlayStateStateWaitingForPucks: {
       if (waitTicksLeft_-- == 0) {
         for (int i = 0; i < numPucks_; i++) {
           Puck *puck = pucks_[i];
@@ -338,7 +338,7 @@ void PlayState::Update() {
         numActivePucks_ = numPucks_;
         numPlayer1ScoresLastRound_ = 0;
         
-        state_ = PLAY_STATE_PLAYING;        
+        state_ = kPlayStateStatePlaying;        
 
         break;
       }
@@ -387,12 +387,12 @@ void PlayState::setUpNewGame() {
   numActivePucks_ = numPucks_;
   numPlayer1ScoresLastRound_ = 0;
   
-  state_ = PLAY_STATE_GET_READY;
+  state_ = kPlayStateStateGetReady;
   getReadyTicksLeft_ = GET_READY_TICKS_TOTAL;
 }
 
 void PlayState::finishGameWithWinner(int playerId) {
-  state_ = PLAY_STATE_FINISHED;
+  state_ = kPlayStateStateFinished;
   
   double loseX = (SCREEN_WIDTH - lose_->size().width)/2;
   double winX =  (SCREEN_WIDTH - win_->size().width)/2;
@@ -490,9 +490,9 @@ void PlayState::continuePressed() {
 }
 
 void PlayState::pausePressed() {
-  if (state_ != PLAY_STATE_FINISHED && state_ != PLAY_STATE_PAUSED) {
+  if (state_ != kPlayStateStateFinished && state_ != kPlayStateStatePaused) {
     prePauseState_ = state_;
-    state_ = PLAY_STATE_PAUSED;
+    state_ = kPlayStateStatePaused;
     AddEntity(*menuBackground_);
     AddEntity(*soundSlider_);
     AddEntity(*menuButton_);
@@ -505,11 +505,11 @@ void PlayState::pausePressed() {
 
 void PlayState::TouchesBegan(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
-  if (state_ == PLAY_STATE_PAUSED) {
+  if (state_ == kPlayStateStatePaused) {
     menuButton_->TouchesBegan(touches);
     continueButton_->TouchesBegan(touches);
     soundSlider_->TouchesBegan(touches);
-  } else if (state_ == PLAY_STATE_GET_READY) {
+  } else if (state_ == kPlayStateStateGetReady) {
     pauseButton1_->TouchesBegan(touches);
     pauseButton2_->TouchesBegan(touches);
   } else {
@@ -519,9 +519,9 @@ void PlayState::TouchesBegan(vector<Touch> touches) {
 
 void PlayState::TouchesMoved(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
-  if (state_ == PLAY_STATE_PAUSED) {
+  if (state_ == kPlayStateStatePaused) {
     soundSlider_->TouchesMoved(touches);
-  } else if (state_ == PLAY_STATE_GET_READY) {
+  } else if (state_ == kPlayStateStateGetReady) {
   } else {
     EngineState::TouchesMoved(touches);
   }
@@ -529,11 +529,11 @@ void PlayState::TouchesMoved(vector<Touch> touches) {
 
 void PlayState::TouchesEnded(vector<Touch> touches) {
   // When paused, only allow touches on the menu and continue buttons.
-  if (state_ == PLAY_STATE_PAUSED) {
+  if (state_ == kPlayStateStatePaused) {
     menuButton_->TouchesEnded(touches);
     continueButton_->TouchesEnded(touches);
     soundSlider_->TouchesEnded(touches);
-  } else if (state_ == PLAY_STATE_GET_READY) {
+  } else if (state_ == kPlayStateStateGetReady) {
     pauseButton1_->TouchesEnded(touches);
     pauseButton2_->TouchesEnded(touches);
   } else {
