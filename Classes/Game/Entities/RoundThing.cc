@@ -59,7 +59,7 @@ void RoundThing::BounceOff(RoundThing *other) {
   
   double dxFull = x_ - other->x();
   double dyFull = y_ - other->y();
-  double radiusTotal = other->getRadius() + radius_;
+  double radiusTotal = other->radius() + radius_;
 //  double v = sqrt(self.vx * self.vx + self.vy * self.vy);
 //  double otherV = sqrt(other.vx * other.vx + other.vy * other.vy);
   
@@ -227,6 +227,6 @@ bool RoundThing::ContainsTouch(Touch *touch) {
 bool RoundThing::Overlaps(RoundThing * thing) {
   double dx = thing->x() - x_;
   double dy = thing->y() - y_;
-  double totalRadius = thing->getRadius() + radius_;
+  double totalRadius = thing->radius() + radius_;
   return (dx*dx + dy*dy <= totalRadius*totalRadius);
 }

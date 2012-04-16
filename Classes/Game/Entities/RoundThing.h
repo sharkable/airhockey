@@ -38,8 +38,8 @@ class RoundThing : public StateEntity {
   void set_vx(double vx) { vx_ = vx; }
   double vy() { return vy_; }
   void set_vy(double vy) { vy_ = vy; }
-  double getRadius() { return radius_; }
-  void setRadius(double radius) { radius_ = radius; }
+  double radius() { return radius_; }
+  void set_radius(double radius) { radius_ = radius; }
   double getMass() { return mass_; }
   void setMass(double mass) { mass_ = mass; }
   double getFriction() { return friction_; }

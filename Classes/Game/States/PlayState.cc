@@ -289,7 +289,7 @@ void PlayState::Update() {
     if (!puck->isActive()) {
       continue;
     }
-    if (puck->y() < -puck->getRadius()) {
+    if (puck->y() < -puck->radius()) {
       puck->setIsActive(false);
       if (player_1_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player_1_score_.set_texture(player_1_score_.texture() + 1);
@@ -301,7 +301,7 @@ void PlayState::Update() {
       }
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
-    } else if (puck->y() > SCREEN_HEIGHT + puck->getRadius()) {
+    } else if (puck->y() > SCREEN_HEIGHT + puck->radius()) {
       puck->setIsActive(false);
       if (player_2_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player_2_score_.set_texture(player_2_score_.texture() + 1);

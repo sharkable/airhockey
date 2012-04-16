@@ -14,7 +14,7 @@ Post::Post(double x, double y) {
 
   set_x(x);
   set_y(y);
-  setRadius(1);
+  set_radius(1);
   setMass(99999999999.99);  
 }
 

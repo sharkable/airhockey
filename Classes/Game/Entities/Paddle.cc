@@ -137,7 +137,7 @@ void Paddle::Update() {
       if (puck->vy() < 0) {
         timeToReach = fabs((y_ - puck->y()) / puck->vy());
       }
-      if (puck->y() - puck->getRadius() > SCREEN_HEIGHT/2) {
+      if (puck->y() - puck->radius() > SCREEN_HEIGHT/2) {
         continue;
       }
       if (target == NULL || timeToReach < bestTime || (timeToReach == bestTime && puck->y() < target->y())) {
@@ -184,13 +184,13 @@ void Paddle::Update() {
     } else if (target) {
       if (target->y() > y_) {
         targetX = target->x();
-        targetY = target->y() - target->getRadius();
+        targetY = target->y() - target->radius();
       } else {
-        targetY = target->y() - target->getRadius() - radius_ - 20;
+        targetY = target->y() - target->radius() - radius_ - 20;
         if (target->x() < x_) {
-          targetX = target->x() + target->getRadius() + radius_ + 20;
+          targetX = target->x() + target->radius() + radius_ + 20;
         } else {
-          targetX = target->x() - target->getRadius() - radius_ - 20;
+          targetX = target->x() - target->radius() - radius_ - 20;
         }
       }
     } else if (aiLevel_ >= caiExcellent) {
