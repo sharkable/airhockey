@@ -16,166 +16,171 @@
 #import "ResourceLoader.h"
 #import "const.h"
 
-MainMenuState::MainMenuState(GameEngine &gameEngine) : EngineState(gameEngine), soundSlider_(SGPointMake(400, 50)) {
-  bool isIPhone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+MainMenuState::MainMenuState(GameEngine &game_engine)
+    : EngineState(game_engine),
+      sound_slider_(SGPointMake(400, 50)) {
+  bool is_iphone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
-  Texture2D backgroundTexture = ResourceLoader::Instance().TextureWithName("rink_bg");
-  SimpleItem *background = new SimpleItem(backgroundTexture, SGPointMake(0, 0));
+  Texture2D background_texture = ResourceLoader::Instance().TextureWithName("rink_bg");
+  SimpleItem *background = new SimpleItem(background_texture, SGPointMake(0, 0));
   AddEntity(*background);
 
   // Add rink left and right pieces.
-  Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
-  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
-  AddEntity(*leftRinkBorder);
-  Texture2D rightRinkBorderTexture =
+  Texture2D left_rink_border_texture = ResourceLoader::Instance().TextureWithName("rink_left");
+  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_texture, SGPointMake(0, 0));
+  AddEntity(*left_rink_border);
+  Texture2D right_rink_border_texture =
       ResourceLoader::Instance().TextureWithName("rink_right");
-  SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
+  SGPoint left_rink_border_pos = SGPointMake(SCREEN_WIDTH - right_rink_border_texture.contentSize().width,
                                           0);
-  SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
-  AddEntity(*rightRinkBorder);
+  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_texture, left_rink_border_pos);
+  AddEntity(*right_rink_border);
 
-  Texture2D titleTexture = ResourceLoader::Instance().TextureWithName("title");
-  SimpleItem *title = new SimpleItem(titleTexture, SGPointMake(81, 53));
+  Texture2D title_texture = ResourceLoader::Instance().TextureWithName("title");
+  SimpleItem *title = new SimpleItem(title_texture, SGPointMake(81, 53));
   AddEntity(*title);
   
-  Texture2D mainMenuTexture = ResourceLoader::Instance().TextureWithName("main_menu");
-  SGPoint mainMenuPosition = SGPointMake((SCREEN_WIDTH - mainMenuTexture.contentSize().width) / 2,
+  Texture2D main_menu_texture = ResourceLoader::Instance().TextureWithName("main_menu");
+  SGPoint main_menu_position = SGPointMake((SCREEN_WIDTH - main_menu_texture.contentSize().width) / 2,
                                          339);
-  SimpleItem *mainMenu = new SimpleItem(mainMenuTexture, mainMenuPosition);
-  AddEntity(*mainMenu);
+  SimpleItem *main_menu = new SimpleItem(main_menu_texture, main_menu_position);
+  AddEntity(*main_menu);
   
-  Texture2D startButtonImage = ResourceLoader::Instance().TextureWithName("start_button");
-  Texture2D startButtonPressedImage =
+  Texture2D start_button_image = ResourceLoader::Instance().TextureWithName("start_button");
+  Texture2D start_button_pressed_image =
       ResourceLoader::Instance().TextureWithName("start_button_pressed");
-  SGPoint startButtonPosition =
-      SGPointMake((SCREEN_WIDTH - startButtonImage.contentSize().width) / 2, 392);
-  startButton_.set_normal_texture(startButtonImage);
-  startButton_.set_pressed_texture(startButtonPressedImage);
-  startButton_.set_position(startButtonPosition);
-  startButton_.set_delegate(this);
-  AddEntity(startButton_);
+  SGPoint start_button_position =
+      SGPointMake((SCREEN_WIDTH - start_button_image.contentSize().width) / 2, 392);
+  start_button_.set_normal_texture(start_button_image);
+  start_button_.set_pressed_texture(start_button_pressed_image);
+  start_button_.set_position(start_button_position);
+  start_button_.set_delegate(this);
+  AddEntity(start_button_);
   
-  Texture2D feedbackButtonImage =
+  Texture2D feedback_button_image =
       ResourceLoader::Instance().TextureWithName("feedback_button");
-  Texture2D feedbackButtonPressedImage =
+  Texture2D feedback_button_pressed_image =
       ResourceLoader::Instance().TextureWithName("feedback_button_pressed");
-  feedbackButton_.set_normal_texture(feedbackButtonImage);
-  feedbackButton_.set_pressed_texture(feedbackButtonPressedImage);
-  feedbackButton_.set_position(isIPhone ? SGPointMake(440, 926) : SGPointMake(486, 936));
-  feedbackButton_.set_delegate(this);
-  AddEntity(feedbackButton_);
+  feedback_button_.set_normal_texture(feedback_button_image);
+  feedback_button_.set_pressed_texture(feedback_button_pressed_image);
+  feedback_button_.set_position(is_iphone ? SGPointMake(440, 926) : SGPointMake(486, 936));
+  feedback_button_.set_delegate(this);
+  AddEntity(feedback_button_);
 
-  Texture2D storyButtonImage = ResourceLoader::Instance().TextureWithName("story_button");
-  Texture2D storyButtonPressedImage =
+  Texture2D story_button_image = ResourceLoader::Instance().TextureWithName("story_button");
+  Texture2D story_button_pressed_image =
       ResourceLoader::Instance().TextureWithName("story_button_pressed");
-  storyButton_.set_normal_texture(storyButtonImage);
-  storyButton_.set_pressed_texture(storyButtonPressedImage);
-  storyButton_.set_position(isIPhone ? SGPointMake(86, 926) : SGPointMake(91, 936));
-  storyButton_.set_delegate(this);
-  AddEntity(storyButton_);
+  story_button_.set_normal_texture(story_button_image);
+  story_button_.set_pressed_texture(story_button_pressed_image);
+  story_button_.set_position(is_iphone ? SGPointMake(86, 926) : SGPointMake(91, 936));
+  story_button_.set_delegate(this);
+  AddEntity(story_button_);
   
   if (false) {
-    Texture2D upgradeButtonImage =
+    Texture2D upgrade_button_image =
         ResourceLoader::Instance().TextureWithName("upgrade_button");
-    Texture2D upgradeButtonPressedImage =
+    Texture2D upgrade_button_pressed_image =
         ResourceLoader::Instance().TextureWithName("upgrade_button_pressed");
-    upgradeButton_.set_normal_texture(upgradeButtonImage);
-    upgradeButton_.set_pressed_texture(upgradeButtonPressedImage);
-    upgradeButton_.set_position(SGPointMake(91, 936));
-    upgradeButton_.set_delegate(this);
-    AddEntity(upgradeButton_);
+    upgrade_button_.set_normal_texture(upgrade_button_image);
+    upgrade_button_.set_pressed_texture(upgrade_button_pressed_image);
+    upgrade_button_.set_position(SGPointMake(91, 936));
+    upgrade_button_.set_delegate(this);
+    AddEntity(upgrade_button_);
   }
   
-  double playersY = isIPhone ? 570 : 511;
-  Texture2D onePlayerImage = ResourceLoader::Instance().TextureWithName("1_player");
-  Texture2D twoPlayerImage = ResourceLoader::Instance().TextureWithName("2_player");
-  Texture2D onePlayerSelectedImage =
+  double players_y = is_iphone ? 570 : 511;
+  Texture2D one_player_image = ResourceLoader::Instance().TextureWithName("1_player");
+  Texture2D two_player_image = ResourceLoader::Instance().TextureWithName("2_player");
+  Texture2D one_player_selected_image =
       ResourceLoader::Instance().TextureWithName("1_player_selected");
-  Texture2D twoPlayerSelectedImage =
+  Texture2D two_player_selected_image =
       ResourceLoader::Instance().TextureWithName("2_player_selected");
-  SGPoint numPlayersSelectPosition =
-      SGPointMake(SCREEN_WIDTH / 2 - onePlayerImage.contentSize().width, playersY);
-  numPlayersSelect_.Add(onePlayerImage, onePlayerSelectedImage, numPlayersSelectPosition);
-  numPlayersSelect_.Add(twoPlayerImage, twoPlayerSelectedImage, SGPointMake(SCREEN_WIDTH/2, playersY));
-  numPlayersSelect_.set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
-  AddEntity(numPlayersSelect_);
+  SGPoint num_players_select_position =
+      SGPointMake(SCREEN_WIDTH / 2 - one_player_image.contentSize().width, players_y);
+  num_players_select_.Add(one_player_image, one_player_selected_image, num_players_select_position);
+  num_players_select_.Add(two_player_image, two_player_selected_image, SGPointMake(SCREEN_WIDTH/2, players_y));
+  num_players_select_.set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
+  AddEntity(num_players_select_);
   
-  double pucksY = isIPhone ? 706 : 627;
-  double pucks1X = isIPhone ? 40 : 138.5;
-  double pucks2X = isIPhone ? 45 : 142.5;
-  double pucksXSpread = isIPhone ? 96 : 69;
+  double pucks_y = is_iphone ? 706 : 627;
+  double pucks_1_x = is_iphone ? 40 : 138.5;
+  double pucks_2_x = is_iphone ? 45 : 142.5;
+  double pucks_x_spread = is_iphone ? 96 : 69;
   for (int i = 1; i <= (false ? 4 : MAX_NUM_PUCKS); i++) {
-    char pucksstr[15];
-    sprintf(pucksstr, "%d", i);
-    char pucksselectedstr[15];
-    sprintf(pucksselectedstr, "%d_selected", i);
+    char pucks_str[15];
+    sprintf(pucks_str, "%d", i);
+    char pucks_selected_str[15];
+    sprintf(pucks_selected_str, "%d_selected", i);
 
-    Texture2D numPucksImage = ResourceLoader::Instance().TextureWithName(pucksstr);
-    Texture2D numPucksSelectedImage =
-        ResourceLoader::Instance().TextureWithName(pucksselectedstr);
-    SGPoint numPucksSelectPosition =
-        SGPointMake(i == 1 ? pucks1X : pucks2X + pucksXSpread * (i - 1), pucksY);
-    numPucksSelect_.Add(numPucksImage, numPucksSelectedImage, numPucksSelectPosition);
+    Texture2D num_pucks_image = ResourceLoader::Instance().TextureWithName(pucks_str);
+    Texture2D num_pucks_selected_image =
+        ResourceLoader::Instance().TextureWithName(pucks_selected_str);
+    SGPoint num_pucks_select_position =
+        SGPointMake(i == 1 ? pucks_1_x : pucks_2_x + pucks_x_spread * (i - 1), pucks_y);
+    num_pucks_select_.Add(num_pucks_image, num_pucks_selected_image, num_pucks_select_position);
   }
-  numPucksSelect_.set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
-  AddEntity(numPucksSelect_);
+  num_pucks_select_.set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
+  AddEntity(num_pucks_select_);
   
   if (false) {
-    Texture2D upgradeForMoreTexture =
+    Texture2D upgrade_for_more_texture =
         ResourceLoader::Instance().TextureWithName("upgrade_for_more");
-    SGPoint upgradeForMorePosition = SGPointMake(pucks2X + pucksXSpread * 4, pucksY);
-    SimpleItem *upgradeForMore = new SimpleItem(upgradeForMoreTexture, upgradeForMorePosition);
-    AddEntity(*upgradeForMore);
+    SGPoint upgrade_for_more_position = SGPointMake(pucks_2_x + pucks_x_spread * 4, pucks_y);
+    SimpleItem *upgrade_for_more = new SimpleItem(upgrade_for_more_texture, upgrade_for_more_position);
+    AddEntity(*upgrade_for_more);
   }
   
   
-  double difficultyY = isIPhone ? 839 : 734;
-  Texture2D badImage = ResourceLoader::Instance().TextureWithName("bad");
-  Texture2D badImageSelected = ResourceLoader::Instance().TextureWithName("bad_selected");
-  Texture2D goodImage = ResourceLoader::Instance().TextureWithName("good");
-  Texture2D goodImageSelected = ResourceLoader::Instance().TextureWithName("good_selected");
-  Texture2D excellentImage = ResourceLoader::Instance().TextureWithName("excellent");
-  Texture2D excellentImageSelected =
+  double difficulty_y = is_iphone ? 839 : 734;
+  Texture2D bad_image = ResourceLoader::Instance().TextureWithName("bad");
+  Texture2D bad_image_selected = ResourceLoader::Instance().TextureWithName("bad_selected");
+  Texture2D good_image = ResourceLoader::Instance().TextureWithName("good");
+  Texture2D good_image_selected = ResourceLoader::Instance().TextureWithName("good_selected");
+  Texture2D excellent_image = ResourceLoader::Instance().TextureWithName("excellent");
+  Texture2D excellent_image_selected =
       ResourceLoader::Instance().TextureWithName("excellent_selected");
-  Texture2D amazingImage = ResourceLoader::Instance().TextureWithName("amazing");
-  Texture2D amazingImageSelected =
+  Texture2D amazing_image = ResourceLoader::Instance().TextureWithName("amazing");
+  Texture2D amazing_image_selected =
       ResourceLoader::Instance().TextureWithName("amazing_selected");
-  difficultySelect_.Add(badImage, badImageSelected, SGPointMake(isIPhone ? 38 : 138, difficultyY));
-  difficultySelect_.Add(goodImage, goodImageSelected, SGPointMake(isIPhone ? 216 : 266, difficultyY));
-  difficultySelect_.Add(excellentImage, excellentImageSelected, SGPointMake(isIPhone ? 380 : 384, difficultyY));
-  difficultySelect_.Add(amazingImage, amazingImageSelected, SGPointMake(isIPhone ? 543 : 502, difficultyY));
+  difficulty_select_.Add(bad_image, bad_image_selected, SGPointMake(is_iphone ? 38 : 138, difficulty_y));
+  difficulty_select_.Add(good_image, good_image_selected, SGPointMake(is_iphone ? 216 : 266, difficulty_y));
+  difficulty_select_.Add(excellent_image, excellent_image_selected, SGPointMake(is_iphone ? 380 : 384, difficulty_y));
+  difficulty_select_.Add(amazing_image, amazing_image_selected, SGPointMake(is_iphone ? 543 : 502, difficulty_y));
   if (LocalStore::HasEntryForKey(LS_DIFFICULTY)) {
-    difficultySelect_.set_selected_value(LocalStore::IntegerForKey(LS_DIFFICULTY));
+    difficulty_select_.set_selected_value(LocalStore::IntegerForKey(LS_DIFFICULTY));
   } else {
-    difficultySelect_.set_selected_value(caiGood);
+    difficulty_select_.set_selected_value(caiGood);
   }
-  AddEntity(difficultySelect_);
+  AddEntity(difficulty_select_);
   
-  if (!isIPhone) {
-    Texture2D smallImage = ResourceLoader::Instance().TextureWithName("small");
-    Texture2D smallImageSelected =
+  if (!is_iphone) {
+    Texture2D small_image = ResourceLoader::Instance().TextureWithName("small");
+    Texture2D small_image_selected =
         ResourceLoader::Instance().TextureWithName("small_selected");
-    Texture2D mediumImage = ResourceLoader::Instance().TextureWithName("medium");
-    Texture2D mediumImageSelected =
+    Texture2D medium_image = ResourceLoader::Instance().TextureWithName("medium");
+    Texture2D medium_image_selected =
         ResourceLoader::Instance().TextureWithName("medium_selected");
-    Texture2D largeImage = ResourceLoader::Instance().TextureWithName("large");
-    Texture2D largeImageSelected =
+    Texture2D large_image = ResourceLoader::Instance().TextureWithName("large");
+    Texture2D large_image_selected =
         ResourceLoader::Instance().TextureWithName("large_selected");
-    paddleSizeSelect_.Add(smallImage, smallImageSelected, SGPointMake(139, 842));
-    paddleSizeSelect_.Add(mediumImage, mediumImageSelected, SGPointMake(305, 842));
-    paddleSizeSelect_.Add(largeImage, largeImageSelected, SGPointMake(464, 842));
+    paddle_size_select_.Add(small_image, small_image_selected, SGPointMake(139, 842));
+    paddle_size_select_.Add(medium_image, medium_image_selected, SGPointMake(305, 842));
+    paddle_size_select_.Add(large_image, large_image_selected, SGPointMake(464, 842));
     if (LocalStore::HasEntryForKey(LS_PADDLE_SIZE)) {
-      paddleSizeSelect_.set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
+      paddle_size_select_.set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
     } else {
-      paddleSizeSelect_.set_selected_value(psMedium);
+      paddle_size_select_.set_selected_value(psMedium);
     }
-    AddEntity(paddleSizeSelect_);
+    AddEntity(paddle_size_select_);
   }
   
-  AddEntity(soundSlider_);
+  AddEntity(sound_slider_);
 }
 
-void MainMenuState::stateIsShown() {
+
+// EngineState
+
+void MainMenuState::StateIsShown() {
   if (IS_FREE) {
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(0, 0)];  
@@ -185,39 +190,57 @@ void MainMenuState::stateIsShown() {
   }
 }
 
-void MainMenuState::pressedStart() {
-  bool isIPhone = true; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
-  LocalStore::SetInteger(numPlayersSelect_.selected_value(), LS_NUM_PLAYERS);
-  LocalStore::SetInteger(numPucksSelect_.selected_value(), LS_NUM_PUCKS);
-  LocalStore::SetInteger(difficultySelect_.selected_value(), LS_DIFFICULTY);
-  if (!isIPhone) {
-    LocalStore::SetInteger(paddleSizeSelect_.selected_value(), LS_PADDLE_SIZE);
+// ButtonDelegate
+
+void MainMenuState::ButtonPressed(Button *button) {
+  if (button == &start_button_) {
+    PressedStart();
+  } else if (button == &feedback_button_) {
+    PressedFeedback();
+  } else if (button == &story_button_) {
+    PressedStory();
+  } else if (button == &upgrade_button_) {
+    PressedUpgrade();
+  }
+}
+
+
+// private
+
+void MainMenuState::PressedStart() {
+  bool is_iphone = true; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+
+  LocalStore::SetInteger(num_players_select_.selected_value(), LS_NUM_PLAYERS);
+  LocalStore::SetInteger(num_pucks_select_.selected_value(), LS_NUM_PUCKS);
+  LocalStore::SetInteger(difficulty_select_.selected_value(), LS_DIFFICULTY);
+  if (!is_iphone) {
+    LocalStore::SetInteger(paddle_size_select_.selected_value(), LS_PADDLE_SIZE);
   }
 
 //  NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
-//  [flurryData setObject:[NSNumber numberWithInt:numPlayersSelect_.selected_value() + 1]
+//  [flurryData setObject:[NSNumber numberWithInt:num_players_select_.selected_value() + 1]
 //                 forKey:@"NumPlayers"];
-//  [flurryData setObject:[NSNumber numberWithInt:numPucksSelect_.selected_value() + 1]
+//  [flurryData setObject:[NSNumber numberWithInt:num_pucks_select_.selected_value() + 1]
 //                 forKey:@"NumPucks"];
-//  [flurryData setObject:[NSNumber numberWithInt:difficultySelect_.selected_value()]
+//  [flurryData setObject:[NSNumber numberWithInt:difficulty_select_.selected_value()]
 //                 forKey:@"Difficulty"];
-//  if (!isIPhone) {
-//    [flurryData setObject:[NSNumber numberWithInt:paddleSizeSelect_.selected_value()]
+//  if (!is_iphone) {
+//    [flurryData setObject:[NSNumber numberWithInt:paddle_size_select_.selected_value()]
 //                   forKey:@"PaddleSize"];
 //  }
 //  [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
 
-  PaddleSize paddleSize = PaddleSize(isIPhone ? psLarge : paddleSizeSelect_.selected_value());
-  PlayState *playState = new PlayState(game_engine(),
-                                       numPlayersSelect_.selected_value() + 1,
-                                       numPucksSelect_.selected_value() + 1,
-                                       ComputerAI(difficultySelect_.selected_value()),
-                                       paddleSize);
-  game_engine().ReplaceTopState(playState);
+  PaddleSize paddle_size = PaddleSize(is_iphone ? psLarge : paddle_size_select_.selected_value());
+  PlayState *play_state = new PlayState(game_engine(),
+                                        num_players_select_.selected_value() + 1,
+                                        num_pucks_select_.selected_value() + 1,
+                                        ComputerAI(difficulty_select_.selected_value()),
+                                        paddle_size);
+  game_engine().ReplaceTopState(play_state);
 }
 
-void MainMenuState::pressedFeedback() {
+void MainMenuState::PressedFeedback() {
 //  NSString *free;
 //  NSString *device;
 //  
@@ -243,13 +266,13 @@ void MainMenuState::pressedFeedback() {
 //  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
-void MainMenuState::pressedStory() {
+void MainMenuState::PressedStory() {
 //  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
 //  [getGameEngine()->adEngine() removeAd];
   game_engine().PushState(new StoryState(game_engine()));
 }
 
-void MainMenuState::pressedUpgrade() {
+void MainMenuState::PressedUpgrade() {
 // TODO
 //  UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Upgrade"
 //                                                   message:@"You can remove ads and have up to "
@@ -267,18 +290,3 @@ void MainMenuState::pressedUpgrade() {
 //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 //  }
 //}
-
-
-#pragma mark - ButtonDelegate
-
-void MainMenuState::ButtonPressed(Button *button) {
-  if (button == &startButton_) {
-    pressedStart();
-  } else if (button == &feedbackButton_) {
-    pressedFeedback();
-  } else if (button == &storyButton_) {
-    pressedStory();
-  } else if (button == &upgradeButton_) {
-    pressedUpgrade();
-  }
-}

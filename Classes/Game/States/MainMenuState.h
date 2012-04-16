@@ -6,6 +6,9 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
+#ifndef AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
+#define AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
+
 #import "engine_state.h"
 #import "simple_item.h"
 #import "button.h"
@@ -14,22 +17,29 @@
 
 class MainMenuState : public EngineState, private ButtonDelegate {
  public:
-  MainMenuState(GameEngine &gameEngine);
-  void stateIsShown();
-  void pressedStart();
-  void pressedFeedback();
-  void pressedStory();
-  void pressedUpgrade();
+  MainMenuState(GameEngine &game_engine);
+  
+  // EngineState
+  void StateIsShown();
+  
+  // ButtonDelegate
   void ButtonPressed(Button *button);
 
  private:
-  Button startButton_; 
-  Button feedbackButton_; 
-  Button storyButton_; 
-  Button upgradeButton_; 
-  MultiSelect numPlayersSelect_;
-  MultiSelect numPucksSelect_;
-  MultiSelect difficultySelect_;
-  MultiSelect paddleSizeSelect_;
-  SoundSlider soundSlider_;
+  void PressedStart();
+  void PressedFeedback();
+  void PressedStory();
+  void PressedUpgrade();
+  
+  Button start_button_; 
+  Button feedback_button_; 
+  Button story_button_; 
+  Button upgrade_button_; 
+  MultiSelect num_players_select_;
+  MultiSelect num_pucks_select_;
+  MultiSelect difficulty_select_;
+  MultiSelect paddle_size_select_;
+  SoundSlider sound_slider_;
 };
+
+#endif
