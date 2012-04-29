@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "SoundSlider.h"
+#import "sound_slider.h"
 #import "ResourceLoader.h"
 #import "gameengine/local_store.h"
 #include "Touch.h"

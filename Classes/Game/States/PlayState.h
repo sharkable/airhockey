@@ -16,7 +16,7 @@ using namespace std;
 #include "game/entities/Paddle.h"
 #include "game/entities/Post.h"
 #include "game/entities/Rink.h"
-#include "game/entities/SoundSlider.h"
+#include "game/entities/sound_slider.h"
 #include "gameengine/entities/button.h"
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/engine_state.h"

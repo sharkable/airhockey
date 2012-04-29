@@ -9,7 +9,7 @@
 #ifndef AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
 #define AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
 
-#import "game/entities/SoundSlider.h"
+#import "game/entities/sound_slider.h"
 #import "gameengine/engine_state.h"
 #import "gameengine/entities/button.h"
 #import "gameengine/entities/multi_select.h"

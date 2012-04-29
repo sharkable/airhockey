@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/entities/roundthing.h"
+#include "game/entities/round_thing.h"
 
 #include <cmath>
 
