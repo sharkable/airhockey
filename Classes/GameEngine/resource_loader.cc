@@ -6,7 +6,7 @@
 //  Copyright 2009 Sharkable. All rights reserved.
 //
 
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 
 #include "const.h"
 

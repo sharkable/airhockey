@@ -57,12 +57,12 @@
 		D49689F1154DE5EC00DB64DF /* story_state.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689E8154DE5EC00DB64DF /* story_state.cc */; };
 		D49689F7154DFC8300DB64DF /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D49689F6154DFC8200DB64DF /* ResourceLoader.mm */; };
 		D49689F8154DFC8300DB64DF /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D49689F6154DFC8200DB64DF /* ResourceLoader.mm */; };
+		D49689FB154DFE4D00DB64DF /* resource_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689F9154DFE4B00DB64DF /* resource_loader.cc */; };
+		D49689FC154DFE4D00DB64DF /* resource_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689F9154DFE4B00DB64DF /* resource_loader.cc */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
-		D4B1F53A1515291500620EF2 /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F21515291500620EF2 /* ResourceLoader.mm */; };
-		D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4F21515291500620EF2 /* ResourceLoader.mm */; };
 		D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
 		D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
 		D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5061515291500620EF2 /* AVAudio.mm */; };
@@ -497,12 +497,12 @@
 		D49689E8154DE5EC00DB64DF /* story_state.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = story_state.cc; sourceTree = "<group>"; };
 		D49689E9154DE5EC00DB64DF /* story_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = story_state.h; sourceTree = "<group>"; };
 		D49689F6154DFC8200DB64DF /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourceLoader.mm; sourceTree = "<group>"; };
+		D49689F9154DFE4B00DB64DF /* resource_loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = resource_loader.cc; sourceTree = "<group>"; };
+		D49689FA154DFE4C00DB64DF /* resource_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resource_loader.h; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4DD1515291500620EF2 /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
 		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
-		D4B1F4F11515291500620EF2 /* ResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceLoader.h; sourceTree = "<group>"; };
-		D4B1F4F21515291500620EF2 /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ResourceLoader.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Texture2D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
 		D4B1F5031515291500620EF2 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
@@ -849,12 +849,12 @@
 				D484899C1538836C006CE9AD /* game_engine.h */,
 				D484899B1538836C006CE9AD /* game_engine.cc */,
 				D4FE0274153B85F8001DB2C0 /* local_store.h */,
+				D49689FA154DFE4C00DB64DF /* resource_loader.h */,
+				D49689F9154DFE4B00DB64DF /* resource_loader.cc */,
 				D4FE0275153B88F9001DB2C0 /* state_entity.h */,
 				D48489A11538A451006CE9AD /* touch.h */,
 				D4B1F4DD1515291500620EF2 /* AdEngine.h */,
 				D4B1F4DE1515291500620EF2 /* AdEngine.mm */,
-				D4B1F4F11515291500620EF2 /* ResourceLoader.h */,
-				D4B1F4F21515291500620EF2 /* ResourceLoader.mm */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -1833,7 +1833,6 @@
 			files = (
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F53A1515291500620EF2 /* ResourceLoader.mm in Sources */,
 				D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
@@ -1865,6 +1864,7 @@
 				D49689EE154DE5EC00DB64DF /* splash_state.cc in Sources */,
 				D49689F0154DE5EC00DB64DF /* story_state.cc in Sources */,
 				D49689F7154DFC8300DB64DF /* ResourceLoader.mm in Sources */,
+				D49689FB154DFE4D00DB64DF /* resource_loader.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1874,7 +1874,6 @@
 			files = (
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F53B1515291500620EF2 /* ResourceLoader.mm in Sources */,
 				D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */,
 				D4B1F5491515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
@@ -1906,6 +1905,7 @@
 				D49689EF154DE5EC00DB64DF /* splash_state.cc in Sources */,
 				D49689F1154DE5EC00DB64DF /* story_state.cc in Sources */,
 				D49689F8154DFC8300DB64DF /* ResourceLoader.mm in Sources */,
+				D49689FC154DFE4D00DB64DF /* resource_loader.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

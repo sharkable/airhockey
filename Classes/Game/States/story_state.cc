@@ -7,7 +7,7 @@
 //
 
 #import "story_state.h"
-#import "ResourceLoader.h"
+#import "resource_loader.h"
 #import "game_engine.h"
 
 StoryState::StoryState(GameEngine &gameEngine) : EngineState(gameEngine) {

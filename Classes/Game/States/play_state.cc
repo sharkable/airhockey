@@ -11,7 +11,7 @@
 #include "game/entities/puck.h"
 #include "game/states/main_menu_state.h"
 #include "gameengine/game_engine.h"
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 
 PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                      PaddleSize paddle_size)

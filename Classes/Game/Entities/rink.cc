@@ -10,7 +10,7 @@
 
 #include "const.h"
 #include "game/entities/puck.h"
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 
 Rink::Rink() {
   texture_ = ResourceLoader::Instance().TextureWithName("rink_bg");

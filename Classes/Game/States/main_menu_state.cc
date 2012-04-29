@@ -13,7 +13,7 @@
 #import "game/states/story_state.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
-#import "gameengine/ResourceLoader.h"
+#import "gameengine/resource_loader.h"
 #import "opengl/Texture2D.h"
 
 MainMenuState::MainMenuState(GameEngine &game_engine)

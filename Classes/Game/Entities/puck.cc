@@ -13,7 +13,7 @@
 using namespace std;
 
 #include "const.h"
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 
 Puck::Puck() {
   texture_ = ResourceLoader::Instance().TextureWithName("puck");

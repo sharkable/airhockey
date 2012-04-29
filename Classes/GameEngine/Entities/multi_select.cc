@@ -8,7 +8,7 @@
 
 #include "gameengine/entities/multi_select.h"
 
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
 
 MultiSelect::~MultiSelect() {

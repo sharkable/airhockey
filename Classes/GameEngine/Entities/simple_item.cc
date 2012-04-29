@@ -8,7 +8,7 @@
 
 #import "gameengine/entities/simple_item.h"
 
-#import "gameengine/ResourceLoader.h"
+#import "gameengine/resource_loader.h"
 
 SimpleItem::SimpleItem(Texture2D texture, SGPoint position)
     : texture_(0),

@@ -8,7 +8,7 @@
 
 #include "gameengine/entities/button.h"
 
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
 
 Button::Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position)

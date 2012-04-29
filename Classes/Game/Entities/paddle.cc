@@ -12,7 +12,7 @@
 
 #include "game/entities/puck.h"
 #include "gameengine/game_engine.h"
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 
 Paddle::Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
                vector<Puck> &pucks) : pucks_(pucks) {

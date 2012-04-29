@@ -7,7 +7,7 @@
 //
 
 #import "splash_state.h"
-#import "ResourceLoader.h"
+#import "resource_loader.h"
 #import "main_menu_state.h"
 #import "game_engine.h"
 #import "const.h"
