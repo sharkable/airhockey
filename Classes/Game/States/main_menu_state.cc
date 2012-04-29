@@ -1,16 +1,16 @@
 //
-//  MainMenuState.m
+//  main_menu_state.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-30.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "game/states/MainMenuState.h"
+#import "game/states/main_menu_state.h"
 
 #import "const.h"
-#import "game/states/PlayState.h"
-#import "game/states/StoryState.h"
+#import "game/states/play_state.h"
+#import "game/states/story_state.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
 #import "gameengine/ResourceLoader.h"

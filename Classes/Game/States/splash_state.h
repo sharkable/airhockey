@@ -1,5 +1,5 @@
 //
-//  SplashState.h
+//  splash_state.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-05-07.

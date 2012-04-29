@@ -1,5 +1,5 @@
 //
-//  StoryState.h
+//  story_state.h
 //  AirHockeyFree
 //
 //  Created by Jonathan Sharkey on 10-05-17.

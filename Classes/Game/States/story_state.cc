@@ -1,12 +1,12 @@
 //
-//  StoryState.m
+//  story_state.cc
 //  AirHockeyFree
 //
 //  Created by Jonathan Sharkey on 10-05-17.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "StoryState.h"
+#import "story_state.h"
 #import "ResourceLoader.h"
 #import "game_engine.h"
 

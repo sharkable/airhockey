@@ -12,7 +12,7 @@
 #import "game_engine.h"
 #import "GameTimer.h"
 #import "GameTouchWindow.h"
-#import "SplashState.h"
+#import "splash_state.h"
 
 @implementation ViewController {
  @private

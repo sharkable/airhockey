@@ -1,5 +1,5 @@
 //
-//  MainMenuState.h
+//  main_menu_state.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-30.

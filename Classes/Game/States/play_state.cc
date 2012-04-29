@@ -1,15 +1,15 @@
 //
-//  PlayState.m
+//  play_state.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/states/PlayState.h"
+#include "game/states/play_state.h"
 
-#include "game/entities/Puck.h"
-#include "game/states/MainMenuState.h"
+#include "game/entities/puck.h"
+#include "game/states/main_menu_state.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/ResourceLoader.h"
 

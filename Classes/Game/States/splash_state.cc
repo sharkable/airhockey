@@ -1,14 +1,14 @@
 //
-//  SplashState.m
+//  splash_state.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-05-07.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "SplashState.h"
+#import "splash_state.h"
 #import "ResourceLoader.h"
-#import "MainMenuState.h"
+#import "main_menu_state.h"
 #import "game_engine.h"
 #import "const.h"
 
