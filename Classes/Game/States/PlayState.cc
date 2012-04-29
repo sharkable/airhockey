@@ -55,8 +55,8 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   AddEntity(paddle_2_);
   round_things_.push_back(&paddle_2_);
   
-  paddle_1_.setOtherPaddle(&paddle_2_);
-  paddle_2_.setOtherPaddle(&paddle_1_);
+  paddle_1_.set_other_paddle(&paddle_2_);
+  paddle_2_.set_other_paddle(&paddle_1_);
   
   AddEntity(post_1_);
   round_things_.push_back(&post_1_);
@@ -259,18 +259,18 @@ void PlayState::Update() {
     }
   }
   
-  paddle_1_.keepInPlayerBounds();
-  paddle_2_.keepInPlayerBounds();
+  paddle_1_.KeepInPlayerBounds();
+  paddle_2_.KeepInPlayerBounds();
   
   for (int i = 0; i < round_things_.size(); i++) {
     RoundThing *thing = round_things_[i];
-    if (!thing->isActive()) {
+    if (!thing->is_active()) {
       continue;
     }
-    rink_.bounceOff(thing);
+    rink_.BounceOff(thing);
     for (int j = i + 1; j < round_things_.size(); j++) {
       RoundThing *otherThing = round_things_[j];
-      if (otherThing->isActive()) {
+      if (otherThing->is_active()) {
         thing->BounceOff(otherThing);
       }
     }
@@ -281,16 +281,16 @@ void PlayState::Update() {
     // it only behaves if item A was added to roundsThings_
     // after item B. This is OK for Air Hockey, but should be fixed
     // for other games.
-    rink_.moveInFromEdge(thing);
+    rink_.MoveInFromEdge(thing);
   }
 
   for (int i = 0; i < pucks_.size(); i++) {
     Puck *puck = &pucks_[i];
-    if (!puck->isActive()) {
+    if (!puck->is_active()) {
       continue;
     }
     if (puck->y() < -puck->radius()) {
-      puck->setIsActive(false);
+      puck->set_active(false);
       if (player_1_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player_1_score_.set_texture(player_1_score_.texture() + 1);
       }
@@ -302,7 +302,7 @@ void PlayState::Update() {
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
     } else if (puck->y() > SCREEN_HEIGHT + puck->radius()) {
-      puck->setIsActive(false);
+      puck->set_active(false);
       if (player_2_score_.texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
         player_2_score_.set_texture(player_2_score_.texture() + 1);
       }
@@ -332,13 +332,13 @@ void PlayState::Update() {
       if (wait_ticks_left_-- == 0) {
         for (int i = 0; i < num_pucks_; i++) {
           Puck *puck = &pucks_[i];
-          puck->setIsActive(true);
-          puck->placeForPlayer(i < num_player_1_scores_last_round_ ? PLAYER_2 : PLAYER_1,
+          puck->set_active(true);
+          puck->PlaceForPlayer(i < num_player_1_scores_last_round_ ? PLAYER_2 : PLAYER_1,
                                round_things_,
                                 (i < num_player_1_scores_last_round_ ?
                                     (num_player_1_scores_last_round_ % 2 == 1) :
                                     ((num_pucks_ - num_player_1_scores_last_round_) % 2 == 1)));
-          puck->fadeIn();
+          puck->FadeIn();
         }
         num_active_pucks_ = num_pucks_;
         num_player_1_scores_last_round_ = 0;
@@ -367,8 +367,8 @@ void PlayState::SetUpNewGame() {
 //  }
 
   // Place paddles!
-  paddle_1_.setInitialPositionForPlayer(PLAYER_1);
-  paddle_2_.setInitialPositionForPlayer(PLAYER_2);
+  paddle_1_.SetInitialPositionForPlayer(PLAYER_1);
+  paddle_2_.SetInitialPositionForPlayer(PLAYER_2);
   
   // Place pucks!
   // First move them all out of the way. That way we can lay them out properly.
@@ -380,13 +380,13 @@ void PlayState::SetUpNewGame() {
   }
   for (int i = 0; i < num_pucks_; i++) {
     Puck *puck = &pucks_[i];
-    puck->setIsActive(true);
+    puck->set_active(true);
     int playerId = (i % 2 == 0) ? give_extra_puck_to_player_ : 1 - give_extra_puck_to_player_;
     bool center = !((playerId == give_extra_puck_to_player_ &&
                       (num_pucks_ == 3 || num_pucks_ == 4 || num_pucks_ == 7)) ||
                       (playerId == 1 - give_extra_puck_to_player_ &&
                       (num_pucks_ == 4 || num_pucks_ == 5)));
-    puck->placeForPlayer(playerId, round_things_, center);
+    puck->PlaceForPlayer(playerId, round_things_, center);
   }
   
   player_1_score_.set_texture(0);

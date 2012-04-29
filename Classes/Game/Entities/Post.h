@@ -6,15 +6,17 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AirHockey_Post_h
-#define AirHockey_Post_h
+#ifndef AIRHOCKEY_GAME_ENTITIES_POST_H_
+#define AIRHOCKEY_GAME_ENTITIES_POST_H_
 
-#import "RoundThing.h"
+#include "game/entities/roundthing.h"
 
 class Post : public RoundThing {
  public:
   Post(double x, double y);
-  virtual bool isMovable();
+  
+  // RoundThing
+  virtual bool IsMovable();
 };
 
 #endif

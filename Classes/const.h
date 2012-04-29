@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef AIRHOCKEY_CONST_H_
+#define AIRHOCKEY_CONST_H_
+
 #define SCREEN_WIDTH  768
 #define SCREEN_HEIGHT 1024
 
@@ -81,5 +84,7 @@ typedef enum {
 #define UI_USER_INTERFACE_IDIOM() 0
 #define UIUserInterfaceIdiomPhone 0
 #define UIUserInterfaceIdiomPad   1
+
+#endif
 
 #endif

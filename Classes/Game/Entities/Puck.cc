@@ -1,19 +1,18 @@
 //
-//  Puck.m
+//  Puck.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "Puck.h"
-#import "const.h"
+#include "Puck.h"
 
 #include <cmath>
-
 #include <vector>
 using namespace std;
 
+#include "const.h"
 #include "gameengine/ResourceLoader.h"
 
 Puck::Puck() {
@@ -24,37 +23,14 @@ Puck::Puck() {
   alpha_ = 1;
 }
 
-void Puck::Update() {
-  RoundThing::Update();
-  
-  // Stop the puck from getting stuck in the goal.
-  if (y() < RINK_TOP_Y && fabs(vy()) < PUCK_GOAL_MIN_DROP_SPEED) {
-    set_vy(-PUCK_GOAL_MIN_DROP_SPEED);
-  } else if (y_ > RINK_BOTTOM_Y && fabs(vy_) < PUCK_GOAL_MIN_DROP_SPEED) {
-    vy_ = PUCK_GOAL_MIN_DROP_SPEED;
-  }
-  
-  if (fadeTicksLeft_ > 0) {
-    fadeTicksLeft_--;
-    alpha_ = ((double)PUCK_FADE_TICKS - fadeTicksLeft_) / PUCK_FADE_TICKS;
-  }
-}
-
-void Puck::Render() {
-  if (isActive()) {
-    texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
-                         alpha_, 1, 0, 0);
-  }
-}
-
-void Puck::placeForPlayer(int playerId, const vector<RoundThing *> &roundThings, bool center) {
+void Puck::PlaceForPlayer(int player_id, const vector<RoundThing *> &round_things, bool center) {
   double startX = SCREEN_WIDTH / 2;
   if (!center) {
     startX += PUCK_X_SEPARATION / 2;
   }
   x_ = startX;
-  y_ = playerId == PLAYER_1 ? PLAYER_1_PUCK_Y : PLAYER_2_PUCK_Y;
-
+  y_ = player_id == PLAYER_1 ? PLAYER_1_PUCK_Y : PLAYER_2_PUCK_Y;
+  
   vx_ = 0;
   vy_ = 0;
   
@@ -63,8 +39,8 @@ void Puck::placeForPlayer(int playerId, const vector<RoundThing *> &roundThings,
   bool overlapping;
   do {
     overlapping = false;
-    for (int i = 0; i < roundThings.size(); i++) {
-      RoundThing *thing = roundThings[i];
+    for (int i = 0; i < round_things.size(); i++) {
+      RoundThing *thing = round_things[i];
       if (thing != this && Overlaps(thing)) {
         overlapping = true;
         if (goLeft) {
@@ -81,7 +57,33 @@ void Puck::placeForPlayer(int playerId, const vector<RoundThing *> &roundThings,
   } while (overlapping);
 }
 
-void Puck::fadeIn() {
-  fadeTicksLeft_ = PUCK_FADE_TICKS;
+void Puck::FadeIn() {
+  fade_ticks_left_ = PUCK_FADE_TICKS;
   alpha_ = 0;
+}
+
+
+// StateEntity
+
+void Puck::Update() {
+  RoundThing::Update();
+  
+  // Stop the puck from getting stuck in the goal.
+  if (y() < RINK_TOP_Y && fabs(vy()) < PUCK_GOAL_MIN_DROP_SPEED) {
+    set_vy(-PUCK_GOAL_MIN_DROP_SPEED);
+  } else if (y_ > RINK_BOTTOM_Y && fabs(vy_) < PUCK_GOAL_MIN_DROP_SPEED) {
+    vy_ = PUCK_GOAL_MIN_DROP_SPEED;
+  }
+  
+  if (fade_ticks_left_ > 0) {
+    fade_ticks_left_--;
+    alpha_ = ((double)PUCK_FADE_TICKS - fade_ticks_left_) / PUCK_FADE_TICKS;
+  }
+}
+
+void Puck::Render() {
+  if (is_active()) {
+    texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
+                         alpha_, 1, 0, 0);
+  }
 }

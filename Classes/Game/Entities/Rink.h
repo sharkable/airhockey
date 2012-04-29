@@ -6,24 +6,29 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AirHockey_Rink_h
-#define AirHockey_Rink_h
+#ifndef AIRHOCKEY_GAME_ENTITIES_RINK_H_
+#define AIRHOCKEY_GAME_ENTITIES_RINK_H_
 
 #include "gameengine/state_entity.h"
-#import "RoundThing.h"
-#import "Texture2D.h"
+#include "opengl/Texture2D.h"
+
+class RoundThing;
 
 class Rink : public StateEntity {
- private:
-  Texture2D texture_;
-  SGPoint renderPoint_;
  public:
   Rink();
   ~Rink();
+  
+  void BounceOff(RoundThing *thing);
+  void MoveInFromEdge(RoundThing *thing);
+
+  // StateEntity
   void Update();
   void Render();
-  void bounceOff(RoundThing *thing);
-  void moveInFromEdge(RoundThing *thing);
+
+ private:
+  Texture2D texture_;
+  SGPoint renderPoint_;
 };
 
 #endif

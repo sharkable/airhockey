@@ -1,16 +1,16 @@
 //
-//  Rink.m
+//  Rink.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-13.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "Rink.h"
+#include "game/entities/rink.h"
 
-#import "Puck.h"
-#import "ResourceLoader.h"
-#import "const.h"
+#include "const.h"
+#include "game/entities/puck.h"
+#include "gameengine/ResourceLoader.h"
 
 Rink::Rink() {
   texture_ = ResourceLoader::Instance().TextureWithName("rink_bg");
@@ -21,15 +21,8 @@ Rink::~Rink() {
   ResourceLoader::Instance().ReleaseResource(texture_);
 }
 
-void Rink::Update() {
-}
-
-void Rink::Render() {
-  texture_.drawAtPoint(renderPoint_);
-}
-
-void Rink::bounceOff(RoundThing *thing) {
-  if (thing->isGrabbed() || !thing->isMovable()) {
+void Rink::BounceOff(RoundThing *thing) {
+  if (thing->is_grabbed() || !thing->IsMovable()) {
     return;
   }
   
@@ -115,8 +108,8 @@ void Rink::bounceOff(RoundThing *thing) {
   }  
 }
 
-void Rink::moveInFromEdge(RoundThing *thing) {
-  if (!thing->isMovable()) {
+void Rink::MoveInFromEdge(RoundThing *thing) {
+  if (!thing->IsMovable()) {
     return;
   }
   if (thing->x() - thing->radius() < RINK_LEFT_X) {
@@ -129,4 +122,14 @@ void Rink::moveInFromEdge(RoundThing *thing) {
   } else if (thing->y() + thing->radius() > RINK_BOTTOM_Y && (thing->x() < GOAL_LEFT_X || thing->x() >= GOAL_RIGHT_X)) {
     thing->set_y(RINK_BOTTOM_Y - thing->radius());
   }
+}
+
+
+// StateEntity
+
+void Rink::Update() {
+}
+
+void Rink::Render() {
+  texture_.drawAtPoint(renderPoint_);
 }

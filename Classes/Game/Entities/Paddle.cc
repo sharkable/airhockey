@@ -1,27 +1,26 @@
 //
-//  Paddle.m
+//  Paddle.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-12.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "Paddle.h"
+#include "game/entities/paddle.h"
 
 #include <cmath>
 
-#import "Puck.h"
-#import "game_engine.h"
-
+#include "game/entities/puck.h"
+#include "gameengine/game_engine.h"
 #include "gameengine/ResourceLoader.h"
 
-Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel,
+Paddle::Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
                vector<Puck> &pucks) : pucks_(pucks) {
-  playerId_ = playerId;
-  playerControlled_ = playerControlled;
-  aiLevel_ = aiLevel;
+  player_id_ = player_id;
+  player_controlled_ = player_controlled;
+  ai_level_ = ai_level;
 
-  if (playerId == PLAYER_1) {
+  if (player_id == PLAYER_1) {
     switch (size) {
       case psSmall:
         texture_ = ResourceLoader::Instance().TextureWithName("paddle_1_small");
@@ -49,14 +48,12 @@ Paddle::Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI 
 
   radius_ = PADDLE_RADIUS[size];
   mass_ = PADDLE_MASS;
-  friction_ = playerControlled_ ? PADDLE_FRICTION : PADDLE_AI_FRICTION;
+  friction_ = player_controlled_ ? PADDLE_FRICTION : PADDLE_AI_FRICTION;
 }
 
-Paddle::~Paddle() {
-}
 
-void Paddle::setInitialPositionForPlayer(int playerId) {
-  switch (playerId_) {
+void Paddle::SetInitialPositionForPlayer(int playerId) {
+  switch (player_id_) {
     case PLAYER_1: {
       x_ = PADDLE_1_X;
       y_ = PADDLE_1_Y;      
@@ -70,8 +67,8 @@ void Paddle::setInitialPositionForPlayer(int playerId) {
   }  
 }
 
-void Paddle::keepInPlayerBounds() {
-  switch (playerId_) {
+void Paddle::KeepInPlayerBounds() {
+  switch (player_id_) {
     case PLAYER_1: {
       if (y_ + radius_ > RINK_BOTTOM_Y) {
         y_ = RINK_BOTTOM_Y - radius_;
@@ -102,11 +99,14 @@ void Paddle::keepInPlayerBounds() {
   }
 }
 
+
+// StateEntity
+
 void Paddle::Update() {
   // Computer AI
-  if (!playerControlled_) {
+  if (!player_controlled_) {
     double speed = 0;
-    switch (aiLevel_) {
+    switch (ai_level_) {
       case caiBad:
         speed = 1;
         break;
@@ -126,8 +126,8 @@ void Paddle::Update() {
     double bestTime;
     
     for (int i = 0; i < pucks_.size(); i++) {
-    Puck *puck = &pucks_[i];
-      if (!puck->isActive()) {
+      Puck *puck = &pucks_[i];
+      if (!puck->is_active()) {
         continue;
       }
       if (puck->vy() > 4) {
@@ -147,39 +147,39 @@ void Paddle::Update() {
     }
     
     if (!target) {
-      targetLeftCorner_ = targetRightCorner_ = targetAwayFromCorner_ = false;
+      target_left_corner_ = target_right_corner_ = target_away_from_corner_ = false;
     }
     
     double targetX;
     double targetY;
     
-    if (!targetAwayFromCorner_ && target && target->y() <= RINK_TOP_Y + radius_ && fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
+    if (!target_away_from_corner_ && target && target->y() <= RINK_TOP_Y + radius_ && fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
       if (target->x() < SCREEN_WIDTH / 2) {
-        targetLeftCorner_ = true;
+        target_left_corner_ = true;
       } else {
-        targetRightCorner_ = true;
+        target_right_corner_ = true;
       }
     }
     
-    if (targetLeftCorner_) {
+    if (target_left_corner_) {
       targetX = RINK_LEFT_X + radius_;
       targetY = RINK_TOP_Y + radius_;
       if (Overlaps(target)) {
-        targetLeftCorner_ = false;
-        targetAwayFromCorner_ = true;
+        target_left_corner_ = false;
+        target_away_from_corner_ = true;
       }
-    } else if (targetRightCorner_) {
+    } else if (target_right_corner_) {
       targetX = RINK_RIGHT_X - radius_;
       targetY = RINK_TOP_Y + radius_;
       if (Overlaps(target)) {
-        targetRightCorner_ = false;
-        targetAwayFromCorner_ = true;
+        target_right_corner_ = false;
+        target_away_from_corner_ = true;
       }
-    } else if (targetAwayFromCorner_) {
+    } else if (target_away_from_corner_) {
       targetX = SCREEN_WIDTH / 2;
       targetY = RINK_TOP_Y + radius_;
       if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
-        targetAwayFromCorner_ = false;
+        target_away_from_corner_ = false;
       }
     } else if (target) {
       if (target->y() > y_) {
@@ -193,10 +193,10 @@ void Paddle::Update() {
           targetX = target->x() - target->radius() - radius_ - 20;
         }
       }
-    } else if (aiLevel_ >= caiExcellent) {
+    } else if (ai_level_ >= caiExcellent) {
       targetX = PADDLE_2_X;
       targetY = PADDLE_2_Y;
-    } else if (aiLevel_ == caiGood) {
+    } else if (ai_level_ == caiGood) {
       targetX = PADDLE_2_X;
       targetY = y_;
     } else {
@@ -234,19 +234,18 @@ void Paddle::Update() {
 
 void Paddle::Render() {
   texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2),
-                       (isGrabbed() || !playerControlled_ ? 1.0 : 0.5), 1, 0, 0);
+                       (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1, 0, 0);
 }
 
-bool Paddle::isGrabbable() {
-  return playerControlled_;
-}
 
-bool Paddle::containsTouch(Touch *touch) {
+// RoungThing
+
+bool Paddle::ContainsTouch(Touch *touch) {
   SGPoint p = touch->location();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return false;
   }
-  switch (playerId_) {
+  switch (player_id_) {
     case PLAYER_1:
       return p.y >= SCREEN_HEIGHT/2 && p.y < SCREEN_HEIGHT;
       break;
@@ -255,4 +254,8 @@ bool Paddle::containsTouch(Touch *touch) {
       break;
   }
   return false;
+}
+
+bool Paddle::IsGrabbable() {
+  return player_controlled_;
 }

@@ -6,13 +6,11 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AirHockey_Paddle_h
-#define AirHockey_Paddle_h
+#ifndef AIRHOCKEY_GAME_ENTITIES_PADDLE_H_
+#define AIRHOCKEY_GAME_ENTITIES_PADDLE_H_
 
-#import "Paddle.h"
-#import "RoundThing.h"
-#import "Texture2D.h"
-#import "const.h"
+#include "const.h"
+#include "game/entities/RoundThing.h"
 
 class Puck;
 
@@ -20,30 +18,34 @@ class Puck;
 using namespace std;
 
 class Paddle : public RoundThing {
- private:
-  int playerId_;
-  bool playerControlled_;
-  ComputerAI aiLevel_;
-  vector<Puck> &pucks_;
-  Paddle *otherPaddle_;
-  bool targetLeftCorner_;
-  bool targetRightCorner_;
-  bool targetAwayFromCorner_;
-
  public:
-  Paddle(int playerId, PaddleSize size, bool playerControlled, ComputerAI aiLevel,
+  Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
          vector<Puck> &pucks);
-  ~Paddle();
+  
+  void SetInitialPositionForPlayer(int player_id);
+  void KeepInPlayerBounds();
+  
+  vector<Puck> &pucks() { return pucks_; }
+  Paddle *pther_paddle() { return other_paddle_; }
+  void set_other_paddle(Paddle *other_paddle) { other_paddle_ = other_paddle; }
+
+  // StateEntity
   void Update();
   void Render();
-  bool isGrabbable();
-  bool containsTouch(Touch *touch);
-  void setInitialPositionForPlayer(int playerId);
-  void keepInPlayerBounds();
+  
+  // RoundThing
+  bool ContainsTouch(Touch *touch);
+  bool IsGrabbable();  
 
-  vector<Puck> &getPucks() { return pucks_; }
-  Paddle *getOtherPaddle() { return otherPaddle_; }
-  void setOtherPaddle(Paddle *otherPaddle) { otherPaddle_ = otherPaddle; }
+ private:
+  int player_id_;
+  bool player_controlled_;
+  ComputerAI ai_level_;
+  vector<Puck> &pucks_;
+  Paddle *other_paddle_;  // weak
+  bool target_left_corner_;
+  bool target_right_corner_;
+  bool target_away_from_corner_;
 };
 
 #endif

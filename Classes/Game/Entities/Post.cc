@@ -1,23 +1,25 @@
 //
-//  Post.m
+//  Post.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-25.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "Post.h"
-#import "Rink.h"
+#include "game/entities/post.h"
+
+#include "game/entities/rink.h"
 
 Post::Post(double x, double y) {
-// TODO  super();
-
   set_x(x);
   set_y(y);
   set_radius(1);
-  setMass(99999999999.99);  
+  set_mass(99999999999.99);  
 }
 
-bool Post::isMovable() {
+
+// RoundThing
+
+bool Post::IsMovable() {
   return false;
 }

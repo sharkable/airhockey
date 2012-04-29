@@ -17,18 +17,12 @@ class RoundThing : public StateEntity {
   RoundThing();
   ~RoundThing();
   
-  // StateEntity
-  void Update();
-  void Render();
-  void TouchesBegan(vector<Touch> touches);
-  void TouchesMoved(vector<Touch> touches);
-  void TouchesEnded(vector<Touch> touches);
-  void ClearTouches();
-  
   void ApplyFriction();
   void BounceOff(RoundThing *other);
   bool ContainsTouch(Touch *touch);
   bool Overlaps(RoundThing *thing);
+  virtual bool IsGrabbable();
+  virtual bool IsMovable();
   
   double x() { return x_; }
   void set_x(double x) { x_ = x; }
@@ -40,15 +34,21 @@ class RoundThing : public StateEntity {
   void set_vy(double vy) { vy_ = vy; }
   double radius() { return radius_; }
   void set_radius(double radius) { radius_ = radius; }
-  double getMass() { return mass_; }
-  void setMass(double mass) { mass_ = mass; }
-  double getFriction() { return friction_; }
-  virtual bool isGrabbable();
-  bool isGrabbed() { return grabbed_; }
-  virtual bool isMovable();
-  bool isActive() { return active_; }
-  void setIsActive(bool active) { active_ = active; }
+  double mass() { return mass_; }
+  void set_mass(double mass) { mass_ = mass; }
+  double friction() { return friction_; }
+  bool is_grabbed() { return grabbed_; }
+  bool is_active() { return active_; }
+  void set_active(bool active) { active_ = active; }
 
+  // StateEntity
+  void Update();
+  void Render();
+  void TouchesBegan(vector<Touch> touches);
+  void TouchesMoved(vector<Touch> touches);
+  void TouchesEnded(vector<Touch> touches);
+  void ClearTouches();
+  
  protected:
   Texture2D texture_;
   double x_;

@@ -1,20 +1,19 @@
 //
-//  RoundThing.m
+//  RoundThing.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-14.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "RoundThing.h"
+#include "game/entities/roundthing.h"
 
 #include <cmath>
 
-#include "Touch.h"
-#import "Paddle.h"
-#import "Puck.h"
-
+#include "game/entities/paddle.h"
+#include "game/entities/puck.h"
 #include "gameengine/ResourceLoader.h"
+#include "gameengine/touch.h"
 
 RoundThing::RoundThing() {
   active_ = true;
@@ -24,32 +23,10 @@ RoundThing::~RoundThing() {
   ResourceLoader::Instance().ReleaseResource(texture_);
 }
 
-void RoundThing::Update() {
-  if (!isMovable() || !isActive()) {
-    return;
-  }
-  
-  if (!grabbed_) {
-    x_ += vx_;
-    y_ += vy_;
-  } else {    
-    vx_ = vx_ * 0.75 + (x_ - old_x_) * 0.25;
-    vy_ = vy_ * 0.75 + (y_ - old_y_) * 0.25;
-    old_x_ = x_;
-    old_y_ = y_;
-  }
-}
-
 void RoundThing::ApplyFriction() {
-  if (!isGrabbed()) {
+  if (!is_grabbed()) {
     vx_ *= friction_;
     vy_ *= friction_;
-  }
-}
-
-void RoundThing::Render() {
-  if (active_) {
-    texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2));
   }
 }
 
@@ -70,11 +47,11 @@ void RoundThing::BounceOff(RoundThing *other) {
     double dy = dyFull / nL;
     
     // *** Move the round things outside of each other. ***
-    double vFraction = mass_ / (other->getMass() + mass_);
+    double vFraction = mass_ / (other->mass() + mass_);
     
-    if ((grabbed_ && !other->isGrabbed() && other->isMovable()) || !isMovable()) {
+    if ((grabbed_ && !other->is_grabbed() && other->IsMovable()) || !IsMovable()) {
       vFraction = 1;
-    } else if ((!grabbed_ && other->isGrabbed()) || !other->isMovable()) {
+    } else if ((!grabbed_ && other->is_grabbed()) || !other->IsMovable()) {
       vFraction = 0;
     }
     
@@ -102,23 +79,23 @@ void RoundThing::BounceOff(RoundThing *other) {
     double otherwx_ = other->vx() - otherux_;
     double otherwy_ = other->vy() - otheruy_;
     
-    double newux_ = (ux * (mass_ - other->getMass()) + 2.0 * other->getMass() * otherux_) / (mass_ + other->getMass());
-    double newuy_ = (uy * (mass_ - other->getMass()) + 2.0 * other->getMass() * otheruy_) / (mass_ + other->getMass());  
+    double newux_ = (ux * (mass_ - other->mass()) + 2.0 * other->mass() * otherux_) / (mass_ + other->mass());
+    double newuy_ = (uy * (mass_ - other->mass()) + 2.0 * other->mass() * otheruy_) / (mass_ + other->mass());  
     
-    double newother_ux_ = (otherux_ * (other->getMass() - mass_) + 2.0 * mass_ * ux) / (mass_ + other->getMass());
-    double newother_uy_ = (otheruy_ * (other->getMass() - mass_) + 2.0 * mass_ * uy) / (mass_ + other->getMass());    
+    double newother_ux_ = (otherux_ * (other->mass() - mass_) + 2.0 * mass_ * ux) / (mass_ + other->mass());
+    double newother_uy_ = (otheruy_ * (other->mass() - mass_) + 2.0 * mass_ * uy) / (mass_ + other->mass());    
     
 //    if (!self.grabbed && !other.grabbed) {
 //      NSLog(@"\n");
 //      NSLog(@"Before total: %f", v * self.mass + otherV * other.mass);
 //    }
     
-    if (!isGrabbed() && isMovable()) {
+    if (!is_grabbed() && IsMovable()) {
       vx_ = newux_ + wx;
       vy_ = newuy_ + wy;
     }
     
-    if (!other->isGrabbed() && other->isMovable()) {
+    if (!other->is_grabbed() && other->IsMovable()) {
       other->set_vx(newother_ux_ + otherwx_);
       other->set_vy(newother_uy_ + otherwy_);
     }
@@ -155,8 +132,54 @@ void RoundThing::BounceOff(RoundThing *other) {
   }  
 }
 
+bool RoundThing::ContainsTouch(Touch *touch) {
+  double dx = touch->location().x - x_;
+  double dy = touch->location().y - y_;
+  return (dx*dx + dy*dy <= radius_*radius_);
+}
+
+bool RoundThing::Overlaps(RoundThing * thing) {
+  double dx = thing->x() - x_;
+  double dy = thing->y() - y_;
+  double totalRadius = thing->radius() + radius_;
+  return (dx*dx + dy*dy <= totalRadius*totalRadius);
+}
+
+bool RoundThing::IsGrabbable() {
+  return false;
+}
+
+bool RoundThing::IsMovable() {
+  return true;
+}
+
+
+// StateEntity
+
+void RoundThing::Update() {
+  if (!IsMovable() || !is_active()) {
+    return;
+  }
+  
+  if (!grabbed_) {
+    x_ += vx_;
+    y_ += vy_;
+  } else {    
+    vx_ = vx_ * 0.75 + (x_ - old_x_) * 0.25;
+    vy_ = vy_ * 0.75 + (y_ - old_y_) * 0.25;
+    old_x_ = x_;
+    old_y_ = y_;
+  }
+}
+
+void RoundThing::Render() {
+  if (active_) {
+    texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2));
+  }
+}
+
 void RoundThing::TouchesBegan(vector<Touch> touches) {
-  if (!isGrabbable() || !isActive() || isGrabbed()) {
+  if (!IsGrabbable() || !is_active() || is_grabbed()) {
     return;
   }
   for (int i = 0; i < touches.size(); i++) {
@@ -208,25 +231,4 @@ void RoundThing::TouchesEnded(vector<Touch> touches) {
 void RoundThing::ClearTouches() {
   grabbed_ = false;
   grabbed_touch_ = NULL;
-}
-
-bool RoundThing::isGrabbable() {
-  return false;
-}
-
-bool RoundThing::isMovable() {
-  return true;
-}
-   
-bool RoundThing::ContainsTouch(Touch *touch) {
-  double dx = touch->location().x - x_;
-  double dy = touch->location().y - y_;
-  return (dx*dx + dy*dy <= radius_*radius_);
-}
-
-bool RoundThing::Overlaps(RoundThing * thing) {
-  double dx = thing->x() - x_;
-  double dy = thing->y() - y_;
-  double totalRadius = thing->radius() + radius_;
-  return (dx*dx + dy*dy <= totalRadius*totalRadius);
 }

@@ -23,7 +23,7 @@ class ResourceLoader {
 
  private:
   map<string, Texture2D> resources_;
-  map<string, int> resource_counter_;  
+  map<string, int> resource_counter_;
 };
 
 #endif
