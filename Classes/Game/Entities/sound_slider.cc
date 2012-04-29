@@ -1,5 +1,5 @@
 //
-//  SoundSlider.cc
+//  sound_slider.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-05-06.

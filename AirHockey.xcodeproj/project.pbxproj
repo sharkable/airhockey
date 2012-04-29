@@ -805,18 +805,18 @@
 		D4B1F4C61515291500620EF2 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				D49689CA154DE47E00DB64DF /* paddle.cc */,
 				D49689CB154DE47E00DB64DF /* paddle.h */,
-				D49689CC154DE47E00DB64DF /* post.cc */,
+				D49689CA154DE47E00DB64DF /* paddle.cc */,
 				D49689CD154DE47E00DB64DF /* post.h */,
-				D49689CE154DE47E00DB64DF /* puck.cc */,
+				D49689CC154DE47E00DB64DF /* post.cc */,
 				D49689CF154DE47E00DB64DF /* puck.h */,
-				D49689D0154DE47E00DB64DF /* rink.cc */,
+				D49689CE154DE47E00DB64DF /* puck.cc */,
 				D49689D1154DE47E00DB64DF /* rink.h */,
-				D49689D2154DE47E00DB64DF /* round_thing.cc */,
+				D49689D0154DE47E00DB64DF /* rink.cc */,
 				D49689D3154DE47E00DB64DF /* round_thing.h */,
-				D49689D4154DE47E00DB64DF /* sound_slider.cc */,
+				D49689D2154DE47E00DB64DF /* round_thing.cc */,
 				D49689D5154DE47E00DB64DF /* sound_slider.h */,
+				D49689D4154DE47E00DB64DF /* sound_slider.cc */,
 			);
 			path = Entities;
 			sourceTree = "<group>";

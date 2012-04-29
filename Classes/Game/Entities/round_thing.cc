@@ -1,5 +1,5 @@
 //
-//  RoundThing.cc
+//  round_thing.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-14.

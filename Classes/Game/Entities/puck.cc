@@ -1,5 +1,5 @@
 //
-//  Puck.cc
+//  puck.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.

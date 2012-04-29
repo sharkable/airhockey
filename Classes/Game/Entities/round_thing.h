@@ -1,5 +1,5 @@
 //
-//  RoundThing.h
+//  round_thing.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-14.
