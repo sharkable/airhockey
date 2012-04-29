@@ -35,7 +35,7 @@ class SimpleItem : public StateEntity {
   void set_position(SGPoint position) { position_ = position; }
   double angle() { return angle_; }
   void set_angle(double angle) { angle_ = angle; }
-  SGSize size() { return textures_[texture_].contentSize(); }
+  SGSize size() { return textures_[texture_].content_size(); }
 
  private:
   vector<Texture2D> textures_;

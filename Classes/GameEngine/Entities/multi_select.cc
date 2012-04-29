@@ -34,9 +34,9 @@ void MultiSelect::Render() {
   for (int i = 0; i < normal_textures_.size(); i++) {
     SGPoint p = SGPointMake(positions_x_[i], positions_y_[i]);
     if (i == selected_value_) {
-      selected_textures_[i].drawAtPoint(p);
+      selected_textures_[i].DrawAtPoint(p);
     } else {
-      normal_textures_[i].drawAtPoint(p);
+      normal_textures_[i].DrawAtPoint(p);
     }
   }
 }
@@ -45,7 +45,7 @@ void MultiSelect::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < normal_textures_.size(); i++) {
     double x = positions_x_[i];
     double y = positions_y_[i];
-    SGSize size = normal_textures_[i].contentSize();
+    SGSize size = normal_textures_[i].content_size();
     for (int j = 0; j < touches.size(); j++) {
       SGPoint touchPoint = touches[j].location();
       if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&

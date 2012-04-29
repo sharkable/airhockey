@@ -31,7 +31,7 @@ MainMenuState::MainMenuState(GameEngine &game_engine)
   AddEntity(*left_rink_border);
   Texture2D right_rink_border_texture =
       ResourceLoader::Instance().TextureWithName("rink_right");
-  SGPoint left_rink_border_pos = SGPointMake(SCREEN_WIDTH - right_rink_border_texture.contentSize().width,
+  SGPoint left_rink_border_pos = SGPointMake(SCREEN_WIDTH - right_rink_border_texture.content_size().width,
                                           0);
   SimpleItem *right_rink_border = new SimpleItem(right_rink_border_texture, left_rink_border_pos);
   AddEntity(*right_rink_border);
@@ -41,7 +41,7 @@ MainMenuState::MainMenuState(GameEngine &game_engine)
   AddEntity(*title);
   
   Texture2D main_menu_texture = ResourceLoader::Instance().TextureWithName("main_menu");
-  SGPoint main_menu_position = SGPointMake((SCREEN_WIDTH - main_menu_texture.contentSize().width) / 2,
+  SGPoint main_menu_position = SGPointMake((SCREEN_WIDTH - main_menu_texture.content_size().width) / 2,
                                          339);
   SimpleItem *main_menu = new SimpleItem(main_menu_texture, main_menu_position);
   AddEntity(*main_menu);
@@ -50,7 +50,7 @@ MainMenuState::MainMenuState(GameEngine &game_engine)
   Texture2D start_button_pressed_image =
       ResourceLoader::Instance().TextureWithName("start_button_pressed");
   SGPoint start_button_position =
-      SGPointMake((SCREEN_WIDTH - start_button_image.contentSize().width) / 2, 392);
+      SGPointMake((SCREEN_WIDTH - start_button_image.content_size().width) / 2, 392);
   start_button_.set_normal_texture(start_button_image);
   start_button_.set_pressed_texture(start_button_pressed_image);
   start_button_.set_position(start_button_position);
@@ -96,7 +96,7 @@ MainMenuState::MainMenuState(GameEngine &game_engine)
   Texture2D two_player_selected_image =
       ResourceLoader::Instance().TextureWithName("2_player_selected");
   SGPoint num_players_select_position =
-      SGPointMake(SCREEN_WIDTH / 2 - one_player_image.contentSize().width, players_y);
+      SGPointMake(SCREEN_WIDTH / 2 - one_player_image.content_size().width, players_y);
   num_players_select_.Add(one_player_image, one_player_selected_image, num_players_select_position);
   num_players_select_.Add(two_player_image, two_player_selected_image, SGPointMake(SCREEN_WIDTH/2, players_y));
   num_players_select_.set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));

@@ -131,5 +131,5 @@ void Rink::Update() {
 }
 
 void Rink::Render() {
-  texture_.drawAtPoint(renderPoint_);
+  texture_.DrawAtPoint(renderPoint_);
 }

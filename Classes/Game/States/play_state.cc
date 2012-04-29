@@ -75,7 +75,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
   AddEntity(*leftRinkBorder);
   Texture2D rightRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_right");
-  SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.contentSize().width,
+  SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.content_size().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
   AddEntity(*rightRinkBorder);
@@ -90,14 +90,14 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
 
   Texture2D getReadyTexture = ResourceLoader::Instance().TextureWithName("get_ready");
   SGPoint getReadyPosition =
-      SGPointMake((SCREEN_WIDTH - getReadyTexture.contentSize().width) / 2, 
-                  (SCREEN_HEIGHT - getReadyTexture.contentSize().height) / 2);
+      SGPointMake((SCREEN_WIDTH - getReadyTexture.content_size().width) / 2, 
+                  (SCREEN_HEIGHT - getReadyTexture.content_size().height) / 2);
   get_ready_.add_texture(getReadyTexture);
   get_ready_.set_position(getReadyPosition);
 
   Texture2D goTexture = ResourceLoader::Instance().TextureWithName("go");
-  SGPoint goPosition = SGPointMake((SCREEN_WIDTH - goTexture.contentSize().width) / 2, 
-                                   (SCREEN_HEIGHT - goTexture.contentSize().height) / 2);
+  SGPoint goPosition = SGPointMake((SCREEN_WIDTH - goTexture.content_size().width) / 2, 
+                                   (SCREEN_HEIGHT - goTexture.content_size().height) / 2);
   go_.add_texture(goTexture);
   go_.set_position(goPosition);
   
@@ -106,7 +106,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   Texture2D rematchButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("rematch_button_pressed");
   SGPoint rematchButtonPos =
-      SGPointMake((SCREEN_WIDTH - rematchButtonTexture.contentSize().width) / 2, 441);
+      SGPointMake((SCREEN_WIDTH - rematchButtonTexture.content_size().width) / 2, 441);
   rematch_button_.set_normal_texture(rematchButtonTexture);
   rematch_button_.set_pressed_texture(rematchButtonPressedTexture);
   rematch_button_.set_position(rematchButtonPos);
@@ -115,7 +115,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   Texture2D menuButtonTexture = ResourceLoader::Instance().TextureWithName("menu_button");
   Texture2D menuButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("menu_button_pressed");
-  SGPoint menuButtonPos = SGPointMake((SCREEN_WIDTH - menuButtonTexture.contentSize().width) / 2,
+  SGPoint menuButtonPos = SGPointMake((SCREEN_WIDTH - menuButtonTexture.content_size().width) / 2,
                                       546);
   continue_button_.set_normal_texture(menuButtonTexture);
   continue_button_.set_pressed_texture(menuButtonPressedTexture);
@@ -127,7 +127,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   Texture2D continueButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("continue_button_pressed");
   SGPoint continueButtonPos =
-      SGPointMake((SCREEN_WIDTH - continueButtonTexture.contentSize().width) / 2, 441);
+      SGPointMake((SCREEN_WIDTH - continueButtonTexture.content_size().width) / 2, 441);
   continue_button_.set_normal_texture(continueButtonTexture);
   continue_button_.set_pressed_texture(continueButtonPressedTexture);
   continue_button_.set_position(continueButtonPos);
@@ -136,7 +136,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   Texture2D menuBackgroundTexture =
       ResourceLoader::Instance().TextureWithName("game_menu_bg");
   SGPoint menuBackgroundPosition =
-      SGPointMake((SCREEN_WIDTH - menuBackgroundTexture.contentSize().width) / 2, 306);
+      SGPointMake((SCREEN_WIDTH - menuBackgroundTexture.content_size().width) / 2, 306);
   menu_background_.add_texture(menuBackgroundTexture);
   menu_background_.set_position(menuBackgroundPosition);
   
@@ -156,8 +156,8 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   }
   
   SGPoint pauseButtonPos2 =
-      SGPointMake(SCREEN_WIDTH - pauseButtonTexture.contentSize().width,
-                  SCREEN_HEIGHT - pauseButtonTexture.contentSize().height +
+      SGPointMake(SCREEN_WIDTH - pauseButtonTexture.content_size().width,
+                  SCREEN_HEIGHT - pauseButtonTexture.content_size().height +
                       (false ? (27 * 768.0/320.0) : 0));
   pause_button_2_.set_normal_texture(pauseButtonTexture);
   pause_button_2_.set_pressed_texture(pauseButtonPressedTexture);

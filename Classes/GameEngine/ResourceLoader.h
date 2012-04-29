@@ -22,6 +22,8 @@ class ResourceLoader {
   void ReleaseResource(Texture2D resource);
 
  private:
+  Texture2D Texture(string filename);
+  
   map<string, Texture2D> resources_;
   map<string, int> resource_counter_;
 };

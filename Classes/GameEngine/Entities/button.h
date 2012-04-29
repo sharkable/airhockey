@@ -43,7 +43,7 @@ class Button : public StateEntity {
   void set_pressed_texture(Texture2D pressed_texture) { pressed_texture_ = pressed_texture; }
   void set_position(SGPoint position) { position_ = position; }
   void set_delegate(ButtonDelegate *delegate) { delegate_ = delegate; }
-  SGSize size() { return normal_texture_.contentSize(); }
+  SGSize size() { return normal_texture_.content_size(); }
  
  private:
   Texture2D normal_texture_;

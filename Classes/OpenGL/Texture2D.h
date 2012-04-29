@@ -60,15 +60,13 @@
  
  */
 
-#ifndef AirHockey_Texture2D_h
-#define AirHockey_Texture2D_h
+#ifndef AIRHOCKEY_OPENGL_TEXTURE2D_H_
+#define AIRHOCKEY_OPENGL_TEXTURE2D_H_
 
 #import <OpenGLES/ES1/gl.h>
-
 #import <string>
 using namespace std;
 
-//CONSTANTS:
 #define kMaxTextureSize   1024
 
 typedef enum {
@@ -90,67 +88,52 @@ struct SGPoint {
 };
 SGPoint SGPointMake(double x, double y);
 
-#define LIGHTEN_AMOUNT 128
-
-//CLASS INTERFACES:
-
 /*
  This class allows to easily create OpenGL 2D textures from images, text or raw data.
  The created Texture2D object will always have power-of-two dimensions.
- Depending on how you create the Texture2D object, the actual image area of the texture might be smaller than the texture dimensions i.e. "contentSize" != (pixelsWide, pixelsHigh) and (maxS, maxT) != (1.0, 1.0).
+ Depending on how you create the Texture2D object, the actual image area of the texture might be
+ smaller than the texture dimensions i.e. "contentSize" != (pixelsWide, pixelsHigh) and
+ (maxS, maxT) != (1.0, 1.0).
  Be aware that the content of the generated textures will be upside-down!
  */
 class Texture2D {
+ public:
+  Texture2D() {}
+  Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
+            SGSize size);
+
+  static void SetGlobalAlpha(GLfloat alpha);
+  void DrawAtPoint(SGPoint point);
+  void DrawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z);
+  void DrawAtPointLeftRatio(SGPoint point, GLfloat leftRatio);
+  void DrawAtPointRightRatio(SGPoint point, GLfloat rightRatio);
+  void DrawAtPointAngle(SGPoint point, GLfloat angle);
+  void Delete();
+  
+  GLuint name() { return name_; }
+  SGSize content_size() {
+    //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    //      return size_;
+    //    } else {
+    return SGSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
+    //    }
+  }  
+
  private:
+  void Init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
+            SGSize size);
+
+  static int nameCounter_;
+  static GLfloat globalAlpha_;
   GLuint name_;
   SGSize size_;
   uint32_t width_;
   uint32_t height_;
   Texture2DPixelFormat format_;
-  GLfloat maxS_;
-  GLfloat maxT_;
-  string resourceName_;
+  GLfloat max_s_;
+  GLfloat max_t_;
   GLfloat coordinates_[8];
-  GLfloat vertices_[12];
-
- public:
-  Texture2D() {}
-  Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
-            SGSize size);
-  void init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
-            SGSize size);
-  Texture2D(GLuint name, SGSize size, uint32_t width, uint32_t height,
-            Texture2DPixelFormat format, GLfloat maxS, GLfloat maxT);
-  Texture2D(string filename);
-  Texture2D(string filename, bool silhouette, bool lighten);
-  void init(string filename, bool silhouette, bool lighten);
-  // Texture2D(UIImage *uiImage);
-  // Texture2D(string str, SGSize dimensions, UITextAlignment alignment, UIFont *font);
-  ~Texture2D();
-
-  static void setGlobalAlpha(GLfloat alpha);
-  
-  Texture2DPixelFormat pixelFormat() { return format_; }
-  uint32_t pixelsWide() { return width_; }
-  uint32_t pixelsHigh() { return height_; }
-  GLuint name() { return name_; }
-  SGSize contentSize() {
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//      return size_;
-//    } else {
-      return SGSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
-//    }
-  }
-  GLfloat maxS() { return maxS_; }
-  GLfloat maxT() { return maxT_; }
-
-  string resourceName();
-  
-  void drawAtPoint(SGPoint point);
-  void drawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z);
-  void drawAtPointLeftRatio(SGPoint point, GLfloat leftRatio);
-  void drawAtPointRightRatio(SGPoint point, GLfloat rightRatio);
-  void drawAtPointAngle(SGPoint point, GLfloat angle);
+  GLfloat vertices_[12];  
 };
 
 #endif

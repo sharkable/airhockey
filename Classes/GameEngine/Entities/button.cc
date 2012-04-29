@@ -28,8 +28,8 @@ Button::~Button() {
 bool Button::ContainsPoint(SGPoint p) {
   return p.x >= position_.x &&
   p.y >= position_.y &&
-  p.x < position_.x + pressed_texture_.contentSize().width &&
-  p.y < position_.y + pressed_texture_.contentSize().height;
+  p.x < position_.x + pressed_texture_.content_size().width &&
+  p.y < position_.y + pressed_texture_.content_size().height;
 }
 
 
@@ -41,11 +41,11 @@ void Button::Update() {
 void Button::Render() {
   switch (state_) {
     case kButtonStateNormal: {
-      normal_texture_.drawAtPoint(position_);
+      normal_texture_.DrawAtPoint(position_);
       break;
     }
     case kButtonStatePressed: {
-      pressed_texture_.drawAtPoint(position_);
+      pressed_texture_.DrawAtPoint(position_);
       break;
     }
   }

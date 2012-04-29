@@ -174,7 +174,7 @@ void RoundThing::Update() {
 
 void RoundThing::Render() {
   if (active_) {
-    texture_.drawAtPoint(SGPointMake(x_ - texture_.contentSize().width/2, y_ - texture_.contentSize().height/2));
+    texture_.DrawAtPoint(SGPointMake(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2));
   }
 }
 

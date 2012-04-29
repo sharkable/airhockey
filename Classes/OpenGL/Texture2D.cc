@@ -61,15 +61,11 @@
  
  */
 
-#import <OpenGLES/ES1/glext.h>
+#include "opengl/texture2D.h"
 
-#import "Texture2D.h"
-#import "const.h"
+#include <OpenGLES/ES1/glext.h>
 
-//CLASS IMPLEMENTATIONS:
-
-int nameCounter__ = 0;
-GLfloat globalAlpha__ = 1.f;
+#include "const.h"
 
 SGSize SGSizeMake(double width, double height) {
   SGSize size;
@@ -85,27 +81,181 @@ SGPoint SGPointMake(double x, double y) {
   return point;
 }
 
-void Texture2D::setGlobalAlpha(GLfloat alpha) {
-  globalAlpha__ = alpha;
-}
+int Texture2D::nameCounter_ = 0;
+GLfloat Texture2D::globalAlpha_ = 1;
 
 Texture2D::Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width,
                      uint32_t height, SGSize size) {
-  init(data, pixelFormat, width, height, size);
+  Init(data, pixelFormat, width, height, size);
 }
 
-void Texture2D::init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width,
+void Texture2D::SetGlobalAlpha(GLfloat alpha) {
+  globalAlpha_ = alpha;
+}
+
+void Texture2D::DrawAtPoint(SGPoint point) {
+  DrawAtPoint(point, 1.f, 1.f, 0.f, 0.f);
+}
+
+void Texture2D::DrawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z) {
+  // Swap vertical coordinate system.
+  point.y = 1024.f - point.y;
+
+  GLfloat width = (GLfloat)width_ * max_s_,
+  height = (GLfloat)height_ * max_t_;
+
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    point.x *= 320.0/768.0;
+    point.y *= 320.0/768.0;
+    if (IS_FREE) {
+    } else {
+      point.y += 27;
+    }  
+//  }  
+
+  glLoadIdentity();
+  glBindTexture(GL_TEXTURE_2D, name_);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_);
+  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
+  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+  glTranslatef(point.x + width/2.0, point.y - height/2.0, 0.0);
+  glRotatef(angle, 0.f, 0.f, 1.f);
+  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glColor4f(1.f, 1.f, 1.f, alpha*globalAlpha_);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+void Texture2D::DrawAtPointLeftRatio(SGPoint point, GLfloat leftRatio) {
+  // Swap vertical coordinate system.
+  point.y = 1024.f - point.y;
+  
+  GLfloat    width = (GLfloat)width_ * max_s_ * leftRatio,
+  height = (GLfloat)height_ * max_t_;
+  
+  coordinates_[2] = coordinates_[6] = leftRatio * max_s_;
+
+  vertices_[0] = -width/2.0;
+  vertices_[1] = -height/2.0;
+  
+  vertices_[3] = width/2.0;
+  vertices_[4] = -height/2.0;
+  
+  vertices_[6] = -width/2.0;
+  vertices_[7] = height/2.0;
+  
+  vertices_[9] = width/2.0;
+  vertices_[10] = height/2.0;
+  
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    point.x *= 320.0/768.0;
+    point.y *= 320.0/768.0;
+    if (IS_FREE) {
+    } else {
+      point.y += 27;
+    }  
+    
+//  }  
+  
+  glLoadIdentity();
+  glBindTexture(GL_TEXTURE_2D, name_);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_);
+  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
+  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+  glTranslatef(point.x + width/2.0, point.y - height/2.0, 0.0);
+  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+void Texture2D::DrawAtPointRightRatio(SGPoint point, GLfloat rightRatio) {
+  // Swap vertical coordinate system.
+  point.y = 1024.f - point.y;
+  
+  GLfloat    width = (GLfloat)width_ * max_s_ * rightRatio,
+  height = (GLfloat)height_ * max_t_;
+  
+  coordinates_[0] = coordinates_[4] = (1.0 - rightRatio) * max_s_;
+
+  vertices_[0] = -width/2.0;
+  vertices_[1] = -height/2.0;
+  
+  vertices_[3] = width/2.0;
+  vertices_[4] = -height/2.0;
+  
+  vertices_[6] = -width/2.0;
+  vertices_[7] = height/2.0;
+  
+  vertices_[9] = width/2.0;
+  vertices_[10] = height/2.0;
+  
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    point.x *= 320.0/768.0;
+    point.y *= 320.0/768.0;
+    if (IS_FREE) {
+    } else {
+      point.y += 27;
+    }  
+    
+//  }  
+  
+  glLoadIdentity();
+  glBindTexture(GL_TEXTURE_2D, name_);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_);
+  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
+  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+  glTranslatef(point.x + width/2.0 + (1.0 - rightRatio) * (GLfloat)width_ * max_s_, point.y - height/2.0, 0.0);
+  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+
+void Texture2D::DrawAtPointAngle(SGPoint point, GLfloat angle) {
+  // Swap vertical coordinate system.
+  point.y = 1024.f - point.y;
+  
+  GLfloat    width = (GLfloat)width_ * max_s_,
+  height = (GLfloat)height_ * max_t_;
+
+//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    point.x *= 320.0/768.0;
+    point.y *= 320.0/768.0;
+    if (IS_FREE) {
+    } else {
+      point.y += 27;
+    }  
+    
+//  }
+  
+  glLoadIdentity();
+  glBindTexture(GL_TEXTURE_2D, name_);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_);
+  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
+  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+  glTranslatef(point.x + width/2.0, point.y - height/2.0, 0.0);
+  glRotatef(angle, 0.f, 0.f, 1.f);
+  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+void Texture2D::Delete() {
+  if (name_) {
+    glDeleteTextures(1, &name_);
+  }
+}
+
+
+// Private
+
+void Texture2D::Init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width,
                      uint32_t height, SGSize size) {
   GLint saveName;
-
+  
   //glGenTextures(1, &name_);
-  name_ = ++nameCounter__;
+  name_ = ++nameCounter_;
   
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &saveName);
   glBindTexture(GL_TEXTURE_2D, name_);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   switch(pixelFormat) {
-      
     case kTexture2DPixelFormat_RGBA8888:
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
       break;
@@ -126,19 +276,19 @@ void Texture2D::init(const void *data, Texture2DPixelFormat pixelFormat, uint32_
   width_ = width;
   height_ = height;
   format_ = pixelFormat;
-  maxS_ = size.width / (float)width;
-  maxT_ = size.height / (float)height;
+  max_s_ = size.width / (float)width;
+  max_t_ = size.height / (float)height;
   
   coordinates_[0] = 0;
-  coordinates_[1] = maxT_;
+  coordinates_[1] = max_t_;
   
-  coordinates_[2] = maxS_;
-  coordinates_[3] = maxT_;
+  coordinates_[2] = max_s_;
+  coordinates_[3] = max_t_;
   
   coordinates_[4] = 0;
   coordinates_[5] = 0;
   
-  coordinates_[6] = maxS_;
+  coordinates_[6] = max_s_;
   coordinates_[7] = 0;
   
   
@@ -157,248 +307,4 @@ void Texture2D::init(const void *data, Texture2DPixelFormat pixelFormat, uint32_
   vertices_[9] = size.width/2.0;
   vertices_[10] = size.height/2.0;
   vertices_[11] = 0.0;
-}
-
-Texture2D::Texture2D(GLuint name, SGSize size, uint32_t width, uint32_t height,
-                     Texture2DPixelFormat format, GLfloat maxS, GLfloat maxT) {
-  name_ = name;
-  size_ = size;
-  width_ = width;
-  height_ = height;
-  format_ = format;
-  maxS_ = maxS;
-  maxT_ = maxT;
-}
-
-Texture2D::Texture2D(string filename) {
-  init(filename, false, false);
-}
-
-Texture2D::Texture2D(string filename, bool silhouette, bool lighten) {
-  init(filename, silhouette, lighten);
-}
-
-void Texture2D::init(string filename, bool silhouette, bool lighten) {
-  resourceName_ = filename;
-
-//  NSString* filePath = [[NSBundle mainBundle] pathForResource:TypeUtil::string2NSString(filename)
-//                                                       ofType:nil];
-//  NSData* data = [NSData dataWithContentsOfFile:filePath];
-//
-//  unsigned char* byteData = (unsigned char*)[data bytes];
-//  int originalWidth = byteData[0] + (byteData[1] << 8) + (byteData[2] << 16) + (byteData[3] << 24);
-//  int originalHeight = byteData[4] + (byteData[5] << 8) + (byteData[6] << 16) + (byteData[7] << 24);
-//  int textureWidth = byteData[8] + (byteData[9] << 8) + (byteData[10] << 16) + (byteData[11] << 24);
-//  int textureHeight = byteData[12] + (byteData[13] << 8) + (byteData[14] << 16) +
-//                      (byteData[15] << 24);
-//  if (silhouette) {
-//    for (int i = 16; i < [data length]; i += 4) {
-//      byteData[i] = 0;
-//      byteData[i+1] = 0;
-//      byteData[i+2] = 0;
-//    }
-//  }
-//  if (lighten) {
-//    for (int i = 16; i < [data length]; i += 4) {
-//      int lightenAmount = 300 - i * 300 / [data length];
-//      for (int j = i; j < i + 3; j++) {
-//        if (byteData[j] < 255 - lightenAmount) {
-//          byteData[j] += lightenAmount;
-//        } else {
-//          byteData[j] = 255;
-//        }
-//      }  
-//    }
-//  }
-//  init(byteData+16, kTexture2DPixelFormat_RGBA8888, textureWidth, textureHeight,
-//       SGSizeMake(originalWidth, originalHeight));
-}
-
-//Texture2D::Texture2D(string str, SGSize dimensions, UITextAlignment alignment, UIFont *font) {
-//  NSUInteger width, height, i;
-//  CGContextRef context;
-//  void *data;
-//  CGColorSpaceRef colorSpace;
-//  
-//  width = dimensions.width;
-//  if((width != 1) && (width & (width - 1))) {
-//    i = 1;
-//    while(i < width)
-//      i *= 2;
-//    width = i;
-//  }
-//  height = dimensions.height;
-//  if((height != 1) && (height & (height - 1))) {
-//    i = 1;
-//    while(i < height)
-//      i *= 2;
-//    height = i;
-//  }
-//  
-//  colorSpace = CGColorSpaceCreateDeviceGray();
-//  data = calloc(height, width);
-//  context = CGBitmapContextCreate(data, width, height, 8, width, colorSpace, kCGImageAlphaNone);
-//  CGColorSpaceRelease(colorSpace);
-//  
-//  
-//  CGContextSetGrayFillColor(context, 1.0, 1.0);
-//  CGContextTranslateCTM(context, 0.0, height);
-//  CGContextScaleCTM(context, 1.0, -1.0); //NOTE: NSString draws in UIKit referential i.e. renders upside-down compared to CGBitmapContext referential
-//  UIGraphicsPushContext(context);
-//  [TypeUtil::string2NSString(str) drawInRect:CGRectMake(0, 0, dimensions.width, dimensions.height) withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:alignment];
-//  UIGraphicsPopContext();
-//  
-//  init(data, kTexture2DPixelFormat_A8, width, height, dimensions);
-//  
-//  CGContextRelease(context);
-//  free(data);
-//}
-
-Texture2D::~Texture2D() {
-  if (name_) {
-    // TODO glDeleteTextures(1, &name_);
-  }
-}
-  
-void Texture2D::drawAtPoint(SGPoint point) {
-  drawAtPoint(point, 1.f, 1.f, 0.f, 0.f);
-}
-
-void Texture2D::drawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z) {
-  // Swap vertical coordinate system.
-  point.y = 1024.f - point.y;
-
-  GLfloat width = (GLfloat)width_ * maxS_,
-  height = (GLfloat)height_ * maxT_;
-
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-//  }  
-
-  glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, name_);
-  glVertexPointer(3, GL_FLOAT, 0, vertices_);
-  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
-  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
-  glTranslatef(point.x + width/2.0, point.y - height/2.0, 0.0);
-  glRotatef(angle, 0.f, 0.f, 1.f);
-  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glColor4f(1.f, 1.f, 1.f, alpha*globalAlpha__);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-}
-
-void Texture2D::drawAtPointLeftRatio(SGPoint point, GLfloat leftRatio) {
-  // Swap vertical coordinate system.
-  point.y = 1024.f - point.y;
-  
-  GLfloat    width = (GLfloat)width_ * maxS_ * leftRatio,
-  height = (GLfloat)height_ * maxT_;
-  
-  coordinates_[2] = coordinates_[6] = leftRatio * maxS_;
-
-  vertices_[0] = -width/2.0;
-  vertices_[1] = -height/2.0;
-  
-  vertices_[3] = width/2.0;
-  vertices_[4] = -height/2.0;
-  
-  vertices_[6] = -width/2.0;
-  vertices_[7] = height/2.0;
-  
-  vertices_[9] = width/2.0;
-  vertices_[10] = height/2.0;
-  
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-    
-//  }  
-  
-  glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, name_);
-  glVertexPointer(3, GL_FLOAT, 0, vertices_);
-  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
-  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-  glTranslatef(point.x + width/2.0, point.y - height/2.0, 0.0);
-  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-}
-
-void Texture2D::drawAtPointRightRatio(SGPoint point, GLfloat rightRatio) {
-  // Swap vertical coordinate system.
-  point.y = 1024.f - point.y;
-  
-  GLfloat    width = (GLfloat)width_ * maxS_ * rightRatio,
-  height = (GLfloat)height_ * maxT_;
-  
-  coordinates_[0] = coordinates_[4] = (1.0 - rightRatio) * maxS_;
-
-  vertices_[0] = -width/2.0;
-  vertices_[1] = -height/2.0;
-  
-  vertices_[3] = width/2.0;
-  vertices_[4] = -height/2.0;
-  
-  vertices_[6] = -width/2.0;
-  vertices_[7] = height/2.0;
-  
-  vertices_[9] = width/2.0;
-  vertices_[10] = height/2.0;
-  
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-    
-//  }  
-  
-  glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, name_);
-  glVertexPointer(3, GL_FLOAT, 0, vertices_);
-  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
-  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-  glTranslatef(point.x + width/2.0 + (1.0 - rightRatio) * (GLfloat)width_ * maxS_, point.y - height/2.0, 0.0);
-  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-}
-
-
-void Texture2D::drawAtPointAngle(SGPoint point, GLfloat angle) {
-  // Swap vertical coordinate system.
-  point.y = 1024.f - point.y;
-  
-  GLfloat    width = (GLfloat)width_ * maxS_,
-  height = (GLfloat)height_ * maxT_;
-
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-    
-//  }
-  
-  glLoadIdentity();
-  glBindTexture(GL_TEXTURE_2D, name_);
-  glVertexPointer(3, GL_FLOAT, 0, vertices_);
-  glTexCoordPointer(2, GL_FLOAT, 0, coordinates_);
-  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-  glTranslatef(point.x + width/2.0, point.y - height/2.0, 0.0);
-  glRotatef(angle, 0.f, 0.f, 1.f);
-  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
