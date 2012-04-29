@@ -35,6 +35,18 @@
 		D484899E1538836C006CE9AD /* engine_state.cc in Sources */ = {isa = PBXBuildFile; fileRef = D48489991538836C006CE9AD /* engine_state.cc */; };
 		D484899F1538836C006CE9AD /* game_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = D484899B1538836C006CE9AD /* game_engine.cc */; };
 		D48489A01538836C006CE9AD /* game_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = D484899B1538836C006CE9AD /* game_engine.cc */; };
+		D49689D6154DE47E00DB64DF /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689CA154DE47E00DB64DF /* paddle.cc */; };
+		D49689D7154DE47E00DB64DF /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689CA154DE47E00DB64DF /* paddle.cc */; };
+		D49689D8154DE47E00DB64DF /* post.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689CC154DE47E00DB64DF /* post.cc */; };
+		D49689D9154DE47E00DB64DF /* post.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689CC154DE47E00DB64DF /* post.cc */; };
+		D49689DA154DE47E00DB64DF /* puck.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689CE154DE47E00DB64DF /* puck.cc */; };
+		D49689DB154DE47E00DB64DF /* puck.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689CE154DE47E00DB64DF /* puck.cc */; };
+		D49689DC154DE47E00DB64DF /* rink.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689D0154DE47E00DB64DF /* rink.cc */; };
+		D49689DD154DE47E00DB64DF /* rink.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689D0154DE47E00DB64DF /* rink.cc */; };
+		D49689DE154DE47E00DB64DF /* round_thing.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689D2154DE47E00DB64DF /* round_thing.cc */; };
+		D49689DF154DE47E00DB64DF /* round_thing.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689D2154DE47E00DB64DF /* round_thing.cc */; };
+		D49689E0154DE47E00DB64DF /* sound_slider.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689D4154DE47E00DB64DF /* sound_slider.cc */; };
+		D49689E1154DE47E00DB64DF /* sound_slider.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689D4154DE47E00DB64DF /* sound_slider.cc */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
@@ -422,18 +434,6 @@
 		FEA8E8B614F97D320084E117 /* upgrade_for_more.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */; };
 		FEA8E8B714F97D320084E117 /* title_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B014F97D320084E117 /* title_iphone.png */; };
 		FEA8E8B814F97D320084E117 /* upgrade_for_more_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */; };
-		FEF7DDAD15313B11007F7A4C /* Paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA115313B11007F7A4C /* Paddle.cc */; };
-		FEF7DDAE15313B11007F7A4C /* Paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA115313B11007F7A4C /* Paddle.cc */; };
-		FEF7DDAF15313B11007F7A4C /* Post.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA315313B11007F7A4C /* Post.cc */; };
-		FEF7DDB015313B11007F7A4C /* Post.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA315313B11007F7A4C /* Post.cc */; };
-		FEF7DDB115313B11007F7A4C /* Puck.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA515313B11007F7A4C /* Puck.cc */; };
-		FEF7DDB215313B11007F7A4C /* Puck.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA515313B11007F7A4C /* Puck.cc */; };
-		FEF7DDB315313B11007F7A4C /* Rink.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA715313B11007F7A4C /* Rink.cc */; };
-		FEF7DDB415313B11007F7A4C /* Rink.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA715313B11007F7A4C /* Rink.cc */; };
-		FEF7DDB515313B11007F7A4C /* RoundThing.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA915313B11007F7A4C /* RoundThing.cc */; };
-		FEF7DDB615313B11007F7A4C /* RoundThing.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDA915313B11007F7A4C /* RoundThing.cc */; };
-		FEF7DDB715313B11007F7A4C /* SoundSlider.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */; };
-		FEF7DDB815313B11007F7A4C /* SoundSlider.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */; };
 		FEF7DDBA15313CAA007F7A4C /* MainMenuState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDB915313CAA007F7A4C /* MainMenuState.cc */; };
 		FEF7DDBB15313CAA007F7A4C /* MainMenuState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDB915313CAA007F7A4C /* MainMenuState.cc */; };
 		FEF7DDBD15313DD5007F7A4C /* PlayState.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEF7DDBC15313DD4007F7A4C /* PlayState.cc */; };
@@ -474,6 +474,18 @@
 		D484899B1538836C006CE9AD /* game_engine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_engine.cc; sourceTree = "<group>"; };
 		D484899C1538836C006CE9AD /* game_engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_engine.h; sourceTree = "<group>"; };
 		D48489A11538A451006CE9AD /* touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = touch.h; sourceTree = "<group>"; };
+		D49689CA154DE47E00DB64DF /* paddle.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cc; sourceTree = "<group>"; };
+		D49689CB154DE47E00DB64DF /* paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paddle.h; sourceTree = "<group>"; };
+		D49689CC154DE47E00DB64DF /* post.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = post.cc; sourceTree = "<group>"; };
+		D49689CD154DE47E00DB64DF /* post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = post.h; sourceTree = "<group>"; };
+		D49689CE154DE47E00DB64DF /* puck.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = puck.cc; sourceTree = "<group>"; };
+		D49689CF154DE47E00DB64DF /* puck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = puck.h; sourceTree = "<group>"; };
+		D49689D0154DE47E00DB64DF /* rink.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rink.cc; sourceTree = "<group>"; };
+		D49689D1154DE47E00DB64DF /* rink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rink.h; sourceTree = "<group>"; };
+		D49689D2154DE47E00DB64DF /* round_thing.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = round_thing.cc; sourceTree = "<group>"; };
+		D49689D3154DE47E00DB64DF /* round_thing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = round_thing.h; sourceTree = "<group>"; };
+		D49689D4154DE47E00DB64DF /* sound_slider.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sound_slider.cc; sourceTree = "<group>"; };
+		D49689D5154DE47E00DB64DF /* sound_slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound_slider.h; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4D41515291500620EF2 /* MainMenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuState.h; sourceTree = "<group>"; };
@@ -702,18 +714,6 @@
 		FEA8E8AD14F97D320084E117 /* upgrade_for_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more.png; sourceTree = "<group>"; };
 		FEA8E8B014F97D320084E117 /* title_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_iphone.png; sourceTree = "<group>"; };
 		FEA8E8B114F97D320084E117 /* upgrade_for_more_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgrade_for_more_iphone.png; sourceTree = "<group>"; };
-		FEF7DDA115313B11007F7A4C /* Paddle.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Paddle.cc; sourceTree = "<group>"; };
-		FEF7DDA215313B11007F7A4C /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
-		FEF7DDA315313B11007F7A4C /* Post.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Post.cc; sourceTree = "<group>"; };
-		FEF7DDA415313B11007F7A4C /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
-		FEF7DDA515313B11007F7A4C /* Puck.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Puck.cc; sourceTree = "<group>"; };
-		FEF7DDA615313B11007F7A4C /* Puck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Puck.h; sourceTree = "<group>"; };
-		FEF7DDA715313B11007F7A4C /* Rink.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rink.cc; sourceTree = "<group>"; };
-		FEF7DDA815313B11007F7A4C /* Rink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rink.h; sourceTree = "<group>"; };
-		FEF7DDA915313B11007F7A4C /* RoundThing.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoundThing.cc; sourceTree = "<group>"; };
-		FEF7DDAA15313B11007F7A4C /* RoundThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundThing.h; sourceTree = "<group>"; };
-		FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundSlider.cc; sourceTree = "<group>"; };
-		FEF7DDAC15313B11007F7A4C /* SoundSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SoundSlider.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		FEF7DDB915313CAA007F7A4C /* MainMenuState.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuState.cc; sourceTree = "<group>"; };
 		FEF7DDBC15313DD4007F7A4C /* PlayState.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = PlayState.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		FEF7DDBF15313EA0007F7A4C /* SplashState.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplashState.cc; sourceTree = "<group>"; };
@@ -805,18 +805,18 @@
 		D4B1F4C61515291500620EF2 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				FEF7DDA215313B11007F7A4C /* Paddle.h */,
-				FEF7DDA115313B11007F7A4C /* Paddle.cc */,
-				FEF7DDA415313B11007F7A4C /* Post.h */,
-				FEF7DDA315313B11007F7A4C /* Post.cc */,
-				FEF7DDA615313B11007F7A4C /* Puck.h */,
-				FEF7DDA515313B11007F7A4C /* Puck.cc */,
-				FEF7DDA815313B11007F7A4C /* Rink.h */,
-				FEF7DDA715313B11007F7A4C /* Rink.cc */,
-				FEF7DDAA15313B11007F7A4C /* RoundThing.h */,
-				FEF7DDA915313B11007F7A4C /* RoundThing.cc */,
-				FEF7DDAC15313B11007F7A4C /* SoundSlider.h */,
-				FEF7DDAB15313B11007F7A4C /* SoundSlider.cc */,
+				D49689CA154DE47E00DB64DF /* paddle.cc */,
+				D49689CB154DE47E00DB64DF /* paddle.h */,
+				D49689CC154DE47E00DB64DF /* post.cc */,
+				D49689CD154DE47E00DB64DF /* post.h */,
+				D49689CE154DE47E00DB64DF /* puck.cc */,
+				D49689CF154DE47E00DB64DF /* puck.h */,
+				D49689D0154DE47E00DB64DF /* rink.cc */,
+				D49689D1154DE47E00DB64DF /* rink.h */,
+				D49689D2154DE47E00DB64DF /* round_thing.cc */,
+				D49689D3154DE47E00DB64DF /* round_thing.h */,
+				D49689D4154DE47E00DB64DF /* sound_slider.cc */,
+				D49689D5154DE47E00DB64DF /* sound_slider.h */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1835,12 +1835,6 @@
 				D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */,
 				FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */,
-				FEF7DDAD15313B11007F7A4C /* Paddle.cc in Sources */,
-				FEF7DDAF15313B11007F7A4C /* Post.cc in Sources */,
-				FEF7DDB115313B11007F7A4C /* Puck.cc in Sources */,
-				FEF7DDB315313B11007F7A4C /* Rink.cc in Sources */,
-				FEF7DDB515313B11007F7A4C /* RoundThing.cc in Sources */,
-				FEF7DDB715313B11007F7A4C /* SoundSlider.cc in Sources */,
 				FEF7DDBA15313CAA007F7A4C /* MainMenuState.cc in Sources */,
 				FEF7DDBD15313DD5007F7A4C /* PlayState.cc in Sources */,
 				FEF7DDC015313EA1007F7A4C /* SplashState.cc in Sources */,
@@ -1860,6 +1854,12 @@
 				D484899D1538836C006CE9AD /* engine_state.cc in Sources */,
 				D484899F1538836C006CE9AD /* game_engine.cc in Sources */,
 				D4FE0272153B85E0001DB2C0 /* LocalStore.mm in Sources */,
+				D49689D6154DE47E00DB64DF /* paddle.cc in Sources */,
+				D49689D8154DE47E00DB64DF /* post.cc in Sources */,
+				D49689DA154DE47E00DB64DF /* puck.cc in Sources */,
+				D49689DC154DE47E00DB64DF /* rink.cc in Sources */,
+				D49689DE154DE47E00DB64DF /* round_thing.cc in Sources */,
+				D49689E0154DE47E00DB64DF /* sound_slider.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1875,12 +1875,6 @@
 				D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */,
 				FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */,
-				FEF7DDAE15313B11007F7A4C /* Paddle.cc in Sources */,
-				FEF7DDB015313B11007F7A4C /* Post.cc in Sources */,
-				FEF7DDB215313B11007F7A4C /* Puck.cc in Sources */,
-				FEF7DDB415313B11007F7A4C /* Rink.cc in Sources */,
-				FEF7DDB615313B11007F7A4C /* RoundThing.cc in Sources */,
-				FEF7DDB815313B11007F7A4C /* SoundSlider.cc in Sources */,
 				FEF7DDBB15313CAA007F7A4C /* MainMenuState.cc in Sources */,
 				FEF7DDBE15313DD5007F7A4C /* PlayState.cc in Sources */,
 				FEF7DDC115313EA1007F7A4C /* SplashState.cc in Sources */,
@@ -1900,6 +1894,12 @@
 				D484899E1538836C006CE9AD /* engine_state.cc in Sources */,
 				D48489A01538836C006CE9AD /* game_engine.cc in Sources */,
 				D4FE0273153B85E0001DB2C0 /* LocalStore.mm in Sources */,
+				D49689D7154DE47E00DB64DF /* paddle.cc in Sources */,
+				D49689D9154DE47E00DB64DF /* post.cc in Sources */,
+				D49689DB154DE47E00DB64DF /* puck.cc in Sources */,
+				D49689DD154DE47E00DB64DF /* rink.cc in Sources */,
+				D49689DF154DE47E00DB64DF /* round_thing.cc in Sources */,
+				D49689E1154DE47E00DB64DF /* sound_slider.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
