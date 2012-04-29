@@ -1,12 +1,12 @@
 //
-//  ResourceLoader.m
+//  resource_loader.cc
 //  AirHockey
 //
 //  Created by Jon Sharkey on 4/29/12.
 //  Copyright (c) 2012 Sharkable. All rights reserved.
 //
 
-#include "gameengine/ResourceLoader.h"
+#include "gameengine/resource_loader.h"
 
 #import <UIKit/UIKit.h>
 
