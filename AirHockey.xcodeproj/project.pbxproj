@@ -59,6 +59,8 @@
 		D49689F8154DFC8300DB64DF /* ResourceLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D49689F6154DFC8200DB64DF /* ResourceLoader.mm */; };
 		D49689FB154DFE4D00DB64DF /* resource_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689F9154DFE4B00DB64DF /* resource_loader.cc */; };
 		D49689FC154DFE4D00DB64DF /* resource_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689F9154DFE4B00DB64DF /* resource_loader.cc */; };
+		D49689FF154E246D00DB64DF /* texture2d.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689FD154E246D00DB64DF /* texture2d.cc */; };
+		D4968A00154E246D00DB64DF /* texture2d.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689FD154E246D00DB64DF /* texture2d.cc */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
@@ -93,8 +95,6 @@
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FE789BCC14F97B34007FCBC5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FE789BCE14F97B34007FCBC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
-		FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894B15293BBB00431C4F /* Texture2D.cc */; };
-		FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE9F894B15293BBB00431C4F /* Texture2D.cc */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -499,11 +499,12 @@
 		D49689F6154DFC8200DB64DF /* ResourceLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourceLoader.mm; sourceTree = "<group>"; };
 		D49689F9154DFE4B00DB64DF /* resource_loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = resource_loader.cc; sourceTree = "<group>"; };
 		D49689FA154DFE4C00DB64DF /* resource_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resource_loader.h; sourceTree = "<group>"; };
+		D49689FD154E246D00DB64DF /* texture2d.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture2d.cc; sourceTree = "<group>"; };
+		D49689FE154E246D00DB64DF /* texture2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture2d.h; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4DD1515291500620EF2 /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
 		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
-		D4B1F4FF1515291500620EF2 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Texture2D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
 		D4B1F5031515291500620EF2 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
 		D4B1F5041515291500620EF2 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
@@ -531,7 +532,6 @@
 		FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		FE9F894B15293BBB00431C4F /* Texture2D.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture2D.cc; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		FEA8E61E14F97CF00084E117 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
@@ -875,8 +875,8 @@
 		D4B1F4F71515291500620EF2 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				D4B1F4FF1515291500620EF2 /* Texture2D.h */,
-				FE9F894B15293BBB00431C4F /* Texture2D.cc */,
+				D49689FE154E246D00DB64DF /* texture2d.h */,
+				D49689FD154E246D00DB64DF /* texture2d.cc */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -1837,7 +1837,6 @@
 				D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */,
-				FE9F894C15293BBB00431C4F /* Texture2D.cc in Sources */,
 				D484897B15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897D15387DBC006CE9AD /* EAGLView.mm in Sources */,
 				D484897F15387DBC006CE9AD /* ES1Renderer.mm in Sources */,
@@ -1865,6 +1864,7 @@
 				D49689F0154DE5EC00DB64DF /* story_state.cc in Sources */,
 				D49689F7154DFC8300DB64DF /* ResourceLoader.mm in Sources */,
 				D49689FB154DFE4D00DB64DF /* resource_loader.cc in Sources */,
+				D49689FF154E246D00DB64DF /* texture2d.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1878,7 +1878,6 @@
 				D4B1F5491515291500620EF2 /* AVAudio.mm in Sources */,
 				D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */,
-				FE9F894D15293BBB00431C4F /* Texture2D.cc in Sources */,
 				D484897C15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897E15387DBC006CE9AD /* EAGLView.mm in Sources */,
 				D484898015387DBC006CE9AD /* ES1Renderer.mm in Sources */,
@@ -1906,6 +1905,7 @@
 				D49689F1154DE5EC00DB64DF /* story_state.cc in Sources */,
 				D49689F8154DFC8300DB64DF /* ResourceLoader.mm in Sources */,
 				D49689FC154DFE4D00DB64DF /* resource_loader.cc in Sources */,
+				D4968A00154E246D00DB64DF /* texture2d.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
