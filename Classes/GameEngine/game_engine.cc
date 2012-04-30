@@ -10,6 +10,8 @@
 
 #include "gameengine/engine_state.h"
 
+#include <iostream>
+
 void GameEngine::Update() {
   if (pop_on_next_) {
     delete(states_.back());
@@ -27,14 +29,18 @@ void GameEngine::Update() {
   
   // Process input.
   EngineState *top_state = states_.back();
+  
   if (touches_began_.size() > 0) {
     top_state->TouchesBegan(touches_began_);
+    touches_began_.clear();
   }
   if (touches_moved_.size() > 0) {
     top_state->TouchesMoved(touches_moved_);
+    touches_moved_.clear();
   }
   if (touches_ended_.size() > 0) {
     top_state->TouchesEnded(touches_ended_);
+    touches_ended_.clear();
   }
   
   // Update states.

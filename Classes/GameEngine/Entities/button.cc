@@ -67,7 +67,9 @@ void Button::TouchesEnded(vector<Touch> touches) {
     state_ = kButtonStateNormal;
     for (int i = 0; i < touches.size(); i++) {
       if (ContainsPoint(touches[i].location())) {
-        delegate_->ButtonPressed(this);
+        if (delegate_) {
+          delegate_->ButtonPressed(this);
+        }
       }
     }
   }

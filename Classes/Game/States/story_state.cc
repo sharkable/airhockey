@@ -6,37 +6,34 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "story_state.h"
-#import "resource_loader.h"
-#import "game_engine.h"
+#include "game/states/story_state.h"
+
+#include "gameengine/game_engine.h"
+#include "gameengine/resource_loader.h"
 
 StoryState::StoryState(GameEngine &gameEngine) : EngineState(gameEngine) {
   Texture2D storyButtonImage = ResourceLoader::Instance().TextureWithName("story");
-  storyButton_ = new Button(storyButtonImage, storyButtonImage,
-                            SGPointMake(0, 0));
-// TODO
-//  storyButton_->set_delegate(self);
-//  storyButton_->setSelector(@selector(pressedStory));
-  AddEntity(*storyButton_);
-
+  storyButton_.set_normal_texture(storyButtonImage);
+  storyButton_.set_pressed_texture(storyButtonImage);
+  storyButton_.set_position(SGPointMake(0, 0));
+  storyButton_.set_delegate(this);
+  AddEntity(storyButton_);
 
   Texture2D aboutButtonImage = ResourceLoader::Instance().TextureWithName("about");
-  aboutButton_ = new Button(aboutButtonImage, aboutButtonImage, SGPointMake(0, 0));
-// TODO
-//  aboutButton_->set_delegate(self);
-//  aboutButton_->setSelector(@selector(pressedAbout));;
+  aboutButton_.set_normal_texture(aboutButtonImage);
+  aboutButton_.set_pressed_texture(aboutButtonImage);
+  aboutButton_.set_position(SGPointMake(0, 0));
+  aboutButton_.set_delegate(this);
 }
 
-StoryState::~StoryState() {
-  delete storyButton_;
-  delete aboutButton_;
-}
 
-void StoryState::pressedStory() {
-  RemoveEntity(*storyButton_);
-  AddEntity(*aboutButton_);
-}
+// ButtonDelegate
 
-void StoryState::pressedAbout() {
-  game_engine().PopState();
+void StoryState::ButtonPressed(Button *button) {
+  if (button == &storyButton_) {
+    RemoveEntity(storyButton_);
+    AddEntity(aboutButton_);    
+  } else if (button == &aboutButton_) {
+    game_engine().PopState();    
+  }
 }

@@ -6,17 +6,22 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "engine_state.h"
-#import "button.h"
+#ifndef AIRHOCKEY_GAME_STATES_STORYSTATE_H_
+#define AIRHOCKEY_GAME_STATES_STORYSTATE_H_
 
-class StoryState : public EngineState {
+#include "gameengine/engine_state.h"
+#include "gameengine/entities/button.h"
+
+class StoryState : public EngineState, ButtonDelegate {
  public:
   StoryState(GameEngine &gameEngine);
-  ~StoryState();
-  void pressedStory();
-  void pressedAbout();
 
- private:
-  Button *storyButton_; 
-  Button *aboutButton_; 
+  // ButtonDelegate
+  void ButtonPressed(Button *button);
+
+ private:  
+  Button storyButton_; 
+  Button aboutButton_; 
 };
+
+#endif
