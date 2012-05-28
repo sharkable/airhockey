@@ -234,3 +234,24 @@ void RoundThing::ClearTouches() {
   grabbed_ = false;
   grabbed_touch_ = NULL;
 }
+
+//bool RoundThing::isGrabbable() {
+//  return false;
+//}
+//
+//bool RoundThing::isMovable() {
+//  return true;
+//}
+//   
+//bool RoundThing::containsTouch(Touch *touch) {
+//  double dx = touch->location().x - x_;
+//  double dy = touch->location().y - y_;
+//  return (dx*dx + dy*dy <= radius_*radius_);
+//}
+//
+//bool RoundThing::overlaps(RoundThing * thing) {
+//  double dx = thing->getX() - x_;
+//  double dy = thing->getY() - y_;
+//  double totalRadius = thing->getRadius() + radius_;
+//  return (dx*dx + dy*dy <= totalRadius*totalRadius);
+//}
