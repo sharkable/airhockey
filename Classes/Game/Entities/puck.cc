@@ -81,9 +81,10 @@ void Puck::Update() {
   }
 }
 
-void Puck::Render() {
-  if (is_active()) {
-    texture_.DrawAtPoint(SGPointMake(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2),
-                         alpha_, 1, 0, 0);
-  }
-}
+//void Puck::Render() {
+//  if (is_active()) {
+//    texture_.DrawAtPoint(SGPointMake(x_ - texture_.content_size().width / 2,
+//                                     y_ - texture_.content_size().height / 2),
+//                         alpha_, 1, 0, 0);
+//  }
+//}

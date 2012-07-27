@@ -37,7 +37,6 @@ class PlayState : public EngineState, private ButtonDelegate {
  public:
   PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
             PaddleSize paddle_size);
-  ~PlayState();
   
   // EngineState
   void Update();

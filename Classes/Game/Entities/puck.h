@@ -20,7 +20,7 @@ class Puck : public RoundThing {
 
   // StateEntity
   void Update();
-  void Render();
+//  void Render();
 
  private:
   int fade_ticks_left_;

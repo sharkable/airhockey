@@ -122,8 +122,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   continue_button_.set_position(menuButtonPos);
   continue_button_.set_delegate(this);
 
-  Texture2D continueButtonTexture =
-      ResourceLoader::Instance().TextureWithName("continue_button");
+  Texture2D continueButtonTexture = ResourceLoader::Instance().TextureWithName("continue_button");
   Texture2D continueButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("continue_button_pressed");
   SGPoint continueButtonPos =
@@ -133,8 +132,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   continue_button_.set_position(continueButtonPos);
   continue_button_.set_delegate(this);
   
-  Texture2D menuBackgroundTexture =
-      ResourceLoader::Instance().TextureWithName("game_menu_bg");
+  Texture2D menuBackgroundTexture = ResourceLoader::Instance().TextureWithName("game_menu_bg");
   SGPoint menuBackgroundPosition =
       SGPointMake((SCREEN_WIDTH - menuBackgroundTexture.content_size().width) / 2, 306);
   menu_background_.add_texture(menuBackgroundTexture);
@@ -155,10 +153,9 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
     AddEntity(pause_button_1_);
   }
   
-  SGPoint pauseButtonPos2 =
-      SGPointMake(SCREEN_WIDTH - pauseButtonTexture.content_size().width,
-                  SCREEN_HEIGHT - pauseButtonTexture.content_size().height +
-                      (false ? (27 * 768.0/320.0) : 0));
+  SGPoint pauseButtonPos2 = SGPointMake(SCREEN_WIDTH - pauseButtonTexture.content_size().width,
+                                        SCREEN_HEIGHT - pauseButtonTexture.content_size().height +
+                                            (false ? (27 * 768.0/320.0) : 0));
   pause_button_2_.set_normal_texture(pauseButtonTexture);
   pause_button_2_.set_pressed_texture(pauseButtonPressedTexture);
   pause_button_2_.set_position(pauseButtonPos2);
@@ -221,11 +218,6 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   player_1_win_count_ = 0;
   player_2_win_count_ = 0;
   SetUpNewGame();
-}
-
-PlayState::~PlayState() {
-//  [player1Wins_ release];
-//  [player2Wins_ release];
 }
 
 
@@ -355,6 +347,15 @@ void PlayState::Update() {
 // ButtonDelegate
 
 void PlayState::ButtonPressed(Button *button) {
+  if (button == &rematch_button_) {
+    RematchPressed();
+  } else if (button == &menu_button_) {
+    MenuPressed();
+  } else if (button == &continue_button_) {
+    ContinuePressed();
+  } else if (button == &pause_button_1_ || button == &pause_button_2_) {
+    PausePressed();
+  }
 }
 
 
@@ -507,9 +508,9 @@ void PlayState::PausePressed() {
   if (state_ != kPlayStateStateFinished && state_ != kPlayStateStatePaused) {
     pre_pause_state_ = state_;
     state_ = kPlayStateStatePaused;
-    AddEntity(menu_background_);
+//    AddEntity(menu_background_);
     AddEntity(sound_slider_);
-    AddEntity(continue_button_);
+    AddEntity(menu_button_);
     AddEntity(continue_button_);
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake((SCREEN_WIDTH - 320)/2, 385)];

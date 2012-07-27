@@ -20,7 +20,9 @@ RoundThing::RoundThing() {
 }
 
 RoundThing::~RoundThing() {
-  ResourceLoader::Instance().ReleaseResource(texture_);
+  if (texture_.data_loaded()) {
+    ResourceLoader::Instance().ReleaseResource(texture_);
+  }
 }
 
 void RoundThing::ApplyFriction() {

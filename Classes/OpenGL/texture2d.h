@@ -111,6 +111,7 @@ class Texture2D {
   void Delete();
   
   GLuint name() { return name_; }
+  bool data_loaded() { return name_ != 0; }
   SGSize content_size() {
     //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     //      return size_;

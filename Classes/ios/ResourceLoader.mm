@@ -29,7 +29,7 @@ Texture2D ResourceLoader::Texture(string name) {
   if (image == NULL) {
     image = [[UIImage imageNamed:@"yellowright.png"] CGImage];
     NSLog(@"Image is Null");
-    return nil;
+    return Texture2D();
   }
     
   CGImageAlphaInfo info = CGImageGetAlphaInfo(image);
