@@ -35,36 +35,36 @@ static const BOOL thisAppDoesDucking = NO; // if this gets changed to yes then i
   switch(err)
   {
     case kAudioSessionNotInitialized:
-      errStr = [NSString stringWithString:@"An Audio Session Services function was called without first initializing the session. To avoid this error, call the AudioSessionInitialize function before attempting to use the session."];
+      errStr = @"An Audio Session Services function was called without first initializing the session. To avoid this error, call the AudioSessionInitialize function before attempting to use the session.";
       break;
     case kAudioSessionAlreadyInitialized:
-      errStr = [NSString stringWithString:@"The AudioSessionInitialize function was called more than once during the lifetime of your application."];
+      errStr = @"The AudioSessionInitialize function was called more than once during the lifetime of your application.";
       break;
     case kAudioSessionInitializationError:
-      errStr = [NSString stringWithString:@"There was an error during audio session initialization."];
+      errStr = @"There was an error during audio session initialization.";
       break;
     case kAudioSessionUnsupportedPropertyError:
-      errStr = [NSString stringWithString:@"The audio session property is not supported."];
+      errStr = @"The audio session property is not supported.";
       break;
     case kAudioSessionBadPropertySizeError:
-      errStr = [NSString stringWithString:@"The size of the audio session property data was not correct."];
+      errStr = @"The size of the audio session property data was not correct.";
       break;
     case kAudioSessionNotActiveError:
-      errStr = [NSString stringWithString:@"The audio operation failed because your application’s audio session was not active."];
+      errStr = @"The audio operation failed because your application’s audio session was not active.";
       break;
     case kAudioServicesNoHardwareError:
-      errStr = [NSString stringWithString:@"The audio operation failed because the device has no audio input available."];
+      errStr = @"The audio operation failed because the device has no audio input available.";
       break;
 #if __IPHONE_OS_VERSION_MIN_REQUIRED > 30000      
     case kAudioSessionNoCategorySet:
-      errStr = [NSString stringWithString:@"The audio operation failed because it requires the audio session to have an explicitly-set category, but none was set. To use a hardware codec you must explicitly initialize the audio session and explicitly set an audio session category."];
+      errStr = @"The audio operation failed because it requires the audio session to have an explicitly-set category, but none was set. To use a hardware codec you must explicitly initialize the audio session and explicitly set an audio session category.";
       break;
     case kAudioSessionIncompatibleCategory:
-      errStr = [NSString stringWithString:@"The specified audio session category cannot be used for the attempted audio operation. For example, you attempted to play or record audio with the audio session category set to kAudioSessionCategory_AudioProcessing."];
+      errStr = @"The specified audio session category cannot be used for the attempted audio operation. For example, you attempted to play or record audio with the audio session category set to kAudioSessionCategory_AudioProcessing.";
       break;
 #endif
     default:
-      errStr = [NSString stringWithString:@"Unknown Audio Session Error\n"];
+      errStr = @"Unknown Audio Session Error\n";
       break;
   }
   return errStr;  
