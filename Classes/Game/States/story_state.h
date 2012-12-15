@@ -16,6 +16,9 @@ class StoryState : public EngineState, ButtonDelegate {
  public:
   StoryState(GameEngine &gameEngine);
 
+  // EngineState
+  string Name() { return "StoryState"; }
+  
   // ButtonDelegate
   void ButtonPressed(Button *button);
 

@@ -48,7 +48,8 @@ class RoundThing : public StateEntity {
   void TouchesMoved(vector<Touch> touches);
   void TouchesEnded(vector<Touch> touches);
   void ClearTouches();
-  
+  string Name() { return "RoundThing"; }
+
  protected:
   Texture2D texture_;
   double x_;

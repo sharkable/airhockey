@@ -20,6 +20,7 @@ class SplashState : public EngineState {
   // EngineState
   void soundInitialized();
   void Update();
+  string Name() { return "SplashState"; }
 
  private:
   // UIActivityIndicatorView *spinner_;

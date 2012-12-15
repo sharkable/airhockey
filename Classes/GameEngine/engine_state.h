@@ -30,7 +30,8 @@ class EngineState {
   virtual void ClearTouches();
   void AddEntity(StateEntity &entity);
   void RemoveEntity(StateEntity &entity);
-
+  virtual string Name() { return "EngineState"; }
+  
   GameEngine &game_engine() { return game_engine_; }
 
  protected:

@@ -21,6 +21,7 @@ void EngineState::Update() {
 }
 
 void EngineState::Render() {
+  cout << "Rendering! " << Name() << endl;
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->Render();
   }

@@ -26,19 +26,19 @@ MainMenuState::MainMenuState(GameEngine &game_engine)
   AddEntity(*background);
 
   // Add rink left and right pieces.
-  Texture2D left_rink_border_texture = ResourceLoader::Instance().TextureWithName("rink_left");
-  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_texture, SGPointMake(0, 0));
-  AddEntity(*left_rink_border);
-  Texture2D right_rink_border_texture =
-      ResourceLoader::Instance().TextureWithName("rink_right");
-  SGPoint left_rink_border_pos = SGPointMake(SCREEN_WIDTH - right_rink_border_texture.content_size().width,
-                                          0);
-  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_texture, left_rink_border_pos);
-  AddEntity(*right_rink_border);
-
-  Texture2D title_texture = ResourceLoader::Instance().TextureWithName("title");
-  SimpleItem *title = new SimpleItem(title_texture, SGPointMake(81, 53));
-  AddEntity(*title);
+//  Texture2D left_rink_border_texture = ResourceLoader::Instance().TextureWithName("rink_left");
+//  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_texture, SGPointMake(0, 0));
+//  AddEntity(*left_rink_border);
+//  Texture2D right_rink_border_texture =
+//      ResourceLoader::Instance().TextureWithName("rink_right");
+//  SGPoint left_rink_border_pos = SGPointMake(SCREEN_WIDTH - right_rink_border_texture.content_size().width,
+//                                          0);
+//  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_texture, left_rink_border_pos);
+//  AddEntity(*right_rink_border);
+//
+//  Texture2D title_texture = ResourceLoader::Instance().TextureWithName("title");
+//  SimpleItem *title = new SimpleItem(title_texture, SGPointMake(81, 53));
+//  AddEntity(*title);
   
   Texture2D main_menu_texture = ResourceLoader::Instance().TextureWithName("main_menu");
   SGPoint main_menu_position = SGPointMake((SCREEN_WIDTH - main_menu_texture.content_size().width) / 2,

@@ -40,7 +40,8 @@ class PlayState : public EngineState, private ButtonDelegate {
   
   // EngineState
   void Update();
-  
+  string Name() { return "PlayState"; }
+
   // ButtonDelegate
   void ButtonPressed(Button *button);
   

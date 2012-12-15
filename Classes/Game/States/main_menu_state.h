@@ -20,7 +20,8 @@ class MainMenuState : public EngineState, private ButtonDelegate {
   
   // EngineState
   void StateIsShown();
-  
+  string Name() { return "MainMenuState"; }
+
   // ButtonDelegate
   void ButtonPressed(Button *button);
 

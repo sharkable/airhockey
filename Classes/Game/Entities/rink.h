@@ -25,6 +25,7 @@ class Rink : public StateEntity {
   // StateEntity
   void Update();
   void Render();
+  string Name() { return "Rink"; }
 
  private:
   Texture2D texture_;

@@ -28,7 +28,8 @@ class MultiSelect : public StateEntity {
   void Update() {}
   void Render();
   void TouchesBegan(vector<Touch> touches);
-  
+  string Name() { return "MultiSelect"; }
+
   // Accessors
   int selected_value() { return selected_value_; };
   void set_selected_value(int selected_value) { selected_value_ = selected_value; }

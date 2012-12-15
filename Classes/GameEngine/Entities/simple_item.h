@@ -25,6 +25,7 @@ class SimpleItem : public StateEntity {
   // StateEntity
   void Update() {}
   void Render();
+  string Name() { return "SimpleItem"; }
 
   // Accessors
   void set_textures(vector<Texture2D> textures) { textures_ = textures; }

@@ -71,14 +71,14 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   round_things_.push_back(&post_4_);
   
   // Add rink left and right pieces.
-  Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
-  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
-  AddEntity(*leftRinkBorder);
-  Texture2D rightRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_right");
-  SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.content_size().width,
-                                          0);
-  SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
-  AddEntity(*rightRinkBorder);
+//  Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
+//  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, SGPointMake(0, 0));
+//  AddEntity(*leftRinkBorder);
+//  Texture2D rightRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_right");
+//  SGPoint leftRinkBorderPos = SGPointMake(SCREEN_WIDTH - rightRinkBorderTexture.content_size().width,
+//                                          0);
+//  SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
+//  AddEntity(*rightRinkBorder);
   
   Texture2D winTexture = ResourceLoader::Instance().TextureWithName("win");
   win_.add_texture(winTexture);
@@ -229,11 +229,11 @@ void PlayState::Update() {
   } else if (state_ == kPlayStateStateGetReady) {
     get_ready_ticks_left_--;
     if (get_ready_ticks_left_ == SHOW_GET_READY_MESSAGE_TICKS) {
-      AddEntity(get_ready_);
+//      AddEntity(get_ready_);
       // TODO [SoundPlayer playSound:kSoundGetReady];
     } else if (get_ready_ticks_left_ == 0) {
     RemoveEntity(get_ready_);
-      AddEntity(go_);
+//      AddEntity(go_);
       go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
       state_ = kPlayStateStatePlaying;
       // TODO [SoundPlayer playSound:kSoundStart];

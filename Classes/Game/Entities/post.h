@@ -15,6 +15,9 @@ class Post : public RoundThing {
  public:
   Post(double x, double y);
   
+  // StateEntity
+  string Name() { return "Post"; }
+
   // RoundThing
   virtual bool IsMovable();
 };

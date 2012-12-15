@@ -34,5 +34,6 @@ SimpleItem::~SimpleItem() {
 // StateEntity
 
 void SimpleItem::Render() {
+  cout << texture_ << " " << textures_.size() << endl;
   textures_[texture_].DrawAtPointAngle(SGPointMake(position_.x, position_.y), angle_);
 }

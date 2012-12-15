@@ -36,6 +36,7 @@ class Button : public StateEntity {
   void Render();
   void TouchesBegan(vector<Touch> touches);
   void TouchesEnded(vector<Touch> touches);
+  string Name() { return "Button"; }
 
   bool ContainsPoint(SGPoint p);
 

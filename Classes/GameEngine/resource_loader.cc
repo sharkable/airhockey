@@ -15,16 +15,15 @@ ResourceLoader &ResourceLoader::Instance() {
 }
 
 Texture2D ResourceLoader::TextureWithName(string name) {
-  int count = resource_counter_[name];
-  if (count == 0) {
+  if (resource_counter_[name] == 0) {
     Texture2D tex = Texture(name);
-    resource_counter_[name] = count + 1;
+    resource_counter_[name]++;
     resources_[name] = tex;
     return tex;
   }
   
   Texture2D texture = resources_[name];
-  resource_counter_[name] = count + 1;
+  resource_counter_[name]++;
   
   return texture;  
 }

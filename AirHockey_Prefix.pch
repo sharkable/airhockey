@@ -12,3 +12,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #endif
+
+#ifdef __cplusplus
+#include <iostream>
+using namespace std;
+#endif

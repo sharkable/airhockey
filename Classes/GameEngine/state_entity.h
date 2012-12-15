@@ -22,6 +22,7 @@ class StateEntity {
   virtual void TouchesMoved(vector<Touch> touches) {}
   virtual void TouchesEnded(vector<Touch> touches) {}
   virtual void ClearTouches() {}
+  virtual string Name() { return "StateEntity"; }
 };
 
 #endif

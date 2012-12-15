@@ -32,6 +32,7 @@ class Paddle : public RoundThing {
   // StateEntity
   void Update();
   void Render();
+  string Name() { return "Paddle"; }
   
   // RoundThing
   bool ContainsTouch(Touch *touch);
