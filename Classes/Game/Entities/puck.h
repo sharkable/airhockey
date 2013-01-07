@@ -14,9 +14,6 @@
 class Puck : public RoundThing {
  public:
   Puck();
-  Puck(const Puck& puck);
-
-  Puck& operator=(const Puck &rhs);
 
   void PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center);
   void FadeIn();

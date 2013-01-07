@@ -1989,7 +1989,10 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=false";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"IS_FREE=false",
+					NDEBUG,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Resources/PaidResources/AirHockey-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;

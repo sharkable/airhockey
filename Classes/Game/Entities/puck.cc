@@ -23,20 +23,6 @@ Puck::Puck() {
   alpha_ = 1;
 }
 
-Puck::Puck(const Puck& puck) {
-  texture_ = ResourceLoader::Instance().TextureWithName("puck");
-  cout << "Copy constructor" << endl;
-  radius_ = PUCK_RADIUS;
-  mass_ = PUCK_MASS;
-  friction_ = PUCK_FRICTION;
-  alpha_ = 1;
-}
-
-Puck& Puck::operator=(const Puck &rhs) {
-  cout << "EQUALS!" << endl;
-  return *this;
-}
-
 void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center) {
   double startX = SCREEN_WIDTH / 2;
   if (!center) {

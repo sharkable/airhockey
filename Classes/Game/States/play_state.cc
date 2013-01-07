@@ -27,7 +27,8 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   post_4_.reset(new Post(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1));
 
   sound_slider_.reset(new SoundSlider(SGPointMake(331, 336)));
-        
+
+  rink_.reset(new Rink());
   AddEntity(rink_);
   
   vector<Texture2D> scoreTextures;
@@ -37,8 +38,11 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
     Texture2D texture = ResourceLoader::Instance().TextureWithName(pointsstr);
     scoreTextures.push_back(texture);
   }
+  cout << player_1_score_.get() << endl;
+  player_1_score_.reset(new SimpleItem());
   player_1_score_->set_textures(scoreTextures);
   player_1_score_->set_position(SGPointMake(662, 526));
+  player_2_score_.reset(new SimpleItem());
   player_2_score_->set_textures(scoreTextures);
   player_2_score_->set_position(SGPointMake(662, 386));
   AddEntity(player_1_score_);
@@ -85,10 +89,12 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   AddEntity(sp<SimpleItem>(rightRinkBorder));
   
   Texture2D winTexture = ResourceLoader::Instance().TextureWithName("win");
+  win_.reset(new SimpleItem());
   win_->add_texture(winTexture);
   win_->set_position(SGPointMake(0, 0));
 
   Texture2D loseTexture = ResourceLoader::Instance().TextureWithName("lose");
+  lose_.reset(new SimpleItem());
   lose_->add_texture(loseTexture);
   lose_->set_position(SGPointMake(0, 0));
 
@@ -96,12 +102,14 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   SGPoint getReadyPosition =
       SGPointMake((SCREEN_WIDTH - getReadyTexture.content_size().width) / 2, 
                   (SCREEN_HEIGHT - getReadyTexture.content_size().height) / 2);
+  get_ready_.reset(new SimpleItem());
   get_ready_->add_texture(getReadyTexture);
   get_ready_->set_position(getReadyPosition);
 
   Texture2D goTexture = ResourceLoader::Instance().TextureWithName("go");
   SGPoint goPosition = SGPointMake((SCREEN_WIDTH - goTexture.content_size().width) / 2, 
                                    (SCREEN_HEIGHT - goTexture.content_size().height) / 2);
+  go_.reset(new SimpleItem());
   go_->add_texture(goTexture);
   go_->set_position(goPosition);
   
@@ -111,6 +119,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
       ResourceLoader::Instance().TextureWithName("rematch_button_pressed");
   SGPoint rematchButtonPos =
       SGPointMake((SCREEN_WIDTH - rematchButtonTexture.content_size().width) / 2, 441);
+  rematch_button_.reset(new Button());
   rematch_button_->set_normal_texture(rematchButtonTexture);
   rematch_button_->set_pressed_texture(rematchButtonPressedTexture);
   rematch_button_->set_position(rematchButtonPos);
@@ -121,16 +130,18 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
       ResourceLoader::Instance().TextureWithName("menu_button_pressed");
   SGPoint menuButtonPos = SGPointMake((SCREEN_WIDTH - menuButtonTexture.content_size().width) / 2,
                                       546);
-  continue_button_->set_normal_texture(menuButtonTexture);
-  continue_button_->set_pressed_texture(menuButtonPressedTexture);
-  continue_button_->set_position(menuButtonPos);
-  continue_button_->set_delegate(this);
+  menu_button_.reset(new Button());
+  menu_button_->set_normal_texture(menuButtonTexture);
+  menu_button_->set_pressed_texture(menuButtonPressedTexture);
+  menu_button_->set_position(menuButtonPos);
+  menu_button_->set_delegate(this);
 
   Texture2D continueButtonTexture = ResourceLoader::Instance().TextureWithName("continue_button");
   Texture2D continueButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("continue_button_pressed");
   SGPoint continueButtonPos =
       SGPointMake((SCREEN_WIDTH - continueButtonTexture.content_size().width) / 2, 441);
+  continue_button_.reset(new Button());
   continue_button_->set_normal_texture(continueButtonTexture);
   continue_button_->set_pressed_texture(continueButtonPressedTexture);
   continue_button_->set_position(continueButtonPos);
@@ -139,6 +150,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   Texture2D menuBackgroundTexture = ResourceLoader::Instance().TextureWithName("game_menu_bg");
   SGPoint menuBackgroundPosition =
       SGPointMake((SCREEN_WIDTH - menuBackgroundTexture.content_size().width) / 2, 306);
+  menu_background_.reset(new SimpleItem());
   menu_background_->add_texture(menuBackgroundTexture);
   menu_background_->set_position(menuBackgroundPosition);
   
@@ -151,6 +163,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   
   if (!is_iphone) {
     SGPoint pauseButtonPos1 = SGPointMake(0, 0);
+    pause_button_1_.reset(new Button());
     pause_button_1_->set_normal_texture(pauseButtonTexture);
     pause_button_1_->set_pressed_texture(pauseButtonPressedTexture);
     pause_button_1_->set_position(pauseButtonPos1);
@@ -161,6 +174,7 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
   SGPoint pauseButtonPos2 = SGPointMake(SCREEN_WIDTH - pauseButtonTexture.content_size().width,
                                         SCREEN_HEIGHT - pauseButtonTexture.content_size().height +
                                             (false ? (27 * 768.0/320.0) : 0));
+  pause_button_2_.reset(new Button());
   pause_button_2_->set_normal_texture(pauseButtonTexture);
   pause_button_2_->set_pressed_texture(pauseButtonPressedTexture);
   pause_button_2_->set_position(pauseButtonPos2);
@@ -234,11 +248,11 @@ void PlayState::Update() {
   } else if (state_ == kPlayStateStateGetReady) {
     get_ready_ticks_left_--;
     if (get_ready_ticks_left_ == SHOW_GET_READY_MESSAGE_TICKS) {
-//      AddEntity(get_ready_);
+      AddEntity(get_ready_);
       // TODO [SoundPlayer playSound:kSoundGetReady];
     } else if (get_ready_ticks_left_ == 0) {
     RemoveEntity(get_ready_);
-//      AddEntity(go_);
+      AddEntity(go_);
       go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
       state_ = kPlayStateStatePlaying;
       // TODO [SoundPlayer playSound:kSoundStart];
