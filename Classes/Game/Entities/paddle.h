@@ -20,12 +20,12 @@ using namespace std;
 class Paddle : public RoundThing {
  public:
   Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
-         vector<Puck> &pucks);
+         vector<sp<Puck> > &pucks);
   
   void SetInitialPositionForPlayer(int player_id);
   void KeepInPlayerBounds();
   
-  vector<Puck> &pucks() { return pucks_; }
+  vector<sp<Puck> > &pucks() { return pucks_; }
   Paddle *pther_paddle() { return other_paddle_; }
   void set_other_paddle(Paddle *other_paddle) { other_paddle_ = other_paddle; }
 
@@ -42,7 +42,7 @@ class Paddle : public RoundThing {
   int player_id_;
   bool player_controlled_;
   ComputerAI ai_level_;
-  vector<Puck> &pucks_;
+  vector<sp<Puck> > &pucks_;
   Paddle *other_paddle_;  // weak
   bool target_left_corner_;
   bool target_right_corner_;

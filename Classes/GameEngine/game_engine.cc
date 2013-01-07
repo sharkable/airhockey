@@ -10,25 +10,21 @@
 
 #include "gameengine/engine_state.h"
 
-#include <iostream>
-
 void GameEngine::Update() {
   if (pop_on_next_) {
-    delete(states_.back());
     states_.pop_back();
     states_.back()->StateIsShown();
     pop_on_next_ = false;
   } else if (replace_on_next_) {
-    delete(states_.back());
     states_.pop_back();
     states_.push_back(next_state_);
     next_state_->StateIsShown();
     replace_on_next_ = false;
-    next_state_ = NULL;
+    next_state_.reset();
   }
-  
+
   // Process input.
-  EngineState *top_state = states_.back();
+  sp<EngineState> top_state = states_.back();
   
   if (touches_began_.size() > 0) {
     top_state->TouchesBegan(touches_began_);
@@ -45,27 +41,24 @@ void GameEngine::Update() {
   
   // Update states.
   for (int i = 0; i < states_.size(); i++) {
-    EngineState *state = states_[i];
-    state->Update();
+    states_[i]->Update();
   }  
 }
 
 void GameEngine::Render() {
   for (int i = 0; i < states_.size(); i++) {
-    EngineState *state = states_[i];
-    state->Render();
+    states_[i]->Render();
   }
 }
 
 void GameEngine::ClearTouches() {
   for (int i = 0; i < states_.size(); i++) {
-    EngineState *state = states_[i];
-    state->ClearTouches();
+    states_[i]->ClearTouches();
   }
 }
 
 
-void GameEngine::PushState(EngineState *state) {
+void GameEngine::PushState(sp<EngineState> state) {
   states_.push_back(state);
   state->StateIsShown();
 }
@@ -74,7 +67,7 @@ void GameEngine::PopState() {
   pop_on_next_ = true;
 }
 
-void GameEngine::ReplaceTopState(EngineState *state) {
+void GameEngine::ReplaceTopState(sp<EngineState> state) {
   replace_on_next_ = true;
   next_state_ = state;
 }

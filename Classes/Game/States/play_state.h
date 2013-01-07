@@ -15,6 +15,7 @@ using namespace std;
 #include "const.h"
 #include "game/entities/Paddle.h"
 #include "game/entities/Post.h"
+#include "game/entities/puck.h"
 #include "game/entities/Rink.h"
 #include "game/entities/sound_slider.h"
 #include "gameengine/entities/button.h"
@@ -22,7 +23,6 @@ using namespace std;
 #include "gameengine/engine_state.h"
 
 class GameEngine;
-class Puck;
 class RoundThing;
 
 typedef enum {
@@ -57,28 +57,28 @@ class PlayState : public EngineState, private ButtonDelegate {
   int num_pucks_;
   int num_active_pucks_;
   int num_player_1_scores_last_round_;
-  Rink rink_;
-  Post post_1_;
-  Post post_2_;
-  Post post_3_;
-  Post post_4_;
-  Paddle paddle_1_;
-  Paddle paddle_2_;
-  vector<Puck> pucks_;
-  vector<RoundThing *> round_things_;
-  SimpleItem player_1_score_;
-  SimpleItem player_2_score_;
-  SimpleItem win_;
-  SimpleItem lose_;
-  SimpleItem get_ready_;
-  SimpleItem go_;
-  SoundSlider sound_slider_;
-  SimpleItem menu_background_;
-  Button rematch_button_;
-  Button menu_button_;
-  Button continue_button_;
-  Button pause_button_1_;
-  Button pause_button_2_;
+  sp<Rink> rink_;
+  sp<Post> post_1_;
+  sp<Post> post_2_;
+  sp<Post> post_3_;
+  sp<Post> post_4_;
+  sp<Paddle> paddle_1_;
+  sp<Paddle> paddle_2_;
+  vector<sp<Puck> > pucks_;
+  vector<sp<RoundThing> > round_things_;
+  sp<SimpleItem> player_1_score_;
+  sp<SimpleItem> player_2_score_;
+  sp<SimpleItem> win_;
+  sp<SimpleItem> lose_;
+  sp<SimpleItem> get_ready_;
+  sp<SimpleItem> go_;
+  sp<SoundSlider> sound_slider_;
+  sp<SimpleItem> menu_background_;
+  sp<Button> rematch_button_;
+  sp<Button> menu_button_;
+  sp<Button> continue_button_;
+  sp<Button> pause_button_1_;
+  sp<Button> pause_button_2_;
   
   int wait_ticks_left_;
   int get_ready_ticks_left_;

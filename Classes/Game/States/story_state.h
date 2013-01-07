@@ -23,8 +23,8 @@ class StoryState : public EngineState, ButtonDelegate {
   void ButtonPressed(Button *button);
 
  private:  
-  Button storyButton_; 
-  Button aboutButton_; 
+  sp<Button> storyButton_;
+  sp<Button> aboutButton_;
 };
 
 #endif

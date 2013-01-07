@@ -13,27 +13,29 @@
 
 StoryState::StoryState(GameEngine &gameEngine) : EngineState(gameEngine) {
   Texture2D storyButtonImage = ResourceLoader::Instance().TextureWithName("story");
-  storyButton_.set_normal_texture(storyButtonImage);
-  storyButton_.set_pressed_texture(storyButtonImage);
-  storyButton_.set_position(SGPointMake(0, 0));
-  storyButton_.set_delegate(this);
+  storyButton_.reset(new Button());
+  storyButton_->set_normal_texture(storyButtonImage);
+  storyButton_->set_pressed_texture(storyButtonImage);
+  storyButton_->set_position(SGPointMake(0, 0));
+  storyButton_->set_delegate(this);
   AddEntity(storyButton_);
 
   Texture2D aboutButtonImage = ResourceLoader::Instance().TextureWithName("about");
-  aboutButton_.set_normal_texture(aboutButtonImage);
-  aboutButton_.set_pressed_texture(aboutButtonImage);
-  aboutButton_.set_position(SGPointMake(0, 0));
-  aboutButton_.set_delegate(this);
+  aboutButton_.reset(new Button());
+  aboutButton_->set_normal_texture(aboutButtonImage);
+  aboutButton_->set_pressed_texture(aboutButtonImage);
+  aboutButton_->set_position(SGPointMake(0, 0));
+  aboutButton_->set_delegate(this);
 }
 
 
 // ButtonDelegate
 
 void StoryState::ButtonPressed(Button *button) {
-  if (button == &storyButton_) {
+  if (button == storyButton_.get()) {
     RemoveEntity(storyButton_);
     AddEntity(aboutButton_);    
-  } else if (button == &aboutButton_) {
-    game_engine().PopState();    
+  } else if (button == aboutButton_.get()) {
+    game_engine().PopState();
   }
 }

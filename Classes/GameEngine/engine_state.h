@@ -28,8 +28,11 @@ class EngineState {
   virtual void TouchesMoved(vector<Touch> touches);
   virtual void TouchesEnded(vector<Touch> touches);
   virtual void ClearTouches();
-  void AddEntity(StateEntity &entity);
-  void RemoveEntity(StateEntity &entity);
+  // If you add an entity using this method, then this EngineState is responsible for releasing this
+  // object.
+  void AddEntity(StateEntity *entity);
+  void AddEntity(sp<StateEntity> entity);
+  void RemoveEntity(sp<StateEntity> entity);
   virtual string Name() { return "EngineState"; }
   
   GameEngine &game_engine() { return game_engine_; }
@@ -38,7 +41,7 @@ class EngineState {
 
  private:
   GameEngine &game_engine_;
-  vector<StateEntity *> entities_;
+  vector<sp<StateEntity> > entities_;
 };
 
 #endif

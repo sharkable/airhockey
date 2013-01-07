@@ -21,7 +21,6 @@ void EngineState::Update() {
 }
 
 void EngineState::Render() {
-  cout << "Rendering! " << Name() << endl;
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->Render();
   }
@@ -51,13 +50,17 @@ void EngineState::ClearTouches() {
   }
 }
 
-void EngineState::AddEntity(StateEntity &entity) {
-  entities_.push_back(&entity);
+void EngineState::AddEntity(StateEntity *entity) {
+  entities_.push_back(sp<StateEntity>(entity));
 }
 
-void EngineState::RemoveEntity(StateEntity &entity) {
-  for (vector<StateEntity *>::iterator i = entities_.begin(); i != entities_.end(); i++) {
-    if (*i == &entity) {
+void EngineState::AddEntity(sp<StateEntity> entity) {
+  entities_.push_back(entity);
+}
+
+void EngineState::RemoveEntity(sp<StateEntity> entity) {
+  for (vector<sp<StateEntity> >::iterator i = entities_.begin(); i != entities_.end(); i++) {
+    if (*i == entity) {
       entities_.erase(i);
       break;
     }

@@ -31,7 +31,7 @@ SplashState::~SplashState() {
 }
 
 void SplashState::soundInitialized() {
-  game_engine().ReplaceTopState(new MainMenuState(game_engine()));
+  game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
 }
 
 

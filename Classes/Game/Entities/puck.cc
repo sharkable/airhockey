@@ -23,7 +23,21 @@ Puck::Puck() {
   alpha_ = 1;
 }
 
-void Puck::PlaceForPlayer(int player_id, const vector<RoundThing *> &round_things, bool center) {
+Puck::Puck(const Puck& puck) {
+  texture_ = ResourceLoader::Instance().TextureWithName("puck");
+  cout << "Copy constructor" << endl;
+  radius_ = PUCK_RADIUS;
+  mass_ = PUCK_MASS;
+  friction_ = PUCK_FRICTION;
+  alpha_ = 1;
+}
+
+Puck& Puck::operator=(const Puck &rhs) {
+  cout << "EQUALS!" << endl;
+  return *this;
+}
+
+void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center) {
   double startX = SCREEN_WIDTH / 2;
   if (!center) {
     startX += PUCK_X_SEPARATION / 2;
@@ -40,7 +54,7 @@ void Puck::PlaceForPlayer(int player_id, const vector<RoundThing *> &round_thing
   do {
     overlapping = false;
     for (int i = 0; i < round_things.size(); i++) {
-      RoundThing *thing = round_things[i];
+      RoundThing *thing = round_things[i].get();
       if (thing != this && Overlaps(thing)) {
         overlapping = true;
         if (goLeft) {
@@ -82,7 +96,6 @@ void Puck::Update() {
 }
 
 void Puck::Render() {
-  cout << "Is active? " << is_active() << endl;
   if (is_active()) {
     texture_.DrawAtPoint(SGPointMake(x_ - texture_.content_size().width / 2,
                                      y_ - texture_.content_size().height / 2),

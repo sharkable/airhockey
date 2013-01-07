@@ -31,15 +31,15 @@ class MainMenuState : public EngineState, private ButtonDelegate {
   void PressedStory();
   void PressedUpgrade();
   
-  Button start_button_; 
-  Button feedback_button_; 
-  Button story_button_; 
-  Button upgrade_button_; 
-  MultiSelect num_players_select_;
-  MultiSelect num_pucks_select_;
-  MultiSelect difficulty_select_;
-  MultiSelect paddle_size_select_;
-  SoundSlider sound_slider_;
+  sp<Button> start_button_;
+  sp<Button> feedback_button_;
+  sp<Button> story_button_;
+  sp<Button> upgrade_button_;
+  sp<MultiSelect> num_players_select_;
+  sp<MultiSelect> num_pucks_select_;
+  sp<MultiSelect> difficulty_select_;
+  sp<MultiSelect> paddle_size_select_;
+  sp<SoundSlider> sound_slider_;
 };
 
 #endif

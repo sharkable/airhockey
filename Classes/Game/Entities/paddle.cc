@@ -15,7 +15,7 @@
 #include "gameengine/resource_loader.h"
 
 Paddle::Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
-               vector<Puck> &pucks) : pucks_(pucks) {
+               vector<sp<Puck> > &pucks) : pucks_(pucks) {
   player_id_ = player_id;
   player_controlled_ = player_controlled;
   ai_level_ = ai_level;
@@ -126,7 +126,7 @@ void Paddle::Update() {
     double bestTime;
     
     for (int i = 0; i < pucks_.size(); i++) {
-      Puck *puck = &pucks_[i];
+      Puck *puck = pucks_[i].get();
       if (!puck->is_active()) {
         continue;
       }

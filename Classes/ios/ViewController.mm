@@ -21,7 +21,7 @@
   GameTouchWindow *gameTouchWindow_;
 
   GameEngine *game_engine_;
-  EngineState *root_state_;
+  sp<EngineState> root_state_;
 };
 
 @synthesize window = gameTouchWindow_, game_engine = game_engine_;
@@ -31,7 +31,7 @@
   if (self) {
     //[self view];
     game_engine_ = new GameEngine();
-    root_state_ = new SplashState(*game_engine_);
+    root_state_.reset(new SplashState(*game_engine_));
     game_engine_->PushState(root_state_);
     gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
 
@@ -46,7 +46,6 @@
 
 - (void)dealloc {
   delete game_engine_;
-  delete root_state_;
 
   [view_ release];
   [gameTimer_ release];

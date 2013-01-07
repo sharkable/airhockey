@@ -21,10 +21,10 @@ Texture2D ResourceLoader::TextureWithName(string name) {
     resources_[name] = tex;
     return tex;
   }
-  
+
   Texture2D texture = resources_[name];
   resource_counter_[name]++;
-  
+
   return texture;  
 }
 
