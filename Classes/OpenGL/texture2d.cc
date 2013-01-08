@@ -237,9 +237,9 @@ void Texture2D::DrawAtPointAngle(SGPoint point, GLfloat angle) {
 }
 
 void Texture2D::Delete() {
-  if (name_) {
-    glDeleteTextures(1, &name_);
-  }
+  assert(name_);
+  glDeleteTextures(1, &name_);
+  name_ = 0;
 }
 
 

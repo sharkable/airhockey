@@ -14,6 +14,7 @@
 #endif // __OBJC__
 
 #ifdef __cplusplus
+  #include <assert.h>
   #include <iostream>
   #include <tr1/memory>
   using namespace std;

@@ -20,10 +20,13 @@ Button::Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint posi
 }
 
 Button::~Button() {
-  ResourceLoader::Instance().ReleaseResource(normal_texture_);
-  ResourceLoader::Instance().ReleaseResource(pressed_texture_);
+  if (normal_texture_.loaded()) {
+    ResourceLoader::Instance().ReleaseResource(normal_texture_);
+  }
+  if (pressed_texture_.loaded()) {
+    ResourceLoader::Instance().ReleaseResource(pressed_texture_);
+  }
 }
-
 
 bool Button::ContainsPoint(SGPoint p) {
   return p.x >= position_.x &&

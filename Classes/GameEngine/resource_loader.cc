@@ -45,7 +45,8 @@ void ResourceLoader::ReleaseResource(Texture2D resource) {
   for (map<string, Texture2D>::iterator i = resources_.begin(); i != resources_.end(); i++) {
     if (i->second.name() == resource.name()) {
       ReleaseResource(i->first);
-      break;
+      return;
     }
   }
+  assert(false);
 }

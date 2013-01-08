@@ -98,7 +98,7 @@ SGPoint SGPointMake(double x, double y);
  */
 class Texture2D {
  public:
-  Texture2D() {}
+  Texture2D() : name_(0) { }
   Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
             SGSize size, string filename);
 
@@ -110,6 +110,7 @@ class Texture2D {
   void DrawAtPointAngle(SGPoint point, GLfloat angle);
   void Delete();
   
+  bool loaded() { return name_ != 0; }
   GLuint name() { return name_; }
   string filename() { return filename_; }
   bool data_loaded() { return name_ != 0; }

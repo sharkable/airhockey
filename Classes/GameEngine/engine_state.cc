@@ -11,9 +11,6 @@
 #include "gameengine/game_engine.h"
 #include "gameengine/state_entity.h"
 
-
-#include <assert.h>
-
 EngineState::EngineState(GameEngine &game_engine) : game_engine_(game_engine) {
 }
 
