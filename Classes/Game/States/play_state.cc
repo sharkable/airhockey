@@ -251,7 +251,7 @@ void PlayState::Update() {
       AddEntity(get_ready_);
       // TODO [SoundPlayer playSound:kSoundGetReady];
     } else if (get_ready_ticks_left_ == 0) {
-    RemoveEntity(get_ready_);
+      RemoveEntity(get_ready_);
       AddEntity(go_);
       go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
       state_ = kPlayStateStatePlaying;

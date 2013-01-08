@@ -100,7 +100,7 @@ class Texture2D {
  public:
   Texture2D() {}
   Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
-            SGSize size);
+            SGSize size, string filename);
 
   static void SetGlobalAlpha(GLfloat alpha);
   void DrawAtPoint(SGPoint point);
@@ -111,6 +111,7 @@ class Texture2D {
   void Delete();
   
   GLuint name() { return name_; }
+  string filename() { return filename_; }
   bool data_loaded() { return name_ != 0; }
   SGSize content_size() {
     //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -122,11 +123,12 @@ class Texture2D {
 
  private:
   void Init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
-            SGSize size);
+            SGSize size, string filename);
 
   static int nameCounter_;
   static GLfloat globalAlpha_;
   GLuint name_;
+  string filename_;
   SGSize size_;
   uint32_t width_;
   uint32_t height_;

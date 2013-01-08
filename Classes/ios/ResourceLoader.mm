@@ -127,8 +127,8 @@ Texture2D ResourceLoader::Texture(string name) {
     data = tempData;
     
   }
-  Texture2D texture(data, pixelFormat, width, height, imageSize);
-  
+  Texture2D texture(data, pixelFormat, width, height, imageSize, name);
+
   CGContextRelease(context);
   free(data);
   return texture;

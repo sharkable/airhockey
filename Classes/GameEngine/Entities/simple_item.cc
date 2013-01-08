@@ -10,6 +10,12 @@
 
 #import "gameengine/resource_loader.h"
 
+SimpleItem::SimpleItem()
+    : texture_(0),
+      position_(SGPointMake(0, 0)),
+      angle_(0) {
+}
+
 SimpleItem::SimpleItem(Texture2D texture, SGPoint position)
     : texture_(0),
       position_(position),

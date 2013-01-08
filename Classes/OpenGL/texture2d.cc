@@ -85,8 +85,8 @@ int Texture2D::nameCounter_ = 0;
 GLfloat Texture2D::globalAlpha_ = 1;
 
 Texture2D::Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width,
-                     uint32_t height, SGSize size) {
-  Init(data, pixelFormat, width, height, size);
+                     uint32_t height, SGSize size, string filename) {
+  Init(data, pixelFormat, width, height, size, filename);
 }
 
 void Texture2D::SetGlobalAlpha(GLfloat alpha) {
@@ -246,9 +246,10 @@ void Texture2D::Delete() {
 // Private
 
 void Texture2D::Init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width,
-                     uint32_t height, SGSize size) {
+                     uint32_t height, SGSize size, string filename) {
   GLint saveName;
-  
+  filename_ = filename;
+
   //glGenTextures(1, &name_);
   name_ = ++nameCounter_;
   
