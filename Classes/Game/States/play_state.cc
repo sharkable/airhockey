@@ -519,7 +519,7 @@ void PlayState::ContinuePressed() {
   state_ = pre_pause_state_;
   RemoveEntity(menu_background_);
   RemoveEntity(sound_slider_);
-  RemoveEntity(continue_button_);
+  RemoveEntity(menu_button_);
   RemoveEntity(continue_button_);
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
@@ -530,7 +530,7 @@ void PlayState::PausePressed() {
   if (state_ != kPlayStateStateFinished && state_ != kPlayStateStatePaused) {
     pre_pause_state_ = state_;
     state_ = kPlayStateStatePaused;
-//    AddEntity(menu_background_);
+    AddEntity(menu_background_);
     AddEntity(sound_slider_);
     AddEntity(menu_button_);
     AddEntity(continue_button_);
