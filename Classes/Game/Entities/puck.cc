@@ -15,12 +15,13 @@ using namespace std;
 #include "const.h"
 #include "gameengine/resource_loader.h"
 
-Puck::Puck() {
+Puck::Puck() : RoundThing() {
   texture_ = ResourceLoader::Instance().TextureWithName("puck");
   radius_ = PUCK_RADIUS;
   mass_ = PUCK_MASS;
   friction_ = PUCK_FRICTION;
   alpha_ = 1;
+  fade_ticks_left_ = 0;
 }
 
 void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center) {

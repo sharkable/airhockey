@@ -36,6 +36,9 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
     char pointsstr[15];
     sprintf(pointsstr, "%d_points", i);
     Texture2D texture = ResourceLoader::Instance().TextureWithName(pointsstr);
+    // TODO: This is just to bump the use count of the texture since it's being used twice.
+    // Rethink how we handle textures.
+    ResourceLoader::Instance().TextureWithName(pointsstr);
     scoreTextures.push_back(texture);
   }
   cout << player_1_score_.get() << endl;

@@ -17,6 +17,7 @@
 
 RoundThing::RoundThing() {
   active_ = true;
+  grabbed_ = false;
 }
 
 RoundThing::~RoundThing() {
