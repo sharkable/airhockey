@@ -65,12 +65,6 @@
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
-		D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
-		D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5031515291500620EF2 /* ALAudio.mm */; };
-		D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5061515291500620EF2 /* AVAudio.mm */; };
-		D4B1F5491515291500620EF2 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5061515291500620EF2 /* AVAudio.mm */; };
-		D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5081515291500620EF2 /* MyOpenALSupport.mm */; };
-		D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F5081515291500620EF2 /* MyOpenALSupport.mm */; };
 		D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F50B1515291500620EF2 /* SoundPlayer.mm */; };
 		D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F50B1515291500620EF2 /* SoundPlayer.mm */; };
 		D4FE0272153B85E0001DB2C0 /* LocalStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4FE0271153B85E0001DB2C0 /* LocalStore.mm */; };
@@ -95,6 +89,12 @@
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FE789BCC14F97B34007FCBC5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FE789BCE14F97B34007FCBC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FE8DE4AB16A5E396000C5941 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4A616A5E396000C5941 /* ALAudio.mm */; };
+		FE8DE4AC16A5E396000C5941 /* ALAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4A616A5E396000C5941 /* ALAudio.mm */; };
+		FE8DE4AD16A5E396000C5941 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4A816A5E396000C5941 /* AVAudio.mm */; };
+		FE8DE4AE16A5E396000C5941 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4A816A5E396000C5941 /* AVAudio.mm */; };
+		FE8DE4AF16A5E396000C5941 /* MyOpenALSupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */; };
+		FE8DE4B016A5E396000C5941 /* MyOpenALSupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -505,13 +505,7 @@
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4DD1515291500620EF2 /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
 		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
-		D4B1F5021515291500620EF2 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
-		D4B1F5031515291500620EF2 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
 		D4B1F5041515291500620EF2 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
-		D4B1F5051515291500620EF2 /* AVAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVAudio.h; sourceTree = "<group>"; };
-		D4B1F5061515291500620EF2 /* AVAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AVAudio.mm; sourceTree = "<group>"; };
-		D4B1F5071515291500620EF2 /* MyOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenALSupport.h; sourceTree = "<group>"; };
-		D4B1F5081515291500620EF2 /* MyOpenALSupport.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyOpenALSupport.mm; sourceTree = "<group>"; };
 		D4B1F5091515291500620EF2 /* SoundInitializationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInitializationDelegate.h; sourceTree = "<group>"; };
 		D4B1F50A1515291500620EF2 /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
 		D4B1F50B1515291500620EF2 /* SoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundPlayer.mm; sourceTree = "<group>"; };
@@ -532,6 +526,12 @@
 		FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FE8DE4A516A5E396000C5941 /* ALAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAudio.h; sourceTree = "<group>"; };
+		FE8DE4A616A5E396000C5941 /* ALAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ALAudio.mm; sourceTree = "<group>"; };
+		FE8DE4A716A5E396000C5941 /* AVAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVAudio.h; sourceTree = "<group>"; };
+		FE8DE4A816A5E396000C5941 /* AVAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AVAudio.mm; sourceTree = "<group>"; };
+		FE8DE4A916A5E396000C5941 /* MyOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenALSupport.h; sourceTree = "<group>"; };
+		FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyOpenALSupport.mm; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		FEA8E61E14F97CF00084E117 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
@@ -773,6 +773,7 @@
 		D484896815387DBC006CE9AD /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				FE8DE4A416A5E396000C5941 /* SoundEngine */,
 				D484896915387DBC006CE9AD /* AirHockeyAppDelegate.h */,
 				D484896A15387DBC006CE9AD /* AirHockeyAppDelegate.mm */,
 				D484896B15387DBC006CE9AD /* EAGLView.h */,
@@ -884,13 +885,7 @@
 		D4B1F5011515291500620EF2 /* SoundEngine */ = {
 			isa = PBXGroup;
 			children = (
-				D4B1F5021515291500620EF2 /* ALAudio.h */,
-				D4B1F5031515291500620EF2 /* ALAudio.mm */,
 				D4B1F5041515291500620EF2 /* Audio.h */,
-				D4B1F5051515291500620EF2 /* AVAudio.h */,
-				D4B1F5061515291500620EF2 /* AVAudio.mm */,
-				D4B1F5071515291500620EF2 /* MyOpenALSupport.h */,
-				D4B1F5081515291500620EF2 /* MyOpenALSupport.mm */,
 				D4B1F5091515291500620EF2 /* SoundInitializationDelegate.h */,
 				D4B1F50A1515291500620EF2 /* SoundPlayer.h */,
 				D4B1F50B1515291500620EF2 /* SoundPlayer.mm */,
@@ -945,6 +940,19 @@
 				FEA8E66F14F97CF80084E117 /* Resources */,
 			);
 			path = AirHockey;
+			sourceTree = "<group>";
+		};
+		FE8DE4A416A5E396000C5941 /* SoundEngine */ = {
+			isa = PBXGroup;
+			children = (
+				FE8DE4A516A5E396000C5941 /* ALAudio.h */,
+				FE8DE4A616A5E396000C5941 /* ALAudio.mm */,
+				FE8DE4A716A5E396000C5941 /* AVAudio.h */,
+				FE8DE4A816A5E396000C5941 /* AVAudio.mm */,
+				FE8DE4A916A5E396000C5941 /* MyOpenALSupport.h */,
+				FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */,
+			);
+			path = SoundEngine;
 			sourceTree = "<group>";
 		};
 		FEA8E5D014F97CF00084E117 /* classes */ = {
@@ -1833,9 +1841,6 @@
 			files = (
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5461515291500620EF2 /* ALAudio.mm in Sources */,
-				D4B1F5481515291500620EF2 /* AVAudio.mm in Sources */,
-				D4B1F54A1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */,
 				D484897B15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897D15387DBC006CE9AD /* EAGLView.mm in Sources */,
@@ -1865,6 +1870,9 @@
 				D49689F7154DFC8300DB64DF /* ResourceLoader.mm in Sources */,
 				D49689FB154DFE4D00DB64DF /* resource_loader.cc in Sources */,
 				D49689FF154E246D00DB64DF /* texture2d.cc in Sources */,
+				FE8DE4AB16A5E396000C5941 /* ALAudio.mm in Sources */,
+				FE8DE4AD16A5E396000C5941 /* AVAudio.mm in Sources */,
+				FE8DE4AF16A5E396000C5941 /* MyOpenALSupport.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1874,9 +1882,6 @@
 			files = (
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F5471515291500620EF2 /* ALAudio.mm in Sources */,
-				D4B1F5491515291500620EF2 /* AVAudio.mm in Sources */,
-				D4B1F54B1515291500620EF2 /* MyOpenALSupport.mm in Sources */,
 				D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */,
 				D484897C15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897E15387DBC006CE9AD /* EAGLView.mm in Sources */,
@@ -1906,6 +1911,9 @@
 				D49689F8154DFC8300DB64DF /* ResourceLoader.mm in Sources */,
 				D49689FC154DFE4D00DB64DF /* resource_loader.cc in Sources */,
 				D4968A00154E246D00DB64DF /* texture2d.cc in Sources */,
+				FE8DE4AC16A5E396000C5941 /* ALAudio.mm in Sources */,
+				FE8DE4AE16A5E396000C5941 /* AVAudio.mm in Sources */,
+				FE8DE4B016A5E396000C5941 /* MyOpenALSupport.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
