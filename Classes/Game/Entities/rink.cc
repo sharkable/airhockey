@@ -28,7 +28,7 @@ void Rink::BounceOff(RoundThing *thing) {
   
   bool dampen = false;
   if (thing->x() + thing->radius() > RINK_RIGHT_X) {
-    thing->set_vx(-thing->x());
+    thing->set_vx(-thing->vx());
     thing->set_x(2*(RINK_RIGHT_X - thing->radius()) - thing->x());
     dampen = true;
   }
