@@ -24,6 +24,7 @@ class Paddle : public RoundThing {
   
   void SetInitialPositionForPlayer(int player_id);
   void KeepInPlayerBounds();
+  void RunAITick();
   
   vector<sp<Puck> > &pucks() { return pucks_; }
   Paddle *pther_paddle() { return other_paddle_; }

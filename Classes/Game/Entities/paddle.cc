@@ -99,135 +99,139 @@ void Paddle::KeepInPlayerBounds() {
   }
 }
 
+void Paddle::RunAITick() {
+  double speed = 0;
+  switch (ai_level_) {
+    case caiBad:
+      speed = 1;
+      break;
+    case caiGood:
+      speed = 1.5;
+      break;
+    case caiExcellent:
+      speed = 2;
+      break;
+    case caiAmazing:
+      speed = 4.5;
+      break;
+  }
+  
+  // Find the puck that will reach the paddle first.
+  Puck* target = NULL;
+  double bestTime;
+  
+  for (int i = 0; i < pucks_.size(); i++) {
+    Puck *puck = pucks_[i].get();
+    if (!puck->is_active()) {
+      continue;
+    }
+    if (puck->vy() > 4) {
+      continue;
+    }
+    double timeToReach = 999999;
+    if (puck->vy() < 0) {
+      timeToReach = fabs((y_ - puck->y()) / puck->vy());
+    }
+    if (puck->y() - puck->radius() > SCREEN_HEIGHT/2) {
+      continue;
+    }
+    if (target == NULL || timeToReach < bestTime || (timeToReach == bestTime && puck->y() < target->y())) {
+      target = puck;
+      bestTime = timeToReach;
+    }
+  }
+  
+  if (!target) {
+    target_left_corner_ = target_right_corner_ = target_away_from_corner_ = false;
+  }
+  
+  double targetX;
+  double targetY;
+  
+  if (!target_away_from_corner_ && target && target->y() <= RINK_TOP_Y + radius_ && fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
+    if (target->x() < SCREEN_WIDTH / 2) {
+      target_left_corner_ = true;
+    } else {
+      target_right_corner_ = true;
+    }
+  }
+  
+  if (target_left_corner_) {
+    targetX = RINK_LEFT_X + radius_;
+    targetY = RINK_TOP_Y + radius_;
+    if (Overlaps(target)) {
+      target_left_corner_ = false;
+      target_away_from_corner_ = true;
+    }
+  } else if (target_right_corner_) {
+    targetX = RINK_RIGHT_X - radius_;
+    targetY = RINK_TOP_Y + radius_;
+    if (Overlaps(target)) {
+      target_right_corner_ = false;
+      target_away_from_corner_ = true;
+    }
+  } else if (target_away_from_corner_) {
+    targetX = SCREEN_WIDTH / 2;
+    targetY = RINK_TOP_Y + radius_;
+    if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
+      target_away_from_corner_ = false;
+    }
+  } else if (target) {
+    if (target->y() > y_) {
+      targetX = target->x();
+      targetY = target->y() - target->radius();
+    } else {
+      targetY = target->y() - target->radius() - radius_ - 20;
+      if (target->x() < x_) {
+        targetX = target->x() + target->radius() + radius_ + 20;
+      } else {
+        targetX = target->x() - target->radius() - radius_ - 20;
+      }
+    }
+  } else if (ai_level_ >= caiExcellent) {
+    targetX = PADDLE_2_X;
+    targetY = PADDLE_2_Y;
+  } else if (ai_level_ == caiGood) {
+    targetX = PADDLE_2_X;
+    targetY = y_;
+  } else {
+    targetX = x_;
+    targetY = y_;
+  }
+  
+  // Get direction of target.
+  double dx = targetX - x_;
+  double dy = targetY - y_;
+  double adx = fabs(dx);
+  double ady = fabs(dy);
+  
+  if (adx <= speed && ady <= speed) {
+    vx_ = 0;
+    vy_ = 0;
+    x_ = targetX;
+    y_ = targetY;
+  } else {
+    if (fabs(dx) < fabs(vx_)) {
+      vx_ = dx;
+    } else if (fabs(dy) < fabs(vy_)) {
+      vy_ = dy;
+    }
+    
+    double dL = sqrt(dx*dx + dy*dy);
+    double nx = dx / dL;
+    double ny = dy / dL;
+    vx_ += speed * nx;
+    vy_ += speed * ny;
+  }
+}
+
 
 // StateEntity
 
 void Paddle::Update() {
   // Computer AI
   if (!player_controlled_) {
-    double speed = 0;
-    switch (ai_level_) {
-      case caiBad:
-        speed = 1;
-        break;
-      case caiGood:
-        speed = 1.5;
-        break;
-      case caiExcellent:
-        speed = 2;
-        break;
-      case caiAmazing:
-        speed = 4.5;
-        break;
-    }
-    
-    // Find the puck that will reach the paddle first.
-    Puck* target = NULL;    
-    double bestTime;
-    
-    for (int i = 0; i < pucks_.size(); i++) {
-      Puck *puck = pucks_[i].get();
-      if (!puck->is_active()) {
-        continue;
-      }
-      if (puck->vy() > 4) {
-        continue;
-      }
-      double timeToReach = 999999;
-      if (puck->vy() < 0) {
-        timeToReach = fabs((y_ - puck->y()) / puck->vy());
-      }
-      if (puck->y() - puck->radius() > SCREEN_HEIGHT/2) {
-        continue;
-      }
-      if (target == NULL || timeToReach < bestTime || (timeToReach == bestTime && puck->y() < target->y())) {
-        target = puck;
-        bestTime = timeToReach;
-      }
-    }
-    
-    if (!target) {
-      target_left_corner_ = target_right_corner_ = target_away_from_corner_ = false;
-    }
-    
-    double targetX;
-    double targetY;
-    
-    if (!target_away_from_corner_ && target && target->y() <= RINK_TOP_Y + radius_ && fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
-      if (target->x() < SCREEN_WIDTH / 2) {
-        target_left_corner_ = true;
-      } else {
-        target_right_corner_ = true;
-      }
-    }
-    
-    if (target_left_corner_) {
-      targetX = RINK_LEFT_X + radius_;
-      targetY = RINK_TOP_Y + radius_;
-      if (Overlaps(target)) {
-        target_left_corner_ = false;
-        target_away_from_corner_ = true;
-      }
-    } else if (target_right_corner_) {
-      targetX = RINK_RIGHT_X - radius_;
-      targetY = RINK_TOP_Y + radius_;
-      if (Overlaps(target)) {
-        target_right_corner_ = false;
-        target_away_from_corner_ = true;
-      }
-    } else if (target_away_from_corner_) {
-      targetX = SCREEN_WIDTH / 2;
-      targetY = RINK_TOP_Y + radius_;
-      if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
-        target_away_from_corner_ = false;
-      }
-    } else if (target) {
-      if (target->y() > y_) {
-        targetX = target->x();
-        targetY = target->y() - target->radius();
-      } else {
-        targetY = target->y() - target->radius() - radius_ - 20;
-        if (target->x() < x_) {
-          targetX = target->x() + target->radius() + radius_ + 20;
-        } else {
-          targetX = target->x() - target->radius() - radius_ - 20;
-        }
-      }
-    } else if (ai_level_ >= caiExcellent) {
-      targetX = PADDLE_2_X;
-      targetY = PADDLE_2_Y;
-    } else if (ai_level_ == caiGood) {
-      targetX = PADDLE_2_X;
-      targetY = y_;
-    } else {
-      targetX = x_;
-      targetY = y_;
-    }
-    
-    // Get direction of target.
-    double dx = targetX - x_;
-    double dy = targetY - y_;
-    double adx = fabs(dx);
-    double ady = fabs(dy);
-    
-    if (adx <= speed && ady <= speed) {
-      vx_ = 0;
-      vy_ = 0;
-      x_ = targetX;
-      y_ = targetY;
-    } else {
-      if (fabs(dx) < fabs(vx_)) {
-        vx_ = dx;
-      } else if (fabs(dy) < fabs(vy_)) {
-        vy_ = dy;
-      }
-      
-      double dL = sqrt(dx*dx + dy*dy);
-      double nx = dx / dL;
-      double ny = dy / dL;
-      vx_ += speed * nx;
-      vy_ += speed * ny;
-    }
+    RunAITick();
   }
   RoundThing::Update();
 }
