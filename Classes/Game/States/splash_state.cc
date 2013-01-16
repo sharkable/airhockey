@@ -13,31 +13,25 @@
 #import "const.h"
 #include "soundengine/sound_player.h"
 
-SplashState::SplashState(GameEngine &gameEngine) : EngineState(gameEngine) {
-//  spinner_ = [[UIActivityIndicatorView alloc]
-//                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-//    spinner_.center = CGPointMake(320 / 2, 480 / 2);
-//  } else {
-//    spinner_.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-//  }
-//  getGameEngine()->addUIView(spinner_);
-//  [spinner_ startAnimating];
-  soundInitialized_ = false;
-}
+#import "puck.h"
 
-SplashState::~SplashState() {
-//  [spinner_ removeFromSuperview];
-//  [spinner_ release];
+SplashState::SplashState(GameEngine &gameEngine) : EngineState(gameEngine) {
+  state_ = kSplashStateInitial;
 }
 
 void SplashState::Update() {
-  static int c = 0;
-  if (c++ == 3) {
-    SoundPlayer::instance()->initializeWithDelegate(this);
-  }
-  if (soundInitialized_) {
-    game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
+  EngineState::Update();
+  switch (state_) {
+    case kSplashStateInitial:
+      SoundPlayer::instance()->initializeWithDelegate(this);
+      state_ = kSplashStateLoadingSounds;
+      break;
+    case kSplashStateSoundsDidLoad:
+      game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
+      state_ = kSplashStateFinished;
+      break;
+    default:
+      break;
   }
 }
 
@@ -45,5 +39,5 @@ void SplashState::Update() {
 // SoundInitializationDelegate
 
 void SplashState::SoundInitialized(SoundPlayer *sound_player) {
-  soundInitialized_ = true;
+  state_ = kSplashStateSoundsDidLoad;
 }

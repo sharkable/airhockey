@@ -13,10 +13,16 @@
 #import "simple_item.h"
 #include "soundengine/sound_initialization_delegate.h"
 
+typedef enum {
+  kSplashStateInitial = 0,
+  kSplashStateLoadingSounds,
+  kSplashStateSoundsDidLoad,
+  kSplashStateFinished
+} SplashStateState;
+
 class SplashState : public EngineState, SoundInitializationDelegate {
  public:
   SplashState(GameEngine &gameEngine);
-  ~SplashState();
 
   // EngineState
   string Name() { return "SplashState"; }
@@ -26,8 +32,7 @@ class SplashState : public EngineState, SoundInitializationDelegate {
   void SoundInitialized(SoundPlayer *sound_player);
   
  private:
-  // UIActivityIndicatorView *spinner_;
-  bool soundInitialized_;
+  SplashStateState state_;
 };
 
 #endif
