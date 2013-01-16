@@ -1,6 +1,6 @@
 //
-//  SoundInitializationDelegate.h
-//  PetVet
+//  sound_initialization_delegate.h
+//  AirHockey
 //
 //  Created by Jonathan Sharkey on 09-10-26.
 //  Copyright 2012 Sharkable. All rights reserved.

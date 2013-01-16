@@ -37,11 +37,6 @@ class SoundPlayer {
   virtual void setSoundEffectsOn(bool on) = 0;
 
   static SoundPlayer *instance();
-  
-//@property (assign) NSMutableArray* sounds;
-//@property (assign) AVAudio* song;
-//@property BOOL musicOn;
-//@property BOOL soundEffectsOn;
 };
 
 #endif
