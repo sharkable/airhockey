@@ -505,7 +505,6 @@
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4DD1515291500620EF2 /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
 		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
-		D4B1F5091515291500620EF2 /* SoundInitializationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInitializationDelegate.h; sourceTree = "<group>"; };
 		D4FE0271153B85E0001DB2C0 /* LocalStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalStore.mm; sourceTree = "<group>"; };
 		D4FE0274153B85F8001DB2C0 /* local_store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_store.h; sourceTree = "<group>"; };
 		D4FE0275153B88F9001DB2C0 /* state_entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state_entity.h; sourceTree = "<group>"; };
@@ -533,6 +532,7 @@
 		FE8DE4B216A5E4E5000C5941 /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
 		FE8DE4B316A5E4E5000C5941 /* SoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundPlayer.mm; sourceTree = "<group>"; };
 		FE8DE4B616A5E50F000C5941 /* sound_player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sound_player.h; sourceTree = "<group>"; };
+		FE8DE4B716A63F26000C5941 /* sound_initialization_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sound_initialization_delegate.h; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		FEA8E61E14F97CF00084E117 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
@@ -886,7 +886,7 @@
 		D4B1F5011515291500620EF2 /* SoundEngine */ = {
 			isa = PBXGroup;
 			children = (
-				D4B1F5091515291500620EF2 /* SoundInitializationDelegate.h */,
+				FE8DE4B716A63F26000C5941 /* sound_initialization_delegate.h */,
 				FE8DE4B616A5E50F000C5941 /* sound_player.h */,
 			);
 			path = SoundEngine;

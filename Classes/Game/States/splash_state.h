@@ -11,7 +11,7 @@
 
 #import "engine_state.h"
 #import "simple_item.h"
-#include "soundengine/SoundInitializationDelegate.h"
+#include "soundengine/sound_initialization_delegate.h"
 
 class SplashState : public EngineState, SoundInitializationDelegate {
  public:

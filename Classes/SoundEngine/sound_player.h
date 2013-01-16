@@ -9,7 +9,7 @@
 #ifndef AIRHOCKEY_SOUND_PLAYER_H
 #define AIRHOCKEY_SOUND_PLAYER_H
 
-#include "SoundInitializationDelegate.h"
+#include "soundengine/sound_initialization_delegate.h"
 
 typedef enum {
   kSoundScore = 0,

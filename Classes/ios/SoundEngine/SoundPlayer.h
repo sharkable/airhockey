@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#include "soundengine/sound_initialization_delegate.h"
+#include "soundengine/sound_player.h"
+
 #import "ALAudio.h"
 #import "AVAudio.h"
-#import "SoundInitializationDelegate.h"
-#import "sound_player.h"
 
 class SoundPlayerImpl : public SoundPlayer {
  public:
