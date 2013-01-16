@@ -7,39 +7,39 @@
 //
 
 #import "SoundPlayer.h"
+
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioServices.h>
 #import <MediaPlayer/MPMusicPlayerController.h>
 
 #import "TypeUtil.h"
 
-static SoundPlayer *soundInstance_ = NULL;
+static SoundPlayerImpl *soundInstance_ = NULL;
 
 static const bool thisAppDoesDucking = NO; // if this gets changed to yes then it's all set up to duck the sound when iTunes is playing with Sound effects ON
 
 @interface SoundHelpers
-{};
-+(NSString*) getAudioServicesError:(OSStatus)err;
++ (NSString *)getAudioServicesError:(OSStatus)err;
 @end
 
 @implementation SoundHelpers
 
-+(NSString*) getAudioServicesError:(OSStatus)err
-{
-  if( err == kAudioSessionNoError )
-  {
++ (NSString *)getAudioServicesError:(OSStatus)err {
+  if (err == kAudioSessionNoError) {
     return nil;
   }
   
-  NSString* errStr = nil;
+  NSString *errStr = nil;
   
-  switch(err)
-  {
+  switch (err) {
     case kAudioSessionNotInitialized:
-      errStr = @"An Audio Session Services function was called without first initializing the session. To avoid this error, call the AudioSessionInitialize function before attempting to use the session.";
+      errStr = @"An Audio Session Services function was called without first initializing the "
+          "session. To avoid this error, call the AudioSessionInitialize function before "
+          "attempting to use the session.";
       break;
     case kAudioSessionAlreadyInitialized:
-      errStr = @"The AudioSessionInitialize function was called more than once during the lifetime of your application.";
+      errStr = @"The AudioSessionInitialize function was called more than once during the lifetime "
+          "of your application.";
       break;
     case kAudioSessionInitializationError:
       errStr = @"There was an error during audio session initialization.";
@@ -51,17 +51,22 @@ static const bool thisAppDoesDucking = NO; // if this gets changed to yes then i
       errStr = @"The size of the audio session property data was not correct.";
       break;
     case kAudioSessionNotActiveError:
-      errStr = @"The audio operation failed because your application’s audio session was not active.";
+      errStr = @"The audio operation failed because your application’s audio session was not "
+          "active.";
       break;
     case kAudioServicesNoHardwareError:
       errStr = @"The audio operation failed because the device has no audio input available.";
       break;
 #if __IPHONE_OS_VERSION_MIN_REQUIRED > 30000      
     case kAudioSessionNoCategorySet:
-      errStr = @"The audio operation failed because it requires the audio session to have an explicitly-set category, but none was set. To use a hardware codec you must explicitly initialize the audio session and explicitly set an audio session category.";
+      errStr = @"The audio operation failed because it requires the audio session to have an "
+          "explicitly-set category, but none was set. To use a hardware codec you must explicitly "
+          "initialize the audio session and explicitly set an audio session category.";
       break;
     case kAudioSessionIncompatibleCategory:
-      errStr = @"The specified audio session category cannot be used for the attempted audio operation. For example, you attempted to play or record audio with the audio session category set to kAudioSessionCategory_AudioProcessing.";
+      errStr = @"The specified audio session category cannot be used for the attempted audio "
+          "operation. For example, you attempted to play or record audio with the audio session "
+          "category set to kAudioSessionCategory_AudioProcessing.";
       break;
 #endif
     default:
@@ -70,13 +75,12 @@ static const bool thisAppDoesDucking = NO; // if this gets changed to yes then i
   }
   return errStr;  
 }
+
 @end
 
 
 static AVAudioSession *session_ = nil;
 static bool musicIsPlayingInITunes_ = false;
-
-// @synthesize sounds=sounds_, song=song_, musicOn=musicOn_, soundEffectsOn=soundEffectsOn_;
 
 SoundPlayer *SoundPlayer::instance() {
   if (soundInstance_ == nil) {
@@ -85,58 +89,80 @@ SoundPlayer *SoundPlayer::instance() {
   return soundInstance_;
 }
 
-AVAudioSession *SoundPlayerImpl::session()
-{
+AVAudioSession *SoundPlayerImpl::session() {
   return session_;
 }
 
-bool SoundPlayerImpl::isMusicPlayingInITunes()
-{
+bool SoundPlayerImpl::isMusicPlayingInITunes() {
   return musicIsPlayingInITunes_;
 }
 
-
 // allow sound effects to be clear by ducking the iTunes song    
-void SoundPlayerImpl::duckAudioFromITunes(bool duck)
-{
-  //
-  // note: not sure if this is for all AudioSession properties, but at least with ducking the session has to be inactive to make the change
-  //      so here we set the session to inactive at the top of the function, and set to active at the end after setting the property
-  // 
-  NSError* activeErr = nil;
-  BOOL sessionActive = [session_ setActive:NO error:&activeErr ];
-  if( !sessionActive )
-  {
-    NSLog( @"ERROR setting audio session active .... \n\tERROR: %@\n", activeErr );
-  }
+void SoundPlayerImpl::duckAudioFromITunes(bool duck) {
+  // note: not sure if this is for all AudioSession properties, but at least with ducking the
+  // session has to be inactive to make the change so here we set the session to inactive at the top
+  // of the function, and set to active at the end after setting the property
   
-  // if the user want's the sound effects on while iTunes is playing , then we duck the iTunes so you can hear the sounds, if sounds are off, iTunes is full volume :P
+  NSError *activeErr = nil;
+  BOOL sessionActive = [session_ setActive:NO error:&activeErr];
+  if (!sessionActive) {
+    NSLog(@"ERROR setting audio session active .... \n\tERROR: %@\n", activeErr);
+  }
+
+  // if the user want's the sound effects on while iTunes is playing , then we duck the iTunes so
+  // you can hear the sounds, if sounds are off, iTunes is full volume :P
   UInt32 allowDuck = thisAppDoesDucking && duck && musicIsPlayingInITunes_;    
-  OSStatus propertySetError = AudioSessionSetProperty (kAudioSessionProperty_OtherMixableAudioShouldDuck,sizeof (allowDuck),&allowDuck);  
-  if( propertySetError != kAudioSessionNoError )
-  {
-    NSString* errStr = [SoundHelpers getAudioServicesError: propertySetError ];
-    NSLog( @"ERROR setting iTunes audio ducking property to [%s] ... \n\t ERROR: %@\n", allowDuck ? "ON" : "OFF" , errStr );    
+  OSStatus propertySetError =
+      AudioSessionSetProperty(kAudioSessionProperty_OtherMixableAudioShouldDuck, sizeof(allowDuck),
+                              &allowDuck);
+  if (propertySetError != kAudioSessionNoError) {
+    NSString *errStr = [SoundHelpers getAudioServicesError: propertySetError];
+    NSLog(@"ERROR setting iTunes audio ducking property to [%s] ... \n\t ERROR: %@\n",
+          allowDuck ? "ON" : "OFF" ,errStr );
   }
   
   activeErr = nil;
-  sessionActive = [session_ setActive:YES error:&activeErr ];
-  if( !sessionActive )
-  {
-    NSLog( @"ERROR setting audio session active .... \n\tERROR: %@\n", activeErr );
+  sessionActive = [session_ setActive:YES error:&activeErr];
+
+  if(!sessionActive) {
+    NSLog(@"ERROR setting audio session active .... \n\tERROR: %@\n", activeErr);
   }
 }
 
-
 NSURL *SoundPlayerImpl::filenameToUrl(NSString *name) {
   // Convert path to a URL 
-  NSString* path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], name];
-  NSURL*    url  = [NSURL fileURLWithPath:path];
+  NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], name];
+  NSURL *url  = [NSURL fileURLWithPath:path];
   return url;
 }
 
+void SoundPlayerImpl::loadSoundsWithDelegate(SoundInitializationDelegate *delegate) {
+  NSAutoreleasePool *subpool = [[NSAutoreleasePool alloc] init];
+  
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"score" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"score_final" andExt:@"mp3"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"paddle_hit" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"puck_rink_bounce" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"puck_puck_hit" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"beep" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"button_click" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"get_ready" andExt:@"wav"]];
+  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"start" andExt:@"wav"]];
+
+  delegate->SoundInitialized(this);
+  
+  [subpool release];
+}
+
+void *loadSounds(void *delegate) {
+  soundInstance_->loadSoundsWithDelegate((SoundInitializationDelegate *)delegate);
+  pthread_exit(NULL);
+}
+
 void SoundPlayerImpl::initializeWithDelegate(SoundInitializationDelegate *delegate) {
-  loadSoundsWithDelegate(delegate);
+  main_thread_ = pthread_self();
+  pthread_t thread;
+  pthread_create(&thread, NULL, loadSounds, delegate);
 }
 
 bool SoundPlayerImpl::setGlobalVolume(float volume) {
@@ -222,26 +248,6 @@ SoundPlayerImpl::SoundPlayerImpl() {
 
   delegate_ = delegate;
 }
-
-void SoundPlayerImpl::loadSoundsWithDelegate(SoundInitializationDelegate *delegate) {
-  NSAutoreleasePool *subpool = [[NSAutoreleasePool alloc] init];
-
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"score" andExt:@"wav"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"score_final" andExt:@"mp3"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"paddle_hit" andExt:@"wav"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"puck_rink_bounce" andExt:@"wav"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"puck_puck_hit" andExt:@"wav"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"beep" andExt:@"wav"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"button_click" andExt:@"wav"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"get_ready" andExt:@"wav"]];
-  [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"start" andExt:@"wav"]];
-
-  delegate->SoundInitialized(this);
-  
-  [subpool release];
-}
-
-
 
 //  SOUND-ENABLED  MUSIC-ENABLED  ITUNES-PLAYING    OUTCOME
 //    NO        NO        NO          no sound obviously

@@ -23,6 +23,7 @@ SplashState::SplashState(GameEngine &gameEngine) : EngineState(gameEngine) {
 //  }
 //  getGameEngine()->addUIView(spinner_);
 //  [spinner_ startAnimating];
+  soundInitialized_ = false;
 }
 
 SplashState::~SplashState() {
@@ -35,11 +36,14 @@ void SplashState::Update() {
   if (c++ == 3) {
     SoundPlayer::instance()->initializeWithDelegate(this);
   }
+  if (soundInitialized_) {
+    game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
+  }
 }
 
 
 // SoundInitializationDelegate
 
 void SplashState::SoundInitialized(SoundPlayer *sound_player) {
-  game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
+  soundInitialized_ = true;
 }

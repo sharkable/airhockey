@@ -27,6 +27,7 @@ class SplashState : public EngineState, SoundInitializationDelegate {
   
  private:
   // UIActivityIndicatorView *spinner_;
+  bool soundInitialized_;
 };
 
 #endif

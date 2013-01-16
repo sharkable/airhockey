@@ -22,8 +22,9 @@ class SoundPlayerImpl : public SoundPlayer {
   bool isMusicPlayingInITunes();
   void syncAudioSessionForITunes();
   void duckAudioFromITunes(bool duck);
-  
+
   void initializeWithDelegate(SoundInitializationDelegate *delegate);
+  void loadSoundsWithDelegate(SoundInitializationDelegate *delegate);
   bool setGlobalVolume(float volume);
   bool setVolume(Sound sound, float volume);
   bool playSound(Sound sound);
@@ -34,12 +35,12 @@ class SoundPlayerImpl : public SoundPlayer {
   void setSoundEffectsOn(bool on);
 
  private:
+  pthread_t main_thread_;
   NSMutableArray* sounds_;
   AVAudio* song_;
   bool musicOn_;
   bool soundEffectsOn_;
   AudioInterruptDelegate* delegate_;
-  
-  void loadSoundsWithDelegate(SoundInitializationDelegate *delegate);
+
   NSURL *filenameToUrl(NSString *name);
 };
