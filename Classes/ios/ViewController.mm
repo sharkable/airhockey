@@ -29,18 +29,17 @@
 - (id)init {
   self = [super init];
   if (self) {
-    //[self view];
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    gameTouchWindow_ = [[GameTouchWindow alloc] initWithFrame:screenSize];
+    [gameTouchWindow_ addSubview:self.view];
+    [gameTouchWindow_ makeKeyAndVisible];
+
     game_engine_ = new GameEngine();
     root_state_.reset(new SplashState(*game_engine_));
     game_engine_->PushState(root_state_);
     gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
-
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
-    gameTouchWindow_ = [[GameTouchWindow alloc] initWithFrame:screenSize];
-    gameTouchWindow_.gameEngine = game_engine_;
-    [gameTouchWindow_ addSubview:self.view];
-    [gameTouchWindow_ makeKeyAndVisible];
-  }
+    gameTouchWindow_.gameEngine = game_engine_;    
+}
   return self;
 }
 
