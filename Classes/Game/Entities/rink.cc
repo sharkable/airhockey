@@ -11,6 +11,7 @@
 #include "const.h"
 #include "game/entities/puck.h"
 #include "gameengine/resource_loader.h"
+#include "soundengine/sound_player.h"
 
 Rink::Rink() {
   texture_ = ResourceLoader::Instance().TextureWithName("rink_bg");
@@ -97,14 +98,14 @@ void Rink::BounceOff(RoundThing *thing) {
       }
     }
   }
-  
+
   if (dampen) {
     thing->set_vx(thing->vx() * 0.7);
     thing->set_vy(thing->vy() * 0.7);
     // TODO: haha, again.
-//    if ([thing isKindOfClass:[Puck class]]) {
-//      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
-//    }
+    if (thing->Name() == "Puck") {
+      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
+    }
   }  
 }
 

@@ -14,6 +14,7 @@
 #include "game/entities/puck.h"
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
+#include "soundengine/sound_player.h"
 
 RoundThing::RoundThing() {
   active_ = true;
@@ -104,18 +105,18 @@ void RoundThing::BounceOff(RoundThing *other) {
     }
 
     // TODO: haha, this is soooo terrible.
-//    BOOL onePaddle = [self isKindOfClass:[Paddle class]] || [other isKindOfClass:[Paddle class]];
-//    BOOL twoPucks = [self isKindOfClass:[Puck class]] && [other isKindOfClass:[Puck class]];
-//    BOOL onePuck = !twoPucks && ([self isKindOfClass:[Puck class]] || [other isKindOfClass:[Puck class]]);
-//    
-//    if (onePaddle && onePuck) {
-//      [SoundPlayer playSound:kSoundPaddleHit];
-//    } else if (onePuck) {
-//      // The puck hit a post.
-//      [SoundPlayer playSound:kSoundPuckRinkBounce];
-//    } else if (twoPucks) {
-//      [SoundPlayer playSound:kSoundTwoPuckHit];
-//    }
+    bool onePaddle = Name() == "Paddle" || other->Name() == "Paddle";
+    bool twoPucks = Name() == "Puck" && other->Name() == "Puck";
+    bool onePuck = !twoPucks && (Name() == "Puck" || other->Name() == "Puck");
+
+    if (onePaddle && onePuck) {
+      SoundPlayer::instance()->playSound(kSoundPaddleHit);
+    } else if (onePuck) {
+      // The puck hit a post.
+      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
+    } else if (twoPucks) {
+      SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
+    }
     
     double newVSquared = vx_ * vx_ + vy_ * vy_;
     double newOtherVSquared = other->vx() * other->vx() + other->vy() * other->vy();

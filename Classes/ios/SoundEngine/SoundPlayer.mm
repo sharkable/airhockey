@@ -235,7 +235,7 @@ void SoundPlayerImpl::loadSoundsWithDelegate(SoundInitializationDelegate *delega
   [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"button_click" andExt:@"wav"]];
   [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"get_ready" andExt:@"wav"]];
   [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"start" andExt:@"wav"]];
-  cout << "SOUNDS: " << sounds_.count << endl;
+
   delegate->SoundInitialized(this);
   
   [subpool release];
