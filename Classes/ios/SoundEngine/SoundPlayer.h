@@ -43,10 +43,3 @@ class SoundPlayerImpl : public SoundPlayer {
   void loadSoundsWithDelegate(SoundInitializationDelegate *delegate);
   NSURL *filenameToUrl(NSString *name);
 };
-
-//@property (assign) NSMutableArray* sounds;
-//@property (assign) AVAudio* song;
-//@property BOOL musicOn;
-//@property BOOL soundEffectsOn;
-
-//@end
