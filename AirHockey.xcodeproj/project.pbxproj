@@ -65,8 +65,6 @@
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
-		D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F50B1515291500620EF2 /* SoundPlayer.mm */; };
-		D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F50B1515291500620EF2 /* SoundPlayer.mm */; };
 		D4FE0272153B85E0001DB2C0 /* LocalStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4FE0271153B85E0001DB2C0 /* LocalStore.mm */; };
 		D4FE0273153B85E0001DB2C0 /* LocalStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4FE0271153B85E0001DB2C0 /* LocalStore.mm */; };
 		FE3CF94314F9807E0063CCA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94214F9807E0063CCA5 /* QuartzCore.framework */; };
@@ -95,6 +93,8 @@
 		FE8DE4AE16A5E396000C5941 /* AVAudio.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4A816A5E396000C5941 /* AVAudio.mm */; };
 		FE8DE4AF16A5E396000C5941 /* MyOpenALSupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */; };
 		FE8DE4B016A5E396000C5941 /* MyOpenALSupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */; };
+		FE8DE4B416A5E4E5000C5941 /* SoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4B316A5E4E5000C5941 /* SoundPlayer.mm */; };
+		FE8DE4B516A5E4E5000C5941 /* SoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE8DE4B316A5E4E5000C5941 /* SoundPlayer.mm */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -505,10 +505,7 @@
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		D4B1F4DD1515291500620EF2 /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
 		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
-		D4B1F5041515291500620EF2 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
 		D4B1F5091515291500620EF2 /* SoundInitializationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInitializationDelegate.h; sourceTree = "<group>"; };
-		D4B1F50A1515291500620EF2 /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
-		D4B1F50B1515291500620EF2 /* SoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundPlayer.mm; sourceTree = "<group>"; };
 		D4FE0271153B85E0001DB2C0 /* LocalStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalStore.mm; sourceTree = "<group>"; };
 		D4FE0274153B85F8001DB2C0 /* local_store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_store.h; sourceTree = "<group>"; };
 		D4FE0275153B88F9001DB2C0 /* state_entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state_entity.h; sourceTree = "<group>"; };
@@ -532,6 +529,10 @@
 		FE8DE4A816A5E396000C5941 /* AVAudio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AVAudio.mm; sourceTree = "<group>"; };
 		FE8DE4A916A5E396000C5941 /* MyOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenALSupport.h; sourceTree = "<group>"; };
 		FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyOpenALSupport.mm; sourceTree = "<group>"; };
+		FE8DE4B116A5E3F6000C5941 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
+		FE8DE4B216A5E4E5000C5941 /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
+		FE8DE4B316A5E4E5000C5941 /* SoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundPlayer.mm; sourceTree = "<group>"; };
+		FE8DE4B616A5E50F000C5941 /* sound_player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sound_player.h; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8E5CF14F97CF00084E117 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		FEA8E61E14F97CF00084E117 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
@@ -885,10 +886,8 @@
 		D4B1F5011515291500620EF2 /* SoundEngine */ = {
 			isa = PBXGroup;
 			children = (
-				D4B1F5041515291500620EF2 /* Audio.h */,
 				D4B1F5091515291500620EF2 /* SoundInitializationDelegate.h */,
-				D4B1F50A1515291500620EF2 /* SoundPlayer.h */,
-				D4B1F50B1515291500620EF2 /* SoundPlayer.mm */,
+				FE8DE4B616A5E50F000C5941 /* sound_player.h */,
 			);
 			path = SoundEngine;
 			sourceTree = "<group>";
@@ -947,10 +946,13 @@
 			children = (
 				FE8DE4A516A5E396000C5941 /* ALAudio.h */,
 				FE8DE4A616A5E396000C5941 /* ALAudio.mm */,
+				FE8DE4B116A5E3F6000C5941 /* Audio.h */,
 				FE8DE4A716A5E396000C5941 /* AVAudio.h */,
 				FE8DE4A816A5E396000C5941 /* AVAudio.mm */,
 				FE8DE4A916A5E396000C5941 /* MyOpenALSupport.h */,
 				FE8DE4AA16A5E396000C5941 /* MyOpenALSupport.mm */,
+				FE8DE4B216A5E4E5000C5941 /* SoundPlayer.h */,
+				FE8DE4B316A5E4E5000C5941 /* SoundPlayer.mm */,
 			);
 			path = SoundEngine;
 			sourceTree = "<group>";
@@ -1841,7 +1843,6 @@
 			files = (
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F54C1515291500620EF2 /* SoundPlayer.mm in Sources */,
 				D484897B15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897D15387DBC006CE9AD /* EAGLView.mm in Sources */,
 				D484897F15387DBC006CE9AD /* ES1Renderer.mm in Sources */,
@@ -1873,6 +1874,7 @@
 				FE8DE4AB16A5E396000C5941 /* ALAudio.mm in Sources */,
 				FE8DE4AD16A5E396000C5941 /* AVAudio.mm in Sources */,
 				FE8DE4AF16A5E396000C5941 /* MyOpenALSupport.mm in Sources */,
+				FE8DE4B416A5E4E5000C5941 /* SoundPlayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1882,7 +1884,6 @@
 			files = (
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
 				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
-				D4B1F54D1515291500620EF2 /* SoundPlayer.mm in Sources */,
 				D484897C15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897E15387DBC006CE9AD /* EAGLView.mm in Sources */,
 				D484898015387DBC006CE9AD /* ES1Renderer.mm in Sources */,
@@ -1914,6 +1915,7 @@
 				FE8DE4AC16A5E396000C5941 /* ALAudio.mm in Sources */,
 				FE8DE4AE16A5E396000C5941 /* AVAudio.mm in Sources */,
 				FE8DE4B016A5E396000C5941 /* MyOpenALSupport.mm in Sources */,
+				FE8DE4B516A5E4E5000C5941 /* SoundPlayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

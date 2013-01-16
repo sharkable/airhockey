@@ -11,6 +11,7 @@
 #import "main_menu_state.h"
 #import "game_engine.h"
 #import "const.h"
+#include "soundengine/sound_player.h"
 
 SplashState::SplashState(GameEngine &gameEngine) : EngineState(gameEngine) {
 //  spinner_ = [[UIActivityIndicatorView alloc]
@@ -22,7 +23,6 @@ SplashState::SplashState(GameEngine &gameEngine) : EngineState(gameEngine) {
 //  }
 //  getGameEngine()->addUIView(spinner_);
 //  [spinner_ startAnimating];
-//  soundInitialized();  // TODO temporary until we actually can load sound.
 }
 
 SplashState::~SplashState() {
@@ -30,15 +30,16 @@ SplashState::~SplashState() {
 //  [spinner_ release];
 }
 
-void SplashState::soundInitialized() {
-  game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
+void SplashState::Update() {
+  static int c = 0;
+  if (c++ == 3) {
+    SoundPlayer::instance()->initializeWithDelegate(this);
+  }
 }
 
 
-void SplashState::Update() {
-  static int c = 0;
-  EngineState::Update();
-  if (++c == 2) {
-    soundInitialized();
-  }
+// SoundInitializationDelegate
+
+void SplashState::SoundInitialized(SoundPlayer *sound_player) {
+  game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
 }

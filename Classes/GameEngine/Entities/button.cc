@@ -7,9 +7,9 @@
 //
 
 #include "gameengine/entities/button.h"
-
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
+#include "soundengine/sound_player.h"
 
 Button::Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position)
     : normal_texture_(normal_texture),
@@ -59,7 +59,7 @@ void Button::TouchesBegan(vector<Touch> touches) {
     for (int i = 0; i < touches.size(); i++) {
       if (ContainsPoint(touches[i].location())) {
         state_ = kButtonStatePressed;
-//        [SoundPlayer playSound:kSoundButton];
+        SoundPlayer::instance()->playSound(kSoundButton);
       }
     }
   }

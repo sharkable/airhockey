@@ -11,17 +11,20 @@
 
 #import "engine_state.h"
 #import "simple_item.h"
+#include "soundengine/SoundInitializationDelegate.h"
 
-class SplashState : public EngineState {
+class SplashState : public EngineState, SoundInitializationDelegate {
  public:
   SplashState(GameEngine &gameEngine);
   ~SplashState();
 
   // EngineState
-  void soundInitialized();
-  void Update();
   string Name() { return "SplashState"; }
-
+  void Update();
+  
+  // SoundInitializationDelegate
+  void SoundInitialized(SoundPlayer *sound_player);
+  
  private:
   // UIActivityIndicatorView *spinner_;
 };

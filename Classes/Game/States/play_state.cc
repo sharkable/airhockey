@@ -12,6 +12,7 @@
 #include "game/states/main_menu_state.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
+#include "soundengine/sound_player.h"
 
 PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                      PaddleSize paddle_size)
@@ -252,7 +253,7 @@ void PlayState::Update() {
     get_ready_ticks_left_--;
     if (get_ready_ticks_left_ == SHOW_GET_READY_MESSAGE_TICKS) {
       AddEntity(get_ready_);
-      // TODO [SoundPlayer playSound:kSoundGetReady];
+      SoundPlayer::instance()->playSound(kSoundGetReady);
     } else if (get_ready_ticks_left_ == 0) {
       RemoveEntity(get_ready_);
       AddEntity(go_);

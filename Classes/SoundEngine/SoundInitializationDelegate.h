@@ -3,12 +3,12 @@
 //  PetVet
 //
 //  Created by Jonathan Sharkey on 09-10-26.
-//  Copyright 2009 Sharkable. All rights reserved.
+//  Copyright 2012 Sharkable. All rights reserved.
 //
 
+class SoundPlayer;
 
-@protocol SoundInitializationDelegate
-
-- (void) soundInitialized;
-
-@end
+class SoundInitializationDelegate {
+ public:
+  virtual void SoundInitialized(SoundPlayer *sound_player) = 0;
+};

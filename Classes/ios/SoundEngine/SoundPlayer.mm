@@ -11,10 +11,11 @@
 #import <AudioToolbox/AudioServices.h>
 #import <MediaPlayer/MPMusicPlayerController.h>
 
-static SoundPlayer* soundInstance_ = nil;
+#import "TypeUtil.h"
 
+static SoundPlayer *soundInstance_ = NULL;
 
-static const BOOL thisAppDoesDucking = NO; // if this gets changed to yes then it's all set up to duck the sound when iTunes is playing with Sound effects ON
+static const bool thisAppDoesDucking = NO; // if this gets changed to yes then it's all set up to duck the sound when iTunes is playing with Sound effects ON
 
 @interface SoundHelpers
 {};
@@ -72,33 +73,31 @@ static const BOOL thisAppDoesDucking = NO; // if this gets changed to yes then i
 @end
 
 
-@implementation SoundPlayer
+static AVAudioSession *session_ = nil;
+static bool musicIsPlayingInITunes_ = false;
 
-static AVAudioSession*    session_ = nil;
-static BOOL          musicIsPlayingInITunes_ = NO;
+// @synthesize sounds=sounds_, song=song_, musicOn=musicOn_, soundEffectsOn=soundEffectsOn_;
 
-@synthesize sounds=sounds_, song=song_, musicOn=musicOn_, soundEffectsOn=soundEffectsOn_;
-
-+ (SoundPlayer*) instance {
+SoundPlayer *SoundPlayer::instance() {
   if (soundInstance_ == nil) {
-    soundInstance_ = [[SoundPlayer alloc] init];
+    soundInstance_ = new SoundPlayerImpl();
   }
   return soundInstance_;
 }
 
-+(AVAudioSession*) session
+AVAudioSession *SoundPlayerImpl::session()
 {
   return session_;
 }
 
-+(BOOL) isMusicPlayingInITunes
+bool SoundPlayerImpl::isMusicPlayingInITunes()
 {
   return musicIsPlayingInITunes_;
 }
 
 
 // allow sound effects to be clear by ducking the iTunes song    
-+(void) duckAudioFromITunes:(BOOL)duck
+void SoundPlayerImpl::duckAudioFromITunes(bool duck)
 {
   //
   // note: not sure if this is for all AudioSession properties, but at least with ducking the session has to be inactive to make the change
@@ -129,65 +128,60 @@ static BOOL          musicIsPlayingInITunes_ = NO;
 }
 
 
-+ (NSURL*) filenameToUrl:(NSString*)name {  
+NSURL *SoundPlayerImpl::filenameToUrl(NSString *name) {
   // Convert path to a URL 
   NSString* path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], name];
   NSURL*    url  = [NSURL fileURLWithPath:path];
   return url;
 }
 
-+ (void) initializeWithDelegate:(NSObject <SoundInitializationDelegate> *)delegate {
-  SoundPlayer* player = [SoundPlayer instance];
-  [player performSelectorOnMainThread:@selector(loadSoundsWithDelegate:) withObject:delegate waitUntilDone:false];
+void SoundPlayerImpl::initializeWithDelegate(SoundInitializationDelegate *delegate) {
+  loadSoundsWithDelegate(delegate);
 }
 
-+ (BOOL) setGlobalVolume:(float)volume {
-  SoundPlayer* player = [SoundPlayer instance];
-  for (ALAudio* ALSound in player.sounds) {
+bool SoundPlayerImpl::setGlobalVolume(float volume) {
+  for (ALAudio* ALSound in sounds_) {
     [ALSound setVolume:volume];
   }
-  return YES;
+  return true;
 }
 
-+ (BOOL) setVolume:(Sound)sound volume:(float)volume {
-  SoundPlayer* player = [SoundPlayer instance];
-  if (player.soundEffectsOn) {
-    if (player.sounds.count > sound) {
-      ALAudio* ALSound = (ALAudio*)[player.sounds objectAtIndex:sound];
+bool SoundPlayerImpl::setVolume(Sound sound, float volume) {
+  if (soundEffectsOn_) {
+    if (sounds_.count > sound) {
+      ALAudio* ALSound = (ALAudio*)[sounds_ objectAtIndex:sound];
       [ALSound setVolume:volume];
-      return YES;
+      return true;
     }
-    return NO;
+    return false;
   }
-  return YES;  
+  return true;
 }
 
-+ (BOOL) playSound:(Sound)sound {
-  SoundPlayer* player = [SoundPlayer instance];
-  if (player.soundEffectsOn) {
-    if (player.sounds.count > sound) {
-      ALAudio* ALSound = (ALAudio*)[player.sounds objectAtIndex:sound];
+bool SoundPlayerImpl::playSound(Sound sound) {
+  if (soundEffectsOn_) {
+    if (sounds_.count > sound) {
+      ALAudio* ALSound = (ALAudio*)[sounds_ objectAtIndex:sound];
       [ALSound play];
-      return YES;
+      return true;
     }
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
-+ (BOOL) stopSound:(Sound)sound {
-  SoundPlayer* player = [SoundPlayer instance];
-  if (player.soundEffectsOn) {
-    if (player.sounds.count > sound) {
-      [(ALAudio*)[player.sounds objectAtIndex:sound] stop];
-      return YES;
+bool SoundPlayerImpl::stopSound(Sound sound) {
+  if (soundEffectsOn_) {
+    if (sounds_.count > sound) {
+      [(ALAudio*)[sounds_ objectAtIndex:sound] stop];
+      return true;
     }
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
-+ (void) playSong:(NSString*)filename
+void SoundPlayerImpl::playSong(string filename)
 {
   return ;
 
@@ -195,48 +189,41 @@ static BOOL          musicIsPlayingInITunes_ = NO;
   if( musicIsPlayingInITunes_ )
     return;
   
-  [SoundPlayer stopSong];
-  SoundPlayer* player = [SoundPlayer instance];
-  if (player.musicOn) {
-    player.song = [[AVAudio alloc] initWithURL:[SoundPlayer filenameToUrl:filename]];
-    [player.song play];
+  stopSong();
+  if (musicOn_) {
+    song_ = [[AVAudio alloc] initWithURL:filenameToUrl(TypeUtil::string2NSString(filename))];
+    [song_ play];
   }
 }
 
-+ (void) stopSong {
-  SoundPlayer* player = [SoundPlayer instance];
-  [player.song stop];
-  [player.song release];
-  player.song = nil;
+void SoundPlayerImpl::stopSong() {
+  [song_ stop];
+  [song_ release];
+  song_ = nil;
 }
 
-+ (void) setMusicOn:(BOOL)on {
-  SoundPlayer* player = [SoundPlayer instance];
-  player.musicOn = on;
+void SoundPlayerImpl::setMusicOn(bool on) {
+  musicOn_ = on;
 }
 
-+ (void) setSoundEffectsOn:(BOOL)on {
-  SoundPlayer* player = [SoundPlayer instance];
-  player.soundEffectsOn = on;
+void SoundPlayerImpl::setSoundEffectsOn(bool on) {
+  soundEffectsOn_ = on;
   // Initialize!
-  if (on && player.sounds.count == 0) {
-    [SoundPlayer initializeWithDelegate:nil];
+  if (on && sounds_.count == 0) {
+    initializeWithDelegate(NULL);
   }
 }
 
-- (id) init {
+SoundPlayerImpl::SoundPlayerImpl() {
   sounds_ = [[NSMutableArray alloc] initWithCapacity:kNumSounds];
   song_ = nil;
   
   AudioInterruptDelegate* delegate = [[AudioInterruptDelegate alloc] init];
-  
+
   delegate_ = delegate;
-  [delegate_ retain];
-  
-  return self;
 }
 
-- (void) loadSoundsWithDelegate:(NSObject <SoundInitializationDelegate> *)delegate {
+void SoundPlayerImpl::loadSoundsWithDelegate(SoundInitializationDelegate *delegate) {
   NSAutoreleasePool *subpool = [[NSAutoreleasePool alloc] init];
 
   [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"score" andExt:@"wav"]];
@@ -248,8 +235,8 @@ static BOOL          musicIsPlayingInITunes_ = NO;
   [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"button_click" andExt:@"wav"]];
   [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"get_ready" andExt:@"wav"]];
   [sounds_ addObject:[[ALAudio alloc] initWithFilename:@"start" andExt:@"wav"]];
-
-  [delegate performSelector:@selector(soundInitialized)];
+  cout << "SOUNDS: " << sounds_.count << endl;
+  delegate->SoundInitialized(this);
   
   [subpool release];
 }
@@ -274,15 +261,15 @@ static BOOL          musicIsPlayingInITunes_ = NO;
 //
 // Funtionality to allow iTunes songs to play under our game audio
 //
-+(void) syncAudioSessionForITunes
+void SoundPlayerImpl::syncAudioSessionForITunes()
 {
   //
   // In order to allow iTunes songs to play under our game music/effects
   // we need to set the category of our audio session.
   //
-  AVAudioSession* session = [AVAudioSession sharedInstance];
+  AVAudioSession *session = [AVAudioSession sharedInstance];
   session_ = session;
-  NSError* sessionError = nil;
+  NSError *sessionError = nil;
   BOOL success = [session setCategory:AVAudioSessionCategoryAmbient error:&sessionError];
   if( success == NO )
   {
@@ -303,7 +290,3 @@ static BOOL          musicIsPlayingInITunes_ = NO;
     musicIsPlayingInITunes_ = isPlayingITunes;    
   }  
 }
-
-
-
-@end

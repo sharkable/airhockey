@@ -12,6 +12,8 @@
 #include "Touch.h"
 #import "const.h"
 
+#include "soundengine/sound_player.h"
+
 SoundSlider::SoundSlider(SGPoint position) {
   position_ = position;
   
@@ -24,7 +26,7 @@ SoundSlider::SoundSlider(SGPoint position) {
   } else {
     value_ = 0.75;
   }
-  // TODO [SoundPlayer setGlobalVolume:value_];
+  SoundPlayer::instance()->setGlobalVolume(value_);
 }
 
 SGPoint SoundSlider::ThumbPoint() {
@@ -84,7 +86,7 @@ void SoundSlider::TouchesMoved(vector<Touch> touches) {
 void SoundSlider::TouchesEnded(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
-      // TODO [SoundPlayer setGlobalVolume:value_];
+      SoundPlayer::instance()->setGlobalVolume(value_);
       LocalStore::SetDouble(value_, LS_VOLUME);
       grabbed_touch_ = NULL;
       return;

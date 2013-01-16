@@ -10,12 +10,12 @@
 #import "EAGLView.h"
 #import "FlurryAnalytics.h"
 #import "game_engine.h"
-#import "SoundPlayer.h"
+#import "sound_player.h"
 #import "splash_state.h"
 #import "ViewController.h"
 
 @interface AirHockeyAppDelegate ()
-- (void)initAudio:(id)delegate;
+- (void)initAudio:(SoundInitializationDelegate *)delegate;
 @end
 
 @implementation AirHockeyAppDelegate {
@@ -29,12 +29,12 @@
   [super dealloc];
 }
 
-- (void)initAudio:(id)delegate {
+- (void)initAudio:(SoundInitializationDelegate *)delegate {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   
-  [SoundPlayer syncAudioSessionForITunes];
-  [SoundPlayer initializeWithDelegate:delegate];
-  [SoundPlayer setSoundEffectsOn:YES];
+// TODO  SoundPlayer::instance()->syncAudioSessionForITunes();
+  SoundPlayer::instance()->initializeWithDelegate(delegate);
+  SoundPlayer::instance()->setSoundEffectsOn(true);
   
   [pool release];
 }  

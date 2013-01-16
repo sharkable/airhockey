@@ -7,9 +7,9 @@
 //
 
 #include "gameengine/entities/multi_select.h"
-
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
+#include "soundengine/sound_player.h"
 
 MultiSelect::~MultiSelect() {
   for (int i = 0; i < normal_textures_.size(); i++) {
@@ -52,7 +52,7 @@ void MultiSelect::TouchesBegan(vector<Touch> touches) {
           touchPoint.y < y + size.height) {
         if (selected_value_ != i) {
           selected_value_ = i;
-          // TODO [SoundPlayer playSound:kSoundMultiSelect];
+          SoundPlayer::instance->playSound(SoundMultiSelect);
         };
         return;
       }
