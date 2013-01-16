@@ -103,7 +103,7 @@ void Rink::BounceOff(RoundThing *thing) {
     thing->set_vy(thing->vy() * 0.7);
     // TODO: haha, again.
 //    if ([thing isKindOfClass:[Puck class]]) {
-//      [SoundPlayer playSound:kSoundPuckRinkBounce];
+//      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
 //    }
   }  
 }

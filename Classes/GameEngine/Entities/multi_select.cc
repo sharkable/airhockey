@@ -52,7 +52,7 @@ void MultiSelect::TouchesBegan(vector<Touch> touches) {
           touchPoint.y < y + size.height) {
         if (selected_value_ != i) {
           selected_value_ = i;
-          SoundPlayer::instance->playSound(SoundMultiSelect);
+          SoundPlayer::instance()->playSound(kSoundMultiSelect);
         };
         return;
       }

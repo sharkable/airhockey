@@ -259,7 +259,7 @@ void PlayState::Update() {
       AddEntity(go_);
       go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
       state_ = kPlayStateStatePlaying;
-      // TODO [SoundPlayer playSound:kSoundStart];
+      SoundPlayer::instance()->playSound(kSoundStart);
     }
     
     return;
@@ -310,9 +310,9 @@ void PlayState::Update() {
         player_1_score_->set_texture(player_1_score_->texture() + 1);
       }
       if (player_1_score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
-        // TODO [SoundPlayer playSound:kSoundScoreFinal];  
+        SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
-        // TODO [SoundPlayer playSound:kSoundScore];
+        SoundPlayer::instance()->playSound(kSoundScore);
       }
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
@@ -322,9 +322,9 @@ void PlayState::Update() {
         player_2_score_->set_texture(player_2_score_->texture() + 1);
       }
       if (player_2_score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
-        // TODO [SoundPlayer playSound:kSoundScoreFinal];  
+        SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
-        // TODO [SoundPlayer playSound:kSoundScore];
+        SoundPlayer::instance()->playSound(kSoundScore);
       }
       
       num_active_pucks_--;
