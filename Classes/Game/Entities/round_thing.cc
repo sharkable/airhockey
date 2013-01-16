@@ -89,11 +89,6 @@ void RoundThing::BounceOff(RoundThing *other) {
     double newother_ux_ = (otherux_ * (other->mass() - mass_) + 2.0 * mass_ * ux) / (mass_ + other->mass());
     double newother_uy_ = (otheruy_ * (other->mass() - mass_) + 2.0 * mass_ * uy) / (mass_ + other->mass());    
     
-//    if (!self.grabbed && !other.grabbed) {
-//      NSLog(@"\n");
-//      NSLog(@"Before total: %f", v * self.mass + otherV * other.mass);
-//    }
-    
     if (!is_grabbed() && IsMovable()) {
       vx_ = newux_ + wx;
       vy_ = newuy_ + wy;
