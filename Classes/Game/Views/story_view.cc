@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/states/story_view.h"
+#include "game/views/story_view.h"
 
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"

@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_STATES_STORYVIEW_H_
-#define AIRHOCKEY_GAME_STATES_STORYVIEW_H_
+#ifndef AIRHOCKEY_GAME_VIEWS_STORYVIEW_H_
+#define AIRHOCKEY_GAME_VIEWS_STORYVIEW_H_
 
 #include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"

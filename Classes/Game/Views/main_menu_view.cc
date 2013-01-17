@@ -6,11 +6,11 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "game/states/main_menu_view.h"
+#import "game/views/main_menu_view.h"
 
 #import "const.h"
-#import "game/states/play_view.h"
-#import "game/states/story_view.h"
+#import "game/views/play_view.h"
+#import "game/views/story_view.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
 #import "gameengine/resource_loader.h"

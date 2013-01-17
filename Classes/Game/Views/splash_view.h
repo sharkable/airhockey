@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_STATES_SPLASHVIEW_H_
-#define AIRHOCKEY_GAME_STATES_SPLASHVIEW_H_
+#ifndef AIRHOCKEY_GAME_VIEWS_SPLASHVIEW_H_
+#define AIRHOCKEY_GAME_VIEWS_SPLASHVIEW_H_
 
 #import "engine_view.h"
 #import "simple_item.h"

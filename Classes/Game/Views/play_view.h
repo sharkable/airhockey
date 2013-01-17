@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_STATES_PLAYVIEW_H_
-#define AIRHOCKEY_GAME_STATES_PLAYVIEW_H_
+#ifndef AIRHOCKEY_GAME_VIEWS_PLAYVIEW_H_
+#define AIRHOCKEY_GAME_VIEWS_PLAYVIEW_H_
 
 #include <vector>
 using namespace std;
