@@ -12,17 +12,17 @@
 #include <vector>
 using namespace std;
 
-#include "gameengine/state_entity.h"
+#include "gameengine/view_entity.h"
 #include "opengl/Texture2D.h"
 
-class SimpleItem : public StateEntity {
+class SimpleItem : public ViewEntity {
  public:
   SimpleItem();
   SimpleItem(Texture2D texture, SGPoint position);
   SimpleItem(vector<Texture2D> textures, SGPoint position);
   ~SimpleItem();
 
-  // StateEntity
+  // ViewEntity
   void Update() {}
   void Render();
   string Name() { return "SimpleItem(" + textures_[texture_].filename() + ")"; }

@@ -226,7 +226,7 @@ void Paddle::RunAITick() {
 }
 
 
-// StateEntity
+// ViewEntity
 
 void Paddle::Update() {
   // Computer AI

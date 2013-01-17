@@ -36,7 +36,7 @@ bool Button::ContainsPoint(SGPoint p) {
 }
 
 
-// StateEntity
+// ViewEntity
 
 void Button::Update() {
 }

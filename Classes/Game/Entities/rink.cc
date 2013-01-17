@@ -126,7 +126,7 @@ void Rink::MoveInFromEdge(RoundThing *thing) {
 }
 
 
-// StateEntity
+// ViewEntity
 
 void Rink::Update() {
 }

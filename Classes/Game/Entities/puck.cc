@@ -64,7 +64,7 @@ void Puck::FadeIn() {
 }
 
 
-// StateEntity
+// ViewEntity
 
 void Puck::Update() {
   RoundThing::Update();

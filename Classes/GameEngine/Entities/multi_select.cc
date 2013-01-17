@@ -28,7 +28,7 @@ void MultiSelect::Add(Texture2D normal_texture, Texture2D selected_texture, SGPo
 }
 
 
-// StateEntity
+// ViewEntity
 
 void MultiSelect::Render() {
   for (int i = 0; i < normal_textures_.size(); i++) {

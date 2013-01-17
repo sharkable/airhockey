@@ -9,16 +9,16 @@
 #ifndef AIRHOCKEY_GAME_ENTITIES_SOUNDSLIDER_H_
 #define AIRHOCKEY_GAME_ENTITIES_SOUNDSLIDER_H_
 
-#include "gameengine/state_entity.h"
+#include "gameengine/view_entity.h"
 #include "opengl/Texture2D.h"
 
-class SoundSlider : public StateEntity {
+class SoundSlider : public ViewEntity {
  public:
   SoundSlider(SGPoint position);
 
   SGPoint ThumbPoint();
 
-  // StateEntity
+  // ViewEntity
   void Update();
   void Render();
   void TouchesBegan(vector<Touch> touches);

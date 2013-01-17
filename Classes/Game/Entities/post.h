@@ -15,7 +15,7 @@ class Post : public RoundThing {
  public:
   Post(double x, double y);
   
-  // StateEntity
+  // ViewEntity
   string Name() { return "Post"; }
 
   // RoundThing

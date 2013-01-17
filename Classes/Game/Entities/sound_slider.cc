@@ -34,7 +34,7 @@ SGPoint SoundSlider::ThumbPoint() {
 }
 
 
-// StateEntity
+// ViewEntity
 
 void SoundSlider::Update() {
 }

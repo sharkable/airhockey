@@ -153,7 +153,7 @@ bool RoundThing::IsMovable() {
 }
 
 
-// StateEntity
+// ViewEntity
 
 void RoundThing::Update() {
   if (!IsMovable() || !is_active()) {

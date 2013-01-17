@@ -9,10 +9,10 @@
 #ifndef AIRHOCKEY_GAME_ENTITIES_ROUNDTHING_H_
 #define AIRHOCKEY_GAME_ENTITIES_ROUNDTHING_H_
 
-#include "gameengine/state_entity.h"
+#include "gameengine/view_entity.h"
 #include "opengl/Texture2D.h"
 
-class RoundThing : public StateEntity {
+class RoundThing : public ViewEntity {
  public:
   RoundThing();
   ~RoundThing();
@@ -41,7 +41,7 @@ class RoundThing : public StateEntity {
   bool is_active() { return active_; }
   void set_active(bool active) { active_ = active; }
 
-  // StateEntity
+  // ViewEntity
   void Update();
   void Render();
   void TouchesBegan(vector<Touch> touches);

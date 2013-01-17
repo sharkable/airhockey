@@ -9,7 +9,7 @@
 #ifndef AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 #define AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 
-#include "gameengine/state_entity.h"
+#include "gameengine/view_entity.h"
 #include "OpenGL/Texture2D.h"
 
 typedef enum {
@@ -25,13 +25,13 @@ class ButtonDelegate {
   virtual void ButtonPressed(Button *button) = 0;
 };
 
-class Button : public StateEntity {
+class Button : public ViewEntity {
  public:
   Button() : state_(kButtonStateNormal) {}
   Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position);
   ~Button();
   
-  // StateEntity
+  // ViewEntity
   void Update();
   void Render();
   void TouchesBegan(vector<Touch> touches);

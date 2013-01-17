@@ -15,7 +15,7 @@ using namespace std;
 #include "gameengine/touch.h"
 
 class GameEngine;
-class StateEntity;
+class ViewEntity;
 
 class EngineState {
  public:
@@ -30,9 +30,9 @@ class EngineState {
   virtual void ClearTouches();
   // If you add an entity using this method, then this EngineState is responsible for releasing this
   // object.
-  void AddEntity(StateEntity *entity);
-  void AddEntity(sp<StateEntity> entity);
-  void RemoveEntity(sp<StateEntity> entity);
+  void AddEntity(ViewEntity *entity);
+  void AddEntity(sp<ViewEntity> entity);
+  void RemoveEntity(sp<ViewEntity> entity);
   virtual string Name() { return "EngineState"; }
   
   GameEngine &game_engine() { return game_engine_; }
@@ -41,7 +41,7 @@ class EngineState {
 
  private:
   GameEngine &game_engine_;
-  vector<sp<StateEntity> > entities_;
+  vector<sp<ViewEntity> > entities_;
 };
 
 #endif

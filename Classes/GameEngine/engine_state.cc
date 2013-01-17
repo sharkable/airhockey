@@ -9,7 +9,7 @@
 #include "gameengine/engine_state.h"
 
 #include "gameengine/game_engine.h"
-#include "gameengine/state_entity.h"
+#include "gameengine/view_entity.h"
 
 EngineState::EngineState(GameEngine &game_engine) : game_engine_(game_engine) {
 }
@@ -50,17 +50,17 @@ void EngineState::ClearTouches() {
   }
 }
 
-void EngineState::AddEntity(StateEntity *entity) {
-  entities_.push_back(sp<StateEntity>(entity));
+void EngineState::AddEntity(ViewEntity *entity) {
+  entities_.push_back(sp<ViewEntity>(entity));
 }
 
-void EngineState::AddEntity(sp<StateEntity> entity) {
+void EngineState::AddEntity(sp<ViewEntity> entity) {
   assert(entity);
   entities_.push_back(entity);
 }
 
-void EngineState::RemoveEntity(sp<StateEntity> entity) {
-  for (vector<sp<StateEntity> >::iterator i = entities_.begin(); i != entities_.end(); i++) {
+void EngineState::RemoveEntity(sp<ViewEntity> entity) {
+  for (vector<sp<ViewEntity> >::iterator i = entities_.begin(); i != entities_.end(); i++) {
     if (*i == entity) {
       entities_.erase(i);
       break;

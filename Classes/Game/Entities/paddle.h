@@ -30,7 +30,7 @@ class Paddle : public RoundThing {
   Paddle *pther_paddle() { return other_paddle_; }
   void set_other_paddle(Paddle *other_paddle) { other_paddle_ = other_paddle; }
 
-  // StateEntity
+  // ViewEntity
   void Update();
   void Render();
   string Name() { return "Paddle"; }

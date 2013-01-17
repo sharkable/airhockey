@@ -12,19 +12,19 @@
 #include <vector>
 using namespace std;
 
-#include "gameengine/state_entity.h"
+#include "gameengine/view_entity.h"
 
 class Texture2D;
 struct SGPoint;
 
-class MultiSelect : public StateEntity {
+class MultiSelect : public ViewEntity {
  public:
   MultiSelect() {}
   ~MultiSelect();
 
   void Add(Texture2D normal_texture, Texture2D selected_texture, SGPoint position);
 
-  // StateEntity
+  // ViewEntity
   void Update() {}
   void Render();
   void TouchesBegan(vector<Touch> touches);

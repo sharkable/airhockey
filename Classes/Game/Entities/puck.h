@@ -18,7 +18,7 @@ class Puck : public RoundThing {
   void PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center);
   void FadeIn();
 
-  // StateEntity
+  // ViewEntity
   void Update();
   void Render();
   string Name() { return "Puck"; }

@@ -9,12 +9,12 @@
 #ifndef AIRHOCKEY_GAME_ENTITIES_RINK_H_
 #define AIRHOCKEY_GAME_ENTITIES_RINK_H_
 
-#include "gameengine/state_entity.h"
+#include "gameengine/view_entity.h"
 #include "opengl/Texture2D.h"
 
 class RoundThing;
 
-class Rink : public StateEntity {
+class Rink : public ViewEntity {
  public:
   Rink();
   ~Rink();
@@ -22,7 +22,7 @@ class Rink : public StateEntity {
   void BounceOff(RoundThing *thing);
   void MoveInFromEdge(RoundThing *thing);
 
-  // StateEntity
+  // ViewEntity
   void Update();
   void Render();
   string Name() { return "Rink"; }
