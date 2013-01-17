@@ -11,7 +11,7 @@
 #import "FlurryAnalytics.h"
 #import "game_engine.h"
 #import "sound_player.h"
-#import "splash_state.h"
+#import "splash_view.h"
 #import "ViewController.h"
 
 @interface AirHockeyAppDelegate ()

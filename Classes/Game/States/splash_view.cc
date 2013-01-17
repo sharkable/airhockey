@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "splash_state.h"
+#import "splash_view.h"
 
 #import "resource_loader.h"
 #import "main_menu_state.h"
