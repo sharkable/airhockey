@@ -1,12 +1,12 @@
 //
-//  main_menu_state.cc
+//  main_menu_view.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-30.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "game/states/main_menu_state.h"
+#import "game/states/main_menu_view.h"
 
 #import "const.h"
 #import "game/states/play_state.h"
@@ -16,7 +16,7 @@
 #import "gameengine/resource_loader.h"
 #import "opengl/Texture2D.h"
 
-MainMenuState::MainMenuState(GameEngine &game_engine)
+MainMenuView::MainMenuView(GameEngine &game_engine)
     : EngineView(game_engine) {
   bool is_iphone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
@@ -186,9 +186,9 @@ MainMenuState::MainMenuState(GameEngine &game_engine)
 }
 
 
-// EngineState
+// EngineView
 
-void MainMenuState::StateIsShown() {
+void MainMenuView::ViewIsShown() {
   if (IS_FREE) {
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 //      [getGameEngine()->adEngine() addAdAtPoint:SGPointMake(0, 0)];  
@@ -201,7 +201,7 @@ void MainMenuState::StateIsShown() {
 
 // ButtonDelegate
 
-void MainMenuState::ButtonPressed(Button *button) {
+void MainMenuView::ButtonPressed(Button *button) {
   if (button == start_button_.get()) {
     PressedStart();
   } else if (button == feedback_button_.get()) {
@@ -216,7 +216,7 @@ void MainMenuState::ButtonPressed(Button *button) {
 
 // private
 
-void MainMenuState::PressedStart() {
+void MainMenuView::PressedStart() {
   bool is_iphone = true; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
   LocalStore::SetInteger(num_players_select_->selected_value(), LS_NUM_PLAYERS);
@@ -248,7 +248,7 @@ void MainMenuState::PressedStart() {
   game_engine().SetRootView(sp<EngineView>(play_state));
 }
 
-void MainMenuState::PressedFeedback() {
+void MainMenuView::PressedFeedback() {
 //  NSString *free;
 //  NSString *device;
 //  
@@ -274,13 +274,13 @@ void MainMenuState::PressedFeedback() {
 //  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
-void MainMenuState::PressedStory() {
+void MainMenuView::PressedStory() {
 //  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
 //  [getGameEngine()->adEngine() removeAd];
   game_engine().PushView(sp<EngineView>(new StoryView(game_engine())));
 }
 
-void MainMenuState::PressedUpgrade() {
+void MainMenuView::PressedUpgrade() {
 // TODO
 //  UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Upgrade"
 //                                                   message:@"You can remove ads and have up to "

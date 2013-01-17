@@ -9,7 +9,7 @@
 #import "splash_view.h"
 
 #import "resource_loader.h"
-#import "main_menu_state.h"
+#import "main_menu_view.h"
 #import "game_engine.h"
 #import "const.h"
 #include "soundengine/sound_player.h"
@@ -28,7 +28,7 @@ void SplashView::Update() {
       state_ = kSplashViewStateLoadingSounds;
       break;
     case kSplashViewStateSoundsDidLoad:
-      game_engine().SetRootView(sp<EngineView>(new MainMenuState(game_engine())));
+      game_engine().SetRootView(sp<EngineView>(new MainMenuView(game_engine())));
       state_ = kSplashViewStateFinished;
       break;
     default:

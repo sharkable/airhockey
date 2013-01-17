@@ -1,13 +1,13 @@
 //
-//  main_menu_state.h
+//  main_menu_view.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-30.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
-#define AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
+#ifndef AIRHOCKEY_GAME_STATES_MAINMENUVIEW_H_
+#define AIRHOCKEY_GAME_STATES_MAINMENUVIEW_H_
 
 #import "gameengine/engine_view.h"
 #import "gameengine/entities/button.h"
@@ -15,13 +15,13 @@
 
 #import "game/entities/sound_slider.h"
 
-class MainMenuState : public EngineView, private ButtonDelegate {
+class MainMenuView : public EngineView, private ButtonDelegate {
  public:
-  MainMenuState(GameEngine &game_engine);
+  MainMenuView(GameEngine &game_engine);
   
-  // EngineState
-  void StateIsShown();
-  string Name() { return "MainMenuState"; }
+  // EngineView
+  void ViewIsShown();
+  string Name() { return "MainMenuView"; }
 
   // ButtonDelegate
   void ButtonPressed(Button *button);

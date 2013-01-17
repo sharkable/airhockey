@@ -9,7 +9,7 @@
 #include "game/states/play_state.h"
 
 #include "game/entities/puck.h"
-#include "game/states/main_menu_state.h"
+#include "game/states/main_menu_view.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
@@ -510,7 +510,7 @@ void PlayState::RematchPressed() {
 void PlayState::MenuPressed() {
 //  [player1Wins_ removeFromSuperview];
 //  [player2Wins_ removeFromSuperview];
-  game_engine().SetRootView(sp<EngineView>(new MainMenuState(game_engine())));
+  game_engine().SetRootView(sp<EngineView>(new MainMenuView(game_engine())));
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
 //  }
