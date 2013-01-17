@@ -21,7 +21,7 @@
   GameTouchWindow *gameTouchWindow_;
 
   GameEngine *game_engine_;
-  sp<EngineView> root_state_;
+  sp<EngineView> root_view_;
 };
 
 @synthesize window = gameTouchWindow_, game_engine = game_engine_;
@@ -35,8 +35,8 @@
     [gameTouchWindow_ makeKeyAndVisible];
 
     game_engine_ = new GameEngine();
-    root_state_.reset(new SplashView(*game_engine_));
-    game_engine_->PushView(root_state_);
+    root_view_.reset(new SplashView(*game_engine_));
+    game_engine_->PushView(root_view_);
     gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
     gameTouchWindow_.gameEngine = game_engine_;    
 }
