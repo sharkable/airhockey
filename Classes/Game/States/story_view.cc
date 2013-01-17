@@ -1,17 +1,17 @@
 //
-//  story_state.cc
+//  story_view.cc
 //  AirHockeyFree
 //
 //  Created by Jonathan Sharkey on 10-05-17.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/states/story_state.h"
+#include "game/states/story_view.h"
 
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 
-StoryState::StoryState(GameEngine &gameEngine) : EngineView(gameEngine) {
+StoryView::StoryView(GameEngine &gameEngine) : EngineView(gameEngine) {
   Texture2D storyButtonImage = ResourceLoader::Instance().TextureWithName("story");
   storyButton_.reset(new Button());
   storyButton_->set_normal_texture(storyButtonImage);
@@ -31,7 +31,7 @@ StoryState::StoryState(GameEngine &gameEngine) : EngineView(gameEngine) {
 
 // ButtonDelegate
 
-void StoryState::ButtonPressed(Button *button) {
+void StoryView::ButtonPressed(Button *button) {
   if (button == storyButton_.get()) {
     RemoveEntity(storyButton_);
     AddEntity(aboutButton_);    

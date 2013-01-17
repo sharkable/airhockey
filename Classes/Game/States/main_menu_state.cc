@@ -10,7 +10,7 @@
 
 #import "const.h"
 #import "game/states/play_state.h"
-#import "game/states/story_state.h"
+#import "game/states/story_view.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
 #import "gameengine/resource_loader.h"
@@ -277,7 +277,7 @@ void MainMenuState::PressedFeedback() {
 void MainMenuState::PressedStory() {
 //  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
 //  [getGameEngine()->adEngine() removeAd];
-  game_engine().PushView(sp<EngineView>(new StoryState(game_engine())));
+  game_engine().PushView(sp<EngineView>(new StoryView(game_engine())));
 }
 
 void MainMenuState::PressedUpgrade() {
