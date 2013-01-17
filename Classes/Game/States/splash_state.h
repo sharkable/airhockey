@@ -1,38 +1,38 @@
 //
-//  splash_state.h
+//  splash_view.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-05-07.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_STATES_SPLASHSTATE_H_
-#define AIRHOCKEY_GAME_STATES_SPLASHSTATE_H_
+#ifndef AIRHOCKEY_GAME_STATES_SPLASHVIEW_H_
+#define AIRHOCKEY_GAME_STATES_SPLASHVIEW_H_
 
-#import "engine_state.h"
+#import "engine_view.h"
 #import "simple_item.h"
 #include "soundengine/sound_initialization_delegate.h"
 
 typedef enum {
-  kSplashStateInitial = 0,
-  kSplashStateLoadingSounds,
-  kSplashStateSoundsDidLoad,
-  kSplashStateFinished
-} SplashStateState;
+  kSplashViewStateInitial = 0,
+  kSplashViewStateLoadingSounds,
+  kSplashViewStateSoundsDidLoad,
+  kSplashViewStateFinished
+} SplashViewState;
 
-class SplashState : public EngineState, SoundInitializationDelegate {
+class SplashView : public EngineView, SoundInitializationDelegate {
  public:
-  SplashState(GameEngine &gameEngine);
+  SplashView(GameEngine &gameEngine);
 
-  // EngineState
-  string Name() { return "SplashState"; }
+  // EngineView
+  string Name() { return "SplashView"; }
   void Update();
   
   // SoundInitializationDelegate
   void SoundInitialized(SoundPlayer *sound_player);
   
  private:
-  SplashStateState state_;
+  SplashViewState state_;
 };
 
 #endif

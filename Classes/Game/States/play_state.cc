@@ -16,7 +16,7 @@
 
 PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                      PaddleSize paddle_size)
-    : EngineState(game_engine) {
+    : EngineView(game_engine) {
   num_players_ = num_players;
   
   paddle_1_.reset(new Paddle(PLAYER_1, paddle_size, true, caiBad, pucks_));
@@ -265,7 +265,7 @@ void PlayState::Update() {
     return;
   }
 
-  EngineState::Update();
+  EngineView::Update();
   
   if (go_ticks_left_ > 0) {
     go_ticks_left_--;
@@ -510,7 +510,7 @@ void PlayState::RematchPressed() {
 void PlayState::MenuPressed() {
 //  [player1Wins_ removeFromSuperview];
 //  [player2Wins_ removeFromSuperview];
-  game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
+  game_engine().SetRootView(sp<EngineView>(new MainMenuState(game_engine())));
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
 //  }

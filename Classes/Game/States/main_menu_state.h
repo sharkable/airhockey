@@ -9,12 +9,13 @@
 #ifndef AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
 #define AIRHOCKEY_GAME_STATES_MAINMENUSTATE_H_
 
-#import "game/entities/sound_slider.h"
-#import "gameengine/engine_state.h"
+#import "gameengine/engine_view.h"
 #import "gameengine/entities/button.h"
 #import "gameengine/entities/multi_select.h"
 
-class MainMenuState : public EngineState, private ButtonDelegate {
+#import "game/entities/sound_slider.h"
+
+class MainMenuState : public EngineView, private ButtonDelegate {
  public:
   MainMenuState(GameEngine &game_engine);
   

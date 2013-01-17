@@ -9,10 +9,10 @@
 #ifndef AIRHOCKEY_GAME_STATES_STORYSTATE_H_
 #define AIRHOCKEY_GAME_STATES_STORYSTATE_H_
 
-#include "gameengine/engine_state.h"
+#include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
 
-class StoryState : public EngineState, ButtonDelegate {
+class StoryState : public EngineView, ButtonDelegate {
  public:
   StoryState(GameEngine &gameEngine);
 

@@ -13,14 +13,15 @@
 using namespace std;
 
 #include "const.h"
+#include "gameengine/engine_view.h"
+#include "gameengine/entities/button.h"
+#include "gameengine/entities/simple_item.h"
+
 #include "game/entities/Paddle.h"
 #include "game/entities/Post.h"
 #include "game/entities/puck.h"
 #include "game/entities/Rink.h"
 #include "game/entities/sound_slider.h"
-#include "gameengine/entities/button.h"
-#include "gameengine/entities/simple_item.h"
-#include "gameengine/engine_state.h"
 
 class GameEngine;
 class RoundThing;
@@ -33,7 +34,7 @@ typedef enum {
   kPlayStateStatePaused
 } PlayStateState;
 
-class PlayState : public EngineState, private ButtonDelegate {
+class PlayState : public EngineView, private ButtonDelegate {
  public:
   PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
             PaddleSize paddle_size);

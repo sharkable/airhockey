@@ -1,5 +1,5 @@
 //
-//  splash_state.cc
+//  splash_view.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-05-07.
@@ -7,6 +7,7 @@
 //
 
 #import "splash_state.h"
+
 #import "resource_loader.h"
 #import "main_menu_state.h"
 #import "game_engine.h"
@@ -15,20 +16,20 @@
 
 #import "puck.h"
 
-SplashState::SplashState(GameEngine &gameEngine) : EngineState(gameEngine) {
-  state_ = kSplashStateInitial;
+SplashView::SplashView(GameEngine &gameEngine) : EngineView(gameEngine) {
+  state_ = kSplashViewStateInitial;
 }
 
-void SplashState::Update() {
-  EngineState::Update();
+void SplashView::Update() {
+  EngineView::Update();
   switch (state_) {
-    case kSplashStateInitial:
+    case kSplashViewStateInitial:
       SoundPlayer::instance()->initializeWithDelegate(this);
-      state_ = kSplashStateLoadingSounds;
+      state_ = kSplashViewStateLoadingSounds;
       break;
-    case kSplashStateSoundsDidLoad:
-      game_engine().ReplaceTopState(sp<EngineState>(new MainMenuState(game_engine())));
-      state_ = kSplashStateFinished;
+    case kSplashViewStateSoundsDidLoad:
+      game_engine().SetRootView(sp<EngineView>(new MainMenuState(game_engine())));
+      state_ = kSplashViewStateFinished;
       break;
     default:
       break;
@@ -38,6 +39,6 @@ void SplashState::Update() {
 
 // SoundInitializationDelegate
 
-void SplashState::SoundInitialized(SoundPlayer *sound_player) {
-  state_ = kSplashStateSoundsDidLoad;
+void SplashView::SoundInitialized(SoundPlayer *sound_player) {
+  state_ = kSplashViewStateSoundsDidLoad;
 }

@@ -11,7 +11,7 @@
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 
-StoryState::StoryState(GameEngine &gameEngine) : EngineState(gameEngine) {
+StoryState::StoryState(GameEngine &gameEngine) : EngineView(gameEngine) {
   Texture2D storyButtonImage = ResourceLoader::Instance().TextureWithName("story");
   storyButton_.reset(new Button());
   storyButton_->set_normal_texture(storyButtonImage);
@@ -36,6 +36,6 @@ void StoryState::ButtonPressed(Button *button) {
     RemoveEntity(storyButton_);
     AddEntity(aboutButton_);    
   } else if (button == aboutButton_.get()) {
-    game_engine().PopState();
+    game_engine().PopView();
   }
 }

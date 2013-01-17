@@ -1,13 +1,13 @@
 //
-//  engine_state.h
+//  engine_view.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAMEENGINE_ENGINESTATE_H_
-#define AIRHOCKEY_GAMEENGINE_ENGINESTATE_H_
+#ifndef AIRHOCKEY_GAMEENGINE_ENGINEVIEW_H_
+#define AIRHOCKEY_GAMEENGINE_ENGINEVIEW_H_
 
 #include <vector>
 using namespace std;
@@ -17,23 +17,23 @@ using namespace std;
 class GameEngine;
 class ViewEntity;
 
-class EngineState {
+class EngineView {
  public:
-  EngineState(GameEngine &game_engine);
+  EngineView(GameEngine &game_engine);
 
-  virtual void StateIsShown() {}
+  virtual void ViewIsShown() {}
   virtual void Update();
   virtual void Render();
   virtual void TouchesBegan(vector<Touch> touches);
   virtual void TouchesMoved(vector<Touch> touches);
   virtual void TouchesEnded(vector<Touch> touches);
   virtual void ClearTouches();
-  // If you add an entity using this method, then this EngineState is responsible for releasing this
+  // If you add an entity using this method, then this EngineView is responsible for releasing this
   // object.
   void AddEntity(ViewEntity *entity);
   void AddEntity(sp<ViewEntity> entity);
   void RemoveEntity(sp<ViewEntity> entity);
-  virtual string Name() { return "EngineState"; }
+  virtual string Name() { return "EngineView"; }
   
   GameEngine &game_engine() { return game_engine_; }
 

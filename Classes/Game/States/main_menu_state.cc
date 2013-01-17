@@ -17,7 +17,7 @@
 #import "opengl/Texture2D.h"
 
 MainMenuState::MainMenuState(GameEngine &game_engine)
-    : EngineState(game_engine) {
+    : EngineView(game_engine) {
   bool is_iphone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
   Texture2D background_texture = ResourceLoader::Instance().TextureWithName("rink_bg");
@@ -245,7 +245,7 @@ void MainMenuState::PressedStart() {
                                         num_pucks_select_->selected_value() + 1,
                                         ComputerAI(difficulty_select_->selected_value()),
                                         paddle_size);
-  game_engine().ReplaceTopState(sp<EngineState>(play_state));
+  game_engine().SetRootView(sp<EngineView>(play_state));
 }
 
 void MainMenuState::PressedFeedback() {
@@ -277,7 +277,7 @@ void MainMenuState::PressedFeedback() {
 void MainMenuState::PressedStory() {
 //  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
 //  [getGameEngine()->adEngine() removeAd];
-  game_engine().PushState(sp<EngineState>(new StoryState(game_engine())));
+  game_engine().PushView(sp<EngineView>(new StoryState(game_engine())));
 }
 
 void MainMenuState::PressedUpgrade() {

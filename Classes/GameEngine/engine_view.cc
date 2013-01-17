@@ -1,65 +1,65 @@
 //
-//  engine_state.cc
+//  engine_view.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "gameengine/engine_state.h"
+#include "gameengine/engine_view.h"
 
 #include "gameengine/game_engine.h"
 #include "gameengine/view_entity.h"
 
-EngineState::EngineState(GameEngine &game_engine) : game_engine_(game_engine) {
+EngineView::EngineView(GameEngine &game_engine) : game_engine_(game_engine) {
 }
 
-void EngineState::Update() {
+void EngineView::Update() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->Update();
   }
 }
 
-void EngineState::Render() {
+void EngineView::Render() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->Render();
   }
 }
 
-void EngineState::TouchesBegan(vector<Touch> touches) {
+void EngineView::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->TouchesBegan(touches);
   }
 }
 
-void EngineState::TouchesMoved(vector<Touch> touches) {
+void EngineView::TouchesMoved(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->TouchesMoved(touches);
   }
 }
 
-void EngineState::TouchesEnded(vector<Touch> touches) {
+void EngineView::TouchesEnded(vector<Touch> touches) {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->TouchesEnded(touches);
   }
 }
 
-void EngineState::ClearTouches() {
+void EngineView::ClearTouches() {
   for (int i = 0; i < entities_.size(); i++) {
     entities_[i]->ClearTouches();
   }
 }
 
-void EngineState::AddEntity(ViewEntity *entity) {
+void EngineView::AddEntity(ViewEntity *entity) {
   entities_.push_back(sp<ViewEntity>(entity));
 }
 
-void EngineState::AddEntity(sp<ViewEntity> entity) {
+void EngineView::AddEntity(sp<ViewEntity> entity) {
   assert(entity);
   entities_.push_back(entity);
 }
 
-void EngineState::RemoveEntity(sp<ViewEntity> entity) {
+void EngineView::RemoveEntity(sp<ViewEntity> entity) {
   for (vector<sp<ViewEntity> >::iterator i = entities_.begin(); i != entities_.end(); i++) {
     if (*i == entity) {
       entities_.erase(i);
