@@ -9,7 +9,7 @@
 #import "game/states/main_menu_view.h"
 
 #import "const.h"
-#import "game/states/play_state.h"
+#import "game/states/play_view.h"
 #import "game/states/story_view.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
@@ -240,12 +240,12 @@ void MainMenuView::PressedStart() {
 //  [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
 
   PaddleSize paddle_size = PaddleSize(is_iphone ? psLarge : paddle_size_select_->selected_value());
-  PlayState *play_state = new PlayState(game_engine(),
-                                        num_players_select_->selected_value() + 1,
-                                        num_pucks_select_->selected_value() + 1,
-                                        ComputerAI(difficulty_select_->selected_value()),
-                                        paddle_size);
-  game_engine().SetRootView(sp<EngineView>(play_state));
+  PlayView *play_view = new PlayView(game_engine(),
+                                     num_players_select_->selected_value() + 1,
+                                     num_pucks_select_->selected_value() + 1,
+                                     ComputerAI(difficulty_select_->selected_value()),
+                                     paddle_size);
+  game_engine().SetRootView(sp<EngineView>(play_view));
 }
 
 void MainMenuView::PressedFeedback() {

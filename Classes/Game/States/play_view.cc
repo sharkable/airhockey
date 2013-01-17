@@ -1,12 +1,12 @@
 //
-//  play_state.cc
+//  play_view.cc
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/states/play_state.h"
+#include "game/states/play_view.h"
 
 #include "game/entities/puck.h"
 #include "game/states/main_menu_view.h"
@@ -14,8 +14,8 @@
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
-PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
-                     PaddleSize paddle_size)
+PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
+                   PaddleSize paddle_size)
     : EngineView(game_engine) {
   num_players_ = num_players;
   
@@ -244,12 +244,12 @@ PlayState::PlayState(GameEngine &game_engine, int num_players, int num_pucks, Co
 }
 
 
-// EngineState
+// EngineView
 
-void PlayState::Update() {
-  if (state_ == kPlayStateStatePaused) {
+void PlayView::Update() {
+  if (state_ == kPlayViewStatePaused) {
     return;
-  } else if (state_ == kPlayStateStateGetReady) {
+  } else if (state_ == kPlayViewStateGetReady) {
     get_ready_ticks_left_--;
     if (get_ready_ticks_left_ == SHOW_GET_READY_MESSAGE_TICKS) {
       AddEntity(get_ready_);
@@ -258,7 +258,7 @@ void PlayState::Update() {
       RemoveEntity(get_ready_);
       AddEntity(go_);
       go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
-      state_ = kPlayStateStatePlaying;
+      state_ = kPlayViewStatePlaying;
       SoundPlayer::instance()->playSound(kSoundStart);
     }
     
@@ -306,10 +306,10 @@ void PlayState::Update() {
     }
     if (puck->y() < -puck->radius()) {
       puck->set_active(false);
-      if (player_1_score_->texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
+      if (player_1_score_->texture() < WIN_SCORE && state_ == kPlayViewStatePlaying) {
         player_1_score_->set_texture(player_1_score_->texture() + 1);
       }
-      if (player_1_score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
+      if (player_1_score_->texture() == WIN_SCORE && state_ == kPlayViewStatePlaying) {
         SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
         SoundPlayer::instance()->playSound(kSoundScore);
@@ -318,10 +318,10 @@ void PlayState::Update() {
       num_active_pucks_--;
     } else if (puck->y() > SCREEN_HEIGHT + puck->radius()) {
       puck->set_active(false);
-      if (player_2_score_->texture() < WIN_SCORE && state_ == kPlayStateStatePlaying) {
+      if (player_2_score_->texture() < WIN_SCORE && state_ == kPlayViewStatePlaying) {
         player_2_score_->set_texture(player_2_score_->texture() + 1);
       }
-      if (player_2_score_->texture() == WIN_SCORE && state_ == kPlayStateStatePlaying) {
+      if (player_2_score_->texture() == WIN_SCORE && state_ == kPlayViewStatePlaying) {
         SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
         SoundPlayer::instance()->playSound(kSoundScore);
@@ -332,18 +332,18 @@ void PlayState::Update() {
   }  
   
   switch (state_) {
-    case kPlayStateStatePlaying: {      
+    case kPlayViewStatePlaying: {      
       if (player_1_score_->texture() == WIN_SCORE) {
         FinishGameWithWinner(PLAYER_1);
       } else if (player_2_score_->texture() == WIN_SCORE) {
         FinishGameWithWinner(PLAYER_2);
       } else if (num_active_pucks_ == 0) {
         wait_ticks_left_ = WAIT_TICKS;
-        state_ = kPlayStateStateWaitingForPucks;
+        state_ = kPlayViewStateWaitingForPucks;
       }
       break;
     }
-    case kPlayStateStateWaitingForPucks: {
+    case kPlayViewStateWaitingForPucks: {
       if (wait_ticks_left_-- == 0) {
         for (int i = 0; i < num_pucks_; i++) {
           Puck *puck = pucks_[i].get();
@@ -358,7 +358,7 @@ void PlayState::Update() {
         num_active_pucks_ = num_pucks_;
         num_player_1_scores_last_round_ = 0;
         
-        state_ = kPlayStateStatePlaying;        
+        state_ = kPlayViewStatePlaying;        
 
         break;
       }
@@ -369,7 +369,7 @@ void PlayState::Update() {
 
 // ButtonDelegate
 
-void PlayState::ButtonPressed(Button *button) {
+void PlayView::ButtonPressed(Button *button) {
   if (button == rematch_button_.get()) {
     RematchPressed();
   } else if (button == menu_button_.get()) {
@@ -384,7 +384,7 @@ void PlayState::ButtonPressed(Button *button) {
 
 // private
 
-void PlayState::SetUpNewGame() {
+void PlayView::SetUpNewGame() {
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 //  } else {
 //    [getGameEngine()->adEngine() removeAd];
@@ -425,12 +425,12 @@ void PlayState::SetUpNewGame() {
   num_active_pucks_ = num_pucks_;
   num_player_1_scores_last_round_ = 0;
   
-  state_ = kPlayStateStateGetReady;
+  state_ = kPlayViewStateGetReady;
   get_ready_ticks_left_ = GET_READY_TICKS_TOTAL;
 }
 
-void PlayState::FinishGameWithWinner(int playerId) {
-  state_ = kPlayStateStateFinished;
+void PlayView::FinishGameWithWinner(int playerId) {
+  state_ = kPlayViewStateFinished;
   
   double loseX = (SCREEN_WIDTH - lose_->size().width)/2;
   double winX =  (SCREEN_WIDTH - win_->size().width)/2;
@@ -494,7 +494,7 @@ void PlayState::FinishGameWithWinner(int playerId) {
 //  }
 }
 
-void PlayState::RematchPressed() {
+void PlayView::RematchPressed() {
 //  [FlurryAnalytics logEvent:@"REMATCH"];
 //  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [player1Wins_ removeFromSuperview];
@@ -507,7 +507,7 @@ void PlayState::RematchPressed() {
 }
 
 
-void PlayState::MenuPressed() {
+void PlayView::MenuPressed() {
 //  [player1Wins_ removeFromSuperview];
 //  [player2Wins_ removeFromSuperview];
   game_engine().SetRootView(sp<EngineView>(new MainMenuView(game_engine())));
@@ -516,7 +516,7 @@ void PlayState::MenuPressed() {
 //  }
 }
 
-void PlayState::ContinuePressed() {
+void PlayView::ContinuePressed() {
   state_ = pre_pause_state_;
   RemoveEntity(menu_background_);
   RemoveEntity(sound_slider_);
@@ -527,10 +527,10 @@ void PlayState::ContinuePressed() {
 //  }
 }
 
-void PlayState::PausePressed() {
-  if (state_ != kPlayStateStateFinished && state_ != kPlayStateStatePaused) {
+void PlayView::PausePressed() {
+  if (state_ != kPlayViewStateFinished && state_ != kPlayViewStatePaused) {
     pre_pause_state_ = state_;
-    state_ = kPlayStateStatePaused;
+    state_ = kPlayViewStatePaused;
     AddEntity(menu_background_);
     AddEntity(sound_slider_);
     AddEntity(menu_button_);

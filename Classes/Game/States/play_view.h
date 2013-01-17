@@ -1,13 +1,13 @@
 //
-//  play_state.h
+//  play_view.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 10-04-10.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_STATES_PLAYSTATE_H_
-#define AIRHOCKEY_GAME_STATES_PLAYSTATE_H_
+#ifndef AIRHOCKEY_GAME_STATES_PLAYVIEW_H_
+#define AIRHOCKEY_GAME_STATES_PLAYVIEW_H_
 
 #include <vector>
 using namespace std;
@@ -27,21 +27,21 @@ class GameEngine;
 class RoundThing;
 
 typedef enum {
-  kPlayStateStateGetReady,
-  kPlayStateStatePlaying,
-  kPlayStateStateWaitingForPucks,
-  kPlayStateStateFinished,
-  kPlayStateStatePaused
-} PlayStateState;
+  kPlayViewStateGetReady,
+  kPlayViewStatePlaying,
+  kPlayViewStateWaitingForPucks,
+  kPlayViewStateFinished,
+  kPlayViewStatePaused
+} PlayViewState;
 
-class PlayState : public EngineView, private ButtonDelegate {
+class PlayView : public EngineView, private ButtonDelegate {
  public:
-  PlayState(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
-            PaddleSize paddle_size);
+  PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
+           PaddleSize paddle_size);
   
-  // EngineState
+  // EngineView
   void Update();
-  string Name() { return "PlayState"; }
+  string Name() { return "PlayView"; }
 
   // ButtonDelegate
   void ButtonPressed(Button *button);
