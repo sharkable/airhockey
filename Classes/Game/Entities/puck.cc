@@ -14,6 +14,7 @@ using namespace std;
 
 #include "const.h"
 #include "gameengine/resource_loader.h"
+#include "soundengine/sound_player.h"
 
 Puck::Puck() : RoundThing() {
   texture_ = ResourceLoader::Instance().TextureWithName("puck");
@@ -87,5 +88,18 @@ void Puck::Render() {
     texture_.DrawAtPoint(SGPointMake(x_ - texture_.content_size().width / 2,
                                      y_ - texture_.content_size().height / 2),
                          alpha_, 1, 0, 0);
+  }
+}
+
+
+// RoundThing
+
+void Puck::DidBounceOff(RoundThing *other) {
+  if (other->Name() == "Puck") {
+    SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
+  } else if (other->Name() == "Paddle") {
+    SoundPlayer::instance()->playSound(kSoundPaddleHit);
+  } else if (other->Name() == "Post") {
+    SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }
 }

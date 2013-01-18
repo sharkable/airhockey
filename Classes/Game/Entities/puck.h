@@ -22,7 +22,10 @@ class Puck : public RoundThing {
   void Update();
   void Render();
   string Name() { return "Puck"; }
-
+  
+  // RoundThing
+  void DidBounceOff(RoundThing *other);
+  
  private:
   int fade_ticks_left_;
   double alpha_;

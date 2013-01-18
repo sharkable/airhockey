@@ -34,7 +34,7 @@ void RoundThing::ApplyFriction() {
   }
 }
 
-void RoundThing::BounceOff(RoundThing *other) {
+void RoundThing::MaybeBounceOff(RoundThing *other) {
   // TODO optimize this function.
   // For now I'm just getting it to work.
   
@@ -99,20 +99,6 @@ void RoundThing::BounceOff(RoundThing *other) {
       other->set_vy(newother_uy_ + otherwy_);
     }
 
-    // TODO: haha, this is soooo terrible.
-    bool onePaddle = Name() == "Paddle" || other->Name() == "Paddle";
-    bool twoPucks = Name() == "Puck" && other->Name() == "Puck";
-    bool onePuck = !twoPucks && (Name() == "Puck" || other->Name() == "Puck");
-
-    if (onePaddle && onePuck) {
-      SoundPlayer::instance()->playSound(kSoundPaddleHit);
-    } else if (onePuck) {
-      // The puck hit a post.
-      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
-    } else if (twoPucks) {
-      SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
-    }
-    
     double newVSquared = vx_ * vx_ + vy_ * vy_;
     double newOtherVSquared = other->vx() * other->vx() + other->vy() * other->vy();
     
@@ -127,7 +113,9 @@ void RoundThing::BounceOff(RoundThing *other) {
       double newRatio = MAX_SPEED / newOtherV;
       other->set_vx(other->vx() * newRatio);
       other->set_vy(other->vy() * newRatio);
-    }    
+    }
+
+    DidBounceOff(other);
   }  
 }
 

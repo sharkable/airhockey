@@ -8,6 +8,8 @@
 
 #include "game/entities/post.h"
 
+#include "soundengine/sound_player.h"
+
 #include "game/entities/rink.h"
 
 Post::Post(double x, double y) {
@@ -19,6 +21,12 @@ Post::Post(double x, double y) {
 
 
 // RoundThing
+
+void Post::DidBounceOff(RoundThing *other) {
+  if (other->Name() == "Puck") {
+    SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
+  }
+}
 
 bool Post::IsMovable() {
   return false;

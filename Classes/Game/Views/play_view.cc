@@ -286,7 +286,7 @@ void PlayView::Update() {
     for (int j = i + 1; j < round_things_.size(); j++) {
       RoundThing *otherThing = round_things_[j].get();
       if (otherThing->is_active()) {
-        thing->BounceOff(otherThing);
+        thing->MaybeBounceOff(otherThing);
       }
     }
     

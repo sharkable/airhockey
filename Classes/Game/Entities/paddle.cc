@@ -13,6 +13,7 @@
 #include "game/entities/puck.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
+#include "soundengine/sound_player.h"
 
 Paddle::Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
                vector<sp<Puck> > &pucks) : pucks_(pucks) {
@@ -243,6 +244,12 @@ void Paddle::Render() {
 
 
 // RoungThing
+
+void Paddle::DidBounceOff(RoundThing *other) {
+  if (other->Name() == "Puck") {
+    SoundPlayer::instance()->playSound(kSoundPaddleHit);
+  }
+}
 
 bool Paddle::ContainsTouch(Touch *touch) {
   SGPoint p = touch->location();

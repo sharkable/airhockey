@@ -19,6 +19,7 @@ class Post : public RoundThing {
   string Name() { return "Post"; }
 
   // RoundThing
+  virtual void DidBounceOff(RoundThing *other);
   virtual bool IsMovable();
 };
 
