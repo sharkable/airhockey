@@ -234,10 +234,6 @@ void SoundPlayerImpl::setMusicOn(bool on) {
 
 void SoundPlayerImpl::setSoundEffectsOn(bool on) {
   soundEffectsOn_ = on;
-  // Initialize!
-  if (on && sounds_.count == 0) {
-    initializeWithDelegate(NULL);
-  }
 }
 
 SoundPlayerImpl::SoundPlayerImpl() {

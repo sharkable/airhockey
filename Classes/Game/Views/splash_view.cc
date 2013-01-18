@@ -25,6 +25,7 @@ void SplashView::Update() {
   switch (state_) {
     case kSplashViewStateInitial:
       SoundPlayer::instance()->initializeWithDelegate(this);
+      SoundPlayer::instance()->setSoundEffectsOn(true);
       state_ = kSplashViewStateLoadingSounds;
       break;
     case kSplashViewStateSoundsDidLoad:
