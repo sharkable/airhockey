@@ -24,7 +24,7 @@ class Puck : public RoundThing {
   string Name() { return "Puck"; }
   
   // RoundThing
-  void DidBounceOff(RoundThing *other);
+  void DidBounceOff(ViewEntity *other);
   
  private:
   int fade_ticks_left_;

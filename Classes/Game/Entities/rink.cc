@@ -102,10 +102,7 @@ void Rink::BounceOff(RoundThing *thing) {
   if (dampen) {
     thing->set_vx(thing->vx() * 0.7);
     thing->set_vy(thing->vy() * 0.7);
-    // TODO: haha, again.
-    if (thing->Name() == "Puck") {
-      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
-    }
+    thing->DidBounceOff(this);
   }  
 }
 

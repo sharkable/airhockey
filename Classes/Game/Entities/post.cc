@@ -22,7 +22,7 @@ Post::Post(double x, double y) {
 
 // RoundThing
 
-void Post::DidBounceOff(RoundThing *other) {
+void Post::DidBounceOff(ViewEntity *other) {
   if (other->Name() == "Puck") {
     SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }

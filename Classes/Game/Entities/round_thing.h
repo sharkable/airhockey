@@ -20,7 +20,7 @@ class RoundThing : public ViewEntity {
   void ApplyFriction();
   void MaybeBounceOff(RoundThing *other);
   // Will get called for one of the two round things when they bounce.
-  virtual void DidBounceOff(RoundThing *other) {};
+  virtual void DidBounceOff(ViewEntity *other) {};
   bool ContainsTouch(Touch *touch);
   bool Overlaps(RoundThing *thing);
   virtual bool IsGrabbable();

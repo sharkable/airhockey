@@ -36,7 +36,7 @@ class Paddle : public RoundThing {
   string Name() { return "Paddle"; }
   
   // RoundThing
-  void DidBounceOff(RoundThing *other);
+  void DidBounceOff(ViewEntity *other);
   bool ContainsTouch(Touch *touch);
   bool IsGrabbable();  
 

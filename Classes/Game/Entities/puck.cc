@@ -94,12 +94,12 @@ void Puck::Render() {
 
 // RoundThing
 
-void Puck::DidBounceOff(RoundThing *other) {
+void Puck::DidBounceOff(ViewEntity *other) {
   if (other->Name() == "Puck") {
     SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
   } else if (other->Name() == "Paddle") {
     SoundPlayer::instance()->playSound(kSoundPaddleHit);
-  } else if (other->Name() == "Post") {
+  } else if (other->Name() == "Post" || other->Name() == "Rink") {
     SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }
 }
