@@ -246,7 +246,7 @@ void Paddle::Render() {
 // RoungThing
 
 void Paddle::DidBounceOff(ViewEntity *other) {
-  if (other->Name() == "Puck") {
+  if (typeid(other) == typeid(Puck)) {
     SoundPlayer::instance()->playSound(kSoundPaddleHit);
   }
 }

@@ -16,6 +16,11 @@ using namespace std;
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
+#include "game/entities/paddle.h"
+#include "game/entities/post.h"
+#include "game/entities/puck.h"
+#include "game/entities/rink.h"
+
 Puck::Puck() : RoundThing() {
   texture_ = ResourceLoader::Instance().TextureWithName("puck");
   radius_ = PUCK_RADIUS;
@@ -95,11 +100,11 @@ void Puck::Render() {
 // RoundThing
 
 void Puck::DidBounceOff(ViewEntity *other) {
-  if (other->Name() == "Puck") {
+  if (typeid(other) == typeid(Puck)) {
     SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
-  } else if (other->Name() == "Paddle") {
+  } else if (typeid(other) == typeid(Paddle)) {
     SoundPlayer::instance()->playSound(kSoundPaddleHit);
-  } else if (other->Name() == "Post" || other->Name() == "Rink") {
+  } else if (typeid(other) == typeid(Post) || typeid(other) == typeid(Rink)) {
     SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }
 }

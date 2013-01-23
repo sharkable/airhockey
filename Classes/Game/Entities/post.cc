@@ -10,6 +10,7 @@
 
 #include "soundengine/sound_player.h"
 
+#include "game/entities/puck.h"
 #include "game/entities/rink.h"
 
 Post::Post(double x, double y) {
@@ -23,7 +24,7 @@ Post::Post(double x, double y) {
 // RoundThing
 
 void Post::DidBounceOff(ViewEntity *other) {
-  if (other->Name() == "Puck") {
+  if (typeid(other) == typeid(Puck)) {
     SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }
 }
