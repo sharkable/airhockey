@@ -41,7 +41,6 @@ class PlayView : public EngineView, private ButtonDelegate {
   
   // EngineView
   void Update();
-  string Name() { return "PlayView"; }
 
   // ButtonDelegate
   void ButtonPressed(Button *button);

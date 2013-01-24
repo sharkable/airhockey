@@ -21,7 +21,6 @@ class MainMenuView : public EngineView, private ButtonDelegate {
   
   // EngineView
   void ViewIsShown();
-  string Name() { return "MainMenuView"; }
 
   // ButtonDelegate
   void ButtonPressed(Button *button);

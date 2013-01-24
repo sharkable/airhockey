@@ -25,7 +25,6 @@ class Rink : public ViewEntity {
   // ViewEntity
   void Update();
   void Render();
-  string Name() { return "Rink"; }
 
  private:
   Texture2D texture_;

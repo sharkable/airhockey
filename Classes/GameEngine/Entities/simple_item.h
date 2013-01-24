@@ -25,7 +25,6 @@ class SimpleItem : public ViewEntity {
   // ViewEntity
   void Update() {}
   void Render();
-  string Name() { return "SimpleItem(" + textures_[texture_].filename() + ")"; }
 
   // Accessors
   void set_textures(vector<Texture2D> textures) { textures_ = textures; }

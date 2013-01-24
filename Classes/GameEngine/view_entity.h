@@ -22,7 +22,6 @@ class ViewEntity {
   virtual void TouchesMoved(vector<Touch> touches) {}
   virtual void TouchesEnded(vector<Touch> touches) {}
   virtual void ClearTouches() {}
-  virtual string Name() { return "ViewEntity"; }
 };
 
 #endif

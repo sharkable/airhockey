@@ -21,7 +21,6 @@ class Puck : public RoundThing {
   // ViewEntity
   void Update();
   void Render();
-  string Name() { return "Puck"; }
   
   // RoundThing
   void DidBounceOff(ViewEntity *other);

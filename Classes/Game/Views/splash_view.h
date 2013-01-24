@@ -25,7 +25,6 @@ class SplashView : public EngineView, SoundInitializationDelegate {
   SplashView(GameEngine &gameEngine);
 
   // EngineView
-  string Name() { return "SplashView"; }
   void Update();
   
   // SoundInitializationDelegate

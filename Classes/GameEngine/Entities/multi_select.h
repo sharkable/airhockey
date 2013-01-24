@@ -28,7 +28,6 @@ class MultiSelect : public ViewEntity {
   void Update() {}
   void Render();
   void TouchesBegan(vector<Touch> touches);
-  string Name() { return "MultiSelect"; }
 
   // Accessors
   int selected_value() { return selected_value_; };

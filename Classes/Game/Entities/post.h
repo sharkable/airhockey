@@ -15,9 +15,6 @@ class Post : public RoundThing {
  public:
   Post(double x, double y);
   
-  // ViewEntity
-  string Name() { return "Post"; }
-
   // RoundThing
   virtual void DidBounceOff(ViewEntity *other);
   virtual bool IsMovable();

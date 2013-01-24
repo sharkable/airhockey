@@ -33,7 +33,6 @@ class Paddle : public RoundThing {
   // ViewEntity
   void Update();
   void Render();
-  string Name() { return "Paddle"; }
   
   // RoundThing
   void DidBounceOff(ViewEntity *other);

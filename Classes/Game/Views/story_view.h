@@ -16,9 +16,6 @@ class StoryView : public EngineView, ButtonDelegate {
  public:
   StoryView(GameEngine &gameEngine);
 
-  // EngineView
-  string Name() { return "StoryView"; }
-  
   // ButtonDelegate
   void ButtonPressed(Button *button);
 

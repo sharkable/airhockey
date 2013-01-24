@@ -24,7 +24,6 @@ class SoundSlider : public ViewEntity {
   void TouchesBegan(vector<Touch> touches);
   void TouchesMoved(vector<Touch> touches);
   void TouchesEnded(vector<Touch> touches);
-  string Name() { return "SoundSlider"; }
 
  private:
   SGPoint position_;

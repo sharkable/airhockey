@@ -33,7 +33,6 @@ class EngineView {
   void AddEntity(ViewEntity *entity);
   void AddEntity(sp<ViewEntity> entity);
   void RemoveEntity(sp<ViewEntity> entity);
-  virtual string Name() { return "EngineView"; }
   
   GameEngine &game_engine() { return game_engine_; }
 

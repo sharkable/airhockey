@@ -36,7 +36,6 @@ class Button : public ViewEntity {
   void Render();
   void TouchesBegan(vector<Touch> touches);
   void TouchesEnded(vector<Touch> touches);
-  string Name() { return "Button(" + normal_texture_.filename() + ")"; }
 
   bool ContainsPoint(SGPoint p);
 
