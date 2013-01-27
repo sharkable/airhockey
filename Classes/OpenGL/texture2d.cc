@@ -67,15 +67,15 @@
 
 #include "const.h"
 
-SGSize SGSizeMake(double width, double height) {
-  SGSize size;
+ScreenSize ScreenSizeMake(double width, double height) {
+  ScreenSize size;
   size.width = width;
   size.height = height;
   return size;
 }
 
-SGPoint SGPointMake(double x, double y) {
-  SGPoint point;
+ScreenPoint ScreenPointMake(double x, double y) {
+  ScreenPoint point;
   point.x = x;
   point.y = y;
   return point;
@@ -85,7 +85,7 @@ int Texture2D::nameCounter_ = 0;
 GLfloat Texture2D::globalAlpha_ = 1;
 
 Texture2D::Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width,
-                     uint32_t height, SGSize size, string filename) {
+                     uint32_t height, ScreenSize size, string filename) {
   Init(data, pixelFormat, width, height, size, filename);
 }
 
@@ -93,11 +93,11 @@ void Texture2D::SetGlobalAlpha(GLfloat alpha) {
   globalAlpha_ = alpha;
 }
 
-void Texture2D::DrawAtPoint(SGPoint point) {
+void Texture2D::DrawAtPoint(ScreenPoint point) {
   DrawAtPoint(point, 1.f, 1.f, 0.f, 0.f);
 }
 
-void Texture2D::DrawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z) {
+void Texture2D::DrawAtPoint(ScreenPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z) {
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
 
@@ -125,7 +125,7 @@ void Texture2D::DrawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat 
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-void Texture2D::DrawAtPointLeftRatio(SGPoint point, GLfloat leftRatio) {
+void Texture2D::DrawAtPointLeftRatio(ScreenPoint point, GLfloat leftRatio) {
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
   
@@ -166,7 +166,7 @@ void Texture2D::DrawAtPointLeftRatio(SGPoint point, GLfloat leftRatio) {
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-void Texture2D::DrawAtPointRightRatio(SGPoint point, GLfloat rightRatio) {
+void Texture2D::DrawAtPointRightRatio(ScreenPoint point, GLfloat rightRatio) {
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
   
@@ -208,7 +208,7 @@ void Texture2D::DrawAtPointRightRatio(SGPoint point, GLfloat rightRatio) {
 }
 
 
-void Texture2D::DrawAtPointAngle(SGPoint point, GLfloat angle) {
+void Texture2D::DrawAtPointAngle(ScreenPoint point, GLfloat angle) {
   // Swap vertical coordinate system.
   point.y = 1024.f - point.y;
   
@@ -246,7 +246,7 @@ void Texture2D::Delete() {
 // Private
 
 void Texture2D::Init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width,
-                     uint32_t height, SGSize size, string filename) {
+                     uint32_t height, ScreenSize size, string filename) {
   GLint saveName;
   filename_ = filename;
 

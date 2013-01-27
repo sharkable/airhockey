@@ -49,7 +49,7 @@ Texture2D ResourceLoader::Texture(string name) {
     pixelFormat = kTexture2DPixelFormat_A8;
   }
   
-  SGSize imageSize = SGSizeMake(CGImageGetWidth(image), CGImageGetHeight(image));
+  ScreenSize imageSize = ScreenSizeMake(CGImageGetWidth(image), CGImageGetHeight(image));
   CGAffineTransform transform = CGAffineTransformIdentity;
   
   NSUInteger width = imageSize.width;

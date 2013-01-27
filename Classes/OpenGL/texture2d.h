@@ -76,17 +76,17 @@ typedef enum {
   kTexture2DPixelFormat_A8,
 } Texture2DPixelFormat;
 
-struct SGSize {
+struct ScreenSize {
   double width;
   double height;
 };
-SGSize SGSizeMake(double width, double height);
+ScreenSize ScreenSizeMake(double width, double height);
 
-struct SGPoint {
+struct ScreenPoint {
   double x;
   double y;
 };
-SGPoint SGPointMake(double x, double y);
+ScreenPoint ScreenPointMake(double x, double y);
 
 /*
  This class allows to easily create OpenGL 2D textures from images, text or raw data.
@@ -100,37 +100,37 @@ class Texture2D {
  public:
   Texture2D() : name_(0) { }
   Texture2D(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
-            SGSize size, string filename);
+            ScreenSize size, string filename);
 
   static void SetGlobalAlpha(GLfloat alpha);
-  void DrawAtPoint(SGPoint point);
-  void DrawAtPoint(SGPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z);
-  void DrawAtPointLeftRatio(SGPoint point, GLfloat leftRatio);
-  void DrawAtPointRightRatio(SGPoint point, GLfloat rightRatio);
-  void DrawAtPointAngle(SGPoint point, GLfloat angle);
+  void DrawAtPoint(ScreenPoint point);
+  void DrawAtPoint(ScreenPoint point, GLfloat alpha, GLfloat zoom, GLfloat angle, GLfloat z);
+  void DrawAtPointLeftRatio(ScreenPoint point, GLfloat leftRatio);
+  void DrawAtPointRightRatio(ScreenPoint point, GLfloat rightRatio);
+  void DrawAtPointAngle(ScreenPoint point, GLfloat angle);
   void Delete();
   
   bool loaded() { return name_ != 0; }
   GLuint name() { return name_; }
   string filename() { return filename_; }
   bool data_loaded() { return name_ != 0; }
-  SGSize content_size() {
+  ScreenSize content_size() {
     //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     //      return size_;
     //    } else {
-    return SGSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
+    return ScreenSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
     //    }
   }  
 
  private:
   void Init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,
-            SGSize size, string filename);
+            ScreenSize size, string filename);
 
   static int nameCounter_;
   static GLfloat globalAlpha_;
   GLuint name_;
   string filename_;
-  SGSize size_;
+  ScreenSize size_;
   uint32_t width_;
   uint32_t height_;
   Texture2DPixelFormat format_;

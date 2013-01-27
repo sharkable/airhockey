@@ -46,10 +46,10 @@ using namespace std;
   for (UITouch *touch in touches) {
     Touch converted_touch;
     CGPoint location = [touch locationInView:touch.view];
-    SGPoint l = SGPointMake(location.x, location.y);
+    ScreenPoint l = ScreenPointMake(location.x, location.y);
     converted_touch.set_location(l);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      SGPoint p = converted_touch.location();
+      ScreenPoint p = converted_touch.location();
       p.x *= 768.0 / 320.0;
       p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
       converted_touch.set_location(p);

@@ -28,7 +28,7 @@ class Rink : public ViewEntity {
 
  private:
   Texture2D texture_;
-  SGPoint renderPoint_;
+  ScreenPoint renderPoint_;
 };
 
 #endif

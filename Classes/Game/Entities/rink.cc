@@ -15,7 +15,7 @@
 
 Rink::Rink() {
   texture_ = ResourceLoader::Instance().TextureWithName("rink_bg");
-  renderPoint_ = SGPointMake(0, 0);
+  renderPoint_ = ScreenPointMake(0, 0);
 }
 
 Rink::~Rink() {

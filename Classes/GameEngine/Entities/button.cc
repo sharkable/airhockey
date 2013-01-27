@@ -11,7 +11,7 @@
 #include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
 
-Button::Button(Texture2D normal_texture, Texture2D pressed_texture, SGPoint position)
+Button::Button(Texture2D normal_texture, Texture2D pressed_texture, ScreenPoint position)
     : normal_texture_(normal_texture),
       pressed_texture_(pressed_texture),
       position_(position),
@@ -28,7 +28,7 @@ Button::~Button() {
   }
 }
 
-bool Button::ContainsPoint(SGPoint p) {
+bool Button::ContainsPoint(ScreenPoint p) {
   return p.x >= position_.x &&
   p.y >= position_.y &&
   p.x < position_.x + pressed_texture_.content_size().width &&

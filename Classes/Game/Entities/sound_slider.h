@@ -14,9 +14,9 @@
 
 class SoundSlider : public ViewEntity {
  public:
-  SoundSlider(SGPoint position);
+  SoundSlider(ScreenPoint position);
 
-  SGPoint ThumbPoint();
+  ScreenPoint ThumbPoint();
 
   // ViewEntity
   void Update();
@@ -26,13 +26,13 @@ class SoundSlider : public ViewEntity {
   void TouchesEnded(vector<Touch> touches);
 
  private:
-  SGPoint position_;
+  ScreenPoint position_;
   Texture2D empty_texture_;
   Texture2D full_texture_;
   Texture2D thumb_texture_;
   double value_;
   void *grabbed_touch_;
-  SGPoint last_touch_position_;
+  ScreenPoint last_touch_position_;
 };
 
 #endif

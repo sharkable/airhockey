@@ -13,13 +13,13 @@
 
 class Touch {
  public:
-  SGPoint location() const { return location_; }
-  void set_location(SGPoint location) { location_ = location; }
+  ScreenPoint location() const { return location_; }
+  void set_location(ScreenPoint location) { location_ = location; }
   void *identifier() const { return identifier_; }
   void set_identifier(void *identifier) { identifier_ = identifier; }
 
  private:
-  SGPoint location_;
+  ScreenPoint location_;
   void *identifier_;
 };
 

@@ -238,7 +238,7 @@ void Paddle::Update() {
 }
 
 void Paddle::Render() {
-  texture_.DrawAtPoint(SGPointMake(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2),
+  texture_.DrawAtPoint(ScreenPointMake(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2),
                        (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1, 0, 0);
 }
 
@@ -252,7 +252,7 @@ void Paddle::DidBounceOff(ViewEntity *other) {
 }
 
 bool Paddle::ContainsTouch(Touch *touch) {
-  SGPoint p = touch->location();
+  ScreenPoint p = touch->location();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return false;
   }

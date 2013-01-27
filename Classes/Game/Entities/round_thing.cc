@@ -161,7 +161,7 @@ void RoundThing::Update() {
 
 void RoundThing::Render() {
   if (active_) {
-    texture_.DrawAtPoint(SGPointMake(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2));
+    texture_.DrawAtPoint(ScreenPointMake(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2));
   }
 }
 
@@ -195,7 +195,7 @@ void RoundThing::TouchesMoved(vector<Touch> touches) {
     }
   }
   if (grabbed_ && correctTouch != NULL) {
-    SGPoint p = correctTouch->location();
+    ScreenPoint p = correctTouch->location();
     x_ = p.x;
     y_ = p.y;
   }

@@ -16,7 +16,7 @@ class GameEngine;
 
 @property(nonatomic, assign) GameEngine *gameEngine;
 
-- (void)addAdAtPoint:(SGPoint)point;
+- (void)addAdAtPoint:(ScreenPoint)point;
 - (void)removeAd;
 
 @end

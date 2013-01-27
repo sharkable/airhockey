@@ -18,8 +18,8 @@ using namespace std;
 class SimpleItem : public ViewEntity {
  public:
   SimpleItem();
-  SimpleItem(Texture2D texture, SGPoint position);
-  SimpleItem(vector<Texture2D> textures, SGPoint position);
+  SimpleItem(Texture2D texture, ScreenPoint position);
+  SimpleItem(vector<Texture2D> textures, ScreenPoint position);
   ~SimpleItem();
 
   // ViewEntity
@@ -31,16 +31,16 @@ class SimpleItem : public ViewEntity {
   int texture() { return texture_; }
   void set_texture(int texture) { texture_ = texture; }
   void add_texture(Texture2D texture) { textures_.push_back(texture); }
-  SGPoint position() { return position_; }
-  void set_position(SGPoint position) { position_ = position; }
+  ScreenPoint position() { return position_; }
+  void set_position(ScreenPoint position) { position_ = position; }
   double angle() { return angle_; }
   void set_angle(double angle) { angle_ = angle; }
-  SGSize size() { return textures_[texture_].content_size(); }
+  ScreenSize size() { return textures_[texture_].content_size(); }
 
  private:
   vector<Texture2D> textures_;
   int texture_;
-  SGPoint position_;
+  ScreenPoint position_;
   double angle_;
 };
 

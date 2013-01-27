@@ -15,14 +15,14 @@ using namespace std;
 #include "gameengine/view_entity.h"
 
 class Texture2D;
-struct SGPoint;
+struct ScreenPoint;
 
 class MultiSelect : public ViewEntity {
  public:
   MultiSelect() {}
   ~MultiSelect();
 
-  void Add(Texture2D normal_texture, Texture2D selected_texture, SGPoint position);
+  void Add(Texture2D normal_texture, Texture2D selected_texture, ScreenPoint position);
 
   // ViewEntity
   void Update() {}

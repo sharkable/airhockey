@@ -14,7 +14,7 @@
 
 #include "soundengine/sound_player.h"
 
-SoundSlider::SoundSlider(SGPoint position) {
+SoundSlider::SoundSlider(ScreenPoint position) {
   position_ = position;
   
   empty_texture_ = ResourceLoader::Instance().TextureWithName("sound_empty");
@@ -29,8 +29,8 @@ SoundSlider::SoundSlider(SGPoint position) {
   SoundPlayer::instance()->setGlobalVolume(value_);
 }
 
-SGPoint SoundSlider::ThumbPoint() {
-  return SGPointMake(position_.x + 19 + (269.0 - thumb_texture_.content_size().width)*value_, position_.y);
+ScreenPoint SoundSlider::ThumbPoint() {
+  return ScreenPointMake(position_.x + 19 + (269.0 - thumb_texture_.content_size().width)*value_, position_.y);
 }
 
 
@@ -48,8 +48,8 @@ void SoundSlider::Render() {
 
 void SoundSlider::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
-    SGPoint touchP = touches[i].location();
-    SGPoint thumbP = ThumbPoint();
+    ScreenPoint touchP = touches[i].location();
+    ScreenPoint thumbP = ThumbPoint();
     double thumbWidth = thumb_texture_.content_size().width;
     double thumbHeight = thumb_texture_.content_size().height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
@@ -65,7 +65,7 @@ void SoundSlider::TouchesBegan(vector<Touch> touches) {
 void SoundSlider::TouchesMoved(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
-      SGPoint touchP = touches[i].location();
+      ScreenPoint touchP = touches[i].location();
       value_ += (touchP.x - last_touch_position_.x) / (269 - thumb_texture_.content_size().width);
       last_touch_position_ = touchP;
       if (last_touch_position_.x < position_.x + 19) {

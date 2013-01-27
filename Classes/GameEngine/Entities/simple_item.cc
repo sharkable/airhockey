@@ -12,18 +12,18 @@
 
 SimpleItem::SimpleItem()
     : texture_(0),
-      position_(SGPointMake(0, 0)),
+      position_(ScreenPointMake(0, 0)),
       angle_(0) {
 }
 
-SimpleItem::SimpleItem(Texture2D texture, SGPoint position)
+SimpleItem::SimpleItem(Texture2D texture, ScreenPoint position)
     : texture_(0),
       position_(position),
       angle_(0) {
   textures_.push_back(texture);
 }
 
-SimpleItem::SimpleItem(vector<Texture2D> textures, SGPoint position)
+SimpleItem::SimpleItem(vector<Texture2D> textures, ScreenPoint position)
     : textures_(textures),
       texture_(0),
       position_(position),
@@ -40,5 +40,5 @@ SimpleItem::~SimpleItem() {
 // ViewEntity
 
 void SimpleItem::Render() {
-  textures_[texture_].DrawAtPointAngle(SGPointMake(position_.x, position_.y), angle_);
+  textures_[texture_].DrawAtPointAngle(ScreenPointMake(position_.x, position_.y), angle_);
 }
