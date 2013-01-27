@@ -80,13 +80,23 @@ struct ScreenSize {
   double width;
   double height;
 };
-ScreenSize ScreenSizeMake(double width, double height);
+inline ScreenSize screen_size_make(double width, double height) {
+  ScreenSize size;
+  size.width = width;
+  size.height = height;
+  return size;
+}
 
 struct ScreenPoint {
   double x;
   double y;
 };
-ScreenPoint ScreenPointMake(double x, double y);
+inline ScreenPoint screen_point_make(double x, double y) {
+  ScreenPoint point;
+  point.x = x;
+  point.y = y;
+  return point;
+}
 
 /*
  This class allows to easily create OpenGL 2D textures from images, text or raw data.
@@ -114,13 +124,7 @@ class Texture2D {
   GLuint name() { return name_; }
   string filename() { return filename_; }
   bool data_loaded() { return name_ != 0; }
-  ScreenSize content_size() {
-    //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    //      return size_;
-    //    } else {
-    return ScreenSizeMake(size_.width*(768.0/320.0), size_.height*(768.0/320.0));
-    //    }
-  }  
+  ScreenSize content_size() { return size_; }
 
  private:
   void Init(const void *data, Texture2DPixelFormat pixelFormat, uint32_t width, uint32_t height,

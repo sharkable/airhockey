@@ -11,21 +11,21 @@
 #import "gameengine/resource_loader.h"
 
 SimpleItem::SimpleItem()
-    : texture_(0),
-      position_(ScreenPointMake(0, 0)),
+    : sprite_(0),
+      position_(screen_point_make(0, 0)),
       angle_(0) {
 }
 
-SimpleItem::SimpleItem(Texture2D texture, ScreenPoint position)
-    : texture_(0),
+SimpleItem::SimpleItem(Sprite sprite, ScreenPoint position)
+    : sprite_(0),
       position_(position),
       angle_(0) {
-  textures_.push_back(texture);
+  sprites_.push_back(sprite);
 }
 
-SimpleItem::SimpleItem(vector<Texture2D> textures, ScreenPoint position)
-    : textures_(textures),
-      texture_(0),
+SimpleItem::SimpleItem(vector<Sprite> sprites, ScreenPoint position)
+    : sprites_(sprites),
+      sprite_(0),
       position_(position),
       angle_(0) {
 }
@@ -40,5 +40,5 @@ SimpleItem::~SimpleItem() {
 // ViewEntity
 
 void SimpleItem::Render() {
-  textures_[texture_].DrawAtPointAngle(ScreenPointMake(position_.x, position_.y), angle_);
+  sprites_[sprite_].DrawAtPointAngle(screen_point_make(position_.x, position_.y), angle_);
 }

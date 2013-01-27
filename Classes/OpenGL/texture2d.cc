@@ -67,20 +67,6 @@
 
 #include "const.h"
 
-ScreenSize ScreenSizeMake(double width, double height) {
-  ScreenSize size;
-  size.width = width;
-  size.height = height;
-  return size;
-}
-
-ScreenPoint ScreenPointMake(double x, double y) {
-  ScreenPoint point;
-  point.x = x;
-  point.y = y;
-  return point;
-}
-
 int Texture2D::nameCounter_ = 0;
 GLfloat Texture2D::globalAlpha_ = 1;
 
@@ -104,15 +90,6 @@ void Texture2D::DrawAtPoint(ScreenPoint point, GLfloat alpha, GLfloat zoom, GLfl
   GLfloat width = (GLfloat)width_ * max_s_,
   height = (GLfloat)height_ * max_t_;
 
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-//  }  
-
   glLoadIdentity();
   glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices_);
@@ -127,6 +104,7 @@ void Texture2D::DrawAtPoint(ScreenPoint point, GLfloat alpha, GLfloat zoom, GLfl
 
 void Texture2D::DrawAtPointLeftRatio(ScreenPoint point, GLfloat leftRatio) {
   // Swap vertical coordinate system.
+  // TODO make this not screen size dependent.
   point.y = 1024.f - point.y;
   
   GLfloat    width = (GLfloat)width_ * max_s_ * leftRatio,
@@ -146,16 +124,6 @@ void Texture2D::DrawAtPointLeftRatio(ScreenPoint point, GLfloat leftRatio) {
   vertices_[9] = width/2.0;
   vertices_[10] = height/2.0;
   
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-    
-//  }  
-  
   glLoadIdentity();
   glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices_);
@@ -168,6 +136,7 @@ void Texture2D::DrawAtPointLeftRatio(ScreenPoint point, GLfloat leftRatio) {
 
 void Texture2D::DrawAtPointRightRatio(ScreenPoint point, GLfloat rightRatio) {
   // Swap vertical coordinate system.
+  // TODO screen size dependence.
   point.y = 1024.f - point.y;
   
   GLfloat    width = (GLfloat)width_ * max_s_ * rightRatio,
@@ -187,16 +156,6 @@ void Texture2D::DrawAtPointRightRatio(ScreenPoint point, GLfloat rightRatio) {
   vertices_[9] = width/2.0;
   vertices_[10] = height/2.0;
   
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-    
-//  }  
-  
   glLoadIdentity();
   glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices_);
@@ -210,21 +169,12 @@ void Texture2D::DrawAtPointRightRatio(ScreenPoint point, GLfloat rightRatio) {
 
 void Texture2D::DrawAtPointAngle(ScreenPoint point, GLfloat angle) {
   // Swap vertical coordinate system.
+  // TODO screen size dependence.
   point.y = 1024.f - point.y;
   
   GLfloat    width = (GLfloat)width_ * max_s_,
   height = (GLfloat)height_ * max_t_;
 
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    point.x *= 320.0/768.0;
-    point.y *= 320.0/768.0;
-    if (IS_FREE) {
-    } else {
-      point.y += 27;
-    }  
-    
-//  }
-  
   glLoadIdentity();
   glBindTexture(GL_TEXTURE_2D, name_);
   glVertexPointer(3, GL_FLOAT, 0, vertices_);

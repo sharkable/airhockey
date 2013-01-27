@@ -9,6 +9,7 @@
 #ifndef AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 #define AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 
+#include "gameengine/game_engine.h"
 #include "gameengine/view_entity.h"
 #include "OpenGL/Texture2D.h"
 
@@ -28,7 +29,7 @@ class ButtonDelegate {
 class Button : public ViewEntity {
  public:
   Button() : state_(kButtonStateNormal) {}
-  Button(Texture2D normal_texture, Texture2D pressed_texture, ScreenPoint position);
+  Button(Texture2D normal_texture, Texture2D pressed_texture, GamePoint position);
   ~Button();
   
   // ViewEntity
@@ -37,18 +38,18 @@ class Button : public ViewEntity {
   void TouchesBegan(vector<Touch> touches);
   void TouchesEnded(vector<Touch> touches);
 
-  bool ContainsPoint(ScreenPoint p);
+  bool ContainsPoint(GamePoint p);
 
   void set_normal_texture(Texture2D normal_texture) { normal_texture_ = normal_texture; }
   void set_pressed_texture(Texture2D pressed_texture) { pressed_texture_ = pressed_texture; }
-  void set_position(ScreenPoint position) { position_ = position; }
+  void set_position(GamePoint position) { position_ = position; }
   void set_delegate(ButtonDelegate *delegate) { delegate_ = delegate; }
-  ScreenSize size() { return normal_texture_.content_size(); }
+  GameSize size() { return game_size_make(0, 0); } // TODONOW normal_texture_.content_size(); }
  
  private:
   Texture2D normal_texture_;
   Texture2D pressed_texture_;
-  ScreenPoint position_;
+  GamePoint position_;
   int state_;
   ButtonDelegate *delegate_;
 };

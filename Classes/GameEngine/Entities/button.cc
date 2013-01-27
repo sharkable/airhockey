@@ -7,11 +7,12 @@
 //
 
 #include "gameengine/entities/button.h"
+
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
 
-Button::Button(Texture2D normal_texture, Texture2D pressed_texture, ScreenPoint position)
+Button::Button(Texture2D normal_texture, Texture2D pressed_texture, GamePoint position)
     : normal_texture_(normal_texture),
       pressed_texture_(pressed_texture),
       position_(position),
@@ -28,7 +29,7 @@ Button::~Button() {
   }
 }
 
-bool Button::ContainsPoint(ScreenPoint p) {
+bool Button::ContainsPoint(GamePoint p) {
   return p.x >= position_.x &&
   p.y >= position_.y &&
   p.x < position_.x + pressed_texture_.content_size().width &&
@@ -44,11 +45,11 @@ void Button::Update() {
 void Button::Render() {
   switch (state_) {
     case kButtonStateNormal: {
-      normal_texture_.DrawAtPoint(position_);
+      // TODONOW normal_texture_.DrawAtPoint(position_);
       break;
     }
     case kButtonStatePressed: {
-      pressed_texture_.DrawAtPoint(position_);
+      // TODONOW pressed_texture_.DrawAtPoint(position_);
       break;
     }
   }
@@ -57,10 +58,11 @@ void Button::Render() {
 void Button::TouchesBegan(vector<Touch> touches) {
   if (state_ == kButtonStateNormal) {
     for (int i = 0; i < touches.size(); i++) {
-      if (ContainsPoint(touches[i].location())) {
-        state_ = kButtonStatePressed;
-        SoundPlayer::instance()->playSound(kSoundButton);
-      }
+// TODONOW
+//      if (ContainsPoint(touches[i].location())) {
+//        state_ = kButtonStatePressed;
+//        SoundPlayer::instance()->playSound(kSoundButton);
+//      }
     }
   }
 }
@@ -69,11 +71,12 @@ void Button::TouchesEnded(vector<Touch> touches) {
   if (state_ == kButtonStatePressed) {
     state_ = kButtonStateNormal;
     for (int i = 0; i < touches.size(); i++) {
-      if (ContainsPoint(touches[i].location())) {
-        if (delegate_) {
-          delegate_->ButtonPressed(this);
-        }
-      }
+// TODONOW
+//      if (ContainsPoint(touches[i].location())) {
+//        if (delegate_) {
+//          delegate_->ButtonPressed(this);
+//        }
+//      }
     }
   }
 }

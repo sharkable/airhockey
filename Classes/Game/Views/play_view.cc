@@ -27,7 +27,7 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   post_3_.reset(new Post(GOAL_RIGHT_X + 1, RINK_TOP_Y));
   post_4_.reset(new Post(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1));
 
-  sound_slider_.reset(new SoundSlider(ScreenPointMake(331, 336)));
+  sound_slider_.reset(new SoundSlider(screen_point_make(331, 336)));
 
   rink_.reset(new Rink());
   AddEntity(rink_);
@@ -45,10 +45,10 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   cout << player_1_score_.get() << endl;
   player_1_score_.reset(new SimpleItem());
   player_1_score_->set_textures(scoreTextures);
-  player_1_score_->set_position(ScreenPointMake(662, 526));
+  player_1_score_->set_position(screen_point_make(662, 526));
   player_2_score_.reset(new SimpleItem());
   player_2_score_->set_textures(scoreTextures);
-  player_2_score_->set_position(ScreenPointMake(662, 386));
+  player_2_score_->set_position(screen_point_make(662, 386));
   AddEntity(player_1_score_);
   AddEntity(player_2_score_);
   
@@ -84,10 +84,10 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   
   // Add rink left and right pieces.
   Texture2D leftRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_left");
-  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, ScreenPointMake(0, 0));
+  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderTexture, screen_point_make(0, 0));
   AddEntity(sp<SimpleItem>(leftRinkBorder));
   Texture2D rightRinkBorderTexture = ResourceLoader::Instance().TextureWithName("rink_right");
-  ScreenPoint leftRinkBorderPos = ScreenPointMake(SCREEN_WIDTH - rightRinkBorderTexture.content_size().width,
+  ScreenPoint leftRinkBorderPos = screen_point_make(SCREEN_WIDTH - rightRinkBorderTexture.content_size().width,
                                           0);
   SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderTexture, leftRinkBorderPos);
   AddEntity(sp<SimpleItem>(rightRinkBorder));
@@ -95,23 +95,23 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   Texture2D winTexture = ResourceLoader::Instance().TextureWithName("win");
   win_.reset(new SimpleItem());
   win_->add_texture(winTexture);
-  win_->set_position(ScreenPointMake(0, 0));
+  win_->set_position(screen_point_make(0, 0));
 
   Texture2D loseTexture = ResourceLoader::Instance().TextureWithName("lose");
   lose_.reset(new SimpleItem());
   lose_->add_texture(loseTexture);
-  lose_->set_position(ScreenPointMake(0, 0));
+  lose_->set_position(screen_point_make(0, 0));
 
   Texture2D getReadyTexture = ResourceLoader::Instance().TextureWithName("get_ready");
   ScreenPoint getReadyPosition =
-      ScreenPointMake((SCREEN_WIDTH - getReadyTexture.content_size().width) / 2, 
+      screen_point_make((SCREEN_WIDTH - getReadyTexture.content_size().width) / 2, 
                   (SCREEN_HEIGHT - getReadyTexture.content_size().height) / 2);
   get_ready_.reset(new SimpleItem());
   get_ready_->add_texture(getReadyTexture);
   get_ready_->set_position(getReadyPosition);
 
   Texture2D goTexture = ResourceLoader::Instance().TextureWithName("go");
-  ScreenPoint goPosition = ScreenPointMake((SCREEN_WIDTH - goTexture.content_size().width) / 2, 
+  ScreenPoint goPosition = screen_point_make((SCREEN_WIDTH - goTexture.content_size().width) / 2, 
                                    (SCREEN_HEIGHT - goTexture.content_size().height) / 2);
   go_.reset(new SimpleItem());
   go_->add_texture(goTexture);
@@ -121,39 +121,42 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
       ResourceLoader::Instance().TextureWithName("rematch_button");
   Texture2D rematchButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("rematch_button_pressed");
-  ScreenPoint rematchButtonPos =
-      ScreenPointMake((SCREEN_WIDTH - rematchButtonTexture.content_size().width) / 2, 441);
+// TODONOW
+//  ScreenPoint rematchButtonPos =
+//      screen_point_make((SCREEN_WIDTH - rematchButtonTexture.content_size().width) / 2, 441);
   rematch_button_.reset(new Button());
   rematch_button_->set_normal_texture(rematchButtonTexture);
   rematch_button_->set_pressed_texture(rematchButtonPressedTexture);
-  rematch_button_->set_position(rematchButtonPos);
+// TODONOW  rematch_button_->set_position(rematchButtonPos);
   rematch_button_->set_delegate(this);
 
   Texture2D menuButtonTexture = ResourceLoader::Instance().TextureWithName("menu_button");
   Texture2D menuButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("menu_button_pressed");
-  ScreenPoint menuButtonPos = ScreenPointMake((SCREEN_WIDTH - menuButtonTexture.content_size().width) / 2,
-                                      546);
+// TODONOW
+//  ScreenPoint menuButtonPos = screen_point_make((SCREEN_WIDTH - menuButtonTexture.content_size().width) / 2,
+//                                      546);
   menu_button_.reset(new Button());
   menu_button_->set_normal_texture(menuButtonTexture);
   menu_button_->set_pressed_texture(menuButtonPressedTexture);
-  menu_button_->set_position(menuButtonPos);
+// TODONOW  menu_button_->set_position(menuButtonPos);
   menu_button_->set_delegate(this);
 
   Texture2D continueButtonTexture = ResourceLoader::Instance().TextureWithName("continue_button");
   Texture2D continueButtonPressedTexture =
       ResourceLoader::Instance().TextureWithName("continue_button_pressed");
-  ScreenPoint continueButtonPos =
-      ScreenPointMake((SCREEN_WIDTH - continueButtonTexture.content_size().width) / 2, 441);
+// TODONOW
+//  ScreenPoint continueButtonPos =
+//      screen_point_make((SCREEN_WIDTH - continueButtonTexture.content_size().width) / 2, 441);
   continue_button_.reset(new Button());
   continue_button_->set_normal_texture(continueButtonTexture);
   continue_button_->set_pressed_texture(continueButtonPressedTexture);
-  continue_button_->set_position(continueButtonPos);
+// TODONOW  continue_button_->set_position(continueButtonPos);
   continue_button_->set_delegate(this);
   
   Texture2D menuBackgroundTexture = ResourceLoader::Instance().TextureWithName("game_menu_bg");
   ScreenPoint menuBackgroundPosition =
-      ScreenPointMake((SCREEN_WIDTH - menuBackgroundTexture.content_size().width) / 2, 306);
+      screen_point_make((SCREEN_WIDTH - menuBackgroundTexture.content_size().width) / 2, 306);
   menu_background_.reset(new SimpleItem());
   menu_background_->add_texture(menuBackgroundTexture);
   menu_background_->set_position(menuBackgroundPosition);
@@ -166,22 +169,23 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   bool is_iphone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
   
   if (!is_iphone) {
-    ScreenPoint pauseButtonPos1 = ScreenPointMake(0, 0);
+// TODONOW    ScreenPoint pauseButtonPos1 = screen_point_make(0, 0);
     pause_button_1_.reset(new Button());
     pause_button_1_->set_normal_texture(pauseButtonTexture);
     pause_button_1_->set_pressed_texture(pauseButtonPressedTexture);
-    pause_button_1_->set_position(pauseButtonPos1);
+// TODONOW    pause_button_1_->set_position(pauseButtonPos1);
     pause_button_1_->set_delegate(this);
     AddEntity(pause_button_1_);
   }
-  
-  ScreenPoint pauseButtonPos2 = ScreenPointMake(SCREEN_WIDTH - pauseButtonTexture.content_size().width,
-                                        SCREEN_HEIGHT - pauseButtonTexture.content_size().height +
-                                            (false ? (27 * 768.0/320.0) : 0));
+
+// TODO NOW
+//  ScreenPoint pauseButtonPos2 = screen_point_make(SCREEN_WIDTH - pauseButtonTexture.content_size().width,
+//                                        SCREEN_HEIGHT - pauseButtonTexture.content_size().height +
+//                                            (false ? (27 * 768.0/320.0) : 0));
   pause_button_2_.reset(new Button());
   pause_button_2_->set_normal_texture(pauseButtonTexture);
   pause_button_2_->set_pressed_texture(pauseButtonPressedTexture);
-  pause_button_2_->set_position(pauseButtonPos2);
+// TODONOW  pause_button_2_->set_position(pauseButtonPos2);
   pause_button_2_->set_delegate(this);
   AddEntity(pause_button_2_);
     
@@ -440,12 +444,12 @@ void PlayView::FinishGameWithWinner(int playerId) {
     case PLAYER_1: {
       player_1_win_count_++;
 
-      win_->set_position(ScreenPointMake(winX, bottomY));
+      win_->set_position(screen_point_make(winX, bottomY));
       win_->set_angle(0);
       AddEntity(win_);
       
       if (num_players_ == 2) {
-        lose_->set_position(ScreenPointMake(loseX, topY));
+        lose_->set_position(screen_point_make(loseX, topY));
         lose_->set_angle(180);
         AddEntity(lose_);
       }
@@ -458,12 +462,12 @@ void PlayView::FinishGameWithWinner(int playerId) {
       player_2_win_count_++;
       
       if (num_players_ == 2) {
-        win_->set_position(ScreenPointMake(winX, topY));
+        win_->set_position(screen_point_make(winX, topY));
         win_->set_angle(180);
         AddEntity(win_);
       }
       
-      lose_->set_position(ScreenPointMake(loseX, bottomY));
+      lose_->set_position(screen_point_make(loseX, bottomY));
       lose_->set_angle(0);
       AddEntity(lose_);
       
@@ -488,9 +492,9 @@ void PlayView::FinishGameWithWinner(int playerId) {
   AddEntity(continue_button_);
   
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    [getGameEngine()->adEngine() addAdAtPoint:ScreenPointMake((SCREEN_WIDTH - 320) / 2, 385)];
+//    [getGameEngine()->adEngine() addAdAtPoint:screen_point_make((SCREEN_WIDTH - 320) / 2, 385)];
 //  } else {
-//    [getGameEngine()->adEngine() addAdAtPoint:ScreenPointMake(0, 0)];
+//    [getGameEngine()->adEngine() addAdAtPoint:screen_point_make(0, 0)];
 //  }
 }
 
@@ -536,7 +540,7 @@ void PlayView::PausePressed() {
     AddEntity(menu_button_);
     AddEntity(continue_button_);
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//      [getGameEngine()->adEngine() addAdAtPoint:ScreenPointMake((SCREEN_WIDTH - 320)/2, 385)];
+//      [getGameEngine()->adEngine() addAdAtPoint:screen_point_make((SCREEN_WIDTH - 320)/2, 385)];
 //    }
   }
 }

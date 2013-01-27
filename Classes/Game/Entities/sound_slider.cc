@@ -30,7 +30,7 @@ SoundSlider::SoundSlider(ScreenPoint position) {
 }
 
 ScreenPoint SoundSlider::ThumbPoint() {
-  return ScreenPointMake(position_.x + 19 + (269.0 - thumb_texture_.content_size().width)*value_, position_.y);
+  return screen_point_make(position_.x + 19 + (269.0 - thumb_texture_.content_size().width)*value_, position_.y);
 }
 
 

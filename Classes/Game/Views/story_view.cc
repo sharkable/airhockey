@@ -16,7 +16,7 @@ StoryView::StoryView(GameEngine &gameEngine) : EngineView(gameEngine) {
   storyButton_.reset(new Button());
   storyButton_->set_normal_texture(storyButtonImage);
   storyButton_->set_pressed_texture(storyButtonImage);
-  storyButton_->set_position(ScreenPointMake(0, 0));
+// TODONOW  storyButton_->set_position(screen_point_make(0, 0));
   storyButton_->set_delegate(this);
   AddEntity(storyButton_);
 
@@ -24,7 +24,7 @@ StoryView::StoryView(GameEngine &gameEngine) : EngineView(gameEngine) {
   aboutButton_.reset(new Button());
   aboutButton_->set_normal_texture(aboutButtonImage);
   aboutButton_->set_pressed_texture(aboutButtonImage);
-  aboutButton_->set_position(ScreenPointMake(0, 0));
+// TODONOW  aboutButton_->set_position(screen_point_make(0, 0));
   aboutButton_->set_delegate(this);
 }
 

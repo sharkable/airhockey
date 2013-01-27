@@ -13,6 +13,7 @@
 #import "GameTimer.h"
 #import "GameTouchWindow.h"
 #import "splash_view.h"
+#import "texture2d.h"
 
 @implementation ViewController {
  @private
@@ -35,11 +36,16 @@
     [gameTouchWindow_ makeKeyAndVisible];
 
     game_engine_ = new GameEngine();
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+      game_engine_->SetScreenSize(screen_size_make(320, 480), game_size_make(768, 1152));
+    } else {
+      game_engine_->SetScreenSize(screen_size_make(768, 1024), game_size_make(768, 1024));
+    }
     root_view_.reset(new SplashView(*game_engine_));
     game_engine_->PushView(root_view_);
     gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
     gameTouchWindow_.gameEngine = game_engine_;    
-}
+  }
   return self;
 }
 

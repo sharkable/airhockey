@@ -32,7 +32,7 @@ void MultiSelect::Add(Texture2D normal_texture, Texture2D selected_texture, Scre
 
 void MultiSelect::Render() {
   for (int i = 0; i < normal_textures_.size(); i++) {
-    ScreenPoint p = ScreenPointMake(positions_x_[i], positions_y_[i]);
+    ScreenPoint p = screen_point_make(positions_x_[i], positions_y_[i]);
     if (i == selected_value_) {
       selected_textures_[i].DrawAtPoint(p);
     } else {

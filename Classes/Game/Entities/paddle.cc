@@ -238,7 +238,7 @@ void Paddle::Update() {
 }
 
 void Paddle::Render() {
-  texture_.DrawAtPoint(ScreenPointMake(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2),
+  texture_.DrawAtPoint(screen_point_make(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2),
                        (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1, 0, 0);
 }
 

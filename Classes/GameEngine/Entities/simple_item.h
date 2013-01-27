@@ -12,14 +12,14 @@
 #include <vector>
 using namespace std;
 
+#include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
-#include "opengl/Texture2D.h"
 
 class SimpleItem : public ViewEntity {
  public:
   SimpleItem();
-  SimpleItem(Texture2D texture, ScreenPoint position);
-  SimpleItem(vector<Texture2D> textures, ScreenPoint position);
+  SimpleItem(Sprite sprite, ScreenPoint position);
+  SimpleItem(vector<Sprite> sprites, ScreenPoint position);
   ~SimpleItem();
 
   // ViewEntity
@@ -27,10 +27,10 @@ class SimpleItem : public ViewEntity {
   void Render();
 
   // Accessors
-  void set_textures(vector<Texture2D> textures) { textures_ = textures; }
+  void set_sprites(vector<Sprite> textures) { textures_ = textures; }
   int texture() { return texture_; }
-  void set_texture(int texture) { texture_ = texture; }
-  void add_texture(Texture2D texture) { textures_.push_back(texture); }
+  void set_sprite(int sprite) { sprite_ = sprite; }
+  void add_sprite(Sprite sprite) { sprites_.push_back(sprite); }
   ScreenPoint position() { return position_; }
   void set_position(ScreenPoint position) { position_ = position; }
   double angle() { return angle_; }
@@ -38,8 +38,8 @@ class SimpleItem : public ViewEntity {
   ScreenSize size() { return textures_[texture_].content_size(); }
 
  private:
-  vector<Texture2D> textures_;
-  int texture_;
+  vector<Sprite> sprites_;
+  int sprite_;
   ScreenPoint position_;
   double angle_;
 };
