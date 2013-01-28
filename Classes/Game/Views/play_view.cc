@@ -19,13 +19,14 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
     : EngineView(game_engine) {
   num_players_ = num_players;
   
-  paddle_1_.reset(new Paddle(PLAYER_1, paddle_size, true, caiBad, pucks_));
-  paddle_2_.reset(new Paddle(PLAYER_2, paddle_size, num_players == 2, difficulty, pucks_));
+  paddle_1_.reset(new Paddle(game_engine, PLAYER_1, paddle_size, true, caiBad, pucks_));
+  paddle_2_.reset(new Paddle(game_engine, PLAYER_2, paddle_size, num_players == 2, difficulty,
+                             pucks_));
 
-  post_1_.reset(new Post(GOAL_LEFT_X, RINK_TOP_Y));
-  post_2_.reset(new Post(GOAL_LEFT_X, RINK_BOTTOM_Y + 1));
-  post_3_.reset(new Post(GOAL_RIGHT_X + 1, RINK_TOP_Y));
-  post_4_.reset(new Post(GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1));
+  post_1_.reset(new Post(game_engine, GOAL_LEFT_X, RINK_TOP_Y));
+  post_2_.reset(new Post(game_engine, GOAL_LEFT_X, RINK_BOTTOM_Y + 1));
+  post_3_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_TOP_Y));
+  post_4_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1));
 
   sound_slider_.reset(new SoundSlider(game_point_make(331, 336)));
 
@@ -56,7 +57,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   num_pucks_ = num_pucks;
   num_active_pucks_ = num_pucks_;
   for (int i = 0; i < num_pucks_; i++) {
-    pucks_.push_back(sp<Puck>(new Puck()));
+    pucks_.push_back(sp<Puck>(new Puck(game_engine)));
     AddEntity(pucks_[i]);
     round_things_.push_back(pucks_[i]);
   }

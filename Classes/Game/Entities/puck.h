@@ -13,7 +13,7 @@
 
 class Puck : public RoundThing {
  public:
-  Puck();
+  Puck(sp<GameEngine> game_engine);
 
   void PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center);
   void FadeIn();

@@ -101,7 +101,7 @@ class Texture2D {
   void DrawAtPointAngle(ScreenPoint point, GLfloat angle);
   void Delete();
   
-  bool loaded() { return name_ != 0; }
+  bool loaded() { return name_ != 0; }  // TODO identical to data_loaded
   GLuint name() { return name_; }
   string filename() { return filename_; }
   bool data_loaded() { return name_ != 0; }

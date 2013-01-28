@@ -13,7 +13,7 @@
 
 class Post : public RoundThing {
  public:
-  Post(double x, double y);
+  Post(sp<GameEngine> game_engine, double x, double y);
   
   // RoundThing
   virtual void DidBounceOff(ViewEntity *other);

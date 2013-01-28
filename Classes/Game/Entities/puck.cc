@@ -21,8 +21,7 @@ using namespace std;
 #include "game/entities/puck.h"
 #include "game/entities/rink.h"
 
-Puck::Puck() : RoundThing() {
-  texture_ = ResourceLoader::Instance().TextureWithName("puck");
+Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
   radius_ = PUCK_RADIUS;
   mass_ = PUCK_MASS;
   friction_ = PUCK_FRICTION;
@@ -90,9 +89,9 @@ void Puck::Update() {
 
 void Puck::Render() {
   if (is_active()) {
-    texture_.DrawAtPoint(screen_point_make(x_ - texture_.content_size().width / 2,
-                                     y_ - texture_.content_size().height / 2),
-                         alpha_, 1, 0, 0);
+    sprite_.DrawAtPointAlpha(game_point_make(x_ - sprite_.content_size().width / 2,
+                                             y_ - sprite_.content_size().height / 2),
+                             alpha_);
   }
 }
 

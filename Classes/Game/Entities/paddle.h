@@ -19,8 +19,8 @@ using namespace std;
 
 class Paddle : public RoundThing {
  public:
-  Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
-         vector<sp<Puck> > &pucks);
+  Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
+         ComputerAI ai_level, vector<sp<Puck> > &pucks);
   
   void SetInitialPositionForPlayer(int player_id);
   void KeepInPlayerBounds();

@@ -12,18 +12,22 @@
 
 #include "game/entities/paddle.h"
 #include "game/entities/puck.h"
+#include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
 
-RoundThing::RoundThing() {
-  active_ = true;
-  grabbed_ = false;
+RoundThing::RoundThing(sp<GameEngine> game_engine) : sprite_(game_engine) { }
+
+RoundThing::RoundThing(sp<GameEngine> game_engine, string texture_name)
+    : sprite_(game_engine, texture_name),
+      active_(true),
+      grabbed_(false) {
 }
 
 RoundThing::~RoundThing() {
-  if (texture_.data_loaded()) {
-    ResourceLoader::Instance().ReleaseResource(texture_);
+  if (sprite_.texture().data_loaded()) {
+    ResourceLoader::Instance().ReleaseResource(sprite_.texture());
   }
 }
 
@@ -161,7 +165,8 @@ void RoundThing::Update() {
 
 void RoundThing::Render() {
   if (active_) {
-    texture_.DrawAtPoint(screen_point_make(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2));
+    sprite_.DrawAtPoint(game_point_make(x_ - sprite_.content_size().width / 2,
+                                        y_ - sprite_.content_size().height / 2));
   }
 }
 

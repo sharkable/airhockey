@@ -9,12 +9,13 @@
 #ifndef AIRHOCKEY_GAME_ENTITIES_ROUNDTHING_H_
 #define AIRHOCKEY_GAME_ENTITIES_ROUNDTHING_H_
 
+#include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
-#include "opengl/Texture2D.h"
 
 class RoundThing : public ViewEntity {
  public:
-  RoundThing();
+  RoundThing(sp<GameEngine> game_engine);
+  RoundThing(sp<GameEngine> game_engine, string texture_name);
   ~RoundThing();
   
   void ApplyFriction();
@@ -52,7 +53,7 @@ class RoundThing : public ViewEntity {
   void ClearTouches();
 
  protected:
-  Texture2D texture_;
+  Sprite sprite_;
   double x_;
   double y_;
   double old_x_;

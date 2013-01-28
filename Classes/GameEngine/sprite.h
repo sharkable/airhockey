@@ -18,6 +18,8 @@ class Sprite {
  public:
   Sprite() { }
 
+  Sprite(sp<GameEngine> game_engine) : game_engine_(game_engine) { }
+
   Sprite(sp<GameEngine> game_engine, Texture2D texture)
     : game_engine_(game_engine),
       texture_(texture) {
@@ -30,6 +32,8 @@ class Sprite {
   // TODO consider removing this.
   Texture2D texture() { return texture_; }
 
+  void set_texture(Texture2D texture) { texture_ = texture; }
+
   GameSize content_size() {
     return game_engine_->screen_size_to_game_size(texture_.content_size());
   }
@@ -40,6 +44,10 @@ class Sprite {
 
   void DrawAtPointAngle(GamePoint position, GLfloat angle) {
     texture_.DrawAtPointAngle(game_engine_->game_point_to_screen_point(position), angle);
+  }
+
+  void DrawAtPointAlpha(GamePoint position, GLfloat alpha) {
+    texture_.DrawAtPoint(game_engine_->game_point_to_screen_point(position), alpha, 1, 0, 0);
   }
 
  private:

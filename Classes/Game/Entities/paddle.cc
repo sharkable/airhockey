@@ -15,8 +15,10 @@
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
-Paddle::Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerAI ai_level,
-               vector<sp<Puck> > &pucks) : pucks_(pucks) {
+Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
+               ComputerAI ai_level, vector<sp<Puck> > &pucks)
+    : RoundThing(game_engine),
+      pucks_(pucks) {
   player_id_ = player_id;
   player_controlled_ = player_controlled;
   ai_level_ = ai_level;
@@ -24,25 +26,25 @@ Paddle::Paddle(int player_id, PaddleSize size, bool player_controlled, ComputerA
   if (player_id == PLAYER_1) {
     switch (size) {
       case psSmall:
-        texture_ = ResourceLoader::Instance().TextureWithName("paddle_1_small");
+        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_small"));
         break;
       case psMedium:
-        texture_ = ResourceLoader::Instance().TextureWithName("paddle_1_medium");
+        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_medium"));
         break;
       case psLarge:
-        texture_ = ResourceLoader::Instance().TextureWithName("paddle_1_large");
+        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_large"));
         break;
     }
   } else {
     switch (size) {
       case psSmall:
-        texture_ = ResourceLoader::Instance().TextureWithName("paddle_2_small");
+        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_small"));
         break;
       case psMedium:
-        texture_ = ResourceLoader::Instance().TextureWithName("paddle_2_medium");
+        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_medium"));
         break;
       case psLarge:
-        texture_ = ResourceLoader::Instance().TextureWithName("paddle_2_large");
+        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_large"));
         break;
     }    
   }
@@ -238,8 +240,9 @@ void Paddle::Update() {
 }
 
 void Paddle::Render() {
-  texture_.DrawAtPoint(screen_point_make(x_ - texture_.content_size().width/2, y_ - texture_.content_size().height/2),
-                       (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1, 0, 0);
+  sprite_.DrawAtPointAlpha(game_point_make(x_ - sprite_.content_size().width/2,
+                                           y_ - sprite_.content_size().height/2),
+                           (is_grabbed() || !player_controlled_ ? 1.0 : 0.5));
 }
 
 
