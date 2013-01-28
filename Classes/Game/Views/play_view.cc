@@ -138,105 +138,101 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   menu_button_->set_position(menu_button_pos);
   menu_button_->set_delegate(this);
 
-//  Texture2D continueButtonTexture = ResourceLoader::Instance().TextureWithName("continue_button");
-//  Texture2D continueButtonPressedTexture =
-//      ResourceLoader::Instance().TextureWithName("continue_button_pressed");
-//// TODONOW
-////  ScreenPoint continueButtonPos =
-////      screen_point_make((SCREEN_WIDTH - continueButtonTexture.content_size().width) / 2, 441);
-//  continue_button_.reset(new Button());
-//  continue_button_->set_normal_texture(continueButtonTexture);
-//  continue_button_->set_pressed_texture(continueButtonPressedTexture);
-//// TODONOW  continue_button_->set_position(continueButtonPos);
-//  continue_button_->set_delegate(this);
-//  
-//  Texture2D menuBackgroundTexture = ResourceLoader::Instance().TextureWithName("game_menu_bg");
-//  ScreenPoint menuBackgroundPosition =
-//      screen_point_make((SCREEN_WIDTH - menuBackgroundTexture.content_size().width) / 2, 306);
-//  menu_background_.reset(new SimpleItem());
-//  menu_background_->add_texture(menuBackgroundTexture);
-//  menu_background_->set_position(menuBackgroundPosition);
-//  
-//  Texture2D pauseButtonTexture = ResourceLoader::Instance().TextureWithName("pause_button");
-//        cout << "Pause button texture " << pauseButtonTexture.name() << endl;
-//  Texture2D pauseButtonPressedTexture =
-//      ResourceLoader::Instance().TextureWithName("pause_button_pressed");
-//  
-//  bool is_iphone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
-//  
-//  if (!is_iphone) {
-//// TODONOW    ScreenPoint pauseButtonPos1 = screen_point_make(0, 0);
-//    pause_button_1_.reset(new Button());
-//    pause_button_1_->set_normal_texture(pauseButtonTexture);
-//    pause_button_1_->set_pressed_texture(pauseButtonPressedTexture);
-//// TODONOW    pause_button_1_->set_position(pauseButtonPos1);
-//    pause_button_1_->set_delegate(this);
-//    AddEntity(pause_button_1_);
+  Sprite continue_button_sprite(game_engine, "continue_button");
+  Sprite continue_button_pressed_sprite(game_engine, "continue_button_pressed");
+  GamePoint continue_button_pos =
+      game_point_make((SCREEN_WIDTH - continue_button_sprite.content_size().width) / 2, 441);
+  continue_button_.reset(new Button());
+  continue_button_->set_normal_sprite(continue_button_sprite);
+  continue_button_->set_pressed_sprite(continue_button_pressed_sprite);
+  continue_button_->set_position(continue_button_pos);
+  continue_button_->set_delegate(this);
+
+  Sprite menu_background_sprite(game_engine, "game_menu_bg");
+  GamePoint menu_background_position =
+      game_point_make((SCREEN_WIDTH - menu_background_sprite.content_size().width) / 2, 306);
+  menu_background_.reset(new SimpleItem());
+  menu_background_->add_sprite(menu_background_sprite);
+  menu_background_->set_position(menu_background_position);
+
+  Sprite pause_button_sprite(game_engine, "pause_button");
+  Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
+
+  bool is_iphone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+
+  if (!is_iphone) {
+    GamePoint pause_button_pos_1 = game_point_make(0, 0);
+    pause_button_1_.reset(new Button());
+    pause_button_1_->set_normal_sprite(pause_button_sprite);
+    pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
+    pause_button_1_->set_position(pause_button_pos_1);
+    pause_button_1_->set_delegate(this);
+    AddEntity(pause_button_1_);
+  }
+
+  GamePoint pause_button_pos_2 =
+      game_point_make(SCREEN_WIDTH - pause_button_sprite.content_size().width,
+                      SCREEN_HEIGHT - pause_button_sprite.content_size().height +
+                          (false ? (27 * 768.0/320.0) : 0));
+  pause_button_2_.reset(new Button());
+  pause_button_2_->set_normal_sprite(pause_button_sprite);
+  pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite);
+  pause_button_2_->set_position(pause_button_pos_2);
+  pause_button_2_->set_delegate(this);
+  AddEntity(pause_button_2_);
+
+//  if (isIPhone) {
+//    if (IS_FREE) {
+//      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 278 + 26, 150, 35)];
+//      player1Wins_.textColor = [UIColor whiteColor];
+//    } else {
+//      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, 448, 150, 35)];
+//      player1Wins_.textColor = [UIColor grayColor];
+//    }
+//  } else {
+//    player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 644, 150, 35)];
+//    player1Wins_.textColor = [UIColor whiteColor];
 //  }
-//
-//// TODO NOW
-////  ScreenPoint pauseButtonPos2 = screen_point_make(SCREEN_WIDTH - pauseButtonTexture.content_size().width,
-////                                        SCREEN_HEIGHT - pauseButtonTexture.content_size().height +
-////                                            (false ? (27 * 768.0/320.0) : 0));
-//  pause_button_2_.reset(new Button());
-//  pause_button_2_->set_normal_texture(pauseButtonTexture);
-//  pause_button_2_->set_pressed_texture(pauseButtonPressedTexture);
-//// TODONOW  pause_button_2_->set_position(pauseButtonPos2);
-//  pause_button_2_->set_delegate(this);
-//  AddEntity(pause_button_2_);
-//    
-////  if (isIPhone) {
-////    if (IS_FREE) {
-////      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 278 + 26, 150, 35)];
-////      player1Wins_.textColor = [UIColor whiteColor];
-////    } else {
-////      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, 448, 150, 35)];
-////      player1Wins_.textColor = [UIColor grayColor];
-////    }
-////  } else {
-////    player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 644, 150, 35)];
-////    player1Wins_.textColor = [UIColor whiteColor];
-////  }
-////  player1Wins_.backgroundColor = [UIColor clearColor];
-////  player1Wins_.textAlignment = UITextAlignmentLeft;
-////  if (isIPhone) {
-////    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-////  } else {
-////    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
-////  }
-////  
-////  if (isIPhone) {
-////    if (IS_FREE) {
-////      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 155 + 26, 150, 35)];
-////      player2Wins_.textColor = [UIColor whiteColor];
-////    } else {
-////      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, -5, 150, 35)];
-////      player2Wins_.textColor = [UIColor grayColor];
-////    }
-////  } else {
-////    player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 324, 150, 35)];
-////    player2Wins_.textColor = [UIColor whiteColor];
-////  }
-////  player2Wins_.backgroundColor = [UIColor clearColor];
-////  if (isIPhone) {
-////    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-////  } else {
-////    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
-////  }
-////  if (num_players_ == 2) {
-////    player2Wins_.transform = CGAffineTransformMakeRotation(M_PI); 
-////    player2Wins_.textAlignment = UITextAlignmentRight;
-////  } else {
-////    player2Wins_.textAlignment = UITextAlignmentLeft;
-////  }
-////  
-////  if (!IS_FREE && isIPhone) {
-////    player1Wins_.text = @"0 wins";
-////    player2Wins_.text = @"0 wins";
-////    getGameEngine()->addUIView(player1Wins_);
-////    getGameEngine()->addUIView(player2Wins_);
-////  }
+//  player1Wins_.backgroundColor = [UIColor clearColor];
+//  player1Wins_.textAlignment = UITextAlignmentLeft;
+//  if (isIPhone) {
+//    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+//  } else {
+//    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
+//  }
 //  
+//  if (isIPhone) {
+//    if (IS_FREE) {
+//      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 155 + 26, 150, 35)];
+//      player2Wins_.textColor = [UIColor whiteColor];
+//    } else {
+//      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, -5, 150, 35)];
+//      player2Wins_.textColor = [UIColor grayColor];
+//    }
+//  } else {
+//    player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 324, 150, 35)];
+//    player2Wins_.textColor = [UIColor whiteColor];
+//  }
+//  player2Wins_.backgroundColor = [UIColor clearColor];
+//  if (isIPhone) {
+//    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+//  } else {
+//    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
+//  }
+//  if (num_players_ == 2) {
+//    player2Wins_.transform = CGAffineTransformMakeRotation(M_PI); 
+//    player2Wins_.textAlignment = UITextAlignmentRight;
+//  } else {
+//    player2Wins_.textAlignment = UITextAlignmentLeft;
+//  }
+//  
+//  if (!IS_FREE && isIPhone) {
+//    player1Wins_.text = @"0 wins";
+//    player2Wins_.text = @"0 wins";
+//    getGameEngine()->addUIView(player1Wins_);
+//    getGameEngine()->addUIView(player2Wins_);
+//  }
+  
   give_extra_puck_to_player_ = PLAYER_1;
   player_1_win_count_ = 0;
   player_2_win_count_ = 0;
