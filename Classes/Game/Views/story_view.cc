@@ -11,18 +11,22 @@
 #include "gameengine/game_engine.h"
 
 StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+  // TODO We're loading this twice so the counter for this texture goes up. Rethink texture
+  // management.
   Sprite storyButtonImage = Sprite(game_engine, "story");
+  Sprite storyButtonImage2 = Sprite(game_engine, "story");
   storyButton_.reset(new Button());
   storyButton_->set_normal_sprite(storyButtonImage);
-  storyButton_->set_pressed_sprite(storyButtonImage);
+  storyButton_->set_pressed_sprite(storyButtonImage2);
   storyButton_->set_position(game_point_make(0, 0));
   storyButton_->set_delegate(this);
   AddEntity(storyButton_);
 
   Sprite aboutButtonImage = Sprite(game_engine, "about");
+  Sprite aboutButtonImage2 = Sprite(game_engine, "about");
   aboutButton_.reset(new Button());
   aboutButton_->set_normal_sprite(aboutButtonImage);
-  aboutButton_->set_pressed_sprite(aboutButtonImage);
+  aboutButton_->set_pressed_sprite(aboutButtonImage2);
   aboutButton_->set_position(game_point_make(0, 0));
   aboutButton_->set_delegate(this);
 }
