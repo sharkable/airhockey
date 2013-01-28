@@ -17,7 +17,11 @@
 #include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
 
-RoundThing::RoundThing(sp<GameEngine> game_engine) : sprite_(game_engine) { }
+RoundThing::RoundThing(sp<GameEngine> game_engine)
+    : sprite_(game_engine),
+      active_(true),
+      grabbed_(false) {
+}
 
 RoundThing::RoundThing(sp<GameEngine> game_engine, string texture_name)
     : sprite_(game_engine, texture_name),
