@@ -118,31 +118,26 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   go_->add_sprite(goSprite);
   go_->set_position(goPosition);
   
-//  Texture2D rematchButtonTexture =
-//      ResourceLoader::Instance().TextureWithName("rematch_button");
-//  Texture2D rematchButtonPressedTexture =
-//      ResourceLoader::Instance().TextureWithName("rematch_button_pressed");
-//// TODONOW
-////  ScreenPoint rematchButtonPos =
-////      screen_point_make((SCREEN_WIDTH - rematchButtonTexture.content_size().width) / 2, 441);
-//  rematch_button_.reset(new Button());
-//  rematch_button_->set_normal_texture(rematchButtonTexture);
-//  rematch_button_->set_pressed_texture(rematchButtonPressedTexture);
-//// TODONOW  rematch_button_->set_position(rematchButtonPos);
-//  rematch_button_->set_delegate(this);
-//
-//  Texture2D menuButtonTexture = ResourceLoader::Instance().TextureWithName("menu_button");
-//  Texture2D menuButtonPressedTexture =
-//      ResourceLoader::Instance().TextureWithName("menu_button_pressed");
-//// TODONOW
-////  ScreenPoint menuButtonPos = screen_point_make((SCREEN_WIDTH - menuButtonTexture.content_size().width) / 2,
-////                                      546);
-//  menu_button_.reset(new Button());
-//  menu_button_->set_normal_texture(menuButtonTexture);
-//  menu_button_->set_pressed_texture(menuButtonPressedTexture);
-//// TODONOW  menu_button_->set_position(menuButtonPos);
-//  menu_button_->set_delegate(this);
-//
+  Sprite rematch_button_sprite(game_engine, "rematch_button");
+  Sprite rematch_button_pressed_sprite(game_engine, "rematch_button_pressed");
+  GamePoint rematch_button_pos =
+      game_point_make((SCREEN_WIDTH - rematch_button_sprite.content_size().width) / 2, 441);
+  rematch_button_.reset(new Button());
+  rematch_button_->set_normal_sprite(rematch_button_sprite);
+  rematch_button_->set_pressed_sprite(rematch_button_pressed_sprite);
+  rematch_button_->set_position(rematch_button_pos);
+  rematch_button_->set_delegate(this);
+
+  Sprite menu_button_sprite(game_engine, "menu_button");
+  Sprite menu_button_pressed_sprite(game_engine, "menu_button_pressed");
+  GamePoint menu_button_pos =
+      game_point_make((SCREEN_WIDTH - menu_button_sprite.content_size().width) / 2, 546);
+  menu_button_.reset(new Button());
+  menu_button_->set_normal_sprite(menu_button_sprite);
+  menu_button_->set_pressed_sprite(menu_button_pressed_sprite);
+  menu_button_->set_position(menu_button_pos);
+  menu_button_->set_delegate(this);
+
 //  Texture2D continueButtonTexture = ResourceLoader::Instance().TextureWithName("continue_button");
 //  Texture2D continueButtonPressedTexture =
 //      ResourceLoader::Instance().TextureWithName("continue_button_pressed");
