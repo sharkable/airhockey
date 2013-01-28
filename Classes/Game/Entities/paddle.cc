@@ -246,7 +246,7 @@ void Paddle::Render() {
 }
 
 
-// RoungThing
+// RoundThing
 
 void Paddle::DidBounceOff(ViewEntity *other) {
   if (typeid(other) == typeid(Puck)) {
