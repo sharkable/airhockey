@@ -45,13 +45,12 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 
   Sprite start_button_image(game_engine, "start_button");
   Sprite start_button_pressed_image(game_engine, "start_button_pressed");
-// TODONOW
-//  ScreenPoint start_button_position =
-//      screen_point_make((SCREEN_WIDTH - start_button_image.content_size().width) / 2, 392);
+  GamePoint start_button_position =
+      game_point_make((SCREEN_WIDTH - start_button_image.content_size().width) / 2, 392);
   start_button_.reset(new Button());
   start_button_->set_normal_sprite(start_button_image);
   start_button_->set_pressed_sprite(start_button_pressed_image);
-// TODONOW  start_button_->set_position(start_button_position);
+  start_button_->set_position(start_button_position);
   start_button_->set_delegate(this);
   AddEntity(start_button_);
   
@@ -60,7 +59,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   feedback_button_.reset(new Button());
   feedback_button_->set_normal_sprite(feedback_button_image);
   feedback_button_->set_pressed_sprite(feedback_button_pressed_image);
-// TODONOW  feedback_button_->set_position(is_iphone ? screen_point_make(440, 926) : screen_point_make(486, 936));
+  feedback_button_->set_position(is_iphone ? game_point_make(440, 926) : game_point_make(486, 936));
   feedback_button_->set_delegate(this);
   AddEntity(feedback_button_);
 
@@ -69,7 +68,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   story_button_.reset(new Button());
   story_button_->set_normal_sprite(story_button_image);
   story_button_->set_pressed_sprite(story_button_pressed_image);
-// TODONOW  story_button_->set_position(is_iphone ? screen_point_make(86, 926) : screen_point_make(91, 936));
+  story_button_->set_position(is_iphone ? game_point_make(86, 926) : game_point_make(91, 936));
   story_button_->set_delegate(this);
   AddEntity(story_button_);
   
@@ -79,7 +78,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     upgrade_button_.reset(new Button());
     upgrade_button_->set_normal_sprite(upgrade_button_image);
     upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
-// TODONOW    upgrade_button_->set_position(screen_point_make(91, 936));
+    upgrade_button_->set_position(game_point_make(91, 936));
     upgrade_button_->set_delegate(this);
     AddEntity(upgrade_button_);
   }

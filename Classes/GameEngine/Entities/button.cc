@@ -45,11 +45,11 @@ void Button::Update() {
 void Button::Render() {
   switch (state_) {
     case kButtonStateNormal: {
-      // TODONOW normal_texture_.DrawAtPoint(position_);
+      normal_sprite_.DrawAtPoint(position_);
       break;
     }
     case kButtonStatePressed: {
-      // TODONOW pressed_texture_.DrawAtPoint(position_);
+      pressed_sprite_.DrawAtPoint(position_);
       break;
     }
   }
@@ -58,11 +58,10 @@ void Button::Render() {
 void Button::TouchesBegan(vector<Touch> touches) {
   if (state_ == kButtonStateNormal) {
     for (int i = 0; i < touches.size(); i++) {
-// TODONOW
-//      if (ContainsPoint(touches[i].location())) {
-//        state_ = kButtonStatePressed;
-//        SoundPlayer::instance()->playSound(kSoundButton);
-//      }
+      if (ContainsPoint(touches[i].location())) {
+        state_ = kButtonStatePressed;
+        SoundPlayer::instance()->playSound(kSoundButton);
+      }
     }
   }
 }
@@ -71,12 +70,11 @@ void Button::TouchesEnded(vector<Touch> touches) {
   if (state_ == kButtonStatePressed) {
     state_ = kButtonStateNormal;
     for (int i = 0; i < touches.size(); i++) {
-// TODONOW
-//      if (ContainsPoint(touches[i].location())) {
-//        if (delegate_) {
-//          delegate_->ButtonPressed(this);
-//        }
-//      }
+      if (ContainsPoint(touches[i].location())) {
+        if (delegate_) {
+          delegate_->ButtonPressed(this);
+        }
+      }
     }
   }
 }
