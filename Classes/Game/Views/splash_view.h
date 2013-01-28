@@ -22,7 +22,7 @@ typedef enum {
 
 class SplashView : public EngineView, SoundInitializationDelegate {
  public:
-  SplashView(GameEngine &gameEngine);
+  SplashView(sp<GameEngine> game_engine);
 
   // EngineView
   void Update();

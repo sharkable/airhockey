@@ -12,18 +12,18 @@
 
 SimpleItem::SimpleItem()
     : sprite_(0),
-      position_(screen_point_make(0, 0)),
+      position_(game_point_make(0, 0)),
       angle_(0) {
 }
 
-SimpleItem::SimpleItem(Sprite sprite, ScreenPoint position)
+SimpleItem::SimpleItem(Sprite sprite, GamePoint position)
     : sprite_(0),
       position_(position),
       angle_(0) {
   sprites_.push_back(sprite);
 }
 
-SimpleItem::SimpleItem(vector<Sprite> sprites, ScreenPoint position)
+SimpleItem::SimpleItem(vector<Sprite> sprites, GamePoint position)
     : sprites_(sprites),
       sprite_(0),
       position_(position),
@@ -31,8 +31,8 @@ SimpleItem::SimpleItem(vector<Sprite> sprites, ScreenPoint position)
 }
 
 SimpleItem::~SimpleItem() {
-  for (int i = 0; i < textures_.size(); i++) {
-    ResourceLoader::Instance().ReleaseResource(textures_[i]);
+  for (int i = 0; i < sprites_.size(); i++) {
+    ResourceLoader::Instance().ReleaseResource(sprites_[i].texture());
   }
 }
 
@@ -40,5 +40,5 @@ SimpleItem::~SimpleItem() {
 // ViewEntity
 
 void SimpleItem::Render() {
-  sprites_[sprite_].DrawAtPointAngle(screen_point_make(position_.x, position_.y), angle_);
+  sprites_[sprite_].DrawAtPointAngle(position_, angle_);
 }

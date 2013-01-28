@@ -12,28 +12,28 @@
 #include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
 
-Button::Button(Texture2D normal_texture, Texture2D pressed_texture, GamePoint position)
-    : normal_texture_(normal_texture),
-      pressed_texture_(pressed_texture),
+Button::Button(Sprite normal_sprite, Sprite pressed_sprite, GamePoint position)
+    : normal_sprite_(normal_sprite),
+      pressed_sprite_(pressed_sprite),
       position_(position),
       state_(kButtonStateNormal),
       delegate_(NULL) {
 }
 
 Button::~Button() {
-  if (normal_texture_.loaded()) {
-    ResourceLoader::Instance().ReleaseResource(normal_texture_);
+  if (normal_sprite_.texture().loaded()) {
+    ResourceLoader::Instance().ReleaseResource(normal_sprite_.texture());
   }
-  if (pressed_texture_.loaded()) {
-    ResourceLoader::Instance().ReleaseResource(pressed_texture_);
+  if (pressed_sprite_.texture().loaded()) {
+    ResourceLoader::Instance().ReleaseResource(pressed_sprite_.texture());
   }
 }
 
 bool Button::ContainsPoint(GamePoint p) {
   return p.x >= position_.x &&
   p.y >= position_.y &&
-  p.x < position_.x + pressed_texture_.content_size().width &&
-  p.y < position_.y + pressed_texture_.content_size().height;
+  p.x < position_.x + pressed_sprite_.content_size().width &&
+  p.y < position_.y + pressed_sprite_.content_size().height;
 }
 
 

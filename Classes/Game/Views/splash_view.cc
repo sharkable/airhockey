@@ -16,7 +16,7 @@
 
 #import "puck.h"
 
-SplashView::SplashView(GameEngine &gameEngine) : EngineView(gameEngine) {
+SplashView::SplashView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   state_ = kSplashViewStateInitial;
 }
 
@@ -29,7 +29,7 @@ void SplashView::Update() {
       state_ = kSplashViewStateLoadingSounds;
       break;
     case kSplashViewStateSoundsDidLoad:
-      game_engine().SetRootView(sp<EngineView>(new MainMenuView(game_engine())));
+      game_engine()->SetRootView(sp<EngineView>(new MainMenuView(game_engine())));
       state_ = kSplashViewStateFinished;
       break;
     default:

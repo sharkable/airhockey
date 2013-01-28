@@ -17,7 +17,7 @@
 
 class MainMenuView : public EngineView, private ButtonDelegate {
  public:
-  MainMenuView(GameEngine &game_engine);
+  MainMenuView(sp<GameEngine> game_engine);
   
   // EngineView
   void ViewIsShown();

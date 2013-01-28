@@ -9,22 +9,21 @@
 #include "game/views/story_view.h"
 
 #include "gameengine/game_engine.h"
-#include "gameengine/resource_loader.h"
 
-StoryView::StoryView(GameEngine &gameEngine) : EngineView(gameEngine) {
-  Texture2D storyButtonImage = ResourceLoader::Instance().TextureWithName("story");
+StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+  Sprite storyButtonImage = Sprite(game_engine, "story");
   storyButton_.reset(new Button());
-  storyButton_->set_normal_texture(storyButtonImage);
-  storyButton_->set_pressed_texture(storyButtonImage);
-// TODONOW  storyButton_->set_position(screen_point_make(0, 0));
+  storyButton_->set_normal_sprite(storyButtonImage);
+  storyButton_->set_pressed_sprite(storyButtonImage);
+  storyButton_->set_position(game_point_make(0, 0));
   storyButton_->set_delegate(this);
   AddEntity(storyButton_);
 
-  Texture2D aboutButtonImage = ResourceLoader::Instance().TextureWithName("about");
+  Sprite aboutButtonImage = Sprite(game_engine, "about");
   aboutButton_.reset(new Button());
-  aboutButton_->set_normal_texture(aboutButtonImage);
-  aboutButton_->set_pressed_texture(aboutButtonImage);
-// TODONOW  aboutButton_->set_position(screen_point_make(0, 0));
+  aboutButton_->set_normal_sprite(aboutButtonImage);
+  aboutButton_->set_pressed_sprite(aboutButtonImage);
+  aboutButton_->set_position(game_point_make(0, 0));
   aboutButton_->set_delegate(this);
 }
 
@@ -36,6 +35,6 @@ void StoryView::ButtonPressed(Button *button) {
     RemoveEntity(storyButton_);
     AddEntity(aboutButton_);    
   } else if (button == aboutButton_.get()) {
-    game_engine().PopView();
+    game_engine()->PopView();
   }
 }

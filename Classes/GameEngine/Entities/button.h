@@ -10,8 +10,8 @@
 #define AIRHOCKEY_GAMEENGINE_ENTITIES_BUTTON_H_
 
 #include "gameengine/game_engine.h"
+#include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
-#include "OpenGL/Texture2D.h"
 
 typedef enum {
   kButtonStateNormal,
@@ -29,7 +29,7 @@ class ButtonDelegate {
 class Button : public ViewEntity {
  public:
   Button() : state_(kButtonStateNormal) {}
-  Button(Texture2D normal_texture, Texture2D pressed_texture, GamePoint position);
+  Button(Sprite normal_sprite, Sprite pressed_sprite, GamePoint position);
   ~Button();
   
   // ViewEntity
@@ -40,15 +40,15 @@ class Button : public ViewEntity {
 
   bool ContainsPoint(GamePoint p);
 
-  void set_normal_texture(Texture2D normal_texture) { normal_texture_ = normal_texture; }
-  void set_pressed_texture(Texture2D pressed_texture) { pressed_texture_ = pressed_texture; }
+  void set_normal_sprite(Sprite normal_sprite) { normal_sprite_ = normal_sprite; }
+  void set_pressed_sprite(Sprite pressed_sprite) { pressed_sprite_ = pressed_sprite; }
   void set_position(GamePoint position) { position_ = position; }
   void set_delegate(ButtonDelegate *delegate) { delegate_ = delegate; }
-  GameSize size() { return game_size_make(0, 0); } // TODONOW normal_texture_.content_size(); }
+  GameSize size() { return normal_sprite_.content_size(); }
  
  private:
-  Texture2D normal_texture_;
-  Texture2D pressed_texture_;
+  Sprite normal_sprite_;
+  Sprite pressed_sprite_;
   GamePoint position_;
   int state_;
   ButtonDelegate *delegate_;

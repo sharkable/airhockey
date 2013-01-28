@@ -54,19 +54,19 @@ class GameEngine {
   void set_touches_moved(vector<Touch> touches_moved) { touches_moved_ = touches_moved; }
   void set_touches_ended(vector<Touch> touches_ended) { touches_ended_ = touches_ended; }
 
-  ScreenSize game_to_screen_size(GameSize game_size_) {
+  ScreenSize game_size_to_screen_size(GameSize game_size_) {
     return screen_size_make(game_size_.width * game_to_screen_point_ratio_x_,
                             game_size_.height * game_to_screen_point_ratio_y_);
   }
-  ScreenPoint game_to_screen_point(GamePoint game_point_) {
+  ScreenPoint game_point_to_screen_point(GamePoint game_point_) {
     return screen_point_make(game_point_.x * game_to_screen_point_ratio_x_,
                              game_point_.y * game_to_screen_point_ratio_y_);
   }
-  GameSize screen_to_game_size(ScreenSize screen_size_) {
+  GameSize screen_size_to_game_size(ScreenSize screen_size_) {
     return game_size_make(screen_size_.width * screen_to_game_point_ratio_x_,
                           screen_size_.height * screen_to_game_point_ratio_y_);
   }
-  GamePoint screen_to_game_point(ScreenPoint screen_point_) {
+  GamePoint screen_point_to_game_point(ScreenPoint screen_point_) {
     return game_point_make(screen_point_.x * screen_to_game_point_ratio_x_,
                            screen_point_.y * screen_to_game_point_ratio_y_);
   }

@@ -18,8 +18,8 @@ using namespace std;
 class SimpleItem : public ViewEntity {
  public:
   SimpleItem();
-  SimpleItem(Sprite sprite, ScreenPoint position);
-  SimpleItem(vector<Sprite> sprites, ScreenPoint position);
+  SimpleItem(Sprite sprite, GamePoint position);
+  SimpleItem(vector<Sprite> sprites, GamePoint position);
   ~SimpleItem();
 
   // ViewEntity
@@ -27,20 +27,20 @@ class SimpleItem : public ViewEntity {
   void Render();
 
   // Accessors
-  void set_sprites(vector<Sprite> textures) { textures_ = textures; }
-  int texture() { return texture_; }
+  void set_sprites(vector<Sprite> sprites) { sprites_ = sprites; }
+  int sprite() { return sprite_; }
   void set_sprite(int sprite) { sprite_ = sprite; }
   void add_sprite(Sprite sprite) { sprites_.push_back(sprite); }
-  ScreenPoint position() { return position_; }
-  void set_position(ScreenPoint position) { position_ = position; }
+  GamePoint position() { return position_; }
+  void set_position(GamePoint position) { position_ = position; }
   double angle() { return angle_; }
   void set_angle(double angle) { angle_ = angle; }
-  ScreenSize size() { return textures_[texture_].content_size(); }
+  GameSize size() { return sprites_[sprite_].content_size(); }
 
  private:
   vector<Sprite> sprites_;
   int sprite_;
-  ScreenPoint position_;
+  GamePoint position_;
   double angle_;
 };
 

@@ -14,7 +14,7 @@
 
 class StoryView : public EngineView, ButtonDelegate {
  public:
-  StoryView(GameEngine &gameEngine);
+  StoryView(sp<GameEngine> game_engine);
 
   // ButtonDelegate
   void ButtonPressed(Button *button);

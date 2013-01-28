@@ -41,7 +41,7 @@
     } else {
       game_engine_->SetScreenSize(screen_size_make(768, 1024), game_size_make(768, 1024));
     }
-    root_view_.reset(new SplashView(*game_engine_));
+    root_view_.reset(new SplashView(sp<GameEngine>(game_engine_)));
     game_engine_->PushView(root_view_);
     gameTimer_ = [[GameTimer alloc] initWithTarget:self selector:@selector(update)];
     gameTouchWindow_.gameEngine = game_engine_;    

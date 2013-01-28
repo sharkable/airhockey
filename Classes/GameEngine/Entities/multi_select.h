@@ -14,15 +14,15 @@ using namespace std;
 
 #include "gameengine/view_entity.h"
 
-class Texture2D;
-struct ScreenPoint;
+class Sprite;
+struct GamePoint;
 
 class MultiSelect : public ViewEntity {
  public:
   MultiSelect() {}
   ~MultiSelect();
 
-  void Add(Texture2D normal_texture, Texture2D selected_texture, ScreenPoint position);
+  void Add(Sprite normal_sprite, Sprite selected_sprite, GamePoint position);
 
   // ViewEntity
   void Update() {}
@@ -34,8 +34,8 @@ class MultiSelect : public ViewEntity {
   void set_selected_value(int selected_value) { selected_value_ = selected_value; }
 
  private:
-  vector<Texture2D> normal_textures_;
-  vector<Texture2D> selected_textures_;
+  vector<Sprite> normal_sprites_;
+  vector<Sprite> selected_sprites_;
   vector<double> positions_x_;
   vector<double> positions_y_;
   int selected_value_;

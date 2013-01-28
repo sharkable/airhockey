@@ -14,97 +14,87 @@
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
 #import "gameengine/resource_loader.h"
-#import "opengl/Texture2D.h"
+#import "gameengine/sprite.h"
 
-MainMenuView::MainMenuView(GameEngine &game_engine)
-    : EngineView(game_engine) {
+MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   bool is_iphone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
-  Texture2D background_texture = ResourceLoader::Instance().TextureWithName("rink_bg");
-  SimpleItem *background = new SimpleItem(background_texture, screen_point_make(0, 0));
+  Sprite background_sprite(game_engine, "rink_bg");
+  SimpleItem *background = new SimpleItem(background_sprite, game_point_make(0, 0));
   AddEntity(sp<SimpleItem>(background));
 
   // Add rink left and right pieces.
-  Texture2D left_rink_border_texture = ResourceLoader::Instance().TextureWithName("rink_left");
-  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_texture, screen_point_make(0, 0));
+  Sprite left_rink_border_sprite(game_engine, "rink_left");
+  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite, game_point_make(0, 0));
   AddEntity(left_rink_border);
-  Texture2D right_rink_border_texture =
-      ResourceLoader::Instance().TextureWithName("rink_right");
-  ScreenPoint left_rink_border_pos =
-      screen_point_make(SCREEN_WIDTH - right_rink_border_texture.content_size().width, 0);
-  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_texture, left_rink_border_pos);
+  Sprite right_rink_border_sprite(game_engine, "rink_right");
+  GamePoint left_rink_border_pos =
+      game_point_make(SCREEN_WIDTH - right_rink_border_sprite.content_size().width, 0);
+  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite, left_rink_border_pos);
   AddEntity(right_rink_border);
 
-  Texture2D title_texture = ResourceLoader::Instance().TextureWithName("title");
-  SimpleItem *title = new SimpleItem(title_texture, screen_point_make(81, 53));
+  Sprite title_sprite(game_engine, "title");
+  SimpleItem *title = new SimpleItem(title_sprite, game_point_make(81, 53));
   AddEntity(title);
 
-  Texture2D main_menu_texture = ResourceLoader::Instance().TextureWithName("main_menu");
-  ScreenPoint main_menu_position = screen_point_make((SCREEN_WIDTH - main_menu_texture.content_size().width) / 2,
-                                         339);
-  SimpleItem *main_menu = new SimpleItem(main_menu_texture, main_menu_position);
+  Sprite main_menu_sprite(game_engine, "main_menu");
+  GamePoint main_menu_position =
+      game_point_make((SCREEN_WIDTH - main_menu_sprite.content_size().width) / 2, 339);
+  SimpleItem *main_menu = new SimpleItem(main_menu_sprite, main_menu_position);
   AddEntity(main_menu);
 
-  Texture2D start_button_image = ResourceLoader::Instance().TextureWithName("start_button");
-  Texture2D start_button_pressed_image =
-      ResourceLoader::Instance().TextureWithName("start_button_pressed");
+  Sprite start_button_image(game_engine, "start_button");
+  Sprite start_button_pressed_image(game_engine, "start_button_pressed");
 // TODONOW
 //  ScreenPoint start_button_position =
 //      screen_point_make((SCREEN_WIDTH - start_button_image.content_size().width) / 2, 392);
   start_button_.reset(new Button());
-  start_button_->set_normal_texture(start_button_image);
-  start_button_->set_pressed_texture(start_button_pressed_image);
+  start_button_->set_normal_sprite(start_button_image);
+  start_button_->set_pressed_sprite(start_button_pressed_image);
 // TODONOW  start_button_->set_position(start_button_position);
   start_button_->set_delegate(this);
   AddEntity(start_button_);
   
-  Texture2D feedback_button_image =
-      ResourceLoader::Instance().TextureWithName("feedback_button");
-  Texture2D feedback_button_pressed_image =
-      ResourceLoader::Instance().TextureWithName("feedback_button_pressed");
+  Sprite feedback_button_image(game_engine, "feedback_button");
+  Sprite feedback_button_pressed_image(game_engine, "feedback_button_pressed");
   feedback_button_.reset(new Button());
-  feedback_button_->set_normal_texture(feedback_button_image);
-  feedback_button_->set_pressed_texture(feedback_button_pressed_image);
+  feedback_button_->set_normal_sprite(feedback_button_image);
+  feedback_button_->set_pressed_sprite(feedback_button_pressed_image);
 // TODONOW  feedback_button_->set_position(is_iphone ? screen_point_make(440, 926) : screen_point_make(486, 936));
   feedback_button_->set_delegate(this);
   AddEntity(feedback_button_);
 
-  Texture2D story_button_image = ResourceLoader::Instance().TextureWithName("story_button");
-  Texture2D story_button_pressed_image =
-      ResourceLoader::Instance().TextureWithName("story_button_pressed");
+  Sprite story_button_image(game_engine, "story_button");
+  Sprite story_button_pressed_image(game_engine, "story_button_pressed");
   story_button_.reset(new Button());
-  story_button_->set_normal_texture(story_button_image);
-  story_button_->set_pressed_texture(story_button_pressed_image);
+  story_button_->set_normal_sprite(story_button_image);
+  story_button_->set_pressed_sprite(story_button_pressed_image);
 // TODONOW  story_button_->set_position(is_iphone ? screen_point_make(86, 926) : screen_point_make(91, 936));
   story_button_->set_delegate(this);
   AddEntity(story_button_);
   
   if (false) {
-    Texture2D upgrade_button_image =
-        ResourceLoader::Instance().TextureWithName("upgrade_button");
-    Texture2D upgrade_button_pressed_image =
-        ResourceLoader::Instance().TextureWithName("upgrade_button_pressed");
+    Sprite upgrade_button_image(game_engine, "upgrade_button");
+    Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
     upgrade_button_.reset(new Button());
-    upgrade_button_->set_normal_texture(upgrade_button_image);
-    upgrade_button_->set_pressed_texture(upgrade_button_pressed_image);
+    upgrade_button_->set_normal_sprite(upgrade_button_image);
+    upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
 // TODONOW    upgrade_button_->set_position(screen_point_make(91, 936));
     upgrade_button_->set_delegate(this);
     AddEntity(upgrade_button_);
   }
   
   double players_y = is_iphone ? 570 : 511;
-  Texture2D one_player_image = ResourceLoader::Instance().TextureWithName("1_player");
-  Texture2D two_player_image = ResourceLoader::Instance().TextureWithName("2_player");
-  Texture2D one_player_selected_image =
-      ResourceLoader::Instance().TextureWithName("1_player_selected");
-  Texture2D two_player_selected_image =
-      ResourceLoader::Instance().TextureWithName("2_player_selected");
-  ScreenPoint num_players_select_position =
-      screen_point_make(SCREEN_WIDTH / 2 - one_player_image.content_size().width, players_y);
+  Sprite one_player_image(game_engine, "1_player");
+  Sprite two_player_image(game_engine, "2_player");
+  Sprite one_player_selected_image(game_engine, "1_player_selected");
+  Sprite two_player_selected_image(game_engine, "2_player_selected");
+  GamePoint num_players_select_position =
+      game_point_make(SCREEN_WIDTH / 2 - one_player_image.content_size().width, players_y);
   num_players_select_.reset(new MultiSelect());
   num_players_select_->Add(one_player_image, one_player_selected_image, num_players_select_position);
   num_players_select_->Add(two_player_image, two_player_selected_image,
-                           screen_point_make(SCREEN_WIDTH/2, players_y));
+                           game_point_make(SCREEN_WIDTH/2, players_y));
   num_players_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
   AddEntity(num_players_select_);
   
@@ -119,44 +109,40 @@ MainMenuView::MainMenuView(GameEngine &game_engine)
     char pucks_selected_str[15];
     sprintf(pucks_selected_str, "%d_selected", i);
 
-    Texture2D num_pucks_image = ResourceLoader::Instance().TextureWithName(pucks_str);
-    Texture2D num_pucks_selected_image =
-        ResourceLoader::Instance().TextureWithName(pucks_selected_str);
-    ScreenPoint num_pucks_select_position =
-        screen_point_make(i == 1 ? pucks_1_x : pucks_2_x + pucks_x_spread * (i - 1), pucks_y);
+    Sprite num_pucks_image(game_engine, pucks_str);
+    Sprite num_pucks_selected_image(game_engine, pucks_selected_str);
+    GamePoint num_pucks_select_position =
+        game_point_make(i == 1 ? pucks_1_x : pucks_2_x + pucks_x_spread * (i - 1), pucks_y);
     num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_select_position);
   }
   num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
   AddEntity(num_pucks_select_);
   
   if (false) {
-    Texture2D upgrade_for_more_texture =
-        ResourceLoader::Instance().TextureWithName("upgrade_for_more");
-    ScreenPoint upgrade_for_more_position =
-        screen_point_make(pucks_2_x + pucks_x_spread * 4, pucks_y);
+    Sprite upgrade_for_more_image(game_engine, "upgrade_for_more");
+    GamePoint upgrade_for_more_position =
+        game_point_make(pucks_2_x + pucks_x_spread * 4, pucks_y);
     SimpleItem *upgrade_for_more =
-        new SimpleItem(upgrade_for_more_texture, upgrade_for_more_position);
+        new SimpleItem(upgrade_for_more_image, upgrade_for_more_position);
     AddEntity(upgrade_for_more);
   }
   
   
   double difficulty_y = is_iphone ? 839 : 734;
-  Texture2D bad_image = ResourceLoader::Instance().TextureWithName("bad");
-  Texture2D bad_image_selected = ResourceLoader::Instance().TextureWithName("bad_selected");
-  Texture2D good_image = ResourceLoader::Instance().TextureWithName("good");
-  Texture2D good_image_selected = ResourceLoader::Instance().TextureWithName("good_selected");
-  Texture2D excellent_image = ResourceLoader::Instance().TextureWithName("excellent");
-  Texture2D excellent_image_selected =
-      ResourceLoader::Instance().TextureWithName("excellent_selected");
-  Texture2D amazing_image = ResourceLoader::Instance().TextureWithName("amazing");
-  Texture2D amazing_image_selected =
-      ResourceLoader::Instance().TextureWithName("amazing_selected");
+  Sprite bad_image(game_engine, "bad");
+  Sprite bad_image_selected(game_engine, "bad_selected");
+  Sprite good_image(game_engine, "good");
+  Sprite good_image_selected(game_engine, "good_selected");
+  Sprite excellent_image(game_engine, "excellent");
+  Sprite excellent_image_selected(game_engine, "excellent_selected");
+  Sprite amazing_image(game_engine, "amazing");
+  Sprite amazing_image_selected(game_engine, "amazing_selected");
   difficulty_select_.reset(new MultiSelect());
-  difficulty_select_->Add(bad_image, bad_image_selected, screen_point_make(is_iphone ? 38 : 138, difficulty_y));
-  difficulty_select_->Add(good_image, good_image_selected, screen_point_make(is_iphone ? 216 : 266, difficulty_y));
-  difficulty_select_->Add(excellent_image, excellent_image_selected, screen_point_make(is_iphone ? 380 : 384, difficulty_y));
+  difficulty_select_->Add(bad_image, bad_image_selected, game_point_make(is_iphone ? 38 : 138, difficulty_y));
+  difficulty_select_->Add(good_image, good_image_selected, game_point_make(is_iphone ? 216 : 266, difficulty_y));
+  difficulty_select_->Add(excellent_image, excellent_image_selected, game_point_make(is_iphone ? 380 : 384, difficulty_y));
   difficulty_select_->Add(amazing_image, amazing_image_selected,
-                          screen_point_make(is_iphone ? 543 : 502, difficulty_y));
+                          game_point_make(is_iphone ? 543 : 502, difficulty_y));
   if (LocalStore::HasEntryForKey(LS_DIFFICULTY)) {
     difficulty_select_->set_selected_value(LocalStore::IntegerForKey(LS_DIFFICULTY));
   } else {
@@ -165,19 +151,16 @@ MainMenuView::MainMenuView(GameEngine &game_engine)
   AddEntity(difficulty_select_);
   
   if (!is_iphone) {
-    Texture2D small_image = ResourceLoader::Instance().TextureWithName("small");
-    Texture2D small_image_selected =
-        ResourceLoader::Instance().TextureWithName("small_selected");
-    Texture2D medium_image = ResourceLoader::Instance().TextureWithName("medium");
-    Texture2D medium_image_selected =
-        ResourceLoader::Instance().TextureWithName("medium_selected");
-    Texture2D large_image = ResourceLoader::Instance().TextureWithName("large");
-    Texture2D large_image_selected =
-        ResourceLoader::Instance().TextureWithName("large_selected");
+    Sprite small_image(game_engine, "small");
+    Sprite small_image_selected(game_engine, "small_selected");
+    Sprite medium_image(game_engine, "medium");
+    Sprite medium_image_selected(game_engine, "medium_selected");
+    Sprite large_image(game_engine, "large");
+    Sprite large_image_selected(game_engine, "large_selected");
     paddle_size_select_.reset(new MultiSelect());
-    paddle_size_select_->Add(small_image, small_image_selected, screen_point_make(139, 842));
-    paddle_size_select_->Add(medium_image, medium_image_selected, screen_point_make(305, 842));
-    paddle_size_select_->Add(large_image, large_image_selected, screen_point_make(464, 842));
+    paddle_size_select_->Add(small_image, small_image_selected, game_point_make(139, 842));
+    paddle_size_select_->Add(medium_image, medium_image_selected, game_point_make(305, 842));
+    paddle_size_select_->Add(large_image, large_image_selected, game_point_make(464, 842));
     if (LocalStore::HasEntryForKey(LS_PADDLE_SIZE)) {
       paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
     } else {
@@ -250,7 +233,7 @@ void MainMenuView::PressedStart() {
                                      num_pucks_select_->selected_value() + 1,
                                      ComputerAI(difficulty_select_->selected_value()),
                                      paddle_size);
-  game_engine().SetRootView(sp<EngineView>(play_view));
+  game_engine()->SetRootView(sp<EngineView>(play_view));
 }
 
 void MainMenuView::PressedFeedback() {
@@ -282,7 +265,7 @@ void MainMenuView::PressedFeedback() {
 void MainMenuView::PressedStory() {
 //  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
 //  [getGameEngine()->adEngine() removeAd];
-  game_engine().PushView(sp<EngineView>(new StoryView(game_engine())));
+  game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
 }
 
 void MainMenuView::PressedUpgrade() {

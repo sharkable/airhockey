@@ -19,7 +19,7 @@ class ViewEntity;
 
 class EngineView {
  public:
-  EngineView(GameEngine &game_engine);
+  EngineView(sp<GameEngine> game_engine);
 
   virtual void ViewIsShown() {}
   virtual void Update();
@@ -34,12 +34,12 @@ class EngineView {
   void AddEntity(sp<ViewEntity> entity);
   void RemoveEntity(sp<ViewEntity> entity);
   
-  GameEngine &game_engine() { return game_engine_; }
+  sp<GameEngine> game_engine() { return game_engine_; }
 
  protected:
 
  private:
-  GameEngine &game_engine_;
+  sp<GameEngine> game_engine_;
   vector<sp<ViewEntity> > entities_;
 };
 

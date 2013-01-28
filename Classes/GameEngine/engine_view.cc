@@ -11,7 +11,7 @@
 #include "gameengine/game_engine.h"
 #include "gameengine/view_entity.h"
 
-EngineView::EngineView(GameEngine &game_engine) : game_engine_(game_engine) {
+EngineView::EngineView(sp<GameEngine> game_engine) : game_engine_(game_engine) {
 }
 
 void EngineView::Update() {

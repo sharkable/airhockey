@@ -36,7 +36,7 @@ typedef enum {
 
 class PlayView : public EngineView, private ButtonDelegate {
  public:
-  PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
+  PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, ComputerAI difficulty,
            PaddleSize paddle_size);
   
   // EngineView
