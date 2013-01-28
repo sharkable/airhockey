@@ -168,7 +168,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     AddEntity(paddle_size_select_);
   }
 
-  sound_slider_.reset(new SoundSlider(game_point_make(400, 50)));
+  sound_slider_.reset(new SoundSlider(game_engine, game_point_make(400, 50)));
   AddEntity(sound_slider_);
 }
 

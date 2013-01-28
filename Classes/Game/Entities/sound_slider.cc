@@ -14,13 +14,11 @@
 
 #include "soundengine/sound_player.h"
 
-SoundSlider::SoundSlider(GamePoint position) {
-  position_ = position;
-  
-  empty_texture_ = ResourceLoader::Instance().TextureWithName("sound_empty");
-  full_texture_ = ResourceLoader::Instance().TextureWithName("sound_full");
-  thumb_texture_ = ResourceLoader::Instance().TextureWithName("sound_thumb");
-  
+SoundSlider::SoundSlider(sp<GameEngine> game_engine, GamePoint position)
+    : position_(position),
+      empty_sprite_(game_engine, "sound_empty"),
+      full_sprite_(game_engine, "sound_full"),
+      thumb_sprite_(game_engine, "sound_thumb") {
   if (LocalStore::HasEntryForKey(LS_VOLUME)) {
     value_ = LocalStore::DoubleForKey(LS_VOLUME);
   } else {
@@ -30,7 +28,7 @@ SoundSlider::SoundSlider(GamePoint position) {
 }
 
 GamePoint SoundSlider::ThumbPoint() {
-  return game_point_make(position_.x + 19 + (269.0 - thumb_texture_.content_size().width)*value_, position_.y);
+  return game_point_make(position_.x + 19 + (269.0 - thumb_sprite_.content_size().width)*value_, position_.y);
 }
 
 
@@ -40,19 +38,18 @@ void SoundSlider::Update() {
 }
 
 void SoundSlider::Render() {
-// TODONOW
-//  double drawRatio = (269.0 - thumb_texture_.content_size().width)/320.0 * value_ + (19.0 + thumb_texture_.content_size().width/2)/320.0;
-//  full_texture_.DrawAtPointLeftRatio(position_, drawRatio);
-//  empty_texture_.DrawAtPointRightRatio(position_, 1.0 - drawRatio);
-//  thumb_texture_.DrawAtPoint(ThumbPoint());
+  double drawRatio = (269.0 - thumb_sprite_.content_size().width)/320.0 * value_ + (19.0 + thumb_sprite_.content_size().width/2)/320.0;
+  full_sprite_.DrawAtPointLeftRatio(position_, drawRatio);
+  empty_sprite_.DrawAtPointRightRatio(position_, 1.0 - drawRatio);
+  thumb_sprite_.DrawAtPoint(ThumbPoint());
 }
 
 void SoundSlider::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     GamePoint touchP = touches[i].location();
     GamePoint thumbP = ThumbPoint();
-    double thumbWidth = thumb_texture_.content_size().width;
-    double thumbHeight = thumb_texture_.content_size().height;
+    double thumbWidth = thumb_sprite_.content_size().width;
+    double thumbHeight = thumb_sprite_.content_size().height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
           touchP.x < thumbP.x + 2 * thumbWidth &&
           touchP.y < thumbP.y + 2 * thumbHeight) {
@@ -67,12 +64,12 @@ void SoundSlider::TouchesMoved(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       GamePoint touchP = touches[i].location();
-      value_ += (touchP.x - last_touch_position_.x) / (269 - thumb_texture_.content_size().width);
+      value_ += (touchP.x - last_touch_position_.x) / (269 - thumb_sprite_.content_size().width);
       last_touch_position_ = touchP;
       if (last_touch_position_.x < position_.x + 19) {
         last_touch_position_.x = position_.x + 10;
-      } else if (last_touch_position_.x >= position_.x + 19 + (269.0 - thumb_texture_.content_size().width)) {
-        last_touch_position_.x = position_.x + 19 + (269.0 - thumb_texture_.content_size().width) - 1;
+      } else if (last_touch_position_.x >= position_.x + 19 + (269.0 - thumb_sprite_.content_size().width)) {
+        last_touch_position_.x = position_.x + 19 + (269.0 - thumb_sprite_.content_size().width) - 1;
       }
       if (value_ < 0.0) {
         value_ = 0.0;

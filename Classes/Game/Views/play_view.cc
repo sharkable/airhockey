@@ -28,7 +28,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   post_3_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_TOP_Y));
   post_4_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1));
 
-  sound_slider_.reset(new SoundSlider(game_point_make(331, 336)));
+  sound_slider_.reset(new SoundSlider(game_engine, game_point_make(331, 336)));
 
   rink_.reset(new Rink());
   AddEntity(rink_);

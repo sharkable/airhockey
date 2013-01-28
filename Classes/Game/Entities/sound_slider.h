@@ -9,12 +9,12 @@
 #ifndef AIRHOCKEY_GAME_ENTITIES_SOUNDSLIDER_H_
 #define AIRHOCKEY_GAME_ENTITIES_SOUNDSLIDER_H_
 
+#include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
-#include "opengl/Texture2D.h"
 
 class SoundSlider : public ViewEntity {
  public:
-  SoundSlider(GamePoint position);
+  SoundSlider(sp<GameEngine> game_engine, GamePoint position);
 
   GamePoint ThumbPoint();
 
@@ -27,9 +27,9 @@ class SoundSlider : public ViewEntity {
 
  private:
   GamePoint position_;
-  Texture2D empty_texture_;
-  Texture2D full_texture_;
-  Texture2D thumb_texture_;
+  Sprite empty_sprite_;
+  Sprite full_sprite_;
+  Sprite thumb_sprite_;
   double value_;
   void *grabbed_touch_;
   GamePoint last_touch_position_;

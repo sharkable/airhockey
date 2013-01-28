@@ -50,6 +50,14 @@ class Sprite {
     texture_.DrawAtPoint(game_engine_->game_point_to_screen_point(position), alpha, 1, 0, 0);
   }
 
+  void DrawAtPointLeftRatio(GamePoint position, GLfloat left_ratio) {
+    texture_.DrawAtPointLeftRatio(game_engine_->game_point_to_screen_point(position), left_ratio);
+  }
+
+  void DrawAtPointRightRatio(GamePoint position, GLfloat right_ratio) {
+    texture_.DrawAtPointRightRatio(game_engine_->game_point_to_screen_point(position), right_ratio);
+  }
+
  private:
   sp<GameEngine> game_engine_;
   Texture2D texture_;
