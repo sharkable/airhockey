@@ -163,6 +163,8 @@ void RoundThing::Update() {
   }
 }
 
+#include "game/entities/post.h"
+
 void RoundThing::Render() {
   if (active_) {
     sprite_.DrawAtPoint(game_point_make(x_ - sprite_.content_size().width / 2,

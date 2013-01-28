@@ -13,10 +13,11 @@
 #include "game/entities/puck.h"
 #include "game/entities/rink.h"
 
-Post::Post(sp<GameEngine> game_engine, double x, double y) : RoundThing(game_engine, "puck") {
+Post::Post(sp<GameEngine> game_engine, double x, double y) : RoundThing(game_engine) {
   set_x(x);
   set_y(y);
   set_radius(1);
+  set_active(true);
   set_mass(99999999999.99);  
 }
 
