@@ -9,17 +9,17 @@
 #ifndef AIRHOCKEY_GAMEENGINE_TOUCH_H_
 #define AIRHOCKEY_GAMEENGINE_TOUCH_H_
 
-#include "Texture2D.h"
+#include "gameengine/coordinate_types.h"
 
 class Touch {
  public:
-  ScreenPoint location() const { return location_; }
-  void set_location(ScreenPoint location) { location_ = location; }
+  GamePoint location() const { return location_; }
+  void set_location(GamePoint location) { location_ = location; }
   void *identifier() const { return identifier_; }
   void set_identifier(void *identifier) { identifier_ = identifier; }
 
  private:
-  ScreenPoint location_;
+  GamePoint location_;
   void *identifier_;
 };
 

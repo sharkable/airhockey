@@ -14,7 +14,7 @@
 
 #include "soundengine/sound_player.h"
 
-SoundSlider::SoundSlider(ScreenPoint position) {
+SoundSlider::SoundSlider(GamePoint position) {
   position_ = position;
   
   empty_texture_ = ResourceLoader::Instance().TextureWithName("sound_empty");
@@ -29,8 +29,8 @@ SoundSlider::SoundSlider(ScreenPoint position) {
   SoundPlayer::instance()->setGlobalVolume(value_);
 }
 
-ScreenPoint SoundSlider::ThumbPoint() {
-  return screen_point_make(position_.x + 19 + (269.0 - thumb_texture_.content_size().width)*value_, position_.y);
+GamePoint SoundSlider::ThumbPoint() {
+  return game_point_make(position_.x + 19 + (269.0 - thumb_texture_.content_size().width)*value_, position_.y);
 }
 
 
@@ -40,16 +40,17 @@ void SoundSlider::Update() {
 }
 
 void SoundSlider::Render() {
-  double drawRatio = (269.0 - thumb_texture_.content_size().width)/320.0 * value_ + (19.0 + thumb_texture_.content_size().width/2)/320.0;
-  full_texture_.DrawAtPointLeftRatio(position_, drawRatio);
-  empty_texture_.DrawAtPointRightRatio(position_, 1.0 - drawRatio);
-  thumb_texture_.DrawAtPoint(ThumbPoint());
+// TODONOW
+//  double drawRatio = (269.0 - thumb_texture_.content_size().width)/320.0 * value_ + (19.0 + thumb_texture_.content_size().width/2)/320.0;
+//  full_texture_.DrawAtPointLeftRatio(position_, drawRatio);
+//  empty_texture_.DrawAtPointRightRatio(position_, 1.0 - drawRatio);
+//  thumb_texture_.DrawAtPoint(ThumbPoint());
 }
 
 void SoundSlider::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
-    ScreenPoint touchP = touches[i].location();
-    ScreenPoint thumbP = ThumbPoint();
+    GamePoint touchP = touches[i].location();
+    GamePoint thumbP = ThumbPoint();
     double thumbWidth = thumb_texture_.content_size().width;
     double thumbHeight = thumb_texture_.content_size().height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
@@ -65,7 +66,7 @@ void SoundSlider::TouchesBegan(vector<Touch> touches) {
 void SoundSlider::TouchesMoved(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
-      ScreenPoint touchP = touches[i].location();
+      GamePoint touchP = touches[i].location();
       value_ += (touchP.x - last_touch_position_.x) / (269 - thumb_texture_.content_size().width);
       last_touch_position_ = touchP;
       if (last_touch_position_.x < position_.x + 19) {

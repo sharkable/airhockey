@@ -47,13 +47,8 @@ using namespace std;
     Touch converted_touch;
     CGPoint location = [touch locationInView:touch.view];
     ScreenPoint l = screen_point_make(location.x, location.y);
-    converted_touch.set_location(l);
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      ScreenPoint p = converted_touch.location();
-      p.x *= 768.0 / 320.0;
-      p.y = (p.y - (IS_FREE ? 53 : 26)) * (768.0 / 320.0);
-      converted_touch.set_location(p);
-    }
+    GamePoint p = gameEngine_->screen_point_to_game_point(l);
+    converted_touch.set_location(p);
     converted_touch.set_identifier(touch);
     converted_touches.push_back(converted_touch);
   }

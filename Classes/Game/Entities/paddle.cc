@@ -252,7 +252,7 @@ void Paddle::DidBounceOff(ViewEntity *other) {
 }
 
 bool Paddle::ContainsTouch(Touch *touch) {
-  ScreenPoint p = touch->location();
+  GamePoint p = touch->location();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
     return false;
   }

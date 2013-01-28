@@ -50,7 +50,7 @@ void MultiSelect::TouchesBegan(vector<Touch> touches) {
     double y = positions_y_[i];
     GameSize size = normal_sprites_[i].content_size();
     for (int j = 0; j < touches.size(); j++) {
-      ScreenPoint touchPoint = touches[j].location();
+      GamePoint touchPoint = touches[j].location();
       if (touchPoint.x >= x && touchPoint.y >= y && touchPoint.x < x + size.width &&
           touchPoint.y < y + size.height) {
         if (selected_value_ != i) {

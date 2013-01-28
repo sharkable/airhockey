@@ -67,6 +67,9 @@
 #import <string>
 using namespace std;
 
+// TODO this is overreaching... this shouldn't know about the game engine.
+#include "gameengine/coordinate_types.h"
+
 #define kMaxTextureSize   1024
 
 typedef enum {
@@ -75,28 +78,6 @@ typedef enum {
   kTexture2DPixelFormat_RGB565,
   kTexture2DPixelFormat_A8,
 } Texture2DPixelFormat;
-
-struct ScreenSize {
-  double width;
-  double height;
-};
-inline ScreenSize screen_size_make(double width, double height) {
-  ScreenSize size;
-  size.width = width;
-  size.height = height;
-  return size;
-}
-
-struct ScreenPoint {
-  double x;
-  double y;
-};
-inline ScreenPoint screen_point_make(double x, double y) {
-  ScreenPoint point;
-  point.x = x;
-  point.y = y;
-  return point;
-}
 
 /*
  This class allows to easily create OpenGL 2D textures from images, text or raw data.

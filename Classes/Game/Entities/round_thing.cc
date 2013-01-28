@@ -195,7 +195,7 @@ void RoundThing::TouchesMoved(vector<Touch> touches) {
     }
   }
   if (grabbed_ && correctTouch != NULL) {
-    ScreenPoint p = correctTouch->location();
+    GamePoint p = correctTouch->location();
     x_ = p.x;
     y_ = p.y;
   }
