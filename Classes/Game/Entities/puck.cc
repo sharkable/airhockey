@@ -99,11 +99,11 @@ void Puck::Render() {
 // RoundThing
 
 void Puck::DidBounceOff(ViewEntity *other) {
-  if (typeid(other) == typeid(Puck)) {
+  if (typeid(*other) == typeid(Puck)) {
     SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
-  } else if (typeid(other) == typeid(Paddle)) {
+  } else if (typeid(*other) == typeid(Paddle)) {
     SoundPlayer::instance()->playSound(kSoundPaddleHit);
-  } else if (typeid(other) == typeid(Post) || typeid(other) == typeid(Rink)) {
+  } else if (typeid(*other) == typeid(Post) || typeid(*other) == typeid(Rink)) {
     SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }
 }

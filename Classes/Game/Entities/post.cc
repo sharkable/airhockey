@@ -25,7 +25,7 @@ Post::Post(sp<GameEngine> game_engine, double x, double y) : RoundThing(game_eng
 // RoundThing
 
 void Post::DidBounceOff(ViewEntity *other) {
-  if (typeid(other) == typeid(Puck)) {
+  if (typeid(*other) == typeid(Puck)) {
     SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }
 }
