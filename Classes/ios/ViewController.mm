@@ -12,6 +12,7 @@
 #import "game_engine.h"
 #import "GameTimer.h"
 #import "GameTouchWindow.h"
+#import "ios/AdEngineIOS.h"
 #import "splash_view.h"
 #import "texture2d.h"
 
@@ -36,6 +37,7 @@
     [gameTouchWindow_ makeKeyAndVisible];
 
     game_engine_ = new GameEngine();
+    game_engine_->set_ad_engine(sp<AdEngine>(new AdEngineIOS(self)));
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
       game_engine_->SetScreenSize(screen_size_make(320, 480), game_size_make(768, 1152));
     } else {

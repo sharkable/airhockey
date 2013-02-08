@@ -1,22 +1,20 @@
 //
-//  AdEngine.h
+//  ad_engine.h
 //  AirHockey
 //
 //  Created by Jonathan Sharkey on 2/25/12.
 //  Copyright (c) 2012 Sharkable. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef AIRHOCKEY_GAMEENGINE_ADENGINE_H_
+#define AIRHOCKEY_GAMEENGINE_ADENGINE_H_
 
-#include "Texture2D.h"
+struct ScreenPoint;
 
-class GameEngine;
+class AdEngine {
+ public:
+  virtual void SetAdAtPoint(ScreenPoint point) = 0;
+  virtual void RemoveAd() = 0;
+};
 
-@interface AdEngine : NSObject
-
-@property(nonatomic, assign) GameEngine *gameEngine;
-
-- (void)addAdAtPoint:(ScreenPoint)point;
-- (void)removeAd;
-
-@end
+#endif

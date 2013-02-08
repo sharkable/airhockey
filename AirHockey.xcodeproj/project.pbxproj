@@ -76,8 +76,8 @@
 		FE3F442C16C445CD00E8BEDF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442A16C445CD00E8BEDF /* StoreKit.framework */; };
 		FE3F442D16C445E000E8BEDF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442916C445CD00E8BEDF /* AdSupport.framework */; };
 		FE3F442E16C445E000E8BEDF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442A16C445CD00E8BEDF /* StoreKit.framework */; };
-		FE3F443416C4859000E8BEDF /* ad_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE3F443316C4858F00E8BEDF /* ad_engine.cc */; };
-		FE3F443516C4859000E8BEDF /* ad_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE3F443316C4858F00E8BEDF /* ad_engine.cc */; };
+		FE3F444116C493C600E8BEDF /* AdEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE3F444016C493C600E8BEDF /* AdEngineIOS.mm */; };
+		FE3F444216C493C600E8BEDF /* AdEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE3F444016C493C600E8BEDF /* AdEngineIOS.mm */; };
 		FE789BC614F97B34007FCBC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FE789BC814F97B34007FCBC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -520,7 +520,8 @@
 		FE3F442916C445CD00E8BEDF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FE3F442A16C445CD00E8BEDF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		FE3F443016C4857A00E8BEDF /* ad_engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ad_engine.h; sourceTree = "<group>"; };
-		FE3F443316C4858F00E8BEDF /* ad_engine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ad_engine.cc; sourceTree = "<group>"; };
+		FE3F443C16C4939600E8BEDF /* AdEngineIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngineIOS.h; sourceTree = "<group>"; };
+		FE3F444016C493C600E8BEDF /* AdEngineIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngineIOS.mm; sourceTree = "<group>"; };
 		FE789BC114F97B34007FCBC5 /* AirHockey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE789BC514F97B34007FCBC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FE789BC714F97B34007FCBC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -789,6 +790,8 @@
 			isa = PBXGroup;
 			children = (
 				FE8DE4A416A5E396000C5941 /* SoundEngine */,
+				FE3F443C16C4939600E8BEDF /* AdEngineIOS.h */,
+				FE3F444016C493C600E8BEDF /* AdEngineIOS.mm */,
 				D484896915387DBC006CE9AD /* AirHockeyAppDelegate.h */,
 				D484896A15387DBC006CE9AD /* AirHockeyAppDelegate.mm */,
 				D484896B15387DBC006CE9AD /* EAGLView.h */,
@@ -845,7 +848,6 @@
 			isa = PBXGroup;
 			children = (
 				D4B1F4E11515291500620EF2 /* Entities */,
-				FE3F443316C4858F00E8BEDF /* ad_engine.cc */,
 				FE3F443016C4857A00E8BEDF /* ad_engine.h */,
 				FE889B9016B63EF6002CA81E /* coordinate_types.h */,
 				FE8DE4BF16A77795000C5941 /* engine_view.cc */,
@@ -1894,7 +1896,7 @@
 				FE8DE4E816A78EA6000C5941 /* play_view.cc in Sources */,
 				FE8DE4EA16A78EA6000C5941 /* splash_view.cc in Sources */,
 				FE8DE4EC16A78EA6000C5941 /* story_view.cc in Sources */,
-				FE3F443416C4859000E8BEDF /* ad_engine.cc in Sources */,
+				FE3F444116C493C600E8BEDF /* AdEngineIOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1935,7 +1937,7 @@
 				FE8DE4E916A78EA6000C5941 /* play_view.cc in Sources */,
 				FE8DE4EB16A78EA6000C5941 /* splash_view.cc in Sources */,
 				FE8DE4ED16A78EA6000C5941 /* story_view.cc in Sources */,
-				FE3F443516C4859000E8BEDF /* ad_engine.cc in Sources */,
+				FE3F444216C493C600E8BEDF /* AdEngineIOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2006,8 +2008,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
 					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -2032,8 +2032,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
 					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -2058,8 +2056,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
 					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -2080,8 +2076,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
 					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";

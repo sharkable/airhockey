@@ -11,6 +11,7 @@
 #import "const.h"
 #import "game/views/play_view.h"
 #import "game/views/story_view.h"
+#import "gameengine/ad_engine.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
 #import "gameengine/resource_loader.h"
@@ -178,7 +179,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 void MainMenuView::ViewIsShown() {
   if (IS_FREE) {
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-//      [getGameEngine()->adEngine() addAdAtPoint:screen_point_make(0, 0)];  
+    game_engine()->ad_engine()->SetAdAtPoint(kScreenPointZero);
 //    } else {
 //      [getGameEngine()->adEngine() addAdAtPoint:screen_point_make(45, 40)];  
 //    }
