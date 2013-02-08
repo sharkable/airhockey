@@ -53,8 +53,6 @@
 		D4968A00154E246D00DB64DF /* texture2d.cc in Sources */ = {isa = PBXBuildFile; fileRef = D49689FD154E246D00DB64DF /* texture2d.cc */; };
 		D4B1F50E1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
 		D4B1F50F1515291500620EF2 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4C11515291500620EF2 /* const.mm */; };
-		D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
-		D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B1F4DE1515291500620EF2 /* AdEngine.mm */; };
 		D4FE0272153B85E0001DB2C0 /* LocalStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4FE0271153B85E0001DB2C0 /* LocalStore.mm */; };
 		D4FE0273153B85E0001DB2C0 /* LocalStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4FE0271153B85E0001DB2C0 /* LocalStore.mm */; };
 		FE3CF94314F9807E0063CCA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94214F9807E0063CCA5 /* QuartzCore.framework */; };
@@ -78,6 +76,8 @@
 		FE3F442C16C445CD00E8BEDF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442A16C445CD00E8BEDF /* StoreKit.framework */; };
 		FE3F442D16C445E000E8BEDF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442916C445CD00E8BEDF /* AdSupport.framework */; };
 		FE3F442E16C445E000E8BEDF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442A16C445CD00E8BEDF /* StoreKit.framework */; };
+		FE3F443416C4859000E8BEDF /* ad_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE3F443316C4858F00E8BEDF /* ad_engine.cc */; };
+		FE3F443516C4859000E8BEDF /* ad_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE3F443316C4858F00E8BEDF /* ad_engine.cc */; };
 		FE789BC614F97B34007FCBC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FE789BC814F97B34007FCBC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -497,8 +497,6 @@
 		D49689FE154E246D00DB64DF /* texture2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture2d.h; sourceTree = "<group>"; };
 		D4B1F4C01515291500620EF2 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		D4B1F4C11515291500620EF2 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
-		D4B1F4DD1515291500620EF2 /* AdEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngine.h; sourceTree = "<group>"; };
-		D4B1F4DE1515291500620EF2 /* AdEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngine.mm; sourceTree = "<group>"; };
 		D4FE0271153B85E0001DB2C0 /* LocalStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalStore.mm; sourceTree = "<group>"; };
 		D4FE0274153B85F8001DB2C0 /* local_store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_store.h; sourceTree = "<group>"; };
 		FE3CF94214F9807E0063CCA5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -521,6 +519,8 @@
 		FE3F43BE16C440B400E8BEDF /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		FE3F442916C445CD00E8BEDF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FE3F442A16C445CD00E8BEDF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		FE3F443016C4857A00E8BEDF /* ad_engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ad_engine.h; sourceTree = "<group>"; };
+		FE3F443316C4858F00E8BEDF /* ad_engine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ad_engine.cc; sourceTree = "<group>"; };
 		FE789BC114F97B34007FCBC5 /* AirHockey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE789BC514F97B34007FCBC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FE789BC714F97B34007FCBC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -845,18 +845,18 @@
 			isa = PBXGroup;
 			children = (
 				D4B1F4E11515291500620EF2 /* Entities */,
+				FE3F443316C4858F00E8BEDF /* ad_engine.cc */,
+				FE3F443016C4857A00E8BEDF /* ad_engine.h */,
 				FE889B9016B63EF6002CA81E /* coordinate_types.h */,
-				FE8DE4C016A77797000C5941 /* engine_view.h */,
 				FE8DE4BF16A77795000C5941 /* engine_view.cc */,
-				D484899C1538836C006CE9AD /* game_engine.h */,
+				FE8DE4C016A77797000C5941 /* engine_view.h */,
 				D484899B1538836C006CE9AD /* game_engine.cc */,
+				D484899C1538836C006CE9AD /* game_engine.h */,
 				D4FE0274153B85F8001DB2C0 /* local_store.h */,
-				D49689FA154DFE4C00DB64DF /* resource_loader.h */,
 				D49689F9154DFE4B00DB64DF /* resource_loader.cc */,
+				D49689FA154DFE4C00DB64DF /* resource_loader.h */,
 				FE889B8E16B5E58F002CA81E /* sprite.h */,
 				D48489A11538A451006CE9AD /* touch.h */,
-				D4B1F4DD1515291500620EF2 /* AdEngine.h */,
-				D4B1F4DE1515291500620EF2 /* AdEngine.mm */,
 				FE8DE4BE16A775F7000C5941 /* view_entity.h */,
 			);
 			path = GameEngine;
@@ -1862,7 +1862,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4B1F50E1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5261515291500620EF2 /* AdEngine.mm in Sources */,
 				D484897B15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897D15387DBC006CE9AD /* EAGLView.mm in Sources */,
 				D484897F15387DBC006CE9AD /* ES1Renderer.mm in Sources */,
@@ -1895,6 +1894,7 @@
 				FE8DE4E816A78EA6000C5941 /* play_view.cc in Sources */,
 				FE8DE4EA16A78EA6000C5941 /* splash_view.cc in Sources */,
 				FE8DE4EC16A78EA6000C5941 /* story_view.cc in Sources */,
+				FE3F443416C4859000E8BEDF /* ad_engine.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1903,7 +1903,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4B1F50F1515291500620EF2 /* const.mm in Sources */,
-				D4B1F5271515291500620EF2 /* AdEngine.mm in Sources */,
 				D484897C15387DBC006CE9AD /* AirHockeyAppDelegate.mm in Sources */,
 				D484897E15387DBC006CE9AD /* EAGLView.mm in Sources */,
 				D484898015387DBC006CE9AD /* ES1Renderer.mm in Sources */,
@@ -1936,6 +1935,7 @@
 				FE8DE4E916A78EA6000C5941 /* play_view.cc in Sources */,
 				FE8DE4EB16A78EA6000C5941 /* splash_view.cc in Sources */,
 				FE8DE4ED16A78EA6000C5941 /* story_view.cc in Sources */,
+				FE3F443516C4859000E8BEDF /* ad_engine.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
