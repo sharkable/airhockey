@@ -40,6 +40,7 @@
     game_engine_->set_ad_engine(sp<AdEngine>(new AdEngineIOS(self)));
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
       game_engine_->SetScreenSize(screen_size_make(320, 480), game_size_make(768, 1152));
+      game_engine_->SetScreenOffset(screen_point_make(0, 50));
     } else {
       game_engine_->SetScreenSize(screen_size_make(768, 1024), game_size_make(768, 1024));
     }
