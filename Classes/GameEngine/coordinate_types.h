@@ -35,6 +35,8 @@ inline GamePoint game_point_make(double x, double y) {
   return point;
 }
 
+static const GamePoint kGamePointZero = game_point_make(0, 0);
+
 
 // "Screen" - coordinates in pixel space.
 
@@ -61,5 +63,7 @@ inline ScreenPoint screen_point_make(double x, double y) {
   point.y = y;
   return point;
 }
+
+static const ScreenPoint kScreenPointZero = screen_point_make(0, 0);
 
 #endif
