@@ -13,13 +13,13 @@
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
-Rink::Rink() {
-  texture_ = ResourceLoader::Instance().TextureWithName("rink_bg");
-  renderPoint_ = screen_point_make(0, 0);
+Rink::Rink(sp<GameEngine> game_engine)
+    : sprite_(game_engine, "rink_bg"),
+      render_point_(kGamePointZero) {
 }
 
 Rink::~Rink() {
-  ResourceLoader::Instance().ReleaseResource(texture_);
+  ResourceLoader::Instance().ReleaseResource(sprite_.texture());
 }
 
 void Rink::BounceOff(RoundThing *thing) {
@@ -129,5 +129,5 @@ void Rink::Update() {
 }
 
 void Rink::Render() {
-  texture_.DrawAtPoint(renderPoint_);
+  sprite_.DrawAtPoint(render_point_);
 }

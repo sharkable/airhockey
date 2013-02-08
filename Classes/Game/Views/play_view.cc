@@ -30,7 +30,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
 
   sound_slider_.reset(new SoundSlider(game_engine, game_point_make(331, 336)));
 
-  rink_.reset(new Rink());
+  rink_.reset(new Rink(game_engine));
   AddEntity(rink_);
   
   vector<Sprite> scoreSprites;
