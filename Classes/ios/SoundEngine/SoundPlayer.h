@@ -35,7 +35,6 @@ class SoundPlayerImpl : public SoundPlayer {
   void setSoundEffectsOn(bool on);
 
  private:
-  pthread_t main_thread_;
   NSMutableArray* sounds_;
   AVAudio* song_;
   bool musicOn_;

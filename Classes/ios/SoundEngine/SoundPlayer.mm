@@ -18,7 +18,7 @@ static SoundPlayerImpl *soundInstance_ = NULL;
 
 static const bool thisAppDoesDucking = NO; // if this gets changed to yes then it's all set up to duck the sound when iTunes is playing with Sound effects ON
 
-@interface SoundHelpers
+@interface SoundHelpers : NSObject
 + (NSString *)getAudioServicesError:(OSStatus)err;
 @end
 
@@ -160,7 +160,6 @@ void *loadSounds(void *delegate) {
 }
 
 void SoundPlayerImpl::initializeWithDelegate(SoundInitializationDelegate *delegate) {
-  main_thread_ = pthread_self();
   pthread_t thread;
   pthread_create(&thread, NULL, loadSounds, delegate);
 }
