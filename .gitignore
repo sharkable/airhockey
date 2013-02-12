@@ -1,7 +1,8 @@
-AirHockey.xcodeproj/*.mode1v3
+*.mode1v3
 
-AirHockey.xcodeproj/*.pbxuser
+*.pbxuser
 
-AirHockey.xcodeproj/xcuserdata/*
+xcuserdata*
 
-AirHockey.xcodeproj/project.xcworkspace/*
+project.xcworkspace*
+
