@@ -13,7 +13,7 @@
 #import "gameengine/entities/button.h"
 #import "gameengine/entities/multi_select.h"
 
-#import "game/entities/sound_slider.h"
+#import "airhockey/entities/sound_slider.h"
 
 class MainMenuView : public EngineView, private ButtonDelegate {
  public:

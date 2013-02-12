@@ -6,12 +6,12 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/entities/round_thing.h"
+#include "airhockey/entities/round_thing.h"
 
 #include <cmath>
 
-#include "game/entities/paddle.h"
-#include "game/entities/puck.h"
+#include "airhockey/entities/paddle.h"
+#include "airhockey/entities/puck.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
@@ -166,8 +166,6 @@ void RoundThing::Update() {
     old_y_ = y_;
   }
 }
-
-#include "game/entities/post.h"
 
 void RoundThing::Render() {
   if (active_) {

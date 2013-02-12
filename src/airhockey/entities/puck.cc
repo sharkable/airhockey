@@ -16,10 +16,10 @@ using namespace std;
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
-#include "game/entities/paddle.h"
-#include "game/entities/post.h"
-#include "game/entities/puck.h"
-#include "game/entities/rink.h"
+#include "airhockey/entities/paddle.h"
+#include "airhockey/entities/post.h"
+#include "airhockey/entities/puck.h"
+#include "airhockey/entities/rink.h"
 
 Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
   radius_ = PUCK_RADIUS;

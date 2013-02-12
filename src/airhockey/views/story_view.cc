@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/views/story_view.h"
+#include "airhockey/views/story_view.h"
 
 #include "gameengine/game_engine.h"
 

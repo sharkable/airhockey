@@ -6,10 +6,10 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/views/play_view.h"
+#include "airhockey/views/play_view.h"
 
-#include "game/entities/puck.h"
-#include "game/views/main_menu_view.h"
+#include "airhockey/entities/puck.h"
+#include "airhockey/views/main_menu_view.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"

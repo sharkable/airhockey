@@ -9,7 +9,7 @@
 #ifndef AIRHOCKEY_GAME_ENTITIES_POST_H_
 #define AIRHOCKEY_GAME_ENTITIES_POST_H_
 
-#include "game/entities/round_thing.h"
+#include "airhockey/entities/round_thing.h"
 
 class Post : public RoundThing {
  public:

@@ -6,11 +6,11 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/entities/paddle.h"
+#include "airhockey/entities/paddle.h"
 
 #include <cmath>
 
-#include "game/entities/puck.h"
+#include "airhockey/entities/puck.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"

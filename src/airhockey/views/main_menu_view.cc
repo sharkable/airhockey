@@ -6,11 +6,11 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "game/views/main_menu_view.h"
+#import "airhockey/views/main_menu_view.h"
 
 #import "const.h"
-#import "game/views/play_view.h"
-#import "game/views/story_view.h"
+#import "airhockey/views/play_view.h"
+#import "airhockey/views/story_view.h"
 #import "gameengine/ad_engine.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"

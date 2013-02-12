@@ -6,12 +6,12 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#include "game/entities/post.h"
+#include "airhockey/entities/post.h"
 
 #include "soundengine/sound_player.h"
 
-#include "game/entities/puck.h"
-#include "game/entities/rink.h"
+#include "airhockey/entities/puck.h"
+#include "airhockey/entities/rink.h"
 
 Post::Post(sp<GameEngine> game_engine, double x, double y) : RoundThing(game_engine) {
   set_x(x);
