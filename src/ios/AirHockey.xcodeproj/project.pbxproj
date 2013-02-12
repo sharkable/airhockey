@@ -2008,6 +2008,10 @@
 					..,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					../../gameengine/src/ios/thirdparty/FlurryAnalytics,
+					"../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2031,6 +2035,10 @@
 					..,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					../../gameengine/src/ios/thirdparty/FlurryAnalytics,
+					"../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1",
+				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2050,14 +2058,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../resources/PaidResources/AirHockey-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "$(inherited)";
@@ -2077,14 +2078,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../resources/PaidResources/AirHockey-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "$(inherited)";
@@ -2104,14 +2098,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../resources/FreeResources/AirHockeyFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = AirHockeyFree;
 				WRAPPER_EXTENSION = app;
@@ -2127,14 +2114,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../resources/FreeResources/AirHockeyFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/ThirdParty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/ThirdParty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/FlurryAnalytics\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
-					"\"$(SRCROOT)/../../gameengine/src/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = AirHockeyFree;
 				WRAPPER_EXTENSION = app;
