@@ -673,7 +673,6 @@
 		FE28FAF816C9C95C00D3BBFB /* IconPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconPad.png; sourceTree = "<group>"; };
 		FE28FAFB16C9C95C00D3BBFB /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		FE28FAFE16C9C95C00D3BBFB /* title_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_iphone.png; sourceTree = "<group>"; };
-		FE28FB1116C9C95C00D3BBFB /* AirHockey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AirHockey.xcodeproj; sourceTree = "<group>"; };
 		FE28FB1416C9C95C00D3BBFB /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = "<group>"; };
 		FE28FB1516C9C95C00D3BBFB /* AirHockeyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockeyAppDelegate.h; sourceTree = "<group>"; };
 		FE28FB1616C9C95C00D3BBFB /* AirHockeyAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AirHockeyAppDelegate.mm; sourceTree = "<group>"; };
@@ -1332,7 +1331,6 @@
 		FE28FB1016C9C95C00D3BBFB /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				FE28FB1116C9C95C00D3BBFB /* AirHockey.xcodeproj */,
 				FE28FB1416C9C95C00D3BBFB /* AirHockey_Prefix.pch */,
 				FE28FB1516C9C95C00D3BBFB /* AirHockeyAppDelegate.h */,
 				FE28FB1616C9C95C00D3BBFB /* AirHockeyAppDelegate.mm */,
@@ -1341,11 +1339,6 @@
 				FE28FB1916C9C95C00D3BBFB /* ViewController.mm */,
 			);
 			path = ios;
-			sourceTree = "<group>";
-		};
-		FE28FB1216C9C95C00D3BBFB /* Products */ = {
-			isa = PBXGroup;
-			name = Products;
 			sourceTree = "<group>";
 		};
 		FE413FA916C9CCBF001BF838 /* gameengine */ = {
@@ -1524,12 +1517,6 @@
 			mainGroup = FE789BB614F97B34007FCBC5;
 			productRefGroup = FE789BC214F97B34007FCBC5 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = FE28FB1216C9C95C00D3BBFB /* Products */;
-					ProjectRef = FE28FB1116C9C95C00D3BBFB /* AirHockey.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				FE789BC014F97B34007FCBC5 /* AirHockey */,
