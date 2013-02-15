@@ -6,13 +6,15 @@
 //  Copyright Sharkable 2010. All rights reserved.
 //
 
-#import "AirHockeyAppDelegate.h"
-#import "EAGLView.h"
-#import "FlurryAnalytics.h"
-#import "game_engine.h"
-#import "sound_player.h"
-#import "splash_view.h"
-#import "ViewController.h"
+#import "ios/AirHockeyAppDelegate.h"
+
+#import "gameengine/game_engine.h"
+#import "ios/thirdparty/FlurryAnalytics/FlurryAnalytics.h"
+#import "ios/ViewController.h"
+#import "ios/EAGLView.h"
+#import "soundengine/sound_player.h"
+
+#import "airhockey/views/splash_view.h"
 
 @interface AirHockeyAppDelegate ()
 - (void)initAudio:(SoundInitializationDelegate *)delegate;
@@ -50,8 +52,17 @@
   } else {
     [FlurryAnalytics startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
   }
-  
-  viewController_ = [[ViewController alloc] init];
+
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1152)];
+    viewController_.gameEngine->SetScreenOffset(screen_point_make(0, 50));
+  } else {
+    viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1024)];
+  }
+
+  sp<EngineView> rootView =
+      sp<EngineView>(new SplashView(sp<GameEngine>(viewController_.gameEngine)));
+  viewController_.gameEngine->PushView(rootView);
   
   return YES;
 }
@@ -62,7 +73,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [viewController_ start];
-  viewController_.game_engine->ClearTouches();
+  viewController_.gameEngine->ClearTouches();
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

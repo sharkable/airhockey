@@ -383,8 +383,6 @@
 		FE28FC9616C9C95C00D3BBFB /* AirHockeyAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE28FB1616C9C95C00D3BBFB /* AirHockeyAppDelegate.mm */; };
 		FE28FC9716C9C95C00D3BBFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FE28FB1716C9C95C00D3BBFB /* main.m */; };
 		FE28FC9816C9C95C00D3BBFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FE28FB1716C9C95C00D3BBFB /* main.m */; };
-		FE28FC9916C9C95C00D3BBFB /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE28FB1916C9C95C00D3BBFB /* ViewController.mm */; };
-		FE28FC9A16C9C95C00D3BBFB /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE28FB1916C9C95C00D3BBFB /* ViewController.mm */; };
 		FE3CF94314F9807E0063CCA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94214F9807E0063CCA5 /* QuartzCore.framework */; };
 		FE3CF94514F980A40063CCA5 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94414F980A40063CCA5 /* OpenAL.framework */; };
 		FE3CF94714F980AC0063CCA5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3CF94614F980AC0063CCA5 /* AVFoundation.framework */; };
@@ -450,6 +448,8 @@
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FEA8E5C714F97CB00084E117 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FEA8E5C814F97CB00084E117 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FED7989316CDB48400EF724B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FED7989216CDB48400EF724B /* ViewController.mm */; };
+		FED7989416CDB52800EF724B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FED7989216CDB48400EF724B /* ViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -677,8 +677,6 @@
 		FE28FB1516C9C95C00D3BBFB /* AirHockeyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockeyAppDelegate.h; sourceTree = "<group>"; };
 		FE28FB1616C9C95C00D3BBFB /* AirHockeyAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AirHockeyAppDelegate.mm; sourceTree = "<group>"; };
 		FE28FB1716C9C95C00D3BBFB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FE28FB1816C9C95C00D3BBFB /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FE28FB1916C9C95C00D3BBFB /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		FE3CF94214F9807E0063CCA5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FE3CF94414F980A40063CCA5 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		FE3CF94614F980AC0063CCA5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -737,6 +735,8 @@
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FED7989116CDB48400EF724B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FED7989216CDB48400EF724B /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -832,6 +832,8 @@
 				FE28F91E16C9C83600D3BBFB /* ResourceLoader.mm */,
 				FE28F99116C9C83600D3BBFB /* TypeUtil.h */,
 				FE28F99216C9C83600D3BBFB /* TypeUtil.mm */,
+				FED7989116CDB48400EF724B /* ViewController.h */,
+				FED7989216CDB48400EF724B /* ViewController.mm */,
 			);
 			name = ios;
 			path = ../../gameengine/src/ios;
@@ -1335,8 +1337,6 @@
 				FE28FB1516C9C95C00D3BBFB /* AirHockeyAppDelegate.h */,
 				FE28FB1616C9C95C00D3BBFB /* AirHockeyAppDelegate.mm */,
 				FE28FB1716C9C95C00D3BBFB /* main.m */,
-				FE28FB1816C9C95C00D3BBFB /* ViewController.h */,
-				FE28FB1916C9C95C00D3BBFB /* ViewController.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -1903,7 +1903,6 @@
 				FE28FA2A16C9C83700D3BBFB /* texture2d.cc in Sources */,
 				FE28FC9516C9C95C00D3BBFB /* AirHockeyAppDelegate.mm in Sources */,
 				FE28FC9716C9C95C00D3BBFB /* main.m in Sources */,
-				FE28FC9916C9C95C00D3BBFB /* ViewController.mm in Sources */,
 				FE413FB716C9CCBF001BF838 /* engine_view.cc in Sources */,
 				FE413FB916C9CCBF001BF838 /* game_engine.cc in Sources */,
 				FE413FBB16C9CCBF001BF838 /* mt19937ar.c in Sources */,
@@ -1922,6 +1921,7 @@
 				FE413FF816C9CD9E001BF838 /* button.cc in Sources */,
 				FE413FFA16C9CD9E001BF838 /* multi_select.cc in Sources */,
 				FE413FFC16C9CD9E001BF838 /* simple_item.cc in Sources */,
+				FED7989316CDB48400EF724B /* ViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1945,7 +1945,6 @@
 				FE28FA2B16C9C83700D3BBFB /* texture2d.cc in Sources */,
 				FE28FC9616C9C95C00D3BBFB /* AirHockeyAppDelegate.mm in Sources */,
 				FE28FC9816C9C95C00D3BBFB /* main.m in Sources */,
-				FE28FC9A16C9C95C00D3BBFB /* ViewController.mm in Sources */,
 				FE413FB816C9CCBF001BF838 /* engine_view.cc in Sources */,
 				FE413FBA16C9CCBF001BF838 /* game_engine.cc in Sources */,
 				FE413FBC16C9CCBF001BF838 /* mt19937ar.c in Sources */,
@@ -1964,6 +1963,7 @@
 				FE413FF916C9CD9E001BF838 /* button.cc in Sources */,
 				FE413FFB16C9CD9E001BF838 /* multi_select.cc in Sources */,
 				FE413FFD16C9CD9E001BF838 /* simple_item.cc in Sources */,
+				FED7989416CDB52800EF724B /* ViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
