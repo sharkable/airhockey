@@ -9,7 +9,7 @@
 #import "ios/AirHockeyAppDelegate.h"
 
 #import "gameengine/game_engine.h"
-#import "ios/thirdparty/FlurryAnalytics/FlurryAnalytics.h"
+#import "ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry/Flurry.h"
 #import "ios/ViewController.h"
 #import "ios/EAGLView.h"
 #import "soundengine/sound_player.h"
@@ -46,11 +46,11 @@
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-  [FlurryAnalytics setAppVersion:appVersion];
+  [Flurry setAppVersion:appVersion];
   if (IS_FREE) {
-    [FlurryAnalytics startSession:@"BGGPH5B2THWFSJHXEKRH"];
+    [Flurry startSession:@"BGGPH5B2THWFSJHXEKRH"];
   } else {
-    [FlurryAnalytics startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
+    [Flurry startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
   }
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
