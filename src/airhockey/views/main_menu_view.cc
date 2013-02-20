@@ -35,7 +35,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   AddEntity(right_rink_border);
 
   Sprite title_sprite(game_engine, "title");
-  SimpleItem *title = new SimpleItem(title_sprite, game_point_make(81, 53));
+  SimpleItem *title = new SimpleItem(title_sprite, game_engine->position("title"));
   AddEntity(title);
 
   Sprite main_menu_sprite(game_engine, "main_menu");
