@@ -441,6 +441,12 @@
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FE789BCC14F97B34007FCBC5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FE789BCE14F97B34007FCBC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FEA5DAB016D43B360009487C /* positions.xml in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DAAF16D43B360009487C /* positions.xml */; };
+		FEA5DAB116D43B360009487C /* positions.xml in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DAAF16D43B360009487C /* positions.xml */; };
+		FEA5DAD716D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
+		FEA5DAD816D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
+		FEA5DB7616D441B50009487C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DB5A16D441B50009487C /* tinyxml2.cpp */; };
+		FEA5DB7716D441B50009487C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DB5A16D441B50009487C /* tinyxml2.cpp */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -732,6 +738,11 @@
 		FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FEA5DAAF16D43B360009487C /* positions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = positions.xml; sourceTree = "<group>"; };
+		FEA5DAD516D43DAC0009487C /* positions.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = positions.cc; sourceTree = "<group>"; };
+		FEA5DAD616D43DAC0009487C /* positions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = positions.h; sourceTree = "<group>"; };
+		FEA5DB5A16D441B50009487C /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml2.cpp; sourceTree = "<group>"; };
+		FEA5DB5B16D441B50009487C /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml2.h; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FED7989116CDB48400EF724B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FED7989216CDB48400EF724B /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
@@ -918,9 +929,10 @@
 			children = (
 				FE28FA3316C9C95C00D3BBFB /* iPadImages */,
 				FE28FA8816C9C95C00D3BBFB /* iPhoneImages */,
+				FEA5DAAE16D43B360009487C /* positions */,
+				FE28FADF16C9C95C00D3BBFB /* Sounds */,
 				FE28FADD16C9C95C00D3BBFB /* LaunchImage.png */,
 				FE28FADE16C9C95C00D3BBFB /* LaunchImagePad.png */,
-				FE28FADF16C9C95C00D3BBFB /* Sounds */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1336,6 +1348,7 @@
 			isa = PBXGroup;
 			children = (
 				FE413FF116C9CD9E001BF838 /* entities */,
+				FEA5DB4716D441B50009487C /* thirdparty */,
 				FE413FAA16C9CCBF001BF838 /* ad_engine.h */,
 				FE413FAB16C9CCBF001BF838 /* coordinate_types.h */,
 				FE413FAC16C9CCBF001BF838 /* engine_view.cc */,
@@ -1344,6 +1357,8 @@
 				FE413FAF16C9CCBF001BF838 /* game_engine.h */,
 				FE413FB016C9CCBF001BF838 /* local_store.h */,
 				FE413FB116C9CCBF001BF838 /* mt19937ar.c */,
+				FEA5DAD516D43DAC0009487C /* positions.cc */,
+				FEA5DAD616D43DAC0009487C /* positions.h */,
 				FE413FB216C9CCBF001BF838 /* resource_loader.cc */,
 				FE413FB316C9CCBF001BF838 /* resource_loader.h */,
 				FE413FB416C9CCBF001BF838 /* sprite.h */,
@@ -1451,6 +1466,32 @@
 				FE789BC514F97B34007FCBC5 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FEA5DAAE16D43B360009487C /* positions */ = {
+			isa = PBXGroup;
+			children = (
+				FEA5DAAF16D43B360009487C /* positions.xml */,
+			);
+			path = positions;
+			sourceTree = "<group>";
+		};
+		FEA5DB4716D441B50009487C /* thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				FEA5DB4816D441B50009487C /* tinyxml2 */,
+			);
+			name = thirdparty;
+			path = ../thirdparty;
+			sourceTree = "<group>";
+		};
+		FEA5DB4816D441B50009487C /* tinyxml2 */ = {
+			isa = PBXGroup;
+			children = (
+				FEA5DB5A16D441B50009487C /* tinyxml2.cpp */,
+				FEA5DB5B16D441B50009487C /* tinyxml2.h */,
+			);
+			path = tinyxml2;
 			sourceTree = "<group>";
 		};
 		FED7989516CEC7A900EF724B /* Flurry */ = {
@@ -1700,6 +1741,7 @@
 				FE28FC7F16C9C95C00D3BBFB /* IconPad.png in Resources */,
 				FE28FC8116C9C95C00D3BBFB /* title.png in Resources */,
 				FE28FC8316C9C95C00D3BBFB /* title_iphone.png in Resources */,
+				FEA5DAB016D43B360009487C /* positions.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1878,6 +1920,7 @@
 				FE28FC7616C9C95C00D3BBFB /* upgrade_for_more.png in Resources */,
 				FE28FC7816C9C95C00D3BBFB /* title_iphone.png in Resources */,
 				FE28FC7A16C9C95C00D3BBFB /* upgrade_for_more_iphone.png in Resources */,
+				FEA5DAB116D43B360009487C /* positions.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1923,6 +1966,8 @@
 				FE413FFA16C9CD9E001BF838 /* multi_select.cc in Sources */,
 				FE413FFC16C9CD9E001BF838 /* simple_item.cc in Sources */,
 				FED7989316CDB48400EF724B /* ViewController.mm in Sources */,
+				FEA5DAD716D43DAC0009487C /* positions.cc in Sources */,
+				FEA5DB7616D441B50009487C /* tinyxml2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1965,6 +2010,8 @@
 				FE413FFB16C9CD9E001BF838 /* multi_select.cc in Sources */,
 				FE413FFD16C9CD9E001BF838 /* simple_item.cc in Sources */,
 				FED7989416CDB52800EF724B /* ViewController.mm in Sources */,
+				FEA5DAD816D43DAC0009487C /* positions.cc in Sources */,
+				FEA5DB7716D441B50009487C /* tinyxml2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

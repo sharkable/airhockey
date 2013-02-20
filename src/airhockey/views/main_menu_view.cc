@@ -18,7 +18,7 @@
 #import "gameengine/sprite.h"
 
 MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
-  bool is_iphone = true;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+  bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
   Sprite background_sprite(game_engine, "rink_bg");
   SimpleItem *background = new SimpleItem(background_sprite, game_point_make(0, 0));
@@ -39,8 +39,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   AddEntity(title);
 
   Sprite main_menu_sprite(game_engine, "main_menu");
-  GamePoint main_menu_position =
-      game_point_make((SCREEN_WIDTH - main_menu_sprite.content_size().width) / 2, 339);
+  GamePoint main_menu_position = game_engine->position("main_menu");
   SimpleItem *main_menu = new SimpleItem(main_menu_sprite, main_menu_position);
   AddEntity(main_menu);
 
@@ -83,21 +82,19 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     upgrade_button_->set_delegate(this);
     AddEntity(upgrade_button_);
   }
-  
-  double players_y = is_iphone ? 570 : 511;
+
   Sprite one_player_image(game_engine, "1_player");
   Sprite two_player_image(game_engine, "2_player");
   Sprite one_player_selected_image(game_engine, "1_player_selected");
   Sprite two_player_selected_image(game_engine, "2_player_selected");
-  GamePoint num_players_select_position =
-      game_point_make(SCREEN_WIDTH / 2 - one_player_image.content_size().width, players_y);
   num_players_select_.reset(new MultiSelect());
-  num_players_select_->Add(one_player_image, one_player_selected_image, num_players_select_position);
+  num_players_select_->Add(one_player_image, one_player_selected_image,
+                           game_engine->position("1_player"));
   num_players_select_->Add(two_player_image, two_player_selected_image,
-                           game_point_make(SCREEN_WIDTH/2, players_y));
+                           game_engine->position("2_player"));
   num_players_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
   AddEntity(num_players_select_);
-  
+
   double pucks_y = is_iphone ? 706 : 627;
   double pucks_1_x = is_iphone ? 40 : 138.5;
   double pucks_2_x = is_iphone ? 45 : 142.5;

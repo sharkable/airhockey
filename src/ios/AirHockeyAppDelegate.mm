@@ -12,6 +12,7 @@
 #import "ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry/Flurry.h"
 #import "ios/ViewController.h"
 #import "ios/EAGLView.h"
+#import "ios/TypeUtil.h"
 #import "soundengine/sound_player.h"
 
 #import "airhockey/views/splash_view.h"
@@ -60,10 +61,12 @@
     viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1024)];
   }
 
+  NSString *positionsFilename = [[NSBundle mainBundle] pathForResource:@"positions" ofType:@"xml"];
+  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(positionsFilename));
   sp<EngineView> rootView =
       sp<EngineView>(new SplashView(sp<GameEngine>(viewController_.gameEngine)));
   viewController_.gameEngine->PushView(rootView);
-  
+
   return YES;
 }
 
