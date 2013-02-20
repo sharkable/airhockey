@@ -21,17 +21,17 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
   
   Sprite background_sprite(game_engine, "rink_bg");
-  SimpleItem *background = new SimpleItem(background_sprite, game_point_make(0, 0));
+  SimpleItem *background = new SimpleItem(background_sprite, game_engine->position("rink_bg"));
   AddEntity(sp<SimpleItem>(background));
 
   // Add rink left and right pieces.
   Sprite left_rink_border_sprite(game_engine, "rink_left");
-  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite, game_point_make(0, 0));
+  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite,
+                                                game_engine->position("rink_left"));
   AddEntity(left_rink_border);
   Sprite right_rink_border_sprite(game_engine, "rink_right");
-  GamePoint left_rink_border_pos =
-      game_point_make(SCREEN_WIDTH - right_rink_border_sprite.content_size().width, 0);
-  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite, left_rink_border_pos);
+  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite,
+                                                 game_engine->position("rink_right"));
   AddEntity(right_rink_border);
 
   Sprite title_sprite(game_engine, "title");
@@ -45,12 +45,10 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 
   Sprite start_button_image(game_engine, "start_button");
   Sprite start_button_pressed_image(game_engine, "start_button_pressed");
-  GamePoint start_button_position =
-      game_point_make((SCREEN_WIDTH - start_button_image.content_size().width) / 2, 392);
   start_button_.reset(new Button());
   start_button_->set_normal_sprite(start_button_image);
   start_button_->set_pressed_sprite(start_button_pressed_image);
-  start_button_->set_position(start_button_position);
+  start_button_->set_position(game_engine->position("start_button"));
   start_button_->set_delegate(this);
   AddEntity(start_button_);
   
