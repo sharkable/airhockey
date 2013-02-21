@@ -200,7 +200,7 @@ void MainMenuView::ButtonPressed(Button *button) {
 // private
 
 void MainMenuView::PressedStart() {
-  bool is_iphone = true; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+  bool is_iphone = false; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
   LocalStore::SetInteger(num_players_select_->selected_value(), LS_NUM_PLAYERS);
   LocalStore::SetInteger(num_pucks_select_->selected_value(), LS_NUM_PUCKS);

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE0D6CD516D5CB8F00A8F856 /* paddle_1_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE0D6CD216D5CB8F00A8F856 /* paddle_1_large@2x.png */; };
+		FE0D6CD616D5CB8F00A8F856 /* paddle_1_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE0D6CD216D5CB8F00A8F856 /* paddle_1_large@2x.png */; };
+		FE0D6CD716D5CB8F00A8F856 /* paddle_1_medium@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE0D6CD316D5CB8F00A8F856 /* paddle_1_medium@2x.png */; };
+		FE0D6CD816D5CB8F00A8F856 /* paddle_1_medium@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE0D6CD316D5CB8F00A8F856 /* paddle_1_medium@2x.png */; };
+		FE0D6CD916D5CB8F00A8F856 /* paddle_1_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE0D6CD416D5CB8F00A8F856 /* paddle_1_small@2x.png */; };
+		FE0D6CDA16D5CB8F00A8F856 /* paddle_1_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE0D6CD416D5CB8F00A8F856 /* paddle_1_small@2x.png */; };
 		FE28F9AA16C9C83600D3BBFB /* AdEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE28F91116C9C83600D3BBFB /* AdEngineIOS.mm */; };
 		FE28F9AB16C9C83600D3BBFB /* AdEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE28F91116C9C83600D3BBFB /* AdEngineIOS.mm */; };
 		FE28F9AC16C9C83600D3BBFB /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE28F91316C9C83600D3BBFB /* EAGLView.mm */; };
@@ -480,6 +486,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FE0D6CD216D5CB8F00A8F856 /* paddle_1_large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paddle_1_large@2x.png"; sourceTree = "<group>"; };
+		FE0D6CD316D5CB8F00A8F856 /* paddle_1_medium@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paddle_1_medium@2x.png"; sourceTree = "<group>"; };
+		FE0D6CD416D5CB8F00A8F856 /* paddle_1_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paddle_1_small@2x.png"; sourceTree = "<group>"; };
 		FE28F91016C9C83600D3BBFB /* AdEngineIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdEngineIOS.h; sourceTree = "<group>"; };
 		FE28F91116C9C83600D3BBFB /* AdEngineIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AdEngineIOS.mm; sourceTree = "<group>"; };
 		FE28F91216C9C83600D3BBFB /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
@@ -1265,8 +1274,11 @@
 			isa = PBXGroup;
 			children = (
 				FEA5DBC616D47BDD0009487C /* paddle_1_large.png */,
+				FE0D6CD216D5CB8F00A8F856 /* paddle_1_large@2x.png */,
 				FEA5DBC716D47BDD0009487C /* paddle_1_medium.png */,
+				FE0D6CD316D5CB8F00A8F856 /* paddle_1_medium@2x.png */,
 				FEA5DBC816D47BDD0009487C /* paddle_1_small.png */,
+				FE0D6CD416D5CB8F00A8F856 /* paddle_1_small@2x.png */,
 				FEA5DBC916D47BDD0009487C /* paddle_2_large.png */,
 				FEA5DBCA16D47BDD0009487C /* paddle_2_medium.png */,
 				FEA5DBCB16D47BDD0009487C /* paddle_2_small.png */,
@@ -1771,6 +1783,9 @@
 				FEA5DDC716D48CF90009487C /* main_menu@2x.png in Resources */,
 				FEA5DDC916D48CF90009487C /* start_button_pressed@2x.png in Resources */,
 				FEA5DDCB16D48CF90009487C /* start_button@2x.png in Resources */,
+				FE0D6CD516D5CB8F00A8F856 /* paddle_1_large@2x.png in Resources */,
+				FE0D6CD716D5CB8F00A8F856 /* paddle_1_medium@2x.png in Resources */,
+				FE0D6CD916D5CB8F00A8F856 /* paddle_1_small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1961,6 +1976,9 @@
 				FEA5DDCA16D48CF90009487C /* start_button_pressed@2x.png in Resources */,
 				FEA5DDCC16D48CF90009487C /* start_button@2x.png in Resources */,
 				FEA5DDCE16D4A2BC0009487C /* title@2x.png in Resources */,
+				FE0D6CD616D5CB8F00A8F856 /* paddle_1_large@2x.png in Resources */,
+				FE0D6CD816D5CB8F00A8F856 /* paddle_1_medium@2x.png in Resources */,
+				FE0D6CDA16D5CB8F00A8F856 /* paddle_1_small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
