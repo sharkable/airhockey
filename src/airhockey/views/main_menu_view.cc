@@ -35,7 +35,13 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   AddEntity(right_rink_border);
 
   Sprite title_sprite(game_engine, "title");
-  SimpleItem *title = new SimpleItem(title_sprite, game_engine->position("title"));
+  GamePoint title_target_point = game_engine->position("title");
+  GamePoint title_start_point = game_point_make(title_target_point.x,
+                                                -title_sprite.content_size().height);
+  SimpleItem *title = new SimpleItem(title_sprite, title_start_point);
+  title->AnimateToPosition(title_target_point, kAnimationTypeBounceEaseOut, 120);
+  title->set_angle(-45);
+  title->AnimateToAngle(0, kAnimationTypeLinear, 120);
   AddEntity(title);
 
   Sprite main_menu_sprite(game_engine, "main_menu");
