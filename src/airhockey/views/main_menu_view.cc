@@ -64,17 +64,6 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   story_button_->set_position(is_iphone ? game_point_make(86, 926) : game_point_make(91, 936));
   story_button_->set_delegate(this);
   AddEntity(story_button_);
-  
-  if (false) {
-    Sprite upgrade_button_image(game_engine, "upgrade_button");
-    Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
-    upgrade_button_.reset(new Button());
-    upgrade_button_->set_normal_sprite(upgrade_button_image);
-    upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
-    upgrade_button_->set_position(game_point_make(91, 936));
-    upgrade_button_->set_delegate(this);
-    AddEntity(upgrade_button_);
-  }
 
   Sprite one_player_image(game_engine, "1_player");
   Sprite two_player_image(game_engine, "2_player");
@@ -107,17 +96,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   }
   num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
   AddEntity(num_pucks_select_);
-  
-  if (false) {
-    Sprite upgrade_for_more_image(game_engine, "upgrade_for_more");
-    GamePoint upgrade_for_more_position =
-        game_point_make(pucks_2_x + pucks_x_spread * 4, pucks_y);
-    SimpleItem *upgrade_for_more =
-        new SimpleItem(upgrade_for_more_image, upgrade_for_more_position);
-    AddEntity(upgrade_for_more);
-  }
-  
-  
+
   double difficulty_y = is_iphone ? 839 : 734;
   Sprite bad_image(game_engine, "bad");
   Sprite bad_image_selected(game_engine, "bad_selected");
@@ -184,8 +163,6 @@ void MainMenuView::ButtonPressed(Button *button) {
     PressedStart();
   } else if (button == story_button_.get()) {
     PressedStory();
-  } else if (button == upgrade_button_.get()) {
-    PressedUpgrade();
   }
 }
 
@@ -229,22 +206,3 @@ void MainMenuView::PressedStory() {
 //  [getGameEngine()->adEngine() removeAd];
   game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
 }
-
-void MainMenuView::PressedUpgrade() {
-// TODO
-//  UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Upgrade"
-//                                                   message:@"You can remove ads and have up to "
-//                                                            "seven pucks!\nJust upgrade to the paid"
-//                                                            " version.\nIt's cheap!"
-//                                                  delegate:self
-//                                         cancelButtonTitle:@"No thanks!"
-//                                         otherButtonTitles:@"OK!", nil] autorelease];
-//  [alert show];
-}
-
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-//  if (buttonIndex == 1) {
-//    NSString * url = @"http://itunes.com/app/GlideHockeyHD";
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-//  }
-//}
