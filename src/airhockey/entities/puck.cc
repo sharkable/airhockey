@@ -89,9 +89,9 @@ void Puck::Update() {
 
 void Puck::Render() {
   if (is_active()) {
-    sprite_.DrawAtPointAlpha(game_point_make(x_ - sprite_.content_size().width / 2,
-                                             y_ - sprite_.content_size().height / 2),
-                             alpha_);
+    sprite_.Draw(game_point_make(x_ - sprite_.content_size().width / 2,
+                                 y_ - sprite_.content_size().height / 2),
+                 0, alpha_, 1);
   }
 }
 

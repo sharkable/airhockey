@@ -240,9 +240,9 @@ void Paddle::Update() {
 }
 
 void Paddle::Render() {
-  sprite_.DrawAtPointAlpha(game_point_make(x_ - sprite_.content_size().width/2,
-                                           y_ - sprite_.content_size().height/2),
-                           (is_grabbed() || !player_controlled_ ? 1.0 : 0.5));
+  sprite_.Draw(game_point_make(x_ - sprite_.content_size().width/2,
+                               y_ - sprite_.content_size().height/2),
+               0, (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1);
 }
 
 
