@@ -458,6 +458,16 @@
 		FE5144DA16E05D3400AFB0CE /* title@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE51435316E05D3400AFB0CE /* title@2x.tx */; };
 		FE5144DC16E05D3400AFB0CE /* title_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE51435516E05D3400AFB0CE /* title_iphone.tx */; };
 		FE5144DE16E05D5800AFB0CE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FE51427F16E05D3300AFB0CE /* Icon.png */; };
+		FE5144E116E1485F00AFB0CE /* story_button_pressed@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE5144DF16E1485F00AFB0CE /* story_button_pressed@2x.tx */; };
+		FE5144E216E1485F00AFB0CE /* story_button_pressed@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE5144DF16E1485F00AFB0CE /* story_button_pressed@2x.tx */; };
+		FE5144E316E1485F00AFB0CE /* story_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE5144E016E1485F00AFB0CE /* story_button@2x.tx */; };
+		FE5144E416E1485F00AFB0CE /* story_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE5144E016E1485F00AFB0CE /* story_button@2x.tx */; };
+		FE6F9A2B16E16154004294A5 /* sound_empty@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2816E16153004294A5 /* sound_empty@2x.tx */; };
+		FE6F9A2C16E16154004294A5 /* sound_empty@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2816E16153004294A5 /* sound_empty@2x.tx */; };
+		FE6F9A2D16E16154004294A5 /* sound_full@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2916E16154004294A5 /* sound_full@2x.tx */; };
+		FE6F9A2E16E16154004294A5 /* sound_full@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2916E16154004294A5 /* sound_full@2x.tx */; };
+		FE6F9A2F16E16154004294A5 /* sound_thumb@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2A16E16154004294A5 /* sound_thumb@2x.tx */; };
+		FE6F9A3016E16154004294A5 /* sound_thumb@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2A16E16154004294A5 /* sound_thumb@2x.tx */; };
 		FE789BC614F97B34007FCBC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FE789BC814F97B34007FCBC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -809,6 +819,11 @@
 		FE51435216E05D3400AFB0CE /* title.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = title.tx; sourceTree = "<group>"; };
 		FE51435316E05D3400AFB0CE /* title@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "title@2x.tx"; sourceTree = "<group>"; };
 		FE51435516E05D3400AFB0CE /* title_iphone.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = title_iphone.tx; sourceTree = "<group>"; };
+		FE5144DF16E1485F00AFB0CE /* story_button_pressed@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "story_button_pressed@2x.tx"; sourceTree = "<group>"; };
+		FE5144E016E1485F00AFB0CE /* story_button@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "story_button@2x.tx"; sourceTree = "<group>"; };
+		FE6F9A2816E16153004294A5 /* sound_empty@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_empty@2x.tx"; sourceTree = "<group>"; };
+		FE6F9A2916E16154004294A5 /* sound_full@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_full@2x.tx"; sourceTree = "<group>"; };
+		FE6F9A2A16E16154004294A5 /* sound_thumb@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_thumb@2x.tx"; sourceTree = "<group>"; };
 		FE789BC114F97B34007FCBC5 /* AirHockey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE789BC514F97B34007FCBC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FE789BC714F97B34007FCBC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1317,7 +1332,9 @@
 				FE5142D216E05D3300AFB0CE /* start_button_pressed@2x.tx */,
 				FE5142D316E05D3300AFB0CE /* story.tx */,
 				FE5142D416E05D3300AFB0CE /* story_button.tx */,
+				FE5144E016E1485F00AFB0CE /* story_button@2x.tx */,
 				FE5142D516E05D3300AFB0CE /* story_button_pressed.tx */,
+				FE5144DF16E1485F00AFB0CE /* story_button_pressed@2x.tx */,
 			);
 			path = mainmenu;
 			sourceTree = "<group>";
@@ -1375,8 +1392,11 @@
 			isa = PBXGroup;
 			children = (
 				FE5142F816E05D3400AFB0CE /* sound_empty.tx */,
+				FE6F9A2816E16153004294A5 /* sound_empty@2x.tx */,
 				FE5142F916E05D3400AFB0CE /* sound_full.tx */,
+				FE6F9A2916E16154004294A5 /* sound_full@2x.tx */,
 				FE5142FA16E05D3400AFB0CE /* sound_thumb.tx */,
+				FE6F9A2A16E16154004294A5 /* sound_thumb@2x.tx */,
 			);
 			path = soundslider;
 			sourceTree = "<group>";
@@ -1935,6 +1955,11 @@
 				FE5144DA16E05D3400AFB0CE /* title@2x.tx in Resources */,
 				FE5144DC16E05D3400AFB0CE /* title_iphone.tx in Resources */,
 				FE5144DE16E05D5800AFB0CE /* Icon.png in Resources */,
+				FE5144E116E1485F00AFB0CE /* story_button_pressed@2x.tx in Resources */,
+				FE5144E316E1485F00AFB0CE /* story_button@2x.tx in Resources */,
+				FE6F9A2B16E16154004294A5 /* sound_empty@2x.tx in Resources */,
+				FE6F9A2D16E16154004294A5 /* sound_full@2x.tx in Resources */,
+				FE6F9A2F16E16154004294A5 /* sound_thumb@2x.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2133,6 +2158,11 @@
 				FE5144D316E05D3400AFB0CE /* sound_empty_iphone.tx in Resources */,
 				FE5144D516E05D3400AFB0CE /* sound_full_iphone.tx in Resources */,
 				FE5144D716E05D3400AFB0CE /* sound_thumb_iphone.tx in Resources */,
+				FE5144E216E1485F00AFB0CE /* story_button_pressed@2x.tx in Resources */,
+				FE5144E416E1485F00AFB0CE /* story_button@2x.tx in Resources */,
+				FE6F9A2C16E16154004294A5 /* sound_empty@2x.tx in Resources */,
+				FE6F9A2E16E16154004294A5 /* sound_full@2x.tx in Resources */,
+				FE6F9A3016E16154004294A5 /* sound_thumb@2x.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

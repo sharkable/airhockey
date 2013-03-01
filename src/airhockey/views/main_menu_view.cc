@@ -61,7 +61,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   story_button_.reset(new Button());
   story_button_->set_normal_sprite(story_button_image);
   story_button_->set_pressed_sprite(story_button_pressed_image);
-  story_button_->set_position(is_iphone ? game_point_make(86, 926) : game_point_make(91, 936));
+  story_button_->set_position(game_engine->position("story_button"));
   story_button_->set_delegate(this);
   AddEntity(story_button_);
 
@@ -138,7 +138,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     AddEntity(paddle_size_select_);
   }
 
-  sound_slider_.reset(new SoundSlider(game_engine, game_point_make(400, 50)));
+  sound_slider_.reset(new SoundSlider(game_engine,
+                                      game_engine->position("sound_slider_main_menu")));
   AddEntity(sound_slider_);
 }
 
