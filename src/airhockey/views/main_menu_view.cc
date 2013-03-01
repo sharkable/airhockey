@@ -56,15 +56,6 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   start_button_->set_delegate(this);
   AddEntity(start_button_);
   
-  Sprite feedback_button_image(game_engine, "feedback_button");
-  Sprite feedback_button_pressed_image(game_engine, "feedback_button_pressed");
-  feedback_button_.reset(new Button());
-  feedback_button_->set_normal_sprite(feedback_button_image);
-  feedback_button_->set_pressed_sprite(feedback_button_pressed_image);
-  feedback_button_->set_position(is_iphone ? game_point_make(440, 926) : game_point_make(486, 936));
-  feedback_button_->set_delegate(this);
-  AddEntity(feedback_button_);
-
   Sprite story_button_image(game_engine, "story_button");
   Sprite story_button_pressed_image(game_engine, "story_button_pressed");
   story_button_.reset(new Button());
@@ -191,8 +182,6 @@ void MainMenuView::ViewIsShown() {
 void MainMenuView::ButtonPressed(Button *button) {
   if (button == start_button_.get()) {
     PressedStart();
-  } else if (button == feedback_button_.get()) {
-    PressedFeedback();
   } else if (button == story_button_.get()) {
     PressedStory();
   } else if (button == upgrade_button_.get()) {
@@ -233,32 +222,6 @@ void MainMenuView::PressedStart() {
                                      ComputerAI(difficulty_select_->selected_value()),
                                      paddle_size);
   game_engine()->SetRootView(sp<EngineView>(play_view));
-}
-
-void MainMenuView::PressedFeedback() {
-//  NSString *free;
-//  NSString *device;
-//  
-//  [FlurryAnalytics logEvent:@"FEEDBACK_PRESSED"];
-//
-//  if (IS_FREE) {
-//    free = @"%20Free";
-//  } else {
-//    free = @"";
-//  }
-//  
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    device = @"iPad";
-//  } else {
-//    device = @"iPhone/iPod";
-//  }
-//
-//  NSString *url =
-//      [NSString stringWithFormat:@"mailto:feedback@sharkable.com?"
-//                                  "subject=Glide%%20Hockey%%20HD%@%%20feedback%%20(%@)",
-//                                     free, device];
-//  
-//  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 void MainMenuView::PressedStory() {

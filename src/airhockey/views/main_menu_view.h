@@ -27,12 +27,10 @@ class MainMenuView : public EngineView, private ButtonDelegate {
 
  private:
   void PressedStart();
-  void PressedFeedback();
   void PressedStory();
   void PressedUpgrade();
   
   sp<Button> start_button_;
-  sp<Button> feedback_button_;
   sp<Button> story_button_;
   sp<Button> upgrade_button_;
   sp<MultiSelect> num_players_select_;
