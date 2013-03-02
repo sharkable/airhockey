@@ -1,0 +1,1 @@
+<positions>  <position name="player_1_score">    <x>662</x>    <y>526</y>  </position>  <position name="player_2_score">    <x>662</x>    <y>386</y>  </position>  <position name="get_ready">    <x>0</x>    <y>439</y>  </position>  <position name="go">    <x>89</x>    <y>528</y>  </position></positions>

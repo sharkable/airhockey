@@ -43,17 +43,15 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
     ResourceLoader::Instance().TextureWithName(pointsstr);
     scoreSprites.push_back(sprite);
   }
-  cout << player_1_score_.get() << endl;
   player_1_score_.reset(new SimpleItem());
   player_1_score_->set_sprites(scoreSprites);
-  player_1_score_->set_position(game_point_make(662, 526));
+  player_1_score_->set_position(game_engine->position("player_1_score"));
   player_2_score_.reset(new SimpleItem());
   player_2_score_->set_sprites(scoreSprites);
-  player_2_score_->set_position(game_point_make(662, 386));
+  player_2_score_->set_position(game_engine->position("player_2_score"));
   AddEntity(player_1_score_);
   AddEntity(player_2_score_);
   
-  cout << "Num pucks: " << num_pucks << endl;
   num_pucks_ = num_pucks;
   num_active_pucks_ = num_pucks_;
   for (int i = 0; i < num_pucks_; i++) {
@@ -104,16 +102,13 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   lose_->set_position(game_point_make(0, 0));
 
   Sprite getReadySprite(game_engine, "get_ready");
-  GamePoint getReadyPosition =
-      game_point_make((SCREEN_WIDTH - getReadySprite.content_size().width) / 2,
-                      (SCREEN_HEIGHT - getReadySprite.content_size().height) / 2);
+  GamePoint getReadyPosition = game_engine->position("get_ready");
   get_ready_.reset(new SimpleItem());
   get_ready_->add_sprite(getReadySprite);
   get_ready_->set_position(getReadyPosition);
 
   Sprite goSprite(game_engine, "go");
-  GamePoint goPosition = game_point_make((SCREEN_WIDTH - goSprite.content_size().width) / 2,
-                                         (SCREEN_HEIGHT - goSprite.content_size().height) / 2);
+  GamePoint goPosition = game_engine->position("go");
   go_.reset(new SimpleItem());
   go_->add_sprite(goSprite);
   go_->set_position(goPosition);
