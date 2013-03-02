@@ -121,9 +121,9 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     Sprite large_image(game_engine, "large");
     Sprite large_image_selected(game_engine, "large_selected");
     paddle_size_select_.reset(new MultiSelect());
-    paddle_size_select_->Add(small_image, small_image_selected, game_point_make(139, 842));
-    paddle_size_select_->Add(medium_image, medium_image_selected, game_point_make(305, 842));
-    paddle_size_select_->Add(large_image, large_image_selected, game_point_make(464, 842));
+    paddle_size_select_->Add(small_image, small_image_selected, game_engine->position("small"));
+    paddle_size_select_->Add(medium_image, medium_image_selected, game_engine->position("medium"));
+    paddle_size_select_->Add(large_image, large_image_selected, game_engine->position("large"));
     if (LocalStore::HasEntryForKey(LS_PADDLE_SIZE)) {
       paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
     } else {
