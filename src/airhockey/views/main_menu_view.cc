@@ -20,6 +20,8 @@
 MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
+  state_ = kMainMenuStateRunning;
+
   Sprite title_sprite(game_engine, "title");
   SimpleItem *title = new SimpleItem(title_sprite, game_engine->position("title"));
   AddEntity(title);
@@ -136,6 +138,16 @@ void MainMenuView::ViewIsShown() {
   }
 }
 
+void MainMenuView::Update() {
+  EngineView::Update();
+  if (state_ == kMainMenuStateAnimatingOut) {
+    animating_out_ticks_left_--;
+    if (animating_out_ticks_left_ <= 0) {
+      game_engine()->RemoveView(this);
+    }
+  }
+}
+
 
 // ButtonDelegate
 
@@ -149,6 +161,11 @@ void MainMenuView::ButtonPressed(Button *button) {
 
 
 // private
+
+void MainMenuView::AnimateOut() {
+  state_ = kMainMenuStateAnimatingOut;
+  animating_out_ticks_left_ = 120;
+}
 
 void MainMenuView::PressedStart() {
   bool is_iphone = false; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
@@ -179,7 +196,7 @@ void MainMenuView::PressedStart() {
                                      num_pucks_select_->selected_value() + 1,
                                      ComputerAI(difficulty_select_->selected_value()),
                                      paddle_size);
-  game_engine()->PopView();
+  AnimateOut();
   game_engine()->PushView(sp<EngineView>(play_view));
 }
 

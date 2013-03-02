@@ -83,8 +83,8 @@ class PlayView : public EngineView, private ButtonDelegate {
   int wait_ticks_left_;
   int get_ready_ticks_left_;
   int go_ticks_left_;
-  int state_;
-  int pre_pause_state_;
+  PlayViewState state_;
+  PlayViewState pre_pause_state_;
   int give_extra_puck_to_player_;
   int player_1_win_count_;
   int player_2_win_count_;

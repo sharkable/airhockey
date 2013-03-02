@@ -15,17 +15,24 @@
 
 #import "airhockey/entities/sound_slider.h"
 
+typedef enum {
+  kMainMenuStateRunning = 0,
+  kMainMenuStateAnimatingOut
+} MainMenuState;
+
 class MainMenuView : public EngineView, private ButtonDelegate {
  public:
   MainMenuView(sp<GameEngine> game_engine);
   
   // EngineView
   void ViewIsShown();
+  void Update();
 
   // ButtonDelegate
   void ButtonPressed(Button *button);
 
  private:
+  void AnimateOut();
   void PressedStart();
   void PressedStory();
 
@@ -36,6 +43,9 @@ class MainMenuView : public EngineView, private ButtonDelegate {
   sp<MultiSelect> difficulty_select_;
   sp<MultiSelect> paddle_size_select_;
   sp<SoundSlider> sound_slider_;
+
+  MainMenuState state_;
+  int animating_out_ticks_left_;
 };
 
 #endif

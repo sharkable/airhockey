@@ -313,6 +313,8 @@ void PlayView::Update() {
   }  
   
   switch (state_) {
+    case kPlayViewStateGetReady:
+      break;
     case kPlayViewStatePlaying: {      
       if (player_1_score_->sprite() == WIN_SCORE) {
         FinishGameWithWinner(PLAYER_1);
@@ -344,6 +346,10 @@ void PlayView::Update() {
         break;
       }
     }
+    case kPlayViewStateFinished:
+      break;
+    case kPlayViewStatePaused:
+      break;
   }
 }
 
