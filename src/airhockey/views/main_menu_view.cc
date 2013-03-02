@@ -92,7 +92,6 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
   AddEntity(num_pucks_select_);
 
-  double difficulty_y = is_iphone ? 839 : 734;
   Sprite bad_image(game_engine, "bad");
   Sprite bad_image_selected(game_engine, "bad_selected");
   Sprite good_image(game_engine, "good");
@@ -102,18 +101,18 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   Sprite amazing_image(game_engine, "amazing");
   Sprite amazing_image_selected(game_engine, "amazing_selected");
   difficulty_select_.reset(new MultiSelect());
-  difficulty_select_->Add(bad_image, bad_image_selected, game_point_make(is_iphone ? 38 : 138, difficulty_y));
-  difficulty_select_->Add(good_image, good_image_selected, game_point_make(is_iphone ? 216 : 266, difficulty_y));
-  difficulty_select_->Add(excellent_image, excellent_image_selected, game_point_make(is_iphone ? 380 : 384, difficulty_y));
-  difficulty_select_->Add(amazing_image, amazing_image_selected,
-                          game_point_make(is_iphone ? 543 : 502, difficulty_y));
+  difficulty_select_->Add(bad_image, bad_image_selected, game_engine->position("bad"));
+  difficulty_select_->Add(good_image, good_image_selected, game_engine->position("good"));
+  difficulty_select_->Add(excellent_image, excellent_image_selected,
+                          game_engine->position("excellent"));
+  difficulty_select_->Add(amazing_image, amazing_image_selected, game_engine->position("amazing"));
   if (LocalStore::HasEntryForKey(LS_DIFFICULTY)) {
     difficulty_select_->set_selected_value(LocalStore::IntegerForKey(LS_DIFFICULTY));
   } else {
     difficulty_select_->set_selected_value(caiGood);
   }
   AddEntity(difficulty_select_);
-  
+
   if (!is_iphone) {
     Sprite small_image(game_engine, "small");
     Sprite small_image_selected(game_engine, "small_selected");

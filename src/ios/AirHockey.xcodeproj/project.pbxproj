@@ -501,6 +501,22 @@
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FE789BCC14F97B34007FCBC5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FE789BCE14F97B34007FCBC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FE9121FF16E1A9FC0038510E /* amazing_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121F716E1A9FC0038510E /* amazing_selected@2x.tx */; };
+		FE91220016E1A9FC0038510E /* amazing_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121F716E1A9FC0038510E /* amazing_selected@2x.tx */; };
+		FE91220116E1A9FC0038510E /* amazing@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121F816E1A9FC0038510E /* amazing@2x.tx */; };
+		FE91220216E1A9FC0038510E /* amazing@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121F816E1A9FC0038510E /* amazing@2x.tx */; };
+		FE91220316E1A9FC0038510E /* bad_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121F916E1A9FC0038510E /* bad_selected@2x.tx */; };
+		FE91220416E1A9FC0038510E /* bad_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121F916E1A9FC0038510E /* bad_selected@2x.tx */; };
+		FE91220516E1A9FC0038510E /* bad@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FA16E1A9FC0038510E /* bad@2x.tx */; };
+		FE91220616E1A9FC0038510E /* bad@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FA16E1A9FC0038510E /* bad@2x.tx */; };
+		FE91220716E1A9FC0038510E /* excellent_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FB16E1A9FC0038510E /* excellent_selected@2x.tx */; };
+		FE91220816E1A9FC0038510E /* excellent_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FB16E1A9FC0038510E /* excellent_selected@2x.tx */; };
+		FE91220916E1A9FC0038510E /* excellent@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FC16E1A9FC0038510E /* excellent@2x.tx */; };
+		FE91220A16E1A9FC0038510E /* excellent@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FC16E1A9FC0038510E /* excellent@2x.tx */; };
+		FE91220B16E1A9FC0038510E /* good_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FD16E1A9FC0038510E /* good_selected@2x.tx */; };
+		FE91220C16E1A9FC0038510E /* good_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FD16E1A9FC0038510E /* good_selected@2x.tx */; };
+		FE91220D16E1A9FC0038510E /* good@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FE16E1A9FC0038510E /* good@2x.tx */; };
+		FE91220E16E1A9FC0038510E /* good@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE9121FE16E1A9FC0038510E /* good@2x.tx */; };
 		FEA5DAD716D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
 		FEA5DAD816D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
 		FEA5DB7616D441B50009487C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DB5A16D441B50009487C /* tinyxml2.cpp */; };
@@ -872,6 +888,14 @@
 		FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FE9121F716E1A9FC0038510E /* amazing_selected@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "amazing_selected@2x.tx"; sourceTree = "<group>"; };
+		FE9121F816E1A9FC0038510E /* amazing@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "amazing@2x.tx"; sourceTree = "<group>"; };
+		FE9121F916E1A9FC0038510E /* bad_selected@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bad_selected@2x.tx"; sourceTree = "<group>"; };
+		FE9121FA16E1A9FC0038510E /* bad@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bad@2x.tx"; sourceTree = "<group>"; };
+		FE9121FB16E1A9FC0038510E /* excellent_selected@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "excellent_selected@2x.tx"; sourceTree = "<group>"; };
+		FE9121FC16E1A9FC0038510E /* excellent@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "excellent@2x.tx"; sourceTree = "<group>"; };
+		FE9121FD16E1A9FC0038510E /* good_selected@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "good_selected@2x.tx"; sourceTree = "<group>"; };
+		FE9121FE16E1A9FC0038510E /* good@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "good@2x.tx"; sourceTree = "<group>"; };
 		FEA5DAD516D43DAC0009487C /* positions.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = positions.cc; sourceTree = "<group>"; };
 		FEA5DAD616D43DAC0009487C /* positions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = positions.h; sourceTree = "<group>"; };
 		FEA5DB5A16D441B50009487C /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml2.cpp; sourceTree = "<group>"; };
@@ -1367,13 +1391,21 @@
 				FE1FCE5316E198A50005AD8D /* 7_selected@2x.tx */,
 				FE5142BC16E05D3300AFB0CE /* about.tx */,
 				FE5142BD16E05D3300AFB0CE /* amazing.tx */,
+				FE9121F816E1A9FC0038510E /* amazing@2x.tx */,
 				FE5142BE16E05D3300AFB0CE /* amazing_selected.tx */,
+				FE9121F716E1A9FC0038510E /* amazing_selected@2x.tx */,
 				FE5142BF16E05D3300AFB0CE /* bad.tx */,
+				FE9121FA16E1A9FC0038510E /* bad@2x.tx */,
 				FE5142C016E05D3300AFB0CE /* bad_selected.tx */,
+				FE9121F916E1A9FC0038510E /* bad_selected@2x.tx */,
 				FE5142C116E05D3300AFB0CE /* excellent.tx */,
+				FE9121FC16E1A9FC0038510E /* excellent@2x.tx */,
 				FE5142C216E05D3300AFB0CE /* excellent_selected.tx */,
+				FE9121FB16E1A9FC0038510E /* excellent_selected@2x.tx */,
 				FE5142C516E05D3300AFB0CE /* good.tx */,
+				FE9121FE16E1A9FC0038510E /* good@2x.tx */,
 				FE5142C616E05D3300AFB0CE /* good_selected.tx */,
+				FE9121FD16E1A9FC0038510E /* good_selected@2x.tx */,
 				FE5142C716E05D3300AFB0CE /* large.tx */,
 				FE5142C816E05D3300AFB0CE /* large_selected.tx */,
 				FE5142C916E05D3300AFB0CE /* main_menu.tx */,
@@ -2030,6 +2062,14 @@
 				FE1FCE6B16E198A50005AD8D /* 6@2x.tx in Resources */,
 				FE1FCE6D16E198A50005AD8D /* 7_selected@2x.tx in Resources */,
 				FE1FCE6F16E198A50005AD8D /* 7@2x.tx in Resources */,
+				FE9121FF16E1A9FC0038510E /* amazing_selected@2x.tx in Resources */,
+				FE91220116E1A9FC0038510E /* amazing@2x.tx in Resources */,
+				FE91220316E1A9FC0038510E /* bad_selected@2x.tx in Resources */,
+				FE91220516E1A9FC0038510E /* bad@2x.tx in Resources */,
+				FE91220716E1A9FC0038510E /* excellent_selected@2x.tx in Resources */,
+				FE91220916E1A9FC0038510E /* excellent@2x.tx in Resources */,
+				FE91220B16E1A9FC0038510E /* good_selected@2x.tx in Resources */,
+				FE91220D16E1A9FC0038510E /* good@2x.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2247,6 +2287,14 @@
 				FE1FCE6C16E198A50005AD8D /* 6@2x.tx in Resources */,
 				FE1FCE6E16E198A50005AD8D /* 7_selected@2x.tx in Resources */,
 				FE1FCE7016E198A50005AD8D /* 7@2x.tx in Resources */,
+				FE91220016E1A9FC0038510E /* amazing_selected@2x.tx in Resources */,
+				FE91220216E1A9FC0038510E /* amazing@2x.tx in Resources */,
+				FE91220416E1A9FC0038510E /* bad_selected@2x.tx in Resources */,
+				FE91220616E1A9FC0038510E /* bad@2x.tx in Resources */,
+				FE91220816E1A9FC0038510E /* excellent_selected@2x.tx in Resources */,
+				FE91220A16E1A9FC0038510E /* excellent@2x.tx in Resources */,
+				FE91220C16E1A9FC0038510E /* good_selected@2x.tx in Resources */,
+				FE91220E16E1A9FC0038510E /* good@2x.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
