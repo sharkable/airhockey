@@ -77,12 +77,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   num_players_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
   AddEntity(num_players_select_);
 
-  double pucks_y = is_iphone ? 706 : 627;
-  double pucks_1_x = is_iphone ? 40 : 138.5;
-  double pucks_2_x = is_iphone ? 45 : 142.5;
-  double pucks_x_spread = is_iphone ? 96 : 69;
   num_pucks_select_.reset(new MultiSelect());
-  for (int i = 1; i <= (false ? 4 : MAX_NUM_PUCKS); i++) {
+  for (int i = 1; i <= MAX_NUM_PUCKS; i++) {
     char pucks_str[15];
     sprintf(pucks_str, "%d", i);
     char pucks_selected_str[15];
@@ -90,9 +86,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 
     Sprite num_pucks_image(game_engine, pucks_str);
     Sprite num_pucks_selected_image(game_engine, pucks_selected_str);
-    GamePoint num_pucks_select_position =
-        game_point_make(i == 1 ? pucks_1_x : pucks_2_x + pucks_x_spread * (i - 1), pucks_y);
-    num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_select_position);
+    GamePoint num_pucks_position = game_engine->position(pucks_str);
+    num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_position);
   }
   num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
   AddEntity(num_pucks_select_);
