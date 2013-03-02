@@ -13,15 +13,6 @@
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
-Rink::Rink(sp<GameEngine> game_engine)
-    : sprite_(game_engine, "rink_bg"),
-      render_point_(kGamePointZero) {
-}
-
-Rink::~Rink() {
-  ResourceLoader::Instance().ReleaseResource(sprite_.texture());
-}
-
 void Rink::BounceOff(RoundThing *thing) {
   if (thing->is_grabbed() || !thing->IsMovable()) {
     return;
@@ -129,5 +120,4 @@ void Rink::Update() {
 }
 
 void Rink::Render() {
-  sprite_.DrawAtPoint(render_point_);
 }

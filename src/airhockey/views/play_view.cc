@@ -30,7 +30,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
 
   sound_slider_.reset(new SoundSlider(game_engine, game_point_make(331, 336)));
 
-  rink_.reset(new Rink(game_engine));
+  rink_.reset(new Rink());
   AddEntity(rink_);
   
   vector<Sprite> scoreSprites;
@@ -80,16 +80,6 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   
   AddEntity(post_4_);
   round_things_.push_back(post_4_);
-  
-  // Add rink left and right pieces.
-  Sprite leftRinkBorderSprite(game_engine, "rink_left");
-  SimpleItem *leftRinkBorder = new SimpleItem(leftRinkBorderSprite, game_point_make(0, 0));
-  AddEntity(sp<SimpleItem>(leftRinkBorder));
-  Sprite rightRinkBorderSprite(game_engine, "rink_right");
-  GamePoint leftRinkBorderPos = game_point_make(SCREEN_WIDTH - rightRinkBorderSprite.content_size().width,
-                                          0);
-  SimpleItem *rightRinkBorder = new SimpleItem(rightRinkBorderSprite, leftRinkBorderPos);
-  AddEntity(sp<SimpleItem>(rightRinkBorder));
   
   Sprite winSprite(game_engine, "win");
   win_.reset(new SimpleItem());
@@ -501,7 +491,8 @@ void PlayView::RematchPressed() {
 void PlayView::MenuPressed() {
 //  [player1Wins_ removeFromSuperview];
 //  [player2Wins_ removeFromSuperview];
-  game_engine()->SetRootView(sp<EngineView>(new MainMenuView(game_engine())));
+  game_engine()->PopView();
+  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() removeAd];
 //  }

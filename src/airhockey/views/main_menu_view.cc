@@ -19,20 +19,6 @@
 
 MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
-  
-  Sprite background_sprite(game_engine, "rink_bg");
-  SimpleItem *background = new SimpleItem(background_sprite, game_engine->position("rink_bg"));
-  AddEntity(sp<SimpleItem>(background));
-
-  // Add rink left and right pieces.
-  Sprite left_rink_border_sprite(game_engine, "rink_left");
-  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite,
-                                                game_engine->position("rink_left"));
-  AddEntity(left_rink_border);
-  Sprite right_rink_border_sprite(game_engine, "rink_right");
-  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite,
-                                                 game_engine->position("rink_right"));
-  AddEntity(right_rink_border);
 
   Sprite title_sprite(game_engine, "title");
   SimpleItem *title = new SimpleItem(title_sprite, game_engine->position("title"));
@@ -193,7 +179,8 @@ void MainMenuView::PressedStart() {
                                      num_pucks_select_->selected_value() + 1,
                                      ComputerAI(difficulty_select_->selected_value()),
                                      paddle_size);
-  game_engine()->SetRootView(sp<EngineView>(play_view));
+  game_engine()->PopView();
+  game_engine()->PushView(sp<EngineView>(play_view));
 }
 
 void MainMenuView::PressedStory() {

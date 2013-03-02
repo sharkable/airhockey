@@ -6,15 +6,13 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "splash_view.h"
+#include "airhockey/views/splash_view.h"
 
-#import "resource_loader.h"
-#import "main_menu_view.h"
-#import "game_engine.h"
-#import "const.h"
+#include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
-#import "puck.h"
+#include "airhockey/views/main_menu_view.h"
+#include "airhockey/views/rink_view.h"
 
 SplashView::SplashView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   state_ = kSplashViewStateInitial;
@@ -29,7 +27,8 @@ void SplashView::Update() {
       state_ = kSplashViewStateLoadingSounds;
       break;
     case kSplashViewStateSoundsDidLoad:
-      game_engine()->SetRootView(sp<EngineView>(new MainMenuView(game_engine())));
+      game_engine()->SetRootView(sp<EngineView>(new RinkView(game_engine())));
+      game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
       state_ = kSplashViewStateFinished;
       break;
     default:

@@ -18,19 +18,12 @@ class RoundThing;
 
 class Rink : public ViewEntity {
  public:
-  Rink(sp<GameEngine> game_engine);
-  ~Rink();
-  
   void BounceOff(RoundThing *thing);
   void MoveInFromEdge(RoundThing *thing);
 
   // ViewEntity
   void Update();
   void Render();
-
- private:
-  Sprite sprite_;
-  GamePoint render_point_;
 };
 
 #endif

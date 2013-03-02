@@ -12,7 +12,6 @@
 #include <vector>
 using namespace std;
 
-#include "const.h"
 #include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
 #include "gameengine/entities/simple_item.h"
@@ -22,6 +21,7 @@ using namespace std;
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/Rink.h"
 #include "airhockey/entities/sound_slider.h"
+#include "airhockey/const.h"
 
 class GameEngine;
 class RoundThing;

@@ -555,6 +555,8 @@
 		FE91224516E1DC7B0038510E /* pause_button_pressed@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE91224216E1DC7B0038510E /* pause_button_pressed@2x.tx */; };
 		FE91224616E1DC7B0038510E /* pause_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE91224316E1DC7B0038510E /* pause_button@2x.tx */; };
 		FE91224716E1DC7B0038510E /* pause_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE91224316E1DC7B0038510E /* pause_button@2x.tx */; };
+		FE91224A16E1E8450038510E /* rink_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE91224816E1E8440038510E /* rink_view.cpp */; };
+		FE91224B16E1E8450038510E /* rink_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE91224816E1E8440038510E /* rink_view.cpp */; };
 		FEA5DAD716D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
 		FEA5DAD816D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
 		FEA5DB7616D441B50009487C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DB5A16D441B50009487C /* tinyxml2.cpp */; };
@@ -951,6 +953,8 @@
 		FE91223F16E1DC300038510E /* play.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = play.xml; sourceTree = "<group>"; };
 		FE91224216E1DC7B0038510E /* pause_button_pressed@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pause_button_pressed@2x.tx"; sourceTree = "<group>"; };
 		FE91224316E1DC7B0038510E /* pause_button@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pause_button@2x.tx"; sourceTree = "<group>"; };
+		FE91224816E1E8440038510E /* rink_view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rink_view.cpp; sourceTree = "<group>"; };
+		FE91224916E1E8440038510E /* rink_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rink_view.h; sourceTree = "<group>"; };
 		FEA5DAD516D43DAC0009487C /* positions.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = positions.cc; sourceTree = "<group>"; };
 		FEA5DAD616D43DAC0009487C /* positions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = positions.h; sourceTree = "<group>"; };
 		FEA5DB5A16D441B50009487C /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml2.cpp; sourceTree = "<group>"; };
@@ -1263,6 +1267,8 @@
 				FE413FD216C9CD57001BF838 /* main_menu_view.h */,
 				FE413FD316C9CD57001BF838 /* play_view.cc */,
 				FE413FD416C9CD57001BF838 /* play_view.h */,
+				FE91224816E1E8440038510E /* rink_view.cpp */,
+				FE91224916E1E8440038510E /* rink_view.h */,
 				FE413FD516C9CD57001BF838 /* splash_view.cc */,
 				FE413FD616C9CD57001BF838 /* splash_view.h */,
 				FE413FD716C9CD57001BF838 /* story_view.cc */,
@@ -2463,6 +2469,7 @@
 				FEF47B4516DD5A710096F3D4 /* Sine.cpp in Sources */,
 				FEF47B5016DD60D30096F3D4 /* animation.cc in Sources */,
 				FEF47B5316DE97170096F3D4 /* animatable.cc in Sources */,
+				FE91224A16E1E8450038510E /* rink_view.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2520,6 +2527,7 @@
 				FEF47B4616DD5A710096F3D4 /* Sine.cpp in Sources */,
 				FEF47B5116DD60D30096F3D4 /* animation.cc in Sources */,
 				FEF47B5416DE97170096F3D4 /* animatable.cc in Sources */,
+				FE91224B16E1E8450038510E /* rink_view.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
