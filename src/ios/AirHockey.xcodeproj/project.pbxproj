@@ -529,12 +529,14 @@
 		FE91221E16E1AF3A0038510E /* small_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE91221316E1AF3A0038510E /* small_selected@2x.tx */; };
 		FE91221F16E1AF3A0038510E /* small@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE91221416E1AF3A0038510E /* small@2x.tx */; };
 		FE91222016E1AF3A0038510E /* small@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE91221416E1AF3A0038510E /* small@2x.tx */; };
+		FE91222316E1C0480038510E /* main_menu.xml in Resources */ = {isa = PBXBuildFile; fileRef = FE91222116E1C0480038510E /* main_menu.xml */; };
+		FE91222416E1C0480038510E /* main_menu.xml in Resources */ = {isa = PBXBuildFile; fileRef = FE91222116E1C0480038510E /* main_menu.xml */; };
+		FE91222516E1C0480038510E /* rink.xml in Resources */ = {isa = PBXBuildFile; fileRef = FE91222216E1C0480038510E /* rink.xml */; };
+		FE91222616E1C0480038510E /* rink.xml in Resources */ = {isa = PBXBuildFile; fileRef = FE91222216E1C0480038510E /* rink.xml */; };
 		FEA5DAD716D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
 		FEA5DAD816D43DAC0009487C /* positions.cc in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DAD516D43DAC0009487C /* positions.cc */; };
 		FEA5DB7616D441B50009487C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DB5A16D441B50009487C /* tinyxml2.cpp */; };
 		FEA5DB7716D441B50009487C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA5DB5A16D441B50009487C /* tinyxml2.cpp */; };
-		FEA5DD9B16D47BDD0009487C /* positions.xml in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4016D47BDD0009487C /* positions.xml */; };
-		FEA5DD9C16D47BDD0009487C /* positions.xml in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4016D47BDD0009487C /* positions.xml */; };
 		FEA5DD9D16D47BDD0009487C /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4216D47BDD0009487C /* beep.wav */; };
 		FEA5DD9E16D47BDD0009487C /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4216D47BDD0009487C /* beep.wav */; };
 		FEA5DD9F16D47BDD0009487C /* button_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4316D47BDD0009487C /* button_click.wav */; };
@@ -914,13 +916,14 @@
 		FE91221216E1AF3A0038510E /* medium@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "medium@2x.tx"; sourceTree = "<group>"; };
 		FE91221316E1AF3A0038510E /* small_selected@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "small_selected@2x.tx"; sourceTree = "<group>"; };
 		FE91221416E1AF3A0038510E /* small@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "small@2x.tx"; sourceTree = "<group>"; };
+		FE91222116E1C0480038510E /* main_menu.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main_menu.xml; sourceTree = "<group>"; };
+		FE91222216E1C0480038510E /* rink.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = rink.xml; sourceTree = "<group>"; };
 		FEA5DAD516D43DAC0009487C /* positions.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = positions.cc; sourceTree = "<group>"; };
 		FEA5DAD616D43DAC0009487C /* positions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = positions.h; sourceTree = "<group>"; };
 		FEA5DB5A16D441B50009487C /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml2.cpp; sourceTree = "<group>"; };
 		FEA5DB5B16D441B50009487C /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml2.h; sourceTree = "<group>"; };
 		FEA5DC3D16D47BDD0009487C /* AirHockey-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AirHockey-Info.plist"; sourceTree = "<group>"; };
 		FEA5DC3E16D47BDD0009487C /* AirHockeyFree-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AirHockeyFree-Info.plist"; sourceTree = "<group>"; };
-		FEA5DC4016D47BDD0009487C /* positions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = positions.xml; sourceTree = "<group>"; };
 		FEA5DC4216D47BDD0009487C /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
 		FEA5DC4316D47BDD0009487C /* button_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = button_click.wav; sourceTree = "<group>"; };
 		FEA5DC4416D47BDD0009487C /* get_ready.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = get_ready.wav; sourceTree = "<group>"; };
@@ -1748,7 +1751,8 @@
 		FEA5DC3F16D47BDD0009487C /* positions */ = {
 			isa = PBXGroup;
 			children = (
-				FEA5DC4016D47BDD0009487C /* positions.xml */,
+				FE91222116E1C0480038510E /* main_menu.xml */,
+				FE91222216E1C0480038510E /* rink.xml */,
 			);
 			path = positions;
 			sourceTree = "<group>";
@@ -1876,7 +1880,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEA5DD9B16D47BDD0009487C /* positions.xml in Resources */,
 				FEA5DD9D16D47BDD0009487C /* beep.wav in Resources */,
 				FEA5DD9F16D47BDD0009487C /* button_click.wav in Resources */,
 				FEA5DDA116D47BDD0009487C /* get_ready.wav in Resources */,
@@ -2100,6 +2103,8 @@
 				FE91221B16E1AF3A0038510E /* medium@2x.tx in Resources */,
 				FE91221D16E1AF3A0038510E /* small_selected@2x.tx in Resources */,
 				FE91221F16E1AF3A0038510E /* small@2x.tx in Resources */,
+				FE91222316E1C0480038510E /* main_menu.xml in Resources */,
+				FE91222516E1C0480038510E /* rink.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2107,7 +2112,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEA5DD9C16D47BDD0009487C /* positions.xml in Resources */,
 				FEA5DD9E16D47BDD0009487C /* beep.wav in Resources */,
 				FEA5DDA016D47BDD0009487C /* button_click.wav in Resources */,
 				FEA5DDA216D47BDD0009487C /* get_ready.wav in Resources */,
@@ -2331,6 +2335,8 @@
 				FE91221C16E1AF3A0038510E /* medium@2x.tx in Resources */,
 				FE91221E16E1AF3A0038510E /* small_selected@2x.tx in Resources */,
 				FE91222016E1AF3A0038510E /* small@2x.tx in Resources */,
+				FE91222416E1C0480038510E /* main_menu.xml in Resources */,
+				FE91222616E1C0480038510E /* rink.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -61,8 +61,12 @@
     viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1024)];
   }
 
-  NSString *positionsFilename = [[NSBundle mainBundle] pathForResource:@"positions" ofType:@"xml"];
-  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(positionsFilename));
+  NSString *mainMenuPositionsFilename =
+      [[NSBundle mainBundle] pathForResource:@"main_menu" ofType:@"xml"];
+  NSString *rinkPositionsFilename =
+      [[NSBundle mainBundle] pathForResource:@"rink" ofType:@"xml"];
+  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(mainMenuPositionsFilename));
+  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(rinkPositionsFilename));
   sp<EngineView> rootView =
       sp<EngineView>(new SplashView(sp<GameEngine>(viewController_.gameEngine)));
   viewController_.gameEngine->PushView(rootView);
