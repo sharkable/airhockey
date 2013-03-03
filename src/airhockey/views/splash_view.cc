@@ -27,7 +27,7 @@ void SplashView::Update() {
       state_ = kSplashViewStateLoadingSounds;
       break;
     case kSplashViewStateSoundsDidLoad:
-      game_engine()->SetRootView(sp<EngineView>(new RinkView(game_engine())));
+      game_engine()->PopView();
       game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
       state_ = kSplashViewStateFinished;
       break;
