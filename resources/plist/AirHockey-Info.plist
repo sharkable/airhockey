@@ -29,8 +29,6 @@
 	<true/>
 	<key>UILaunchImageFile</key>
 	<string>LaunchImage.png</string>
-	<key>UILaunchImageFile~ipad</key>
-	<string>LaunchImagePad.png</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
