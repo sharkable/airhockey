@@ -15,6 +15,7 @@
 #import "ios/TypeUtil.h"
 #import "soundengine/sound_player.h"
 
+#import "airhockey/views/rink_view.h"
 #import "airhockey/views/splash_view.h"
 
 @interface AirHockeyAppDelegate ()
@@ -70,8 +71,11 @@
   viewController_.gameEngine->load_positions(TypeUtil::NSString2string(playPositionsFilename));
 
   sp<EngineView> rootView =
+      sp<EngineView>(new RinkView(sp<GameEngine>(viewController_.gameEngine)));
+  viewController_.gameEngine->SetRootView(rootView);
+  sp<EngineView> splashView =
       sp<EngineView>(new SplashView(sp<GameEngine>(viewController_.gameEngine)));
-  viewController_.gameEngine->PushView(rootView);
+  viewController_.gameEngine->PushView(splashView);
 
   return YES;
 }

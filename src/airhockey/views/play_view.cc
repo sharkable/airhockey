@@ -102,7 +102,17 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   go_.reset(new SimpleItem());
   go_->add_sprite(goSprite);
   go_->set_position(goPosition);
-  
+
+  // Add rink left and right pieces.
+  Sprite left_rink_border_sprite(game_engine, "rink_left");
+  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite,
+                                                game_engine->position("rink_left"));
+  AddEntity(left_rink_border);
+  Sprite right_rink_border_sprite(game_engine, "rink_right");
+  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite,
+                                                 game_engine->position("rink_right"));
+  AddEntity(right_rink_border);
+      
   Sprite rematch_button_sprite(game_engine, "rematch_button");
   Sprite rematch_button_pressed_sprite(game_engine, "rematch_button_pressed");
   GamePoint rematch_button_pos =
@@ -313,6 +323,8 @@ void PlayView::Update() {
   }  
   
   switch (state_) {
+    case kPlayViewStateGetReady:
+      break;
     case kPlayViewStatePlaying: {      
       if (player_1_score_->sprite() == WIN_SCORE) {
         FinishGameWithWinner(PLAYER_1);
@@ -344,6 +356,10 @@ void PlayView::Update() {
         break;
       }
     }
+    case kPlayViewStateFinished:
+      break;
+    case kPlayViewStatePaused:
+      break;
   }
 }
 
