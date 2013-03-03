@@ -66,9 +66,6 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   AddEntity(paddle_2_);
   round_things_.push_back(paddle_2_);
   
-  paddle_1_->set_other_paddle(paddle_2_.get());
-  paddle_2_->set_other_paddle(paddle_1_.get());
-  
   AddEntity(post_1_);
   round_things_.push_back(post_1_);
 

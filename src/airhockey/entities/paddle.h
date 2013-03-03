@@ -27,8 +27,6 @@ class Paddle : public RoundThing {
   void RunAITick();
   
   vector<sp<Puck> > &pucks() { return pucks_; }
-  Paddle *pther_paddle() { return other_paddle_; }
-  void set_other_paddle(Paddle *other_paddle) { other_paddle_ = other_paddle; }
 
   // ViewEntity
   void Update();
@@ -44,7 +42,6 @@ class Paddle : public RoundThing {
   bool player_controlled_;
   ComputerAI ai_level_;
   vector<sp<Puck> > &pucks_;
-  Paddle *other_paddle_;  // weak
   bool target_left_corner_;
   bool target_right_corner_;
   bool target_away_from_corner_;
