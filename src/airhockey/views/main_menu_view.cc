@@ -164,7 +164,7 @@ void MainMenuView::ButtonPressed(Button *button) {
 
 void MainMenuView::AnimateOut() {
   state_ = kMainMenuStateAnimatingOut;
-  animating_out_ticks_left_ = 120;
+  animating_out_ticks_left_ = 0;
 }
 
 void MainMenuView::PressedStart() {
