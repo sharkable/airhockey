@@ -14,6 +14,9 @@
 
 #include "soundengine/sound_player.h"
 
+const int kLeftMargin = 18;
+const int kSliderWidth = 271;
+
 SoundSlider::SoundSlider(sp<GameEngine> game_engine, GamePoint position)
     : position_(position),
       empty_sprite_(game_engine, "sound_empty"),
@@ -28,7 +31,9 @@ SoundSlider::SoundSlider(sp<GameEngine> game_engine, GamePoint position)
 }
 
 GamePoint SoundSlider::ThumbPoint() {
-  return game_point_make(position_.x + 19 + (269.0 - thumb_sprite_.content_size().width)*value_, position_.y);
+  return game_point_make(position_.x + kLeftMargin +
+                             (kSliderWidth - thumb_sprite_.content_size().width) * value_,
+                         position_.y);
 }
 
 
@@ -38,9 +43,11 @@ void SoundSlider::Update() {
 }
 
 void SoundSlider::Render() {
-  double drawRatio = (269.0 - thumb_sprite_.content_size().width)/320.0 * value_ + (19.0 + thumb_sprite_.content_size().width/2)/320.0;
-  full_sprite_.DrawAtPointLeftRatio(position_, drawRatio);
-  empty_sprite_.DrawAtPointRightRatio(position_, 1.0 - drawRatio);
+  double sprite_width = full_sprite_.content_size().width;
+  double draw_ratio = (kSliderWidth - thumb_sprite_.content_size().width) / sprite_width * value_ +
+      (kLeftMargin + thumb_sprite_.content_size().width / 2) / sprite_width;
+  full_sprite_.DrawAtPointLeftRatio(position_, draw_ratio);
+  empty_sprite_.DrawAtPointRightRatio(position_, 1 - draw_ratio);
   thumb_sprite_.DrawAtPoint(ThumbPoint());
 }
 
@@ -64,17 +71,16 @@ void SoundSlider::TouchesMoved(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       GamePoint touchP = touches[i].location();
-      value_ += (touchP.x - last_touch_position_.x) / (269 - thumb_sprite_.content_size().width);
+      value_ +=
+          (touchP.x - last_touch_position_.x) / (kSliderWidth - thumb_sprite_.content_size().width);
       last_touch_position_ = touchP;
-      if (last_touch_position_.x < position_.x + 19) {
-        last_touch_position_.x = position_.x + 10;
-      } else if (last_touch_position_.x >= position_.x + 19 + (269.0 - thumb_sprite_.content_size().width)) {
-        last_touch_position_.x = position_.x + 19 + (269.0 - thumb_sprite_.content_size().width) - 1;
-      }
-      if (value_ < 0.0) {
-        value_ = 0.0;
-      } else if (value_ > 1.0) {
-        value_ = 1.0;
+      // Stop moving when we reach the ends. Lock into this value until the user retouches.
+      if (value_ < 0) {
+        value_ = 0;
+        TouchesEnded(touches);
+      } else if (value_ > 1) {
+        value_ = 1;
+        TouchesEnded(touches);
       }
       return;
     }
