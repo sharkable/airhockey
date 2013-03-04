@@ -247,6 +247,8 @@ void PlayView::Update() {
       AddEntity(go_);
       go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
       state_ = kPlayViewStatePlaying;
+      paddle_1_->set_active(true);
+      paddle_2_->set_active(true);
       SoundPlayer::instance()->playSound(kSoundStart);
     }
     
@@ -387,6 +389,8 @@ void PlayView::SetUpNewGame() {
   // Place paddles!
   paddle_1_->SetInitialPositionForPlayer(PLAYER_1);
   paddle_2_->SetInitialPositionForPlayer(PLAYER_2);
+  paddle_1_->set_active(false);
+  paddle_2_->set_active(false);
   
   // Place pucks!
   // First move them all out of the way. That way we can lay them out properly.
