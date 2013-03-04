@@ -18,11 +18,13 @@
 Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
                ComputerAI ai_level, vector<sp<Puck> > &pucks)
     : RoundThing(game_engine),
-      pucks_(pucks) {
-  player_id_ = player_id;
-  player_controlled_ = player_controlled;
-  ai_level_ = ai_level;
-
+      player_id_(player_id),
+      player_controlled_(player_controlled),
+      ai_level_(ai_level),
+      pucks_(pucks),
+      target_left_corner_(false),
+      target_right_corner_(false),
+      target_away_from_corner_(false) {
   if (player_id == PLAYER_1) {
     switch (size) {
       case psSmall:
@@ -120,7 +122,7 @@ void Paddle::RunAITick() {
   }
   
   // Find the puck that will reach the paddle first.
-  Puck* target = NULL;
+  Puck *target = NULL;
   double bestTime;
   
   for (int i = 0; i < pucks_.size(); i++) {
@@ -138,7 +140,8 @@ void Paddle::RunAITick() {
     if (puck->y() - puck->radius() > SCREEN_HEIGHT/2) {
       continue;
     }
-    if (target == NULL || timeToReach < bestTime || (timeToReach == bestTime && puck->y() < target->y())) {
+    if (target == NULL || timeToReach < bestTime ||
+        (timeToReach == bestTime && puck->y() < target->y())) {
       target = puck;
       bestTime = timeToReach;
     }
@@ -151,7 +154,8 @@ void Paddle::RunAITick() {
   double targetX;
   double targetY;
   
-  if (!target_away_from_corner_ && target && target->y() <= RINK_TOP_Y + radius_ && fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
+  if (!target_away_from_corner_ && target && target->y() <= RINK_TOP_Y + radius_ &&
+      fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
     if (target->x() < SCREEN_WIDTH / 2) {
       target_left_corner_ = true;
     } else {

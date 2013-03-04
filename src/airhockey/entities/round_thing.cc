@@ -19,14 +19,34 @@
 
 RoundThing::RoundThing(sp<GameEngine> game_engine)
     : sprite_(game_engine),
-      active_(true),
-      grabbed_(false) {
+      x_(0),
+      y_(0),
+      old_x_(0),
+      old_y_(0),
+      vx_(0),
+      vy_(0),
+      radius_(0),
+      mass_(0),
+      friction_(0),
+      grabbed_(false),
+      grabbed_touch_(NULL),
+      active_(true) {
 }
 
 RoundThing::RoundThing(sp<GameEngine> game_engine, string texture_name)
     : sprite_(game_engine, texture_name),
-      active_(true),
-      grabbed_(false) {
+      x_(0),
+      y_(0),
+      old_x_(0),
+      old_y_(0),
+      vx_(0),
+      vy_(0),
+      radius_(0),
+      mass_(0),
+      friction_(0),
+      grabbed_(false),
+      grabbed_touch_(NULL),
+      active_(true) {
 }
 
 RoundThing::~RoundThing() {
