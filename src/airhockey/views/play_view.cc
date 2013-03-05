@@ -111,28 +111,29 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   Sprite pause_button_sprite(game_engine, "pause_button");
   Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
-  bool is_iphone = true;  // (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
-
-  if (!is_iphone) {
-    GamePoint pause_button_pos_1 = game_point_make(0, 0);
-    pause_button_1_.reset(new Button());
-    pause_button_1_->set_normal_sprite(pause_button_sprite);
-    pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
-    pause_button_1_->set_position(pause_button_pos_1);
-    pause_button_1_->set_delegate(this);
-    AddEntity(pause_button_1_);
-  }
-
-  GamePoint pause_button_pos_2 =
+  GamePoint pause_button_pos_1 =
       game_point_make(SCREEN_WIDTH - pause_button_sprite.content_size().width,
-                      SCREEN_HEIGHT - pause_button_sprite.content_size().height +
-                          (false ? (27 * 768.0/320.0) : 0));
-  pause_button_2_.reset(new Button());
-  pause_button_2_->set_normal_sprite(pause_button_sprite);
-  pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite);
-  pause_button_2_->set_position(pause_button_pos_2);
-  pause_button_2_->set_delegate(this);
-  AddEntity(pause_button_2_);
+                      SCREEN_HEIGHT - pause_button_sprite.content_size().height);
+  pause_button_1_.reset(new Button());
+  pause_button_1_->set_normal_sprite(pause_button_sprite);
+  pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
+  pause_button_1_->set_position(pause_button_pos_1);
+  pause_button_1_->set_delegate(this);
+  AddEntity(pause_button_1_);
+
+  if (num_players == 2) {
+    // TODO: This is needed because of crappy texture management.
+    Sprite pause_button_sprite_2(game_engine, "pause_button");
+    Sprite pause_button_pressed_sprite_2(game_engine, "pause_button_pressed");
+
+    GamePoint pause_button_pos_2 = game_point_make(0, 0);
+    pause_button_2_.reset(new Button());
+    pause_button_2_->set_normal_sprite(pause_button_sprite_2);
+    pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite_2);
+    pause_button_2_->set_position(pause_button_pos_2);
+    pause_button_2_->set_delegate(this);
+    AddEntity(pause_button_2_);
+  }
 
 //  if (isIPhone) {
 //    if (IS_FREE) {
