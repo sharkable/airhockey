@@ -105,26 +105,30 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
     double wx = vx_ - ux;
     double wy = vy_ - uy;
     
-    double othervDn_ = other->vx() * dx + other->vy() * dy;
-    double otherux_ = dx * othervDn_;
-    double otheruy_ = dy * othervDn_;
+    double othervDn_ = other->vx() * -dx + other->vy() * -dy;
+    double otherux_ = -dx * othervDn_;
+    double otheruy_ = -dy * othervDn_;
     double otherwx_ = other->vx() - otherux_;
     double otherwy_ = other->vy() - otheruy_;
     
-    double newux_ = (ux * (mass_ - other->mass()) + 2.0 * other->mass() * otherux_) / (mass_ + other->mass());
-    double newuy_ = (uy * (mass_ - other->mass()) + 2.0 * other->mass() * otheruy_) / (mass_ + other->mass());  
+    double newux_ = (ux * fabs(mass_ - other->mass()) - 2.0 * other->mass() * otherux_) /
+        (mass_ + other->mass());
+    double newuy_ = (uy * fabs(mass_ - other->mass()) - 2.0 * other->mass() * otheruy_) /
+        (mass_ + other->mass());
     
-    double newother_ux_ = (otherux_ * (other->mass() - mass_) + 2.0 * mass_ * ux) / (mass_ + other->mass());
-    double newother_uy_ = (otheruy_ * (other->mass() - mass_) + 2.0 * mass_ * uy) / (mass_ + other->mass());    
+    double newother_ux_ = (otherux_ * fabs(other->mass() - mass_) - 2.0 * mass_ * ux) /
+        (mass_ + other->mass());
+    double newother_uy_ = (otheruy_ * fabs(other->mass() - mass_) - 2.0 * mass_ * uy) /
+        (mass_ + other->mass());
     
     if (!is_grabbed() && IsMovable()) {
-      vx_ = newux_ + wx;
-      vy_ = newuy_ + wy;
+      vx_ = wx - newux_;
+      vy_ = wy - newuy_;
     }
     
     if (!other->is_grabbed() && other->IsMovable()) {
-      other->set_vx(newother_ux_ + otherwx_);
-      other->set_vy(newother_uy_ + otherwy_);
+      other->set_vx(otherwx_ - newother_ux_);
+      other->set_vy(otherwy_ - newother_uy_);
     }
 
     double newVSquared = vx_ * vx_ + vy_ * vy_;
