@@ -135,58 +135,6 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
     AddEntity(pause_button_2_);
   }
 
-//  if (isIPhone) {
-//    if (IS_FREE) {
-//      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 278 + 26, 150, 35)];
-//      player1Wins_.textColor = [UIColor whiteColor];
-//    } else {
-//      player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, 448, 150, 35)];
-//      player1Wins_.textColor = [UIColor grayColor];
-//    }
-//  } else {
-//    player1Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 644, 150, 35)];
-//    player1Wins_.textColor = [UIColor whiteColor];
-//  }
-//  player1Wins_.backgroundColor = [UIColor clearColor];
-//  player1Wins_.textAlignment = UITextAlignmentLeft;
-//  if (isIPhone) {
-//    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-//  } else {
-//    player1Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
-//  }
-//  
-//  if (isIPhone) {
-//    if (IS_FREE) {
-//      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(47, 155 + 26, 150, 35)];
-//      player2Wins_.textColor = [UIColor whiteColor];
-//    } else {
-//      player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(5, -5, 150, 35)];
-//      player2Wins_.textColor = [UIColor grayColor];
-//    }
-//  } else {
-//    player2Wins_ = [[UILabel alloc] initWithFrame:CGRectMake(106, 324, 150, 35)];
-//    player2Wins_.textColor = [UIColor whiteColor];
-//  }
-//  player2Wins_.backgroundColor = [UIColor clearColor];
-//  if (isIPhone) {
-//    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-//  } else {
-//    player2Wins_.font = [UIFont fontWithName:@"Helvetica-Bold" size:35];
-//  }
-//  if (num_players_ == 2) {
-//    player2Wins_.transform = CGAffineTransformMakeRotation(M_PI); 
-//    player2Wins_.textAlignment = UITextAlignmentRight;
-//  } else {
-//    player2Wins_.textAlignment = UITextAlignmentLeft;
-//  }
-//  
-//  if (!IS_FREE && isIPhone) {
-//    player1Wins_.text = @"0 wins";
-//    player2Wins_.text = @"0 wins";
-//    getGameEngine()->addUIView(player1Wins_);
-//    getGameEngine()->addUIView(player2Wins_);
-//  }
-  
   give_extra_puck_to_player_ = PLAYER_1;
   player_1_win_count_ = 0;
   player_2_win_count_ = 0;
@@ -340,10 +288,6 @@ void PlayView::ButtonPressed(Button *button) {
 
 void PlayView::RematchPressed() {
   //  [FlurryAnalytics logEvent:@"REMATCH"];
-  //  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-  //    [player1Wins_ removeFromSuperview];
-  //    [player2Wins_ removeFromSuperview];
-  //  }
   SetUpNewGame();
   //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
   //    [getGameEngine()->adEngine() removeAd];
@@ -351,8 +295,6 @@ void PlayView::RematchPressed() {
 }
 
 void PlayView::MenuPressed() {
-  //  [player1Wins_ removeFromSuperview];
-  //  [player2Wins_ removeFromSuperview];
   game_engine()->PopView();
   game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
   //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -457,15 +399,6 @@ void PlayView::FinishGameWithWinner(int playerId) {
     }
   }
 
-//  player1Wins_.text =
-//      [NSString stringWithFormat:@"%d win%@", player_1_win_count_, player_1_win_count_ == 1 ? @"" : @"s"];
-//  player2Wins_.text =
-//      [NSString stringWithFormat:@"%d win%@", player_2_win_count_, player_2_win_count_ == 1 ? @"" : @"s"];
-//  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    getGameEngine()->addUIView(player1Wins_);
-//    getGameEngine()->addUIView(player2Wins_);
-//  }
-  
   game_engine()->PushView(sp<GameMenuView>(new GameMenuView(game_engine(), this, true)));
   
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

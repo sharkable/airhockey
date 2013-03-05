@@ -86,9 +86,6 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   int give_extra_puck_to_player_;
   int player_1_win_count_;
   int player_2_win_count_;
-  
-// TODO UILabel *player1Wins_;
-//  UILabel *player2Wins_;
 };
 
 #endif
