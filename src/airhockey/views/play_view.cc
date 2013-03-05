@@ -28,8 +28,6 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   post_3_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_TOP_Y));
   post_4_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1));
 
-  sound_slider_.reset(new SoundSlider(game_engine, game_point_make(331, 336)));
-
   rink_.reset(new Rink());
   AddEntity(rink_);
   
@@ -110,43 +108,6 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
                                                  game_engine->position("rink_right"));
   AddEntity(right_rink_border);
       
-  Sprite rematch_button_sprite(game_engine, "rematch_button");
-  Sprite rematch_button_pressed_sprite(game_engine, "rematch_button_pressed");
-  GamePoint rematch_button_pos =
-      game_point_make((SCREEN_WIDTH - rematch_button_sprite.content_size().width) / 2, 441);
-  rematch_button_.reset(new Button());
-  rematch_button_->set_normal_sprite(rematch_button_sprite);
-  rematch_button_->set_pressed_sprite(rematch_button_pressed_sprite);
-  rematch_button_->set_position(rematch_button_pos);
-  rematch_button_->set_delegate(this);
-
-  Sprite menu_button_sprite(game_engine, "menu_button");
-  Sprite menu_button_pressed_sprite(game_engine, "menu_button_pressed");
-  GamePoint menu_button_pos =
-      game_point_make((SCREEN_WIDTH - menu_button_sprite.content_size().width) / 2, 546);
-  menu_button_.reset(new Button());
-  menu_button_->set_normal_sprite(menu_button_sprite);
-  menu_button_->set_pressed_sprite(menu_button_pressed_sprite);
-  menu_button_->set_position(menu_button_pos);
-  menu_button_->set_delegate(this);
-
-  Sprite continue_button_sprite(game_engine, "continue_button");
-  Sprite continue_button_pressed_sprite(game_engine, "continue_button_pressed");
-  GamePoint continue_button_pos =
-      game_point_make((SCREEN_WIDTH - continue_button_sprite.content_size().width) / 2, 441);
-  continue_button_.reset(new Button());
-  continue_button_->set_normal_sprite(continue_button_sprite);
-  continue_button_->set_pressed_sprite(continue_button_pressed_sprite);
-  continue_button_->set_position(continue_button_pos);
-  continue_button_->set_delegate(this);
-
-  Sprite menu_background_sprite(game_engine, "game_menu_bg");
-  GamePoint menu_background_position =
-      game_point_make((SCREEN_WIDTH - menu_background_sprite.content_size().width) / 2, 306);
-  menu_background_.reset(new SimpleItem());
-  menu_background_->add_sprite(menu_background_sprite);
-  menu_background_->set_position(menu_background_position);
-
   Sprite pause_button_sprite(game_engine, "pause_button");
   Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
@@ -366,15 +327,43 @@ void PlayView::Update() {
 // ButtonDelegate
 
 void PlayView::ButtonPressed(Button *button) {
-  if (button == rematch_button_.get()) {
-    RematchPressed();
-  } else if (button == menu_button_.get()) {
-    MenuPressed();
-  } else if (button == continue_button_.get()) {
-    ContinuePressed();
-  } else if (button == pause_button_1_.get() || button == pause_button_2_.get()) {
+  if (button == pause_button_1_.get() || button == pause_button_2_.get()) {
     PausePressed();
+  } else {
+    assert(false);
   }
+}
+
+
+// GameMenuViewDelegate
+
+void PlayView::RematchPressed() {
+  //  [FlurryAnalytics logEvent:@"REMATCH"];
+  //  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+  //    [player1Wins_ removeFromSuperview];
+  //    [player2Wins_ removeFromSuperview];
+  //  }
+  SetUpNewGame();
+  //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+  //    [getGameEngine()->adEngine() removeAd];
+  //  }
+}
+
+void PlayView::MenuPressed() {
+  //  [player1Wins_ removeFromSuperview];
+  //  [player2Wins_ removeFromSuperview];
+  game_engine()->PopView();
+  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
+  //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+  //    [getGameEngine()->adEngine() removeAd];
+  //  }
+}
+
+void PlayView::ContinuePressed() {
+  state_ = pre_pause_state_;
+  //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+  //    [getGameEngine()->adEngine() removeAd];
+  //  }
 }
 
 
@@ -413,10 +402,6 @@ void PlayView::SetUpNewGame() {
 
   player_1_score_->set_sprite(0);
   player_2_score_->set_sprite(0);
-  RemoveEntity(menu_background_);
-  RemoveEntity(sound_slider_);
-  RemoveEntity(rematch_button_);
-  RemoveEntity(continue_button_);
   RemoveEntity(win_);
   RemoveEntity(lose_);
   
@@ -480,10 +465,7 @@ void PlayView::FinishGameWithWinner(int playerId) {
 //    getGameEngine()->addUIView(player2Wins_);
 //  }
   
-  AddEntity(menu_background_);
-  AddEntity(sound_slider_);
-  AddEntity(rematch_button_);
-  AddEntity(continue_button_);
+  game_engine()->PushView(sp<GameMenuView>(new GameMenuView(game_engine(), this, true)));
   
 //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //    [getGameEngine()->adEngine() addAdAtPoint:screen_point_make((SCREEN_WIDTH - 320) / 2, 385)];
@@ -492,48 +474,11 @@ void PlayView::FinishGameWithWinner(int playerId) {
 //  }
 }
 
-void PlayView::RematchPressed() {
-//  [FlurryAnalytics logEvent:@"REMATCH"];
-//  if (IS_FREE || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    [player1Wins_ removeFromSuperview];
-//    [player2Wins_ removeFromSuperview];
-//  }
-  SetUpNewGame();
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    [getGameEngine()->adEngine() removeAd];
-//  }  
-}
-
-
-void PlayView::MenuPressed() {
-//  [player1Wins_ removeFromSuperview];
-//  [player2Wins_ removeFromSuperview];
-  game_engine()->PopView();
-  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    [getGameEngine()->adEngine() removeAd];
-//  }
-}
-
-void PlayView::ContinuePressed() {
-  state_ = pre_pause_state_;
-  RemoveEntity(menu_background_);
-  RemoveEntity(sound_slider_);
-  RemoveEntity(menu_button_);
-  RemoveEntity(continue_button_);
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    [getGameEngine()->adEngine() removeAd];
-//  }
-}
-
 void PlayView::PausePressed() {
   if (state_ != kPlayViewStateFinished && state_ != kPlayViewStatePaused) {
     pre_pause_state_ = state_;
     state_ = kPlayViewStatePaused;
-    AddEntity(menu_background_);
-    AddEntity(sound_slider_);
-    AddEntity(menu_button_);
-    AddEntity(continue_button_);
+    game_engine()->PushView(sp<GameMenuView>(new GameMenuView(game_engine(), this, false)));
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 //      [getGameEngine()->adEngine() addAdAtPoint:screen_point_make((SCREEN_WIDTH - 320)/2, 385)];
 //    }

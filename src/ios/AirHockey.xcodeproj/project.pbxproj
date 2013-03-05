@@ -584,6 +584,8 @@
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FEA8E5C714F97CB00084E117 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FEA8E5C814F97CB00084E117 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FECD493E16E59C940081B089 /* game_menu_view.cc in Sources */ = {isa = PBXBuildFile; fileRef = FECD493C16E59C940081B089 /* game_menu_view.cc */; };
+		FECD493F16E59C940081B089 /* game_menu_view.cc in Sources */ = {isa = PBXBuildFile; fileRef = FECD493C16E59C940081B089 /* game_menu_view.cc */; };
 		FED7989316CDB48400EF724B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FED7989216CDB48400EF724B /* ViewController.mm */; };
 		FED7989416CDB52800EF724B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FED7989216CDB48400EF724B /* ViewController.mm */; };
 		FED7989816CEC7A900EF724B /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FED7989716CEC7A900EF724B /* libFlurry.a */; };
@@ -971,6 +973,8 @@
 		FEA5DC4916D47BDD0009487C /* score_final.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = score_final.mp3; sourceTree = "<group>"; };
 		FEA5DC4A16D47BDD0009487C /* start.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = start.wav; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FECD493C16E59C940081B089 /* game_menu_view.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_menu_view.cc; sourceTree = "<group>"; };
+		FECD493D16E59C940081B089 /* game_menu_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_menu_view.h; sourceTree = "<group>"; };
 		FED7989116CDB48400EF724B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FED7989216CDB48400EF724B /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		FED7989616CEC7A900EF724B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
@@ -1263,6 +1267,8 @@
 		FE413FD016C9CD57001BF838 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				FECD493C16E59C940081B089 /* game_menu_view.cc */,
+				FECD493D16E59C940081B089 /* game_menu_view.h */,
 				FE413FD116C9CD57001BF838 /* main_menu_view.cc */,
 				FE413FD216C9CD57001BF838 /* main_menu_view.h */,
 				FE413FD316C9CD57001BF838 /* play_view.cc */,
@@ -2470,6 +2476,7 @@
 				FEF47B5016DD60D30096F3D4 /* animation.cc in Sources */,
 				FEF47B5316DE97170096F3D4 /* animatable.cc in Sources */,
 				FE91224A16E1E8450038510E /* rink_view.cpp in Sources */,
+				FECD493E16E59C940081B089 /* game_menu_view.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2528,6 +2535,7 @@
 				FEF47B5116DD60D30096F3D4 /* animation.cc in Sources */,
 				FEF47B5416DE97170096F3D4 /* animatable.cc in Sources */,
 				FE91224B16E1E8450038510E /* rink_view.cpp in Sources */,
+				FECD493F16E59C940081B089 /* game_menu_view.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

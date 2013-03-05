@@ -21,6 +21,7 @@ using namespace std;
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/Rink.h"
 #include "airhockey/entities/sound_slider.h"
+#include "airhockey/views/game_menu_view.h"
 #include "airhockey/const.h"
 
 class GameEngine;
@@ -34,25 +35,27 @@ typedef enum {
   kPlayViewStatePaused
 } PlayViewState;
 
-class PlayView : public EngineView, private ButtonDelegate {
+class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate {
  public:
   PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, ComputerAI difficulty,
            PaddleSize paddle_size);
-  
+
   // EngineView
   void Update();
 
   // ButtonDelegate
   void ButtonPressed(Button *button);
-  
- private:
-  void SetUpNewGame();
-  void FinishGameWithWinner(int player_id);
+
+  // GameMenuViewDelegate
   void RematchPressed();
   void MenuPressed();
   void ContinuePressed();
+
+ private:
+  void SetUpNewGame();
+  void FinishGameWithWinner(int player_id);
   void PausePressed();
-  
+
   int num_players_;
   int num_pucks_;
   int num_active_pucks_;
@@ -72,11 +75,6 @@ class PlayView : public EngineView, private ButtonDelegate {
   sp<SimpleItem> lose_;
   sp<SimpleItem> get_ready_;
   sp<SimpleItem> go_;
-  sp<SoundSlider> sound_slider_;
-  sp<SimpleItem> menu_background_;
-  sp<Button> rematch_button_;
-  sp<Button> menu_button_;
-  sp<Button> continue_button_;
   sp<Button> pause_button_1_;
   sp<Button> pause_button_2_;
   

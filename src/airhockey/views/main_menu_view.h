@@ -13,7 +13,7 @@
 #import "gameengine/entities/button.h"
 #import "gameengine/entities/multi_select.h"
 
-#import "airhockey/entities/sound_slider.h"
+class SoundSlider;
 
 typedef enum {
   kMainMenuStateRunning = 0,
