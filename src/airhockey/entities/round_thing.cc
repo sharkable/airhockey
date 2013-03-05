@@ -70,29 +70,34 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
   double dy = y_ - other->y();
   double radius_total = other->radius() + radius_;
 
-  if (dx * dx + dy * dy <= radius_total * radius_total) {
+  double distance_squared = dx * dx + dy * dy;
+  if (distance_squared <= radius_total * radius_total) {
     // Normalize N
-    double distance = sqrt(dx * dx + dy * dy);
+
+    double distance = sqrt(distance_squared);
     double dx_normal = dx / distance;
     double dy_normal = dy / distance;
-    
-    // *** Move the round things outside of each other. ***
+
+    // Move the round things outside of each other.
+
     double v_fraction = mass_ / (other->mass() + mass_);
-    
+
     if ((grabbed_ && !other->is_grabbed() && other->IsMovable()) || !IsMovable()) {
       v_fraction = 1;
     } else if ((!grabbed_ && other->is_grabbed()) || !other->IsMovable()) {
       v_fraction = 0;
     }
-    
-    double overlap = sqrt(radius_total * radius_total) - distance;
-    other->set_x(other->x() - dx_normal * overlap * v_fraction);
-    other->set_y(other->y() - dy_normal * overlap * v_fraction);
-    v_fraction = 1 - v_fraction;
-    x_ += dx_normal * overlap * v_fraction;
-    y_ += dy_normal * overlap * v_fraction;
-    
-    // *** Now change the direction based on the bounce. ***
+
+    double overlap = radius_total - distance;
+    double other_move_distance = overlap * v_fraction;
+    other->set_x(other->x() - dx_normal * other_move_distance);
+    other->set_y(other->y() - dy_normal * other_move_distance);
+
+    double move_distance = overlap - other_move_distance;
+    x_ += dx_normal * move_distance;
+    y_ += dy_normal * move_distance;
+
+    // Now change the direction based on the bounce.
     
     // Based on this: http://stackoverflow.com/questions/573084/how-to-calculate-bounce-angle
     // But it had some problems.
@@ -118,12 +123,12 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
         (mass_ + other->mass());
     double new_other_uy = (other_uy * fabs(other->mass() - mass_) - 2.0 * mass_ * uy) /
         (mass_ + other->mass());
-    
+
     if (!is_grabbed() && IsMovable()) {
       vx_ = wx - new_ux;
       vy_ = wy - new_uy;
     }
-    
+
     if (!other->is_grabbed() && other->IsMovable()) {
       other->set_vx(other_wx - new_other_ux);
       other->set_vy(other_wy - new_other_uy);
@@ -131,7 +136,7 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
 
     double v_squared = vx_ * vx_ + vy_ * vy_;
     double other_v_squared = other->vx() * other->vx() + other->vy() * other->vy();
-    
+
     if (v_squared > (MAX_SPEED * MAX_SPEED)) {
       double new_v = sqrt(v_squared);
       double new_ratio = MAX_SPEED / new_v;
