@@ -93,7 +93,7 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
     other->set_x(other->x() - dx_normal * other_move_distance);
     other->set_y(other->y() - dy_normal * other_move_distance);
 
-    double move_distance = overlap - other_move_distance;
+    double move_distance = overlap - other_move_distance + 1;
     x_ += dx_normal * move_distance;
     y_ += dy_normal * move_distance;
 
