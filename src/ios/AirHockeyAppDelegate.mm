@@ -62,12 +62,24 @@
     viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1024)];
   }
 
-  NSString *mainMenuPositionsFilename =
-      [[NSBundle mainBundle] pathForResource:@"main_menu" ofType:@"xml"];
-  NSString *rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink" ofType:@"xml"];
-  NSString *playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"xml"];
-  NSString *gameMenuPositionsFilename =
-      [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
+  NSString *mainMenuPositionsFilename = nil;
+  NSString *rinkPositionsFilename = nil;
+  NSString *playPositionsFilename = nil;
+  NSString *gameMenuPositionsFilename = nil;
+
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    mainMenuPositionsFilename =
+        [[NSBundle mainBundle] pathForResource:@"main_menu_iphone" ofType:@"xml"];
+    rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink_iphone" ofType:@"xml"];
+    playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"xml"];
+    gameMenuPositionsFilename =
+    [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
+  } else {
+    mainMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"main_menu" ofType:@"xml"];
+    rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink" ofType:@"xml"];
+    playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"xml"];
+    gameMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
+  }
   viewController_.gameEngine->load_positions(TypeUtil::NSString2string(mainMenuPositionsFilename));
   viewController_.gameEngine->load_positions(TypeUtil::NSString2string(rinkPositionsFilename));
   viewController_.gameEngine->load_positions(TypeUtil::NSString2string(playPositionsFilename));
