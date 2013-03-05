@@ -66,9 +66,12 @@
       [[NSBundle mainBundle] pathForResource:@"main_menu" ofType:@"xml"];
   NSString *rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink" ofType:@"xml"];
   NSString *playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"xml"];
+  NSString *gameMenuPositionsFilename =
+      [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
   viewController_.gameEngine->load_positions(TypeUtil::NSString2string(mainMenuPositionsFilename));
   viewController_.gameEngine->load_positions(TypeUtil::NSString2string(rinkPositionsFilename));
   viewController_.gameEngine->load_positions(TypeUtil::NSString2string(playPositionsFilename));
+  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(gameMenuPositionsFilename));
 
   sp<EngineView> rootView =
       sp<EngineView>(new RinkView(sp<GameEngine>(viewController_.gameEngine)));

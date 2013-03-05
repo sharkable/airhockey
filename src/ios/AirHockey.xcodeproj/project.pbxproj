@@ -586,6 +586,8 @@
 		FEA8E5C814F97CB00084E117 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
 		FECD493E16E59C940081B089 /* game_menu_view.cc in Sources */ = {isa = PBXBuildFile; fileRef = FECD493C16E59C940081B089 /* game_menu_view.cc */; };
 		FECD493F16E59C940081B089 /* game_menu_view.cc in Sources */ = {isa = PBXBuildFile; fileRef = FECD493C16E59C940081B089 /* game_menu_view.cc */; };
+		FECD494116E5B14B0081B089 /* game_menu.xml in Resources */ = {isa = PBXBuildFile; fileRef = FECD494016E5B14B0081B089 /* game_menu.xml */; };
+		FECD494216E5B14B0081B089 /* game_menu.xml in Resources */ = {isa = PBXBuildFile; fileRef = FECD494016E5B14B0081B089 /* game_menu.xml */; };
 		FED7989316CDB48400EF724B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FED7989216CDB48400EF724B /* ViewController.mm */; };
 		FED7989416CDB52800EF724B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FED7989216CDB48400EF724B /* ViewController.mm */; };
 		FED7989816CEC7A900EF724B /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FED7989716CEC7A900EF724B /* libFlurry.a */; };
@@ -975,6 +977,7 @@
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECD493C16E59C940081B089 /* game_menu_view.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_menu_view.cc; sourceTree = "<group>"; };
 		FECD493D16E59C940081B089 /* game_menu_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_menu_view.h; sourceTree = "<group>"; };
+		FECD494016E5B14B0081B089 /* game_menu.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = game_menu.xml; sourceTree = "<group>"; };
 		FED7989116CDB48400EF724B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FED7989216CDB48400EF724B /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		FED7989616CEC7A900EF724B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
@@ -1806,6 +1809,7 @@
 		FEA5DC3F16D47BDD0009487C /* positions */ = {
 			isa = PBXGroup;
 			children = (
+				FECD494016E5B14B0081B089 /* game_menu.xml */,
 				FE91222116E1C0480038510E /* main_menu.xml */,
 				FE91223F16E1DC300038510E /* play.xml */,
 				FE91222216E1C0480038510E /* rink.xml */,
@@ -2172,6 +2176,7 @@
 				FE91224616E1DC7B0038510E /* pause_button@2x.tx in Resources */,
 				FE233E9416E2FB55001B13A8 /* LaunchImage-Portrait@2x~ipad.png in Resources */,
 				FE233E9616E2FB55001B13A8 /* LaunchImage-Portrait~ipad.png in Resources */,
+				FECD494116E5B14B0081B089 /* game_menu.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2415,6 +2420,7 @@
 				FE91224716E1DC7B0038510E /* pause_button@2x.tx in Resources */,
 				FE233E9516E2FB55001B13A8 /* LaunchImage-Portrait@2x~ipad.png in Resources */,
 				FE233E9716E2FB55001B13A8 /* LaunchImage-Portrait~ipad.png in Resources */,
+				FECD494216E5B14B0081B089 /* game_menu.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
