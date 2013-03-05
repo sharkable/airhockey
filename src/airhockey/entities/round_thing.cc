@@ -65,86 +65,84 @@ void RoundThing::ApplyFriction() {
 void RoundThing::MaybeBounceOff(RoundThing *other) {
   // TODO optimize this function.
   // For now I'm just getting it to work.
-  
-  double dxFull = x_ - other->x();
-  double dyFull = y_ - other->y();
-  double radiusTotal = other->radius() + radius_;
-//  double v = sqrt(self.vx * self.vx + self.vy * self.vy);
-//  double otherV = sqrt(other.vx * other.vx + other.vy * other.vy);
-  
-  if (dxFull*dxFull + dyFull*dyFull <= radiusTotal*radiusTotal) {    
+
+  double dx = x_ - other->x();
+  double dy = y_ - other->y();
+  double radius_total = other->radius() + radius_;
+
+  if (dx * dx + dy * dy <= radius_total * radius_total) {
     // Normalize N
-    double nL = sqrt(dxFull*dxFull + dyFull*dyFull);
-    double dx = dxFull / nL;
-    double dy = dyFull / nL;
+    double distance = sqrt(dx * dx + dy * dy);
+    double dx_normal = dx / distance;
+    double dy_normal = dy / distance;
     
     // *** Move the round things outside of each other. ***
-    double vFraction = mass_ / (other->mass() + mass_);
+    double v_fraction = mass_ / (other->mass() + mass_);
     
     if ((grabbed_ && !other->is_grabbed() && other->IsMovable()) || !IsMovable()) {
-      vFraction = 1;
+      v_fraction = 1;
     } else if ((!grabbed_ && other->is_grabbed()) || !other->IsMovable()) {
-      vFraction = 0;
+      v_fraction = 0;
     }
     
-    double diff = sqrt(radiusTotal*radiusTotal) - nL;
-    other->set_x(other->x() - dx * diff * vFraction);
-    other->set_y(other->y() - dy * diff * vFraction);
-    vFraction = 1 - vFraction;
-    x_ += dx * diff * vFraction;
-    y_ += dy * diff * vFraction;
+    double overlap = sqrt(radius_total * radius_total) - distance;
+    other->set_x(other->x() - dx_normal * overlap * v_fraction);
+    other->set_y(other->y() - dy_normal * overlap * v_fraction);
+    v_fraction = 1 - v_fraction;
+    x_ += dx_normal * overlap * v_fraction;
+    y_ += dy_normal * overlap * v_fraction;
     
     // *** Now change the direction based on the bounce. ***
     
     // Based on this: http://stackoverflow.com/questions/573084/how-to-calculate-bounce-angle
     // But it had some problems.
     // Looked at Wikipedia dot product article to help.
-    double vDn = vx_ * dx + vy_ * dy;
-    double ux = dx * vDn;
-    double uy = dy * vDn;
+    double v_dot_n = vx_ * dx_normal + vy_ * dy_normal;
+    double ux = dx_normal * v_dot_n;
+    double uy = dy_normal * v_dot_n;
     double wx = vx_ - ux;
     double wy = vy_ - uy;
     
-    double othervDn_ = other->vx() * -dx + other->vy() * -dy;
-    double otherux_ = -dx * othervDn_;
-    double otheruy_ = -dy * othervDn_;
-    double otherwx_ = other->vx() - otherux_;
-    double otherwy_ = other->vy() - otheruy_;
+    double other_v_dot_n = other->vx() * -dx_normal + other->vy() * -dy_normal;
+    double other_ux = -dx_normal * other_v_dot_n;
+    double other_uy = -dy_normal * other_v_dot_n;
+    double other_wx = other->vx() - other_ux;
+    double other_wy = other->vy() - other_uy;
     
-    double newux_ = (ux * fabs(mass_ - other->mass()) - 2.0 * other->mass() * otherux_) /
+    double new_ux = (ux * fabs(mass_ - other->mass()) - 2.0 * other->mass() * other_ux) /
         (mass_ + other->mass());
-    double newuy_ = (uy * fabs(mass_ - other->mass()) - 2.0 * other->mass() * otheruy_) /
+    double new_uy = (uy * fabs(mass_ - other->mass()) - 2.0 * other->mass() * other_uy) /
         (mass_ + other->mass());
     
-    double newother_ux_ = (otherux_ * fabs(other->mass() - mass_) - 2.0 * mass_ * ux) /
+    double new_other_ux = (other_ux * fabs(other->mass() - mass_) - 2.0 * mass_ * ux) /
         (mass_ + other->mass());
-    double newother_uy_ = (otheruy_ * fabs(other->mass() - mass_) - 2.0 * mass_ * uy) /
+    double new_other_uy = (other_uy * fabs(other->mass() - mass_) - 2.0 * mass_ * uy) /
         (mass_ + other->mass());
     
     if (!is_grabbed() && IsMovable()) {
-      vx_ = wx - newux_;
-      vy_ = wy - newuy_;
+      vx_ = wx - new_ux;
+      vy_ = wy - new_uy;
     }
     
     if (!other->is_grabbed() && other->IsMovable()) {
-      other->set_vx(otherwx_ - newother_ux_);
-      other->set_vy(otherwy_ - newother_uy_);
+      other->set_vx(other_wx - new_other_ux);
+      other->set_vy(other_wy - new_other_uy);
     }
 
-    double newVSquared = vx_ * vx_ + vy_ * vy_;
-    double newOtherVSquared = other->vx() * other->vx() + other->vy() * other->vy();
+    double v_squared = vx_ * vx_ + vy_ * vy_;
+    double other_v_squared = other->vx() * other->vx() + other->vy() * other->vy();
     
-    if (newVSquared > (MAX_SPEED*MAX_SPEED)) {
-      double newV = sqrt(newVSquared);
-      double newRatio = MAX_SPEED / newV;
-      vx_ *= newRatio;
-      vy_ *= newRatio;
+    if (v_squared > (MAX_SPEED * MAX_SPEED)) {
+      double new_v = sqrt(v_squared);
+      double new_ratio = MAX_SPEED / new_v;
+      vx_ *= new_ratio;
+      vy_ *= new_ratio;
     }
-    if (newOtherVSquared > (MAX_SPEED*MAX_SPEED)) {
-      double newOtherV = sqrt(newOtherVSquared);
-      double newRatio = MAX_SPEED / newOtherV;
-      other->set_vx(other->vx() * newRatio);
-      other->set_vy(other->vy() * newRatio);
+    if (other_v_squared > (MAX_SPEED * MAX_SPEED)) {
+      double new_other_v = sqrt(other_v_squared);
+      double new_ratio = MAX_SPEED / new_other_v;
+      other->set_vx(other->vx() * new_ratio);
+      other->set_vy(other->vy() * new_ratio);
     }
 
     DidBounceOff(other);
