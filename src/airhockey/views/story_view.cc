@@ -20,7 +20,6 @@ StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
       game_point_make((screen_size.width - story_button_image.content_size().width) / 2,
                       (screen_size.height - story_button_image.content_size().height) / 2);
   double zoom = screen_size.width / story_button_image.content_size().width;
-  cout << "zoom: " << zoom << endl;
   story_button_.reset(new Button());
   story_button_->set_normal_sprite(story_button_image);
   story_button_->set_pressed_sprite(story_button_image_2);
