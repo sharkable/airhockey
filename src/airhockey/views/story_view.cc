@@ -13,32 +13,40 @@
 StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   // TODO We're loading this twice so the counter for this texture goes up. Rethink texture
   // management.
-  Sprite storyButtonImage = Sprite(game_engine, "story");
-  Sprite storyButtonImage2 = Sprite(game_engine, "story");
-  storyButton_.reset(new Button());
-  storyButton_->set_normal_sprite(storyButtonImage);
-  storyButton_->set_pressed_sprite(storyButtonImage2);
-  storyButton_->set_position(game_point_make(0, 0));
-  storyButton_->set_delegate(this);
-  AddEntity(storyButton_);
+  Sprite story_button_image = Sprite(game_engine, "story");
+  Sprite story_button_image_2 = Sprite(game_engine, "story");
+  GameSize screen_size = game_engine->game_size();
+  GamePoint button_position =
+      game_point_make((screen_size.width - story_button_image.content_size().width) / 2,
+                      (screen_size.height - story_button_image.content_size().height) / 2);
+  double zoom = screen_size.width / story_button_image.content_size().width;
+  cout << "zoom: " << zoom << endl;
+  story_button_.reset(new Button());
+  story_button_->set_normal_sprite(story_button_image);
+  story_button_->set_pressed_sprite(story_button_image_2);
+  story_button_->set_zoom(zoom);
+  story_button_->set_position(button_position);
+  story_button_->set_delegate(this);
+  AddEntity(story_button_);
 
-  Sprite aboutButtonImage = Sprite(game_engine, "about");
-  Sprite aboutButtonImage2 = Sprite(game_engine, "about");
-  aboutButton_.reset(new Button());
-  aboutButton_->set_normal_sprite(aboutButtonImage);
-  aboutButton_->set_pressed_sprite(aboutButtonImage2);
-  aboutButton_->set_position(game_point_make(0, 0));
-  aboutButton_->set_delegate(this);
+  Sprite about_button_image = Sprite(game_engine, "about");
+  Sprite about_button_image_2 = Sprite(game_engine, "about");
+  about_button_.reset(new Button());
+  about_button_->set_normal_sprite(about_button_image);
+  about_button_->set_pressed_sprite(about_button_image_2);
+  about_button_->set_zoom(zoom);
+  about_button_->set_position(button_position);
+  about_button_->set_delegate(this);
 }
 
 
 // ButtonDelegate
 
 void StoryView::ButtonPressed(Button *button) {
-  if (button == storyButton_.get()) {
-    RemoveEntity(storyButton_);
-    AddEntity(aboutButton_);    
-  } else if (button == aboutButton_.get()) {
+  if (button == story_button_.get()) {
+    RemoveEntity(story_button_);
+    AddEntity(about_button_);    
+  } else if (button == about_button_.get()) {
     game_engine()->PopView();
   }
 }

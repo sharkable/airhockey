@@ -20,8 +20,8 @@ class StoryView : public EngineView, ButtonDelegate {
   void ButtonPressed(Button *button);
 
  private:  
-  sp<Button> storyButton_;
-  sp<Button> aboutButton_;
+  sp<Button> story_button_;
+  sp<Button> about_button_;
 };
 
 #endif
