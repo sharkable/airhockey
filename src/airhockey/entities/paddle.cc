@@ -266,10 +266,12 @@ bool Paddle::ContainsTouch(Touch *touch) {
   }
   switch (player_id_) {
     case PLAYER_1:
-      return p.y >= SCREEN_HEIGHT/2 && p.y < SCREEN_HEIGHT;
+      return p.y >= SCREEN_HEIGHT / 2 && p.y < RINK_BOTTOM_Y && p.x >= RINK_LEFT_X &&
+          p.x < RINK_RIGHT_X;
       break;
     case PLAYER_2:
-      return p.y < SCREEN_HEIGHT/2 && p.y >= 0;
+      return p.y < SCREEN_HEIGHT / 2 && p.y >= RINK_TOP_Y && p.x >= RINK_LEFT_X &&
+          p.x < RINK_RIGHT_X;
       break;
   }
   return false;
