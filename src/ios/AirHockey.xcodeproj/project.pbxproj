@@ -149,6 +149,10 @@
 		FE0CE8F916E60DEC004C2090 /* pause_button_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE0CE8F616E60DEC004C2090 /* pause_button_iphone@2x.tx */; };
 		FE0CE8FA16E60DEC004C2090 /* pause_button_pressed_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE0CE8F716E60DEC004C2090 /* pause_button_pressed_iphone@2x.tx */; };
 		FE0CE8FB16E60DEC004C2090 /* pause_button_pressed_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE0CE8F716E60DEC004C2090 /* pause_button_pressed_iphone@2x.tx */; };
+		FE0CE8FD16E61161004C2090 /* about_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE0CE8FC16E61161004C2090 /* about_iphone.tx */; };
+		FE0CE8FE16E61161004C2090 /* about_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE0CE8FC16E61161004C2090 /* about_iphone.tx */; };
+		FE0CE90016E61178004C2090 /* about.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE0CE8FF16E61178004C2090 /* about.tx */; };
+		FE0CE90116E61178004C2090 /* about.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE0CE8FF16E61178004C2090 /* about.tx */; };
 		FE1FCE5516E198A50005AD8D /* 1_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE4716E198A40005AD8D /* 1_selected@2x.tx */; };
 		FE1FCE5616E198A50005AD8D /* 1_selected@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE4716E198A40005AD8D /* 1_selected@2x.tx */; };
 		FE1FCE5716E198A50005AD8D /* 1@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE4816E198A40005AD8D /* 1@2x.tx */; };
@@ -834,6 +838,8 @@
 		FE0CE8E516E60D6D004C2090 /* 7_points_iphone@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "7_points_iphone@2x.tx"; sourceTree = "<group>"; };
 		FE0CE8F616E60DEC004C2090 /* pause_button_iphone@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pause_button_iphone@2x.tx"; sourceTree = "<group>"; };
 		FE0CE8F716E60DEC004C2090 /* pause_button_pressed_iphone@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pause_button_pressed_iphone@2x.tx"; sourceTree = "<group>"; };
+		FE0CE8FC16E61161004C2090 /* about_iphone.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = about_iphone.tx; sourceTree = "<group>"; };
+		FE0CE8FF16E61178004C2090 /* about.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = about.tx; sourceTree = "<group>"; };
 		FE1FCE4716E198A40005AD8D /* 1_selected@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1_selected@2x.tx"; sourceTree = "<group>"; };
 		FE1FCE4816E198A40005AD8D /* 1@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1@2x.tx"; sourceTree = "<group>"; };
 		FE1FCE4916E198A50005AD8D /* 2_selected@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2_selected@2x.tx"; sourceTree = "<group>"; };
@@ -1672,6 +1678,7 @@
 				FE1FCE5416E198A50005AD8D /* 7@2x.tx */,
 				FE5142BB16E05D3300AFB0CE /* 7_selected.tx */,
 				FE1FCE5316E198A50005AD8D /* 7_selected@2x.tx */,
+				FE0CE8FF16E61178004C2090 /* about.tx */,
 				FE5142BD16E05D3300AFB0CE /* amazing.tx */,
 				FE9121F816E1A9FC0038510E /* amazing@2x.tx */,
 				FE5142BE16E05D3300AFB0CE /* amazing_selected.tx */,
@@ -1871,6 +1878,7 @@
 				FE0CE84316E5FF89004C2090 /* 7_iphone@2x.tx */,
 				FE51431D16E05D3400AFB0CE /* 7_selected_iphone.tx */,
 				FE0CE84416E5FF89004C2090 /* 7_selected_iphone@2x.tx */,
+				FE0CE8FC16E61161004C2090 /* about_iphone.tx */,
 				FE51431F16E05D3400AFB0CE /* amazing_iphone.tx */,
 				FE0CE84516E5FF89004C2090 /* amazing_iphone@2x.tx */,
 				FE51432016E05D3400AFB0CE /* amazing_selected_iphone.tx */,
@@ -2523,6 +2531,8 @@
 				FE0CE8F416E60D6D004C2090 /* 7_points_iphone@2x.tx in Resources */,
 				FE0CE8F816E60DEC004C2090 /* pause_button_iphone@2x.tx in Resources */,
 				FE0CE8FA16E60DEC004C2090 /* pause_button_pressed_iphone@2x.tx in Resources */,
+				FE0CE8FD16E61161004C2090 /* about_iphone.tx in Resources */,
+				FE0CE90016E61178004C2090 /* about.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2835,6 +2845,8 @@
 				FE0CE8F516E60D6D004C2090 /* 7_points_iphone@2x.tx in Resources */,
 				FE0CE8F916E60DEC004C2090 /* pause_button_iphone@2x.tx in Resources */,
 				FE0CE8FB16E60DEC004C2090 /* pause_button_pressed_iphone@2x.tx in Resources */,
+				FE0CE8FE16E61161004C2090 /* about_iphone.tx in Resources */,
+				FE0CE90116E61178004C2090 /* about.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
