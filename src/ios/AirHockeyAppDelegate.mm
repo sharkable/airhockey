@@ -71,9 +71,8 @@
     mainMenuPositionsFilename =
         [[NSBundle mainBundle] pathForResource:@"main_menu_iphone" ofType:@"xml"];
     rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink_iphone" ofType:@"xml"];
-    playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"xml"];
-    gameMenuPositionsFilename =
-    [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
+    playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play_iphone" ofType:@"xml"];
+    gameMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
   } else {
     mainMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"main_menu" ofType:@"xml"];
     rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink" ofType:@"xml"];
