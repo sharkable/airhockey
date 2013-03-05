@@ -109,7 +109,7 @@ void Paddle::RunAITick() {
   double speed = 0;
   switch (ai_level_) {
     case caiBad:
-      speed = 1;
+      speed = 0.4;
       break;
     case caiGood:
       speed = 1.5;
@@ -118,7 +118,7 @@ void Paddle::RunAITick() {
       speed = 2;
       break;
     case caiAmazing:
-      speed = 4.5;
+      speed = 2.5;
       break;
   }
   
