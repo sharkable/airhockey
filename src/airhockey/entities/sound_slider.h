@@ -32,7 +32,8 @@ class SoundSlider : public ViewEntity {
   Sprite thumb_sprite_;
   double value_;
   void *grabbed_touch_;
-  GamePoint last_touch_position_;
+  GamePoint start_touch_position_;
+  double start_value_;
 };
 
 #endif
