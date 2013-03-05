@@ -28,7 +28,7 @@ class Paddle : public RoundThing {
 
   // Accessors
   vector<sp<Puck> > &pucks() { return pucks_; }
-  void set_ready_to_play(bool ready) { ready_to_play_ = ready; }
+  void set_ready_to_play(bool ready) { ready_to_play_ = ready; if (!ready) grabbed_ = false; }
 
   // ViewEntity
   void Update();
