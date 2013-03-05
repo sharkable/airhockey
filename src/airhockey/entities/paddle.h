@@ -21,25 +21,29 @@ class Paddle : public RoundThing {
  public:
   Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
          ComputerAI ai_level, vector<sp<Puck> > &pucks);
-  
+
   void SetInitialPositionForPlayer(int player_id);
   void KeepInPlayerBounds();
   void RunAITick();
-  
+
+  // Accessors
   vector<sp<Puck> > &pucks() { return pucks_; }
+  void set_ready_to_play(bool ready) { ready_to_play_ = ready; }
 
   // ViewEntity
   void Update();
   void Render();
-  
+
   // RoundThing
   void DidBounceOff(ViewEntity *other);
   bool ContainsTouch(Touch *touch);
   bool IsGrabbable();  
+  bool IsMovable();
 
  private:
   int player_id_;
   bool player_controlled_;
+  bool ready_to_play_;
   ComputerAI ai_level_;
   vector<sp<Puck> > &pucks_;
   bool target_left_corner_;

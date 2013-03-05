@@ -20,6 +20,7 @@ Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool 
     : RoundThing(game_engine),
       player_id_(player_id),
       player_controlled_(player_controlled),
+      ready_to_play_(true),
       ai_level_(ai_level),
       pucks_(pucks),
       target_left_corner_(false),
@@ -276,4 +277,8 @@ bool Paddle::ContainsTouch(Touch *touch) {
 
 bool Paddle::IsGrabbable() {
   return player_controlled_;
+}
+
+bool Paddle::IsMovable() {
+  return ready_to_play_;
 }

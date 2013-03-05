@@ -223,7 +223,10 @@ void RoundThing::TouchesBegan(vector<Touch> touches) {
 }
 
 void RoundThing::TouchesMoved(vector<Touch> touches) {
-  Touch* correctTouch = NULL;
+  if (!IsMovable()) {
+    return;
+  }
+  Touch *correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       correctTouch = &touches[i];
@@ -238,7 +241,7 @@ void RoundThing::TouchesMoved(vector<Touch> touches) {
 }
 
 void RoundThing::TouchesEnded(vector<Touch> touches) {
-  Touch* correctTouch = NULL;
+  Touch *correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       correctTouch = &touches[i];
