@@ -8,6 +8,7 @@
 
 #include "airhockey/views/game_menu_view.h"
 
+#include "gameengine/ad_engine.h"
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/coordinate_types.h"
 
@@ -25,6 +26,9 @@ GameMenuView::GameMenuView(sp<GameEngine> game_engine, GameMenuViewDelegate *del
 // ButtonDelegate
 
 void GameMenuView::ButtonPressed(Button *button) {
+  if (game_engine()->platform_type() == kPlatformTypeTablet) {
+    game_engine()->ad_engine()->RemoveAd();
+  }
   game_engine()->PopView();
   if (button == rematch_button_.get()) {
     delegate_->RematchPressed();
@@ -77,4 +81,8 @@ void GameMenuView::Init(bool match_finished) {
   menu_button_->set_position(game_engine()->position("menu_button"));
   menu_button_->set_delegate(this);
   AddEntity(menu_button_);
+
+  if (game_engine()->platform_type() == kPlatformTypeTablet) {
+    game_engine()->ad_engine()->SetAdAtPoint(screen_point_make((SCREEN_WIDTH - 320) / 2, 380));
+  }
 }

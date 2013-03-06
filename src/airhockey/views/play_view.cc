@@ -291,35 +291,21 @@ void PlayView::ButtonPressed(Button *button) {
 void PlayView::RematchPressed() {
   game_engine()->analytics_engine()->LogEvent("REMATCH");
   SetUpNewGame();
-  //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-  //    [getGameEngine()->adEngine() removeAd];
-  //  }
 }
 
 void PlayView::MenuPressed() {
   game_engine()->PopView();
   game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
-  //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-  //    [getGameEngine()->adEngine() removeAd];
-  //  }
 }
 
 void PlayView::ContinuePressed() {
   state_ = pre_pause_state_;
-  //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-  //    [getGameEngine()->adEngine() removeAd];
-  //  }
 }
 
 
 // private
 
 void PlayView::SetUpNewGame() {
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-//  } else {
-//    [getGameEngine()->adEngine() removeAd];
-//  }
-
   // Place paddles!
   paddle_1_->SetInitialPositionForPlayer(PLAYER_1);
   paddle_2_->SetInitialPositionForPlayer(PLAYER_2);
@@ -402,12 +388,6 @@ void PlayView::FinishGameWithWinner(int playerId) {
   }
 
   game_engine()->PushView(sp<GameMenuView>(new GameMenuView(game_engine(), this, true)));
-  
-//  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//    [getGameEngine()->adEngine() addAdAtPoint:screen_point_make((SCREEN_WIDTH - 320) / 2, 385)];
-//  } else {
-//    [getGameEngine()->adEngine() addAdAtPoint:screen_point_make(0, 0)];
-//  }
 }
 
 void PlayView::PausePressed() {
@@ -415,8 +395,5 @@ void PlayView::PausePressed() {
     pre_pause_state_ = state_;
     state_ = kPlayViewStatePaused;
     game_engine()->PushView(sp<GameMenuView>(new GameMenuView(game_engine(), this, false)));
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//      [getGameEngine()->adEngine() addAdAtPoint:screen_point_make((SCREEN_WIDTH - 320)/2, 385)];
-//    }
   }
 }

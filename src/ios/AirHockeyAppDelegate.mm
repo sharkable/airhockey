@@ -53,7 +53,8 @@
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
     viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1152)];
-    viewController_.gameEngine->SetScreenOffset(screen_point_make(0, 50));
+    // TODO this is kinda hacky. I want it to be right on point 53 of an iPhone.
+    viewController_.gameEngine->SetGameOffset(game_point_make(0, 53 * 768.0 / 320.0));
   } else {
     viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1024)];
   }

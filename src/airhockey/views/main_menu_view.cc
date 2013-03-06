@@ -140,11 +140,11 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 
 void MainMenuView::ViewIsShown() {
   if (IS_FREE) {
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    game_engine()->ad_engine()->SetAdAtPoint(kScreenPointZero);
-//    } else {
-//      [getGameEngine()->adEngine() addAdAtPoint:screen_point_make(45, 40)];  
-//    }
+    if (game_engine()->platform_type() == kPlatformTypePhone) {
+      game_engine()->ad_engine()->SetAdAtPoint(kScreenPointZero);
+    } else {
+      game_engine()->ad_engine()->SetAdAtPoint(screen_point_make(45, 40));
+    }
   }
 }
 
@@ -178,6 +178,10 @@ void MainMenuView::AnimateOut() {
 }
 
 void MainMenuView::PressedStart() {
+  if (game_engine()->platform_type() == kPlatformTypeTablet) {
+    game_engine()->ad_engine()->RemoveAd();
+  }
+
   bool is_iphone = false; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
   LocalStore::SetInteger(num_players_select_->selected_value(), LS_NUM_PLAYERS);
@@ -206,6 +210,8 @@ void MainMenuView::PressedStart() {
 
 void MainMenuView::PressedStory() {
   game_engine()->analytics_engine()->LogEvent("STORY_PRESSED");
-//  [getGameEngine()->adEngine() removeAd];
+  if (game_engine()->platform_type() == kPlatformTypeTablet) {
+    game_engine()->ad_engine()->RemoveAd();
+  }
   game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
 }
