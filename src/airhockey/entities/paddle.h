@@ -28,7 +28,11 @@ class Paddle : public RoundThing {
 
   // Accessors
   vector<sp<Puck> > &pucks() { return pucks_; }
-  void set_ready_to_play(bool ready) { ready_to_play_ = ready; if (!ready) grabbed_ = false; }
+  void set_ready_to_play(bool ready) {
+    ready_to_play_ = ready;
+    if (!ready) grabbed_ = false;
+    ai_initial_pause_ticks_ = 30;  // TODO hacky
+  }
 
   // ViewEntity
   void Update();
@@ -49,6 +53,7 @@ class Paddle : public RoundThing {
   bool target_left_corner_;
   bool target_right_corner_;
   bool target_away_from_corner_;
+  int ai_initial_pause_ticks_;
 };
 
 #endif

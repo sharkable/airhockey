@@ -239,6 +239,10 @@ void Paddle::RunAITick() {
 void Paddle::Update() {
   // Computer AI
   if (!player_controlled_) {
+    if (ai_initial_pause_ticks_) {
+      ai_initial_pause_ticks_--;
+      return;
+    }
     RunAITick();
   }
   RoundThing::Update();
