@@ -9,6 +9,8 @@
 #ifndef AIRHOCKEY_GAME_ENTITIES_ROUNDTHING_H_
 #define AIRHOCKEY_GAME_ENTITIES_ROUNDTHING_H_
 
+#include <cmath>
+
 #include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
 
@@ -21,7 +23,7 @@ class RoundThing : public ViewEntity {
   void ApplyFriction();
   void MaybeBounceOff(RoundThing *other);
   // Will get called for one of the two round things when they bounce.
-  virtual void DidBounceOff(ViewEntity *other) {};
+  virtual void DidBounceOff(ViewEntity *other, double total_velocity) {};
   virtual bool ContainsTouch(Touch *touch);
   bool Overlaps(RoundThing *thing);
   virtual bool IsGrabbable();
@@ -35,6 +37,7 @@ class RoundThing : public ViewEntity {
   void set_vx(double vx) { vx_ = vx; }
   double vy() { return vy_; }
   void set_vy(double vy) { vy_ = vy; }
+  double velocity() { return sqrt(vx_ * vx_ + vy_ * vy_); }
   double radius() { return radius_; }
   void set_radius(double radius) { radius_ = radius; }
   double mass() { return mass_; }

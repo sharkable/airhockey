@@ -257,9 +257,9 @@ void Paddle::Render() {
 
 // RoundThing
 
-void Paddle::DidBounceOff(ViewEntity *other) {
+void Paddle::DidBounceOff(ViewEntity *other, double total_velocity) {
   if (typeid(*other) == typeid(Puck)) {
-    SoundPlayer::instance()->playSound(kSoundPaddleHit);
+    ((Puck *)other)->DidBounceOff(this, total_velocity);
   }
 }
 

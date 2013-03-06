@@ -8,8 +8,6 @@
 
 #include "airhockey/entities/round_thing.h"
 
-#include <cmath>
-
 #include "airhockey/entities/paddle.h"
 #include "airhockey/entities/puck.h"
 #include "gameengine/game_engine.h"
@@ -150,7 +148,7 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
       other->set_vy(other->vy() * new_ratio);
     }
 
-    DidBounceOff(other);
+    DidBounceOff(other, velocity() + other->velocity());
   }  
 }
 

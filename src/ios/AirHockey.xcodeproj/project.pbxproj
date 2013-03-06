@@ -731,12 +731,12 @@
 		FEA5DDA816D47BDD0009487C /* puck_rink_bounce.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4716D47BDD0009487C /* puck_rink_bounce.wav */; };
 		FEA5DDA916D47BDD0009487C /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4816D47BDD0009487C /* score.wav */; };
 		FEA5DDAA16D47BDD0009487C /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4816D47BDD0009487C /* score.wav */; };
-		FEA5DDAB16D47BDD0009487C /* score_final.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4916D47BDD0009487C /* score_final.mp3 */; };
-		FEA5DDAC16D47BDD0009487C /* score_final.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4916D47BDD0009487C /* score_final.mp3 */; };
 		FEA5DDAD16D47BDD0009487C /* start.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4A16D47BDD0009487C /* start.wav */; };
 		FEA5DDAE16D47BDD0009487C /* start.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA5DC4A16D47BDD0009487C /* start.wav */; };
 		FEA6136316E6BC00008EEDDB /* AnalyticsEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEA6136116E6BC00008EEDDB /* AnalyticsEngineIOS.mm */; };
 		FEA6136416E6BC00008EEDDB /* AnalyticsEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEA6136116E6BC00008EEDDB /* AnalyticsEngineIOS.mm */; };
+		FEA6136E16E6FF8D008EEDDB /* score_final.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA6136D16E6FF8D008EEDDB /* score_final.wav */; };
+		FEA6136F16E6FF8D008EEDDB /* score_final.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEA6136D16E6FF8D008EEDDB /* score_final.wav */; };
 		FEA8E5C414F97CB00084E117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC514F97B34007FCBC5 /* UIKit.framework */; };
 		FEA8E5C514F97CB00084E117 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC714F97B34007FCBC5 /* Foundation.framework */; };
 		FEA8E5C614F97CB00084E117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
@@ -1211,11 +1211,11 @@
 		FEA5DC4616D47BDD0009487C /* puck_puck_hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = puck_puck_hit.wav; sourceTree = "<group>"; };
 		FEA5DC4716D47BDD0009487C /* puck_rink_bounce.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = puck_rink_bounce.wav; sourceTree = "<group>"; };
 		FEA5DC4816D47BDD0009487C /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
-		FEA5DC4916D47BDD0009487C /* score_final.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = score_final.mp3; sourceTree = "<group>"; };
 		FEA5DC4A16D47BDD0009487C /* start.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = start.wav; sourceTree = "<group>"; };
 		FEA6136016E6B925008EEDDB /* analytics_engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = analytics_engine.h; sourceTree = "<group>"; };
 		FEA6136116E6BC00008EEDDB /* AnalyticsEngineIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnalyticsEngineIOS.mm; sourceTree = "<group>"; };
 		FEA6136216E6BC00008EEDDB /* AnalyticsEngineIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsEngineIOS.h; sourceTree = "<group>"; };
+		FEA6136D16E6FF8D008EEDDB /* score_final.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score_final.wav; sourceTree = "<group>"; };
 		FEA8E5CD14F97CB00084E117 /* AirHockeyFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECD493C16E59C940081B089 /* game_menu_view.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_menu_view.cc; sourceTree = "<group>"; };
 		FECD493D16E59C940081B089 /* game_menu_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_menu_view.h; sourceTree = "<group>"; };
@@ -2153,7 +2153,7 @@
 				FEA5DC4616D47BDD0009487C /* puck_puck_hit.wav */,
 				FEA5DC4716D47BDD0009487C /* puck_rink_bounce.wav */,
 				FEA5DC4816D47BDD0009487C /* score.wav */,
-				FEA5DC4916D47BDD0009487C /* score_final.mp3 */,
+				FEA6136D16E6FF8D008EEDDB /* score_final.wav */,
 				FEA5DC4A16D47BDD0009487C /* start.wav */,
 			);
 			path = sounds;
@@ -2273,7 +2273,6 @@
 				FEA5DDA516D47BDD0009487C /* puck_puck_hit.wav in Resources */,
 				FEA5DDA716D47BDD0009487C /* puck_rink_bounce.wav in Resources */,
 				FEA5DDA916D47BDD0009487C /* score.wav in Resources */,
-				FEA5DDAB16D47BDD0009487C /* score_final.mp3 in Resources */,
 				FEA5DDAD16D47BDD0009487C /* start.wav in Resources */,
 				FE51436016E05D3400AFB0CE /* IconPad.png in Resources */,
 				FE51436C16E05D3400AFB0CE /* continue_button.tx in Resources */,
@@ -2581,6 +2580,7 @@
 				FE0CE91416E614ED004C2090 /* menu_button_pressed_iphone@2x.tx in Resources */,
 				FE0CE91616E614ED004C2090 /* rematch_button_iphone@2x.tx in Resources */,
 				FE0CE91816E614ED004C2090 /* rematch_button_pressed_iphone@2x.tx in Resources */,
+				FEA6136E16E6FF8D008EEDDB /* score_final.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2595,7 +2595,6 @@
 				FEA5DDA616D47BDD0009487C /* puck_puck_hit.wav in Resources */,
 				FEA5DDA816D47BDD0009487C /* puck_rink_bounce.wav in Resources */,
 				FEA5DDAA16D47BDD0009487C /* score.wav in Resources */,
-				FEA5DDAC16D47BDD0009487C /* score_final.mp3 in Resources */,
 				FEA5DDAE16D47BDD0009487C /* start.wav in Resources */,
 				FE51435916E05D3400AFB0CE /* IconPhone.png in Resources */,
 				FE51436316E05D3400AFB0CE /* title.tx in Resources */,
@@ -2903,6 +2902,7 @@
 				FE0CE91516E614ED004C2090 /* menu_button_pressed_iphone@2x.tx in Resources */,
 				FE0CE91716E614ED004C2090 /* rematch_button_iphone@2x.tx in Resources */,
 				FE0CE91916E614ED004C2090 /* rematch_button_pressed_iphone@2x.tx in Resources */,
+				FEA6136F16E6FF8D008EEDDB /* score_final.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

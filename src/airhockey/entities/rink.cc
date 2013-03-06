@@ -93,7 +93,7 @@ void Rink::BounceOff(RoundThing *thing) {
   if (dampen) {
     thing->set_vx(thing->vx() * 0.7);
     thing->set_vy(thing->vy() * 0.7);
-    thing->DidBounceOff(this);
+    thing->DidBounceOff(this, thing->velocity());
   }  
 }
 

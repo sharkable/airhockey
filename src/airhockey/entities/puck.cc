@@ -98,12 +98,21 @@ void Puck::Render() {
 
 // RoundThing
 
-void Puck::DidBounceOff(ViewEntity *other) {
+void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
+  float volume = (float)(total_velocity / 66.0);
+  if (volume > 1.4) volume = 1.4;
+  float position = (x_ / SCREEN_WIDTH - 0.5) * 2;
   if (typeid(*other) == typeid(Puck)) {
+    SoundPlayer::instance()->setVolume(kSoundTwoPuckHit, volume);
+    SoundPlayer::instance()->setPosition(kSoundTwoPuckHit, position);
     SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
   } else if (typeid(*other) == typeid(Paddle)) {
+    SoundPlayer::instance()->setVolume(kSoundPaddleHit, volume);
+    SoundPlayer::instance()->setPosition(kSoundPaddleHit, position);
     SoundPlayer::instance()->playSound(kSoundPaddleHit);
   } else if (typeid(*other) == typeid(Post) || typeid(*other) == typeid(Rink)) {
+    SoundPlayer::instance()->setVolume(kSoundPuckRinkBounce, volume);
+    SoundPlayer::instance()->setPosition(kSoundPuckRinkBounce, position);
     SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
   }
 }

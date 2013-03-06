@@ -207,25 +207,32 @@ void PlayView::Update() {
       continue;
     }
     if (puck->y() < -puck->radius()) {
+      // TODO make this less shitty.
       puck->set_active(false);
+      float position = (puck->x() / SCREEN_WIDTH - 0.5) * 2;
       if (player_1_score_->sprite() < WIN_SCORE && state_ == kPlayViewStatePlaying) {
         player_1_score_->set_sprite(player_1_score_->sprite() + 1);
       }
       if (player_1_score_->sprite() == WIN_SCORE && state_ == kPlayViewStatePlaying) {
+        SoundPlayer::instance()->setPosition(kSoundScoreFinal, position);
         SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
+        SoundPlayer::instance()->setPosition(kSoundScore, position);
         SoundPlayer::instance()->playSound(kSoundScore);
       }
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
     } else if (puck->y() > SCREEN_HEIGHT + puck->radius()) {
       puck->set_active(false);
+      float position = (puck->x() / SCREEN_WIDTH - 0.5) * 2;
       if (player_2_score_->sprite() < WIN_SCORE && state_ == kPlayViewStatePlaying) {
         player_2_score_->set_sprite(player_2_score_->sprite() + 1);
       }
       if (player_2_score_->sprite() == WIN_SCORE && state_ == kPlayViewStatePlaying) {
+        SoundPlayer::instance()->setPosition(kSoundScoreFinal, position);
         SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
+        SoundPlayer::instance()->setPosition(kSoundScore, position);
         SoundPlayer::instance()->playSound(kSoundScore);
       }
       

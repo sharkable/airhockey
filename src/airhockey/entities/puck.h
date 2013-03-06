@@ -23,7 +23,7 @@ class Puck : public RoundThing {
   void Render();
   
   // RoundThing
-  void DidBounceOff(ViewEntity *other);
+  void DidBounceOff(ViewEntity *other, double total_velocity);
   
  private:
   int fade_ticks_left_;
