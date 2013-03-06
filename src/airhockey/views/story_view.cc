@@ -16,9 +16,10 @@ StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   Sprite story_button_image = Sprite(game_engine, "story");
   Sprite story_button_image_2 = Sprite(game_engine, "story");
   GameSize screen_size = game_engine->game_size();
+  // TODO hack: because of OTHER iphone issue where the game height is > 1024.
   GamePoint button_position =
-      game_point_make((screen_size.width - story_button_image.content_size().width) / 2,
-                      (screen_size.height - story_button_image.content_size().height) / 2);
+      game_point_make((768 - story_button_image.content_size().width) / 2,
+                      (1024 - story_button_image.content_size().height) / 2);
   double zoom = screen_size.width / story_button_image.content_size().width;
   story_button_.reset(new Button());
   story_button_->set_normal_sprite(story_button_image);
