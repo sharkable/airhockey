@@ -27,23 +27,34 @@ inline string to_string(int i) {
   return ss.str();
 }
 
+void fade_in(Animatable *entity) {
+  entity->set_alpha(0);
+  entity->AnimateToAlpha(1, kAnimationTypeLinear, 15);
+}
+
+void fade_out(Animatable *entity) {
+  entity->AnimateToAlpha(0, kAnimationTypeLinear, 15);
+}
+
 MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
   state_ = kMainMenuStateRunning;
 
   Sprite title_sprite(game_engine, "title");
-  SimpleItem *title = new SimpleItem(title_sprite, game_engine->position("title"));
-  AddEntity(title);
-//  title->set_zoom(5);
-//  title->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 60);
-  title->set_alpha(0);
-  title->AnimateToAlpha(1, kAnimationTypeLinear, 130);
+  title_.reset(new SimpleItem(title_sprite, game_engine->position("title")));
+  AddEntity(title_);
+  title_->set_zoom(1.3);
+  title_->AnimateToZoom(1, kAnimationTypeCubicEaseOut, 900);
+  title_->set_alpha(0);
+  title_->AnimateToAlpha(1, kAnimationTypeCubicEaseOut, 900);
 
   Sprite main_menu_sprite(game_engine, "main_menu");
   GamePoint main_menu_position = game_engine->position("main_menu");
-  SimpleItem *main_menu = new SimpleItem(main_menu_sprite, main_menu_position);
-  AddEntity(main_menu);
+  main_menu_.reset(new SimpleItem(main_menu_sprite, main_menu_position));
+  AddEntity(main_menu_);
+  main_menu_->set_alpha(0);
+  main_menu_->AnimateToAlpha(1, kAnimationTypeLinear, 45);
 
   Sprite start_button_image(game_engine, "start_button");
   Sprite start_button_pressed_image(game_engine, "start_button_pressed");
@@ -53,6 +64,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   start_button_->set_position(game_engine->position("start_button"));
   start_button_->set_delegate(this);
   AddEntity(start_button_);
+  fade_in(start_button_.get());
   
   Sprite story_button_image(game_engine, "story_button");
   Sprite story_button_pressed_image(game_engine, "story_button_pressed");
@@ -62,6 +74,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   story_button_->set_position(game_engine->position("story_button"));
   story_button_->set_delegate(this);
   AddEntity(story_button_);
+  fade_in(story_button_.get());
 
   Sprite one_player_image(game_engine, "1_player");
   Sprite two_player_image(game_engine, "2_player");
@@ -74,6 +87,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
                            game_engine->position("2_player"));
   num_players_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
   AddEntity(num_players_select_);
+  fade_in(num_players_select_.get());
 
   num_pucks_select_.reset(new MultiSelect());
   for (int i = 1; i <= MAX_NUM_PUCKS; i++) {
@@ -89,6 +103,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   }
   num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
   AddEntity(num_pucks_select_);
+  fade_in(num_pucks_select_.get());
 
   Sprite bad_image(game_engine, "bad");
   Sprite bad_image_selected(game_engine, "bad_selected");
@@ -110,6 +125,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     difficulty_select_->set_selected_value(caiGood);
   }
   AddEntity(difficulty_select_);
+  fade_in(difficulty_select_.get());
 
   if (!is_iphone) {
     Sprite small_image(game_engine, "small");
@@ -125,9 +141,10 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     if (LocalStore::HasEntryForKey(LS_PADDLE_SIZE)) {
       paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
     } else {
-      paddle_size_select_->set_selected_value(psMedium);
+      paddle_size_select_->set_selected_value(psLarge);
     }
     AddEntity(paddle_size_select_);
+    fade_in(paddle_size_select_.get());
   }
 
   sound_slider_.reset(new SoundSlider(game_engine,
@@ -174,7 +191,18 @@ void MainMenuView::ButtonPressed(Button *button) {
 
 void MainMenuView::AnimateOut() {
   state_ = kMainMenuStateAnimatingOut;
-  animating_out_ticks_left_ = 0;
+
+  title_->AnimateToZoom(0, kAnimationTypeLinear, 15);
+  fade_out(main_menu_.get());
+  fade_out(start_button_.get());
+  fade_out(story_button_.get());
+  fade_out(num_players_select_.get());
+  fade_out(num_pucks_select_.get());
+  fade_out(difficulty_select_.get());
+  fade_out(paddle_size_select_.get());
+  RemoveEntity(sound_slider_);
+
+  animating_out_ticks_left_ = 15;
 }
 
 void MainMenuView::PressedStart() {

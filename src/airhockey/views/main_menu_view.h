@@ -13,6 +13,7 @@
 #import "gameengine/entities/button.h"
 #import "gameengine/entities/multi_select.h"
 
+class SimpleItem;
 class SoundSlider;
 
 typedef enum {
@@ -36,6 +37,8 @@ class MainMenuView : public EngineView, private ButtonDelegate {
   void PressedStart();
   void PressedStory();
 
+  sp<SimpleItem> title_;
+  sp<SimpleItem> main_menu_;
   sp<Button> start_button_;
   sp<Button> story_button_;
   sp<MultiSelect> num_players_select_;
