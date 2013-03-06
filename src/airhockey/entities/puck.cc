@@ -99,8 +99,9 @@ void Puck::Render() {
 // RoundThing
 
 void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
-  float volume = (float)(total_velocity / 66.0);
-  if (volume > 1.4) volume = 1.4;
+  float volume = (float)(total_velocity / 50.0);
+  if (volume > 1.8) volume = 1.8;
+  else if (volume < 0.4) volume = 0.4;
   float position = (x_ / SCREEN_WIDTH - 0.5) * 2;
   if (typeid(*other) == typeid(Puck)) {
     SoundPlayer::instance()->setVolume(kSoundTwoPuckHit, volume);
