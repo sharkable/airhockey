@@ -36,7 +36,6 @@
 - (void)initAudio:(SoundInitializationDelegate *)delegate {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   
-// TODO  SoundPlayer::instance()->syncAudioSessionForITunes();
   SoundPlayer::instance()->initializeWithDelegate(delegate);
   SoundPlayer::instance()->setSoundEffectsOn(true);
   
@@ -96,6 +95,9 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+  SoundPlayer::instance()->syncAudioSessionForITunes();
+  SoundPlayer::instance()->duckAudioFromITunes(true);
+
   [viewController_ start];
   viewController_.gameEngine->ClearTouches();
 }
