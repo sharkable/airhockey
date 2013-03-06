@@ -259,6 +259,9 @@ void Paddle::DidBounceOff(ViewEntity *other) {
   }
 }
 
+// TODO ugh. Hack to prevent moving paddle on iPhone when touching the pause button.
+#define PAUSE_BUTTON_SIZE (28 * 768.0 / 320.0)
+
 bool Paddle::ContainsTouch(Touch *touch) {
   GamePoint p = touch->location();
   if (p.x < 0 || p.x >= SCREEN_WIDTH) {
@@ -267,11 +270,13 @@ bool Paddle::ContainsTouch(Touch *touch) {
   switch (player_id_) {
     case PLAYER_1:
       return p.y >= SCREEN_HEIGHT / 2 && p.y < RINK_BOTTOM_Y && p.x >= RINK_LEFT_X &&
-          p.x < RINK_RIGHT_X;
+          p.x < RINK_RIGHT_X &&
+          (p.x < SCREEN_WIDTH - PAUSE_BUTTON_SIZE || p.y < SCREEN_HEIGHT - PAUSE_BUTTON_SIZE);
       break;
     case PLAYER_2:
       return p.y < SCREEN_HEIGHT / 2 && p.y >= RINK_TOP_Y && p.x >= RINK_LEFT_X &&
-          p.x < RINK_RIGHT_X;
+          p.x < RINK_RIGHT_X &&
+          (p.x > PAUSE_BUTTON_SIZE || p.y >PAUSE_BUTTON_SIZE);
       break;
   }
   return false;
