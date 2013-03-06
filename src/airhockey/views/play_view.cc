@@ -392,6 +392,9 @@ void PlayView::FinishGameWithWinner(int playerId) {
 
 void PlayView::PausePressed() {
   if (state_ != kPlayViewStateFinished && state_ != kPlayViewStatePaused) {
+    paddle_1_->set_grabbed(false);
+    paddle_2_->set_grabbed(false);
+
     pre_pause_state_ = state_;
     state_ = kPlayViewStatePaused;
     game_engine()->PushView(sp<GameMenuView>(new GameMenuView(game_engine(), this, false)));
