@@ -112,10 +112,10 @@ void Paddle::RunAITick() {
       speed = 0.4;
       break;
     case caiGood:
-      speed = 1.5;
+      speed = 1.15;
       break;
     case caiExcellent:
-      speed = 2;
+      speed = 1.7;
       break;
     case caiAmazing:
       speed = 2.5;
