@@ -8,11 +8,13 @@
 
 #include "airhockey/views/play_view.h"
 
-#include "airhockey/entities/puck.h"
-#include "airhockey/views/main_menu_view.h"
+#include "gameengine/analytics_engine.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
+
+#include "airhockey/entities/puck.h"
+#include "airhockey/views/main_menu_view.h"
 
 PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                    PaddleSize paddle_size)
@@ -287,7 +289,7 @@ void PlayView::ButtonPressed(Button *button) {
 // GameMenuViewDelegate
 
 void PlayView::RematchPressed() {
-  //  [FlurryAnalytics logEvent:@"REMATCH"];
+  game_engine()->analytics_engine()->LogEvent("REMATCH");
   SetUpNewGame();
   //  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
   //    [getGameEngine()->adEngine() removeAd];

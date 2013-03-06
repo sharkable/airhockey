@@ -8,14 +8,24 @@
 
 #import "airhockey/views/main_menu_view.h"
 
-#import "const.h"
-#import "airhockey/views/play_view.h"
-#import "airhockey/views/story_view.h"
+#include <sstream>
+
 #import "gameengine/ad_engine.h"
+#import "gameengine/analytics_engine.h"
 #import "gameengine/game_engine.h"
 #import "gameengine/local_store.h"
 #import "gameengine/resource_loader.h"
 #import "gameengine/sprite.h"
+
+#import "airhockey/const.h"
+#import "airhockey/views/play_view.h"
+#import "airhockey/views/story_view.h"
+
+inline string to_string(int i) {
+  stringstream ss;
+  ss << i;
+  return ss.str();
+}
 
 MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
@@ -177,18 +187,12 @@ void MainMenuView::PressedStart() {
     LocalStore::SetInteger(paddle_size_select_->selected_value(), LS_PADDLE_SIZE);
   }
 
-//  NSMutableDictionary *flurryData = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
-//  [flurryData setObject:[NSNumber numberWithInt:num_players_select_.selected_value() + 1]
-//                 forKey:@"NumPlayers"];
-//  [flurryData setObject:[NSNumber numberWithInt:num_pucks_select_.selected_value() + 1]
-//                 forKey:@"NumPucks"];
-//  [flurryData setObject:[NSNumber numberWithInt:difficulty_select_.selected_value()]
-//                 forKey:@"Difficulty"];
-//  if (!is_iphone) {
-//    [flurryData setObject:[NSNumber numberWithInt:paddle_size_select_.selected_value()]
-//                   forKey:@"PaddleSize"];
-//  }
-//  [FlurryAnalytics logEvent:@"START_GAME" withParameters:flurryData];
+  map<string, string> analytics_params;
+  analytics_params["NumPlayers"] = to_string(num_players_select_->selected_value() + 1);
+  analytics_params["NumPucks"] = to_string(num_pucks_select_->selected_value() + 1);
+  analytics_params["Difficulty"] = to_string(difficulty_select_->selected_value());
+  analytics_params["PaddleSize"] = to_string(paddle_size_select_->selected_value());
+  game_engine()->analytics_engine()->LogEvent("START_GAME", analytics_params);
 
   PaddleSize paddle_size = PaddleSize(is_iphone ? psLarge : paddle_size_select_->selected_value());
   PlayView *play_view = new PlayView(game_engine(),
@@ -201,7 +205,7 @@ void MainMenuView::PressedStart() {
 }
 
 void MainMenuView::PressedStory() {
-//  [FlurryAnalytics logEvent:@"STORY_PRESSED"];
+  game_engine()->analytics_engine()->LogEvent("STORY_PRESSED");
 //  [getGameEngine()->adEngine() removeAd];
   game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
 }

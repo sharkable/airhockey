@@ -49,11 +49,7 @@
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
   [Flurry setAppVersion:appVersion];
-  if (IS_FREE) {
-    [Flurry startSession:@"BGGPH5B2THWFSJHXEKRH"];
-  } else {
-    [Flurry startSession:@"4HECR4PRJJP4ZSLZ2EJB"];
-  }
+  [Flurry startSession:@"BGGPH5B2THWFSJHXEKRH"];
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
     viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1152)];
