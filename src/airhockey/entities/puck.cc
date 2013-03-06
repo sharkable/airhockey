@@ -27,6 +27,12 @@ Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
   friction_ = PUCK_FRICTION;
   alpha_ = 1;
   fade_ticks_left_ = 0;
+  hit_puck_last_time_ = false;
+  hit_puck_this_time_ = false;
+  hit_paddle_last_time_ = false;
+  hit_paddle_this_time_ = false;
+  hit_rink_last_time_ = false;
+  hit_rink_this_time_ = false;
 }
 
 void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center) {
@@ -72,8 +78,23 @@ void Puck::FadeIn() {
 // ViewEntity
 
 void Puck::Update() {
+  if (!hit_puck_this_time_) {
+    hit_puck_last_time_ = false;
+  }
+  hit_puck_this_time_ = false;
+
+  if (!hit_paddle_this_time_) {
+    hit_paddle_last_time_ = false;
+  }
+  hit_paddle_this_time_ = false;
+
+  if (!hit_rink_this_time_) {
+    hit_rink_last_time_ = false;
+  }
+  hit_rink_this_time_ = false;
+
   RoundThing::Update();
-  
+
   // Stop the puck from getting stuck in the goal.
   if (y() < RINK_TOP_Y && fabs(vy()) < PUCK_GOAL_MIN_DROP_SPEED) {
     set_vy(-PUCK_GOAL_MIN_DROP_SPEED);
@@ -104,16 +125,28 @@ void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
   else if (volume < 0.4) volume = 0.4;
   float position = (x_ / SCREEN_WIDTH - 0.5) * 2;
   if (typeid(*other) == typeid(Puck)) {
-    SoundPlayer::instance()->setVolume(kSoundTwoPuckHit, volume);
-    SoundPlayer::instance()->setPosition(kSoundTwoPuckHit, position);
-    SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
+    if (!hit_puck_this_time_) {
+      SoundPlayer::instance()->setVolume(kSoundTwoPuckHit, volume);
+      SoundPlayer::instance()->setPosition(kSoundTwoPuckHit, position);
+      SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
+      hit_puck_last_time_ = true;
+    }
+    hit_puck_this_time_ = true;
   } else if (typeid(*other) == typeid(Paddle)) {
-    SoundPlayer::instance()->setVolume(kSoundPaddleHit, volume);
-    SoundPlayer::instance()->setPosition(kSoundPaddleHit, position);
-    SoundPlayer::instance()->playSound(kSoundPaddleHit);
+    if (!hit_paddle_last_time_) {
+      SoundPlayer::instance()->setVolume(kSoundPaddleHit, volume);
+      SoundPlayer::instance()->setPosition(kSoundPaddleHit, position);
+      SoundPlayer::instance()->playSound(kSoundPaddleHit);
+      hit_paddle_last_time_ = true;
+    }
+    hit_paddle_this_time_ = true;
   } else if (typeid(*other) == typeid(Post) || typeid(*other) == typeid(Rink)) {
-    SoundPlayer::instance()->setVolume(kSoundPuckRinkBounce, volume);
-    SoundPlayer::instance()->setPosition(kSoundPuckRinkBounce, position);
-    SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
+    if (!hit_rink_last_time_) {
+      SoundPlayer::instance()->setVolume(kSoundPuckRinkBounce, volume);
+      SoundPlayer::instance()->setPosition(kSoundPuckRinkBounce, position);
+      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
+      hit_rink_last_time_ = true;
+    }
+    hit_rink_this_time_ = true;
   }
 }

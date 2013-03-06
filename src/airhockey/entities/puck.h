@@ -26,6 +26,12 @@ class Puck : public RoundThing {
   void DidBounceOff(ViewEntity *other, double total_velocity);
   
  private:
+  bool hit_puck_last_time_;
+  bool hit_puck_this_time_;
+  bool hit_paddle_last_time_;
+  bool hit_paddle_this_time_;
+  bool hit_rink_last_time_;
+  bool hit_rink_this_time_;
   int fade_ticks_left_;
   double alpha_;
 };
