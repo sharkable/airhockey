@@ -638,6 +638,10 @@
 		FE5144E216E1485F00AFB0CE /* story_button_pressed@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE5144DF16E1485F00AFB0CE /* story_button_pressed@2x.tx */; };
 		FE5144E316E1485F00AFB0CE /* story_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE5144E016E1485F00AFB0CE /* story_button@2x.tx */; };
 		FE5144E416E1485F00AFB0CE /* story_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE5144E016E1485F00AFB0CE /* story_button@2x.tx */; };
+		FE5DF90816E7337200C0E399 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5DF90616E7337200C0E399 /* LaunchImage.png */; };
+		FE5DF90916E7337200C0E399 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5DF90616E7337200C0E399 /* LaunchImage.png */; };
+		FE5DF90A16E7337200C0E399 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5DF90716E7337200C0E399 /* LaunchImage@2x.png */; };
+		FE5DF90B16E7337200C0E399 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5DF90716E7337200C0E399 /* LaunchImage@2x.png */; };
 		FE6F9A2B16E16154004294A5 /* sound_empty@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2816E16153004294A5 /* sound_empty@2x.tx */; };
 		FE6F9A2C16E16154004294A5 /* sound_empty@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2816E16153004294A5 /* sound_empty@2x.tx */; };
 		FE6F9A2D16E16154004294A5 /* sound_full@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FE6F9A2916E16154004294A5 /* sound_full@2x.tx */; };
@@ -1160,6 +1164,8 @@
 		FE51435516E05D3400AFB0CE /* title_iphone.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = title_iphone.tx; sourceTree = "<group>"; };
 		FE5144DF16E1485F00AFB0CE /* story_button_pressed@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "story_button_pressed@2x.tx"; sourceTree = "<group>"; };
 		FE5144E016E1485F00AFB0CE /* story_button@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "story_button@2x.tx"; sourceTree = "<group>"; };
+		FE5DF90616E7337200C0E399 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
+		FE5DF90716E7337200C0E399 /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
 		FE6F9A2816E16153004294A5 /* sound_empty@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_empty@2x.tx"; sourceTree = "<group>"; };
 		FE6F9A2916E16154004294A5 /* sound_full@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_full@2x.tx"; sourceTree = "<group>"; };
 		FE6F9A2A16E16154004294A5 /* sound_thumb@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_thumb@2x.tx"; sourceTree = "<group>"; };
@@ -1551,6 +1557,8 @@
 			children = (
 				FE51427916E05D3300AFB0CE /* free */,
 				FE51427E16E05D3300AFB0CE /* paid */,
+				FE5DF90616E7337200C0E399 /* LaunchImage.png */,
+				FE5DF90716E7337200C0E399 /* LaunchImage@2x.png */,
 				FE233E9216E2FB55001B13A8 /* LaunchImage-Portrait@2x~ipad.png */,
 				FE233E9316E2FB55001B13A8 /* LaunchImage-Portrait~ipad.png */,
 			);
@@ -2581,6 +2589,8 @@
 				FE0CE91616E614ED004C2090 /* rematch_button_iphone@2x.tx in Resources */,
 				FE0CE91816E614ED004C2090 /* rematch_button_pressed_iphone@2x.tx in Resources */,
 				FEA6136E16E6FF8D008EEDDB /* score_final.wav in Resources */,
+				FE5DF90816E7337200C0E399 /* LaunchImage.png in Resources */,
+				FE5DF90A16E7337200C0E399 /* LaunchImage@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2903,6 +2913,8 @@
 				FEBAD1D416E72C8B00A01C83 /* title@2x.tx in Resources */,
 				FEBAD1D516E72C8F00A01C83 /* title_iphone.tx in Resources */,
 				FEBAD1D616E72C8F00A01C83 /* title_iphone@2x.tx in Resources */,
+				FE5DF90916E7337200C0E399 /* LaunchImage.png in Resources */,
+				FE5DF90B16E7337200C0E399 /* LaunchImage@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
