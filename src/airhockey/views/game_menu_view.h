@@ -3,7 +3,7 @@
 //  AirHockey
 //
 //  Created by Jon Sharkey on 3/4/13.
-// C opyright 2013 Sharkable. All rights reserved.
+//  Copyright 2013 Sharkable. All rights reserved.
 //
 
 #ifndef AIRHOCKEY_VIEWS_GAMEMENUVIEW_H_
