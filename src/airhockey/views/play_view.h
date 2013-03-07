@@ -10,7 +10,6 @@
 #define AIRHOCKEY_GAME_VIEWS_PLAYVIEW_H_
 
 #include <vector>
-using namespace std;
 
 #include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
@@ -67,8 +66,8 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   sp<Post> post_4_;
   sp<Paddle> paddle_1_;
   sp<Paddle> paddle_2_;
-  vector<sp<Puck> > pucks_;
-  vector<sp<RoundThing> > round_things_;
+  std::vector<sp<Puck> > pucks_;
+  std::vector<sp<RoundThing> > round_things_;
   sp<SimpleItem> player_1_score_;
   sp<SimpleItem> player_2_score_;
   sp<SimpleItem> win_;

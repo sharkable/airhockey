@@ -10,7 +10,6 @@
 
 #include <cmath>
 #include <vector>
-using namespace std;
 
 #include "const.h"
 #include "gameengine/resource_loader.h"
@@ -20,6 +19,8 @@ using namespace std;
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/rink.h"
+
+using std::vector;
 
 Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
   radius_ = PUCK_RADIUS;

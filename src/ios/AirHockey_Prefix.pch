@@ -17,7 +17,6 @@
   #include <assert.h>
   #include <iostream>
   #include <tr1/memory>
-  using namespace std;
 
-  #define sp tr1::shared_ptr
+  #define sp std::tr1::shared_ptr
 #endif // __cplusplus

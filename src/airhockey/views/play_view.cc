@@ -16,6 +16,8 @@
 #include "airhockey/entities/puck.h"
 #include "airhockey/views/main_menu_view.h"
 
+using std::vector;
+
 PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                    PaddleSize paddle_size)
     : EngineView(game_engine) {

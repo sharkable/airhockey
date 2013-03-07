@@ -15,6 +15,9 @@
 #include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
 
+using std::string;
+using std::vector;
+
 RoundThing::RoundThing(sp<GameEngine> game_engine)
     : sprite_(game_engine),
       x_(0),

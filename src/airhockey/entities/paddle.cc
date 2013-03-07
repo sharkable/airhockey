@@ -15,6 +15,8 @@
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
+using std::vector;
+
 Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
                ComputerAI ai_level, vector<sp<Puck> > &pucks)
     : RoundThing(game_engine),

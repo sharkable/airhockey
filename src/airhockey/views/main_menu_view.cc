@@ -21,8 +21,11 @@
 #import "airhockey/views/play_view.h"
 #import "airhockey/views/story_view.h"
 
+using std::map;
+using std::string;
+
 inline string to_string(int i) {
-  stringstream ss;
+  std::stringstream ss;
   ss << i;
   return ss.str();
 }

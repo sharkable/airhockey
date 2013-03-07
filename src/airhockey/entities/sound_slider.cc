@@ -14,6 +14,8 @@
 
 #include "soundengine/sound_player.h"
 
+using std::vector;
+
 const int kLeftMargin = 18;
 const int kSliderWidth = 271;
 

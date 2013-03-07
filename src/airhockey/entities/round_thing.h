@@ -17,7 +17,7 @@
 class RoundThing : public ViewEntity {
  public:
   RoundThing(sp<GameEngine> game_engine);
-  RoundThing(sp<GameEngine> game_engine, string texture_name);
+  RoundThing(sp<GameEngine> game_engine, std::string texture_name);
   ~RoundThing();
   
   void ApplyFriction();
@@ -50,9 +50,9 @@ class RoundThing : public ViewEntity {
   // ViewEntity
   void Update();
   void Render();
-  void TouchesBegan(vector<Touch> touches);
-  void TouchesMoved(vector<Touch> touches);
-  void TouchesEnded(vector<Touch> touches);
+  void TouchesBegan(std::vector<Touch> touches);
+  void TouchesMoved(std::vector<Touch> touches);
+  void TouchesEnded(std::vector<Touch> touches);
   void ClearTouches();
 
  protected:

@@ -21,9 +21,9 @@ class SoundSlider : public ViewEntity {
   // ViewEntity
   void Update();
   void Render();
-  void TouchesBegan(vector<Touch> touches);
-  void TouchesMoved(vector<Touch> touches);
-  void TouchesEnded(vector<Touch> touches);
+  void TouchesBegan(std::vector<Touch> touches);
+  void TouchesMoved(std::vector<Touch> touches);
+  void TouchesEnded(std::vector<Touch> touches);
 
  private:
   GamePoint position_;
