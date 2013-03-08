@@ -2,7 +2,7 @@
 //  rink_view.cpp
 //  AirHockey
 //
-//  Created by Jon Sharkey on 3/1/13.
+//  Created by Jon Sharkey on 2013-03-01.
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 

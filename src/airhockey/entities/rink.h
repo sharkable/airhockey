@@ -2,7 +2,7 @@
 //  rink.h
 //  AirHockey
 //
-//  Created by Jonathan Sharkey on 10-04-13.
+//  Created by Jon Sharkey on 2010-04-13.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 

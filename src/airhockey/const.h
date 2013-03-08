@@ -2,7 +2,7 @@
 //  const.h
 //  AirHockey
 //
-//  Created by Jonathan Sharkey on 10-04-26.
+//  Created by Jon Sharkey on 2010-04-26.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 

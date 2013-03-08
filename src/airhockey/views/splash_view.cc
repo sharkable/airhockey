@@ -2,7 +2,7 @@
 //  splash_view.cc
 //  AirHockey
 //
-//  Created by Jonathan Sharkey on 10-05-07.
+//  Created by Jon Sharkey on 2010-05-07.
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 

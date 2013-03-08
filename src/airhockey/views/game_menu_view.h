@@ -2,7 +2,7 @@
 //  game_menu_view.h
 //  AirHockey
 //
-//  Created by Jon Sharkey on 3/4/13.
+//  Created by Jon Sharkey on 2013-03-04.
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 
