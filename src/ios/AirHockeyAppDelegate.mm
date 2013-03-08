@@ -8,10 +8,10 @@
 
 #import "ios/AirHockeyAppDelegate.h"
 
+#import "gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry/Flurry.h"
+#import "gameengine/ios/TypeUtil.h"
+#import "gameengine/ios/ViewController.h"
 #import "gameengine/game_engine.h"
-#import "ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry/Flurry.h"
-#import "ios/ViewController.h"
-#import "ios/TypeUtil.h"
 #import "soundengine/sound_player.h"
 
 #import "airhockey/views/rink_view.h"
