@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "ios/AirHockeyAppDelegate.h"
+#import "airhockey/ios/AirHockeyAppDelegate.h"
 
 #import "gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry/Flurry.h"
 #import "gameengine/ios/TypeUtil.h"
