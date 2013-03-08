@@ -64,13 +64,4 @@ extern double PADDLE_RADIUS[];
 #define LS_PADDLE_SIZE "ls_paddle_size"
 #define LS_VOLUME "ls_volume"
 
-
-#if (__IPHONE_OS_VERSION_MAX_ALLOWED < 30200)
-
-#define UI_USER_INTERFACE_IDIOM() 0
-#define UIUserInterfaceIdiomPhone 0
-#define UIUserInterfaceIdiomPad   1
-
-#endif
-
 #endif
