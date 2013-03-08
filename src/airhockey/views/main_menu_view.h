@@ -9,10 +9,10 @@
 #ifndef AIRHOCKEY_VIEWS_MAINMENUVIEW_H_
 #define AIRHOCKEY_VIEWS_MAINMENUVIEW_H_
 
-#import "gameengine/engine_view.h"
-#import "gameengine/entities/button.h"
-#import "gameengine/entities/multi_select.h"
+#include "gameengine/engine_view.h"
+#include "gameengine/entities/button.h"
 
+class MultiSelect;
 class SimpleItem;
 class SoundSlider;
 

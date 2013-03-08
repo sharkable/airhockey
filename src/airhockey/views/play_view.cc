@@ -8,12 +8,17 @@
 
 #include "airhockey/views/play_view.h"
 
+#include "gameengine/entities/simple_item.h"
 #include "gameengine/analytics_engine.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
+#include "airhockey/entities/paddle.h"
+#include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
+#include "airhockey/entities/rink.h"
+#include "airhockey/entities/round_thing.h"
 #include "airhockey/views/main_menu_view.h"
 
 using std::vector;

@@ -8,7 +8,9 @@
 
 #include "airhockey/views/story_view.h"
 
+#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/sprite.h"
 
 StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   // TODO We're loading this twice so the counter for this texture goes up. Rethink texture

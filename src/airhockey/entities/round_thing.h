@@ -14,6 +14,8 @@
 #include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
 
+class GameEngine;
+
 class RoundThing : public ViewEntity {
  public:
   RoundThing(sp<GameEngine> game_engine);

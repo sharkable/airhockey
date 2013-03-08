@@ -8,11 +8,11 @@
 
 #include "airhockey/views/splash_view.h"
 
-#include "gameengine/resource_loader.h"
+#include "gameengine/engine_view.h"
+#include "gameengine/game_engine.h"
 #include "soundengine/sound_player.h"
 
 #include "airhockey/views/main_menu_view.h"
-#include "airhockey/views/rink_view.h"
 
 SplashView::SplashView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   state_ = kSplashViewStateInitial;

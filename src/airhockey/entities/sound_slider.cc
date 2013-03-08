@@ -6,13 +6,14 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "sound_slider.h"
-#import "resource_loader.h"
-#import "gameengine/local_store.h"
-#include "Touch.h"
-#import "const.h"
+#include "airhockey/entities/sound_slider.h"
 
+#include "gameengine/game_engine.h"
+#include "gameengine/local_store.h"
+#include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
+
+#include "airhockey/const.h"
 
 using std::vector;
 

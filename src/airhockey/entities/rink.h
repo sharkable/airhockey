@@ -9,11 +9,8 @@
 #ifndef AIRHOCKEY_ENTITIES_RINK_H_
 #define AIRHOCKEY_ENTITIES_RINK_H_
 
-#include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
-#include "opengl/Texture2D.h"
 
-class GameEngine;
 class RoundThing;
 
 class Rink : public ViewEntity {

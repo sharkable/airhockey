@@ -8,9 +8,10 @@
 
 #include "airhockey/views/game_menu_view.h"
 
-#include "gameengine/ad_engine.h"
 #include "gameengine/entities/simple_item.h"
+#include "gameengine/ad_engine.h"
 #include "gameengine/coordinate_types.h"
+#include "gameengine/sprite.h"
 
 #include "airhockey/entities/sound_slider.h"
 #include "airhockey/const.h"

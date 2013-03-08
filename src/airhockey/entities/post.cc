@@ -8,10 +8,11 @@
 
 #include "airhockey/entities/post.h"
 
+#include "gameengine/game_engine.h"
+#include "gameengine/view_entity.h"
 #include "soundengine/sound_player.h"
 
 #include "airhockey/entities/puck.h"
-#include "airhockey/entities/rink.h"
 
 Post::Post(sp<GameEngine> game_engine, double x, double y) : RoundThing(game_engine) {
   set_x(x);

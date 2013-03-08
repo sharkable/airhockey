@@ -13,18 +13,17 @@
 
 #include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
-#include "gameengine/entities/simple_item.h"
 
-#include "airhockey/entities/Paddle.h"
-#include "airhockey/entities/Post.h"
-#include "airhockey/entities/puck.h"
-#include "airhockey/entities/Rink.h"
-#include "airhockey/entities/sound_slider.h"
 #include "airhockey/views/game_menu_view.h"
 #include "airhockey/const.h"
 
 class GameEngine;
+class Paddle;
+class Post;
+class Puck;
+class Rink;
 class RoundThing;
+class SimpleItem;
 
 typedef enum {
   kPlayViewStateGetReady,

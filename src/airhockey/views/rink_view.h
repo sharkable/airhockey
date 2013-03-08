@@ -11,6 +11,8 @@
 
 #include "gameengine/engine_view.h"
 
+class GameEngine;
+
 class RinkView : public EngineView {
  public:
   RinkView(sp<GameEngine> game_engine);

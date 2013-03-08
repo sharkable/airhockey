@@ -9,8 +9,14 @@
 #ifndef AIRHOCKEY_ENTITIES_SOUNDSLIDER_H_
 #define AIRHOCKEY_ENTITIES_SOUNDSLIDER_H_
 
+#include <vector>
+
+#include "gameengine/coordinate_types.h"
 #include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
+
+class GameEngine;
+class Touch;
 
 class SoundSlider : public ViewEntity {
  public:

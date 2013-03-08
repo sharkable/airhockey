@@ -10,10 +10,11 @@
 
 #include <cmath>
 
-#include "airhockey/entities/puck.h"
+#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
-#include "soundengine/sound_player.h"
+
+#include "airhockey/entities/puck.h"
 
 using std::vector;
 

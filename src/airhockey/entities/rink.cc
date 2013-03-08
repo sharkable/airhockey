@@ -8,10 +8,8 @@
 
 #include "airhockey/entities/rink.h"
 
-#include "const.h"
-#include "airhockey/entities/puck.h"
-#include "gameengine/resource_loader.h"
-#include "soundengine/sound_player.h"
+#include "airhockey/entities/round_thing.h"
+#include "airhockey/const.h"
 
 void Rink::BounceOff(RoundThing *thing) {
   if (thing->is_grabbed() || !thing->IsMovable()) {

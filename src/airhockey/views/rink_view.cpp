@@ -8,8 +8,9 @@
 
 #include "airhockey/views/rink_view.h"
 
-#import "gameengine/entities/simple_item.h"
-#import "gameengine/sprite.h"
+#include "gameengine/entities/simple_item.h"
+#include "gameengine/game_engine.h"
+#include "gameengine/sprite.h"
 
 RinkView::RinkView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   Sprite background_sprite(game_engine, "rink_bg");

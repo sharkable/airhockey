@@ -9,8 +9,8 @@
 #ifndef AIRHOCKEY_VIEWS_STORYVIEW_H_
 #define AIRHOCKEY_VIEWS_STORYVIEW_H_
 
-#include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
+#include "gameengine/engine_view.h"
 
 class StoryView : public EngineView, ButtonDelegate {
  public:

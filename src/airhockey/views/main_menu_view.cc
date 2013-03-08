@@ -10,16 +10,19 @@
 
 #include <sstream>
 
-#import "gameengine/ad_engine.h"
-#import "gameengine/analytics_engine.h"
-#import "gameengine/game_engine.h"
-#import "gameengine/local_store.h"
-#import "gameengine/resource_loader.h"
-#import "gameengine/sprite.h"
+#include "gameengine/entities/multi_select.h"
+#include "gameengine/entities/simple_item.h"
+#include "gameengine/ad_engine.h"
+#include "gameengine/analytics_engine.h"
+#include "gameengine/coordinate_types.h"
+#include "gameengine/game_engine.h"
+#include "gameengine/local_store.h"
+#include "gameengine/sprite.h"
 
-#import "airhockey/const.h"
-#import "airhockey/views/play_view.h"
-#import "airhockey/views/story_view.h"
+#include "airhockey/entities/sound_slider.h"
+#include "airhockey/views/play_view.h"
+#include "airhockey/views/story_view.h"
+#include "airhockey/const.h"
 
 using std::map;
 using std::string;

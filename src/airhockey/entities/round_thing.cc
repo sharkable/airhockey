@@ -8,12 +8,12 @@
 
 #include "airhockey/entities/round_thing.h"
 
-#include "airhockey/entities/paddle.h"
-#include "airhockey/entities/puck.h"
+#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
-#include "soundengine/sound_player.h"
+
+#include "airhockey/const.h"
 
 using std::string;
 using std::vector;

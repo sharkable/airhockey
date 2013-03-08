@@ -11,6 +11,9 @@
 
 #include "airhockey/entities/round_thing.h"
 
+class GameEngine;
+class ViewEntity;
+
 class Puck : public RoundThing {
  public:
   Puck(sp<GameEngine> game_engine);
