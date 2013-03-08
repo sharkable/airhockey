@@ -43,10 +43,10 @@ void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_th
   }
   x_ = startX;
   y_ = player_id == PLAYER_1 ? PLAYER_1_PUCK_Y : PLAYER_2_PUCK_Y;
-  
+
   vx_ = 0;
   vy_ = 0;
-  
+
   bool goLeft = true;
   int offset = 1;
   bool overlapping;
@@ -102,7 +102,7 @@ void Puck::Update() {
   } else if (y_ > RINK_BOTTOM_Y && fabs(vy_) < PUCK_GOAL_MIN_DROP_SPEED) {
     vy_ = PUCK_GOAL_MIN_DROP_SPEED;
   }
-  
+
   if (fade_ticks_left_ > 0) {
     fade_ticks_left_--;
     alpha_ = ((double)PUCK_FADE_TICKS - fade_ticks_left_) / PUCK_FADE_TICKS;

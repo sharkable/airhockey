@@ -52,7 +52,7 @@ Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool 
       case psLarge:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_large"));
         break;
-    }    
+    }
   }
 
   radius_ = PADDLE_RADIUS[size];
@@ -65,15 +65,15 @@ void Paddle::SetInitialPositionForPlayer(int playerId) {
   switch (player_id_) {
     case PLAYER_1: {
       x_ = PADDLE_1_X;
-      y_ = PADDLE_1_Y;      
+      y_ = PADDLE_1_Y;
       break;
     }
     case PLAYER_2: {
       x_ = PADDLE_2_X;
-      y_ = PADDLE_2_Y;      
+      y_ = PADDLE_2_Y;
       break;
     }
-  }  
+  }
 }
 
 void Paddle::KeepInPlayerBounds() {
@@ -124,11 +124,11 @@ void Paddle::RunAITick() {
       speed = 2.5;
       break;
   }
-  
+
   // Find the puck that will reach the paddle first.
   Puck *target = NULL;
   double bestTime;
-  
+
   for (int i = 0; i < pucks_.size(); i++) {
     Puck *puck = pucks_[i].get();
     if (!puck->is_active()) {
@@ -150,14 +150,14 @@ void Paddle::RunAITick() {
       bestTime = timeToReach;
     }
   }
-  
+
   if (!target) {
     target_left_corner_ = target_right_corner_ = target_away_from_corner_ = false;
   }
-  
+
   double targetX;
   double targetY;
-  
+
   if (!target_away_from_corner_ && target && target->y() <= RINK_TOP_Y + radius_ &&
       fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
     if (target->x() < SCREEN_WIDTH / 2) {
@@ -166,7 +166,7 @@ void Paddle::RunAITick() {
       target_right_corner_ = true;
     }
   }
-  
+
   if (target_left_corner_) {
     targetX = RINK_LEFT_X + radius_;
     targetY = RINK_TOP_Y + radius_;
@@ -209,13 +209,13 @@ void Paddle::RunAITick() {
     targetX = x_;
     targetY = y_;
   }
-  
+
   // Get direction of target.
   double dx = targetX - x_;
   double dy = targetY - y_;
   double adx = fabs(dx);
   double ady = fabs(dy);
-  
+
   if (adx <= speed && ady <= speed) {
     vx_ = 0;
     vy_ = 0;
@@ -227,7 +227,7 @@ void Paddle::RunAITick() {
     } else if (fabs(dy) < fabs(vy_)) {
       vy_ = dy;
     }
-    
+
     double dL = sqrt(dx*dx + dy*dy);
     double nx = dx / dL;
     double ny = dy / dL;

@@ -15,7 +15,7 @@ void Rink::BounceOff(RoundThing *thing) {
   if (thing->is_grabbed() || !thing->IsMovable()) {
     return;
   }
-  
+
   bool dampen = false;
   if (thing->x() + thing->radius() > RINK_RIGHT_X) {
     thing->set_vx(-thing->vx());
@@ -37,7 +37,7 @@ void Rink::BounceOff(RoundThing *thing) {
       if (hx < GOAL_LEFT_X || hx >= GOAL_RIGHT_X) {
         thing->set_vy(-thing->vy());
         thing->set_y(2*(RINK_BOTTOM_Y - thing->radius()) - thing->y());
-        dampen = true;        
+        dampen = true;
       }
     } else if (thing->vx() < 0 && thing->x() - thing->radius() < GOAL_LEFT_X) {
       double outsideFraction = ((GOAL_LEFT_X + thing->radius()) - thing->x()) / (oldX - thing->x());
@@ -45,7 +45,7 @@ void Rink::BounceOff(RoundThing *thing) {
       if (hy >= RINK_BOTTOM_Y) {
         thing->set_vx(-thing->vx());
         thing->set_x(2*(GOAL_LEFT_X + thing->radius()) - thing->x());
-        dampen = true;          
+        dampen = true;
       }
     } else if (thing->vx() > 0 && thing->x() + thing->radius() > GOAL_RIGHT_X) {
       double outsideFraction = (thing->x() - (GOAL_RIGHT_X - thing->radius())) / (thing->x() - oldX);
@@ -53,7 +53,7 @@ void Rink::BounceOff(RoundThing *thing) {
       if (hy >= RINK_BOTTOM_Y) {
         thing->set_vx(-thing->vx());
         thing->set_x(2*(GOAL_RIGHT_X - thing->radius()) - thing->x());
-        dampen = true;          
+        dampen = true;
       }
     }
   }
@@ -67,7 +67,7 @@ void Rink::BounceOff(RoundThing *thing) {
       if (hx < GOAL_LEFT_X || hx >= GOAL_RIGHT_X) {
         thing->set_vy(-thing->vy());
         thing->set_y(2*(RINK_TOP_Y + thing->radius()) - thing->y());
-        dampen = true;        
+        dampen = true;
       }
     } else if (thing->vx() < 0 && thing->x() - thing->radius() < GOAL_LEFT_X) {
       double outsideFraction = ((GOAL_LEFT_X + thing->radius()) - thing->x()) / (oldX - thing->x());
@@ -75,7 +75,7 @@ void Rink::BounceOff(RoundThing *thing) {
       if (hy <= RINK_TOP_Y) {
         thing->set_vx(-thing->vx());
         thing->set_x(2*(GOAL_LEFT_X + thing->radius()) - thing->x());
-        dampen = true;          
+        dampen = true;
       }
     } else if (thing->vx() > 0 && thing->x() + thing->radius() > GOAL_RIGHT_X) {
       double outsideFraction = (thing->x() - (GOAL_RIGHT_X - thing->radius())) / (thing->x() - oldX);
@@ -83,7 +83,7 @@ void Rink::BounceOff(RoundThing *thing) {
       if (hy <= RINK_TOP_Y) {
         thing->set_vx(-thing->vx());
         thing->set_x(2*(GOAL_RIGHT_X - thing->radius()) - thing->x());
-        dampen = true;          
+        dampen = true;
       }
     }
   }
@@ -92,7 +92,7 @@ void Rink::BounceOff(RoundThing *thing) {
     thing->set_vx(thing->vx() * 0.7);
     thing->set_vy(thing->vy() * 0.7);
     thing->DidBounceOff(this, thing->velocity());
-  }  
+  }
 }
 
 void Rink::MoveInFromEdge(RoundThing *thing) {

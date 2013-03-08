@@ -75,7 +75,7 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   sp<SimpleItem> go_;
   sp<Button> pause_button_1_;
   sp<Button> pause_button_2_;
-  
+
   int wait_ticks_left_;
   int get_ready_ticks_left_;
   int go_ticks_left_;

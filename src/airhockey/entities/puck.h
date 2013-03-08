@@ -24,10 +24,10 @@ class Puck : public RoundThing {
   // ViewEntity
   void Update();
   void Render();
-  
+
   // RoundThing
   void DidBounceOff(ViewEntity *other, double total_velocity);
-  
+
  private:
   bool hit_puck_last_time_;
   bool hit_puck_this_time_;

@@ -17,7 +17,7 @@ class ViewEntity;
 class Post : public RoundThing {
  public:
   Post(sp<GameEngine> game_engine, double x, double y);
-  
+
   // RoundThing
   virtual void DidBounceOff(ViewEntity *other, double total_velocity);
   virtual bool IsMovable();

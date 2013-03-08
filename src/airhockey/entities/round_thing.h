@@ -21,7 +21,7 @@ class RoundThing : public ViewEntity {
   RoundThing(sp<GameEngine> game_engine);
   RoundThing(sp<GameEngine> game_engine, std::string texture_name);
   ~RoundThing();
-  
+
   void ApplyFriction();
   void MaybeBounceOff(RoundThing *other);
   // Will get called for one of the two round things when they bounce.
@@ -30,7 +30,7 @@ class RoundThing : public ViewEntity {
   bool Overlaps(RoundThing *thing);
   virtual bool IsGrabbable();
   virtual bool IsMovable();
-  
+
   double x() { return x_; }
   void set_x(double x) { x_ = x; }
   double y() { return y_; }

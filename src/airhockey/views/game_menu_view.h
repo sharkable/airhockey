@@ -31,7 +31,7 @@ class GameMenuView : public EngineView, private ButtonDelegate {
 
  private:
   void Init(bool match_finished);
-  
+
   GameMenuViewDelegate *delegate_;
   sp<SoundSlider> sound_slider_;
   sp<SimpleItem> menu_background_;

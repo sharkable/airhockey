@@ -34,12 +34,12 @@
 
 - (void)initAudio:(SoundInitializationDelegate *)delegate {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  
+
   SoundPlayer::instance()->initializeWithDelegate(delegate);
   SoundPlayer::instance()->setSoundEffectsOn(true);
-  
+
   [pool release];
-}  
+}
 
 #pragma mark - UIApplicationDelegate
 

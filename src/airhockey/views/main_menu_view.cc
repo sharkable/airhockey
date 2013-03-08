@@ -71,7 +71,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   start_button_->set_delegate(this);
   AddEntity(start_button_);
   fade_in(start_button_.get());
-  
+
   Sprite story_button_image(game_engine, "story_button");
   Sprite story_button_pressed_image(game_engine, "story_button_pressed");
   story_button_.reset(new Button());

@@ -99,7 +99,7 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
     y_ += dy_normal * move_distance;
 
     // Now change the direction based on the bounce.
-    
+
     // Based on this: http://stackoverflow.com/questions/573084/how-to-calculate-bounce-angle
     // But it had some problems.
     // Looked at Wikipedia dot product article to help.
@@ -108,18 +108,18 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
     double uy = dy_normal * v_dot_n;
     double wx = vx_ - ux;
     double wy = vy_ - uy;
-    
+
     double other_v_dot_n = other->vx() * -dx_normal + other->vy() * -dy_normal;
     double other_ux = -dx_normal * other_v_dot_n;
     double other_uy = -dy_normal * other_v_dot_n;
     double other_wx = other->vx() - other_ux;
     double other_wy = other->vy() - other_uy;
-    
+
     double new_ux = (ux * fabs(mass_ - other->mass()) - 2.0 * other->mass() * other_ux) /
         (mass_ + other->mass());
     double new_uy = (uy * fabs(mass_ - other->mass()) - 2.0 * other->mass() * other_uy) /
         (mass_ + other->mass());
-    
+
     double new_other_ux = (other_ux * fabs(other->mass() - mass_) - 2.0 * mass_ * ux) /
         (mass_ + other->mass());
     double new_other_uy = (other_uy * fabs(other->mass() - mass_) - 2.0 * mass_ * uy) /
@@ -152,7 +152,7 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
     }
 
     DidBounceOff(other, velocity() + other->velocity());
-  }  
+  }
 }
 
 bool RoundThing::ContainsTouch(Touch *touch) {
@@ -183,11 +183,11 @@ void RoundThing::Update() {
   if (!IsMovable() || !is_active()) {
     return;
   }
-  
+
   if (!grabbed_) {
     x_ += vx_;
     y_ += vy_;
-  } else {    
+  } else {
     vx_ = vx_ * 0.75 + (x_ - old_x_) * 0.25;
     vy_ = vy_ * 0.75 + (y_ - old_y_) * 0.25;
     old_x_ = x_;
@@ -218,7 +218,7 @@ void RoundThing::TouchesBegan(vector<Touch> touches) {
       // snaps to center on your touch, it doesn't have a really high
       // initial velocity.
       old_x_ = x_;
-      old_y_ = y_;      
+      old_y_ = y_;
     }
   }
 }
@@ -267,7 +267,7 @@ void RoundThing::ClearTouches() {
 //bool RoundThing::isMovable() {
 //  return true;
 //}
-//   
+//
 //bool RoundThing::containsTouch(Touch *touch) {
 //  double dx = touch->location().x - x_;
 //  double dy = touch->location().y - y_;

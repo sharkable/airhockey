@@ -28,10 +28,10 @@ class SplashView : public EngineView, SoundInitializationDelegate {
 
   // EngineView
   void Update();
-  
+
   // SoundInitializationDelegate
   void SoundInitialized(SoundPlayer *sound_player);
-  
+
  private:
   SplashViewState state_;
 };

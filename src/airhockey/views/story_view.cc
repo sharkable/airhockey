@@ -47,7 +47,7 @@ StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
 void StoryView::ButtonPressed(Button *button) {
   if (button == story_button_.get()) {
     RemoveEntity(story_button_);
-    AddEntity(about_button_);    
+    AddEntity(about_button_);
   } else if (button == about_button_.get()) {
     game_engine()->PopView();
   }

@@ -24,7 +24,7 @@ typedef enum {
 class MainMenuView : public EngineView, private ButtonDelegate {
  public:
   MainMenuView(sp<GameEngine> game_engine);
-  
+
   // EngineView
   void ViewIsShown();
   void Update();

@@ -19,7 +19,7 @@ Post::Post(sp<GameEngine> game_engine, double x, double y) : RoundThing(game_eng
   set_y(y);
   set_radius(1);
   set_active(true);
-  set_mass(99999999999.99);  
+  set_mass(99999999999.99);
 }
 
 

@@ -27,7 +27,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
                    PaddleSize paddle_size)
     : EngineView(game_engine) {
   num_players_ = num_players;
-  
+
   paddle_1_.reset(new Paddle(game_engine, PLAYER_1, paddle_size, true, caiBad, pucks_));
   paddle_2_.reset(new Paddle(game_engine, PLAYER_2, paddle_size, num_players == 2, difficulty,
                              pucks_));
@@ -39,7 +39,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
 
   rink_.reset(new Rink());
   AddEntity(rink_);
-  
+
   vector<Sprite> scoreSprites;
   for (int i = 0; i <= WIN_SCORE; i++) {
     char pointsstr[15];
@@ -58,7 +58,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   player_2_score_->set_position(game_engine->position("player_2_score"));
   AddEntity(player_1_score_);
   AddEntity(player_2_score_);
-  
+
   num_pucks_ = num_pucks;
   num_active_pucks_ = num_pucks_;
   for (int i = 0; i < num_pucks_; i++) {
@@ -66,13 +66,13 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
     AddEntity(pucks_[i]);
     round_things_.push_back(pucks_[i]);
   }
-  
+
   AddEntity(paddle_1_);
   round_things_.push_back(paddle_1_);
 
   AddEntity(paddle_2_);
   round_things_.push_back(paddle_2_);
-  
+
   AddEntity(post_1_);
   round_things_.push_back(post_1_);
 
@@ -81,10 +81,10 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
 
   AddEntity(post_3_);
   round_things_.push_back(post_3_);
-  
+
   AddEntity(post_4_);
   round_things_.push_back(post_4_);
-  
+
   Sprite winSprite(game_engine, "win");
   win_.reset(new SimpleItem());
   win_->add_sprite(winSprite);
@@ -116,7 +116,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite,
                                                  game_engine->position("rink_right"));
   AddEntity(right_rink_border);
-      
+
   Sprite pause_button_sprite(game_engine, "pause_button");
   Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
@@ -170,22 +170,22 @@ void PlayView::Update() {
       paddle_2_->set_ready_to_play(true);
       SoundPlayer::instance()->playSound(kSoundStart);
     }
-    
+
     return;
   }
 
   EngineView::Update();
-  
+
   if (go_ticks_left_ > 0) {
     go_ticks_left_--;
     if (go_ticks_left_ == 0) {
       RemoveEntity(go_);
     }
   }
-  
+
   paddle_1_->KeepInPlayerBounds();
   paddle_2_->KeepInPlayerBounds();
-  
+
   for (int i = 0; i < round_things_.size(); i++) {
     RoundThing *thing = round_things_[i].get();
     if (!thing->is_active()) {
@@ -198,9 +198,9 @@ void PlayView::Update() {
         thing->MaybeBounceOff(otherThing);
       }
     }
-    
+
     thing->ApplyFriction();
-    
+
     // TODO If you grab item A and push item B into a corner,
     // it only behaves if item A was added to roundsThings_
     // after item B. This is OK for Air Hockey, but should be fixed
@@ -242,15 +242,15 @@ void PlayView::Update() {
         SoundPlayer::instance()->setPosition(kSoundScore, position);
         SoundPlayer::instance()->playSound(kSoundScore);
       }
-      
+
       num_active_pucks_--;
     }
-  }  
-  
+  }
+
   switch (state_) {
     case kPlayViewStateGetReady:
       break;
-    case kPlayViewStatePlaying: {      
+    case kPlayViewStatePlaying: {
       if (player_1_score_->sprite() == WIN_SCORE) {
         FinishGameWithWinner(PLAYER_1);
       } else if (player_2_score_->sprite() == WIN_SCORE) {
@@ -275,8 +275,8 @@ void PlayView::Update() {
         }
         num_active_pucks_ = num_pucks_;
         num_player_1_scores_last_round_ = 0;
-        
-        state_ = kPlayViewStatePlaying;        
+
+        state_ = kPlayViewStatePlaying;
 
         break;
       }
@@ -349,10 +349,10 @@ void PlayView::SetUpNewGame() {
   player_2_score_->set_sprite(0);
   RemoveEntity(win_);
   RemoveEntity(lose_);
-  
+
   num_active_pucks_ = num_pucks_;
   num_player_1_scores_last_round_ = 0;
-  
+
   state_ = kPlayViewStateGetReady;
   get_ready_ticks_left_ = GET_READY_TICKS_TOTAL;
 }
@@ -371,32 +371,32 @@ void PlayView::FinishGameWithWinner(int playerId) {
       win_->set_position(game_point_make(winX, bottomY));
       win_->set_angle(0);
       AddEntity(win_);
-      
+
       if (num_players_ == 2) {
         lose_->set_position(game_point_make(loseX, topY));
         lose_->set_angle(180);
         AddEntity(lose_);
       }
-      
+
       give_extra_puck_to_player_ = PLAYER_2;
-      
+
       break;
     }
     case PLAYER_2: {
       player_2_win_count_++;
-      
+
       if (num_players_ == 2) {
         win_->set_position(game_point_make(winX, topY));
         win_->set_angle(180);
         AddEntity(win_);
       }
-      
+
       lose_->set_position(game_point_make(loseX, bottomY));
       lose_->set_angle(0);
       AddEntity(lose_);
-      
+
       give_extra_puck_to_player_ = PLAYER_1;
-      
+
       break;
     }
   }
