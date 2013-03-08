@@ -216,8 +216,6 @@
 		FE3F442C16C445CD00E8BEDF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442A16C445CD00E8BEDF /* StoreKit.framework */; };
 		FE3F442D16C445E000E8BEDF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442916C445CD00E8BEDF /* AdSupport.framework */; };
 		FE3F442E16C445E000E8BEDF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F442A16C445CD00E8BEDF /* StoreKit.framework */; };
-		FE413FD916C9CD57001BF838 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE413FC116C9CD57001BF838 /* const.mm */; };
-		FE413FDA16C9CD57001BF838 /* const.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE413FC116C9CD57001BF838 /* const.mm */; };
 		FE413FDB16C9CD57001BF838 /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE413FC316C9CD57001BF838 /* paddle.cc */; };
 		FE413FDC16C9CD57001BF838 /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE413FC316C9CD57001BF838 /* paddle.cc */; };
 		FE413FDD16C9CD57001BF838 /* post.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE413FC516C9CD57001BF838 /* post.cc */; };
@@ -897,7 +895,6 @@
 		FE3F442916C445CD00E8BEDF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FE3F442A16C445CD00E8BEDF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		FE413FC016C9CD57001BF838 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
-		FE413FC116C9CD57001BF838 /* const.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = const.mm; sourceTree = "<group>"; };
 		FE413FC316C9CD57001BF838 /* paddle.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cc; sourceTree = "<group>"; };
 		FE413FC416C9CD57001BF838 /* paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paddle.h; sourceTree = "<group>"; };
 		FE413FC516C9CD57001BF838 /* post.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = post.cc; sourceTree = "<group>"; };
@@ -1357,7 +1354,6 @@
 				FE4E6C2216EA9724001F9D94 /* ios */,
 				FE413FD016C9CD57001BF838 /* views */,
 				FE413FC016C9CD57001BF838 /* const.h */,
-				FE413FC116C9CD57001BF838 /* const.mm */,
 			);
 			path = airhockey;
 			sourceTree = "<group>";
@@ -2934,7 +2930,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE413FD916C9CD57001BF838 /* const.mm in Sources */,
 				FE413FDB16C9CD57001BF838 /* paddle.cc in Sources */,
 				FE413FDD16C9CD57001BF838 /* post.cc in Sources */,
 				FE413FDF16C9CD57001BF838 /* puck.cc in Sources */,
@@ -2994,7 +2989,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE413FDA16C9CD57001BF838 /* const.mm in Sources */,
 				FE413FDC16C9CD57001BF838 /* paddle.cc in Sources */,
 				FE413FDE16C9CD57001BF838 /* post.cc in Sources */,
 				FE413FE016C9CD57001BF838 /* puck.cc in Sources */,

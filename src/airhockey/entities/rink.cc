@@ -9,7 +9,6 @@
 #include "airhockey/entities/rink.h"
 
 #include "airhockey/entities/round_thing.h"
-#include "airhockey/const.h"
 
 void Rink::BounceOff(RoundThing *thing) {
   if (thing->is_grabbed() || !thing->IsMovable()) {
@@ -17,72 +16,72 @@ void Rink::BounceOff(RoundThing *thing) {
   }
 
   bool dampen = false;
-  if (thing->x() + thing->radius() > RINK_RIGHT_X) {
+  if (thing->x() + thing->radius() > kRinkRightX) {
     thing->set_vx(-thing->vx());
-    thing->set_x(2*(RINK_RIGHT_X - thing->radius()) - thing->x());
+    thing->set_x(2*(kRinkRightX - thing->radius()) - thing->x());
     dampen = true;
   }
-  if (thing->x() - thing->radius() < RINK_LEFT_X) {
+  if (thing->x() - thing->radius() < kRinkLeftX) {
     thing->set_vx(-thing->vx());
-    thing->set_x(2*(RINK_LEFT_X + thing->radius()) - thing->x());
+    thing->set_x(2*(kRinkLeftX + thing->radius()) - thing->x());
     dampen = true;
   }
-  if (thing->y() + thing->radius() > RINK_BOTTOM_Y) {
+  if (thing->y() + thing->radius() > kRinkBottomY) {
     // Interpolate circle x (hx) when the circle reached the edge of the goal.
     double oldX = thing->x() - thing->vx();
     double oldY = thing->y() - thing->vy();
-    if (oldY + thing->radius() <= RINK_BOTTOM_Y) {
-      double topFraction = (thing->y() - (RINK_BOTTOM_Y - thing->radius())) / (thing->y() - oldY);
+    if (oldY + thing->radius() <= kRinkBottomY) {
+      double topFraction = (thing->y() - (kRinkBottomY - thing->radius())) / (thing->y() - oldY);
       double hx = thing->x() - (thing->x() - oldX) * topFraction;
-      if (hx < GOAL_LEFT_X || hx >= GOAL_RIGHT_X) {
+      if (hx < kGoalLeftX || hx >= kGoalRightX) {
         thing->set_vy(-thing->vy());
-        thing->set_y(2*(RINK_BOTTOM_Y - thing->radius()) - thing->y());
+        thing->set_y(2*(kRinkBottomY - thing->radius()) - thing->y());
         dampen = true;
       }
-    } else if (thing->vx() < 0 && thing->x() - thing->radius() < GOAL_LEFT_X) {
-      double outsideFraction = ((GOAL_LEFT_X + thing->radius()) - thing->x()) / (oldX - thing->x());
+    } else if (thing->vx() < 0 && thing->x() - thing->radius() < kGoalLeftX) {
+      double outsideFraction = ((kGoalLeftX + thing->radius()) - thing->x()) / (oldX - thing->x());
       double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
-      if (hy >= RINK_BOTTOM_Y) {
+      if (hy >= kRinkBottomY) {
         thing->set_vx(-thing->vx());
-        thing->set_x(2*(GOAL_LEFT_X + thing->radius()) - thing->x());
+        thing->set_x(2*(kGoalLeftX + thing->radius()) - thing->x());
         dampen = true;
       }
-    } else if (thing->vx() > 0 && thing->x() + thing->radius() > GOAL_RIGHT_X) {
-      double outsideFraction = (thing->x() - (GOAL_RIGHT_X - thing->radius())) / (thing->x() - oldX);
+    } else if (thing->vx() > 0 && thing->x() + thing->radius() > kGoalRightX) {
+      double outsideFraction = (thing->x() - (kGoalRightX - thing->radius())) / (thing->x() - oldX);
       double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
-      if (hy >= RINK_BOTTOM_Y) {
+      if (hy >= kRinkBottomY) {
         thing->set_vx(-thing->vx());
-        thing->set_x(2*(GOAL_RIGHT_X - thing->radius()) - thing->x());
+        thing->set_x(2*(kGoalRightX - thing->radius()) - thing->x());
         dampen = true;
       }
     }
   }
-  if (thing->y() - thing->radius() < RINK_TOP_Y) {
+  if (thing->y() - thing->radius() < kRinkTopY) {
     // Interpolate circle x (hx) when the circle reached the edge of the goal.
     double oldX = thing->x() - thing->vx();
     double oldY = thing->y() - thing->vy();
-    if (oldY - thing->radius() >= RINK_TOP_Y) {
-      double topFraction = ((RINK_TOP_Y + thing->radius()) - thing->y()) / (oldY - thing->y());
+    if (oldY - thing->radius() >= kRinkTopY) {
+      double topFraction = ((kRinkTopY + thing->radius()) - thing->y()) / (oldY - thing->y());
       double hx = thing->x() - (thing->x() - oldX) * topFraction;
-      if (hx < GOAL_LEFT_X || hx >= GOAL_RIGHT_X) {
+      if (hx < kGoalLeftX || hx >= kGoalRightX) {
         thing->set_vy(-thing->vy());
-        thing->set_y(2*(RINK_TOP_Y + thing->radius()) - thing->y());
+        thing->set_y(2*(kRinkTopY + thing->radius()) - thing->y());
         dampen = true;
       }
-    } else if (thing->vx() < 0 && thing->x() - thing->radius() < GOAL_LEFT_X) {
-      double outsideFraction = ((GOAL_LEFT_X + thing->radius()) - thing->x()) / (oldX - thing->x());
+    } else if (thing->vx() < 0 && thing->x() - thing->radius() < kGoalLeftX) {
+      double outsideFraction = ((kGoalLeftX + thing->radius()) - thing->x()) / (oldX - thing->x());
       double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
-      if (hy <= RINK_TOP_Y) {
+      if (hy <= kRinkTopY) {
         thing->set_vx(-thing->vx());
-        thing->set_x(2*(GOAL_LEFT_X + thing->radius()) - thing->x());
+        thing->set_x(2*(kGoalLeftX + thing->radius()) - thing->x());
         dampen = true;
       }
-    } else if (thing->vx() > 0 && thing->x() + thing->radius() > GOAL_RIGHT_X) {
-      double outsideFraction = (thing->x() - (GOAL_RIGHT_X - thing->radius())) / (thing->x() - oldX);
+    } else if (thing->vx() > 0 && thing->x() + thing->radius() > kGoalRightX) {
+      double outsideFraction = (thing->x() - (kGoalRightX - thing->radius())) / (thing->x() - oldX);
       double hy = thing->y() - (thing->y() - oldY) * outsideFraction;
-      if (hy <= RINK_TOP_Y) {
+      if (hy <= kRinkTopY) {
         thing->set_vx(-thing->vx());
-        thing->set_x(2*(GOAL_RIGHT_X - thing->radius()) - thing->x());
+        thing->set_x(2*(kGoalRightX - thing->radius()) - thing->x());
         dampen = true;
       }
     }
@@ -99,15 +98,15 @@ void Rink::MoveInFromEdge(RoundThing *thing) {
   if (!thing->IsMovable()) {
     return;
   }
-  if (thing->x() - thing->radius() < RINK_LEFT_X) {
-    thing->set_x(RINK_LEFT_X + thing->radius());
-  } else if (thing->x() + thing->radius() > RINK_RIGHT_X) {
-    thing->set_x(RINK_RIGHT_X - thing->radius());
+  if (thing->x() - thing->radius() < kRinkLeftX) {
+    thing->set_x(kRinkLeftX + thing->radius());
+  } else if (thing->x() + thing->radius() > kRinkRightX) {
+    thing->set_x(kRinkRightX - thing->radius());
   }
-  if (thing->y() - thing->radius() < RINK_TOP_Y && (thing->x() < GOAL_LEFT_X || thing->x() >= GOAL_RIGHT_X)) {
-    thing->set_y(RINK_TOP_Y + thing->radius());
-  } else if (thing->y() + thing->radius() > RINK_BOTTOM_Y && (thing->x() < GOAL_LEFT_X || thing->x() >= GOAL_RIGHT_X)) {
-    thing->set_y(RINK_BOTTOM_Y - thing->radius());
+  if (thing->y() - thing->radius() < kRinkTopY && (thing->x() < kGoalLeftX || thing->x() >= kGoalRightX)) {
+    thing->set_y(kRinkTopY + thing->radius());
+  } else if (thing->y() + thing->radius() > kRinkBottomY && (thing->x() < kGoalLeftX || thing->x() >= kGoalRightX)) {
+    thing->set_y(kRinkBottomY - thing->radius());
   }
 }
 

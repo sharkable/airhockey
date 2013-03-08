@@ -22,6 +22,11 @@
 
 using std::vector;
 
+static const int kWaitTicks = 60;
+static const int kGetReadyTicksTotal = 120;
+static const int kShowGetReadyMessageTicks = 90;
+static const int kShowGoMessageTicks = 30;
+
 PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                    PaddleSize paddle_size)
     : EngineView(game_engine) {
@@ -31,10 +36,10 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   paddle_2_.reset(new Paddle(game_engine, PLAYER_2, paddle_size, num_players == 2, difficulty,
                              pucks_));
 
-  post_1_.reset(new Post(game_engine, GOAL_LEFT_X, RINK_TOP_Y));
-  post_2_.reset(new Post(game_engine, GOAL_LEFT_X, RINK_BOTTOM_Y + 1));
-  post_3_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_TOP_Y));
-  post_4_.reset(new Post(game_engine, GOAL_RIGHT_X + 1, RINK_BOTTOM_Y + 1));
+  post_1_.reset(new Post(game_engine, kGoalLeftX, kRinkTopY));
+  post_2_.reset(new Post(game_engine, kGoalLeftX, kRinkBottomY + 1));
+  post_3_.reset(new Post(game_engine, kGoalRightX + 1, kRinkTopY));
+  post_4_.reset(new Post(game_engine, kGoalRightX + 1, kRinkBottomY + 1));
 
   rink_.reset(new Rink());
   AddEntity(rink_);
@@ -157,13 +162,13 @@ void PlayView::Update() {
     return;
   } else if (state_ == kPlayViewStateGetReady) {
     get_ready_ticks_left_--;
-    if (get_ready_ticks_left_ == SHOW_GET_READY_MESSAGE_TICKS) {
+    if (get_ready_ticks_left_ == kShowGetReadyMessageTicks) {
       AddEntity(get_ready_);
       SoundPlayer::instance()->playSound(kSoundGetReady);
     } else if (get_ready_ticks_left_ == 0) {
       RemoveEntity(get_ready_);
       AddEntity(go_);
-      go_ticks_left_ = SHOW_GO_MESSAGE_TICKS;
+      go_ticks_left_ = kShowGoMessageTicks;
       state_ = kPlayViewStatePlaying;
       paddle_1_->set_ready_to_play(true);
       paddle_2_->set_ready_to_play(true);
@@ -255,7 +260,7 @@ void PlayView::Update() {
       } else if (player_2_score_->sprite() == WIN_SCORE) {
         FinishGameWithWinner(PLAYER_2);
       } else if (num_active_pucks_ == 0) {
-        wait_ticks_left_ = WAIT_TICKS;
+        wait_ticks_left_ = kWaitTicks;
         state_ = kPlayViewStateWaitingForPucks;
       }
       break;
@@ -353,7 +358,7 @@ void PlayView::SetUpNewGame() {
   num_player_1_scores_last_round_ = 0;
 
   state_ = kPlayViewStateGetReady;
-  get_ready_ticks_left_ = GET_READY_TICKS_TOTAL;
+  get_ready_ticks_left_ = kGetReadyTicksTotal;
 }
 
 void PlayView::FinishGameWithWinner(int playerId) {

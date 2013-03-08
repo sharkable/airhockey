@@ -18,6 +18,8 @@
 using std::string;
 using std::vector;
 
+static const double kMaxSpeed = 60;
+
 RoundThing::RoundThing(sp<GameEngine> game_engine)
     : sprite_(game_engine),
       x_(0),
@@ -138,15 +140,15 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
     double v_squared = vx_ * vx_ + vy_ * vy_;
     double other_v_squared = other->vx() * other->vx() + other->vy() * other->vy();
 
-    if (v_squared > (MAX_SPEED * MAX_SPEED)) {
+    if (v_squared > (kMaxSpeed * kMaxSpeed)) {
       double new_v = sqrt(v_squared);
-      double new_ratio = MAX_SPEED / new_v;
+      double new_ratio = kMaxSpeed / new_v;
       vx_ *= new_ratio;
       vy_ *= new_ratio;
     }
-    if (other_v_squared > (MAX_SPEED * MAX_SPEED)) {
+    if (other_v_squared > (kMaxSpeed * kMaxSpeed)) {
       double new_other_v = sqrt(other_v_squared);
-      double new_ratio = MAX_SPEED / new_other_v;
+      double new_ratio = kMaxSpeed / new_other_v;
       other->set_vx(other->vx() * new_ratio);
       other->set_vy(other->vy() * new_ratio);
     }

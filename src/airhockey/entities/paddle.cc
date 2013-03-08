@@ -15,8 +15,18 @@
 #include "gameengine/resource_loader.h"
 
 #include "airhockey/entities/puck.h"
+#include "airhockey/entities/rink.h"
 
 using std::vector;
+
+static const double kPaddleRadii[] = {40, 65, 92.5};
+static const int kPaddle2X = (SCREEN_WIDTH / 2);
+static const int kPaddle2Y = 130;
+static const int kPaddle1X = kPaddle2X;
+static const int kPaddle1Y = (SCREEN_HEIGHT - kPaddle2Y - 1);
+static const double kPaddleMass = 100;
+static const double kPaddleFriction = 0.1;
+static const double kPaddleAIFriction = 0.999;
 
 Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
                ComputerAI ai_level, vector<sp<Puck> > &pucks)
@@ -55,22 +65,21 @@ Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool 
     }
   }
 
-  radius_ = PADDLE_RADIUS[size];
-  mass_ = PADDLE_MASS;
-  friction_ = player_controlled_ ? PADDLE_FRICTION : PADDLE_AI_FRICTION;
+  radius_ = kPaddleRadii[size];
+  mass_ = kPaddleMass;
+  friction_ = player_controlled_ ? kPaddleFriction : kPaddleAIFriction;
 }
-
 
 void Paddle::SetInitialPositionForPlayer(int playerId) {
   switch (player_id_) {
     case PLAYER_1: {
-      x_ = PADDLE_1_X;
-      y_ = PADDLE_1_Y;
+      x_ = kPaddle1X;
+      y_ = kPaddle1Y;
       break;
     }
     case PLAYER_2: {
-      x_ = PADDLE_2_X;
-      y_ = PADDLE_2_Y;
+      x_ = kPaddle2X;
+      y_ = kPaddle2Y;
       break;
     }
   }
@@ -79,8 +88,8 @@ void Paddle::SetInitialPositionForPlayer(int playerId) {
 void Paddle::KeepInPlayerBounds() {
   switch (player_id_) {
     case PLAYER_1: {
-      if (y_ + radius_ > RINK_BOTTOM_Y) {
-        y_ = RINK_BOTTOM_Y - radius_;
+      if (y_ + radius_ > kRinkBottomY) {
+        y_ = kRinkBottomY - radius_;
         vy_ = 0;
       } else if (y_ - radius_ < SCREEN_HEIGHT/2+1) {
         y_ = SCREEN_HEIGHT/2+1 + radius_;
@@ -89,8 +98,8 @@ void Paddle::KeepInPlayerBounds() {
       break;
     }
     case PLAYER_2: {
-      if (y_ - radius_ < RINK_TOP_Y) {
-        y_ = RINK_TOP_Y + radius_;
+      if (y_ - radius_ < kRinkTopY) {
+        y_ = kRinkTopY + radius_;
         vy_ = 0;
       } else if (y_ + radius_ > SCREEN_HEIGHT/2-1) {
         y_ = SCREEN_HEIGHT/2-1 - radius_;
@@ -99,11 +108,11 @@ void Paddle::KeepInPlayerBounds() {
       break;
     }
   }
-  if (x_ - radius_ < RINK_LEFT_X) {
-    x_ = RINK_LEFT_X + radius_;
+  if (x_ - radius_ < kRinkLeftX) {
+    x_ = kRinkLeftX + radius_;
     vx_ = 0;
-  } else if (x_ + radius_ > RINK_RIGHT_X) {
-    x_ = RINK_RIGHT_X - radius_;
+  } else if (x_ + radius_ > kRinkRightX) {
+    x_ = kRinkRightX - radius_;
     vx_ = 0;
   }
 }
@@ -158,7 +167,7 @@ void Paddle::RunAITick() {
   double targetX;
   double targetY;
 
-  if (!target_away_from_corner_ && target && target->y() <= RINK_TOP_Y + radius_ &&
+  if (!target_away_from_corner_ && target && target->y() <= kRinkTopY + radius_ &&
       fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
     if (target->x() < SCREEN_WIDTH / 2) {
       target_left_corner_ = true;
@@ -168,22 +177,22 @@ void Paddle::RunAITick() {
   }
 
   if (target_left_corner_) {
-    targetX = RINK_LEFT_X + radius_;
-    targetY = RINK_TOP_Y + radius_;
+    targetX = kRinkLeftX + radius_;
+    targetY = kRinkTopY + radius_;
     if (Overlaps(target)) {
       target_left_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_right_corner_) {
-    targetX = RINK_RIGHT_X - radius_;
-    targetY = RINK_TOP_Y + radius_;
+    targetX = kRinkRightX - radius_;
+    targetY = kRinkTopY + radius_;
     if (Overlaps(target)) {
       target_right_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_away_from_corner_) {
     targetX = SCREEN_WIDTH / 2;
-    targetY = RINK_TOP_Y + radius_;
+    targetY = kRinkTopY + radius_;
     if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
       target_away_from_corner_ = false;
     }
@@ -200,10 +209,10 @@ void Paddle::RunAITick() {
       }
     }
   } else if (ai_level_ >= kComputerAIExcellent) {
-    targetX = PADDLE_2_X;
-    targetY = PADDLE_2_Y;
+    targetX = kPaddle2X;
+    targetY = kPaddle2Y;
   } else if (ai_level_ == kComputerAIGood) {
-    targetX = PADDLE_2_X;
+    targetX = kPaddle2X;
     targetY = y_;
   } else {
     targetX = x_;
@@ -276,13 +285,13 @@ bool Paddle::ContainsTouch(Touch *touch) {
   }
   switch (player_id_) {
     case PLAYER_1:
-      return p.y >= SCREEN_HEIGHT / 2 && p.y < RINK_BOTTOM_Y && p.x >= RINK_LEFT_X &&
-          p.x < RINK_RIGHT_X &&
+      return p.y >= SCREEN_HEIGHT / 2 && p.y < kRinkBottomY && p.x >= kRinkLeftX &&
+          p.x < kRinkRightX &&
           (p.x < SCREEN_WIDTH - PAUSE_BUTTON_SIZE || p.y < SCREEN_HEIGHT - PAUSE_BUTTON_SIZE);
       break;
     case PLAYER_2:
-      return p.y < SCREEN_HEIGHT / 2 && p.y >= RINK_TOP_Y && p.x >= RINK_LEFT_X &&
-          p.x < RINK_RIGHT_X &&
+      return p.y < SCREEN_HEIGHT / 2 && p.y >= kRinkTopY && p.x >= kRinkLeftX &&
+          p.x < kRinkRightX &&
           (p.x > PAUSE_BUTTON_SIZE || p.y >PAUSE_BUTTON_SIZE);
       break;
   }

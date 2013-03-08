@@ -22,10 +22,19 @@
 
 using std::vector;
 
+static const int kPuckFadeTicks = 10;
+static const int kPlayer2PuckY = (SCREEN_HEIGHT / 3);
+static const int kPlayer1PuckY = (SCREEN_HEIGHT - kPlayer2PuckY - 1);
+static const int kPuckXSeparation = 150;
+static const double kPuckGoalMinDropSpeed = 5;
+static const double kPuckMass = 10;
+static const double kPuckFriction = 0.995;
+static const double kPuckRadius = 43.5;
+
 Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
-  radius_ = PUCK_RADIUS;
-  mass_ = PUCK_MASS;
-  friction_ = PUCK_FRICTION;
+  radius_ = kPuckRadius;
+  mass_ = kPuckMass;
+  friction_ = kPuckFriction;
   alpha_ = 1;
   fade_ticks_left_ = 0;
   hit_puck_last_time_ = false;
@@ -39,10 +48,10 @@ Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
 void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center) {
   double startX = SCREEN_WIDTH / 2;
   if (!center) {
-    startX += PUCK_X_SEPARATION / 2;
+    startX += kPuckXSeparation / 2;
   }
   x_ = startX;
-  y_ = player_id == PLAYER_1 ? PLAYER_1_PUCK_Y : PLAYER_2_PUCK_Y;
+  y_ = player_id == PLAYER_1 ? kPlayer1PuckY : kPlayer2PuckY;
 
   vx_ = 0;
   vy_ = 0;
@@ -57,10 +66,10 @@ void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_th
       if (thing != this && Overlaps(thing)) {
         overlapping = true;
         if (goLeft) {
-          x_ = startX - offset * PUCK_X_SEPARATION;
+          x_ = startX - offset * kPuckXSeparation;
           goLeft = false;
         } else {
-          x_ = startX + offset * PUCK_X_SEPARATION;
+          x_ = startX + offset * kPuckXSeparation;
           offset++;
           goLeft = true;
         }
@@ -71,7 +80,7 @@ void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_th
 }
 
 void Puck::FadeIn() {
-  fade_ticks_left_ = PUCK_FADE_TICKS;
+  fade_ticks_left_ = kPuckFadeTicks;
   alpha_ = 0;
 }
 
@@ -97,15 +106,15 @@ void Puck::Update() {
   RoundThing::Update();
 
   // Stop the puck from getting stuck in the goal.
-  if (y() < RINK_TOP_Y && fabs(vy()) < PUCK_GOAL_MIN_DROP_SPEED) {
-    set_vy(-PUCK_GOAL_MIN_DROP_SPEED);
-  } else if (y_ > RINK_BOTTOM_Y && fabs(vy_) < PUCK_GOAL_MIN_DROP_SPEED) {
-    vy_ = PUCK_GOAL_MIN_DROP_SPEED;
+  if (y() < kRinkTopY && fabs(vy()) < kPuckGoalMinDropSpeed) {
+    set_vy(-kPuckGoalMinDropSpeed);
+  } else if (y_ > kRinkBottomY && fabs(vy_) < kPuckGoalMinDropSpeed) {
+    vy_ = kPuckGoalMinDropSpeed;
   }
 
   if (fade_ticks_left_ > 0) {
     fade_ticks_left_--;
-    alpha_ = ((double)PUCK_FADE_TICKS - fade_ticks_left_) / PUCK_FADE_TICKS;
+    alpha_ = ((double)kPuckFadeTicks - fade_ticks_left_) / kPuckFadeTicks;
   }
 }
 

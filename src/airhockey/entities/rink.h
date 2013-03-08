@@ -11,7 +11,17 @@
 
 #include "gameengine/view_entity.h"
 
+#include "airhockey/const.h"
+
 class RoundThing;
+
+static const int kRinkEdgeWidth = 23;
+static const int kRinkLeftX = kRinkEdgeWidth;
+static const int kRinkRightX = (SCREEN_WIDTH - kRinkEdgeWidth);
+static const int kRinkTopY = kRinkEdgeWidth;
+static const int kRinkBottomY = (SCREEN_HEIGHT - kRinkEdgeWidth);
+static const int kGoalLeftX = 200;
+static const int kGoalRightX = 568;
 
 class Rink : public ViewEntity {
  public:
