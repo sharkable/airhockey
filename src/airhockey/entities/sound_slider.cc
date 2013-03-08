@@ -15,18 +15,22 @@
 
 #include "airhockey/const.h"
 
+using std::string;
 using std::vector;
 
 const int kLeftMargin = 18;
 const int kSliderWidth = 271;
+
+// Locale Store key
+static const string kLocalStoreVolume = "ls_volume";
 
 SoundSlider::SoundSlider(sp<GameEngine> game_engine, GamePoint position)
     : position_(position),
       empty_sprite_(game_engine, "sound_empty"),
       full_sprite_(game_engine, "sound_full"),
       thumb_sprite_(game_engine, "sound_thumb") {
-  if (LocalStore::HasEntryForKey(LS_VOLUME)) {
-    value_ = LocalStore::DoubleForKey(LS_VOLUME);
+  if (LocalStore::HasEntryForKey(kLocalStoreVolume)) {
+    value_ = LocalStore::DoubleForKey(kLocalStoreVolume);
   } else {
     value_ = 0.75;
   }
@@ -92,7 +96,7 @@ void SoundSlider::TouchesEnded(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       SoundPlayer::instance()->setGlobalVolume(value_);
-      LocalStore::SetDouble(value_, LS_VOLUME);
+      LocalStore::SetDouble(value_, kLocalStoreVolume);
       grabbed_touch_ = NULL;
       return;
     }

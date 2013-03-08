@@ -29,6 +29,12 @@ using std::string;
 
 static const int kMaxNumPucks = 7;
 
+// Local Store keys
+static const string kLocalStoreNumPlayers = "ls_num_players";
+static const string kLocalStoreDifficulty = "ls_difficulty";
+static const string kLocalStoreNumPucks = "ls_num_pucks";
+static const string kLocalStorePaddleSize = "ls_paddle_size";
+
 inline string to_string(int i) {
   std::stringstream ss;
   ss << i;
@@ -93,7 +99,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
                            game_engine->position("1_player"));
   num_players_select_->Add(two_player_image, two_player_selected_image,
                            game_engine->position("2_player"));
-  num_players_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PLAYERS));
+  num_players_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreNumPlayers));
   AddEntity(num_players_select_);
   fade_in(num_players_select_.get());
 
@@ -109,7 +115,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     GamePoint num_pucks_position = game_engine->position(pucks_str);
     num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_position);
   }
-  num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(LS_NUM_PUCKS));
+  num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreNumPucks));
   AddEntity(num_pucks_select_);
   fade_in(num_pucks_select_.get());
 
@@ -127,8 +133,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   difficulty_select_->Add(excellent_image, excellent_image_selected,
                           game_engine->position("excellent"));
   difficulty_select_->Add(amazing_image, amazing_image_selected, game_engine->position("amazing"));
-  if (LocalStore::HasEntryForKey(LS_DIFFICULTY)) {
-    difficulty_select_->set_selected_value(LocalStore::IntegerForKey(LS_DIFFICULTY));
+  if (LocalStore::HasEntryForKey(kLocalStoreDifficulty)) {
+    difficulty_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreDifficulty));
   } else {
     difficulty_select_->set_selected_value(kComputerAIGood);
   }
@@ -146,8 +152,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     paddle_size_select_->Add(small_image, small_image_selected, game_engine->position("small"));
     paddle_size_select_->Add(medium_image, medium_image_selected, game_engine->position("medium"));
     paddle_size_select_->Add(large_image, large_image_selected, game_engine->position("large"));
-    if (LocalStore::HasEntryForKey(LS_PADDLE_SIZE)) {
-      paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
+    if (LocalStore::HasEntryForKey(kLocalStorePaddleSize)) {
+      paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStorePaddleSize));
     } else {
       paddle_size_select_->set_selected_value(kPaddleSizeLarge);
     }
@@ -220,11 +226,11 @@ void MainMenuView::PressedStart() {
 
   bool is_iphone = false; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
-  LocalStore::SetInteger(num_players_select_->selected_value(), LS_NUM_PLAYERS);
-  LocalStore::SetInteger(num_pucks_select_->selected_value(), LS_NUM_PUCKS);
-  LocalStore::SetInteger(difficulty_select_->selected_value(), LS_DIFFICULTY);
+  LocalStore::SetInteger(num_players_select_->selected_value(), kLocalStoreNumPlayers);
+  LocalStore::SetInteger(num_pucks_select_->selected_value(), kLocalStoreNumPucks);
+  LocalStore::SetInteger(difficulty_select_->selected_value(), kLocalStoreDifficulty);
   if (!is_iphone) {
-    LocalStore::SetInteger(paddle_size_select_->selected_value(), LS_PADDLE_SIZE);
+    LocalStore::SetInteger(paddle_size_select_->selected_value(), kLocalStorePaddleSize);
   }
 
   map<string, string> analytics_params;
