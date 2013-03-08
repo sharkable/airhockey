@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_ENTITIES_PADDLE_H_
-#define AIRHOCKEY_GAME_ENTITIES_PADDLE_H_
+#ifndef AIRHOCKEY_ENTITIES_PADDLE_H_
+#define AIRHOCKEY_ENTITIES_PADDLE_H_
 
 #include "const.h"
 #include "airhockey/entities/round_thing.h"

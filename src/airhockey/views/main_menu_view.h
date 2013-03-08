@@ -6,8 +6,8 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_GAME_VIEWS_MAINMENUVIEW_H_
-#define AIRHOCKEY_GAME_VIEWS_MAINMENUVIEW_H_
+#ifndef AIRHOCKEY_VIEWS_MAINMENUVIEW_H_
+#define AIRHOCKEY_VIEWS_MAINMENUVIEW_H_
 
 #import "gameengine/engine_view.h"
 #import "gameengine/entities/button.h"
