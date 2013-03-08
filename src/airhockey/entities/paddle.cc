@@ -31,25 +31,25 @@ Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool 
       target_away_from_corner_(false) {
   if (player_id == PLAYER_1) {
     switch (size) {
-      case psSmall:
+      case kPaddleSizeSmall:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_small"));
         break;
-      case psMedium:
+      case kPaddleSizeMedium:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_medium"));
         break;
-      case psLarge:
+      case kPaddleSizeLarge:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_large"));
         break;
     }
   } else {
     switch (size) {
-      case psSmall:
+      case kPaddleSizeSmall:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_small"));
         break;
-      case psMedium:
+      case kPaddleSizeMedium:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_medium"));
         break;
-      case psLarge:
+      case kPaddleSizeLarge:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_large"));
         break;
     }
@@ -111,16 +111,16 @@ void Paddle::KeepInPlayerBounds() {
 void Paddle::RunAITick() {
   double speed = 0;
   switch (ai_level_) {
-    case caiBad:
+    case kComputerAIBad:
       speed = 0.4;
       break;
-    case caiGood:
+    case kComputerAIGood:
       speed = 1.15;
       break;
-    case caiExcellent:
+    case kComputerAIExcellent:
       speed = 1.7;
       break;
-    case caiAmazing:
+    case kComputerAIAmazing:
       speed = 2.5;
       break;
   }
@@ -199,10 +199,10 @@ void Paddle::RunAITick() {
         targetX = target->x() - target->radius() - radius_ - 20;
       }
     }
-  } else if (ai_level_ >= caiExcellent) {
+  } else if (ai_level_ >= kComputerAIExcellent) {
     targetX = PADDLE_2_X;
     targetY = PADDLE_2_Y;
-  } else if (ai_level_ == caiGood) {
+  } else if (ai_level_ == kComputerAIGood) {
     targetX = PADDLE_2_X;
     targetY = y_;
   } else {

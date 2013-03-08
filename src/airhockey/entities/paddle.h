@@ -16,6 +16,19 @@ class Puck;
 
 #import <vector>
 
+typedef enum {
+  kComputerAIBad = 0,
+  kComputerAIGood,
+  kComputerAIExcellent,
+  kComputerAIAmazing,
+} ComputerAI;
+
+typedef enum {
+  kPaddleSizeSmall = 0,
+  kPaddleSizeMedium,
+  kPaddleSizeLarge,
+} PaddleSize;
+
 class Paddle : public RoundThing {
  public:
   Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,

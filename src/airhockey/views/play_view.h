@@ -14,11 +14,11 @@
 #include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
 
+#include "airhockey/entities/paddle.h"
 #include "airhockey/views/game_menu_view.h"
 #include "airhockey/const.h"
 
 class GameEngine;
-class Paddle;
 class Post;
 class Puck;
 class Rink;

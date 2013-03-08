@@ -57,19 +57,6 @@ extern double PADDLE_RADIUS[];
 #define SHOW_GET_READY_MESSAGE_TICKS 90
 #define SHOW_GO_MESSAGE_TICKS 30
 
-typedef enum {
-  caiBad = 0,
-  caiGood,
-  caiExcellent,
-  caiAmazing,
-} ComputerAI;
-
-typedef enum {
-  psSmall = 0,
-  psMedium,
-  psLarge,
-} PaddleSize;
-
 // Locale Store keys
 #define LS_NUM_PLAYERS "ls_num_players"
 #define LS_DIFFICULTY "ls_difficulty"

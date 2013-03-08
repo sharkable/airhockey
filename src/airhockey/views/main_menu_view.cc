@@ -128,7 +128,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   if (LocalStore::HasEntryForKey(LS_DIFFICULTY)) {
     difficulty_select_->set_selected_value(LocalStore::IntegerForKey(LS_DIFFICULTY));
   } else {
-    difficulty_select_->set_selected_value(caiGood);
+    difficulty_select_->set_selected_value(kComputerAIGood);
   }
   AddEntity(difficulty_select_);
   fade_in(difficulty_select_.get());
@@ -147,7 +147,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
     if (LocalStore::HasEntryForKey(LS_PADDLE_SIZE)) {
       paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(LS_PADDLE_SIZE));
     } else {
-      paddle_size_select_->set_selected_value(psLarge);
+      paddle_size_select_->set_selected_value(kPaddleSizeLarge);
     }
     AddEntity(paddle_size_select_);
     fade_in(paddle_size_select_.get());
@@ -232,7 +232,8 @@ void MainMenuView::PressedStart() {
   analytics_params["PaddleSize"] = to_string(paddle_size_select_->selected_value());
   game_engine()->analytics_engine()->LogEvent("START_GAME", analytics_params);
 
-  PaddleSize paddle_size = PaddleSize(is_iphone ? psLarge : paddle_size_select_->selected_value());
+  PaddleSize paddle_size =
+      PaddleSize(is_iphone ? kPaddleSizeLarge : paddle_size_select_->selected_value());
   PlayView *play_view = new PlayView(game_engine(),
                                      num_players_select_->selected_value() + 1,
                                      num_pucks_select_->selected_value() + 1,

@@ -14,7 +14,6 @@
 #include "gameengine/resource_loader.h"
 #include "soundengine/sound_player.h"
 
-#include "airhockey/entities/paddle.h"
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/rink.h"
@@ -28,7 +27,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
     : EngineView(game_engine) {
   num_players_ = num_players;
 
-  paddle_1_.reset(new Paddle(game_engine, PLAYER_1, paddle_size, true, caiBad, pucks_));
+  paddle_1_.reset(new Paddle(game_engine, PLAYER_1, paddle_size, true, kComputerAIBad, pucks_));
   paddle_2_.reset(new Paddle(game_engine, PLAYER_2, paddle_size, num_players == 2, difficulty,
                              pucks_));
 
