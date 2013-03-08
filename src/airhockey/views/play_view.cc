@@ -26,14 +26,15 @@ static const int kWaitTicks = 60;
 static const int kGetReadyTicksTotal = 120;
 static const int kShowGetReadyMessageTicks = 90;
 static const int kShowGoMessageTicks = 30;
+static const int kWinScore = 7;
 
 PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                    PaddleSize paddle_size)
     : EngineView(game_engine) {
   num_players_ = num_players;
 
-  paddle_1_.reset(new Paddle(game_engine, PLAYER_1, paddle_size, true, kComputerAIBad, pucks_));
-  paddle_2_.reset(new Paddle(game_engine, PLAYER_2, paddle_size, num_players == 2, difficulty,
+  paddle_1_.reset(new Paddle(game_engine, kPlayerId1, paddle_size, true, kComputerAIBad, pucks_));
+  paddle_2_.reset(new Paddle(game_engine, kPlayerId2, paddle_size, num_players == 2, difficulty,
                              pucks_));
 
   post_1_.reset(new Post(game_engine, kGoalLeftX, kRinkTopY));
@@ -45,7 +46,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   AddEntity(rink_);
 
   vector<Sprite> scoreSprites;
-  for (int i = 0; i <= WIN_SCORE; i++) {
+  for (int i = 0; i <= kWinScore; i++) {
     char pointsstr[15];
     sprintf(pointsstr, "%d_points", i);
     Sprite sprite(game_engine, pointsstr);
@@ -148,7 +149,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
     AddEntity(pause_button_2_);
   }
 
-  give_extra_puck_to_player_ = PLAYER_1;
+  give_extra_puck_to_player_ = kPlayerId1;
   player_1_win_count_ = 0;
   player_2_win_count_ = 0;
   SetUpNewGame();
@@ -221,10 +222,10 @@ void PlayView::Update() {
       // TODO make this less shitty.
       puck->set_active(false);
       float position = (puck->x() / SCREEN_WIDTH - 0.5) * 2;
-      if (player_1_score_->sprite() < WIN_SCORE && state_ == kPlayViewStatePlaying) {
+      if (player_1_score_->sprite() < kWinScore && state_ == kPlayViewStatePlaying) {
         player_1_score_->set_sprite(player_1_score_->sprite() + 1);
       }
-      if (player_1_score_->sprite() == WIN_SCORE && state_ == kPlayViewStatePlaying) {
+      if (player_1_score_->sprite() == kWinScore && state_ == kPlayViewStatePlaying) {
         SoundPlayer::instance()->setPosition(kSoundScoreFinal, position);
         SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
@@ -236,10 +237,10 @@ void PlayView::Update() {
     } else if (puck->y() > SCREEN_HEIGHT + puck->radius()) {
       puck->set_active(false);
       float position = (puck->x() / SCREEN_WIDTH - 0.5) * 2;
-      if (player_2_score_->sprite() < WIN_SCORE && state_ == kPlayViewStatePlaying) {
+      if (player_2_score_->sprite() < kWinScore && state_ == kPlayViewStatePlaying) {
         player_2_score_->set_sprite(player_2_score_->sprite() + 1);
       }
-      if (player_2_score_->sprite() == WIN_SCORE && state_ == kPlayViewStatePlaying) {
+      if (player_2_score_->sprite() == kWinScore && state_ == kPlayViewStatePlaying) {
         SoundPlayer::instance()->setPosition(kSoundScoreFinal, position);
         SoundPlayer::instance()->playSound(kSoundScoreFinal);
       } else {
@@ -255,10 +256,10 @@ void PlayView::Update() {
     case kPlayViewStateGetReady:
       break;
     case kPlayViewStatePlaying: {
-      if (player_1_score_->sprite() == WIN_SCORE) {
-        FinishGameWithWinner(PLAYER_1);
-      } else if (player_2_score_->sprite() == WIN_SCORE) {
-        FinishGameWithWinner(PLAYER_2);
+      if (player_1_score_->sprite() == kWinScore) {
+        FinishGameWithWinner(kPlayerId1);
+      } else if (player_2_score_->sprite() == kWinScore) {
+        FinishGameWithWinner(kPlayerId2);
       } else if (num_active_pucks_ == 0) {
         wait_ticks_left_ = kWaitTicks;
         state_ = kPlayViewStateWaitingForPucks;
@@ -270,7 +271,7 @@ void PlayView::Update() {
         for (int i = 0; i < num_pucks_; i++) {
           Puck *puck = pucks_[i].get();
           puck->set_active(true);
-          puck->PlaceForPlayer(i < num_player_1_scores_last_round_ ? PLAYER_2 : PLAYER_1,
+          puck->PlaceForPlayer(i < num_player_1_scores_last_round_ ? kPlayerId2 : kPlayerId1,
                                round_things_,
                                 (i < num_player_1_scores_last_round_ ?
                                     (num_player_1_scores_last_round_ % 2 == 1) :
@@ -325,8 +326,8 @@ void PlayView::ContinuePressed() {
 
 void PlayView::SetUpNewGame() {
   // Place paddles!
-  paddle_1_->SetInitialPositionForPlayer(PLAYER_1);
-  paddle_2_->SetInitialPositionForPlayer(PLAYER_2);
+  paddle_1_->SetInitialPositionForPlayer(kPlayerId1);
+  paddle_2_->SetInitialPositionForPlayer(kPlayerId2);
   paddle_1_->set_ready_to_play(false);
   paddle_2_->set_ready_to_play(false);
 
@@ -341,12 +342,17 @@ void PlayView::SetUpNewGame() {
   for (int i = 0; i < num_pucks_; i++) {
     Puck *puck = pucks_[i].get();
     puck->set_active(true);
-    int playerId = (i % 2 == 0) ? give_extra_puck_to_player_ : 1 - give_extra_puck_to_player_;
-    bool center = !((playerId == give_extra_puck_to_player_ &&
+    PlayerId player_id;
+    if (i % 2 == 0) {
+      player_id = give_extra_puck_to_player_;
+    } else {
+      player_id = (give_extra_puck_to_player_ == kPlayerId1) ? kPlayerId2 : kPlayerId1;
+    }
+    bool center = !((player_id == give_extra_puck_to_player_ &&
                       (num_pucks_ == 3 || num_pucks_ == 4 || num_pucks_ == 7)) ||
-                      (playerId == 1 - give_extra_puck_to_player_ &&
+                      (player_id == 1 - give_extra_puck_to_player_ &&
                       (num_pucks_ == 4 || num_pucks_ == 5)));
-    puck->PlaceForPlayer(playerId, round_things_, center);
+    puck->PlaceForPlayer(player_id, round_things_, center);
   }
 
   player_1_score_->set_sprite(0);
@@ -361,7 +367,7 @@ void PlayView::SetUpNewGame() {
   get_ready_ticks_left_ = kGetReadyTicksTotal;
 }
 
-void PlayView::FinishGameWithWinner(int playerId) {
+void PlayView::FinishGameWithWinner(PlayerId playerId) {
   state_ = kPlayViewStateFinished;
 
   double loseX = (SCREEN_WIDTH - lose_->size().width)/2;
@@ -369,7 +375,7 @@ void PlayView::FinishGameWithWinner(int playerId) {
   double topY = 70;
   double bottomY = SCREEN_HEIGHT - topY - lose_->size().height;
   switch (playerId) {
-    case PLAYER_1: {
+    case kPlayerId1: {
       player_1_win_count_++;
 
       win_->set_position(game_point_make(winX, bottomY));
@@ -382,11 +388,11 @@ void PlayView::FinishGameWithWinner(int playerId) {
         AddEntity(lose_);
       }
 
-      give_extra_puck_to_player_ = PLAYER_2;
+      give_extra_puck_to_player_ = kPlayerId2;
 
       break;
     }
-    case PLAYER_2: {
+    case kPlayerId2: {
       player_2_win_count_++;
 
       if (num_players_ == 2) {
@@ -399,7 +405,7 @@ void PlayView::FinishGameWithWinner(int playerId) {
       lose_->set_angle(0);
       AddEntity(lose_);
 
-      give_extra_puck_to_player_ = PLAYER_1;
+      give_extra_puck_to_player_ = kPlayerId1;
 
       break;
     }

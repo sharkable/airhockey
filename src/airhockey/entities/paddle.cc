@@ -28,8 +28,8 @@ static const double kPaddleMass = 100;
 static const double kPaddleFriction = 0.1;
 static const double kPaddleAIFriction = 0.999;
 
-Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
-               ComputerAI ai_level, vector<sp<Puck> > &pucks)
+Paddle::Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size,
+               bool player_controlled, ComputerAI ai_level, vector<sp<Puck> > &pucks)
     : RoundThing(game_engine),
       player_id_(player_id),
       player_controlled_(player_controlled),
@@ -39,7 +39,7 @@ Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool 
       target_left_corner_(false),
       target_right_corner_(false),
       target_away_from_corner_(false) {
-  if (player_id == PLAYER_1) {
+  if (player_id == kPlayerId1) {
     switch (size) {
       case kPaddleSizeSmall:
         sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_small"));
@@ -70,14 +70,14 @@ Paddle::Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool 
   friction_ = player_controlled_ ? kPaddleFriction : kPaddleAIFriction;
 }
 
-void Paddle::SetInitialPositionForPlayer(int playerId) {
+void Paddle::SetInitialPositionForPlayer(PlayerId playerId) {
   switch (player_id_) {
-    case PLAYER_1: {
+    case kPlayerId1: {
       x_ = kPaddle1X;
       y_ = kPaddle1Y;
       break;
     }
-    case PLAYER_2: {
+    case kPlayerId2: {
       x_ = kPaddle2X;
       y_ = kPaddle2Y;
       break;
@@ -87,7 +87,7 @@ void Paddle::SetInitialPositionForPlayer(int playerId) {
 
 void Paddle::KeepInPlayerBounds() {
   switch (player_id_) {
-    case PLAYER_1: {
+    case kPlayerId1: {
       if (y_ + radius_ > kRinkBottomY) {
         y_ = kRinkBottomY - radius_;
         vy_ = 0;
@@ -97,7 +97,7 @@ void Paddle::KeepInPlayerBounds() {
       }
       break;
     }
-    case PLAYER_2: {
+    case kPlayerId2: {
       if (y_ - radius_ < kRinkTopY) {
         y_ = kRinkTopY + radius_;
         vy_ = 0;
@@ -284,12 +284,12 @@ bool Paddle::ContainsTouch(Touch *touch) {
     return false;
   }
   switch (player_id_) {
-    case PLAYER_1:
+    case kPlayerId1:
       return p.y >= SCREEN_HEIGHT / 2 && p.y < kRinkBottomY && p.x >= kRinkLeftX &&
           p.x < kRinkRightX &&
           (p.x < SCREEN_WIDTH - PAUSE_BUTTON_SIZE || p.y < SCREEN_HEIGHT - PAUSE_BUTTON_SIZE);
       break;
-    case PLAYER_2:
+    case kPlayerId2:
       return p.y < SCREEN_HEIGHT / 2 && p.y >= kRinkTopY && p.x >= kRinkLeftX &&
           p.x < kRinkRightX &&
           (p.x > PAUSE_BUTTON_SIZE || p.y >PAUSE_BUTTON_SIZE);

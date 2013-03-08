@@ -9,6 +9,7 @@
 #ifndef AIRHOCKEY_ENTITIES_PUCK_H_
 #define AIRHOCKEY_ENTITIES_PUCK_H_
 
+#include "airhockey/entities/paddle.h"
 #include "airhockey/entities/round_thing.h"
 
 class GameEngine;
@@ -18,7 +19,8 @@ class Puck : public RoundThing {
  public:
   Puck(sp<GameEngine> game_engine);
 
-  void PlaceForPlayer(int player_id, const std::vector<sp<RoundThing> > &round_things, bool center);
+  void PlaceForPlayer(PlayerId player_id, const std::vector<sp<RoundThing> > &round_things,
+                      bool center);
   void FadeIn();
 
   // ViewEntity

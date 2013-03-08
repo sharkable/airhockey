@@ -17,6 +17,11 @@ class Puck;
 #import <vector>
 
 typedef enum {
+  kPlayerId1 = 0,
+  kPlayerId2
+} PlayerId;
+
+typedef enum {
   kComputerAIBad = 0,
   kComputerAIGood,
   kComputerAIExcellent,
@@ -31,10 +36,10 @@ typedef enum {
 
 class Paddle : public RoundThing {
  public:
-  Paddle(sp<GameEngine> game_engine, int player_id, PaddleSize size, bool player_controlled,
+  Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size, bool player_controlled,
          ComputerAI ai_level, std::vector<sp<Puck> > &pucks);
 
-  void SetInitialPositionForPlayer(int player_id);
+  void SetInitialPositionForPlayer(PlayerId player_id);
   void KeepInPlayerBounds();
   void RunAITick();
 
@@ -59,7 +64,7 @@ class Paddle : public RoundThing {
   void set_grabbed(bool grabbed) { grabbed_ = false; }
 
  private:
-  int player_id_;
+  PlayerId player_id_;
   bool player_controlled_;
   bool ready_to_play_;
   ComputerAI ai_level_;

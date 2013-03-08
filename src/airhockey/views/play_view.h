@@ -51,7 +51,7 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
 
  private:
   void SetUpNewGame();
-  void FinishGameWithWinner(int player_id);
+  void FinishGameWithWinner(PlayerId player_id);
   void PausePressed();
 
   int num_players_;
@@ -81,7 +81,7 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   int go_ticks_left_;
   PlayViewState state_;
   PlayViewState pre_pause_state_;
-  int give_extra_puck_to_player_;
+  PlayerId give_extra_puck_to_player_;
   int player_1_win_count_;
   int player_2_win_count_;
 };

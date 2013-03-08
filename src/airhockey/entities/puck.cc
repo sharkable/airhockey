@@ -14,7 +14,6 @@
 #include "gameengine/game_engine.h"
 #include "soundengine/sound_player.h"
 
-#include "airhockey/entities/paddle.h"
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/rink.h"
@@ -45,13 +44,14 @@ Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
   hit_rink_this_time_ = false;
 }
 
-void Puck::PlaceForPlayer(int player_id, const vector<sp<RoundThing> > &round_things, bool center) {
+void Puck::PlaceForPlayer(PlayerId player_id, const vector<sp<RoundThing> > &round_things,
+                          bool center) {
   double startX = SCREEN_WIDTH / 2;
   if (!center) {
     startX += kPuckXSeparation / 2;
   }
   x_ = startX;
-  y_ = player_id == PLAYER_1 ? kPlayer1PuckY : kPlayer2PuckY;
+  y_ = player_id == kPlayerId1 ? kPlayer1PuckY : kPlayer2PuckY;
 
   vx_ = 0;
   vy_ = 0;

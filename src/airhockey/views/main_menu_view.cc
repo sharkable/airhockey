@@ -27,6 +27,8 @@
 using std::map;
 using std::string;
 
+static const int kMaxNumPucks = 7;
+
 inline string to_string(int i) {
   std::stringstream ss;
   ss << i;
@@ -96,7 +98,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   fade_in(num_players_select_.get());
 
   num_pucks_select_.reset(new MultiSelect());
-  for (int i = 1; i <= MAX_NUM_PUCKS; i++) {
+  for (int i = 1; i <= kMaxNumPucks; i++) {
     char pucks_str[15];
     sprintf(pucks_str, "%d", i);
     char pucks_selected_str[15];
