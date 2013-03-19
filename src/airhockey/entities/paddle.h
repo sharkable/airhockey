@@ -60,8 +60,6 @@ class Paddle : public RoundThing {
   bool ContainsTouch(Touch *touch);
   bool IsGrabbable();
   bool IsMovable();
-  // TODO hack for 1.2 release...
-  void set_grabbed(bool grabbed) { grabbed_ = false; }
 
  private:
   PlayerId player_id_;
