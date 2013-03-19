@@ -34,3 +34,9 @@ void Post::DidBounceOff(ViewEntity *other, double total_velocity) {
 bool Post::IsMovable() {
   return false;
 }
+
+
+// ViewEntity
+
+void Post::Render() {
+}
