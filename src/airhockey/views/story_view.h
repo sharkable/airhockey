@@ -9,19 +9,20 @@
 #ifndef AIRHOCKEY_VIEWS_STORYVIEW_H_
 #define AIRHOCKEY_VIEWS_STORYVIEW_H_
 
-#include "gameengine/entities/button.h"
 #include "gameengine/engine_view.h"
 
-class StoryView : public EngineView, ButtonDelegate {
+class SimpleItem;
+
+class StoryView : public EngineView {
  public:
   StoryView(sp<GameEngine> game_engine);
 
-  // ButtonDelegate
-  void ButtonPressed(Button *button);
+  // EngineView
+  void TouchesBegan(std::vector<Touch> touches);
 
  private:
-  sp<Button> story_button_;
-  sp<Button> about_button_;
+  sp<SimpleItem> story_;
+  sp<SimpleItem> about_;
 };
 
 #endif
