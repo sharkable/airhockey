@@ -49,12 +49,16 @@
   [Flurry setAppVersion:appVersion];
   [Flurry startSession:@"BGGPH5B2THWFSJHXEKRH"];
 
+  viewController_ = [[ViewController alloc] init];
+
+  double screenWidth = [UIScreen mainScreen].bounds.size.width * [UIScreen mainScreen].scale;
+  double screenHeight = screenWidth * 1024.0 / 768.0;
+  viewController_.gameEngine->SetScreenSize(screen_size_make(screenWidth, screenHeight),
+                                            game_size_make(768.0, 1024.0));
+
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1152)];
     // TODO this is kinda hacky. I want it to be right on point 53 of an iPhone.
     viewController_.gameEngine->SetGameOffset(game_point_make(0, 53 * 768.0 / 320.0));
-  } else {
-    viewController_ = [[ViewController alloc] initWithGameSize:game_size_make(768, 1024)];
   }
 
   NSString *mainMenuPositionsFilename = nil;
