@@ -57,8 +57,9 @@
                                             game_size_make(768.0, 1024.0));
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    // TODO this is kinda hacky. I want it to be right on point 53 of an iPhone.
-    viewController_.gameEngine->SetGameOffset(game_point_make(0, 53 * 768.0 / 320.0));
+    // Make room for the banner ad.
+    ScreenPoint offset = screen_point_make(0, 53 * [UIScreen mainScreen].scale);
+    viewController_.gameEngine->SetScreenOffset(offset);
   }
 
   NSString *mainMenuPositionsFilename = nil;
