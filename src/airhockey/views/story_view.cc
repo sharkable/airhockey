@@ -18,23 +18,24 @@ using std::vector;
 
 StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   Sprite story_image = Sprite(game_engine, "story");
-  GameSize screen_size = game_engine->game_size();
-  // TODO hack: because of OTHER iphone issue where the game height is > 1024.
-  GamePoint button_position =
-      game_point_make((768 - story_image.content_size().width) / 2,
-                      (1024 - story_image.content_size().height) / 2);
-  double zoom = screen_size.width / story_image.content_size().width;
+  Sprite about_image = Sprite(game_engine, "about");
+
+  GameSize game_size = game_engine->game_size();
+  GameSize image_size = story_image.content_size();
+  GamePoint image_position = game_point_make((game_size.width - image_size.width) / 2,
+                                             (game_size.height - image_size.height) / 2);
+  double zoom = game_size.width / image_size.width;
+
   story_.reset(new SimpleItem());
   story_->add_sprite(story_image);
   story_->set_zoom(zoom);
-  story_->set_position(button_position);
+  story_->set_position(image_position);
   AddEntity(story_);
 
-  Sprite about_image = Sprite(game_engine, "about");
   about_.reset(new SimpleItem());
   about_->add_sprite(about_image);
   about_->set_zoom(zoom);
-  about_->set_position(button_position);
+  about_->set_position(image_position);
 }
 
 
