@@ -27,6 +27,7 @@ static const int kPaddle1Y = (SCREEN_HEIGHT - kPaddle2Y - 1);
 static const double kPaddleMass = 100;
 static const double kPaddleFriction = 0.1;
 static const double kPaddleAIFriction = 0.999;
+static const int kPaddleAIInitialPauseTicks = 30;
 
 Paddle::Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size,
                bool player_controlled, ComputerAI ai_level, vector<sp<Puck> > &pucks)
@@ -38,7 +39,8 @@ Paddle::Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size,
       pucks_(pucks),
       target_left_corner_(false),
       target_right_corner_(false),
-      target_away_from_corner_(false) {
+      target_away_from_corner_(false),
+      ai_initial_pause_ticks_(0) {
   if (player_id == kPlayerId1) {
     switch (size) {
       case kPaddleSizeSmall:
@@ -115,6 +117,14 @@ void Paddle::KeepInPlayerBounds() {
     x_ = kRinkRightX - radius_;
     vx_ = 0;
   }
+}
+
+void Paddle::SetReadyToPlay(bool ready) {
+  ready_to_play_ = ready;
+  if (!ready) {
+    grabbed_ = false;
+  }
+  ai_initial_pause_ticks_ = kPaddleAIInitialPauseTicks;
 }
 
 

@@ -41,14 +41,10 @@ class Paddle : public RoundThing {
 
   void SetInitialPositionForPlayer(PlayerId player_id);
   void KeepInPlayerBounds();
-
+  void SetReadyToPlay(bool ready);
+  
   // Accessors
   std::vector<sp<Puck> > &pucks() { return pucks_; }
-  void set_ready_to_play(bool ready) {
-    ready_to_play_ = ready;
-    if (!ready) grabbed_ = false;
-    ai_initial_pause_ticks_ = 30;  // TODO hacky
-  }
 
   // ViewEntity
   void Update();
