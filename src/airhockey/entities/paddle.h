@@ -41,7 +41,6 @@ class Paddle : public RoundThing {
 
   void SetInitialPositionForPlayer(PlayerId player_id);
   void KeepInPlayerBounds();
-  void RunAITick();
 
   // Accessors
   std::vector<sp<Puck> > &pucks() { return pucks_; }
@@ -62,6 +61,8 @@ class Paddle : public RoundThing {
   bool IsMovable();
 
  private:
+  void RunAITick();
+
   PlayerId player_id_;
   bool player_controlled_;
   bool ready_to_play_;
