@@ -58,7 +58,7 @@ void SoundSlider::Render() {
   thumb_sprite_.DrawAtPoint(ThumbPoint());
 }
 
-void SoundSlider::TouchesBegan(vector<Touch> touches) {
+bool SoundSlider::TouchesBegan(vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     GamePoint touchP = touches[i].location();
     GamePoint thumbP = ThumbPoint();
@@ -70,9 +70,10 @@ void SoundSlider::TouchesBegan(vector<Touch> touches) {
       grabbed_touch_ = touches[i].identifier();
       start_touch_position_ = touchP;
       start_value_ = value_;
-      return;
+      return true;
     }
   }
+  return false;
 }
 
 void SoundSlider::TouchesMoved(vector<Touch> touches) {

@@ -52,7 +52,7 @@ class RoundThing : public ViewEntity {
   // ViewEntity
   void Update();
   void Render();
-  void TouchesBegan(std::vector<Touch> touches);
+  bool TouchesBegan(std::vector<Touch> touches);
   void TouchesMoved(std::vector<Touch> touches);
   void TouchesEnded(std::vector<Touch> touches);
   void ClearTouches();

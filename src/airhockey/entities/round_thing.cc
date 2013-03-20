@@ -204,9 +204,9 @@ void RoundThing::Render() {
   }
 }
 
-void RoundThing::TouchesBegan(vector<Touch> touches) {
+bool RoundThing::TouchesBegan(vector<Touch> touches) {
   if (!IsGrabbable() || !is_active() || is_grabbed()) {
-    return;
+    return false;
   }
   for (int i = 0; i < touches.size(); i++) {
     if (ContainsTouch(&touches[i])) {
@@ -221,8 +221,10 @@ void RoundThing::TouchesBegan(vector<Touch> touches) {
       // initial velocity.
       old_x_ = x_;
       old_y_ = y_;
+      return true;
     }
   }
+  return false;
 }
 
 void RoundThing::TouchesMoved(vector<Touch> touches) {
