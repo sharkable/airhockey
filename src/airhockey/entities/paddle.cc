@@ -189,7 +189,7 @@ bool Paddle::IsMovable() {
 }
 
 
-// Private
+// private
 
 void Paddle::RunAITick() {
   double speed = 0;
