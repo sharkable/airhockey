@@ -36,6 +36,8 @@ class MainMenuView : public EngineView, private ButtonDelegate {
   void AnimateOut();
   void PressedStart();
   void PressedStory();
+  void PressedRate();
+  void PressedUpgrade();
 
   sp<SimpleItem> title_;
   sp<SimpleItem> main_menu_;

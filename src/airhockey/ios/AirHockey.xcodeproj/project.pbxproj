@@ -794,6 +794,8 @@
 		FEE41D1516FA587000A26516 /* upgrade_button.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D0616FA587000A26516 /* upgrade_button.tx */; };
 		FEE41D1616FA587000A26516 /* upgrade_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D0716FA587000A26516 /* upgrade_button@2x.tx */; };
 		FEE41D1716FA587000A26516 /* upgrade_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D0716FA587000A26516 /* upgrade_button@2x.tx */; };
+		FEE41D1B16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */; };
+		FEE41D1C16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */; };
 		FEF47BC716DF0C960096F3D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF47BC616DF0C950096F3D4 /* libz.dylib */; };
 		FEF47BC816DF0CA40096F3D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF47BC616DF0C950096F3D4 /* libz.dylib */; };
 /* End PBXBuildFile section */
@@ -1274,6 +1276,9 @@
 		FEE41D0516FA587000A26516 /* upgrade_button_pressed@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "upgrade_button_pressed@2x.tx"; sourceTree = "<group>"; };
 		FEE41D0616FA587000A26516 /* upgrade_button.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = upgrade_button.tx; sourceTree = "<group>"; };
 		FEE41D0716FA587000A26516 /* upgrade_button@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "upgrade_button@2x.tx"; sourceTree = "<group>"; };
+		FEE41D1816FA5D3E00A26516 /* app_store_engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_store_engine.h; sourceTree = "<group>"; };
+		FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppStoreEngineIOS.mm; sourceTree = "<group>"; };
+		FEE41D1A16FA5E3C00A26516 /* AppStoreEngineIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreEngineIOS.h; sourceTree = "<group>"; };
 		FEF47BC616DF0C950096F3D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -1438,6 +1443,7 @@
 				FE4E699616EA7D68001F9D94 /* analytics_engine.h */,
 				FE4E699716EA7D68001F9D94 /* animation.cc */,
 				FE4E699816EA7D68001F9D94 /* animation.h */,
+				FEE41D1816FA5D3E00A26516 /* app_store_engine.h */,
 				FE4E699916EA7D68001F9D94 /* coordinate_types.h */,
 				FE4E699A16EA7D68001F9D94 /* engine_view.cc */,
 				FE4E699B16EA7D68001F9D94 /* engine_view.h */,
@@ -1479,6 +1485,8 @@
 				FE4E69A916EA7D68001F9D94 /* AdEngineIOS.mm */,
 				FE4E69AA16EA7D68001F9D94 /* AnalyticsEngineIOS.h */,
 				FE4E69AB16EA7D68001F9D94 /* AnalyticsEngineIOS.mm */,
+				FEE41D1A16FA5E3C00A26516 /* AppStoreEngineIOS.h */,
+				FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */,
 				FE4E69AC16EA7D68001F9D94 /* EAGLView.h */,
 				FE4E69AD16EA7D68001F9D94 /* EAGLView.mm */,
 				FE4E69AE16EA7D68001F9D94 /* ES1Renderer.h */,
@@ -3026,6 +3034,7 @@
 				FE4E6C1D16EA7D6A001F9D94 /* SoundPlayer.mm in Sources */,
 				FE4E6C2A16EA9724001F9D94 /* AirHockeyAppDelegate.mm in Sources */,
 				FE4E6C2C16EA9724001F9D94 /* main.m in Sources */,
+				FEE41D1B16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3085,6 +3094,7 @@
 				FE4E6C1E16EA7D6A001F9D94 /* SoundPlayer.mm in Sources */,
 				FE4E6C2B16EA9724001F9D94 /* AirHockeyAppDelegate.mm in Sources */,
 				FE4E6C2D16EA9724001F9D94 /* main.m in Sources */,
+				FEE41D1C16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

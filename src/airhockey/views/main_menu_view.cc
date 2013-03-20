@@ -14,6 +14,7 @@
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/ad_engine.h"
 #include "gameengine/analytics_engine.h"
+#include "gameengine/app_store_engine.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/local_store.h"
@@ -33,6 +34,7 @@ static const string kLocalStoreNumPlayers = "ls_num_players";
 static const string kLocalStoreDifficulty = "ls_difficulty";
 static const string kLocalStoreNumPucks = "ls_num_pucks";
 static const string kLocalStorePaddleSize = "ls_paddle_size";
+static const string kLocalStoreMainMenuViewCount = "ls_main_menu_view_count";
 
 inline string to_string(int i) {
   std::stringstream ss;
@@ -196,6 +198,15 @@ void MainMenuView::ViewIsShown() {
       game_engine()->ad_engine()->SetAdAtPoint(screen_point_make(45, 40));
     }
   }
+
+  // Force the popup for rating and upgrading just once.
+  int main_menu_view_count = LocalStore::IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
+  LocalStore::SetInteger(main_menu_view_count, kLocalStoreMainMenuViewCount);
+  if (main_menu_view_count == 5) {
+    PressedRate();
+  } else if (main_menu_view_count == 10) {
+    PressedUpgrade();
+  }
 }
 
 void MainMenuView::Update() {
@@ -216,6 +227,10 @@ void MainMenuView::ButtonPressed(Button *button) {
     PressedStart();
   } else if (button == story_button_.get()) {
     PressedStory();
+  } else if (button == rate_button_.get()) {
+    PressedRate();
+  } else if (button == upgrade_button_.get()) {
+    PressedUpgrade();
   }
 }
 
@@ -278,4 +293,12 @@ void MainMenuView::PressedStory() {
     game_engine()->ad_engine()->RemoveAd();
   }
   game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
+}
+
+void MainMenuView::PressedRate() {
+  game_engine()->app_store_engine()->AskForRate("Glide Hockey HD", "371905230");
+}
+
+void MainMenuView::PressedUpgrade() {
+  game_engine()->app_store_engine()->AskForUpgrade("Glide Hockey HD", "id_todo_replace");
 }
