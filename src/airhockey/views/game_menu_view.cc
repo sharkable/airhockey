@@ -14,7 +14,6 @@
 #include "gameengine/sprite.h"
 
 #include "airhockey/entities/sound_slider.h"
-#include "airhockey/const.h"
 
 GameMenuView::GameMenuView(sp<GameEngine> game_engine, GameMenuViewDelegate *delegate,
                            bool match_finished)
@@ -84,6 +83,7 @@ void GameMenuView::Init(bool match_finished) {
   AddEntity(menu_button_);
 
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_engine()->SetAdAtPoint(screen_point_make((SCREEN_WIDTH - 320) / 2, 380));
+    ScreenPoint ad_position = screen_point_make((game_engine()->game_size().width - 320) / 2, 380);
+    game_engine()->ad_engine()->SetAdAtPoint(ad_position);
   }
 }

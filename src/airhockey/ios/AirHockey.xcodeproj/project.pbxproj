@@ -894,7 +894,6 @@
 		FE3CF95014F9819E0063CCA5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FE3F442916C445CD00E8BEDF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FE3F442A16C445CD00E8BEDF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		FE413FC016C9CD57001BF838 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		FE413FC316C9CD57001BF838 /* paddle.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cc; sourceTree = "<group>"; };
 		FE413FC416C9CD57001BF838 /* paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paddle.h; sourceTree = "<group>"; };
 		FE413FC516C9CD57001BF838 /* post.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = post.cc; sourceTree = "<group>"; };
@@ -1353,7 +1352,6 @@
 				FE413FC216C9CD57001BF838 /* entities */,
 				FE4E6C2216EA9724001F9D94 /* ios */,
 				FE413FD016C9CD57001BF838 /* views */,
-				FE413FC016C9CD57001BF838 /* const.h */,
 			);
 			path = airhockey;
 			sourceTree = "<group>";

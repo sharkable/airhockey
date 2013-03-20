@@ -11,15 +11,17 @@
 
 #include "gameengine/view_entity.h"
 
-#include "airhockey/const.h"
-
 class RoundThing;
 
 class Rink : public ViewEntity {
  public:
+  static const int kRinkTotalWidth;
+  static const int kRinkTotalHeight;
   static const int kRinkLeftX;
+  static const int kRinkCenterX;
   static const int kRinkRightX;
   static const int kRinkTopY;
+  static const int kRinkCenterY;
   static const int kRinkBottomY;
   static const int kGoalLeftX;
   static const int kGoalRightX;

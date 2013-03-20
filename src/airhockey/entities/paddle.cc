@@ -20,10 +20,10 @@
 using std::vector;
 
 static const double kPaddleRadii[] = {40, 65, 92.5};
-static const int kPaddle2X = (SCREEN_WIDTH / 2);
+static const int kPaddle2X = Rink::kRinkCenterX;
 static const int kPaddle2Y = 130;
 static const int kPaddle1X = kPaddle2X;
-static const int kPaddle1Y = (SCREEN_HEIGHT - kPaddle2Y - 1);
+static const int kPaddle1Y = (Rink::kRinkTotalHeight - kPaddle2Y - 1);
 static const double kPaddleMass = 100;
 static const double kPaddleFriction = 0.1;
 static const double kPaddleAIFriction = 0.999;
@@ -93,8 +93,8 @@ void Paddle::KeepInPlayerBounds() {
       if (y_ + radius_ > Rink::kRinkBottomY) {
         y_ = Rink::kRinkBottomY - radius_;
         vy_ = 0;
-      } else if (y_ - radius_ < SCREEN_HEIGHT/2+1) {
-        y_ = SCREEN_HEIGHT/2+1 + radius_;
+      } else if (y_ - radius_ < Rink::kRinkCenterY + 1) {
+        y_ = Rink::kRinkCenterY + 1 + radius_;
         vy_ = 0;
       }
       break;
@@ -103,8 +103,8 @@ void Paddle::KeepInPlayerBounds() {
       if (y_ - radius_ < Rink::kRinkTopY) {
         y_ = Rink::kRinkTopY + radius_;
         vy_ = 0;
-      } else if (y_ + radius_ > SCREEN_HEIGHT/2-1) {
-        y_ = SCREEN_HEIGHT/2-1 - radius_;
+      } else if (y_ + radius_ > Rink::kRinkCenterY - 1) {
+        y_ = Rink::kRinkCenterY - 1 - radius_;
         vy_ = 0;
       }
       break;
@@ -159,16 +159,16 @@ void Paddle::DidBounceOff(ViewEntity *other, double total_velocity) {
 
 bool Paddle::ContainsTouch(Touch *touch) {
   GamePoint p = touch->location();
-  if (p.x < 0 || p.x >= SCREEN_WIDTH) {
+  if (p.x < 0 || p.x >= Rink::kRinkTotalWidth) {
     return false;
   }
   switch (player_id_) {
     case kPlayerId1:
-      return p.y >= SCREEN_HEIGHT / 2 && p.y < Rink::kRinkBottomY && p.x >= Rink::kRinkLeftX &&
+      return p.y >= Rink::kRinkCenterY && p.y < Rink::kRinkBottomY && p.x >= Rink::kRinkLeftX &&
           p.x < Rink::kRinkRightX;
       break;
     case kPlayerId2:
-      return p.y < SCREEN_HEIGHT / 2 && p.y >= Rink::kRinkTopY && p.x >= Rink::kRinkLeftX &&
+      return p.y < Rink::kRinkCenterY && p.y >= Rink::kRinkTopY && p.x >= Rink::kRinkLeftX &&
           p.x < Rink::kRinkRightX;
       break;
   }
@@ -219,7 +219,7 @@ void Paddle::RunAITick() {
     if (puck->vy() < 0) {
       timeToReach = fabs((y_ - puck->y()) / puck->vy());
     }
-    if (puck->y() - puck->radius() > SCREEN_HEIGHT/2) {
+    if (puck->y() - puck->radius() > Rink::kRinkCenterY) {
       continue;
     }
     if (target == NULL || timeToReach < bestTime ||
@@ -238,7 +238,7 @@ void Paddle::RunAITick() {
 
   if (!target_away_from_corner_ && target && target->y() <= Rink::kRinkTopY + radius_ &&
       fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
-    if (target->x() < SCREEN_WIDTH / 2) {
+    if (target->x() < Rink::kRinkCenterX) {
       target_left_corner_ = true;
     } else {
       target_right_corner_ = true;
@@ -260,9 +260,9 @@ void Paddle::RunAITick() {
       target_away_from_corner_ = true;
     }
   } else if (target_away_from_corner_) {
-    targetX = SCREEN_WIDTH / 2;
+    targetX = Rink::kRinkCenterX;
     targetY = Rink::kRinkTopY + radius_;
-    if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
+    if (x_ >= Rink::kRinkCenterX - 5 && x_ <= Rink::kRinkCenterX + 5) {
       target_away_from_corner_ = false;
     }
   } else if (target) {

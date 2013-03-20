@@ -16,7 +16,6 @@
 
 #include "airhockey/entities/paddle.h"
 #include "airhockey/views/game_menu_view.h"
-#include "airhockey/const.h"
 
 class GameEngine;
 class Post;

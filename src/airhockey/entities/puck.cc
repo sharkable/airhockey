@@ -17,13 +17,12 @@
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/rink.h"
-#include "airhockey/const.h"
 
 using std::vector;
 
 static const int kPuckFadeTicks = 10;
-static const int kPlayer2PuckY = (SCREEN_HEIGHT / 3);
-static const int kPlayer1PuckY = (SCREEN_HEIGHT - kPlayer2PuckY - 1);
+static const int kPlayer2PuckY = (Rink::kRinkTotalHeight / 3);
+static const int kPlayer1PuckY = (Rink::kRinkTotalHeight - kPlayer2PuckY - 1);
 static const int kPuckXSeparation = 150;
 static const double kPuckGoalMinDropSpeed = 5;
 static const double kPuckMass = 10;
@@ -46,7 +45,7 @@ Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
 
 void Puck::PlaceForPlayer(PlayerId player_id, const vector<sp<RoundThing> > &round_things,
                           bool center) {
-  double startX = SCREEN_WIDTH / 2;
+  double startX = Rink::kRinkCenterX;
   if (!center) {
     startX += kPuckXSeparation / 2;
   }
@@ -133,7 +132,7 @@ void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
   float volume = (float)(total_velocity / 50.0);
   if (volume > 1.8) volume = 1.8;
   else if (volume < 0.4) volume = 0.4;
-  float position = (x_ / SCREEN_WIDTH - 0.5) * 2;
+  float position = (x_ / Rink::kRinkTotalWidth - 0.5) * 2;
   if (typeid(*other) == typeid(Puck)) {
     if (!hit_puck_this_time_) {
       SoundPlayer::instance()->setVolume(kSoundTwoPuckHit, volume);

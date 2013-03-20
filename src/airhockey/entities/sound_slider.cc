@@ -13,8 +13,6 @@
 #include "gameengine/touch.h"
 #include "soundengine/sound_player.h"
 
-#include "airhockey/const.h"
-
 using std::string;
 using std::vector;
 

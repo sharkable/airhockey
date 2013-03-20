@@ -11,12 +11,14 @@
 #include "airhockey/entities/round_thing.h"
 
 static const int kRinkEdgeWidth = 23;
-static const int kRinkTotalWidth = 768;
-static const int kRinkTotalHeight = 1024;
 
+const int Rink::kRinkTotalWidth = 768;
+const int Rink::kRinkTotalHeight = 1024;
 const int Rink::kRinkLeftX = kRinkEdgeWidth;
+const int Rink::kRinkCenterX = kRinkTotalWidth / 2;
 const int Rink::kRinkRightX = (kRinkTotalWidth - kRinkEdgeWidth);
 const int Rink::kRinkTopY = kRinkEdgeWidth;
+const int Rink::kRinkCenterY = kRinkTotalHeight / 2;
 const int Rink::kRinkBottomY = (kRinkTotalHeight - kRinkEdgeWidth);
 const int Rink::kGoalLeftX = 200;
 const int Rink::kGoalRightX = 568;

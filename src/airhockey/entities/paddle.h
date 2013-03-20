@@ -10,7 +10,6 @@
 #define AIRHOCKEY_ENTITIES_PADDLE_H_
 
 #include "airhockey/entities/round_thing.h"
-#include "airhockey/const.h"
 
 class Puck;
 

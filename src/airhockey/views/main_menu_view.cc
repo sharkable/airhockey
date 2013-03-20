@@ -22,7 +22,6 @@
 #include "airhockey/entities/sound_slider.h"
 #include "airhockey/views/play_view.h"
 #include "airhockey/views/story_view.h"
-#include "airhockey/const.h"
 
 using std::map;
 using std::string;
