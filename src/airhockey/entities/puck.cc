@@ -21,8 +21,8 @@
 using std::vector;
 
 static const int kPuckFadeTicks = 10;
-static const int kPlayer2PuckY = (Rink::kRinkTotalHeight / 3);
-static const int kPlayer1PuckY = (Rink::kRinkTotalHeight - kPlayer2PuckY - 1);
+static const int kPlayer2PuckY = (Rink::TotalHeight() / 3);
+static const int kPlayer1PuckY = (Rink::TotalHeight() - kPlayer2PuckY - 1);
 static const int kPuckXSeparation = 150;
 static const double kPuckGoalMinDropSpeed = 5;
 static const double kPuckMass = 10;
@@ -45,7 +45,7 @@ Puck::Puck(sp<GameEngine> game_engine) : RoundThing(game_engine, "puck") {
 
 void Puck::PlaceForPlayer(PlayerId player_id, const vector<sp<RoundThing> > &round_things,
                           bool center) {
-  double startX = Rink::kRinkCenterX;
+  double startX = Rink::CenterX();
   if (!center) {
     startX += kPuckXSeparation / 2;
   }
@@ -105,9 +105,9 @@ void Puck::Update() {
   RoundThing::Update();
 
   // Stop the puck from getting stuck in the goal.
-  if (y() < Rink::kRinkTopY && fabs(vy()) < kPuckGoalMinDropSpeed) {
+  if (y() < Rink::TopY() && fabs(vy()) < kPuckGoalMinDropSpeed) {
     set_vy(-kPuckGoalMinDropSpeed);
-  } else if (y_ > Rink::kRinkBottomY && fabs(vy_) < kPuckGoalMinDropSpeed) {
+  } else if (y_ > Rink::BottomY() && fabs(vy_) < kPuckGoalMinDropSpeed) {
     vy_ = kPuckGoalMinDropSpeed;
   }
 
@@ -132,7 +132,7 @@ void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
   float volume = (float)(total_velocity / 50.0);
   if (volume > 1.8) volume = 1.8;
   else if (volume < 0.4) volume = 0.4;
-  float position = (x_ / Rink::kRinkTotalWidth - 0.5) * 2;
+  float position = (x_ / Rink::TotalWidth() - 0.5) * 2;
   if (typeid(*other) == typeid(Puck)) {
     if (!hit_puck_this_time_) {
       SoundPlayer::instance()->setVolume(kSoundTwoPuckHit, volume);

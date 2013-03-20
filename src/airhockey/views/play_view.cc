@@ -37,10 +37,10 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   paddle_2_.reset(new Paddle(game_engine, kPlayerId2, paddle_size, num_players == 2, difficulty,
                              pucks_));
 
-  post_1_.reset(new Post(game_engine, Rink::kGoalLeftX, Rink::kRinkTopY));
-  post_2_.reset(new Post(game_engine, Rink::kGoalLeftX, Rink::kRinkBottomY + 1));
-  post_3_.reset(new Post(game_engine, Rink::kGoalRightX + 1, Rink::kRinkTopY));
-  post_4_.reset(new Post(game_engine, Rink::kGoalRightX + 1, Rink::kRinkBottomY + 1));
+  post_1_.reset(new Post(game_engine, Rink::GoalLeftX(), Rink::TopY()));
+  post_2_.reset(new Post(game_engine, Rink::GoalLeftX(), Rink::BottomY() + 1));
+  post_3_.reset(new Post(game_engine, Rink::GoalRightX() + 1, Rink::TopY()));
+  post_4_.reset(new Post(game_engine, Rink::GoalRightX() + 1, Rink::BottomY() + 1));
 
   rink_.reset(new Rink());
   AddEntity(rink_);
@@ -126,8 +126,8 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
   GamePoint pause_button_pos_1 =
-      game_point_make(Rink::kRinkTotalWidth - pause_button_sprite.content_size().width,
-                      Rink::kRinkTotalHeight - pause_button_sprite.content_size().height);
+      game_point_make(Rink::TotalWidth() - pause_button_sprite.content_size().width,
+                      Rink::TotalHeight() - pause_button_sprite.content_size().height);
   pause_button_1_.reset(new Button());
   pause_button_1_->set_normal_sprite(pause_button_sprite);
   pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
@@ -221,7 +221,7 @@ void PlayView::Update() {
     if (puck->y() < -puck->radius()) {
       // TODO make this less shitty.
       puck->set_active(false);
-      float position = (puck->x() / Rink::kRinkTotalWidth - 0.5) * 2;
+      float position = (puck->x() / Rink::TotalWidth() - 0.5) * 2;
       if (player_1_score_->sprite() < kWinScore && state_ == kPlayViewStatePlaying) {
         player_1_score_->set_sprite(player_1_score_->sprite() + 1);
       }
@@ -234,9 +234,9 @@ void PlayView::Update() {
       }
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
-    } else if (puck->y() > Rink::kRinkTotalHeight + puck->radius()) {
+    } else if (puck->y() > Rink::TotalHeight() + puck->radius()) {
       puck->set_active(false);
-      float position = (puck->x() / Rink::kRinkTotalWidth - 0.5) * 2;
+      float position = (puck->x() / Rink::TotalWidth() - 0.5) * 2;
       if (player_2_score_->sprite() < kWinScore && state_ == kPlayViewStatePlaying) {
         player_2_score_->set_sprite(player_2_score_->sprite() + 1);
       }
@@ -370,10 +370,10 @@ void PlayView::SetUpNewGame() {
 void PlayView::FinishGameWithWinner(PlayerId playerId) {
   state_ = kPlayViewStateFinished;
 
-  double loseX = (Rink::kRinkTotalWidth - lose_->size().width)/2;
-  double winX =  (Rink::kRinkTotalWidth - win_->size().width)/2;
+  double loseX = (Rink::TotalWidth() - lose_->size().width)/2;
+  double winX =  (Rink::TotalWidth() - win_->size().width)/2;
   double topY = 70;
-  double bottomY = Rink::kRinkTotalHeight - topY - lose_->size().height;
+  double bottomY = Rink::TotalHeight() - topY - lose_->size().height;
   switch (playerId) {
     case kPlayerId1: {
       player_1_win_count_++;

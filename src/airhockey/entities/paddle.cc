@@ -20,10 +20,10 @@
 using std::vector;
 
 static const double kPaddleRadii[] = {40, 65, 92.5};
-static const int kPaddle2X = Rink::kRinkCenterX;
+static const int kPaddle2X = Rink::CenterX();
 static const int kPaddle2Y = 130;
 static const int kPaddle1X = kPaddle2X;
-static const int kPaddle1Y = (Rink::kRinkTotalHeight - kPaddle2Y - 1);
+static const int kPaddle1Y = (Rink::TotalHeight() - kPaddle2Y - 1);
 static const double kPaddleMass = 100;
 static const double kPaddleFriction = 0.1;
 static const double kPaddleAIFriction = 0.999;
@@ -90,31 +90,31 @@ void Paddle::SetInitialPositionForPlayer(PlayerId playerId) {
 void Paddle::KeepInPlayerBounds() {
   switch (player_id_) {
     case kPlayerId1: {
-      if (y_ + radius_ > Rink::kRinkBottomY) {
-        y_ = Rink::kRinkBottomY - radius_;
+      if (y_ + radius_ > Rink::BottomY()) {
+        y_ = Rink::BottomY() - radius_;
         vy_ = 0;
-      } else if (y_ - radius_ < Rink::kRinkCenterY + 1) {
-        y_ = Rink::kRinkCenterY + 1 + radius_;
+      } else if (y_ - radius_ < Rink::CenterY() + 1) {
+        y_ = Rink::CenterY() + 1 + radius_;
         vy_ = 0;
       }
       break;
     }
     case kPlayerId2: {
-      if (y_ - radius_ < Rink::kRinkTopY) {
-        y_ = Rink::kRinkTopY + radius_;
+      if (y_ - radius_ < Rink::TopY()) {
+        y_ = Rink::TopY() + radius_;
         vy_ = 0;
-      } else if (y_ + radius_ > Rink::kRinkCenterY - 1) {
-        y_ = Rink::kRinkCenterY - 1 - radius_;
+      } else if (y_ + radius_ > Rink::CenterY() - 1) {
+        y_ = Rink::CenterY() - 1 - radius_;
         vy_ = 0;
       }
       break;
     }
   }
-  if (x_ - radius_ < Rink::kRinkLeftX) {
-    x_ = Rink::kRinkLeftX + radius_;
+  if (x_ - radius_ < Rink::LeftX()) {
+    x_ = Rink::LeftX() + radius_;
     vx_ = 0;
-  } else if (x_ + radius_ > Rink::kRinkRightX) {
-    x_ = Rink::kRinkRightX - radius_;
+  } else if (x_ + radius_ > Rink::RightX()) {
+    x_ = Rink::RightX() - radius_;
     vx_ = 0;
   }
 }
@@ -159,17 +159,17 @@ void Paddle::DidBounceOff(ViewEntity *other, double total_velocity) {
 
 bool Paddle::ContainsTouch(Touch *touch) {
   GamePoint p = touch->location();
-  if (p.x < 0 || p.x >= Rink::kRinkTotalWidth) {
+  if (p.x < 0 || p.x >= Rink::TotalWidth()) {
     return false;
   }
   switch (player_id_) {
     case kPlayerId1:
-      return p.y >= Rink::kRinkCenterY && p.y < Rink::kRinkBottomY && p.x >= Rink::kRinkLeftX &&
-          p.x < Rink::kRinkRightX;
+      return p.y >= Rink::CenterY() && p.y < Rink::BottomY() && p.x >= Rink::LeftX() &&
+          p.x < Rink::RightX();
       break;
     case kPlayerId2:
-      return p.y < Rink::kRinkCenterY && p.y >= Rink::kRinkTopY && p.x >= Rink::kRinkLeftX &&
-          p.x < Rink::kRinkRightX;
+      return p.y < Rink::CenterY() && p.y >= Rink::TopY() && p.x >= Rink::LeftX() &&
+          p.x < Rink::RightX();
       break;
   }
   return false;
@@ -219,7 +219,7 @@ void Paddle::RunAITick() {
     if (puck->vy() < 0) {
       timeToReach = fabs((y_ - puck->y()) / puck->vy());
     }
-    if (puck->y() - puck->radius() > Rink::kRinkCenterY) {
+    if (puck->y() - puck->radius() > Rink::CenterY()) {
       continue;
     }
     if (target == NULL || timeToReach < bestTime ||
@@ -236,9 +236,9 @@ void Paddle::RunAITick() {
   double targetX;
   double targetY;
 
-  if (!target_away_from_corner_ && target && target->y() <= Rink::kRinkTopY + radius_ &&
+  if (!target_away_from_corner_ && target && target->y() <= Rink::TopY() + radius_ &&
       fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
-    if (target->x() < Rink::kRinkCenterX) {
+    if (target->x() < Rink::CenterX()) {
       target_left_corner_ = true;
     } else {
       target_right_corner_ = true;
@@ -246,23 +246,23 @@ void Paddle::RunAITick() {
   }
 
   if (target_left_corner_) {
-    targetX = Rink::kRinkLeftX + radius_;
-    targetY = Rink::kRinkTopY + radius_;
+    targetX = Rink::LeftX() + radius_;
+    targetY = Rink::TopY() + radius_;
     if (Overlaps(target)) {
       target_left_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_right_corner_) {
-    targetX = Rink::kRinkRightX - radius_;
-    targetY = Rink::kRinkTopY + radius_;
+    targetX = Rink::RightX() - radius_;
+    targetY = Rink::TopY() + radius_;
     if (Overlaps(target)) {
       target_right_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_away_from_corner_) {
-    targetX = Rink::kRinkCenterX;
-    targetY = Rink::kRinkTopY + radius_;
-    if (x_ >= Rink::kRinkCenterX - 5 && x_ <= Rink::kRinkCenterX + 5) {
+    targetX = Rink::CenterX();
+    targetY = Rink::TopY() + radius_;
+    if (x_ >= Rink::CenterX() - 5 && x_ <= Rink::CenterX() + 5) {
       target_away_from_corner_ = false;
     }
   } else if (target) {

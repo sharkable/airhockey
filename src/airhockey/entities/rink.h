@@ -15,16 +15,17 @@ class RoundThing;
 
 class Rink : public ViewEntity {
  public:
-  static const int kRinkTotalWidth;
-  static const int kRinkTotalHeight;
-  static const int kRinkLeftX;
-  static const int kRinkCenterX;
-  static const int kRinkRightX;
-  static const int kRinkTopY;
-  static const int kRinkCenterY;
-  static const int kRinkBottomY;
-  static const int kGoalLeftX;
-  static const int kGoalRightX;
+  static int EdgeWidth() { return 23; }
+  static int TotalWidth() { return 768; }
+  static int TotalHeight() { return 1024; }
+  static int LeftX() { return EdgeWidth(); }
+  static int CenterX() { return TotalWidth() / 2; }
+  static int RightX() { return TotalWidth() - EdgeWidth(); }
+  static int TopY() { return EdgeWidth(); }
+  static int CenterY() { return TotalHeight() / 2; }
+  static int BottomY() { return TotalHeight() - EdgeWidth(); }
+  static int GoalLeftX() { return 200; }
+  static int GoalRightX() { return 568; }
 
   void BounceOff(RoundThing *thing);
   void MoveInFromEdge(RoundThing *thing);
