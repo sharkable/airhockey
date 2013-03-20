@@ -796,6 +796,22 @@
 		FEE41D1716FA587000A26516 /* upgrade_button@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D0716FA587000A26516 /* upgrade_button@2x.tx */; };
 		FEE41D1B16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */; };
 		FEE41D1C16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */; };
+		FEE41D2516FA7AD400A26516 /* rate_button_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D1D16FA7AD400A26516 /* rate_button_iphone.tx */; };
+		FEE41D2616FA7AD400A26516 /* rate_button_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D1D16FA7AD400A26516 /* rate_button_iphone.tx */; };
+		FEE41D2716FA7AD400A26516 /* rate_button_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D1E16FA7AD400A26516 /* rate_button_iphone@2x.tx */; };
+		FEE41D2816FA7AD400A26516 /* rate_button_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D1E16FA7AD400A26516 /* rate_button_iphone@2x.tx */; };
+		FEE41D2916FA7AD400A26516 /* rate_button_pressed_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D1F16FA7AD400A26516 /* rate_button_pressed_iphone.tx */; };
+		FEE41D2A16FA7AD400A26516 /* rate_button_pressed_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D1F16FA7AD400A26516 /* rate_button_pressed_iphone.tx */; };
+		FEE41D2B16FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2016FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx */; };
+		FEE41D2C16FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2016FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx */; };
+		FEE41D2D16FA7AD400A26516 /* upgrade_button_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2116FA7AD400A26516 /* upgrade_button_iphone.tx */; };
+		FEE41D2E16FA7AD400A26516 /* upgrade_button_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2116FA7AD400A26516 /* upgrade_button_iphone.tx */; };
+		FEE41D2F16FA7AD400A26516 /* upgrade_button_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2216FA7AD400A26516 /* upgrade_button_iphone@2x.tx */; };
+		FEE41D3016FA7AD400A26516 /* upgrade_button_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2216FA7AD400A26516 /* upgrade_button_iphone@2x.tx */; };
+		FEE41D3116FA7AD400A26516 /* upgrade_button_pressed_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2316FA7AD400A26516 /* upgrade_button_pressed_iphone.tx */; };
+		FEE41D3216FA7AD400A26516 /* upgrade_button_pressed_iphone.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2316FA7AD400A26516 /* upgrade_button_pressed_iphone.tx */; };
+		FEE41D3316FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2416FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx */; };
+		FEE41D3416FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx in Resources */ = {isa = PBXBuildFile; fileRef = FEE41D2416FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx */; };
 		FEF47BC716DF0C960096F3D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF47BC616DF0C950096F3D4 /* libz.dylib */; };
 		FEF47BC816DF0CA40096F3D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF47BC616DF0C950096F3D4 /* libz.dylib */; };
 /* End PBXBuildFile section */
@@ -1279,6 +1295,14 @@
 		FEE41D1816FA5D3E00A26516 /* app_store_engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_store_engine.h; sourceTree = "<group>"; };
 		FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppStoreEngineIOS.mm; sourceTree = "<group>"; };
 		FEE41D1A16FA5E3C00A26516 /* AppStoreEngineIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreEngineIOS.h; sourceTree = "<group>"; };
+		FEE41D1D16FA7AD400A26516 /* rate_button_iphone.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = rate_button_iphone.tx; sourceTree = "<group>"; };
+		FEE41D1E16FA7AD400A26516 /* rate_button_iphone@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "rate_button_iphone@2x.tx"; sourceTree = "<group>"; };
+		FEE41D1F16FA7AD400A26516 /* rate_button_pressed_iphone.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = rate_button_pressed_iphone.tx; sourceTree = "<group>"; };
+		FEE41D2016FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "rate_button_pressed_iphone@2x.tx"; sourceTree = "<group>"; };
+		FEE41D2116FA7AD400A26516 /* upgrade_button_iphone.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = upgrade_button_iphone.tx; sourceTree = "<group>"; };
+		FEE41D2216FA7AD400A26516 /* upgrade_button_iphone@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "upgrade_button_iphone@2x.tx"; sourceTree = "<group>"; };
+		FEE41D2316FA7AD400A26516 /* upgrade_button_pressed_iphone.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = upgrade_button_pressed_iphone.tx; sourceTree = "<group>"; };
+		FEE41D2416FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "upgrade_button_pressed_iphone@2x.tx"; sourceTree = "<group>"; };
 		FEF47BC616DF0C950096F3D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -2051,6 +2075,10 @@
 				FE0CE85016E5FF89004C2090 /* medium_iphone@2x.tx */,
 				FE51432D16E05D3400AFB0CE /* medium_selected_iphone.tx */,
 				FE0CE85116E5FF89004C2090 /* medium_selected_iphone@2x.tx */,
+				FEE41D1D16FA7AD400A26516 /* rate_button_iphone.tx */,
+				FEE41D1E16FA7AD400A26516 /* rate_button_iphone@2x.tx */,
+				FEE41D1F16FA7AD400A26516 /* rate_button_pressed_iphone.tx */,
+				FEE41D2016FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx */,
 				FE51432E16E05D3400AFB0CE /* small_iphone.tx */,
 				FE0CE85216E5FF89004C2090 /* small_iphone@2x.tx */,
 				FE51432F16E05D3400AFB0CE /* small_selected_iphone.tx */,
@@ -2064,6 +2092,10 @@
 				FE51433316E05D3400AFB0CE /* story_button_pressed_iphone.tx */,
 				FE0CE85716E5FF89004C2090 /* story_button_pressed_iphone@2x.tx */,
 				FE51433416E05D3400AFB0CE /* story_iphone.tx */,
+				FEE41D2116FA7AD400A26516 /* upgrade_button_iphone.tx */,
+				FEE41D2216FA7AD400A26516 /* upgrade_button_iphone@2x.tx */,
+				FEE41D2316FA7AD400A26516 /* upgrade_button_pressed_iphone.tx */,
+				FEE41D2416FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx */,
 			);
 			path = mainmenu;
 			sourceTree = "<group>";
@@ -2640,6 +2672,14 @@
 				FEE41D1216FA587000A26516 /* upgrade_button_pressed@2x.tx in Resources */,
 				FEE41D1416FA587000A26516 /* upgrade_button.tx in Resources */,
 				FEE41D1616FA587000A26516 /* upgrade_button@2x.tx in Resources */,
+				FEE41D2516FA7AD400A26516 /* rate_button_iphone.tx in Resources */,
+				FEE41D2716FA7AD400A26516 /* rate_button_iphone@2x.tx in Resources */,
+				FEE41D2916FA7AD400A26516 /* rate_button_pressed_iphone.tx in Resources */,
+				FEE41D2B16FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx in Resources */,
+				FEE41D2D16FA7AD400A26516 /* upgrade_button_iphone.tx in Resources */,
+				FEE41D2F16FA7AD400A26516 /* upgrade_button_iphone@2x.tx in Resources */,
+				FEE41D3116FA7AD400A26516 /* upgrade_button_pressed_iphone.tx in Resources */,
+				FEE41D3316FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2972,6 +3012,14 @@
 				FEE41D1316FA587000A26516 /* upgrade_button_pressed@2x.tx in Resources */,
 				FEE41D1516FA587000A26516 /* upgrade_button.tx in Resources */,
 				FEE41D1716FA587000A26516 /* upgrade_button@2x.tx in Resources */,
+				FEE41D2616FA7AD400A26516 /* rate_button_iphone.tx in Resources */,
+				FEE41D2816FA7AD400A26516 /* rate_button_iphone@2x.tx in Resources */,
+				FEE41D2A16FA7AD400A26516 /* rate_button_pressed_iphone.tx in Resources */,
+				FEE41D2C16FA7AD400A26516 /* rate_button_pressed_iphone@2x.tx in Resources */,
+				FEE41D2E16FA7AD400A26516 /* upgrade_button_iphone.tx in Resources */,
+				FEE41D3016FA7AD400A26516 /* upgrade_button_iphone@2x.tx in Resources */,
+				FEE41D3216FA7AD400A26516 /* upgrade_button_pressed_iphone.tx in Resources */,
+				FEE41D3416FA7AD400A26516 /* upgrade_button_pressed_iphone@2x.tx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
