@@ -17,10 +17,6 @@
 #import "airhockey/views/rink_view.h"
 #import "airhockey/views/splash_view.h"
 
-@interface AirHockeyAppDelegate ()
-- (void)initAudio:(SoundInitializationDelegate *)delegate;
-@end
-
 @implementation AirHockeyAppDelegate {
  @private
   ViewController *viewController_;
@@ -30,15 +26,6 @@
   [viewController_ release];
 
   [super dealloc];
-}
-
-- (void)initAudio:(SoundInitializationDelegate *)delegate {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-  SoundPlayer::instance()->initializeWithDelegate(delegate);
-  SoundPlayer::instance()->setSoundEffectsOn(true);
-
-  [pool release];
 }
 
 #pragma mark - UIApplicationDelegate

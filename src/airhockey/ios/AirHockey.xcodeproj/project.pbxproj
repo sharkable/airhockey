@@ -1008,7 +1008,6 @@
 		FE4E6AB616EA7D69001F9D94 /* MyOpenALSupport.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyOpenALSupport.mm; sourceTree = "<group>"; };
 		FE4E6AB716EA7D69001F9D94 /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
 		FE4E6AB816EA7D69001F9D94 /* SoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundPlayer.mm; sourceTree = "<group>"; };
-		FE4E6AB916EA7D69001F9D94 /* sound_initialization_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound_initialization_delegate.h; sourceTree = "<group>"; };
 		FE4E6ABA16EA7D69001F9D94 /* sound_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound_player.h; sourceTree = "<group>"; };
 		FE4E6C2616EA9724001F9D94 /* AirHockey_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockey_Prefix.pch; sourceTree = "<group>"; };
 		FE4E6C2716EA9724001F9D94 /* AirHockeyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirHockeyAppDelegate.h; sourceTree = "<group>"; };
@@ -1580,7 +1579,6 @@
 			isa = PBXGroup;
 			children = (
 				FE4E6AAF16EA7D69001F9D94 /* ios */,
-				FE4E6AB916EA7D69001F9D94 /* sound_initialization_delegate.h */,
 				FE4E6ABA16EA7D69001F9D94 /* sound_player.h */,
 			);
 			path = soundengine;

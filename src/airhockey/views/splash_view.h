@@ -10,30 +10,16 @@
 #define AIRHOCKEY_VIEWS_SPLASHVIEW_H_
 
 #include "gameengine/engine_view.h"
-#include "soundengine/sound_initialization_delegate.h"
 
 class GameEngine;
 class SoundPlayer;
 
-typedef enum {
-  kSplashViewStateInitial = 0,
-  kSplashViewStateLoadingSounds,
-  kSplashViewStateSoundsDidLoad,
-  kSplashViewStateFinished
-} SplashViewState;
-
-class SplashView : public EngineView, SoundInitializationDelegate {
+class SplashView : public EngineView {
  public:
   SplashView(sp<GameEngine> game_engine);
 
   // EngineView
   void Update();
-
-  // SoundInitializationDelegate
-  void SoundInitialized(SoundPlayer *sound_player);
-
- private:
-  SplashViewState state_;
 };
 
 #endif
