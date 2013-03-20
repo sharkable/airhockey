@@ -89,6 +89,26 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   AddEntity(story_button_);
   fade_in(story_button_.get());
 
+  Sprite rate_button_image(game_engine, "rate_button");
+  Sprite rate_button_pressed_image(game_engine, "rate_button_pressed");
+  rate_button_.reset(new Button());
+  rate_button_->set_normal_sprite(rate_button_image);
+  rate_button_->set_pressed_sprite(rate_button_pressed_image);
+  rate_button_->set_position(game_engine->position("rate_button"));
+  rate_button_->set_delegate(this);
+  AddEntity(rate_button_);
+  fade_in(rate_button_.get());
+
+  Sprite upgrade_button_image(game_engine, "upgrade_button");
+  Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
+  upgrade_button_.reset(new Button());
+  upgrade_button_->set_normal_sprite(upgrade_button_image);
+  upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
+  upgrade_button_->set_position(game_engine->position("upgrade_button"));
+  upgrade_button_->set_delegate(this);
+  AddEntity(upgrade_button_);
+  fade_in(upgrade_button_.get());
+
   Sprite one_player_image(game_engine, "1_player");
   Sprite two_player_image(game_engine, "2_player");
   Sprite one_player_selected_image(game_engine, "1_player_selected");
@@ -209,6 +229,8 @@ void MainMenuView::AnimateOut() {
   fade_out(main_menu_.get());
   fade_out(start_button_.get());
   fade_out(story_button_.get());
+  fade_out(rate_button_.get());
+  fade_out(upgrade_button_.get());
   fade_out(num_players_select_.get());
   fade_out(num_pucks_select_.get());
   fade_out(difficulty_select_.get());
