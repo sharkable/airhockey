@@ -37,10 +37,10 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   paddle_2_.reset(new Paddle(game_engine, kPlayerId2, paddle_size, num_players == 2, difficulty,
                              pucks_));
 
-  post_1_.reset(new Post(game_engine, kGoalLeftX, kRinkTopY));
-  post_2_.reset(new Post(game_engine, kGoalLeftX, kRinkBottomY + 1));
-  post_3_.reset(new Post(game_engine, kGoalRightX + 1, kRinkTopY));
-  post_4_.reset(new Post(game_engine, kGoalRightX + 1, kRinkBottomY + 1));
+  post_1_.reset(new Post(game_engine, Rink::kGoalLeftX, Rink::kRinkTopY));
+  post_2_.reset(new Post(game_engine, Rink::kGoalLeftX, Rink::kRinkBottomY + 1));
+  post_3_.reset(new Post(game_engine, Rink::kGoalRightX + 1, Rink::kRinkTopY));
+  post_4_.reset(new Post(game_engine, Rink::kGoalRightX + 1, Rink::kRinkBottomY + 1));
 
   rink_.reset(new Rink());
   AddEntity(rink_);

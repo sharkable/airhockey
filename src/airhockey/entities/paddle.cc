@@ -90,8 +90,8 @@ void Paddle::SetInitialPositionForPlayer(PlayerId playerId) {
 void Paddle::KeepInPlayerBounds() {
   switch (player_id_) {
     case kPlayerId1: {
-      if (y_ + radius_ > kRinkBottomY) {
-        y_ = kRinkBottomY - radius_;
+      if (y_ + radius_ > Rink::kRinkBottomY) {
+        y_ = Rink::kRinkBottomY - radius_;
         vy_ = 0;
       } else if (y_ - radius_ < SCREEN_HEIGHT/2+1) {
         y_ = SCREEN_HEIGHT/2+1 + radius_;
@@ -100,8 +100,8 @@ void Paddle::KeepInPlayerBounds() {
       break;
     }
     case kPlayerId2: {
-      if (y_ - radius_ < kRinkTopY) {
-        y_ = kRinkTopY + radius_;
+      if (y_ - radius_ < Rink::kRinkTopY) {
+        y_ = Rink::kRinkTopY + radius_;
         vy_ = 0;
       } else if (y_ + radius_ > SCREEN_HEIGHT/2-1) {
         y_ = SCREEN_HEIGHT/2-1 - radius_;
@@ -110,11 +110,11 @@ void Paddle::KeepInPlayerBounds() {
       break;
     }
   }
-  if (x_ - radius_ < kRinkLeftX) {
-    x_ = kRinkLeftX + radius_;
+  if (x_ - radius_ < Rink::kRinkLeftX) {
+    x_ = Rink::kRinkLeftX + radius_;
     vx_ = 0;
-  } else if (x_ + radius_ > kRinkRightX) {
-    x_ = kRinkRightX - radius_;
+  } else if (x_ + radius_ > Rink::kRinkRightX) {
+    x_ = Rink::kRinkRightX - radius_;
     vx_ = 0;
   }
 }
@@ -164,12 +164,12 @@ bool Paddle::ContainsTouch(Touch *touch) {
   }
   switch (player_id_) {
     case kPlayerId1:
-      return p.y >= SCREEN_HEIGHT / 2 && p.y < kRinkBottomY && p.x >= kRinkLeftX &&
-          p.x < kRinkRightX;
+      return p.y >= SCREEN_HEIGHT / 2 && p.y < Rink::kRinkBottomY && p.x >= Rink::kRinkLeftX &&
+          p.x < Rink::kRinkRightX;
       break;
     case kPlayerId2:
-      return p.y < SCREEN_HEIGHT / 2 && p.y >= kRinkTopY && p.x >= kRinkLeftX &&
-          p.x < kRinkRightX;
+      return p.y < SCREEN_HEIGHT / 2 && p.y >= Rink::kRinkTopY && p.x >= Rink::kRinkLeftX &&
+          p.x < Rink::kRinkRightX;
       break;
   }
   return false;
@@ -236,7 +236,7 @@ void Paddle::RunAITick() {
   double targetX;
   double targetY;
 
-  if (!target_away_from_corner_ && target && target->y() <= kRinkTopY + radius_ &&
+  if (!target_away_from_corner_ && target && target->y() <= Rink::kRinkTopY + radius_ &&
       fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
     if (target->x() < SCREEN_WIDTH / 2) {
       target_left_corner_ = true;
@@ -246,22 +246,22 @@ void Paddle::RunAITick() {
   }
 
   if (target_left_corner_) {
-    targetX = kRinkLeftX + radius_;
-    targetY = kRinkTopY + radius_;
+    targetX = Rink::kRinkLeftX + radius_;
+    targetY = Rink::kRinkTopY + radius_;
     if (Overlaps(target)) {
       target_left_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_right_corner_) {
-    targetX = kRinkRightX - radius_;
-    targetY = kRinkTopY + radius_;
+    targetX = Rink::kRinkRightX - radius_;
+    targetY = Rink::kRinkTopY + radius_;
     if (Overlaps(target)) {
       target_right_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_away_from_corner_) {
     targetX = SCREEN_WIDTH / 2;
-    targetY = kRinkTopY + radius_;
+    targetY = Rink::kRinkTopY + radius_;
     if (x_ >= SCREEN_WIDTH / 2 - 5 && x_ <= SCREEN_WIDTH / 2 + 5) {
       target_away_from_corner_ = false;
     }

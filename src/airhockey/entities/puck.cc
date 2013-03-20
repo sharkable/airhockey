@@ -106,9 +106,9 @@ void Puck::Update() {
   RoundThing::Update();
 
   // Stop the puck from getting stuck in the goal.
-  if (y() < kRinkTopY && fabs(vy()) < kPuckGoalMinDropSpeed) {
+  if (y() < Rink::kRinkTopY && fabs(vy()) < kPuckGoalMinDropSpeed) {
     set_vy(-kPuckGoalMinDropSpeed);
-  } else if (y_ > kRinkBottomY && fabs(vy_) < kPuckGoalMinDropSpeed) {
+  } else if (y_ > Rink::kRinkBottomY && fabs(vy_) < kPuckGoalMinDropSpeed) {
     vy_ = kPuckGoalMinDropSpeed;
   }
 
