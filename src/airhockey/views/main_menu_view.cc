@@ -230,8 +230,8 @@ void MainMenuView::ButtonPressed(Button *button) {
     PressedStory();
   } else if (button == rate_button_.get()) {
     PressedRate();
-  } else if (button == upgrade_button_.get()) {
-    PressedUpgrade();
+//  } else if (button == upgrade_button_.get()) {
+//    PressedUpgrade();
   }
 }
 
@@ -246,7 +246,7 @@ void MainMenuView::AnimateOut() {
   fade_out(start_button_.get());
   fade_out(story_button_.get());
   fade_out(rate_button_.get());
-  fade_out(upgrade_button_.get());
+//  fade_out(upgrade_button_.get());
   fade_out(num_players_select_.get());
   fade_out(num_pucks_select_.get());
   fade_out(difficulty_select_.get());

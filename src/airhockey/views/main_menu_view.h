@@ -44,7 +44,7 @@ class MainMenuView : public EngineView, private ButtonDelegate {
   sp<Button> start_button_;
   sp<Button> story_button_;
   sp<Button> rate_button_;
-  sp<Button> upgrade_button_;
+//  sp<Button> upgrade_button_;
   sp<MultiSelect> num_players_select_;
   sp<MultiSelect> num_pucks_select_;
   sp<MultiSelect> difficulty_select_;
