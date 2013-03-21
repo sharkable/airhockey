@@ -101,16 +101,17 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   AddEntity(rate_button_);
   fade_in(rate_button_.get());
 
-  Sprite upgrade_button_image(game_engine, "upgrade_button");
-  Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
-  upgrade_button_.reset(new Button());
-  upgrade_button_->set_normal_sprite(upgrade_button_image);
-  upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
-  upgrade_button_->set_position(game_engine->position("upgrade_button"));
-  upgrade_button_->set_delegate(this);
-  AddEntity(upgrade_button_);
-  fade_in(upgrade_button_.get());
-
+  // TODO disabling this until I get app store selling sorted out.
+//  Sprite upgrade_button_image(game_engine, "upgrade_button");
+//  Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
+//  upgrade_button_.reset(new Button());
+//  upgrade_button_->set_normal_sprite(upgrade_button_image);
+//  upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
+//  upgrade_button_->set_position(game_engine->position("upgrade_button"));
+//  upgrade_button_->set_delegate(this);
+//  AddEntity(upgrade_button_);
+//  fade_in(upgrade_button_.get());
+//
   Sprite one_player_image(game_engine, "1_player");
   Sprite two_player_image(game_engine, "2_player");
   Sprite one_player_selected_image(game_engine, "1_player_selected");
@@ -202,7 +203,7 @@ void MainMenuView::ViewIsShown() {
   // Force the popup for rating and upgrading just once.
   int main_menu_view_count = LocalStore::IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
   LocalStore::SetInteger(main_menu_view_count, kLocalStoreMainMenuViewCount);
-  if (main_menu_view_count == 5) {
+  if (main_menu_view_count == 6) {
     PressedRate();
   } else if (main_menu_view_count == 10) {
     PressedUpgrade();
@@ -300,5 +301,6 @@ void MainMenuView::PressedRate() {
 }
 
 void MainMenuView::PressedUpgrade() {
-  game_engine()->app_store_engine()->AskForUpgrade("Glide Hockey HD", "id_todo_replace");
+// TODO disabling this until I can get app store purchasing worked out.
+//  game_engine()->app_store_engine()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade");
 }
