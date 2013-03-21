@@ -25,6 +25,7 @@ class RoundThing;
 class SimpleItem;
 
 typedef enum {
+  kPlayViewStateShowingAd,
   kPlayViewStateGetReady,
   kPlayViewStatePlaying,
   kPlayViewStateWaitingForPucks,
