@@ -33,8 +33,8 @@ static const int kWinScore = 7;
 static const int kFullScreenAdFrequency = 4;
 static const string kLocalStoreMatchCount = "ls_match_count";
 
-PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, ComputerAI difficulty,
-                   PaddleSize paddle_size)
+PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
+                   ComputerAI difficulty, PaddleSize paddle_size)
     : EngineView(game_engine) {
   num_players_ = num_players;
 
@@ -105,17 +105,23 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
   lose_->add_sprite(loseSprite);
   lose_->set_position(game_point_make(0, 0));
 
-  Sprite getReadySprite(game_engine, "get_ready");
-  GamePoint getReadyPosition = game_engine->position("get_ready");
+  Sprite get_ready_sprite(game_engine, "get_ready");
+  GameSize screen_size = game_engine->game_size();
+  GameSize get_ready_size = get_ready_sprite.content_size();
+  GamePoint get_ready_position =
+      game_point_make(floorf((screen_size.width - get_ready_size.width) / 2),
+                      floorf((screen_size.height - get_ready_size.height) / 2));
   get_ready_.reset(new SimpleItem());
-  get_ready_->add_sprite(getReadySprite);
-  get_ready_->set_position(getReadyPosition);
+  get_ready_->add_sprite(get_ready_sprite);
+  get_ready_->set_position(get_ready_position);
 
-  Sprite goSprite(game_engine, "go");
-  GamePoint goPosition = game_engine->position("go");
+  Sprite go_sprite(game_engine, "go");
+  GameSize go_size = go_sprite.content_size();
+  GamePoint go_position = game_point_make(floorf((screen_size.width - go_size.width) / 2),
+                                          floorf((screen_size.height - go_size.height) / 2));
   go_.reset(new SimpleItem());
-  go_->add_sprite(goSprite);
-  go_->set_position(goPosition);
+  go_->add_sprite(go_sprite);
+  go_->set_position(go_position);
 
   // Add rink left and right pieces.
   Sprite left_rink_border_sprite(game_engine, "rink_left");
@@ -166,14 +172,28 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks, C
 void PlayView::Update() {
   if (state_ == kPlayViewStatePaused) {
     return;
-  } else if (state_ == kPlayViewStateGetReady) {
+  }
+
+  EngineView::Update();
+
+  if (state_ == kPlayViewStateGetReady) {
     get_ready_ticks_left_--;
     if (get_ready_ticks_left_ == kShowGetReadyMessageTicks) {
+      GamePoint position = get_ready_->position();
+      GamePoint start_position = game_point_make(position.x, position.y - 40);
+      get_ready_->set_position(start_position);
+      get_ready_->set_alpha(0);
+      get_ready_->AnimateToPosition(position, kAnimationTypeLinear, kShowGetReadyMessageTicks);
+      get_ready_->AnimateToAlpha(1, kAnimationTypeLinear, kShowGoMessageTicks);
       AddEntity(get_ready_);
       SoundPlayer::instance()->playSound(kSoundGetReady);
     } else if (get_ready_ticks_left_ == 0) {
       RemoveEntity(get_ready_);
       AddEntity(go_);
+      go_->set_zoom(1);
+      go_->set_alpha(1);
+      go_->AnimateToZoom(5, kAnimationTypeCubicEaseOut, kShowGoMessageTicks);
+      go_->AnimateToAlpha(0, kAnimationTypeLinear, kShowGoMessageTicks);
       go_ticks_left_ = kShowGoMessageTicks;
       state_ = kPlayViewStatePlaying;
       paddle_1_->SetReadyToPlay(true);
@@ -183,8 +203,6 @@ void PlayView::Update() {
 
     return;
   }
-
-  EngineView::Update();
 
   if (go_ticks_left_ > 0) {
     go_ticks_left_--;

@@ -132,7 +132,7 @@ void Paddle::SetReadyToPlay(bool ready) {
 
 void Paddle::Update() {
   // Computer AI
-  if (!player_controlled_) {
+  if (!player_controlled_ && ready_to_play_) {
     if (ai_initial_pause_ticks_) {
       ai_initial_pause_ticks_--;
       return;
