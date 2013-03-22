@@ -446,6 +446,14 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
       break;
     }
   }
+  win_->set_alpha(0);
+  win_->set_zoom(4);
+  win_->AnimateToAlpha(1, kAnimationTypeLinear, 2 * 60);
+  win_->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 2 * 60);
+  lose_->set_alpha(0);
+  lose_->set_zoom(4);
+  lose_->AnimateToAlpha(1, kAnimationTypeLinear, 3 * 60);
+  lose_->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 3 * 60);
 
   game_engine()->PushView(sp<GameMenuView>(new GameMenuView(game_engine(), this, true)));
 }
