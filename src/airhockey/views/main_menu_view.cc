@@ -6,7 +6,7 @@
 //  Copyright 2010 Sharkable. All rights reserved.
 //
 
-#import "airhockey/views/main_menu_view.h"
+#include "airhockey/views/main_menu_view.h"
 
 #include <sstream>
 
@@ -23,6 +23,8 @@
 #include "airhockey/entities/sound_slider.h"
 #include "airhockey/views/play_view.h"
 #include "airhockey/views/story_view.h"
+
+#include "airhockey.h"
 
 using std::map;
 using std::string;
@@ -56,6 +58,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 
   state_ = kMainMenuStateRunning;
 
+  s_log("mmv 1");
+
   Sprite title_sprite(game_engine, "title");
   title_.reset(new SimpleItem(title_sprite, game_engine->position("title")));
   AddEntity(title_);
@@ -64,12 +68,16 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   title_->set_alpha(0);
   title_->AnimateToAlpha(1, kAnimationTypeCubicEaseOut, 900);
 
+  s_log("mmv 2");
+
   Sprite main_menu_sprite(game_engine, "main_menu");
   GamePoint main_menu_position = game_engine->position("main_menu");
   main_menu_.reset(new SimpleItem(main_menu_sprite, main_menu_position));
   AddEntity(main_menu_);
   main_menu_->set_alpha(0);
   main_menu_->AnimateToAlpha(1, kAnimationTypeLinear, 45);
+
+  s_log("mmv 3");
 
   Sprite start_button_image(game_engine, "start_button");
   Sprite start_button_pressed_image(game_engine, "start_button_pressed");
@@ -80,6 +88,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   start_button_->set_delegate(this);
   AddEntity(start_button_);
   fade_in(start_button_.get());
+
+  s_log("mmv 4");
 
   Sprite story_button_image(game_engine, "story_button");
   Sprite story_button_pressed_image(game_engine, "story_button_pressed");
@@ -186,19 +196,21 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   sound_slider_.reset(new SoundSlider(game_engine,
                                       game_engine->position("sound_slider_main_menu")));
   AddEntity(sound_slider_);
+
+  s_log("mmv end");
 }
 
 
 // EngineView
 
 void MainMenuView::ViewIsShown() {
-  if (IS_FREE) {
+//  if (IS_FREE) {
     if (game_engine()->platform_type() == kPlatformTypePhone) {
       game_engine()->ad_engine()->SetAdAtPoint(kScreenPointZero);
     } else {
       game_engine()->ad_engine()->SetAdAtPoint(screen_point_make(45, 40));
     }
-  }
+//  }
 
   // Force the popup for rating and upgrading just once.
   int main_menu_view_count = LocalStore::IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
@@ -211,6 +223,8 @@ void MainMenuView::ViewIsShown() {
 }
 
 void MainMenuView::Update() {
+  s_log("MainMenuView::Update() start");
+
   EngineView::Update();
   if (state_ == kMainMenuStateAnimatingOut) {
     animating_out_ticks_left_--;
@@ -218,6 +232,8 @@ void MainMenuView::Update() {
       game_engine()->RemoveView(this);
     }
   }
+
+  s_log("MainMenuView::Update() end");
 }
 
 

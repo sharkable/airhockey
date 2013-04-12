@@ -2,13 +2,8 @@
 // Prefix header for all source files of the 'AirHockey' target in the 'AirHockey' project
 //
 
-#import <Availability.h>
-
-#ifndef __IPHONE_3_0
-#warning "This project uses features only available in iPhone SDK 3.0 and later."
-#endif
-
 #ifdef __OBJC__
+  #import <Availability.h>
   #import <Foundation/Foundation.h>
   #import <UIKit/UIKit.h>
 #endif // __OBJC__
@@ -16,7 +11,10 @@
 #ifdef __cplusplus
   #include <assert.h>
   #include <iostream>
-  #include <tr1/memory>
+  #include <memory>
 
-  #define sp std::tr1::shared_ptr
+  #define sp std::shared_ptr
 #endif // __cplusplus
+
+#include <android/log.h>
+#define s_log(...)  __android_log_print(ANDROID_LOG_DEBUG, "Sharkable", __VA_ARGS__);
