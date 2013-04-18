@@ -1382,7 +1382,7 @@
 				FE51428116E05D3300AFB0CE /* textures */,
 			);
 			name = resources;
-			path = ../../../resources;
+			path = ../../resources;
 			sourceTree = "<group>";
 		};
 		FE28FAFF16C9C95C00D3BBFB /* src */ = {
@@ -1391,7 +1391,7 @@
 				FE413FBF16C9CD57001BF838 /* airhockey */,
 			);
 			name = src;
-			path = ../..;
+			path = ../../src;
 			sourceTree = "<group>";
 		};
 		FE413FBF16C9CD57001BF838 /* airhockey */ = {
@@ -1449,7 +1449,7 @@
 				FE4E6AAE16EA7D69001F9D94 /* soundengine */,
 			);
 			name = src;
-			path = ../../../gameengine/src;
+			path = ../../gameengine/src;
 			sourceTree = "<group>";
 		};
 		FE4E699416EA7D68001F9D94 /* gameengine */ = {
@@ -3008,7 +3008,7 @@
 					NDEBUG,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "$(SRCROOT)/../../../resources/plist/AirHockey-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockey-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -3025,7 +3025,7 @@
 				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=true";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "$(SRCROOT)/../../../resources/plist/AirHockeyFree-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockeyFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -3112,7 +3112,7 @@
 					"$(inherited)",
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "$(SRCROOT)/../../../resources/plist/AirHockey-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockey-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -3132,7 +3132,7 @@
 					NDEBUG,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "$(SRCROOT)/../../../resources/plist/AirHockey-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockey-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -3152,7 +3152,7 @@
 					"$(inherited)",
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "$(SRCROOT)/../../../resources/plist/AirHockeyFree-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockeyFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -3168,7 +3168,7 @@
 				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=true";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "$(SRCROOT)/../../../resources/plist/AirHockeyFree-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockeyFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
