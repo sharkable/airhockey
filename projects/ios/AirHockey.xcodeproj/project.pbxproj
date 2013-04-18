@@ -2983,13 +2983,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					../../../gameengine/src,
-					../..,
+					../../gameengine/src,
+					../../src,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../gameengine/src/gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry\"",
-					"\"$(SRCROOT)/../../../gameengine/src/gameengine/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
+					"\"$(SRCROOT)/../../gameengine/src/gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry\"",
+					"\"$(SRCROOT)/../../gameengine/src/gameengine/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
@@ -3058,13 +3058,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					../../../gameengine/src,
-					../..,
+					../../gameengine/src,
+					../../src,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../gameengine/src/gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry\"",
-					"\"$(SRCROOT)/../../../gameengine/src/gameengine/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
+					"\"$(SRCROOT)/../../gameengine/src/gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry\"",
+					"\"$(SRCROOT)/../../gameengine/src/gameengine/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3089,13 +3089,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					../../../gameengine/src,
-					../..,
+					../../gameengine/src,
+					../../src,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../gameengine/src/gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry\"",
-					"\"$(SRCROOT)/../../../gameengine/src/gameengine/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
+					"\"$(SRCROOT)/../../gameengine/src/gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry\"",
+					"\"$(SRCROOT)/../../gameengine/src/gameengine/ios/thirdparty/GoogleAdMobAdsSdkiOS-6.2.1\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
