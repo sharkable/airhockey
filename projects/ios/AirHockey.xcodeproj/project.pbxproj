@@ -2975,6 +2975,8 @@
 				COMPRESS_PNG_FILES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ../../src/airhockey/ios/AirHockey_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -3002,7 +3004,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"IS_FREE=false",
 					NDEBUG,
@@ -3022,7 +3023,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=true";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockeyFree-Info.plist";
@@ -3045,6 +3045,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ../../src/airhockey/ios/AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -3079,6 +3081,8 @@
 				COMPRESS_PNG_FILES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ../../src/airhockey/ios/AirHockey_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -3106,7 +3110,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"IS_FREE=false",
 					"$(inherited)",
@@ -3126,7 +3129,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"IS_FREE=false",
 					NDEBUG,
@@ -3146,7 +3148,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"IS_FREE=true",
 					"$(inherited)",
@@ -3165,7 +3166,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AirHockey_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "IS_FREE=true";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../resources/plist/AirHockeyFree-Info.plist";
