@@ -1,4 +1,4 @@
-LOCAL_PATH := ../../../src/airhockey/android/jni
+LOCAL_PATH := ../../src/airhockey/android/jni
 
 include $(CLEAR_VARS)
 
