@@ -8,3 +8,10 @@ xcuserdata*
 
 project.xcworkspace*
 
+projects/android/bin
+
+projects/android/gen
+
+projects/android/libs
+
+projects/android/obj
