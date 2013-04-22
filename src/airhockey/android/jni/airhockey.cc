@@ -12,6 +12,7 @@ extern "C" {
 #include "airhockey/views/splash_view.h"
 #include "gameengine/android/ad_engine_android.h"
 #include "gameengine/android/analytics_engine_android.h"
+#include "gameengine/android/game_engine_factory_android.h"
 #include "gameengine/opengl/texture2d.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/game_engine.h"
@@ -35,16 +36,23 @@ void init() {
 
   game_engine_->SetScreenSize(screen_size_make(640, 960), game_size_make(768, 1024));
 
-  game_engine_->load_positions("assets/positions/game_menu_iphone.xml");
-  game_engine_->load_positions("assets/positions/main_menu_iphone.xml");
-  game_engine_->load_positions("assets/positions/play_iphone.xml");
-  game_engine_->load_positions("assets/positions/rink_iphone.xml");
+  sp<GameEngineFactory> factory = sp<GameEngineFactory>(new GameEngineFactoryAndroid());
+  game_engine_->set_factory(factory);
 
   sp<AdEngine> ad_engine = sp<AdEngine>(new AdEngineAndroid());
   game_engine_->set_ad_engine(ad_engine);
 
   sp<AnalyticsEngine> analytics_engine = sp<AnalyticsEngine>(new AnalyticsEngineAndroid());
   game_engine_->set_analytics_engine(analytics_engine);
+
+  game_engine_->load_positions(
+      *game_engine_->factory()->createAssetReader("assets/positions/game_menu_iphone.xml"));
+  game_engine_->load_positions(
+      *game_engine_->factory()->createAssetReader("assets/positions/main_menu_iphone.xml"));
+  game_engine_->load_positions(
+      *game_engine_->factory()->createAssetReader("assets/positions/play_iphone.xml"));
+  game_engine_->load_positions(
+      *game_engine_->factory()->createAssetReader("assets/positions/rink_iphone.xml"));
 
   sp<EngineView> root_view = sp<EngineView>(new RinkView(game_engine_));
   game_engine_->SetRootView(root_view);

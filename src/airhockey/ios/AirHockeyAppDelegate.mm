@@ -9,6 +9,7 @@
 #import "airhockey/ios/AirHockeyAppDelegate.h"
 
 #import "gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry/Flurry.h"
+#import "gameengine/ios/game_engine_factory_ios.h"
 #import "gameengine/ios/TypeUtil.h"
 #import "gameengine/ios/ViewController.h"
 #import "gameengine/game_engine.h"
@@ -16,6 +17,10 @@
 
 #import "airhockey/views/rink_view.h"
 #import "airhockey/views/splash_view.h"
+
+@interface AirHockeyAppDelegate ()
+- (void)loadPositions:(NSString *)filename;
+@end
 
 @implementation AirHockeyAppDelegate {
  @private
@@ -49,6 +54,8 @@
     viewController_.gameEngine->SetScreenOffset(offset);
   }
 
+  viewController_.gameEngine->set_factory(sp<GameEngineFactory>(new GameEngineFactoryIOS()));
+
   NSString *mainMenuPositionsFilename = nil;
   NSString *rinkPositionsFilename = nil;
   NSString *playPositionsFilename = nil;
@@ -66,10 +73,10 @@
     playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"xml"];
     gameMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
   }
-  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(mainMenuPositionsFilename));
-  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(rinkPositionsFilename));
-  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(playPositionsFilename));
-  viewController_.gameEngine->load_positions(TypeUtil::NSString2string(gameMenuPositionsFilename));
+  [self loadPositions:mainMenuPositionsFilename];
+  [self loadPositions:rinkPositionsFilename];
+  [self loadPositions:playPositionsFilename];
+  [self loadPositions:gameMenuPositionsFilename];
 
   sp<EngineView> rootView =
       sp<EngineView>(new RinkView(sp<GameEngine>(viewController_.gameEngine)));
@@ -99,6 +106,16 @@
 
 - (UIWindow *)window {
   return viewController_.window;
+}
+
+
+// private
+
+- (void)loadPositions:(NSString *)filename {
+  std::string filenameString = TypeUtil::NSString2string(filename);
+  sp<AssetReader> assetReader =
+      viewController_.gameEngine->factory()->createAssetReader(filenameString);
+  viewController_.gameEngine->load_positions(*assetReader);
 }
 
 @end

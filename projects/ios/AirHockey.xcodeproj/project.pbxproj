@@ -773,6 +773,10 @@
 		FE789BCA14F97B34007FCBC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */; };
 		FE789BCC14F97B34007FCBC5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCB14F97B34007FCBC5 /* GLKit.framework */; };
 		FE789BCE14F97B34007FCBC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */; };
+		FE8C8DDB1725FAB4005212D0 /* asset_reader_ios.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE8C8DD71725FAB4005212D0 /* asset_reader_ios.cc */; };
+		FE8C8DDC1725FAB4005212D0 /* asset_reader_ios.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE8C8DD71725FAB4005212D0 /* asset_reader_ios.cc */; };
+		FE8C8DDD1725FAB4005212D0 /* game_engine_factory_ios.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE8C8DD91725FAB4005212D0 /* game_engine_factory_ios.cc */; };
+		FE8C8DDE1725FAB4005212D0 /* game_engine_factory_ios.cc in Sources */ = {isa = PBXBuildFile; fileRef = FE8C8DD91725FAB4005212D0 /* game_engine_factory_ios.cc */; };
 		FE91222316E1C0480038510E /* main_menu.xml in Resources */ = {isa = PBXBuildFile; fileRef = FE91222116E1C0480038510E /* main_menu.xml */; };
 		FE91222416E1C0480038510E /* main_menu.xml in Resources */ = {isa = PBXBuildFile; fileRef = FE91222116E1C0480038510E /* main_menu.xml */; };
 		FE91222516E1C0480038510E /* rink.xml in Resources */ = {isa = PBXBuildFile; fileRef = FE91222216E1C0480038510E /* rink.xml */; };
@@ -1277,6 +1281,12 @@
 		FE789BC914F97B34007FCBC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FE789BCB14F97B34007FCBC5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FE789BCD14F97B34007FCBC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FE8C8DD51725CF8E005212D0 /* asset_reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asset_reader.h; sourceTree = "<group>"; };
+		FE8C8DD61725CF8E005212D0 /* game_engine_factory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game_engine_factory.h; sourceTree = "<group>"; };
+		FE8C8DD71725FAB4005212D0 /* asset_reader_ios.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset_reader_ios.cc; sourceTree = "<group>"; };
+		FE8C8DD81725FAB4005212D0 /* asset_reader_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asset_reader_ios.h; sourceTree = "<group>"; };
+		FE8C8DD91725FAB4005212D0 /* game_engine_factory_ios.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_engine_factory_ios.cc; sourceTree = "<group>"; };
+		FE8C8DDA1725FAB4005212D0 /* game_engine_factory_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_engine_factory_ios.h; sourceTree = "<group>"; };
 		FE91222116E1C0480038510E /* main_menu.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main_menu.xml; sourceTree = "<group>"; };
 		FE91222216E1C0480038510E /* rink.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = rink.xml; sourceTree = "<group>"; };
 		FE91223F16E1DC300038510E /* play.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = play.xml; sourceTree = "<group>"; };
@@ -1464,11 +1474,13 @@
 				FE4E699716EA7D68001F9D94 /* animation.cc */,
 				FE4E699816EA7D68001F9D94 /* animation.h */,
 				FEE41D1816FA5D3E00A26516 /* app_store_engine.h */,
+				FE8C8DD51725CF8E005212D0 /* asset_reader.h */,
 				FE4E699916EA7D68001F9D94 /* coordinate_types.h */,
 				FE4E699A16EA7D68001F9D94 /* engine_view.cc */,
 				FE4E699B16EA7D68001F9D94 /* engine_view.h */,
 				FE4E69A516EA7D68001F9D94 /* game_engine.cc */,
 				FE4E69A616EA7D68001F9D94 /* game_engine.h */,
+				FE8C8DD61725CF8E005212D0 /* game_engine_factory.h */,
 				FE4E6A8516EA7D69001F9D94 /* local_store.h */,
 				FE4E6A8616EA7D69001F9D94 /* mt19937ar.c */,
 				FE4E6A8A16EA7D69001F9D94 /* positions.cc */,
@@ -1507,6 +1519,8 @@
 				FE4E69AB16EA7D68001F9D94 /* AnalyticsEngineIOS.mm */,
 				FEE41D1A16FA5E3C00A26516 /* AppStoreEngineIOS.h */,
 				FEE41D1916FA5E3C00A26516 /* AppStoreEngineIOS.mm */,
+				FE8C8DD71725FAB4005212D0 /* asset_reader_ios.cc */,
+				FE8C8DD81725FAB4005212D0 /* asset_reader_ios.h */,
 				FE4E69AC16EA7D68001F9D94 /* EAGLView.h */,
 				FE4E69AD16EA7D68001F9D94 /* EAGLView.mm */,
 				FE4E69AE16EA7D68001F9D94 /* ES1Renderer.h */,
@@ -1514,6 +1528,8 @@
 				FE4E69B016EA7D68001F9D94 /* ES2Renderer.h */,
 				FE4E69B116EA7D68001F9D94 /* ES2Renderer.mm */,
 				FE4E69B216EA7D68001F9D94 /* ESRenderer.h */,
+				FE8C8DD91725FAB4005212D0 /* game_engine_factory_ios.cc */,
+				FE8C8DDA1725FAB4005212D0 /* game_engine_factory_ios.h */,
 				FE4E69B316EA7D68001F9D94 /* GameTimer.h */,
 				FE4E69B416EA7D68001F9D94 /* GameTimer.mm */,
 				FE4E69B516EA7D68001F9D94 /* GameTouchWindow.h */,
@@ -2899,6 +2915,8 @@
 				FE4E6C2C16EA9724001F9D94 /* main.m in Sources */,
 				FEE41D1B16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */,
 				FE35280D171F630300F566B6 /* rink_view.cc in Sources */,
+				FE8C8DDB1725FAB4005212D0 /* asset_reader_ios.cc in Sources */,
+				FE8C8DDD1725FAB4005212D0 /* game_engine_factory_ios.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2959,6 +2977,8 @@
 				FE4E6C2D16EA9724001F9D94 /* main.m in Sources */,
 				FEE41D1C16FA5E3C00A26516 /* AppStoreEngineIOS.mm in Sources */,
 				FE35280E171F630300F566B6 /* rink_view.cc in Sources */,
+				FE8C8DDC1725FAB4005212D0 /* asset_reader_ios.cc in Sources */,
+				FE8C8DDE1725FAB4005212D0 /* game_engine_factory_ios.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
