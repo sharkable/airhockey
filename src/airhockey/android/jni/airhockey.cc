@@ -35,6 +35,8 @@ void init() {
   game_engine_.reset(new GameEngine());
 
   game_engine_->SetScreenSize(screen_size_make(640, 960), game_size_make(768, 1024));
+  game_engine_->set_platform_type(kPlatformTypePhone);
+  game_engine_->set_platform_resolution(kPlatformResolutionHigh);
 
   sp<GameEngineFactory> factory = sp<GameEngineFactory>(new GameEngineFactoryAndroid());
   game_engine_->set_factory(factory);

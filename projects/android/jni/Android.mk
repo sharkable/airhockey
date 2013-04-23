@@ -22,7 +22,6 @@ LOCAL_SRC_FILES := \
     ../../../../gameengine/src/gameengine/android/asset_reader_android.cc \
     ../../../../gameengine/src/gameengine/android/game_engine_factory_android.cc \
     ../../../../gameengine/src/gameengine/android/local_store.cc \
-    ../../../../gameengine/src/gameengine/android/resource_loader.cc \
     ../../../../gameengine/src/gameengine/animation.cc \
     ../../../../gameengine/src/gameengine/engine_view.cc \
     ../../../../gameengine/src/gameengine/entities/animatable.cc \
