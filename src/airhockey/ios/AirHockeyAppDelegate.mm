@@ -65,7 +65,7 @@
     mainMenuPositionsFilename = @"main_menu_iphone.xml";
     rinkPositionsFilename = @"rink_iphone.xml";
     playPositionsFilename = @"play_iphone.xml";
-    gameMenuPositionsFilename = @"game_menu.xml";
+    gameMenuPositionsFilename = @"game_menu_iphone.xml";
   } else {
     mainMenuPositionsFilename = @"main_menu.xml";
     rinkPositionsFilename = @"rink.xml";
