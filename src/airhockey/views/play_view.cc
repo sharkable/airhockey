@@ -57,7 +57,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
     Sprite sprite(game_engine, pointsstr);
     // TODO: This is just to bump the use count of the texture since it's being used twice.
     // Rethink how we handle textures.
-    ResourceLoader::Instance().TextureWithName(pointsstr);
+    game_engine->resource_loader().TextureWithName(pointsstr);
     scoreSprites.push_back(sprite);
   }
   player_1_score_.reset(new SimpleItem());

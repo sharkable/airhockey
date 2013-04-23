@@ -9,7 +9,7 @@
 #import "airhockey/ios/AirHockeyAppDelegate.h"
 
 #import "gameengine/ios/thirdparty/Flurry iPhone SDK v4.1.0/Flurry/Flurry.h"
-#import "gameengine/ios/game_engine_factory_ios.h"
+#import "gameengine/ios/GameEngineFactoryIOS.h"
 #import "gameengine/ios/TypeUtil.h"
 #import "gameengine/ios/ViewController.h"
 #import "gameengine/game_engine.h"
@@ -62,16 +62,15 @@
   NSString *gameMenuPositionsFilename = nil;
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    mainMenuPositionsFilename =
-        [[NSBundle mainBundle] pathForResource:@"main_menu_iphone" ofType:@"xml"];
-    rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink_iphone" ofType:@"xml"];
-    playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play_iphone" ofType:@"xml"];
-    gameMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
+    mainMenuPositionsFilename = @"main_menu_iphone.xml";
+    rinkPositionsFilename = @"rink_iphone.xml";
+    playPositionsFilename = @"play_iphone.xml";
+    gameMenuPositionsFilename = @"game_menu.xml";
   } else {
-    mainMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"main_menu" ofType:@"xml"];
-    rinkPositionsFilename = [[NSBundle mainBundle] pathForResource:@"rink" ofType:@"xml"];
-    playPositionsFilename = [[NSBundle mainBundle] pathForResource:@"play" ofType:@"xml"];
-    gameMenuPositionsFilename = [[NSBundle mainBundle] pathForResource:@"game_menu" ofType:@"xml"];
+    mainMenuPositionsFilename = @"main_menu.xml";
+    rinkPositionsFilename = @"rink.xml";
+    playPositionsFilename = @"play.xml";
+    gameMenuPositionsFilename = @"game_menu.xml";
   }
   [self loadPositions:mainMenuPositionsFilename];
   [self loadPositions:rinkPositionsFilename];

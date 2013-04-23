@@ -52,7 +52,7 @@ RoundThing::RoundThing(sp<GameEngine> game_engine, string texture_name)
 
 RoundThing::~RoundThing() {
   if (sprite_.texture().data_loaded()) {
-    ResourceLoader::Instance().ReleaseResource(sprite_.texture());
+    // TODO ResourceLoader::Instance().ReleaseResource(sprite_.texture());
   }
 }
 

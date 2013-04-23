@@ -44,25 +44,25 @@ Paddle::Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size,
   if (player_id == kPlayerId1) {
     switch (size) {
       case kPaddleSizeSmall:
-        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_small"));
+        sprite_.set_texture(game_engine->resource_loader().TextureWithName("paddle_1_small"));
         break;
       case kPaddleSizeMedium:
-        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_medium"));
+        sprite_.set_texture(game_engine->resource_loader().TextureWithName("paddle_1_medium"));
         break;
       case kPaddleSizeLarge:
-        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_1_large"));
+        sprite_.set_texture(game_engine->resource_loader().TextureWithName("paddle_1_large"));
         break;
     }
   } else {
     switch (size) {
       case kPaddleSizeSmall:
-        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_small"));
+        sprite_.set_texture(game_engine->resource_loader().TextureWithName("paddle_2_small"));
         break;
       case kPaddleSizeMedium:
-        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_medium"));
+        sprite_.set_texture(game_engine->resource_loader().TextureWithName("paddle_2_medium"));
         break;
       case kPaddleSizeLarge:
-        sprite_.set_texture(ResourceLoader::Instance().TextureWithName("paddle_2_large"));
+        sprite_.set_texture(game_engine->resource_loader().TextureWithName("paddle_2_large"));
         break;
     }
   }
