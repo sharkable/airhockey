@@ -1,3 +1,0 @@
-[submodule "gameengine"]
-	path = gameengine
-	url = git@github.com:sharkable/gameengine.git
