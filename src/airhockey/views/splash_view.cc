@@ -8,9 +8,9 @@
 
 #include "airhockey/views/splash_view.h"
 
+#include "gameengine/modules/sound_player.h"
 #include "gameengine/engine_view.h"
 #include "gameengine/game_engine.h"
-#include "soundengine/sound_player.h"
 
 #include "airhockey/views/main_menu_view.h"
 

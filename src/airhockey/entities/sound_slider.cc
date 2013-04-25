@@ -8,10 +8,10 @@
 
 #include "airhockey/entities/sound_slider.h"
 
+#include "gameengine/modules/local_store.h"
+#include "gameengine/modules/sound_player.h"
 #include "gameengine/game_engine.h"
-#include "gameengine/local_store.h"
 #include "gameengine/touch.h"
-#include "soundengine/sound_player.h"
 
 using std::string;
 using std::vector;

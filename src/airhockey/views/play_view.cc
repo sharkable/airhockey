@@ -9,12 +9,12 @@
 #include "airhockey/views/play_view.h"
 
 #include "gameengine/entities/simple_item.h"
-#include "gameengine/ad_engine.h"
-#include "gameengine/analytics_engine.h"
+#include "gameengine/modules/ad_engine.h"
+#include "gameengine/modules/analytics_engine.h"
+#include "gameengine/modules/local_store.h"
+#include "gameengine/modules/sound_player.h"
 #include "gameengine/game_engine.h"
-#include "gameengine/local_store.h"
 #include "gameengine/resource_loader.h"
-#include "soundengine/sound_player.h"
 
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"

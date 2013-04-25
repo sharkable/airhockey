@@ -9,10 +9,10 @@
 #include "airhockey/views/story_view.h"
 
 #include "gameengine/entities/simple_item.h"
+#include "gameengine/modules/sound_player.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/sprite.h"
-#include "soundengine/sound_player.h"
 
 using std::vector;
 

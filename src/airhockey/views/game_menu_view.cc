@@ -9,7 +9,7 @@
 #include "airhockey/views/game_menu_view.h"
 
 #include "gameengine/entities/simple_item.h"
-#include "gameengine/ad_engine.h"
+#include "gameengine/modules/ad_engine.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/sprite.h"
 

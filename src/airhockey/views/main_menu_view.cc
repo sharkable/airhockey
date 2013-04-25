@@ -12,12 +12,12 @@
 
 #include "gameengine/entities/multi_select.h"
 #include "gameengine/entities/simple_item.h"
-#include "gameengine/ad_engine.h"
-#include "gameengine/analytics_engine.h"
-#include "gameengine/app_store_engine.h"
+#include "gameengine/modules/ad_engine.h"
+#include "gameengine/modules/analytics_engine.h"
+#include "gameengine/modules/app_store_engine.h"
+#include "gameengine/modules/local_store.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
-#include "gameengine/local_store.h"
 #include "gameengine/sprite.h"
 
 #include "airhockey/entities/sound_slider.h"
