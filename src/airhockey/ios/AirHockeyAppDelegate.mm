@@ -12,8 +12,8 @@
 #import "gameengine/ios/GameEngineFactoryIOS.h"
 #import "gameengine/ios/TypeUtil.h"
 #import "gameengine/ios/ViewController.h"
+#import "gameengine/modules/sound_player.h"
 #import "gameengine/game_engine.h"
-#import "soundengine/sound_player.h"
 
 #import "airhockey/views/rink_view.h"
 #import "airhockey/views/splash_view.h"
