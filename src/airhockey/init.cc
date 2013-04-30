@@ -13,14 +13,25 @@
 #include "airhockey/views/splash_view.h"
 
 void sharkengine_init(sp<GameEngine> game_engine) {
-  game_engine->load_positions(
-      *game_engine->factory()->createAssetReader("assets/positions/game_menu_iphone.xml"));
-  game_engine->load_positions(
-      *game_engine->factory()->createAssetReader("assets/positions/main_menu_iphone.xml"));
-  game_engine->load_positions(
-      *game_engine->factory()->createAssetReader("assets/positions/play_iphone.xml"));
-  game_engine->load_positions(
-      *game_engine->factory()->createAssetReader("assets/positions/rink_iphone.xml"));
+  if (game_engine->platform_type() == kPlatformTypePhone) {
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/game_menu_iphone.xml"));
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/main_menu_iphone.xml"));
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/play_iphone.xml"));
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/rink_iphone.xml"));
+  } else {
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/game_menu.xml"));
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/main_menu.xml"));
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/play.xml"));
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/rink.xml"));
+  }
 
   sp<EngineView> root_view = sp<EngineView>(new RinkView(game_engine));
   game_engine->SetRootView(root_view);
