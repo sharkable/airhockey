@@ -33,6 +33,9 @@ void sharkengine_init(sp<GameEngine> game_engine) {
         *game_engine->factory()->createAssetReader("assets/positions/rink.xml"));
   }
 
+  int game_height = 768 * game_engine->screen_size().height / game_engine->screen_size().width;
+  game_engine->SetGameSize(game_size_make(768, game_height));
+
   sp<EngineView> root_view = sp<EngineView>(new RinkView(game_engine));
   game_engine->SetRootView(root_view);
 

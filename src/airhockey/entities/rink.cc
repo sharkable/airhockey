@@ -10,6 +10,10 @@
 
 #include "airhockey/entities/round_thing.h"
 
+Rink::Rink(GameSize size) {
+  size_ = size;
+}
+
 void Rink::BounceOff(RoundThing *thing) {
   if (thing->is_grabbed() || !thing->IsMovable()) {
     return;

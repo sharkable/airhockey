@@ -20,18 +20,16 @@
 using std::vector;
 
 static const double kPaddleRadii[] = {40, 65, 92.5};
-static const int kPaddle2X = Rink::CenterX();
-static const int kPaddle2Y = 130;
-static const int kPaddle1X = kPaddle2X;
-static const int kPaddle1Y = (Rink::TotalHeight() - kPaddle2Y - 1);
+static const double kPaddleY = 130;
 static const double kPaddleMass = 100;
 static const double kPaddleFriction = 0.1;
 static const double kPaddleAIFriction = 0.999;
 static const int kPaddleAIInitialPauseTicks = 30;
 
-Paddle::Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size,
+Paddle::Paddle(sp<GameEngine> game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
                bool player_controlled, ComputerAI ai_level, vector<sp<Puck> > &pucks)
     : RoundThing(game_engine),
+      rink_(rink),
       player_id_(player_id),
       player_controlled_(player_controlled),
       ready_to_play_(true),
@@ -72,49 +70,39 @@ Paddle::Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size,
   friction_ = player_controlled_ ? kPaddleFriction : kPaddleAIFriction;
 }
 
-void Paddle::SetInitialPositionForPlayer(PlayerId playerId) {
-  switch (player_id_) {
-    case kPlayerId1: {
-      x_ = kPaddle1X;
-      y_ = kPaddle1Y;
-      break;
-    }
-    case kPlayerId2: {
-      x_ = kPaddle2X;
-      y_ = kPaddle2Y;
-      break;
-    }
-  }
+void Paddle::SetInitialPosition() {
+  x_ = StartingX();
+  y_ = StartingY();
 }
 
 void Paddle::KeepInPlayerBounds() {
   switch (player_id_) {
     case kPlayerId1: {
-      if (y_ + radius_ > Rink::BottomY()) {
-        y_ = Rink::BottomY() - radius_;
+      if (y_ + radius_ > rink_.BottomY()) {
+        y_ = rink_.BottomY() - radius_;
         vy_ = 0;
-      } else if (y_ - radius_ < Rink::CenterY() + 1) {
-        y_ = Rink::CenterY() + 1 + radius_;
+      } else if (y_ - radius_ < rink_.CenterY() + 1) {
+        y_ = rink_.CenterY() + 1 + radius_;
         vy_ = 0;
       }
       break;
     }
     case kPlayerId2: {
-      if (y_ - radius_ < Rink::TopY()) {
-        y_ = Rink::TopY() + radius_;
+      if (y_ - radius_ < rink_.TopY()) {
+        y_ = rink_.TopY() + radius_;
         vy_ = 0;
-      } else if (y_ + radius_ > Rink::CenterY() - 1) {
-        y_ = Rink::CenterY() - 1 - radius_;
+      } else if (y_ + radius_ > rink_.CenterY() - 1) {
+        y_ = rink_.CenterY() - 1 - radius_;
         vy_ = 0;
       }
       break;
     }
   }
-  if (x_ - radius_ < Rink::LeftX()) {
-    x_ = Rink::LeftX() + radius_;
+  if (x_ - radius_ < rink_.LeftX()) {
+    x_ = rink_.LeftX() + radius_;
     vx_ = 0;
-  } else if (x_ + radius_ > Rink::RightX()) {
-    x_ = Rink::RightX() - radius_;
+  } else if (x_ + radius_ > rink_.RightX()) {
+    x_ = rink_.RightX() - radius_;
     vx_ = 0;
   }
 }
@@ -159,17 +147,17 @@ void Paddle::DidBounceOff(ViewEntity *other, double total_velocity) {
 
 bool Paddle::ContainsTouch(Touch *touch) {
   GamePoint p = touch->location();
-  if (p.x < 0 || p.x >= Rink::TotalWidth()) {
+  if (p.x < 0 || p.x >= rink_.TotalWidth()) {
     return false;
   }
   switch (player_id_) {
     case kPlayerId1:
-      return p.y >= Rink::CenterY() && p.y < Rink::BottomY() && p.x >= Rink::LeftX() &&
-          p.x < Rink::RightX();
+      return p.y >= rink_.CenterY() && p.y < rink_.BottomY() && p.x >= rink_.LeftX() &&
+          p.x < rink_.RightX();
       break;
     case kPlayerId2:
-      return p.y < Rink::CenterY() && p.y >= Rink::TopY() && p.x >= Rink::LeftX() &&
-          p.x < Rink::RightX();
+      return p.y < rink_.CenterY() && p.y >= rink_.TopY() && p.x >= rink_.LeftX() &&
+          p.x < rink_.RightX();
       break;
   }
   return false;
@@ -219,7 +207,7 @@ void Paddle::RunAITick() {
     if (puck->vy() < 0) {
       timeToReach = fabs((y_ - puck->y()) / puck->vy());
     }
-    if (puck->y() - puck->radius() > Rink::CenterY()) {
+    if (puck->y() - puck->radius() > rink_.CenterY()) {
       continue;
     }
     if (target == NULL || timeToReach < bestTime ||
@@ -236,9 +224,9 @@ void Paddle::RunAITick() {
   double targetX;
   double targetY;
 
-  if (!target_away_from_corner_ && target && target->y() <= Rink::TopY() + radius_ &&
+  if (!target_away_from_corner_ && target && target->y() <= rink_.TopY() + radius_ &&
       fabs(target->vx()) < 5 && fabs(target->vy()) < 5) {
-    if (target->x() < Rink::CenterX()) {
+    if (target->x() < rink_.CenterX()) {
       target_left_corner_ = true;
     } else {
       target_right_corner_ = true;
@@ -246,23 +234,23 @@ void Paddle::RunAITick() {
   }
 
   if (target_left_corner_) {
-    targetX = Rink::LeftX() + radius_;
-    targetY = Rink::TopY() + radius_;
+    targetX = rink_.LeftX() + radius_;
+    targetY = rink_.TopY() + radius_;
     if (Overlaps(target)) {
       target_left_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_right_corner_) {
-    targetX = Rink::RightX() - radius_;
-    targetY = Rink::TopY() + radius_;
+    targetX = rink_.RightX() - radius_;
+    targetY = rink_.TopY() + radius_;
     if (Overlaps(target)) {
       target_right_corner_ = false;
       target_away_from_corner_ = true;
     }
   } else if (target_away_from_corner_) {
-    targetX = Rink::CenterX();
-    targetY = Rink::TopY() + radius_;
-    if (x_ >= Rink::CenterX() - 5 && x_ <= Rink::CenterX() + 5) {
+    targetX = rink_.CenterX();
+    targetY = rink_.TopY() + radius_;
+    if (x_ >= rink_.CenterX() - 5 && x_ <= rink_.CenterX() + 5) {
       target_away_from_corner_ = false;
     }
   } else if (target) {
@@ -278,10 +266,10 @@ void Paddle::RunAITick() {
       }
     }
   } else if (ai_level_ >= kComputerAIExcellent) {
-    targetX = kPaddle2X;
-    targetY = kPaddle2Y;
+    targetX = StartingX();
+    targetY = StartingY();
   } else if (ai_level_ == kComputerAIGood) {
-    targetX = kPaddle2X;
+    targetX = StartingX();
     targetY = y_;
   } else {
     targetX = x_;
@@ -311,5 +299,18 @@ void Paddle::RunAITick() {
     double ny = dy / dL;
     vx_ += speed * nx;
     vy_ += speed * ny;
+  }
+}
+
+double Paddle::StartingX() {
+  return rink_.CenterX();
+}
+
+double Paddle::StartingY() {
+  switch (player_id_) {
+    case kPlayerId1:
+      return rink_.TotalHeight() - kPaddleY - 1;
+    case kPlayerId2:
+      return kPaddleY;
   }
 }

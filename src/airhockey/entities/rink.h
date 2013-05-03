@@ -9,23 +9,26 @@
 #ifndef AIRHOCKEY_ENTITIES_RINK_H_
 #define AIRHOCKEY_ENTITIES_RINK_H_
 
+#include "gameengine/coordinate_types.h"
 #include "gameengine/view_entity.h"
 
 class RoundThing;
 
 class Rink : public ViewEntity {
  public:
-  static int EdgeWidth() { return 23; }
-  static int TotalWidth() { return 768; }
-  static int TotalHeight() { return 1024; }
-  static int LeftX() { return EdgeWidth(); }
-  static int CenterX() { return TotalWidth() / 2; }
-  static int RightX() { return TotalWidth() - EdgeWidth(); }
-  static int TopY() { return EdgeWidth(); }
-  static int CenterY() { return TotalHeight() / 2; }
-  static int BottomY() { return TotalHeight() - EdgeWidth(); }
-  static int GoalLeftX() { return 200; }
-  static int GoalRightX() { return 568; }
+  Rink(GameSize size);
+
+  double EdgeWidth() { return 23; }
+  double TotalWidth() { return size_.width; }
+  double TotalHeight() { return size_.height; }
+  double LeftX() { return EdgeWidth(); }
+  double CenterX() { return TotalWidth() / 2; }
+  double RightX() { return TotalWidth() - EdgeWidth(); }
+  double TopY() { return EdgeWidth(); }
+  double CenterY() { return TotalHeight() / 2; }
+  double BottomY() { return TotalHeight() - EdgeWidth(); }
+  double GoalLeftX() { return 200; }
+  double GoalRightX() { return 568; }
 
   void BounceOff(RoundThing *thing);
   void MoveInFromEdge(RoundThing *thing);
@@ -33,6 +36,9 @@ class Rink : public ViewEntity {
   // ViewEntity
   void Update();
   void Render();
+
+ private:
+  GameSize size_;
 };
 
 #endif

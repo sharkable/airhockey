@@ -38,17 +38,18 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
     : EngineView(game_engine) {
   num_players_ = num_players;
 
-  paddle_1_.reset(new Paddle(game_engine, kPlayerId1, paddle_size, true, kComputerAIBad, pucks_));
-  paddle_2_.reset(new Paddle(game_engine, kPlayerId2, paddle_size, num_players == 2, difficulty,
-                             pucks_));
-
-  post_1_.reset(new Post(game_engine, Rink::GoalLeftX(), Rink::TopY()));
-  post_2_.reset(new Post(game_engine, Rink::GoalLeftX(), Rink::BottomY() + 1));
-  post_3_.reset(new Post(game_engine, Rink::GoalRightX() + 1, Rink::TopY()));
-  post_4_.reset(new Post(game_engine, Rink::GoalRightX() + 1, Rink::BottomY() + 1));
-
-  rink_.reset(new Rink());
+  rink_.reset(new Rink(game_engine->game_size()));
   AddEntity(rink_);
+
+  paddle_1_.reset(new Paddle(game_engine, *rink_, kPlayerId1, paddle_size, true, kComputerAIBad,
+                             pucks_));
+  paddle_2_.reset(new Paddle(game_engine, *rink_, kPlayerId2, paddle_size, num_players == 2,
+                             difficulty, pucks_));
+
+  post_1_.reset(new Post(game_engine, rink_->GoalLeftX(), rink_->TopY()));
+  post_2_.reset(new Post(game_engine, rink_->GoalLeftX(), rink_->BottomY() + 1));
+  post_3_.reset(new Post(game_engine, rink_->GoalRightX() + 1, rink_->TopY()));
+  post_4_.reset(new Post(game_engine, rink_->GoalRightX() + 1, rink_->BottomY() + 1));
 
   vector<Sprite> scoreSprites;
   for (int i = 0; i <= kWinScore; i++) {
@@ -72,7 +73,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
   num_pucks_ = num_pucks;
   num_active_pucks_ = num_pucks_;
   for (int i = 0; i < num_pucks_; i++) {
-    pucks_.push_back(sp<Puck>(new Puck(game_engine)));
+    pucks_.push_back(sp<Puck>(new Puck(game_engine, *rink_)));
     AddEntity(pucks_[i]);
     round_things_.push_back(pucks_[i]);
   }
@@ -123,22 +124,31 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
   go_->add_sprite(go_sprite);
   go_->set_position(go_position);
 
+  string rink_left_name;
+  string rink_right_name;
+  if (game_engine->platform_type() == kPlatformTypePhone) {
+    rink_left_name = "rink_left_2_3";
+    rink_right_name = "rink_right_2_3";
+  } else {
+    rink_left_name = "rink_left_3_4";
+    rink_right_name = "rink_right_3_4";
+  }
   // Add rink left and right pieces.
-  Sprite left_rink_border_sprite(game_engine, "rink_left");
+  Sprite left_rink_border_sprite(game_engine, rink_left_name);
   SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite,
-                                                game_engine->position("rink_left"));
+                                                game_engine->position(rink_left_name));
   AddEntity(left_rink_border);
-  Sprite right_rink_border_sprite(game_engine, "rink_right");
+  Sprite right_rink_border_sprite(game_engine, rink_right_name);
   SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite,
-                                                 game_engine->position("rink_right"));
+                                                 game_engine->position(rink_right_name));
   AddEntity(right_rink_border);
 
   Sprite pause_button_sprite(game_engine, "pause_button");
   Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
   GamePoint pause_button_pos_1 =
-      game_point_make(Rink::TotalWidth() - pause_button_sprite.content_size().width,
-                      Rink::TotalHeight() - pause_button_sprite.content_size().height);
+      game_point_make(rink_->TotalWidth() - pause_button_sprite.content_size().width,
+                      rink_->TotalHeight() - pause_button_sprite.content_size().height);
   pause_button_1_.reset(new Button());
   pause_button_1_->set_normal_sprite(pause_button_sprite);
   pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
@@ -244,7 +254,7 @@ void PlayView::Update() {
     if (puck->y() < -puck->radius()) {
       // TODO make this less shitty.
       puck->set_active(false);
-      float position = (puck->x() / Rink::TotalWidth() - 0.5) * 2;
+      float position = (puck->x() / rink_->TotalWidth() - 0.5) * 2;
       if (player_1_score_->sprite() < kWinScore && state_ == kPlayViewStatePlaying) {
         player_1_score_->set_sprite(player_1_score_->sprite() + 1);
       }
@@ -257,9 +267,9 @@ void PlayView::Update() {
       }
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
-    } else if (puck->y() > Rink::TotalHeight() + puck->radius()) {
+    } else if (puck->y() > rink_->TotalHeight() + puck->radius()) {
       puck->set_active(false);
-      float position = (puck->x() / Rink::TotalWidth() - 0.5) * 2;
+      float position = (puck->x() / rink_->TotalWidth() - 0.5) * 2;
       if (player_2_score_->sprite() < kWinScore && state_ == kPlayViewStatePlaying) {
         player_2_score_->set_sprite(player_2_score_->sprite() + 1);
       }
@@ -354,8 +364,8 @@ void PlayView::ContinuePressed() {
 
 void PlayView::SetUpNewGame() {
   // Place paddles!
-  paddle_1_->SetInitialPositionForPlayer(kPlayerId1);
-  paddle_2_->SetInitialPositionForPlayer(kPlayerId2);
+  paddle_1_->SetInitialPosition();
+  paddle_2_->SetInitialPosition();
   paddle_1_->SetReadyToPlay(false);
   paddle_2_->SetReadyToPlay(false);
 
@@ -406,10 +416,10 @@ void PlayView::SetUpNewGame() {
 void PlayView::FinishGameWithWinner(PlayerId playerId) {
   state_ = kPlayViewStateFinished;
 
-  double loseX = (Rink::TotalWidth() - lose_->size().width)/2;
-  double winX =  (Rink::TotalWidth() - win_->size().width)/2;
+  double loseX = (rink_->TotalWidth() - lose_->size().width)/2;
+  double winX =  (rink_->TotalWidth() - win_->size().width)/2;
   double topY = 70;
-  double bottomY = Rink::TotalHeight() - topY - lose_->size().height;
+  double bottomY = rink_->TotalHeight() - topY - lose_->size().height;
   switch (playerId) {
     case kPlayerId1: {
       player_1_win_count_++;

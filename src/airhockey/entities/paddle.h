@@ -10,6 +10,7 @@
 #define AIRHOCKEY_ENTITIES_PADDLE_H_
 
 #include "airhockey/entities/round_thing.h"
+#include "airhockey/entities/rink.h"
 
 class Puck;
 
@@ -35,10 +36,10 @@ typedef enum {
 
 class Paddle : public RoundThing {
  public:
-  Paddle(sp<GameEngine> game_engine, PlayerId player_id, PaddleSize size, bool player_controlled,
-         ComputerAI ai_level, std::vector<sp<Puck> > &pucks);
+  Paddle(sp<GameEngine> game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
+         bool player_controlled, ComputerAI ai_level, std::vector<sp<Puck> > &pucks);
 
-  void SetInitialPositionForPlayer(PlayerId player_id);
+  void SetInitialPosition();
   void KeepInPlayerBounds();
   void SetReadyToPlay(bool ready);
   
@@ -57,7 +58,10 @@ class Paddle : public RoundThing {
 
  private:
   void RunAITick();
+  double StartingX();
+  double StartingY();
 
+  Rink &rink_;
   PlayerId player_id_;
   bool player_controlled_;
   bool ready_to_play_;

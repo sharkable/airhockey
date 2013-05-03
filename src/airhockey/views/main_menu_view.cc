@@ -192,10 +192,8 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 // EngineView
 
 void MainMenuView::ViewIsShown() {
-  if (game_engine()->platform_type() == kPlatformTypePhone) {
-     game_engine()->ad_engine()->SetAdAtPoint(kScreenPointZero);
-  } else {
-     game_engine()->ad_engine()->SetAdAtPoint(screen_point_make(45, 40));
+  if (game_engine()->platform_type() == kPlatformTypeTablet) {
+    game_engine()->ad_engine()->SetAdAtPoint(screen_point_make(45, 40));
   }
 
   // Force the popup for rating and upgrading just once.
