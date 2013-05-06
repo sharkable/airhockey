@@ -9,6 +9,7 @@
 #ifndef AIRHOCKEY_VIEWS_RINKVIEW_H_
 #define AIRHOCKEY_VIEWS_RINKVIEW_H_
 
+#include "gameengine/coordinate_types.h"
 #include "gameengine/engine_view.h"
 
 class GameEngine;
@@ -16,6 +17,8 @@ class GameEngine;
 class RinkView : public EngineView {
  public:
   RinkView(sp<GameEngine> game_engine);
+
+  static GameSize RinkSizeForScreenSize(ScreenSize screen_size);
 };
 
 #endif

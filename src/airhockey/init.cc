@@ -6,6 +6,7 @@
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 
+#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/game_engine_factory.h"
 
@@ -33,8 +34,13 @@ void sharkengine_init(sp<GameEngine> game_engine) {
         *game_engine->factory()->createAssetReader("assets/positions/rink.xml"));
   }
 
-  int game_height = 768 * game_engine->screen_size().height / game_engine->screen_size().width;
-  game_engine->SetGameSize(game_size_make(768, game_height));
+  ScreenSize screen_size = game_engine->screen_size();
+  GameSize game_size = RinkView::RinkSizeForScreenSize(screen_size);
+
+  game_engine->set_screen_to_game_point_ratio(screen_size.width / game_size.width);
+  double y_offset =
+      (screen_size.height - game_engine->game_size_to_screen_size(game_size).height) / 2;
+  game_engine->set_screen_offset(screen_point_make(0, y_offset));
 
   sp<EngineView> root_view = sp<EngineView>(new RinkView(game_engine));
   game_engine->SetRootView(root_view);

@@ -20,7 +20,7 @@ StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   Sprite story_image = Sprite(game_engine, "story");
   Sprite about_image = Sprite(game_engine, "about");
 
-  GameSize game_size = game_engine->game_size();
+  GameSize game_size = game_engine->screen_size_to_game_size(game_engine->screen_size());
   GameSize image_size = story_image.content_size();
   GamePoint image_position = game_point_make((game_size.width - image_size.width) / 2,
                                              (game_size.height - image_size.height) / 2);

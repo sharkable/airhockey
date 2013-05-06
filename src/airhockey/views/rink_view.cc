@@ -23,6 +23,19 @@ RinkView::RinkView(sp<GameEngine> game_engine) : EngineView(game_engine) {
     rink_bg_name = "rink_bg_3_4";
   }
   Sprite background_sprite(game_engine, rink_bg_name);
-  SimpleItem *background = new SimpleItem(background_sprite, game_engine->position(rink_bg_name));
+  GameSize image_size = background_sprite.content_size();
+  GameSize rink_size = RinkSizeForScreenSize(game_engine->screen_size());
+  GamePoint rink_point = game_point_make((rink_size.width - image_size.width) / 2,
+                                         (rink_size.height - image_size.height) / 2);
+  SimpleItem *background = new SimpleItem(background_sprite, rink_point);
   AddEntity(sp<SimpleItem>(background));
+}
+
+GameSize RinkView::RinkSizeForScreenSize(ScreenSize screen_size) {
+  double screen_ratio = screen_size.width / screen_size.height;
+  if (screen_ratio <= 2.0 / 3.0) {
+    return game_size_make(768, 1152);
+  } else {
+    return game_size_make(768, 1024);
+  }
 }
