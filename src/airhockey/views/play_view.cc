@@ -151,9 +151,11 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
   Sprite pause_button_sprite(game_engine, "pause_button");
   Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
+  GameSize game_size = game_engine->screen_size_to_game_size(game_engine->screen_size());
+  double y_margin = (game_size.height - rink_->TotalHeight()) / 2;
   GamePoint pause_button_pos_1 =
-      game_point_make(rink_->TotalWidth() - pause_button_sprite.content_size().width,
-                      rink_->TotalHeight() - pause_button_sprite.content_size().height);
+      game_point_make(game_size.width - pause_button_sprite.content_size().width,
+                      game_size.height - pause_button_sprite.content_size().height - y_margin);
   pause_button_1_.reset(new Button());
   pause_button_1_->set_normal_sprite(pause_button_sprite);
   pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
@@ -166,7 +168,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
     Sprite pause_button_sprite_2(game_engine, "pause_button");
     Sprite pause_button_pressed_sprite_2(game_engine, "pause_button_pressed");
 
-    GamePoint pause_button_pos_2 = game_point_make(0, 0);
+    GamePoint pause_button_pos_2 = game_point_make(0, -y_margin);
     pause_button_2_.reset(new Button());
     pause_button_2_->set_normal_sprite(pause_button_sprite_2);
     pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite_2);
