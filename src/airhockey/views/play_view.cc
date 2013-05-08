@@ -112,19 +112,19 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
   lose_->set_position(game_point_make(0, 0));
 
   Sprite get_ready_sprite(game_engine, "get_ready");
-  GameSize screen_size = game_engine->screen_size_to_game_size(game_engine->screen_size());
+  GameSize rink_size = game_size_make(rink_->TotalWidth(), rink_->TotalHeight());
   GameSize get_ready_size = get_ready_sprite.content_size();
   GamePoint get_ready_position =
-      game_point_make(floorf((screen_size.width - get_ready_size.width) / 2),
-                      floorf((screen_size.height - get_ready_size.height) / 2));
+      game_point_make(floorf((rink_size.width - get_ready_size.width) / 2),
+                      floorf((rink_size.height - get_ready_size.height) / 2));
   get_ready_.reset(new SimpleItem());
   get_ready_->add_sprite(get_ready_sprite);
   get_ready_->set_position(get_ready_position);
 
   Sprite go_sprite(game_engine, "go");
   GameSize go_size = go_sprite.content_size();
-  GamePoint go_position = game_point_make(floorf((screen_size.width - go_size.width) / 2),
-                                          floorf((screen_size.height - go_size.height) / 2));
+  GamePoint go_position = game_point_make(floorf((rink_size.width - go_size.width) / 2),
+                                          floorf((rink_size.height - go_size.height) / 2));
   go_.reset(new SimpleItem());
   go_->add_sprite(go_sprite);
   go_->set_position(go_position);
