@@ -19,6 +19,7 @@
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/rink.h"
+#include "airhockey/entities/rink_overlay.h"
 #include "airhockey/entities/round_thing.h"
 #include "airhockey/views/main_menu_view.h"
 #include "airhockey/views/rink_view.h"
@@ -39,7 +40,7 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
     : EngineView(game_engine) {
   num_players_ = num_players;
 
-  rink_.reset(new Rink(RinkView::RinkSizeForScreenSize(game_engine->screen_size())));
+  rink_.reset(new Rink(RinkView::RinkSizeForPlatformType(game_engine->platform_type())));
   AddEntity(rink_);
 
   paddle_1_.reset(new Paddle(game_engine, *rink_, kPlayerId1, paddle_size, true, kComputerAIBad,
@@ -97,6 +98,9 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
   AddEntity(post_4_);
   round_things_.push_back(post_4_);
 
+  RinkOverlay *rink_overlay = new RinkOverlay(game_engine);
+  AddEntity(rink_overlay);
+
   Sprite winSprite(game_engine, "win");
   win_.reset(new SimpleItem());
   win_->add_sprite(winSprite);
@@ -124,29 +128,6 @@ PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
   go_.reset(new SimpleItem());
   go_->add_sprite(go_sprite);
   go_->set_position(go_position);
-
-  string rink_left_name;
-  string rink_right_name;
-  if (game_engine->platform_type() == kPlatformTypePhone) {
-    rink_left_name = "rink_left_2_3";
-    rink_right_name = "rink_right_2_3";
-  } else {
-    rink_left_name = "rink_left_3_4";
-    rink_right_name = "rink_right_3_4";
-  }
-  // Add rink left and right pieces.
-  Sprite left_rink_border_sprite(game_engine, rink_left_name);
-  // TODO fix this! The position is wrong from the PSD because of the negative space. :/ Think
-  // about it!
-  GamePoint left_rink_position = game_engine->position(rink_left_name);
-  left_rink_position.y = 0;
-  SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite, left_rink_position);
-  AddEntity(left_rink_border);
-  GamePoint right_rink_position = game_engine->position(rink_right_name);
-  right_rink_position.y = 0;
-  Sprite right_rink_border_sprite(game_engine, rink_right_name);
-  SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite, right_rink_position);
-  AddEntity(right_rink_border);
 
   Sprite pause_button_sprite(game_engine, "pause_button");
   Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");

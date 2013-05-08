@@ -11,6 +11,7 @@
 
 #include "gameengine/coordinate_types.h"
 #include "gameengine/engine_view.h"
+#include "gameengine/game_engine.h"
 
 class GameEngine;
 
@@ -18,7 +19,7 @@ class RinkView : public EngineView {
  public:
   RinkView(sp<GameEngine> game_engine);
 
-  static GameSize RinkSizeForScreenSize(ScreenSize screen_size);
+  static GameSize RinkSizeForPlatformType(PlatformType platform_type);
 };
 
 #endif

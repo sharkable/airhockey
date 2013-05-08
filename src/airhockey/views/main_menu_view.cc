@@ -20,6 +20,7 @@
 #include "gameengine/game_engine.h"
 #include "gameengine/sprite.h"
 
+#include "airhockey/entities/rink_overlay.h"
 #include "airhockey/entities/sound_slider.h"
 #include "airhockey/views/play_view.h"
 #include "airhockey/views/story_view.h"
@@ -28,6 +29,7 @@ using std::map;
 using std::string;
 
 static const int kMaxNumPucks = 7;
+static const int kAnimateOutTicks = 15;
 
 // Local Store keys
 static const string kLocalStoreNumPlayers = "ls_num_players";
@@ -55,6 +57,9 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
 
   state_ = kMainMenuStateRunning;
+
+  rink_overlay_.reset(new RinkOverlay(game_engine));
+  AddEntity(rink_overlay_);
 
   Sprite title_sprite(game_engine, "title");
   title_.reset(new SimpleItem(title_sprite, game_engine->position("title")));
@@ -210,6 +215,10 @@ void MainMenuView::Update() {
   EngineView::Update();
   if (state_ == kMainMenuStateAnimatingOut) {
     animating_out_ticks_left_--;
+    // TODO This sometimes causes a brief overlap with the overlap in PlayView.
+    if (animating_out_ticks_left_ == kAnimateOutTicks) {
+      RemoveEntity(rink_overlay_);
+    }
     if (animating_out_ticks_left_ <= 0) {
       game_engine()->RemoveView(this);
     }
@@ -249,7 +258,7 @@ void MainMenuView::AnimateOut() {
   fade_out(paddle_size_select_.get());
   RemoveEntity(sound_slider_);
 
-  animating_out_ticks_left_ = 15;
+  animating_out_ticks_left_ = kAnimateOutTicks;
 }
 
 void MainMenuView::PressedStart() {

@@ -35,7 +35,7 @@ void sharkengine_init(sp<GameEngine> game_engine) {
   }
 
   ScreenSize screen_size = game_engine->screen_size();
-  GameSize game_size = RinkView::RinkSizeForScreenSize(screen_size);
+  GameSize game_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());
 
   game_engine->set_screen_to_game_point_ratio(screen_size.width / game_size.width);
   double y_offset =

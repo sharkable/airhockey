@@ -13,6 +13,7 @@
 #include "gameengine/entities/button.h"
 
 class MultiSelect;
+class RinkOverlay;
 class SimpleItem;
 class SoundSlider;
 
@@ -39,6 +40,7 @@ class MainMenuView : public EngineView, private ButtonDelegate {
   void PressedRate();
   void PressedUpgrade();
 
+  sp<RinkOverlay> rink_overlay_;
   sp<SimpleItem> title_;
   sp<SimpleItem> main_menu_;
   sp<Button> start_button_;
