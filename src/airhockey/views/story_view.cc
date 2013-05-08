@@ -14,17 +14,19 @@
 #include "gameengine/game_engine.h"
 #include "gameengine/sprite.h"
 
+#include "airhockey/views/rink_view.h"
+
 using std::vector;
 
 StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   Sprite story_image = Sprite(game_engine, "story");
   Sprite about_image = Sprite(game_engine, "about");
 
-  GameSize game_size = game_engine->screen_size_to_game_size(game_engine->screen_size());
+  GameSize rink_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());
   GameSize image_size = story_image.content_size();
-  GamePoint image_position = game_point_make((game_size.width - image_size.width) / 2,
-                                             (game_size.height - image_size.height) / 2);
-  double zoom = game_size.width / image_size.width;
+  GamePoint image_position = game_point_make((rink_size.width - image_size.width) / 2,
+                                             (rink_size.height - image_size.height) / 2);
+  double zoom = rink_size.width / image_size.width;
 
   story_.reset(new SimpleItem());
   story_->add_sprite(story_image);
