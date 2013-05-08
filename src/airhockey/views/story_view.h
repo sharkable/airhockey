@@ -9,20 +9,30 @@
 #ifndef AIRHOCKEY_VIEWS_STORYVIEW_H_
 #define AIRHOCKEY_VIEWS_STORYVIEW_H_
 
+#include <vector>
+
+#include "gameengine/entities/animatable.h"
+#include "gameengine/coordinate_types.h"
 #include "gameengine/engine_view.h"
 
 class SimpleItem;
 
-class StoryView : public EngineView {
+class StoryView : public EngineView, public AnimatableDelegate {
  public:
   StoryView(sp<GameEngine> game_engine);
 
   // EngineView
   void TouchesBegan(std::vector<Touch> touches);
 
+  // AnimatableDelegate
+  void AnimationFinished(Animatable *animatable);
+
  private:
   sp<SimpleItem> story_;
   sp<SimpleItem> about_;
+  GamePoint starting_image_position_;
+  GamePoint resting_image_position_;
+  GamePoint ending_image_position_;
 };
 
 #endif
