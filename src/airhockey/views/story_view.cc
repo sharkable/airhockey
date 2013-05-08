@@ -53,6 +53,10 @@ StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
 
 // EngineView
 
+bool StoryView::IsCapturingTouches() {
+  return about_->position().x >= resting_image_position_.x;
+}
+
 void StoryView::TouchesBegan(vector<Touch> touches) {
   if (about_->position().x == starting_image_position_.x) {
     about_->AnimateToPosition(resting_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
@@ -69,6 +73,6 @@ void StoryView::TouchesBegan(vector<Touch> touches) {
 
 void StoryView::AnimationFinished(Animatable *animatable) {
   if (about_->position().x == ending_image_position_.x) {
-    game_engine()->PopView();
+    game_engine()->RemoveView(this);
   }
 }

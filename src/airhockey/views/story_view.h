@@ -22,6 +22,7 @@ class StoryView : public EngineView, public AnimatableDelegate {
   StoryView(sp<GameEngine> game_engine);
 
   // EngineView
+  bool IsCapturingTouches();
   void TouchesBegan(std::vector<Touch> touches);
 
   // AnimatableDelegate
