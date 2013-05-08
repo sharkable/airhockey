@@ -26,14 +26,14 @@ StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
 
   GameSize rink_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());
   GameSize image_size = story_image.content_size();
+  double zoom = rink_size.width / image_size.width;
+
   resting_image_position_ = game_point_make((rink_size.width - image_size.width) / 2,
                                             (rink_size.height - image_size.height) / 2);
   starting_image_position_ = resting_image_position_;
-  starting_image_position_.x += image_size.width;
+  starting_image_position_.x += image_size.width * zoom;
   ending_image_position_ = resting_image_position_;
-  ending_image_position_.x -= image_size.width;
-
-  double zoom = rink_size.width / image_size.width;
+  ending_image_position_.x -= image_size.width * zoom;
 
   story_.reset(new SimpleItem());
   story_->add_sprite(story_image);
