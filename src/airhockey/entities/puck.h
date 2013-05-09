@@ -26,7 +26,7 @@ class Puck : public RoundThing {
 
   // ViewEntity
   void Update();
-  void Render();
+  void Render(GamePoint offset);
 
   // RoundThing
   void DidBounceOff(ViewEntity *other, double total_velocity);

@@ -23,7 +23,7 @@ class Post : public RoundThing {
   bool IsMovable();
 
   // ViewEntity
-  void Render();
+  void Render(GamePoint offset);
 };
 
 #endif

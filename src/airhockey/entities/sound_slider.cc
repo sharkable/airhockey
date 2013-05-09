@@ -59,18 +59,19 @@ GamePoint SoundSlider::ThumbPoint() {
 void SoundSlider::Update() {
 }
 
-void SoundSlider::Render() {
+void SoundSlider::Render(GamePoint offset) {
   double sprite_width = full_sprite_.content_size().width;
   double draw_ratio = (slider_width_ - thumb_sprite_.content_size().width) / sprite_width * value_ +
       (left_marin_ + thumb_sprite_.content_size().width / 2) / sprite_width;
-  full_sprite_.DrawAtPointLeftRatio(position_, draw_ratio);
-  empty_sprite_.DrawAtPointRightRatio(position_, 1 - draw_ratio);
-  thumb_sprite_.DrawAtPoint(ThumbPoint());
+  GamePoint draw_position = position_ + offset;
+  full_sprite_.DrawAtPointLeftRatio(draw_position, draw_ratio);
+  empty_sprite_.DrawAtPointRightRatio(draw_position, 1 - draw_ratio);
+  thumb_sprite_.DrawAtPoint(ThumbPoint() + offset);
 }
 
-bool SoundSlider::TouchesBegan(vector<Touch> touches) {
+bool SoundSlider::TouchesBegan(GamePoint offset, vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
-    GamePoint touchP = touches[i].location();
+    GamePoint touchP = touches[i].location() - offset;
     GamePoint thumbP = ThumbPoint();
     double thumbWidth = thumb_sprite_.content_size().width;
     double thumbHeight = thumb_sprite_.content_size().height;
@@ -86,10 +87,10 @@ bool SoundSlider::TouchesBegan(vector<Touch> touches) {
   return false;
 }
 
-void SoundSlider::TouchesMoved(vector<Touch> touches) {
+void SoundSlider::TouchesMoved(GamePoint offset, vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
-      GamePoint touchP = touches[i].location();
+      GamePoint touchP = touches[i].location() - offset;
       value_ = start_value_ + (touchP.x - start_touch_position_.x) /
           (slider_width_ - thumb_sprite_.content_size().width);
       // Stop moving when we reach the ends. Lock into this value until the user retouches.
@@ -103,7 +104,7 @@ void SoundSlider::TouchesMoved(vector<Touch> touches) {
   }
 }
 
-void SoundSlider::TouchesEnded(vector<Touch> touches) {
+void SoundSlider::TouchesEnded(GamePoint offset, vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       SoundPlayer::instance()->setGlobalVolume(value_);

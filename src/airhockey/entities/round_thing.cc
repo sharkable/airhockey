@@ -155,13 +155,13 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
   }
 }
 
-bool RoundThing::ContainsTouch(Touch *touch) {
-  double dx = touch->location().x - x_;
-  double dy = touch->location().y - y_;
-  return (dx*dx + dy*dy <= radius_*radius_);
+bool RoundThing::ContainsPoint(GamePoint point) {
+  double dx = point.x - x_;
+  double dy = point.y - y_;
+  return (dx * dx + dy * dy <= radius_ * radius_);
 }
 
-bool RoundThing::Overlaps(RoundThing * thing) {
+bool RoundThing::Overlaps(RoundThing *thing) {
   double dx = thing->x() - x_;
   double dy = thing->y() - y_;
   double totalRadius = thing->radius() + radius_;
@@ -195,22 +195,22 @@ void RoundThing::Update() {
   }
 }
 
-void RoundThing::Render() {
+void RoundThing::Render(GamePoint offset) {
   if (active_) {
-    sprite_.DrawAtPoint(game_point_make(x_ - sprite_.content_size().width / 2,
-                                        y_ - sprite_.content_size().height / 2));
+    sprite_.DrawAtPoint(game_point_make(x_ - sprite_.content_size().width / 2 + offset.x,
+                                        y_ - sprite_.content_size().height / 2 + offset.y));
   }
 }
 
-bool RoundThing::TouchesBegan(vector<Touch> touches) {
+bool RoundThing::TouchesBegan(GamePoint offset, vector<Touch> touches) {
   if (!IsGrabbable() || !is_active() || is_grabbed()) {
     return false;
   }
   for (int i = 0; i < touches.size(); i++) {
-    if (ContainsTouch(&touches[i])) {
+    if (ContainsPoint(touches[i].location() - offset)) {
       grabbed_ = true;
       grabbed_touch_ = touches[i].identifier();
-      TouchesMoved(touches);
+      TouchesMoved(offset, touches);
       vx_ = 0;
       vy_ = 0;
       // Set oldX_ and oldY_ here so that the velocity stays around 0.
@@ -225,7 +225,7 @@ bool RoundThing::TouchesBegan(vector<Touch> touches) {
   return false;
 }
 
-void RoundThing::TouchesMoved(vector<Touch> touches) {
+void RoundThing::TouchesMoved(GamePoint offset, vector<Touch> touches) {
   if (!IsMovable()) {
     return;
   }
@@ -237,13 +237,13 @@ void RoundThing::TouchesMoved(vector<Touch> touches) {
     }
   }
   if (grabbed_ && correctTouch != NULL) {
-    GamePoint p = correctTouch->location();
+    GamePoint p = correctTouch->location() - offset;
     x_ = p.x;
     y_ = p.y;
   }
 }
 
-void RoundThing::TouchesEnded(vector<Touch> touches) {
+void RoundThing::TouchesEnded(GamePoint offset, vector<Touch> touches) {
   Touch *correctTouch = NULL;
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {

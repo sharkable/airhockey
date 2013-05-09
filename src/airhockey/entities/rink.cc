@@ -124,5 +124,5 @@ void Rink::MoveInFromEdge(RoundThing *thing) {
 void Rink::Update() {
 }
 
-void Rink::Render() {
+void Rink::Render(GamePoint offset) {
 }

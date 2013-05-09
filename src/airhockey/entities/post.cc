@@ -38,5 +38,5 @@ bool Post::IsMovable() {
 
 // ViewEntity
 
-void Post::Render() {
+void Post::Render(GamePoint offset) {
 }

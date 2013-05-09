@@ -130,9 +130,9 @@ void Paddle::Update() {
   RoundThing::Update();
 }
 
-void Paddle::Render() {
-  sprite_.Draw(game_point_make(x_ - sprite_.content_size().width/2,
-                               y_ - sprite_.content_size().height/2),
+void Paddle::Render(GamePoint offset) {
+  sprite_.Draw(game_point_make(x_ - sprite_.content_size().width / 2 + offset.x,
+                               y_ - sprite_.content_size().height / 2 + offset.y),
                0, (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1);
 }
 
@@ -145,19 +145,18 @@ void Paddle::DidBounceOff(ViewEntity *other, double total_velocity) {
   }
 }
 
-bool Paddle::ContainsTouch(Touch *touch) {
-  GamePoint p = touch->location();
-  if (p.x < 0 || p.x >= rink_.TotalWidth()) {
+bool Paddle::ContainsPoint(GamePoint point) {
+  if (point.x < 0 || point.x >= rink_.TotalWidth()) {
     return false;
   }
   switch (player_id_) {
     case kPlayerId1:
-      return p.y >= rink_.CenterY() && p.y < rink_.BottomY() && p.x >= rink_.LeftX() &&
-          p.x < rink_.RightX();
+      return point.y >= rink_.CenterY() && point.y < rink_.BottomY() && point.x >= rink_.LeftX() &&
+          point.x < rink_.RightX();
       break;
     case kPlayerId2:
-      return p.y < rink_.CenterY() && p.y >= rink_.TopY() && p.x >= rink_.LeftX() &&
-          p.x < rink_.RightX();
+      return point.y < rink_.CenterY() && point.y >= rink_.TopY() && point.x >= rink_.LeftX() &&
+          point.x < rink_.RightX();
       break;
   }
   return false;

@@ -26,7 +26,7 @@ class RoundThing : public ViewEntity {
   void MaybeBounceOff(RoundThing *other);
   // Will get called for one of the two round things when they bounce.
   virtual void DidBounceOff(ViewEntity *other, double total_velocity) {};
-  virtual bool ContainsTouch(Touch *touch);
+  virtual bool ContainsPoint(GamePoint point);
   bool Overlaps(RoundThing *thing);
   virtual bool IsGrabbable();
   virtual bool IsMovable();
@@ -51,10 +51,10 @@ class RoundThing : public ViewEntity {
 
   // ViewEntity
   void Update();
-  void Render();
-  bool TouchesBegan(std::vector<Touch> touches);
-  void TouchesMoved(std::vector<Touch> touches);
-  void TouchesEnded(std::vector<Touch> touches);
+  void Render(GamePoint offset);
+  bool TouchesBegan(GamePoint offset, std::vector<Touch> touches);
+  void TouchesMoved(GamePoint offset, std::vector<Touch> touches);
+  void TouchesEnded(GamePoint offset, std::vector<Touch> touches);
   void ClearTouches();
 
  protected:

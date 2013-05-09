@@ -35,7 +35,7 @@ class Rink : public ViewEntity {
 
   // ViewEntity
   void Update();
-  void Render();
+  void Render(GamePoint offset);
 
  private:
   GameSize size_;

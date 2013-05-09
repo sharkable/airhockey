@@ -48,6 +48,6 @@ void RinkOverlay::Update() {
   rink_pieces_.Update();
 }
 
-void RinkOverlay::Render() {
-  rink_pieces_.Render();
+void RinkOverlay::Render(GamePoint offset) {
+  rink_pieces_.Render(offset);
 }

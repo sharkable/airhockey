@@ -48,11 +48,11 @@ class Paddle : public RoundThing {
 
   // ViewEntity
   void Update();
-  void Render();
+  void Render(GamePoint offset);
 
   // RoundThing
   void DidBounceOff(ViewEntity *other, double total_velocity);
-  bool ContainsTouch(Touch *touch);
+  bool ContainsPoint(GamePoint p);
   bool IsGrabbable();
   bool IsMovable();
 
