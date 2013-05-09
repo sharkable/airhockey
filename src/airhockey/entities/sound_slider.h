@@ -36,6 +36,8 @@ class SoundSlider : public ViewEntity {
   Sprite empty_sprite_;
   Sprite full_sprite_;
   Sprite thumb_sprite_;
+  int left_marin_;
+  int slider_width_;
   double value_;
   void *grabbed_touch_;
   GamePoint start_touch_position_;
