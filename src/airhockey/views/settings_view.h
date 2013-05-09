@@ -11,6 +11,7 @@
 
 #include <string>
 
+#include "gameengine/entities/animatable.h"
 #include "gameengine/entities/button.h"
 #include "gameengine/entities/composite_entity.h"
 #include "gameengine/engine_view.h"
@@ -24,19 +25,27 @@ extern const std::string kLocalStoreDifficulty;
 extern const std::string kLocalStoreNumPucks;
 extern const std::string kLocalStorePaddleSize;
 
-class SettingsView : public EngineView, private ButtonDelegate {
+class SettingsView : public EngineView, private AnimatableDelegate, private ButtonDelegate {
  public:
   SettingsView(sp<GameEngine> game_engine);
+
+  // EngineView
+  bool IsCapturingTouches();
+
+  // Animatable
+  void AnimationFinished(Animatable *animatable);
 
   // ButtonDelegate
   void ButtonPressed(Button *button);
 
  private:
+  sp<CompositeEntity> entities_;
   sp<SimpleItem> background_;
   sp<MultiSelect> num_pucks_select_;
   sp<MultiSelect> difficulty_select_;
   sp<MultiSelect> paddle_size_select_;
   sp<Button> ok_button_;
+  GamePoint ending_position_;
 };
 
 #endif

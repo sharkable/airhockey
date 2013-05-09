@@ -18,6 +18,7 @@
 using std::string;
 
 static const int kMaxNumPucks = 7;
+static const int kAnimateTicks = 30;
 
 // Local Store keys
 const string kLocalStoreDifficulty = "ls_difficulty";
@@ -25,9 +26,18 @@ const string kLocalStoreNumPucks = "ls_num_pucks";
 const string kLocalStorePaddleSize = "ls_paddle_size";
 
 SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+  double width = game_engine->screen_size_to_game_size(game_engine->screen_size()).width;
+  ending_position_ = game_point_make(-width, 0);
+
+  entities_.reset(new CompositeEntity());
+  entities_->set_delegate(this);
+  entities_->set_position(game_point_make(width, 0));
+  entities_->AnimateToPosition(kGamePointZero, kAnimationTypeCubicEaseOut, kAnimateTicks);
+  AddEntity(entities_);
+
   Sprite background_image(game_engine, "settings_bg");
   background_.reset(new SimpleItem(background_image, game_engine->position("settings_bg")));
-  AddEntity(background_);
+  entities_->AddEntity(background_);
 
   num_pucks_select_.reset(new MultiSelect());
   for (int i = 1; i <= kMaxNumPucks; i++) {
@@ -42,7 +52,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
     num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_position);
   }
   num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreNumPucks));
-  AddEntity(num_pucks_select_);
+  entities_->AddEntity(num_pucks_select_);
 
   Sprite bad_image(game_engine, "bad");
   Sprite bad_image_selected(game_engine, "bad_selected");
@@ -63,7 +73,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   } else {
     difficulty_select_->set_selected_value(kComputerAIGood);
   }
-  AddEntity(difficulty_select_);
+  entities_->AddEntity(difficulty_select_);
 
   Sprite small_image(game_engine, "small");
   Sprite small_image_selected(game_engine, "small_selected");
@@ -80,7 +90,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   } else {
     paddle_size_select_->set_selected_value(kPaddleSizeLarge);
   }
-  AddEntity(paddle_size_select_);
+  entities_->AddEntity(paddle_size_select_);
 
   Sprite ok_button_image(game_engine, "ok_button");
   Sprite ok_button_pressed_image(game_engine, "ok_button_pressed");
@@ -89,7 +99,23 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   ok_button_->set_pressed_sprite(ok_button_pressed_image);
   ok_button_->set_position(game_engine->position("ok_button"));
   ok_button_->set_delegate(this);
-  AddEntity(ok_button_);
+  entities_->AddEntity(ok_button_);
+}
+
+
+// EngineView
+
+bool SettingsView::IsCapturingTouches() {
+  return entities_->position().x >= 0;
+}
+
+
+// Animatable
+
+void SettingsView::AnimationFinished(Animatable *animatable) {
+  if (entities_->position().x < 0) {
+    game_engine()->RemoveView(this);
+  }
 }
 
 
@@ -99,5 +125,5 @@ void SettingsView::ButtonPressed(Button *button) {
   LocalStore::SetInteger(num_pucks_select_->selected_value(), kLocalStoreNumPucks);
   LocalStore::SetInteger(difficulty_select_->selected_value(), kLocalStoreDifficulty);
   LocalStore::SetInteger(paddle_size_select_->selected_value(), kLocalStorePaddleSize);
-  game_engine()->PopView();
+  entities_->AnimateToPosition(ending_position_, kAnimationTypeCubicEaseIn, kAnimateTicks);
 }
