@@ -204,7 +204,10 @@ void MainMenuView::PressedStart(int num_players) {
     game_engine()->ad_engine()->RemoveAd();
   }
 
-  int num_pucks = LocalStore::IntegerForKey(kLocalStoreNumPucks);
+  // The stored number of pucks is one less than the desired value. Not ideal. This is for:
+  // 1) Legacy.
+  // 2) Defaults to 0, which means 1 puck.
+  int num_pucks = LocalStore::IntegerForKey(kLocalStoreNumPucks) + 1;
   ComputerAI difficulty = (ComputerAI)LocalStore::IntegerForKey(kLocalStoreDifficulty);
   PaddleSize paddle_size = (PaddleSize)LocalStore::IntegerForKey(kLocalStorePaddleSize);
   map<string, string> analytics_params;
