@@ -12,7 +12,6 @@
 #include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
 
-class MultiSelect;
 class RinkOverlay;
 class SimpleItem;
 class SoundSlider;
@@ -35,22 +34,20 @@ class MainMenuView : public EngineView, private ButtonDelegate {
 
  private:
   void AnimateOut();
-  void PressedStart();
+  void PressedStart(int num_players);
+  void PressedSettings();
   void PressedStory();
   void PressedRate();
   void PressedUpgrade();
 
   sp<RinkOverlay> rink_overlay_;
   sp<SimpleItem> title_;
-  sp<SimpleItem> main_menu_;
-  sp<Button> start_button_;
+  sp<Button> start_1_player_button_;
+  sp<Button> start_2_player_button_;
+  sp<Button> settings_button_;
   sp<Button> story_button_;
   sp<Button> rate_button_;
 //  sp<Button> upgrade_button_;
-  sp<MultiSelect> num_players_select_;
-  sp<MultiSelect> num_pucks_select_;
-  sp<MultiSelect> difficulty_select_;
-  sp<MultiSelect> paddle_size_select_;
   sp<SoundSlider> sound_slider_;
 
   MainMenuState state_;

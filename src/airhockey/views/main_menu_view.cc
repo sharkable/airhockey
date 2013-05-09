@@ -8,9 +8,12 @@
 
 #include "airhockey/views/main_menu_view.h"
 
+#include <map>
 #include <sstream>
+#include <string>
+using std::map;
+using std::string;
 
-#include "gameengine/entities/multi_select.h"
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/modules/ad_engine.h"
 #include "gameengine/modules/analytics_engine.h"
@@ -23,19 +26,12 @@
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/entities/sound_slider.h"
 #include "airhockey/views/play_view.h"
+#include "airhockey/views/settings_view.h"
 #include "airhockey/views/story_view.h"
 
-using std::map;
-using std::string;
-
-static const int kMaxNumPucks = 7;
 static const int kAnimateOutTicks = 15;
 
 // Local Store keys
-static const string kLocalStoreNumPlayers = "ls_num_players";
-static const string kLocalStoreDifficulty = "ls_difficulty";
-static const string kLocalStoreNumPucks = "ls_num_pucks";
-static const string kLocalStorePaddleSize = "ls_paddle_size";
 static const string kLocalStoreMainMenuViewCount = "ls_main_menu_view_count";
 
 inline string to_string(int i) {
@@ -54,8 +50,6 @@ void fade_out(Animatable *entity) {
 }
 
 MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
-  bool is_iphone = false;  // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
-
   state_ = kMainMenuStateRunning;
 
   rink_overlay_.reset(new RinkOverlay(game_engine));
@@ -69,22 +63,35 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   title_->set_alpha(0);
   title_->AnimateToAlpha(1, kAnimationTypeCubicEaseOut, 900);
 
-  Sprite main_menu_sprite(game_engine, "main_menu");
-  GamePoint main_menu_position = game_engine->position("main_menu");
-  main_menu_.reset(new SimpleItem(main_menu_sprite, main_menu_position));
-  AddEntity(main_menu_);
-  main_menu_->set_alpha(0);
-  main_menu_->AnimateToAlpha(1, kAnimationTypeLinear, 45);
+  Sprite start_1_player_button_image(game_engine, "start_1_player_button");
+  Sprite start_1_player_button_pressed_image(game_engine, "start_1_player_button_pressed");
+  start_1_player_button_.reset(new Button());
+  start_1_player_button_->set_normal_sprite(start_1_player_button_image);
+  start_1_player_button_->set_pressed_sprite(start_1_player_button_pressed_image);
+  start_1_player_button_->set_position(game_engine->position("start_1_player_button"));
+  start_1_player_button_->set_delegate(this);
+  AddEntity(start_1_player_button_);
+  fade_in(start_1_player_button_.get());
 
-  Sprite start_button_image(game_engine, "start_button");
-  Sprite start_button_pressed_image(game_engine, "start_button_pressed");
-  start_button_.reset(new Button());
-  start_button_->set_normal_sprite(start_button_image);
-  start_button_->set_pressed_sprite(start_button_pressed_image);
-  start_button_->set_position(game_engine->position("start_button"));
-  start_button_->set_delegate(this);
-  AddEntity(start_button_);
-  fade_in(start_button_.get());
+  Sprite start_2_player_button_image(game_engine, "start_2_player_button");
+  Sprite start_2_player_button_pressed_image(game_engine, "start_2_player_button_pressed");
+  start_2_player_button_.reset(new Button());
+  start_2_player_button_->set_normal_sprite(start_2_player_button_image);
+  start_2_player_button_->set_pressed_sprite(start_2_player_button_pressed_image);
+  start_2_player_button_->set_position(game_engine->position("start_2_player_button"));
+  start_2_player_button_->set_delegate(this);
+  AddEntity(start_2_player_button_);
+  fade_in(start_2_player_button_.get());
+
+  Sprite settings_button_image(game_engine, "settings_button");
+  Sprite settings_button_pressed_image(game_engine, "settings_button_pressed");
+  settings_button_.reset(new Button());
+  settings_button_->set_normal_sprite(settings_button_image);
+  settings_button_->set_pressed_sprite(settings_button_pressed_image);
+  settings_button_->set_position(game_engine->position("settings_button"));
+  settings_button_->set_delegate(this);
+  AddEntity(settings_button_);
+  fade_in(settings_button_.get());
 
   Sprite story_button_image(game_engine, "story_button");
   Sprite story_button_pressed_image(game_engine, "story_button_pressed");
@@ -117,76 +124,6 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 //  AddEntity(upgrade_button_);
 //  fade_in(upgrade_button_.get());
 //
-  Sprite one_player_image(game_engine, "1_player");
-  Sprite two_player_image(game_engine, "2_player");
-  Sprite one_player_selected_image(game_engine, "1_player_selected");
-  Sprite two_player_selected_image(game_engine, "2_player_selected");
-  num_players_select_.reset(new MultiSelect());
-  num_players_select_->Add(one_player_image, one_player_selected_image,
-                           game_engine->position("1_player"));
-  num_players_select_->Add(two_player_image, two_player_selected_image,
-                           game_engine->position("2_player"));
-  num_players_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreNumPlayers));
-  AddEntity(num_players_select_);
-  fade_in(num_players_select_.get());
-
-  num_pucks_select_.reset(new MultiSelect());
-  for (int i = 1; i <= kMaxNumPucks; i++) {
-    char pucks_str[15];
-    sprintf(pucks_str, "%d", i);
-    char pucks_selected_str[15];
-    sprintf(pucks_selected_str, "%d_selected", i);
-
-    Sprite num_pucks_image(game_engine, pucks_str);
-    Sprite num_pucks_selected_image(game_engine, pucks_selected_str);
-    GamePoint num_pucks_position = game_engine->position(pucks_str);
-    num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_position);
-  }
-  num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreNumPucks));
-  AddEntity(num_pucks_select_);
-  fade_in(num_pucks_select_.get());
-
-  Sprite bad_image(game_engine, "bad");
-  Sprite bad_image_selected(game_engine, "bad_selected");
-  Sprite good_image(game_engine, "good");
-  Sprite good_image_selected(game_engine, "good_selected");
-  Sprite excellent_image(game_engine, "excellent");
-  Sprite excellent_image_selected(game_engine, "excellent_selected");
-  Sprite amazing_image(game_engine, "amazing");
-  Sprite amazing_image_selected(game_engine, "amazing_selected");
-  difficulty_select_.reset(new MultiSelect());
-  difficulty_select_->Add(bad_image, bad_image_selected, game_engine->position("bad"));
-  difficulty_select_->Add(good_image, good_image_selected, game_engine->position("good"));
-  difficulty_select_->Add(excellent_image, excellent_image_selected,
-                          game_engine->position("excellent"));
-  difficulty_select_->Add(amazing_image, amazing_image_selected, game_engine->position("amazing"));
-  if (LocalStore::HasEntryForKey(kLocalStoreDifficulty)) {
-    difficulty_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreDifficulty));
-  } else {
-    difficulty_select_->set_selected_value(kComputerAIGood);
-  }
-  AddEntity(difficulty_select_);
-  fade_in(difficulty_select_.get());
-
-  if (!is_iphone) {
-    Sprite small_image(game_engine, "small");
-    Sprite small_image_selected(game_engine, "small_selected");
-    Sprite medium_image(game_engine, "medium");
-    Sprite medium_image_selected(game_engine, "medium_selected");
-    Sprite large_image(game_engine, "large");
-    Sprite large_image_selected(game_engine, "large_selected");
-    paddle_size_select_.reset(new MultiSelect());
-    paddle_size_select_->Add(small_image, small_image_selected, game_engine->position("small"));
-    paddle_size_select_->Add(medium_image, medium_image_selected, game_engine->position("medium"));
-    paddle_size_select_->Add(large_image, large_image_selected, game_engine->position("large"));
-    if (LocalStore::HasEntryForKey(kLocalStorePaddleSize)) {
-      paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStorePaddleSize));
-    } else {
-      paddle_size_select_->set_selected_value(kPaddleSizeLarge);
-    }
-    AddEntity(paddle_size_select_);
-    fade_in(paddle_size_select_.get());
-  }
 
   sound_slider_.reset(new SoundSlider(game_engine,
                                       game_engine->position("sound_slider_main_menu")));
@@ -229,8 +166,12 @@ void MainMenuView::Update() {
 // ButtonDelegate
 
 void MainMenuView::ButtonPressed(Button *button) {
-  if (button == start_button_.get()) {
-    PressedStart();
+  if (button == start_1_player_button_.get()) {
+    PressedStart(1);
+  } else if (button == start_2_player_button_.get()) {
+    PressedStart(2);
+  } else if (button == settings_button_.get()) {
+    PressedSettings();
   } else if (button == story_button_.get()) {
     PressedStory();
   } else if (button == rate_button_.get()) {
@@ -247,50 +188,43 @@ void MainMenuView::AnimateOut() {
   state_ = kMainMenuStateAnimatingOut;
 
   title_->AnimateToZoom(0, kAnimationTypeLinear, 15);
-  fade_out(main_menu_.get());
-  fade_out(start_button_.get());
+  fade_out(start_1_player_button_.get());
+  fade_out(start_2_player_button_.get());
+  fade_out(settings_button_.get());
   fade_out(story_button_.get());
   fade_out(rate_button_.get());
 //  fade_out(upgrade_button_.get());
-  fade_out(num_players_select_.get());
-  fade_out(num_pucks_select_.get());
-  fade_out(difficulty_select_.get());
-  fade_out(paddle_size_select_.get());
   RemoveEntity(sound_slider_);
 
   animating_out_ticks_left_ = kAnimateOutTicks;
 }
 
-void MainMenuView::PressedStart() {
+void MainMenuView::PressedStart(int num_players) {
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
     game_engine()->ad_engine()->RemoveAd();
   }
 
-  bool is_iphone = false; // TODO UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
-
-  LocalStore::SetInteger(num_players_select_->selected_value(), kLocalStoreNumPlayers);
-  LocalStore::SetInteger(num_pucks_select_->selected_value(), kLocalStoreNumPucks);
-  LocalStore::SetInteger(difficulty_select_->selected_value(), kLocalStoreDifficulty);
-  if (!is_iphone) {
-    LocalStore::SetInteger(paddle_size_select_->selected_value(), kLocalStorePaddleSize);
-  }
-
+  int num_pucks = LocalStore::IntegerForKey(kLocalStoreNumPucks);
+  ComputerAI difficulty = (ComputerAI)LocalStore::IntegerForKey(kLocalStoreDifficulty);
+  PaddleSize paddle_size = (PaddleSize)LocalStore::IntegerForKey(kLocalStorePaddleSize);
   map<string, string> analytics_params;
-  analytics_params["NumPlayers"] = to_string(num_players_select_->selected_value() + 1);
-  analytics_params["NumPucks"] = to_string(num_pucks_select_->selected_value() + 1);
-  analytics_params["Difficulty"] = to_string(difficulty_select_->selected_value());
-  analytics_params["PaddleSize"] = to_string(paddle_size_select_->selected_value());
+  analytics_params["NumPlayers"] = num_players;
+  analytics_params["NumPucks"] = num_pucks;
+  analytics_params["Difficulty"] = difficulty;
+  analytics_params["PaddleSize"] = paddle_size;
   game_engine()->analytics_engine()->LogEvent("START_GAME", analytics_params);
 
-  PaddleSize paddle_size =
-      PaddleSize(is_iphone ? kPaddleSizeLarge : paddle_size_select_->selected_value());
   PlayView *play_view = new PlayView(game_engine(),
-                                     num_players_select_->selected_value() + 1,
-                                     num_pucks_select_->selected_value() + 1,
-                                     ComputerAI(difficulty_select_->selected_value()),
+                                     num_players,
+                                     num_pucks,
+                                     difficulty,
                                      paddle_size);
   AnimateOut();
   game_engine()->PushView(sp<EngineView>(play_view));
+}
+
+void MainMenuView::PressedSettings() {
+  game_engine()->PushView(sp<SettingsView>(new SettingsView(game_engine())));
 }
 
 void MainMenuView::PressedStory() {

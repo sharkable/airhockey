@@ -20,6 +20,8 @@ void sharkengine_init(sp<GameEngine> game_engine) {
     game_engine->load_positions(
         *game_engine->factory()->createAssetReader("assets/positions/main_menu_iphone.xml"));
     game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/settings_iphone.xml"));
+    game_engine->load_positions(
         *game_engine->factory()->createAssetReader("assets/positions/play_iphone.xml"));
     game_engine->load_positions(
         *game_engine->factory()->createAssetReader("assets/positions/rink_iphone.xml"));
@@ -28,6 +30,8 @@ void sharkengine_init(sp<GameEngine> game_engine) {
         *game_engine->factory()->createAssetReader("assets/positions/game_menu.xml"));
     game_engine->load_positions(
         *game_engine->factory()->createAssetReader("assets/positions/main_menu.xml"));
+    game_engine->load_positions(
+        *game_engine->factory()->createAssetReader("assets/positions/settings.xml"));
     game_engine->load_positions(
         *game_engine->factory()->createAssetReader("assets/positions/play.xml"));
     game_engine->load_positions(

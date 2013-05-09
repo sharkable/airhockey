@@ -17,7 +17,7 @@
 
 class SimpleItem;
 
-class StoryView : public EngineView, public AnimatableDelegate {
+class StoryView : public EngineView, private AnimatableDelegate {
  public:
   StoryView(sp<GameEngine> game_engine);
 
