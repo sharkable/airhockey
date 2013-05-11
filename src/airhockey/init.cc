@@ -6,6 +6,7 @@
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 
+#include "gameengine/modules/ad_engine.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/game_engine_factory.h"
@@ -37,6 +38,8 @@ void sharkengine_init(sp<GameEngine> game_engine) {
     game_engine->load_positions(
         *game_engine->factory()->createAssetReader("assets/positions/rink.xml"));
   }
+
+  game_engine->ad_engine()->SetPublisherId("a14bdda6dfc895a");
 
   ScreenSize screen_size = game_engine->screen_size();
   GameSize game_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());
