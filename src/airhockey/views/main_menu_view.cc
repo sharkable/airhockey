@@ -102,16 +102,6 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   AddEntity(story_button_);
   fade_in(story_button_.get());
 
-  Sprite rate_button_image(game_engine, "rate_button");
-  Sprite rate_button_pressed_image(game_engine, "rate_button_pressed");
-  rate_button_.reset(new Button());
-  rate_button_->set_normal_sprite(rate_button_image);
-  rate_button_->set_pressed_sprite(rate_button_pressed_image);
-  rate_button_->set_position(game_engine->position("rate_button"));
-  rate_button_->set_delegate(this);
-  AddEntity(rate_button_);
-  fade_in(rate_button_.get());
-
   // TODO disabling this until I get app store selling sorted out.
   Sprite upgrade_button_image(game_engine, "upgrade_button");
   Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
@@ -176,8 +166,6 @@ void MainMenuView::ButtonPressed(Button *button) {
     PressedSettings();
   } else if (button == story_button_.get()) {
     PressedStory();
-  } else if (button == rate_button_.get()) {
-    PressedRate();
   } else if (button == upgrade_button_.get()) {
     PressedUpgrade();
   }
@@ -194,7 +182,6 @@ void MainMenuView::AnimateOut() {
   fade_out(start_2_player_button_.get());
   fade_out(settings_button_.get());
   fade_out(story_button_.get());
-  fade_out(rate_button_.get());
   fade_out(upgrade_button_.get());
   RemoveEntity(sound_slider_);
 
@@ -238,10 +225,6 @@ void MainMenuView::PressedStory() {
     game_engine()->ad_engine()->RemoveAd();
   }
   game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
-}
-
-void MainMenuView::PressedRate() {
-  game_engine()->app_store_engine()->AskForRate();
 }
 
 void MainMenuView::PressedUpgrade() {

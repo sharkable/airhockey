@@ -46,7 +46,6 @@ class MainMenuView : public EngineView, private AppStoreEngineDelegate, private 
   void PressedStart(int num_players);
   void PressedSettings();
   void PressedStory();
-  void PressedRate();
   void PressedUpgrade();
 
   sp<RinkOverlay> rink_overlay_;
@@ -55,7 +54,6 @@ class MainMenuView : public EngineView, private AppStoreEngineDelegate, private 
   sp<Button> start_2_player_button_;
   sp<Button> settings_button_;
   sp<Button> story_button_;
-  sp<Button> rate_button_;
   sp<Button> upgrade_button_;
   sp<SoundSlider> sound_slider_;
 
