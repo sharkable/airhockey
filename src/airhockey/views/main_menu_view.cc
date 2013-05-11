@@ -239,7 +239,7 @@ void MainMenuView::PressedStory() {
 }
 
 void MainMenuView::PressedRate() {
-  game_engine()->app_store_engine()->AskForRate("Glide Hockey HD", "371905230");
+  game_engine()->app_store_engine()->AskForRate();
 }
 
 void MainMenuView::PressedUpgrade() {
