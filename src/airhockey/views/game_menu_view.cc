@@ -81,10 +81,4 @@ void GameMenuView::Init(bool match_finished) {
   menu_button_->set_position(game_engine()->position("menu_button"));
   menu_button_->set_delegate(this);
   AddEntity(menu_button_);
-
-  if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    // TODO do I want this ad?
-//    ScreenPoint ad_position = screen_point_make((game_engine()->game_size().width - 320) / 2, 380);
-//    game_engine()->ad_engine()->SetAdAtPoint(ad_position);
-  }
 }

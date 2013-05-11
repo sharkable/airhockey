@@ -32,7 +32,7 @@ static const int kGetReadyTicksTotal = 120;
 static const int kShowGetReadyMessageTicks = 90;
 static const int kShowGoMessageTicks = 30;
 static const int kWinScore = 7;
-static const int kFullScreenAdFrequency = 4;
+static const int kFullScreenAdFrequency = 3;
 static const string kLocalStoreMatchCount = "ls_match_count";
 
 PlayView::PlayView(sp<GameEngine> game_engine, int num_players, int num_pucks,
@@ -393,9 +393,10 @@ void PlayView::SetUpNewGame() {
   num_active_pucks_ = num_pucks_;
   num_player_1_scores_last_round_ = 0;
 
+  bool app_upgraded = LocalStore::BoolForKey(kLocalStoreUpgraded);
   int num_matches = LocalStore::IntegerForKey(kLocalStoreMatchCount) + 1;
   LocalStore::SetInteger(num_matches, kLocalStoreMatchCount);
-  bool show_full_screen_ad = num_matches % kFullScreenAdFrequency == 0;
+  bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
   if (show_full_screen_ad && game_engine()->ad_engine()->ShowFullScreenAd()) {
     state_ = kPlayViewStateShowingAd;

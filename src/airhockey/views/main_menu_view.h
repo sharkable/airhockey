@@ -9,8 +9,11 @@
 #ifndef AIRHOCKEY_VIEWS_MAINMENUVIEW_H_
 #define AIRHOCKEY_VIEWS_MAINMENUVIEW_H_
 
-#include "gameengine/engine_view.h"
+#include <string>
+
 #include "gameengine/entities/button.h"
+#include "gameengine/modules/app_store_engine.h"
+#include "gameengine/engine_view.h"
 
 class RinkOverlay;
 class SimpleItem;
@@ -21,13 +24,19 @@ typedef enum {
   kMainMenuStateAnimatingOut
 } MainMenuState;
 
-class MainMenuView : public EngineView, private ButtonDelegate {
+// Local Store keys
+extern const std::string kLocalStoreUpgraded;
+
+class MainMenuView : public EngineView, private AppStoreEngineDelegate, private ButtonDelegate {
  public:
   MainMenuView(sp<GameEngine> game_engine);
 
   // EngineView
   void ViewIsShown();
   void Update();
+
+  // AppStoreEngineDelegate
+  void UpgradeSucceeded();
 
   // ButtonDelegate
   void ButtonPressed(Button *button);
@@ -47,7 +56,7 @@ class MainMenuView : public EngineView, private ButtonDelegate {
   sp<Button> settings_button_;
   sp<Button> story_button_;
   sp<Button> rate_button_;
-//  sp<Button> upgrade_button_;
+  sp<Button> upgrade_button_;
   sp<SoundSlider> sound_slider_;
 
   MainMenuState state_;

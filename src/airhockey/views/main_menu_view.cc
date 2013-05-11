@@ -10,14 +10,12 @@
 
 #include <map>
 #include <sstream>
-#include <string>
 using std::map;
 using std::string;
 
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/modules/ad_engine.h"
 #include "gameengine/modules/analytics_engine.h"
-#include "gameengine/modules/app_store_engine.h"
 #include "gameengine/modules/local_store.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
@@ -32,7 +30,8 @@ using std::string;
 static const int kAnimateOutTicks = 15;
 
 // Local Store keys
-static const string kLocalStoreMainMenuViewCount = "ls_main_menu_view_count";
+const string kLocalStoreMainMenuViewCount = "ls_main_menu_view_count";
+const string kLocalStoreUpgraded = "ls_upgraded";
 
 inline string to_string(int i) {
   std::stringstream ss;
@@ -114,16 +113,17 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   fade_in(rate_button_.get());
 
   // TODO disabling this until I get app store selling sorted out.
-//  Sprite upgrade_button_image(game_engine, "upgrade_button");
-//  Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
-//  upgrade_button_.reset(new Button());
-//  upgrade_button_->set_normal_sprite(upgrade_button_image);
-//  upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
-//  upgrade_button_->set_position(game_engine->position("upgrade_button"));
-//  upgrade_button_->set_delegate(this);
-//  AddEntity(upgrade_button_);
-//  fade_in(upgrade_button_.get());
-//
+  Sprite upgrade_button_image(game_engine, "upgrade_button");
+  Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
+  upgrade_button_.reset(new Button());
+  upgrade_button_->set_normal_sprite(upgrade_button_image);
+  upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
+  upgrade_button_->set_position(game_engine->position("upgrade_button"));
+  upgrade_button_->set_delegate(this);
+  if (!LocalStore::BoolForKey(kLocalStoreUpgraded)) {
+    AddEntity(upgrade_button_);
+  }
+  fade_in(upgrade_button_.get());
 
   sound_slider_.reset(new SoundSlider(game_engine,
                                       game_engine->position("sound_slider_main_menu")));
@@ -134,16 +134,10 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 // EngineView
 
 void MainMenuView::ViewIsShown() {
-  if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_engine()->SetAdAtPoint(screen_point_make(45, 40));
-  }
-
   // Force the popup for rating and upgrading just once.
   int main_menu_view_count = LocalStore::IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
   LocalStore::SetInteger(main_menu_view_count, kLocalStoreMainMenuViewCount);
-  if (main_menu_view_count == 6) {
-    PressedRate();
-  } else if (main_menu_view_count == 10) {
+  if (main_menu_view_count == 10) {
     PressedUpgrade();
   }
 }
@@ -163,6 +157,14 @@ void MainMenuView::Update() {
 }
 
 
+// AppStoreEngineDelegate
+
+void MainMenuView::UpgradeSucceeded() {
+  LocalStore::SetBool(true, kLocalStoreUpgraded);
+  RemoveEntity(upgrade_button_);
+}
+
+
 // ButtonDelegate
 
 void MainMenuView::ButtonPressed(Button *button) {
@@ -176,8 +178,8 @@ void MainMenuView::ButtonPressed(Button *button) {
     PressedStory();
   } else if (button == rate_button_.get()) {
     PressedRate();
-//  } else if (button == upgrade_button_.get()) {
-//    PressedUpgrade();
+  } else if (button == upgrade_button_.get()) {
+    PressedUpgrade();
   }
 }
 
@@ -193,7 +195,7 @@ void MainMenuView::AnimateOut() {
   fade_out(settings_button_.get());
   fade_out(story_button_.get());
   fade_out(rate_button_.get());
-//  fade_out(upgrade_button_.get());
+  fade_out(upgrade_button_.get());
   RemoveEntity(sound_slider_);
 
   animating_out_ticks_left_ = kAnimateOutTicks;
@@ -243,6 +245,8 @@ void MainMenuView::PressedRate() {
 }
 
 void MainMenuView::PressedUpgrade() {
-// TODO disabling this until I can get app store purchasing worked out.
-//  game_engine()->app_store_engine()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade");
+  if (!LocalStore::BoolForKey(kLocalStoreUpgraded)) {
+    game_engine()->app_store_engine()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade",
+                                                     this);
+  }
 }
