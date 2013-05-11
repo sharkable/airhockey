@@ -43,7 +43,7 @@ StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
   AddEntity(story_);
 
   about_.reset(new SimpleItem());
-  about_->set_delegate(this);
+  about_->set_animatable_delegate(this);
   about_->add_sprite(about_image);
   about_->set_zoom(zoom);
   about_->set_position(starting_image_position_);

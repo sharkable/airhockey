@@ -30,7 +30,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   ending_position_ = game_point_make(-width, 0);
 
   entities_.reset(new CompositeEntity());
-  entities_->set_delegate(this);
+  entities_->set_animatable_delegate(this);
   entities_->set_position(game_point_make(width, 0));
   entities_->AnimateToPosition(kGamePointZero, kAnimationTypeCubicEaseOut, kAnimateTicks);
   AddEntity(entities_);
