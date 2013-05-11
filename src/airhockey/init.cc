@@ -40,6 +40,7 @@ void sharkengine_init(sp<GameEngine> game_engine) {
   }
 
   game_engine->ad_engine()->SetPublisherId("a14bdda6dfc895a");
+  game_engine->ad_engine()->PrepareFullScreenAd();
 
   ScreenSize screen_size = game_engine->screen_size();
   GameSize game_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());
