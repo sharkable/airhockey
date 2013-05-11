@@ -319,6 +319,10 @@ void PlayView::Update() {
   }
 }
 
+void PlayView::NotifyPause() {
+  PausePressed();
+}
+
 
 // ButtonDelegate
 

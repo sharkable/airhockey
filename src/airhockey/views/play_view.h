@@ -40,6 +40,7 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
 
   // EngineView
   void Update();
+  void NotifyPause();
 
   // ButtonDelegate
   void ButtonPressed(Button *button);
