@@ -68,11 +68,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   difficulty_select_->Add(excellent_image, excellent_image_selected,
                           game_engine->position("excellent"));
   difficulty_select_->Add(amazing_image, amazing_image_selected, game_engine->position("amazing"));
-  if (LocalStore::HasEntryForKey(kLocalStoreDifficulty)) {
-    difficulty_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreDifficulty));
-  } else {
-    difficulty_select_->set_selected_value(kComputerAIGood);
-  }
+  difficulty_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreDifficulty));
   entities_->AddEntity(difficulty_select_);
 
   Sprite small_image(game_engine, "small");
@@ -85,11 +81,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   paddle_size_select_->Add(small_image, small_image_selected, game_engine->position("small"));
   paddle_size_select_->Add(medium_image, medium_image_selected, game_engine->position("medium"));
   paddle_size_select_->Add(large_image, large_image_selected, game_engine->position("large"));
-  if (LocalStore::HasEntryForKey(kLocalStorePaddleSize)) {
-    paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStorePaddleSize));
-  } else {
-    paddle_size_select_->set_selected_value(kPaddleSizeLarge);
-  }
+  paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStorePaddleSize));
   entities_->AddEntity(paddle_size_select_);
 
   Sprite ok_button_image(game_engine, "ok_button");

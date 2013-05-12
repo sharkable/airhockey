@@ -49,6 +49,7 @@ void fade_out(Animatable *entity) {
 }
 
 MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+  InitializeSettings();
   state_ = kMainMenuStateRunning;
 
   rink_overlay_.reset(new RinkOverlay(game_engine));
@@ -173,6 +174,13 @@ void MainMenuView::ButtonPressed(Button *button) {
 
 
 // private
+
+void MainMenuView::InitializeSettings() {
+  if (!LocalStore::HasEntryForKey(kLocalStoreDifficulty)) {
+    LocalStore::SetInteger(kComputerAIGood, kLocalStoreDifficulty);
+    LocalStore::SetInteger(kPaddleSizeLarge, kLocalStorePaddleSize);
+  }
+}
 
 void MainMenuView::AnimateOut() {
   state_ = kMainMenuStateAnimatingOut;

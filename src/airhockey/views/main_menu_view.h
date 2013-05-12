@@ -42,6 +42,7 @@ class MainMenuView : public EngineView, private AppStoreEngineDelegate, private 
   void ButtonPressed(Button *button);
 
  private:
+  void InitializeSettings();
   void AnimateOut();
   void PressedStart(int num_players);
   void PressedSettings();
