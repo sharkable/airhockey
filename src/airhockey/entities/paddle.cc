@@ -19,7 +19,7 @@
 
 using std::vector;
 
-static const double kPaddleRadii[] = {40, 65, 92.5};
+static const double kPaddleRadii[] = {45, 65, 92.5};
 static const double kPaddleY = 130;
 static const double kPaddleMass = 100;
 static const double kPaddleFriction = 0.1;
