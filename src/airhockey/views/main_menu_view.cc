@@ -177,8 +177,8 @@ void MainMenuView::ButtonPressed(Button *button) {
 
 void MainMenuView::InitializeSettings() {
   if (!LocalStore::HasEntryForKey(kLocalStoreDifficulty)) {
-    LocalStore::SetInteger(kComputerAIGood, kLocalStoreDifficulty);
-    LocalStore::SetInteger(kPaddleSizeLarge, kLocalStorePaddleSize);
+    LocalStore::SetInteger(kComputerAIBad, kLocalStoreDifficulty);
+    LocalStore::SetInteger(kPaddleSizeMedium, kLocalStorePaddleSize);
   }
 }
 
