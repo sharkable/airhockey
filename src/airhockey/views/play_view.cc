@@ -393,9 +393,9 @@ void PlayView::SetUpNewGame() {
   num_active_pucks_ = num_pucks_;
   num_player_1_scores_last_round_ = 0;
 
-  bool app_upgraded = LocalStore::BoolForKey(kLocalStoreUpgraded);
-  int num_matches = LocalStore::IntegerForKey(kLocalStoreMatchCount) + 1;
-  LocalStore::SetInteger(num_matches, kLocalStoreMatchCount);
+  bool app_upgraded = game_engine()->local_store()->BoolForKey(kLocalStoreUpgraded);
+  int num_matches = game_engine()->local_store()->IntegerForKey(kLocalStoreMatchCount) + 1;
+  game_engine()->local_store()->SetInteger(num_matches, kLocalStoreMatchCount);
   bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
   if (show_full_screen_ad && game_engine()->ad_engine()->ShowFullScreenAd()) {

@@ -111,7 +111,7 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
   upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
   upgrade_button_->set_position(game_engine->position("upgrade_button"));
   upgrade_button_->set_delegate(this);
-  if (!LocalStore::BoolForKey(kLocalStoreUpgraded)) {
+  if (!game_engine->local_store()->BoolForKey(kLocalStoreUpgraded)) {
     AddEntity(upgrade_button_);
   }
   fade_in(upgrade_button_.get());
@@ -126,8 +126,9 @@ MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine)
 
 void MainMenuView::ViewIsShown() {
   // Force the popup for rating and upgrading just once.
-  int main_menu_view_count = LocalStore::IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
-  LocalStore::SetInteger(main_menu_view_count, kLocalStoreMainMenuViewCount);
+  int main_menu_view_count =
+      game_engine()->local_store()->IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
+  game_engine()->local_store()->SetInteger(main_menu_view_count, kLocalStoreMainMenuViewCount);
   if (main_menu_view_count == 10) {
     PressedUpgrade();
   }
@@ -151,7 +152,7 @@ void MainMenuView::Update() {
 // AppStoreEngineDelegate
 
 void MainMenuView::UpgradeSucceeded() {
-  LocalStore::SetBool(true, kLocalStoreUpgraded);
+  game_engine()->local_store()->SetBool(true, kLocalStoreUpgraded);
   RemoveEntity(upgrade_button_);
 }
 
@@ -176,9 +177,9 @@ void MainMenuView::ButtonPressed(Button *button) {
 // private
 
 void MainMenuView::InitializeSettings() {
-  if (!LocalStore::HasEntryForKey(kLocalStoreDifficulty)) {
-    LocalStore::SetInteger(kComputerAIBad, kLocalStoreDifficulty);
-    LocalStore::SetInteger(kPaddleSizeMedium, kLocalStorePaddleSize);
+  if (!game_engine()->local_store()->HasEntryForKey(kLocalStoreDifficulty)) {
+    game_engine()->local_store()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
+    game_engine()->local_store()->SetInteger(kPaddleSizeMedium, kLocalStorePaddleSize);
   }
 }
 
@@ -204,9 +205,11 @@ void MainMenuView::PressedStart(int num_players) {
   // The stored number of pucks is one less than the desired value. Not ideal. This is for:
   // 1) Legacy.
   // 2) Defaults to 0, which means 1 puck.
-  int num_pucks = LocalStore::IntegerForKey(kLocalStoreNumPucks) + 1;
-  ComputerAI difficulty = (ComputerAI)LocalStore::IntegerForKey(kLocalStoreDifficulty);
-  PaddleSize paddle_size = (PaddleSize)LocalStore::IntegerForKey(kLocalStorePaddleSize);
+  int num_pucks = game_engine()->local_store()->IntegerForKey(kLocalStoreNumPucks) + 1;
+  ComputerAI difficulty =
+      (ComputerAI)game_engine()->local_store()->IntegerForKey(kLocalStoreDifficulty);
+  PaddleSize paddle_size =
+      (PaddleSize)game_engine()->local_store()->IntegerForKey(kLocalStorePaddleSize);
   map<string, string> analytics_params;
   analytics_params["NumPlayers"] = num_players;
   analytics_params["NumPucks"] = num_pucks;
@@ -236,7 +239,7 @@ void MainMenuView::PressedStory() {
 }
 
 void MainMenuView::PressedUpgrade() {
-  if (!LocalStore::BoolForKey(kLocalStoreUpgraded)) {
+  if (!game_engine()->local_store()->BoolForKey(kLocalStoreUpgraded)) {
     game_engine()->app_store_engine()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade",
                                                      this);
   }

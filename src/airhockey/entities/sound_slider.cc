@@ -25,7 +25,8 @@ const int kSliderWidthPhone = 506;
 static const string kLocalStoreVolume = "ls_volume";
 
 SoundSlider::SoundSlider(sp<GameEngine> game_engine, GamePoint position)
-    : position_(position),
+    : game_engine_(game_engine),
+      position_(position),
       empty_sprite_(game_engine, "sound_empty"),
       full_sprite_(game_engine, "sound_full"),
       thumb_sprite_(game_engine, "sound_thumb") {
@@ -39,8 +40,8 @@ SoundSlider::SoundSlider(sp<GameEngine> game_engine, GamePoint position)
       slider_width_ = kSliderWidthTablet;
       break;
   }
-  if (LocalStore::HasEntryForKey(kLocalStoreVolume)) {
-    value_ = LocalStore::DoubleForKey(kLocalStoreVolume);
+  if (game_engine->local_store()->HasEntryForKey(kLocalStoreVolume)) {
+    value_ = game_engine->local_store()->DoubleForKey(kLocalStoreVolume);
   } else {
     value_ = 0.75;
   }
@@ -108,7 +109,7 @@ void SoundSlider::TouchesEnded(GamePoint offset, vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       SoundPlayer::instance()->setGlobalVolume(value_);
-      LocalStore::SetDouble(value_, kLocalStoreVolume);
+      game_engine_->local_store()->SetDouble(value_, kLocalStoreVolume);
       grabbed_touch_ = NULL;
       return;
     }

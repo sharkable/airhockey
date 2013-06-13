@@ -26,6 +26,8 @@ const string kLocalStoreNumPucks = "ls_num_pucks";
 const string kLocalStorePaddleSize = "ls_paddle_size";
 
 SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+  sp<LocalStore> local_store = game_engine->local_store();
+
   double width = game_engine->screen_size_to_game_size(game_engine->screen_size()).width;
   ending_position_ = game_point_make(-width, 0);
 
@@ -51,7 +53,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
     GamePoint num_pucks_position = game_engine->position(pucks_str);
     num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_position);
   }
-  num_pucks_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreNumPucks));
+  num_pucks_select_->set_selected_value(local_store->IntegerForKey(kLocalStoreNumPucks));
   entities_->AddEntity(num_pucks_select_);
 
   Sprite bad_image(game_engine, "bad");
@@ -68,7 +70,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   difficulty_select_->Add(excellent_image, excellent_image_selected,
                           game_engine->position("excellent"));
   difficulty_select_->Add(amazing_image, amazing_image_selected, game_engine->position("amazing"));
-  difficulty_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStoreDifficulty));
+  difficulty_select_->set_selected_value(local_store->IntegerForKey(kLocalStoreDifficulty));
   entities_->AddEntity(difficulty_select_);
 
   Sprite small_image(game_engine, "small");
@@ -81,7 +83,7 @@ SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine)
   paddle_size_select_->Add(small_image, small_image_selected, game_engine->position("small"));
   paddle_size_select_->Add(medium_image, medium_image_selected, game_engine->position("medium"));
   paddle_size_select_->Add(large_image, large_image_selected, game_engine->position("large"));
-  paddle_size_select_->set_selected_value(LocalStore::IntegerForKey(kLocalStorePaddleSize));
+  paddle_size_select_->set_selected_value(local_store->IntegerForKey(kLocalStorePaddleSize));
   entities_->AddEntity(paddle_size_select_);
 
   Sprite ok_button_image(game_engine, "ok_button");
@@ -114,8 +116,9 @@ void SettingsView::AnimationFinished(Animatable *animatable) {
 // ButtonDelegate
 
 void SettingsView::ButtonPressed(Button *button) {
-  LocalStore::SetInteger(num_pucks_select_->selected_value(), kLocalStoreNumPucks);
-  LocalStore::SetInteger(difficulty_select_->selected_value(), kLocalStoreDifficulty);
-  LocalStore::SetInteger(paddle_size_select_->selected_value(), kLocalStorePaddleSize);
+  sp<LocalStore> local_store = game_engine()->local_store();
+  local_store->SetInteger(num_pucks_select_->selected_value(), kLocalStoreNumPucks);
+  local_store->SetInteger(difficulty_select_->selected_value(), kLocalStoreDifficulty);
+  local_store->SetInteger(paddle_size_select_->selected_value(), kLocalStorePaddleSize);
   entities_->AnimateToPosition(ending_position_, kAnimationTypeCubicEaseIn, kAnimateTicks);
 }

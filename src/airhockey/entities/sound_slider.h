@@ -32,6 +32,7 @@ class SoundSlider : public ViewEntity {
   void TouchesEnded(GamePoint offset, std::vector<Touch> touches);
 
  private:
+  sp<GameEngine> game_engine_;
   GamePoint position_;
   Sprite empty_sprite_;
   Sprite full_sprite_;
