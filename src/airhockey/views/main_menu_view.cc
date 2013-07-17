@@ -211,10 +211,10 @@ void MainMenuView::PressedStart(int num_players) {
   PaddleSize paddle_size =
       (PaddleSize)game_engine()->local_store()->IntegerForKey(kLocalStorePaddleSize);
   map<string, string> analytics_params;
-  analytics_params["NumPlayers"] = num_players;
-  analytics_params["NumPucks"] = num_pucks;
-  analytics_params["Difficulty"] = difficulty;
-  analytics_params["PaddleSize"] = paddle_size;
+  analytics_params["NumPlayers"] = to_string(num_players);
+  analytics_params["NumPucks"] = to_string(num_pucks);
+  analytics_params["Difficulty"] = to_string(difficulty);
+  analytics_params["PaddleSize"] = to_string(paddle_size);
   game_engine()->analytics_engine()->LogEvent("START_GAME", analytics_params);
 
   PlayView *play_view = new PlayView(game_engine(),
