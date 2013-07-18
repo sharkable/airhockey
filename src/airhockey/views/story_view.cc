@@ -58,14 +58,12 @@ bool StoryView::IsCapturingTouches() {
 }
 
 void StoryView::TouchesBegan(vector<Touch> touches) {
-  if (about_->position().x == starting_image_position_.x) {
-    about_->AnimateToPosition(resting_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
-    SoundPlayer::instance()->playSound(kSoundButton);
-  } else {
-    story_->AnimateToPosition(ending_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
-    about_->AnimateToPosition(ending_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
-    SoundPlayer::instance()->playSound(kSoundButton);
-  }
+  MoveForward();
+}
+
+bool StoryView::HandleBackButton() {
+  MoveForward();
+  return true;
 }
 
 
@@ -74,5 +72,19 @@ void StoryView::TouchesBegan(vector<Touch> touches) {
 void StoryView::AnimationFinished(Animatable *animatable) {
   if (about_->position().x == ending_image_position_.x) {
     game_engine()->RemoveView(this);
+  }
+}
+
+
+// private
+
+void StoryView::MoveForward() {
+  if (about_->position().x == starting_image_position_.x) {
+    about_->AnimateToPosition(resting_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
+    SoundPlayer::instance()->playSound(kSoundButton);
+  } else {
+    story_->AnimateToPosition(ending_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
+    about_->AnimateToPosition(ending_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
+    SoundPlayer::instance()->playSound(kSoundButton);
   }
 }

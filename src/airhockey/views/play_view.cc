@@ -323,6 +323,11 @@ void PlayView::NotifyPause() {
   PausePressed();
 }
 
+bool PlayView::HandleBackButton() {
+  PausePressed();
+  return true;
+}
+
 
 // ButtonDelegate
 

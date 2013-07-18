@@ -31,6 +31,7 @@ class SettingsView : public EngineView, private AnimatableDelegate, private Butt
 
   // EngineView
   bool IsCapturingTouches();
+  bool HandleBackButton();
 
   // Animatable
   void AnimationFinished(Animatable *animatable);

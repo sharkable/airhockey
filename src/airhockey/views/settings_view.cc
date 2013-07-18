@@ -103,6 +103,11 @@ bool SettingsView::IsCapturingTouches() {
   return entities_->position().x >= 0;
 }
 
+bool SettingsView::HandleBackButton() {
+  ButtonPressed(NULL);
+  return true;
+}
+
 
 // Animatable
 

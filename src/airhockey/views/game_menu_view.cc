@@ -23,6 +23,14 @@ GameMenuView::GameMenuView(sp<GameEngine> game_engine, GameMenuViewDelegate *del
 }
 
 
+// EngineView
+
+bool GameMenuView::HandleBackButton() {
+  ButtonPressed(menu_button_.get());
+  return true;
+}
+
+
 // ButtonDelegate
 
 void GameMenuView::ButtonPressed(Button *button) {

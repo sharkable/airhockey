@@ -26,6 +26,9 @@ class GameMenuView : public EngineView, private ButtonDelegate {
  public:
   GameMenuView(sp<GameEngine> game_engine, GameMenuViewDelegate *delegate, bool match_finished);
 
+  // EngineView
+  bool HandleBackButton();
+
   // ButtonDelegate
   void ButtonPressed(Button *button);
 

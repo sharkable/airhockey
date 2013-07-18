@@ -24,11 +24,14 @@ class StoryView : public EngineView, private AnimatableDelegate {
   // EngineView
   bool IsCapturingTouches();
   void TouchesBegan(std::vector<Touch> touches);
+  bool HandleBackButton();
 
   // AnimatableDelegate
   void AnimationFinished(Animatable *animatable);
 
  private:
+  void MoveForward();
+
   sp<SimpleItem> story_;
   sp<SimpleItem> about_;
   GamePoint starting_image_position_;
