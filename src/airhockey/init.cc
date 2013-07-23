@@ -39,7 +39,11 @@ void sharkengine_init(sp<GameEngine> game_engine) {
         *game_engine->factory()->createAssetReader("assets/positions/rink.xml"));
   }
 
+#ifdef __ANDROID__
+  game_engine->ad_engine()->SetPublisherId("a151d05623e3477");
+#else
   game_engine->ad_engine()->SetPublisherId("a14bdda6dfc895a");
+#endif
   game_engine->ad_engine()->PrepareFullScreenAd();
 
   ScreenSize screen_size = game_engine->screen_size();
