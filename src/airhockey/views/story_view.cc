@@ -20,7 +20,7 @@ using std::vector;
 
 static const int kAnimateTicks = 30;
 
-StoryView::StoryView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
   Sprite story_image = Sprite(game_engine, "story");
   Sprite about_image = Sprite(game_engine, "about");
 

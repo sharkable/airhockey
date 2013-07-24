@@ -18,7 +18,7 @@ class ViewEntity;
 
 class Puck : public RoundThing {
  public:
-  Puck(sp<GameEngine> game_engine, Rink &rink);
+  Puck(GameEngine *game_engine, Rink &rink);
 
   void PlaceForPlayer(PlayerId player_id, const std::vector<sp<RoundThing> > &round_things,
                       bool center);

@@ -29,7 +29,7 @@ extern const std::string kLocalStoreUpgraded;
 
 class MainMenuView : public EngineView, private AppStoreEngineDelegate, private ButtonDelegate {
  public:
-  MainMenuView(sp<GameEngine> game_engine);
+  MainMenuView(GameEngine *game_engine);
 
   // EngineView
   void ViewIsShown();

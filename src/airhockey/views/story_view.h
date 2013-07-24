@@ -19,7 +19,7 @@ class SimpleItem;
 
 class StoryView : public EngineView, private AnimatableDelegate {
  public:
-  StoryView(sp<GameEngine> game_engine);
+  StoryView(GameEngine *game_engine);
 
   // EngineView
   bool IsCapturingTouches();

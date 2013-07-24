@@ -15,7 +15,7 @@
 
 #include "airhockey/entities/sound_slider.h"
 
-GameMenuView::GameMenuView(sp<GameEngine> game_engine, GameMenuViewDelegate *delegate,
+GameMenuView::GameMenuView(GameEngine *game_engine, GameMenuViewDelegate *delegate,
                            bool match_finished)
     : EngineView(game_engine),
       delegate_(delegate) {

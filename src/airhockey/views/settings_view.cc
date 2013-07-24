@@ -25,7 +25,7 @@ const string kLocalStoreDifficulty = "ls_difficulty";
 const string kLocalStoreNumPucks = "ls_num_pucks";
 const string kLocalStorePaddleSize = "ls_paddle_size";
 
-SettingsView::SettingsView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   sp<LocalStore> local_store = game_engine->local_store();
 
   double width = game_engine->screen_size_to_game_size(game_engine->screen_size()).width;

@@ -14,7 +14,7 @@ using std::string;
 
 #include "airhockey/entities/rink_overlay.h"
 
-RinkOverlay::RinkOverlay(sp<GameEngine> game_engine) {
+RinkOverlay::RinkOverlay(GameEngine *game_engine) {
   if (game_engine->platform_type() == kPlatformTypePhone) {
     // Add rink top and bottom pieces.
 

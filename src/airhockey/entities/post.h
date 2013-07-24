@@ -16,7 +16,7 @@ class ViewEntity;
 
 class Post : public RoundThing {
  public:
-  Post(sp<GameEngine> game_engine, double x, double y);
+  Post(GameEngine *game_engine, double x, double y);
 
   // RoundThing
   void DidBounceOff(ViewEntity *other, double total_velocity);

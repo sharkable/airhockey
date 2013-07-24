@@ -15,13 +15,13 @@
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/views/main_menu_view.h"
 
-SplashView::SplashView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+SplashView::SplashView(GameEngine *game_engine) : EngineView(game_engine) {
   AddEntity(new RinkOverlay(game_engine));
 }
 
 void SplashView::Update() {
   EngineView::Update();
-  SoundPlayer::instance()->initialize();
+  SoundPlayer::instance()->initialize();  // TODO this is a dumb place for this.
   SoundPlayer::instance()->setSoundEffectsOn(true);
   game_engine()->PopView();
   game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));

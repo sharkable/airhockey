@@ -18,8 +18,8 @@ class GameEngine;
 
 class RoundThing : public ViewEntity {
  public:
-  RoundThing(sp<GameEngine> game_engine);
-  RoundThing(sp<GameEngine> game_engine, std::string texture_name);
+  RoundThing(GameEngine *game_engine);
+  RoundThing(GameEngine *game_engine, std::string texture_name);
   ~RoundThing();
 
   void ApplyFriction();

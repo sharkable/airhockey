@@ -14,7 +14,7 @@ using std::string;
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/sprite.h"
 
-RinkView::RinkView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+RinkView::RinkView(GameEngine *game_engine) : EngineView(game_engine) {
   Sprite background_sprite(game_engine, "rink_bg");
   SimpleItem *background = new SimpleItem(background_sprite, game_engine->position("rink_bg"));
   AddEntity(sp<SimpleItem>(background));

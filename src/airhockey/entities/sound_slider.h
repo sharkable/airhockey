@@ -20,7 +20,7 @@ class Touch;
 
 class SoundSlider : public ViewEntity {
  public:
-  SoundSlider(sp<GameEngine> game_engine, GamePoint position);
+  SoundSlider(GameEngine *game_engine, GamePoint position);
 
   GamePoint ThumbPoint();
 
@@ -32,7 +32,7 @@ class SoundSlider : public ViewEntity {
   void TouchesEnded(GamePoint offset, std::vector<Touch> touches);
 
  private:
-  sp<GameEngine> game_engine_;
+  GameEngine *game_engine_;  // weak
   GamePoint position_;
   Sprite empty_sprite_;
   Sprite full_sprite_;

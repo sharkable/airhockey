@@ -14,7 +14,7 @@
 #include "airhockey/views/rink_view.h"
 #include "airhockey/views/splash_view.h"
 
-void sharkengine_init(sp<GameEngine> game_engine) {
+void sharkengine_init(GameEngine *game_engine) {
   if (game_engine->platform_type() == kPlatformTypePhone) {
     game_engine->load_positions(
         *game_engine->factory()->createAssetReader("assets/positions/game_menu_iphone.xml"));

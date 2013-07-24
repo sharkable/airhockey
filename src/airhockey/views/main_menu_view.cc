@@ -48,7 +48,7 @@ void fade_out(Animatable *entity) {
   entity->AnimateToAlpha(0, kAnimationTypeLinear, 15);
 }
 
-MainMenuView::MainMenuView(sp<GameEngine> game_engine) : EngineView(game_engine) {
+MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   InitializeSettings();
   state_ = kMainMenuStateRunning;
 

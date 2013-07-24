@@ -17,7 +17,7 @@ class GameEngine;
 
 class RinkView : public EngineView {
  public:
-  RinkView(sp<GameEngine> game_engine);
+  RinkView(GameEngine *game_engine);
 
   static GameSize RinkSizeForPlatformType(PlatformType platform_type);
 };
