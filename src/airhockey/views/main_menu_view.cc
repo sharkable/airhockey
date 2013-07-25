@@ -68,7 +68,11 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   start_1_player_button_.reset(new Button());
   start_1_player_button_->set_normal_sprite(start_1_player_button_image);
   start_1_player_button_->set_pressed_sprite(start_1_player_button_pressed_image);
-  start_1_player_button_->set_position(game_engine->position("start_1_player_button"));
+  GamePoint player_1_position = game_engine->position("start_1_player_button");
+#ifdef __ANDROID__
+  player_1_position.y += 90;
+#endif
+  start_1_player_button_->set_position(player_1_position);
   start_1_player_button_->set_delegate(this);
   AddEntity(start_1_player_button_);
   fade_in(start_1_player_button_.get());
@@ -78,7 +82,11 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   start_2_player_button_.reset(new Button());
   start_2_player_button_->set_normal_sprite(start_2_player_button_image);
   start_2_player_button_->set_pressed_sprite(start_2_player_button_pressed_image);
-  start_2_player_button_->set_position(game_engine->position("start_2_player_button"));
+  GamePoint player_2_position = game_engine->position("start_2_player_button");
+#ifdef __ANDROID__
+  player_2_position.y += 90;
+#endif
+  start_2_player_button_->set_position(player_2_position);
   start_2_player_button_->set_delegate(this);
   AddEntity(start_2_player_button_);
   fade_in(start_2_player_button_.get());
@@ -103,7 +111,8 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   AddEntity(story_button_);
   fade_in(story_button_.get());
 
-  // TODO disabling this until I get app store selling sorted out.
+  // TODO disabling this until I get Android app store selling sorted out.
+#ifndef __ANDROID__
   Sprite upgrade_button_image(game_engine, "upgrade_button");
   Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
   upgrade_button_.reset(new Button());
@@ -115,6 +124,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
     AddEntity(upgrade_button_);
   }
   fade_in(upgrade_button_.get());
+#endif
 
   sound_slider_.reset(new SoundSlider(game_engine,
                                       game_engine->position("sound_slider_main_menu")));
@@ -125,6 +135,8 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
 // EngineView
 
 void MainMenuView::ViewIsShown() {
+  // TODO disabling this until I get Android app store selling sorted out.
+#ifndef __ANDROID__
   // Force the popup for rating and upgrading just once.
   int main_menu_view_count =
       game_engine()->local_store()->IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
@@ -132,6 +144,7 @@ void MainMenuView::ViewIsShown() {
   if (main_menu_view_count == 10) {
     PressedUpgrade();
   }
+#endif
 }
 
 void MainMenuView::Update() {
@@ -191,7 +204,9 @@ void MainMenuView::AnimateOut() {
   fade_out(start_2_player_button_.get());
   fade_out(settings_button_.get());
   fade_out(story_button_.get());
+#ifndef __ANDROID__
   fade_out(upgrade_button_.get());
+#endif
   RemoveEntity(sound_slider_);
 
   animating_out_ticks_left_ = kAnimateOutTicks;
