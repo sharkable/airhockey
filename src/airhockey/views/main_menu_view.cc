@@ -192,7 +192,7 @@ void MainMenuView::ButtonPressed(Button *button) {
 void MainMenuView::InitializeSettings() {
   if (!game_engine()->local_store()->HasEntryForKey(kLocalStoreDifficulty)) {
     game_engine()->local_store()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
-    game_engine()->local_store()->SetInteger(kPaddleSizeMedium, kLocalStorePaddleSize);
+    game_engine()->local_store()->SetInteger(kPaddleSizeLarge, kLocalStorePaddleSize);
   }
 }
 
