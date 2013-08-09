@@ -55,6 +55,7 @@ class Paddle : public RoundThing {
   bool ContainsPoint(GamePoint p);
   bool IsGrabbable();
   bool IsMovable();
+  bool is_grabbed();
 
  private:
   void RunAITick();
@@ -71,6 +72,7 @@ class Paddle : public RoundThing {
   bool target_right_corner_;
   bool target_away_from_corner_;
   int ai_initial_pause_ticks_;
+  bool always_grabbed_;
 };
 
 #endif

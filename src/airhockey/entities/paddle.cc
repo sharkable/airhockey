@@ -68,6 +68,7 @@ Paddle::Paddle(GameEngine *game_engine, Rink &rink, PlayerId player_id, PaddleSi
   radius_ = kPaddleRadii[size];
   mass_ = kPaddleMass;
   friction_ = player_controlled_ ? kPaddleFriction : kPaddleAIFriction;
+  always_grabbed_ = game_engine->platform_type() == kPlatformTypePC;
 }
 
 void Paddle::SetInitialPosition() {
@@ -168,6 +169,13 @@ bool Paddle::IsGrabbable() {
 
 bool Paddle::IsMovable() {
   return ready_to_play_;
+}
+
+bool Paddle::is_grabbed() {
+  if (always_grabbed_ && player_id_ == kPlayerId1) {
+    return true;
+  }
+  return RoundThing::is_grabbed();
 }
 
 

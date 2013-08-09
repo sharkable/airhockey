@@ -83,9 +83,9 @@ void RoundThing::MaybeBounceOff(RoundThing *other) {
 
     double v_fraction = mass_ / (other->mass() + mass_);
 
-    if ((grabbed_ && !other->is_grabbed() && other->IsMovable()) || !IsMovable()) {
+    if ((is_grabbed() && !other->is_grabbed() && other->IsMovable()) || !IsMovable()) {
       v_fraction = 1;
-    } else if ((!grabbed_ && other->is_grabbed()) || !other->IsMovable()) {
+    } else if ((!is_grabbed() && other->is_grabbed()) || !other->IsMovable()) {
       v_fraction = 0;
     }
 
@@ -184,7 +184,7 @@ void RoundThing::Update() {
     return;
   }
 
-  if (!grabbed_) {
+  if (!is_grabbed()) {
     x_ += vx_;
     y_ += vy_;
   } else {
@@ -236,7 +236,7 @@ void RoundThing::TouchesMoved(GamePoint offset, vector<Touch> touches) {
       break;
     }
   }
-  if (grabbed_ && correctTouch != NULL) {
+  if (is_grabbed() && correctTouch != NULL) {
     GamePoint p = correctTouch->location() - offset;
     x_ = p.x;
     y_ = p.y;
@@ -251,7 +251,7 @@ void RoundThing::TouchesEnded(GamePoint offset, vector<Touch> touches) {
       break;
     }
   }
-  if (grabbed_ && correctTouch != NULL) {
+  if (is_grabbed() && correctTouch != NULL) {
     grabbed_ = false;
     grabbed_touch_ = NULL;
   }
@@ -260,6 +260,14 @@ void RoundThing::TouchesEnded(GamePoint offset, vector<Touch> touches) {
 void RoundThing::ClearTouches() {
   grabbed_ = false;
   grabbed_touch_ = NULL;
+}
+
+void RoundThing::HandleMouseDelta(float delta_x, float delta_y) {
+  if (!IsGrabbable() || !is_active() || !IsMovable()) {
+    return;
+  }
+  x_ += delta_x;
+  y_ += delta_y;
 }
 
 //bool RoundThing::isGrabbable() {

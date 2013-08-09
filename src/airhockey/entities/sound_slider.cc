@@ -36,6 +36,7 @@ SoundSlider::SoundSlider(GameEngine *game_engine, GamePoint position)
       slider_width_ = kSliderWidthPhone;
       break;
     case kPlatformTypeTablet:
+    case kPlatformTypePC:
       left_marin_ = kLeftMarginTablet;
       slider_width_ = kSliderWidthTablet;
       break;

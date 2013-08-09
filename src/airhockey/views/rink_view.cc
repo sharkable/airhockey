@@ -25,6 +25,7 @@ GameSize RinkView::RinkSizeForPlatformType(PlatformType platform_type) {
     case kPlatformTypePhone:
       return game_size_make(768, 1152);
     case kPlatformTypeTablet:
+    case kPlatformTypePC:
       return game_size_make(768, 1024);
   }
 }

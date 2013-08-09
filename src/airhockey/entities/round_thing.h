@@ -45,7 +45,7 @@ class RoundThing : public ViewEntity {
   double mass() { return mass_; }
   void set_mass(double mass) { mass_ = mass; }
   double friction() { return friction_; }
-  bool is_grabbed() { return grabbed_; }
+  virtual bool is_grabbed() { return grabbed_; }
   bool is_active() { return active_; }
   void set_active(bool active) { active_ = active; }
 
@@ -56,6 +56,7 @@ class RoundThing : public ViewEntity {
   void TouchesMoved(GamePoint offset, std::vector<Touch> touches);
   void TouchesEnded(GamePoint offset, std::vector<Touch> touches);
   void ClearTouches();
+  void HandleMouseDelta(float delta_x, float delta_y);
 
  protected:
   Sprite sprite_;
