@@ -21,8 +21,9 @@ using std::vector;
 static const int kAnimateTicks = 30;
 
 StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
-  Sprite story_image = Sprite(game_engine, "story");
-  Sprite about_image = Sprite(game_engine, "about");
+  bool use_pc = game_engine->platform_type() == kPlatformTypePC;
+  Sprite story_image = Sprite(game_engine, use_pc ? "story_pc" : "story");
+  Sprite about_image = Sprite(game_engine, use_pc ? "about_pc" : "about");
 
   GameSize rink_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());
   GameSize image_size = story_image.content_size();
