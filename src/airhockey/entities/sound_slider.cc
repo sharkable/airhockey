@@ -16,8 +16,8 @@
 using std::string;
 using std::vector;
 
-const int kLeftMarginTablet = 18;
-const int kSliderWidthTablet = 271;
+const int kLeftMarginTablet = 14;
+const int kSliderWidthTablet = 231;
 const int kLeftMarginPhone = 32;
 const int kSliderWidthPhone = 506;
 
