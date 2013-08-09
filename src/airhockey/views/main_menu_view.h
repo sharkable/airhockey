@@ -61,6 +61,7 @@ class MainMenuView : public EngineView, private AppStoreEngineDelegate, private 
   MainMenuState state_;
   int animating_out_ticks_left_;
   bool show_upgrade_button_;
+  bool supports_2_player_;
 };
 
 #endif

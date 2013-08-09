@@ -50,6 +50,7 @@ void fade_out(Animatable *entity) {
 
 MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   show_upgrade_button_ = game_engine->app_store_engine()->IsImplemented();
+  supports_2_player_ = game_engine->platform_type() != kPlatformTypePC;
 
   InitializeSettings();
   state_ = kMainMenuStateRunning;
@@ -65,8 +66,17 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   title_->set_alpha(0);
   title_->AnimateToAlpha(1, kAnimationTypeCubicEaseOut, 900);
 
-  Sprite start_1_player_button_image(game_engine, "start_1_player_button");
-  Sprite start_1_player_button_pressed_image(game_engine, "start_1_player_button_pressed");
+  char const *start_button;
+  char const *start_button_pressed;
+  if (supports_2_player_) {
+    start_button = "start_1_player_button";
+    start_button_pressed = "start_1_player_button_pressed";
+  } else {
+    start_button = "start_button";
+    start_button_pressed = "start_button_pressed";
+  }
+  Sprite start_1_player_button_image(game_engine, start_button);
+  Sprite start_1_player_button_pressed_image(game_engine, start_button_pressed);
   start_1_player_button_.reset(new Button());
   start_1_player_button_->set_normal_sprite(start_1_player_button_image);
   start_1_player_button_->set_pressed_sprite(start_1_player_button_pressed_image);
@@ -79,19 +89,21 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   AddEntity(start_1_player_button_);
   fade_in(start_1_player_button_.get());
 
-  Sprite start_2_player_button_image(game_engine, "start_2_player_button");
-  Sprite start_2_player_button_pressed_image(game_engine, "start_2_player_button_pressed");
-  start_2_player_button_.reset(new Button());
-  start_2_player_button_->set_normal_sprite(start_2_player_button_image);
-  start_2_player_button_->set_pressed_sprite(start_2_player_button_pressed_image);
-  GamePoint player_2_position = game_engine->position("start_2_player_button");
-  if (!show_upgrade_button_) {
-    player_2_position.y += 90;
+  if (supports_2_player_) {
+    Sprite start_2_player_button_image(game_engine, "start_2_player_button");
+    Sprite start_2_player_button_pressed_image(game_engine, "start_2_player_button_pressed");
+    start_2_player_button_.reset(new Button());
+    start_2_player_button_->set_normal_sprite(start_2_player_button_image);
+    start_2_player_button_->set_pressed_sprite(start_2_player_button_pressed_image);
+    GamePoint player_2_position = game_engine->position("start_2_player_button");
+    if (!show_upgrade_button_) {
+      player_2_position.y += 90;
+    }
+    start_2_player_button_->set_position(player_2_position);
+    start_2_player_button_->set_delegate(this);
+    AddEntity(start_2_player_button_);
+    fade_in(start_2_player_button_.get());
   }
-  start_2_player_button_->set_position(player_2_position);
-  start_2_player_button_->set_delegate(this);
-  AddEntity(start_2_player_button_);
-  fade_in(start_2_player_button_.get());
 
   Sprite settings_button_image(game_engine, "settings_button");
   Sprite settings_button_pressed_image(game_engine, "settings_button_pressed");
@@ -201,7 +213,9 @@ void MainMenuView::AnimateOut() {
 
   title_->AnimateToZoom(0, kAnimationTypeLinear, 15);
   fade_out(start_1_player_button_.get());
-  fade_out(start_2_player_button_.get());
+  if (supports_2_player_) {
+    fade_out(start_2_player_button_.get());
+  }
   fade_out(settings_button_.get());
   fade_out(story_button_.get());
   if (show_upgrade_button_) {
