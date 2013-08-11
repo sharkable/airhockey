@@ -39,9 +39,12 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
            PaddleSize paddle_size);
 
   // EngineView
+  void ViewDidGainFocus();
+  void ViewDidLoseFocus();
   void Update();
   void NotifyPause();
   bool HandleBackButton();
+  void HandlePauseButton();
 
   // ButtonDelegate
   void ButtonPressed(Button *button);

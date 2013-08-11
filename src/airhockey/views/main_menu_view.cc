@@ -147,7 +147,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
 
 // EngineView
 
-void MainMenuView::ViewIsShown() {
+void MainMenuView::ViewDidGainFocus() {
   if (show_upgrade_button_) {
     // Force the popup for rating and upgrading just once.
     int main_menu_view_count =

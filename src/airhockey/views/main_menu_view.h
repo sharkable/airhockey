@@ -32,7 +32,7 @@ class MainMenuView : public EngineView, private AppStoreEngineDelegate, private 
   MainMenuView(GameEngine *game_engine);
 
   // EngineView
-  void ViewIsShown();
+  void ViewDidGainFocus();
   void Update();
 
   // AppStoreEngineDelegate

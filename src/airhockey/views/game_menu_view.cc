@@ -30,6 +30,14 @@ bool GameMenuView::HandleBackButton() {
   return true;
 }
 
+void GameMenuView::HandlePauseButton() {
+  if (rematch_button_.get()) {
+    ButtonPressed(rematch_button_.get());
+  } else if (continue_button_.get()) {
+    ButtonPressed(continue_button_.get());
+  }
+}
+
 
 // ButtonDelegate
 

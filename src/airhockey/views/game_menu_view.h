@@ -28,6 +28,7 @@ class GameMenuView : public EngineView, private ButtonDelegate {
 
   // EngineView
   bool HandleBackButton();
+  void HandlePauseButton();
 
   // ButtonDelegate
   void ButtonPressed(Button *button);
