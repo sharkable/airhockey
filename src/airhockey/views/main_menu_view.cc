@@ -204,7 +204,11 @@ void MainMenuView::ButtonPressed(Button *button) {
 void MainMenuView::InitializeSettings() {
   if (!game_engine()->local_store()->HasEntryForKey(kLocalStoreDifficulty)) {
     game_engine()->local_store()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
-    game_engine()->local_store()->SetInteger(kPaddleSizeLarge, kLocalStorePaddleSize);
+    PaddleSize default_size = kPaddleSizeMedium;
+    if (game_engine()->platform_type() == kPlatformTypePhone) {
+      default_size = kPaddleSizeLarge;
+    }
+    game_engine()->local_store()->SetInteger(default_size, kLocalStorePaddleSize);
   }
 }
 
