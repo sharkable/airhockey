@@ -287,11 +287,6 @@ void PlayView::Update() {
   }
 
   switch (state_) {
-    case kPlayViewStateShowingAd:
-      if (!game_engine()->ad_engine()->IsShowingFullScreenAd()) {
-        state_ = kPlayViewStateGetReady;
-      }
-      break;
     case kPlayViewStateGetReady:
       break;
     case kPlayViewStatePlaying: {
@@ -419,11 +414,10 @@ void PlayView::SetUpNewGame() {
   game_engine()->local_store()->SetInteger(num_matches, kLocalStoreMatchCount);
   bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
-  if (show_full_screen_ad && game_engine()->ad_engine()->ShowFullScreenAd()) {
-    state_ = kPlayViewStateShowingAd;
-  } else {
-    state_ = kPlayViewStateGetReady;
+  if (show_full_screen_ad) {
+    game_engine()->ad_engine()->ShowFullScreenAd();
   }
+  state_ = kPlayViewStateGetReady;
   get_ready_ticks_left_ = kGetReadyTicksTotal;
 }
 
