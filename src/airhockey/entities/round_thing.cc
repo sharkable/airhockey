@@ -177,7 +177,7 @@ bool RoundThing::IsMovable() {
 }
 
 
-// ViewEntity
+#pragma mark - ViewEntity
 
 void RoundThing::Update() {
   if (!IsMovable() || !is_active()) {

@@ -170,7 +170,7 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
 }
 
 
-// EngineView
+#pragma mark - EngineView
 
 void PlayView::ViewDidGainFocus() {
   game_engine()->input_module()->HidePointer();
@@ -340,7 +340,8 @@ void PlayView::HandlePauseButton() {
   PausePressed();
 }
 
-// ButtonDelegate
+
+#pragma mark - ButtonDelegate
 
 void PlayView::ButtonPressed(Button *button) {
   if (button == pause_button_1_.get() || button == pause_button_2_.get()) {
@@ -351,7 +352,7 @@ void PlayView::ButtonPressed(Button *button) {
 }
 
 
-// GameMenuViewDelegate
+#pragma mark - GameMenuViewDelegate
 
 void PlayView::RematchPressed() {
   game_engine()->analytics_engine()->LogEvent("REMATCH");
@@ -368,7 +369,7 @@ void PlayView::ContinuePressed() {
 }
 
 
-// private
+#pragma mark - private
 
 void PlayView::SetUpNewGame() {
   // Place paddles!

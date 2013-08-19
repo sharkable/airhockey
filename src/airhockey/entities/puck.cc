@@ -85,7 +85,7 @@ void Puck::FadeIn() {
 }
 
 
-// ViewEntity
+#pragma mark - ViewEntity
 
 void Puck::Update() {
   if (!hit_puck_this_time_) {
@@ -127,7 +127,7 @@ void Puck::Render(GamePoint offset) {
 }
 
 
-// RoundThing
+#pragma mark - RoundThing
 
 void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
   float volume = (float)(total_velocity / 50.0);

@@ -52,7 +52,7 @@ StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
 }
 
 
-// EngineView
+#pragma mark - EngineView
 
 bool StoryView::IsCapturingTouches() {
   return about_->position().x >= resting_image_position_.x;
@@ -68,7 +68,7 @@ bool StoryView::HandleBackButton() {
 }
 
 
-// AnimatableDelegate
+#pragma mark - AnimatableDelegate
 
 void StoryView::AnimationFinished(Animatable *animatable) {
   if (about_->position().x == ending_image_position_.x) {
@@ -77,7 +77,7 @@ void StoryView::AnimationFinished(Animatable *animatable) {
 }
 
 
-// private
+#pragma mark - private
 
 void StoryView::MoveForward() {
   if (about_->position().x == starting_image_position_.x) {

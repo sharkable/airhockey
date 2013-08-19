@@ -119,7 +119,7 @@ void Rink::MoveInFromEdge(RoundThing *thing) {
 }
 
 
-// ViewEntity
+#pragma mark - ViewEntity
 
 void Rink::Update() {
 }

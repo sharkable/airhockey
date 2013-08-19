@@ -56,7 +56,7 @@ GamePoint SoundSlider::ThumbPoint() {
 }
 
 
-// ViewEntity
+#pragma mark - ViewEntity
 
 void SoundSlider::Update() {
 }

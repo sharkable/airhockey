@@ -23,7 +23,7 @@ Post::Post(GameEngine *game_engine, double x, double y) : RoundThing(game_engine
 }
 
 
-// RoundThing
+#pragma mark - RoundThing
 
 void Post::DidBounceOff(ViewEntity *other, double total_velocity) {
   if (typeid(*other) == typeid(Puck)) {
@@ -36,7 +36,7 @@ bool Post::IsMovable() {
 }
 
 
-// ViewEntity
+#pragma mark - ViewEntity
 
 void Post::Render(GamePoint offset) {
 }

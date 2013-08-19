@@ -145,7 +145,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
 }
 
 
-// EngineView
+#pragma mark - EngineView
 
 void MainMenuView::ViewDidGainFocus() {
   if (show_upgrade_button_) {
@@ -174,7 +174,7 @@ void MainMenuView::Update() {
 }
 
 
-// AppStoreEngineDelegate
+#pragma mark - AppStoreEngineDelegate
 
 void MainMenuView::UpgradeSucceeded() {
   game_engine()->local_store()->SetBool(true, kLocalStoreUpgraded);
@@ -182,7 +182,7 @@ void MainMenuView::UpgradeSucceeded() {
 }
 
 
-// ButtonDelegate
+#pragma mark - ButtonDelegate
 
 void MainMenuView::ButtonPressed(Button *button) {
   if (button == start_1_player_button_.get()) {
@@ -199,7 +199,7 @@ void MainMenuView::ButtonPressed(Button *button) {
 }
 
 
-// private
+#pragma mark - private
 
 void MainMenuView::InitializeSettings() {
   if (!game_engine()->local_store()->HasEntryForKey(kLocalStoreDifficulty)) {

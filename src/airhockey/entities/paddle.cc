@@ -117,7 +117,7 @@ void Paddle::SetReadyToPlay(bool ready) {
 }
 
 
-// ViewEntity
+#pragma mark - ViewEntity
 
 void Paddle::Update() {
   // Computer AI
@@ -138,7 +138,7 @@ void Paddle::Render(GamePoint offset) {
 }
 
 
-// RoundThing
+#pragma mark - RoundThing
 
 void Paddle::DidBounceOff(ViewEntity *other, double total_velocity) {
   if (typeid(*other) == typeid(Puck)) {
@@ -179,7 +179,7 @@ bool Paddle::is_grabbed() {
 }
 
 
-// private
+#pragma mark - private
 
 void Paddle::RunAITick() {
   double speed = 0;

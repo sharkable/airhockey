@@ -42,7 +42,7 @@ RinkOverlay::RinkOverlay(GameEngine *game_engine) {
 }
 
 
-// ViewEntity
+#pragma mark - ViewEntity
 
 void RinkOverlay::Update() {
   rink_pieces_.Update();

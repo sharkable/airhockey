@@ -23,7 +23,7 @@ GameMenuView::GameMenuView(GameEngine *game_engine, GameMenuViewDelegate *delega
 }
 
 
-// EngineView
+#pragma mark - EngineView
 
 bool GameMenuView::HandleBackButton() {
   ButtonPressed(menu_button_.get());
@@ -39,7 +39,7 @@ void GameMenuView::HandlePauseButton() {
 }
 
 
-// ButtonDelegate
+#pragma mark - ButtonDelegate
 
 void GameMenuView::ButtonPressed(Button *button) {
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
@@ -56,7 +56,7 @@ void GameMenuView::ButtonPressed(Button *button) {
 }
 
 
-// private
+#pragma mark - private
 
 void GameMenuView::Init(bool match_finished) {
   Sprite menu_background_sprite(game_engine(), "game_menu_bg");

@@ -97,7 +97,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
 }
 
 
-// EngineView
+#pragma mark - EngineView
 
 bool SettingsView::IsCapturingTouches() {
   return entities_->position().x >= 0;
@@ -109,7 +109,7 @@ bool SettingsView::HandleBackButton() {
 }
 
 
-// Animatable
+#pragma mark - Animatable
 
 void SettingsView::AnimationFinished(Animatable *animatable) {
   if (entities_->position().x < 0) {
@@ -118,7 +118,7 @@ void SettingsView::AnimationFinished(Animatable *animatable) {
 }
 
 
-// ButtonDelegate
+#pragma mark - ButtonDelegate
 
 void SettingsView::ButtonPressed(Button *button) {
   sp<LocalStore> local_store = game_engine()->local_store();
