@@ -9,7 +9,6 @@
 #include "gameengine/modules/ad_engine.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
-#include "gameengine/game_engine_factory.h"
 
 #include "airhockey/views/rink_view.h"
 #include "airhockey/views/splash_view.h"
@@ -17,26 +16,21 @@
 void sharkengine_init(GameEngine *game_engine) {
   if (game_engine->platform_type() == kPlatformTypePhone) {
     game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/game_menu_iphone.xml"));
+        *game_engine->CreateAssetReader("assets/positions/game_menu_iphone.xml"));
     game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/main_menu_iphone.xml"));
+        *game_engine->CreateAssetReader("assets/positions/main_menu_iphone.xml"));
     game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/settings_iphone.xml"));
+        *game_engine->CreateAssetReader("assets/positions/settings_iphone.xml"));
     game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/play_iphone.xml"));
+        *game_engine->CreateAssetReader("assets/positions/play_iphone.xml"));
     game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/rink_iphone.xml"));
+        *game_engine->CreateAssetReader("assets/positions/rink_iphone.xml"));
   } else {
-    game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/game_menu.xml"));
-    game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/main_menu.xml"));
-    game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/settings.xml"));
-    game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/play.xml"));
-    game_engine->load_positions(
-        *game_engine->factory()->createAssetReader("assets/positions/rink.xml"));
+    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/game_menu.xml"));
+    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/main_menu.xml"));
+    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/settings.xml"));
+    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/play.xml"));
+    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/rink.xml"));
   }
 
 #ifdef __ANDROID__
