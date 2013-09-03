@@ -15,7 +15,7 @@ using std::string;
 
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/modules/ad_module.h"
-#include "gameengine/modules/analytics_engine.h"
+#include "gameengine/modules/analytics_module.h"
 #include "gameengine/modules/local_store.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
@@ -248,7 +248,7 @@ void MainMenuView::PressedStart(int num_players) {
   analytics_params["NumPucks"] = to_string(num_pucks);
   analytics_params["Difficulty"] = to_string(difficulty);
   analytics_params["PaddleSize"] = to_string(paddle_size);
-  game_engine()->analytics_engine()->LogEvent("START_GAME", analytics_params);
+  game_engine()->analytics_module()->LogEvent("START_GAME", analytics_params);
 
   PlayView *play_view = new PlayView(game_engine(),
                                      num_players,
@@ -264,7 +264,7 @@ void MainMenuView::PressedSettings() {
 }
 
 void MainMenuView::PressedStory() {
-  game_engine()->analytics_engine()->LogEvent("STORY_PRESSED");
+  game_engine()->analytics_module()->LogEvent("STORY_PRESSED");
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
     game_engine()->ad_module()->RemoveAd();
   }

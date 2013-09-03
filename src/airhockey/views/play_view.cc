@@ -10,7 +10,7 @@
 
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/modules/ad_module.h"
-#include "gameengine/modules/analytics_engine.h"
+#include "gameengine/modules/analytics_module.h"
 #include "gameengine/modules/input_module.h"
 #include "gameengine/modules/local_store.h"
 #include "gameengine/modules/sound_player.h"
@@ -355,7 +355,7 @@ void PlayView::ButtonPressed(Button *button) {
 #pragma mark - GameMenuViewDelegate
 
 void PlayView::RematchPressed() {
-  game_engine()->analytics_engine()->LogEvent("REMATCH");
+  game_engine()->analytics_module()->LogEvent("REMATCH");
   SetUpNewGame();
 }
 
