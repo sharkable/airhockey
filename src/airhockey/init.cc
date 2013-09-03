@@ -6,7 +6,7 @@
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 
-#include "gameengine/modules/ad_engine.h"
+#include "gameengine/modules/ad_module.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 
@@ -34,11 +34,11 @@ void sharkengine_init(GameEngine *game_engine) {
   }
 
 #ifdef __ANDROID__
-  game_engine->ad_engine()->SetPublisherId("a151d05623e3477");
+  game_engine->ad_module()->SetPublisherId("a151d05623e3477");
 #else
-  game_engine->ad_engine()->SetPublisherId("a14bdda6dfc895a");
+  game_engine->ad_module()->SetPublisherId("a14bdda6dfc895a");
 #endif
-  game_engine->ad_engine()->PrepareFullScreenAd();
+  game_engine->ad_module()->PrepareFullScreenAd();
 
   ScreenSize screen_size = game_engine->screen_size();
   GameSize game_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());

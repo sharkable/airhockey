@@ -9,7 +9,7 @@
 #include "airhockey/views/play_view.h"
 
 #include "gameengine/entities/simple_item.h"
-#include "gameengine/modules/ad_engine.h"
+#include "gameengine/modules/ad_module.h"
 #include "gameengine/modules/analytics_engine.h"
 #include "gameengine/modules/input_module.h"
 #include "gameengine/modules/local_store.h"
@@ -416,7 +416,7 @@ void PlayView::SetUpNewGame() {
   bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
   if (show_full_screen_ad) {
-    game_engine()->ad_engine()->ShowFullScreenAd();
+    game_engine()->ad_module()->ShowFullScreenAd();
   }
   state_ = kPlayViewStateGetReady;
   get_ready_ticks_left_ = kGetReadyTicksTotal;

@@ -9,7 +9,7 @@
 #include "airhockey/views/game_menu_view.h"
 
 #include "gameengine/entities/simple_item.h"
-#include "gameengine/modules/ad_engine.h"
+#include "gameengine/modules/ad_module.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/sprite.h"
 
@@ -43,7 +43,7 @@ void GameMenuView::HandlePauseButton() {
 
 void GameMenuView::ButtonPressed(Button *button) {
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_engine()->RemoveAd();
+    game_engine()->ad_module()->RemoveAd();
   }
   game_engine()->PopView();
   if (button == rematch_button_.get()) {

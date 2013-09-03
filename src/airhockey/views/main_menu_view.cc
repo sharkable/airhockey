@@ -14,7 +14,7 @@ using std::map;
 using std::string;
 
 #include "gameengine/entities/simple_item.h"
-#include "gameengine/modules/ad_engine.h"
+#include "gameengine/modules/ad_module.h"
 #include "gameengine/modules/analytics_engine.h"
 #include "gameengine/modules/local_store.h"
 #include "gameengine/coordinate_types.h"
@@ -232,7 +232,7 @@ void MainMenuView::AnimateOut() {
 
 void MainMenuView::PressedStart(int num_players) {
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_engine()->RemoveAd();
+    game_engine()->ad_module()->RemoveAd();
   }
 
   // The stored number of pucks is one less than the desired value. Not ideal. This is for:
@@ -266,7 +266,7 @@ void MainMenuView::PressedSettings() {
 void MainMenuView::PressedStory() {
   game_engine()->analytics_engine()->LogEvent("STORY_PRESSED");
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_engine()->RemoveAd();
+    game_engine()->ad_module()->RemoveAd();
   }
   game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
 }
