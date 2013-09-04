@@ -8,7 +8,7 @@
 
 #include "airhockey/entities/sound_slider.h"
 
-#include "gameengine/modules/local_store.h"
+#include "gameengine/modules/persistence_module.h"
 #include "gameengine/modules/sound_player.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/touch.h"
@@ -41,8 +41,8 @@ SoundSlider::SoundSlider(GameEngine *game_engine, GamePoint position)
       slider_width_ = kSliderWidthTablet;
       break;
   }
-  if (game_engine->local_store()->HasEntryForKey(kLocalStoreVolume)) {
-    value_ = game_engine->local_store()->DoubleForKey(kLocalStoreVolume);
+  if (game_engine->persistence_module()->HasEntryForKey(kLocalStoreVolume)) {
+    value_ = game_engine->persistence_module()->DoubleForKey(kLocalStoreVolume);
   } else {
     value_ = 0.75;
   }
@@ -110,7 +110,7 @@ void SoundSlider::TouchesEnded(GamePoint offset, vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
       SoundPlayer::instance()->setGlobalVolume(value_);
-      game_engine_->local_store()->SetDouble(value_, kLocalStoreVolume);
+      game_engine_->persistence_module()->SetDouble(value_, kLocalStoreVolume);
       grabbed_touch_ = NULL;
       return;
     }

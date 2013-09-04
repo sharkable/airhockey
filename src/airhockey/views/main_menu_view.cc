@@ -16,7 +16,7 @@ using std::string;
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/modules/ad_module.h"
 #include "gameengine/modules/analytics_module.h"
-#include "gameengine/modules/local_store.h"
+#include "gameengine/modules/persistence_module.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/sprite.h"
@@ -49,7 +49,7 @@ void fade_out(Animatable *entity) {
 }
 
 MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
-  show_upgrade_button_ = game_engine->app_store_engine()->IsImplemented();
+  show_upgrade_button_ = game_engine->app_store_module()->IsImplemented();
   supports_2_player_ = game_engine->platform_type() != kPlatformTypePC;
 
   InitializeSettings();
@@ -133,7 +133,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
     upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
     upgrade_button_->set_position(game_engine->position("upgrade_button"));
     upgrade_button_->set_delegate(this);
-    if (!game_engine->local_store()->BoolForKey(kLocalStoreUpgraded)) {
+    if (!game_engine->persistence_module()->BoolForKey(kLocalStoreUpgraded)) {
       AddEntity(upgrade_button_);
     }
     fade_in(upgrade_button_.get());
@@ -151,8 +151,9 @@ void MainMenuView::ViewDidGainFocus() {
   if (show_upgrade_button_) {
     // Force the popup for rating and upgrading just once.
     int main_menu_view_count =
-        game_engine()->local_store()->IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
-    game_engine()->local_store()->SetInteger(main_menu_view_count, kLocalStoreMainMenuViewCount);
+        game_engine()->persistence_module()->IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
+    game_engine()->persistence_module()->SetInteger(main_menu_view_count,
+                                                    kLocalStoreMainMenuViewCount);
     if (main_menu_view_count == 10) {
       PressedUpgrade();
     }
@@ -174,10 +175,10 @@ void MainMenuView::Update() {
 }
 
 
-#pragma mark - AppStoreEngineDelegate
+#pragma mark - AppStoreModuleDelegate
 
 void MainMenuView::UpgradeSucceeded() {
-  game_engine()->local_store()->SetBool(true, kLocalStoreUpgraded);
+  game_engine()->persistence_module()->SetBool(true, kLocalStoreUpgraded);
   RemoveEntity(upgrade_button_);
 }
 
@@ -202,13 +203,13 @@ void MainMenuView::ButtonPressed(Button *button) {
 #pragma mark - private
 
 void MainMenuView::InitializeSettings() {
-  if (!game_engine()->local_store()->HasEntryForKey(kLocalStoreDifficulty)) {
-    game_engine()->local_store()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
+  if (!game_engine()->persistence_module()->HasEntryForKey(kLocalStoreDifficulty)) {
+    game_engine()->persistence_module()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
     PaddleSize default_size = kPaddleSizeMedium;
     if (game_engine()->platform_type() == kPlatformTypePhone) {
       default_size = kPaddleSizeLarge;
     }
-    game_engine()->local_store()->SetInteger(default_size, kLocalStorePaddleSize);
+    game_engine()->persistence_module()->SetInteger(default_size, kLocalStorePaddleSize);
   }
 }
 
@@ -238,11 +239,11 @@ void MainMenuView::PressedStart(int num_players) {
   // The stored number of pucks is one less than the desired value. Not ideal. This is for:
   // 1) Legacy.
   // 2) Defaults to 0, which means 1 puck.
-  int num_pucks = game_engine()->local_store()->IntegerForKey(kLocalStoreNumPucks) + 1;
+  int num_pucks = game_engine()->persistence_module()->IntegerForKey(kLocalStoreNumPucks) + 1;
   ComputerAI difficulty =
-      (ComputerAI)game_engine()->local_store()->IntegerForKey(kLocalStoreDifficulty);
+      (ComputerAI)game_engine()->persistence_module()->IntegerForKey(kLocalStoreDifficulty);
   PaddleSize paddle_size =
-      (PaddleSize)game_engine()->local_store()->IntegerForKey(kLocalStorePaddleSize);
+      (PaddleSize)game_engine()->persistence_module()->IntegerForKey(kLocalStorePaddleSize);
   map<string, string> analytics_params;
   analytics_params["NumPlayers"] = to_string(num_players);
   analytics_params["NumPucks"] = to_string(num_pucks);
@@ -272,8 +273,8 @@ void MainMenuView::PressedStory() {
 }
 
 void MainMenuView::PressedUpgrade() {
-  if (!game_engine()->local_store()->BoolForKey(kLocalStoreUpgraded)) {
-    game_engine()->app_store_engine()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade",
+  if (!game_engine()->persistence_module()->BoolForKey(kLocalStoreUpgraded)) {
+    game_engine()->app_store_module()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade",
                                                      this);
   }
 }

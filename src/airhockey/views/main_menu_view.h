@@ -12,7 +12,7 @@
 #include <string>
 
 #include "gameengine/entities/button.h"
-#include "gameengine/modules/app_store_engine.h"
+#include "gameengine/modules/app_store_module.h"
 #include "gameengine/engine_view.h"
 
 class RinkOverlay;
@@ -27,7 +27,7 @@ typedef enum {
 // Local Store keys
 extern const std::string kLocalStoreUpgraded;
 
-class MainMenuView : public EngineView, private AppStoreEngineDelegate, private ButtonDelegate {
+class MainMenuView : public EngineView, private AppStoreModuleDelegate, private ButtonDelegate {
  public:
   MainMenuView(GameEngine *game_engine);
 
@@ -35,7 +35,7 @@ class MainMenuView : public EngineView, private AppStoreEngineDelegate, private 
   void ViewDidGainFocus();
   void Update();
 
-  // AppStoreEngineDelegate
+  // AppStoreModuleDelegate
   void UpgradeSucceeded();
 
   // ButtonDelegate
