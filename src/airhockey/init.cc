@@ -15,22 +15,17 @@
 
 void sharkengine_init(GameEngine *game_engine) {
   if (game_engine->platform_type() == kPlatformTypePhone) {
-    game_engine->load_positions(
-        *game_engine->CreateAssetReader("assets/positions/game_menu_iphone.xml"));
-    game_engine->load_positions(
-        *game_engine->CreateAssetReader("assets/positions/main_menu_iphone.xml"));
-    game_engine->load_positions(
-        *game_engine->CreateAssetReader("assets/positions/settings_iphone.xml"));
-    game_engine->load_positions(
-        *game_engine->CreateAssetReader("assets/positions/play_iphone.xml"));
-    game_engine->load_positions(
-        *game_engine->CreateAssetReader("assets/positions/rink_iphone.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/game_menu_iphone.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/main_menu_iphone.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/settings_iphone.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/play_iphone.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/rink_iphone.xml"));
   } else {
-    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/game_menu.xml"));
-    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/main_menu.xml"));
-    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/settings.xml"));
-    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/play.xml"));
-    game_engine->load_positions(*game_engine->CreateAssetReader("assets/positions/rink.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/game_menu.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/main_menu.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/settings.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/play.xml"));
+    game_engine->load_positions(*game_engine->LoadAsset("assets/positions/rink.xml"));
   }
 
 #ifdef __ANDROID__
