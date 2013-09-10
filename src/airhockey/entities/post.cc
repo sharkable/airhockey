@@ -8,7 +8,6 @@
 
 #include "airhockey/entities/post.h"
 
-#include "gameengine/modules/sound_player.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/view_entity.h"
 

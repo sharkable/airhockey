@@ -9,10 +9,11 @@
 #include "airhockey/views/story_view.h"
 
 #include "gameengine/entities/simple_item.h"
-#include "gameengine/modules/sound_player.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/sprite.h"
+#include "sharksound/sound_player.h"
+#include "sharksound/sound.h"
 
 #include "airhockey/views/rink_view.h"
 
@@ -49,6 +50,8 @@ StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
   about_->set_zoom(zoom);
   about_->set_position(starting_image_position_);
   AddEntity(about_);
+
+  beep_sound_ = game_engine->sound_player()->getSound("beep.wav");
 }
 
 
@@ -82,10 +85,10 @@ void StoryView::AnimationFinished(Animatable *animatable) {
 void StoryView::MoveForward() {
   if (about_->position().x == starting_image_position_.x) {
     about_->AnimateToPosition(resting_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
-    SoundPlayer::instance()->playSound(kSoundButton);
+    beep_sound_->Play();
   } else {
     story_->AnimateToPosition(ending_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
     about_->AnimateToPosition(ending_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
-    SoundPlayer::instance()->playSound(kSoundButton);
+    beep_sound_->Play();
   }
 }

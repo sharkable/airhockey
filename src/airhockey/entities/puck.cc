@@ -11,8 +11,9 @@
 #include <cmath>
 #include <vector>
 
-#include "gameengine/modules/sound_player.h"
 #include "gameengine/game_engine.h"
+#include "sharksound/sound_player.h"
+#include "sharksound/sound.h"
 
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
@@ -39,6 +40,10 @@ Puck::Puck(GameEngine *game_engine, Rink &rink) : RoundThing(game_engine, "puck"
   hit_paddle_this_time_ = false;
   hit_rink_last_time_ = false;
   hit_rink_this_time_ = false;
+
+  two_puck_hit_sound_ = game_engine->sound_player()->getSound("puck_puck_hit.wav");
+  paddle_hit_sound_ = game_engine->sound_player()->getSound("paddle_hit.wav");
+  puck_rink_bounce_sound_ = game_engine->sound_player()->getSound("start.wav");
 }
 
 void Puck::PlaceForPlayer(PlayerId player_id, const vector<sp<RoundThing> > &round_things,
@@ -136,25 +141,19 @@ void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
   float position = (x_ / rink_.TotalWidth() - 0.5) * 2;
   if (typeid(*other) == typeid(Puck)) {
     if (!hit_puck_this_time_) {
-      SoundPlayer::instance()->setVolume(kSoundTwoPuckHit, volume);
-      SoundPlayer::instance()->setPosition(kSoundTwoPuckHit, position);
-      SoundPlayer::instance()->playSound(kSoundTwoPuckHit);
+      two_puck_hit_sound_->Play(volume, position);
       hit_puck_last_time_ = true;
     }
     hit_puck_this_time_ = true;
   } else if (typeid(*other) == typeid(Paddle)) {
     if (!hit_paddle_last_time_) {
-      SoundPlayer::instance()->setVolume(kSoundPaddleHit, volume);
-      SoundPlayer::instance()->setPosition(kSoundPaddleHit, position);
-      SoundPlayer::instance()->playSound(kSoundPaddleHit);
+      paddle_hit_sound_->Play(volume, position);
       hit_paddle_last_time_ = true;
     }
     hit_paddle_this_time_ = true;
   } else if (typeid(*other) == typeid(Post) || typeid(*other) == typeid(Rink)) {
     if (!hit_rink_last_time_) {
-      SoundPlayer::instance()->setVolume(kSoundPuckRinkBounce, volume);
-      SoundPlayer::instance()->setPosition(kSoundPuckRinkBounce, position);
-      SoundPlayer::instance()->playSound(kSoundPuckRinkBounce);
+      puck_rink_bounce_sound_->Play(volume, position);
       hit_rink_last_time_ = true;
     }
     hit_rink_this_time_ = true;

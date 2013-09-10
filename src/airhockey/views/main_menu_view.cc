@@ -77,7 +77,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   }
   Sprite start_1_player_button_image(game_engine, start_button);
   Sprite start_1_player_button_pressed_image(game_engine, start_button_pressed);
-  start_1_player_button_.reset(new Button());
+  start_1_player_button_.reset(new Button(game_engine));
   start_1_player_button_->set_normal_sprite(start_1_player_button_image);
   start_1_player_button_->set_pressed_sprite(start_1_player_button_pressed_image);
   GamePoint player_1_position = game_engine->position("start_1_player_button");
@@ -92,7 +92,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   if (supports_2_player_) {
     Sprite start_2_player_button_image(game_engine, "start_2_player_button");
     Sprite start_2_player_button_pressed_image(game_engine, "start_2_player_button_pressed");
-    start_2_player_button_.reset(new Button());
+    start_2_player_button_.reset(new Button(game_engine));
     start_2_player_button_->set_normal_sprite(start_2_player_button_image);
     start_2_player_button_->set_pressed_sprite(start_2_player_button_pressed_image);
     GamePoint player_2_position = game_engine->position("start_2_player_button");
@@ -107,7 +107,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
 
   Sprite settings_button_image(game_engine, "settings_button");
   Sprite settings_button_pressed_image(game_engine, "settings_button_pressed");
-  settings_button_.reset(new Button());
+  settings_button_.reset(new Button(game_engine));
   settings_button_->set_normal_sprite(settings_button_image);
   settings_button_->set_pressed_sprite(settings_button_pressed_image);
   settings_button_->set_position(game_engine->position("settings_button"));
@@ -117,7 +117,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
 
   Sprite story_button_image(game_engine, "story_button");
   Sprite story_button_pressed_image(game_engine, "story_button_pressed");
-  story_button_.reset(new Button());
+  story_button_.reset(new Button(game_engine));
   story_button_->set_normal_sprite(story_button_image);
   story_button_->set_pressed_sprite(story_button_pressed_image);
   story_button_->set_position(game_engine->position("story_button"));
@@ -128,7 +128,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   if (show_upgrade_button_) {
     Sprite upgrade_button_image(game_engine, "upgrade_button");
     Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
-    upgrade_button_.reset(new Button());
+    upgrade_button_.reset(new Button(game_engine));
     upgrade_button_->set_normal_sprite(upgrade_button_image);
     upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
     upgrade_button_->set_position(game_engine->position("upgrade_button"));

@@ -9,9 +9,10 @@
 #include "airhockey/entities/sound_slider.h"
 
 #include "gameengine/modules/persistence_module.h"
-#include "gameengine/modules/sound_player.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/touch.h"
+
+#include "sharksound/sound_player.h"
 
 using std::string;
 using std::vector;
@@ -46,7 +47,7 @@ SoundSlider::SoundSlider(GameEngine *game_engine, GamePoint position)
   } else {
     value_ = 0.75;
   }
-  SoundPlayer::instance()->setGlobalVolume(value_);
+  game_engine->sound_player()->setGlobalVolume(value_);
 }
 
 GamePoint SoundSlider::ThumbPoint() {
@@ -109,7 +110,7 @@ void SoundSlider::TouchesMoved(GamePoint offset, vector<Touch> touches) {
 void SoundSlider::TouchesEnded(GamePoint offset, vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
-      SoundPlayer::instance()->setGlobalVolume(value_);
+      game_engine_->sound_player()->setGlobalVolume(value_);
       game_engine_->persistence_module()->SetDouble(value_, kLocalStoreVolume);
       grabbed_touch_ = NULL;
       return;

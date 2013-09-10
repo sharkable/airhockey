@@ -15,6 +15,8 @@
 #include "gameengine/coordinate_types.h"
 #include "gameengine/engine_view.h"
 
+#include "sharksound/sound_player.h"
+
 class SimpleItem;
 
 class StoryView : public EngineView, private AnimatableDelegate {
@@ -37,6 +39,7 @@ class StoryView : public EngineView, private AnimatableDelegate {
   GamePoint starting_image_position_;
   GamePoint resting_image_position_;
   GamePoint ending_image_position_;
+  Sound *beep_sound_;
 };
 
 #endif

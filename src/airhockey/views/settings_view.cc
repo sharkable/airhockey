@@ -88,7 +88,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
 
   Sprite ok_button_image(game_engine, "ok_button");
   Sprite ok_button_pressed_image(game_engine, "ok_button_pressed");
-  ok_button_.reset(new Button());
+  ok_button_.reset(new Button(game_engine));
   ok_button_->set_normal_sprite(ok_button_image);
   ok_button_->set_pressed_sprite(ok_button_pressed_image);
   ok_button_->set_position(game_engine->position("ok_button"));

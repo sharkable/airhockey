@@ -13,6 +13,8 @@
 #include "airhockey/entities/rink.h"
 #include "airhockey/entities/round_thing.h"
 
+#include "sharksound/sound_player.h"
+
 class GameEngine;
 class ViewEntity;
 
@@ -41,6 +43,10 @@ class Puck : public RoundThing {
   bool hit_rink_this_time_;
   int fade_ticks_left_;
   double alpha_;
+
+  Sound *two_puck_hit_sound_;
+  Sound *paddle_hit_sound_;
+  Sound *puck_rink_bounce_sound_;
 };
 
 #endif

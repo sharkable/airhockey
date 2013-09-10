@@ -72,7 +72,7 @@ void GameMenuView::Init(bool match_finished) {
   if (match_finished) {
     Sprite rematch_button_sprite(game_engine(), "rematch_button");
     Sprite rematch_button_pressed_sprite(game_engine(), "rematch_button_pressed");
-    rematch_button_.reset(new Button());
+    rematch_button_.reset(new Button(game_engine()));
     rematch_button_->set_normal_sprite(rematch_button_sprite);
     rematch_button_->set_pressed_sprite(rematch_button_pressed_sprite);
     rematch_button_->set_position(game_engine()->position("rematch_button"));
@@ -81,7 +81,7 @@ void GameMenuView::Init(bool match_finished) {
   } else {
     Sprite continue_button_sprite(game_engine(), "continue_button");
     Sprite continue_button_pressed_sprite(game_engine(), "continue_button_pressed");
-    continue_button_.reset(new Button());
+    continue_button_.reset(new Button(game_engine()));
     continue_button_->set_normal_sprite(continue_button_sprite);
     continue_button_->set_pressed_sprite(continue_button_pressed_sprite);
     continue_button_->set_position(game_engine()->position("continue_button"));
@@ -91,7 +91,7 @@ void GameMenuView::Init(bool match_finished) {
 
   Sprite menu_button_sprite(game_engine(), "menu_button");
   Sprite menu_button_pressed_sprite(game_engine(), "menu_button_pressed");
-  menu_button_.reset(new Button());
+  menu_button_.reset(new Button(game_engine()));
   menu_button_->set_normal_sprite(menu_button_sprite);
   menu_button_->set_pressed_sprite(menu_button_pressed_sprite);
   menu_button_->set_position(game_engine()->position("menu_button"));

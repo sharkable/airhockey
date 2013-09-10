@@ -13,9 +13,10 @@
 #include "gameengine/modules/analytics_module.h"
 #include "gameengine/modules/input_module.h"
 #include "gameengine/modules/persistence_module.h"
-#include "gameengine/modules/sound_player.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
+#include "sharksound/sound_player.h"
+#include "sharksound/sound.h"
 
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
@@ -141,7 +142,7 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
     GamePoint pause_button_pos_1 =
         game_point_make(game_size.width - pause_button_sprite.content_size().width,
                         game_size.height - pause_button_sprite.content_size().height - y_margin);
-    pause_button_1_.reset(new Button());
+    pause_button_1_.reset(new Button(game_engine));
     pause_button_1_->set_normal_sprite(pause_button_sprite);
     pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
     pause_button_1_->set_position(pause_button_pos_1);
@@ -154,7 +155,7 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
       Sprite pause_button_pressed_sprite_2(game_engine, "pause_button_pressed");
 
       GamePoint pause_button_pos_2 = game_point_make(0, -y_margin);
-      pause_button_2_.reset(new Button());
+      pause_button_2_.reset(new Button(game_engine));
       pause_button_2_->set_normal_sprite(pause_button_sprite_2);
       pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite_2);
       pause_button_2_->set_position(pause_button_pos_2);
@@ -162,6 +163,11 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
       AddEntity(pause_button_2_);
     }
   }
+
+  get_ready_sound_ = game_engine->sound_player()->getSound("get_ready.wav");
+  go_sound_ = game_engine->sound_player()->getSound("start.wav");
+  score_sound_ = game_engine->sound_player()->getSound("score.wav");
+  score_final_sound_ = game_engine->sound_player()->getSound("score_final.wav");
 
   give_extra_puck_to_player_ = kPlayerId1;
   player_1_win_count_ = 0;
@@ -197,7 +203,7 @@ void PlayView::Update() {
       get_ready_->AnimateToPosition(position, kAnimationTypeLinear, kShowGetReadyMessageTicks);
       get_ready_->AnimateToAlpha(1, kAnimationTypeLinear, kShowGoMessageTicks);
       AddEntity(get_ready_);
-      SoundPlayer::instance()->playSound(kSoundGetReady);
+      get_ready_sound_->Play();
     } else if (get_ready_ticks_left_ == 0) {
       RemoveEntity(get_ready_);
       AddEntity(go_);
@@ -209,7 +215,7 @@ void PlayView::Update() {
       state_ = kPlayViewStatePlaying;
       paddle_1_->SetReadyToPlay(true);
       paddle_2_->SetReadyToPlay(true);
-      SoundPlayer::instance()->playSound(kSoundStart);
+      go_sound_->Play();
     }
 
     return;
@@ -260,11 +266,9 @@ void PlayView::Update() {
         player_1_score_->set_sprite(player_1_score_->sprite() + 1);
       }
       if (player_1_score_->sprite() == kWinScore && state_ == kPlayViewStatePlaying) {
-        SoundPlayer::instance()->setPosition(kSoundScoreFinal, position);
-        SoundPlayer::instance()->playSound(kSoundScoreFinal);
+        score_final_sound_->Play(1.f, position);
       } else {
-        SoundPlayer::instance()->setPosition(kSoundScore, position);
-        SoundPlayer::instance()->playSound(kSoundScore);
+        score_sound_->Play(1.f, position);
       }
       num_player_1_scores_last_round_++;
       num_active_pucks_--;
@@ -275,11 +279,9 @@ void PlayView::Update() {
         player_2_score_->set_sprite(player_2_score_->sprite() + 1);
       }
       if (player_2_score_->sprite() == kWinScore && state_ == kPlayViewStatePlaying) {
-        SoundPlayer::instance()->setPosition(kSoundScoreFinal, position);
-        SoundPlayer::instance()->playSound(kSoundScoreFinal);
+        score_final_sound_->Play(1.f, position);
       } else {
-        SoundPlayer::instance()->setPosition(kSoundScore, position);
-        SoundPlayer::instance()->playSound(kSoundScore);
+        score_sound_->Play(1.f, position);
       }
 
       num_active_pucks_--;
