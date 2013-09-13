@@ -12,8 +12,8 @@
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/sprite.h"
-#include "sharksound/sound_player.h"
 #include "sharksound/sound.h"
+#include "sharksound/sound_controller.h"
 
 #include "airhockey/views/rink_view.h"
 
@@ -51,7 +51,7 @@ StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
   about_->set_position(starting_image_position_);
   AddEntity(about_);
 
-  beep_sound_ = game_engine->sound_player()->getSound("beep.wav");
+  beep_sound_ = game_engine->sound()->GetSound("sounds/beep.wav");
 }
 
 

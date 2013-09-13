@@ -15,8 +15,8 @@
 #include "gameengine/modules/persistence_module.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
-#include "sharksound/sound_player.h"
 #include "sharksound/sound.h"
+#include "sharksound/sound_controller.h"
 
 #include "airhockey/entities/post.h"
 #include "airhockey/entities/puck.h"
@@ -164,10 +164,10 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
     }
   }
 
-  get_ready_sound_ = game_engine->sound_player()->getSound("get_ready.wav");
-  go_sound_ = game_engine->sound_player()->getSound("start.wav");
-  score_sound_ = game_engine->sound_player()->getSound("score.wav");
-  score_final_sound_ = game_engine->sound_player()->getSound("score_final.wav");
+  get_ready_sound_ = game_engine->sound()->GetSound("sounds/get_ready.wav");
+  go_sound_ = game_engine->sound()->GetSound("sounds/start.wav");
+  score_sound_ = game_engine->sound()->GetSound("sounds/score.wav");
+  score_final_sound_ = game_engine->sound()->GetSound("sounds/score_final.wav");
 
   give_extra_puck_to_player_ = kPlayerId1;
   player_1_win_count_ = 0;

@@ -12,7 +12,7 @@
 #include <vector>
 
 #include "gameengine/game_engine.h"
-#include "sharksound/sound_player.h"
+#include "sharksound/sound_controller.h"
 #include "sharksound/sound.h"
 
 #include "airhockey/entities/post.h"
@@ -41,9 +41,9 @@ Puck::Puck(GameEngine *game_engine, Rink &rink) : RoundThing(game_engine, "puck"
   hit_rink_last_time_ = false;
   hit_rink_this_time_ = false;
 
-  two_puck_hit_sound_ = game_engine->sound_player()->getSound("puck_puck_hit.wav");
-  paddle_hit_sound_ = game_engine->sound_player()->getSound("paddle_hit.wav");
-  puck_rink_bounce_sound_ = game_engine->sound_player()->getSound("start.wav");
+  two_puck_hit_sound_ = game_engine->sound()->GetSound("sounds/puck_puck_hit.wav");
+  paddle_hit_sound_ = game_engine->sound()->GetSound("sounds/paddle_hit.wav");
+  puck_rink_bounce_sound_ = game_engine->sound()->GetSound("sounds/puck_rink_bounce.wav");
 }
 
 void Puck::PlaceForPlayer(PlayerId player_id, const vector<sp<RoundThing> > &round_things,

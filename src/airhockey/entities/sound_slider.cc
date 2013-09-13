@@ -12,7 +12,7 @@
 #include "gameengine/game_engine.h"
 #include "gameengine/touch.h"
 
-#include "sharksound/sound_player.h"
+#include "sharksound/sound_controller.h"
 
 using std::string;
 using std::vector;
@@ -47,7 +47,7 @@ SoundSlider::SoundSlider(GameEngine *game_engine, GamePoint position)
   } else {
     value_ = 0.75;
   }
-  game_engine->sound_player()->setGlobalVolume(value_);
+  game_engine->sound()->SetGlobalVolume(value_);
 }
 
 GamePoint SoundSlider::ThumbPoint() {
@@ -110,7 +110,7 @@ void SoundSlider::TouchesMoved(GamePoint offset, vector<Touch> touches) {
 void SoundSlider::TouchesEnded(GamePoint offset, vector<Touch> touches) {
   for (int i = 0; i < touches.size(); i++) {
     if (touches[i].identifier() == grabbed_touch_) {
-      game_engine_->sound_player()->setGlobalVolume(value_);
+      game_engine_->sound()->SetGlobalVolume(value_);
       game_engine_->persistence_module()->SetDouble(value_, kLocalStoreVolume);
       grabbed_touch_ = NULL;
       return;

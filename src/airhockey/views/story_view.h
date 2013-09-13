@@ -15,9 +15,10 @@
 #include "gameengine/coordinate_types.h"
 #include "gameengine/engine_view.h"
 
-#include "sharksound/sound_player.h"
-
 class SimpleItem;
+namespace SharkSound {
+  class Sound;
+}
 
 class StoryView : public EngineView, private AnimatableDelegate {
  public:
@@ -39,7 +40,7 @@ class StoryView : public EngineView, private AnimatableDelegate {
   GamePoint starting_image_position_;
   GamePoint resting_image_position_;
   GamePoint ending_image_position_;
-  Sound *beep_sound_;
+  SharkSound::Sound *beep_sound_;
 };
 
 #endif

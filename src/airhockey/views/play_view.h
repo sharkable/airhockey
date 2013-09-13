@@ -17,14 +17,15 @@
 #include "airhockey/entities/paddle.h"
 #include "airhockey/views/game_menu_view.h"
 
-#include "sharksound/sound_player.h"
-
 class GameEngine;
 class Post;
 class Puck;
 class Rink;
 class RoundThing;
 class SimpleItem;
+namespace SharkSound {
+  class Sound;
+}
 
 typedef enum {
   kPlayViewStateGetReady,
@@ -82,10 +83,10 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   sp<Button> pause_button_1_;
   sp<Button> pause_button_2_;
 
-  Sound *get_ready_sound_;
-  Sound *go_sound_;
-  Sound *score_sound_;
-  Sound *score_final_sound_;
+  SharkSound::Sound *get_ready_sound_;
+  SharkSound::Sound *go_sound_;
+  SharkSound::Sound *score_sound_;
+  SharkSound::Sound *score_final_sound_;
 
   int wait_ticks_left_;
   int get_ready_ticks_left_;
