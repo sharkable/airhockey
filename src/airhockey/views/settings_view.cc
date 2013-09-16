@@ -104,7 +104,7 @@ bool SettingsView::IsCapturingTouches() {
 }
 
 bool SettingsView::HandleBackButton() {
-  ButtonPressed(NULL);
+  ButtonUp(NULL);
   return true;
 }
 
@@ -120,7 +120,7 @@ void SettingsView::AnimationFinished(Animatable *animatable) {
 
 #pragma mark - ButtonDelegate
 
-void SettingsView::ButtonPressed(Button *button) {
+void SettingsView::ButtonUp(Button *button) {
   sp<PersistenceModule> persistence = game_engine()->persistence_module();
   persistence->SetInteger(num_pucks_select_->selected_value(), kLocalStoreNumPucks);
   persistence->SetInteger(difficulty_select_->selected_value(), kLocalStoreDifficulty);

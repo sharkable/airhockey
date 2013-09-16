@@ -345,7 +345,7 @@ void PlayView::HandlePauseButton() {
 
 #pragma mark - ButtonDelegate
 
-void PlayView::ButtonPressed(Button *button) {
+void PlayView::ButtonUp(Button *button) {
   if (button == pause_button_1_.get() || button == pause_button_2_.get()) {
     PausePressed();
   } else {

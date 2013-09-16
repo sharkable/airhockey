@@ -31,7 +31,7 @@ class GameMenuView : public EngineView, private ButtonDelegate {
   void HandlePauseButton();
 
   // ButtonDelegate
-  void ButtonPressed(Button *button);
+  void ButtonUp(Button *button);
 
  private:
   void Init(bool match_finished);

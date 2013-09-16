@@ -26,22 +26,22 @@ GameMenuView::GameMenuView(GameEngine *game_engine, GameMenuViewDelegate *delega
 #pragma mark - EngineView
 
 bool GameMenuView::HandleBackButton() {
-  ButtonPressed(menu_button_.get());
+  ButtonUp(menu_button_.get());
   return true;
 }
 
 void GameMenuView::HandlePauseButton() {
   if (rematch_button_.get()) {
-    ButtonPressed(rematch_button_.get());
+    ButtonUp(rematch_button_.get());
   } else if (continue_button_.get()) {
-    ButtonPressed(continue_button_.get());
+    ButtonUp(continue_button_.get());
   }
 }
 
 
 #pragma mark - ButtonDelegate
 
-void GameMenuView::ButtonPressed(Button *button) {
+void GameMenuView::ButtonUp(Button *button) {
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
     game_engine()->ad_module()->RemoveAd();
   }

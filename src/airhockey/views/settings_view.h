@@ -37,7 +37,7 @@ class SettingsView : public EngineView, private AnimatableDelegate, private Butt
   void AnimationFinished(Animatable *animatable);
 
   // ButtonDelegate
-  void ButtonPressed(Button *button);
+  void ButtonUp(Button *button);
 
  private:
   sp<CompositeEntity> entities_;

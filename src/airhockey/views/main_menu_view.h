@@ -39,7 +39,7 @@ class MainMenuView : public EngineView, private AppStoreModuleDelegate, private 
   void UpgradeSucceeded();
 
   // ButtonDelegate
-  void ButtonPressed(Button *button);
+  void ButtonUp(Button *button);
 
  private:
   void InitializeSettings();

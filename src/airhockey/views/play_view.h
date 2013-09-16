@@ -49,7 +49,7 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   void HandlePauseButton();
 
   // ButtonDelegate
-  void ButtonPressed(Button *button);
+  void ButtonUp(Button *button);
 
   // GameMenuViewDelegate
   void RematchPressed();

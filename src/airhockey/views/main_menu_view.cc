@@ -185,7 +185,7 @@ void MainMenuView::UpgradeSucceeded() {
 
 #pragma mark - ButtonDelegate
 
-void MainMenuView::ButtonPressed(Button *button) {
+void MainMenuView::ButtonUp(Button *button) {
   if (button == start_1_player_button_.get()) {
     PressedStart(1);
   } else if (button == start_2_player_button_.get()) {
