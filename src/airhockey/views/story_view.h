@@ -35,8 +35,8 @@ class StoryView : public EngineView, private AnimatableDelegate {
  private:
   void MoveForward();
 
-  sp<SimpleItem> story_;
-  sp<SimpleItem> about_;
+  SimpleItem *story_;  // weak
+  SimpleItem *about_;  // weak
   GamePoint starting_image_position_;
   GamePoint resting_image_position_;
   GamePoint ending_image_position_;

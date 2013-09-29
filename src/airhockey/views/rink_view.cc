@@ -17,7 +17,7 @@ using std::string;
 RinkView::RinkView(GameEngine *game_engine) : EngineView(game_engine) {
   Sprite background_sprite(game_engine, "rink_bg");
   SimpleItem *background = new SimpleItem(background_sprite, game_engine->position("rink_bg"));
-  AddEntity(sp<SimpleItem>(background));
+  AddEntity(background);
 }
 
 GameSize RinkView::RinkSizeForPlatformType(PlatformType platform_type) {

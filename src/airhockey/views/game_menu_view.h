@@ -25,6 +25,7 @@ class GameMenuViewDelegate {
 class GameMenuView : public EngineView, private ButtonDelegate {
  public:
   GameMenuView(GameEngine *game_engine, GameMenuViewDelegate *delegate, bool match_finished);
+  ~GameMenuView();
 
   // EngineView
   bool HandleBackButton();
@@ -37,11 +38,11 @@ class GameMenuView : public EngineView, private ButtonDelegate {
   void Init(bool match_finished);
 
   GameMenuViewDelegate *delegate_;
-  sp<SoundSlider> sound_slider_;
-  sp<SimpleItem> menu_background_;
-  sp<Button> rematch_button_;
-  sp<Button> menu_button_;
-  sp<Button> continue_button_;
+  SoundSlider *sound_slider_;
+  SimpleItem *menu_background_;
+  Button *rematch_button_;
+  Button *menu_button_;
+  Button *continue_button_;
 };
 
 #endif

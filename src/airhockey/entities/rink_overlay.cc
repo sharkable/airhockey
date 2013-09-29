@@ -20,12 +20,12 @@ RinkOverlay::RinkOverlay(GameEngine *game_engine) {
 
     Sprite rink_top_sprite(game_engine, "rink_top");
     SimpleItem *rink_top = new SimpleItem(rink_top_sprite, game_engine->position("rink_top"));
-    rink_pieces_.AddEntity(sp<SimpleItem>(rink_top));
+    rink_pieces_.AddEntity(rink_top);
 
     Sprite rink_bottom_sprite(game_engine, "rink_bottom");
     SimpleItem *rink_bottom = new SimpleItem(rink_bottom_sprite,
                                              game_engine->position("rink_bottom"));
-    rink_pieces_.AddEntity(sp<SimpleItem>(rink_bottom));
+    rink_pieces_.AddEntity(rink_bottom);
   }
 
   // Add rink left and right pieces.
@@ -33,12 +33,12 @@ RinkOverlay::RinkOverlay(GameEngine *game_engine) {
   Sprite left_rink_border_sprite(game_engine, "rink_left");
   SimpleItem *left_rink_border = new SimpleItem(left_rink_border_sprite,
                                                 game_engine->position("rink_left"));
-  rink_pieces_.AddEntity(sp<SimpleItem>(left_rink_border));
+  rink_pieces_.AddEntity(left_rink_border);
 
   Sprite right_rink_border_sprite(game_engine, "rink_right");
   SimpleItem *right_rink_border = new SimpleItem(right_rink_border_sprite,
                                                  game_engine->position("rink_right"));
-  rink_pieces_.AddEntity(sp<SimpleItem>(right_rink_border));
+  rink_pieces_.AddEntity(right_rink_border);
 }
 
 

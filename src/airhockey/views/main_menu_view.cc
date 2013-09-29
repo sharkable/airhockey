@@ -48,18 +48,27 @@ void fade_out(Animatable *entity) {
   entity->AnimateToAlpha(0, kAnimationTypeLinear, 15);
 }
 
-MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
+MainMenuView::MainMenuView(GameEngine *game_engine)
+    : EngineView(game_engine),
+      rink_overlay_(NULL),
+      title_(NULL),
+      start_1_player_button_(NULL),
+      start_2_player_button_(NULL),
+      settings_button_(NULL),
+      story_button_(NULL),
+      upgrade_button_(NULL),
+      sound_slider_(NULL) {
   show_upgrade_button_ = game_engine->app_store_module()->IsImplemented();
   supports_2_player_ = game_engine->platform_type() != kPlatformTypePC;
 
   InitializeSettings();
   state_ = kMainMenuStateRunning;
 
-  rink_overlay_.reset(new RinkOverlay(game_engine));
+  rink_overlay_ = new RinkOverlay(game_engine);
   AddEntity(rink_overlay_);
 
   Sprite title_sprite(game_engine, "title");
-  title_.reset(new SimpleItem(title_sprite, game_engine->position("title")));
+  title_ = new SimpleItem(title_sprite, game_engine->position("title"));
   AddEntity(title_);
   title_->set_zoom(1.3);
   title_->AnimateToZoom(1, kAnimationTypeCubicEaseOut, 900);
@@ -77,7 +86,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   }
   Sprite start_1_player_button_image(game_engine, start_button);
   Sprite start_1_player_button_pressed_image(game_engine, start_button_pressed);
-  start_1_player_button_.reset(new Button(game_engine));
+  start_1_player_button_ = new Button(game_engine);
   start_1_player_button_->set_normal_sprite(start_1_player_button_image);
   start_1_player_button_->set_pressed_sprite(start_1_player_button_pressed_image);
   GamePoint player_1_position = game_engine->position("start_1_player_button");
@@ -87,12 +96,12 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   start_1_player_button_->set_position(player_1_position);
   start_1_player_button_->set_delegate(this);
   AddEntity(start_1_player_button_);
-  fade_in(start_1_player_button_.get());
+  fade_in(start_1_player_button_);
 
   if (supports_2_player_) {
     Sprite start_2_player_button_image(game_engine, "start_2_player_button");
     Sprite start_2_player_button_pressed_image(game_engine, "start_2_player_button_pressed");
-    start_2_player_button_.reset(new Button(game_engine));
+    start_2_player_button_ = new Button(game_engine);
     start_2_player_button_->set_normal_sprite(start_2_player_button_image);
     start_2_player_button_->set_pressed_sprite(start_2_player_button_pressed_image);
     GamePoint player_2_position = game_engine->position("start_2_player_button");
@@ -102,33 +111,33 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
     start_2_player_button_->set_position(player_2_position);
     start_2_player_button_->set_delegate(this);
     AddEntity(start_2_player_button_);
-    fade_in(start_2_player_button_.get());
+    fade_in(start_2_player_button_);
   }
 
   Sprite settings_button_image(game_engine, "settings_button");
   Sprite settings_button_pressed_image(game_engine, "settings_button_pressed");
-  settings_button_.reset(new Button(game_engine));
+  settings_button_ = new Button(game_engine);
   settings_button_->set_normal_sprite(settings_button_image);
   settings_button_->set_pressed_sprite(settings_button_pressed_image);
   settings_button_->set_position(game_engine->position("settings_button"));
   settings_button_->set_delegate(this);
   AddEntity(settings_button_);
-  fade_in(settings_button_.get());
+  fade_in(settings_button_);
 
   Sprite story_button_image(game_engine, "story_button");
   Sprite story_button_pressed_image(game_engine, "story_button_pressed");
-  story_button_.reset(new Button(game_engine));
+  story_button_ = new Button(game_engine);
   story_button_->set_normal_sprite(story_button_image);
   story_button_->set_pressed_sprite(story_button_pressed_image);
   story_button_->set_position(game_engine->position("story_button"));
   story_button_->set_delegate(this);
   AddEntity(story_button_);
-  fade_in(story_button_.get());
+  fade_in(story_button_);
 
   if (show_upgrade_button_) {
     Sprite upgrade_button_image(game_engine, "upgrade_button");
     Sprite upgrade_button_pressed_image(game_engine, "upgrade_button_pressed");
-    upgrade_button_.reset(new Button(game_engine));
+    upgrade_button_ = new Button(game_engine);
     upgrade_button_->set_normal_sprite(upgrade_button_image);
     upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
     upgrade_button_->set_position(game_engine->position("upgrade_button"));
@@ -136,11 +145,10 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
     if (!game_engine->persistence_module()->BoolForKey(kLocalStoreUpgraded)) {
       AddEntity(upgrade_button_);
     }
-    fade_in(upgrade_button_.get());
+    fade_in(upgrade_button_);
   }
 
-  sound_slider_.reset(new SoundSlider(game_engine,
-                                      game_engine->position("sound_slider_main_menu")));
+  sound_slider_ = new SoundSlider(game_engine, game_engine->position("sound_slider_main_menu"));
   AddEntity(sound_slider_);
 }
 
@@ -186,15 +194,15 @@ void MainMenuView::UpgradeSucceeded() {
 #pragma mark - ButtonDelegate
 
 void MainMenuView::ButtonUp(Button *button) {
-  if (button == start_1_player_button_.get()) {
+  if (button == start_1_player_button_) {
     PressedStart(1);
-  } else if (button == start_2_player_button_.get()) {
+  } else if (button == start_2_player_button_) {
     PressedStart(2);
-  } else if (button == settings_button_.get()) {
+  } else if (button == settings_button_) {
     PressedSettings();
-  } else if (button == story_button_.get()) {
+  } else if (button == story_button_) {
     PressedStory();
-  } else if (button == upgrade_button_.get()) {
+  } else if (button == upgrade_button_) {
     PressedUpgrade();
   }
 }
@@ -217,14 +225,14 @@ void MainMenuView::AnimateOut() {
   state_ = kMainMenuStateAnimatingOut;
 
   title_->AnimateToZoom(0, kAnimationTypeLinear, 15);
-  fade_out(start_1_player_button_.get());
+  fade_out(start_1_player_button_);
   if (supports_2_player_) {
-    fade_out(start_2_player_button_.get());
+    fade_out(start_2_player_button_);
   }
-  fade_out(settings_button_.get());
-  fade_out(story_button_.get());
+  fade_out(settings_button_);
+  fade_out(story_button_);
   if (show_upgrade_button_) {
-    fade_out(upgrade_button_.get());
+    fade_out(upgrade_button_);
   }
   RemoveEntity(sound_slider_);
 
@@ -257,11 +265,11 @@ void MainMenuView::PressedStart(int num_players) {
                                      difficulty,
                                      paddle_size);
   AnimateOut();
-  game_engine()->PushView(sp<EngineView>(play_view));
+  game_engine()->PushView(play_view);
 }
 
 void MainMenuView::PressedSettings() {
-  game_engine()->PushView(sp<SettingsView>(new SettingsView(game_engine())));
+  game_engine()->PushView(new SettingsView(game_engine()));
 }
 
 void MainMenuView::PressedStory() {
@@ -269,7 +277,7 @@ void MainMenuView::PressedStory() {
   if (game_engine()->platform_type() == kPlatformTypeTablet) {
     game_engine()->ad_module()->RemoveAd();
   }
-  game_engine()->PushView(sp<EngineView>(new StoryView(game_engine())));
+  game_engine()->PushView(new StoryView(game_engine()));
 }
 
 void MainMenuView::PressedUpgrade() {

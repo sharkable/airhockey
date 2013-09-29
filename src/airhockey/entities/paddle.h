@@ -37,14 +37,14 @@ typedef enum {
 class Paddle : public RoundThing {
  public:
   Paddle(GameEngine *game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
-         bool player_controlled, ComputerAI ai_level, std::vector<sp<Puck> > &pucks);
+         bool player_controlled, ComputerAI ai_level, std::vector<Puck *> &pucks);
 
   void SetInitialPosition();
   void KeepInPlayerBounds();
   void SetReadyToPlay(bool ready);
   
   // Accessors
-  std::vector<sp<Puck> > &pucks() { return pucks_; }
+  std::vector<Puck *> &pucks() { return pucks_; }
 
   // ViewEntity
   void Update();
@@ -67,7 +67,7 @@ class Paddle : public RoundThing {
   bool player_controlled_;
   bool ready_to_play_;
   ComputerAI ai_level_;
-  std::vector<sp<Puck> > &pucks_;
+  std::vector<Puck *> &pucks_;
   bool target_left_corner_;
   bool target_right_corner_;
   bool target_away_from_corner_;

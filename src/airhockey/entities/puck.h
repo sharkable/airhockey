@@ -23,7 +23,7 @@ class Puck : public RoundThing {
  public:
   Puck(GameEngine *game_engine, Rink &rink);
 
-  void PlaceForPlayer(PlayerId player_id, const std::vector<sp<RoundThing> > &round_things,
+  void PlaceForPlayer(PlayerId player_id, const std::vector<RoundThing *> &round_things,
                       bool center);
   void FadeIn();
 

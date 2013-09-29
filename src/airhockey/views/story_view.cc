@@ -37,14 +37,14 @@ StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
   ending_image_position_ = resting_image_position_;
   ending_image_position_.x -= image_size.width * zoom;
 
-  story_.reset(new SimpleItem());
+  story_ = new SimpleItem();
   story_->add_sprite(story_image);
   story_->set_zoom(zoom);
   story_->set_position(starting_image_position_);
   story_->AnimateToPosition(resting_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
   AddEntity(story_);
 
-  about_.reset(new SimpleItem());
+  about_ = new SimpleItem();
   about_->set_animatable_delegate(this);
   about_->add_sprite(about_image);
   about_->set_zoom(zoom);

@@ -49,14 +49,14 @@ class MainMenuView : public EngineView, private AppStoreModuleDelegate, private 
   void PressedStory();
   void PressedUpgrade();
 
-  sp<RinkOverlay> rink_overlay_;
-  sp<SimpleItem> title_;
-  sp<Button> start_1_player_button_;
-  sp<Button> start_2_player_button_;
-  sp<Button> settings_button_;
-  sp<Button> story_button_;
-  sp<Button> upgrade_button_;
-  sp<SoundSlider> sound_slider_;
+  RinkOverlay *rink_overlay_;
+  SimpleItem *title_;
+  Button *start_1_player_button_;
+  Button *start_2_player_button_;
+  Button *settings_button_;
+  Button *story_button_;
+  Button *upgrade_button_;
+  SoundSlider *sound_slider_;
 
   MainMenuState state_;
   int animating_out_ticks_left_;

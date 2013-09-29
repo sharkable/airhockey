@@ -27,7 +27,7 @@ static const double kPaddleAIFriction = 0.999;
 static const int kPaddleAIInitialPauseTicks = 30;
 
 Paddle::Paddle(GameEngine *game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
-               bool player_controlled, ComputerAI ai_level, vector<sp<Puck> > &pucks)
+               bool player_controlled, ComputerAI ai_level, vector<Puck *> &pucks)
     : RoundThing(game_engine),
       rink_(rink),
       player_id_(player_id),
@@ -203,7 +203,7 @@ void Paddle::RunAITick() {
   double bestTime;
 
   for (int i = 0; i < pucks_.size(); i++) {
-    Puck *puck = pucks_[i].get();
+    Puck *puck = pucks_[i];
     if (!puck->is_active()) {
       continue;
     }

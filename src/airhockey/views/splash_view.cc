@@ -22,5 +22,5 @@ SplashView::SplashView(GameEngine *game_engine) : EngineView(game_engine) {
 void SplashView::Update() {
   EngineView::Update();
   game_engine()->PopView();
-  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
+  game_engine()->PushView(new MainMenuView(game_engine()));
 }

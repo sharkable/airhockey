@@ -44,9 +44,6 @@ void sharkengine_init(GameEngine *game_engine) {
       (screen_size.height - game_engine->game_size_to_screen_size(game_size).height) / 2;
   game_engine->set_screen_offset(screen_point_make(0, y_offset));
 
-  sp<EngineView> root_view = sp<EngineView>(new RinkView(game_engine));
-  game_engine->SetRootView(root_view);
-
-  sp<EngineView> splash_view = sp<EngineView>(new SplashView(game_engine));
-  game_engine->PushView(splash_view);
+  game_engine->SetRootView(new RinkView(game_engine));
+  game_engine->PushView(new SplashView(game_engine));
 }

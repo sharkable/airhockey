@@ -31,17 +31,17 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   double width = game_engine->screen_size_to_game_size(game_engine->screen_size()).width;
   ending_position_ = game_point_make(-width, 0);
 
-  entities_.reset(new CompositeEntity());
+  entities_ = new CompositeEntity();
   entities_->set_animatable_delegate(this);
   entities_->set_position(game_point_make(width, 0));
   entities_->AnimateToPosition(kGamePointZero, kAnimationTypeCubicEaseOut, kAnimateTicks);
   AddEntity(entities_);
 
   Sprite background_image(game_engine, "settings_bg");
-  background_.reset(new SimpleItem(background_image, game_engine->position("settings_bg")));
+  background_ = new SimpleItem(background_image, game_engine->position("settings_bg"));
   entities_->AddEntity(background_);
 
-  num_pucks_select_.reset(new MultiSelect(game_engine));
+  num_pucks_select_ = new MultiSelect(game_engine);
   for (int i = 1; i <= kMaxNumPucks; i++) {
     char pucks_str[15];
     sprintf(pucks_str, "%d", i);
@@ -64,7 +64,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   Sprite excellent_image_selected(game_engine, "excellent_selected");
   Sprite amazing_image(game_engine, "amazing");
   Sprite amazing_image_selected(game_engine, "amazing_selected");
-  difficulty_select_.reset(new MultiSelect(game_engine));
+  difficulty_select_ = new MultiSelect(game_engine);
   difficulty_select_->Add(bad_image, bad_image_selected, game_engine->position("bad"));
   difficulty_select_->Add(good_image, good_image_selected, game_engine->position("good"));
   difficulty_select_->Add(excellent_image, excellent_image_selected,
@@ -79,7 +79,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   Sprite medium_image_selected(game_engine, "medium_selected");
   Sprite large_image(game_engine, "large");
   Sprite large_image_selected(game_engine, "large_selected");
-  paddle_size_select_.reset(new MultiSelect(game_engine));
+  paddle_size_select_ = new MultiSelect(game_engine);
   paddle_size_select_->Add(small_image, small_image_selected, game_engine->position("small"));
   paddle_size_select_->Add(medium_image, medium_image_selected, game_engine->position("medium"));
   paddle_size_select_->Add(large_image, large_image_selected, game_engine->position("large"));
@@ -88,7 +88,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
 
   Sprite ok_button_image(game_engine, "ok_button");
   Sprite ok_button_pressed_image(game_engine, "ok_button_pressed");
-  ok_button_.reset(new Button(game_engine));
+  ok_button_ = new Button(game_engine);
   ok_button_->set_normal_sprite(ok_button_image);
   ok_button_->set_pressed_sprite(ok_button_pressed_image);
   ok_button_->set_position(game_engine->position("ok_button"));

@@ -46,7 +46,7 @@ Puck::Puck(GameEngine *game_engine, Rink &rink) : RoundThing(game_engine, "puck"
   puck_rink_bounce_sound_ = game_engine->sound()->GetSound("sounds/puck_rink_bounce.wav");
 }
 
-void Puck::PlaceForPlayer(PlayerId player_id, const vector<sp<RoundThing> > &round_things,
+void Puck::PlaceForPlayer(PlayerId player_id, const vector<RoundThing *> &round_things,
                           bool center) {
   double startX = rink_.CenterX();
   if (!center) {
@@ -67,7 +67,7 @@ void Puck::PlaceForPlayer(PlayerId player_id, const vector<sp<RoundThing> > &rou
   do {
     overlapping = false;
     for (int i = 0; i < round_things.size(); i++) {
-      RoundThing *thing = round_things[i].get();
+      RoundThing *thing = round_things[i];
       if (thing != this && Overlaps(thing)) {
         overlapping = true;
         if (goLeft) {

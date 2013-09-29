@@ -40,12 +40,12 @@ class SettingsView : public EngineView, private AnimatableDelegate, private Butt
   void ButtonUp(Button *button);
 
  private:
-  sp<CompositeEntity> entities_;
-  sp<SimpleItem> background_;
-  sp<MultiSelect> num_pucks_select_;
-  sp<MultiSelect> difficulty_select_;
-  sp<MultiSelect> paddle_size_select_;
-  sp<Button> ok_button_;
+  CompositeEntity *entities_;  // weak
+  SimpleItem *background_;  // weak
+  MultiSelect *num_pucks_select_;  // weak
+  MultiSelect *difficulty_select_;  // weak
+  MultiSelect *paddle_size_select_;  // weak
+  Button *ok_button_;  // weak
   GamePoint ending_position_;
 };
 
