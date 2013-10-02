@@ -72,48 +72,40 @@ void SoundSlider::Render(GamePoint offset) {
   thumb_sprite_.DrawAtPoint(ThumbPoint() + offset);
 }
 
-bool SoundSlider::TouchesBegan(GamePoint offset, vector<Touch> touches) {
-  for (int i = 0; i < touches.size(); i++) {
-    GamePoint touchP = touches[i].location() - offset;
-    GamePoint thumbP = ThumbPoint();
-    double thumbWidth = thumb_sprite_.content_size().width;
-    double thumbHeight = thumb_sprite_.content_size().height;
-    if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
-          touchP.x < thumbP.x + 2 * thumbWidth &&
-          touchP.y < thumbP.y + 2 * thumbHeight) {
-      grabbed_touch_ = touches[i].identifier();
-      start_touch_position_ = touchP;
-      start_value_ = value_;
-      return true;
-    }
+bool SoundSlider::TouchBegan(GamePoint offset, Touch touch) {
+  GamePoint touchP = touch.location() - offset;
+  GamePoint thumbP = ThumbPoint();
+  double thumbWidth = thumb_sprite_.content_size().width;
+  double thumbHeight = thumb_sprite_.content_size().height;
+  if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
+        touchP.x < thumbP.x + 2 * thumbWidth &&
+        touchP.y < thumbP.y + 2 * thumbHeight) {
+    grabbed_touch_ = touch.identifier();
+    start_touch_position_ = touchP;
+    start_value_ = value_;
+    return true;
   }
   return false;
 }
 
-void SoundSlider::TouchesMoved(GamePoint offset, vector<Touch> touches) {
-  for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].identifier() == grabbed_touch_) {
-      GamePoint touchP = touches[i].location() - offset;
-      value_ = start_value_ + (touchP.x - start_touch_position_.x) /
-          (slider_width_ - thumb_sprite_.content_size().width);
-      // Stop moving when we reach the ends. Lock into this value until the user retouches.
-      if (value_ < 0) {
-        value_ = 0;
-      } else if (value_ > 1) {
-        value_ = 1;
-      }
-      return;
+void SoundSlider::TouchMoved(GamePoint offset, Touch touch) {
+  if (touch.identifier() == grabbed_touch_) {
+    GamePoint touchP = touch.location() - offset;
+    value_ = start_value_ + (touchP.x - start_touch_position_.x) /
+        (slider_width_ - thumb_sprite_.content_size().width);
+    // Stop moving when we reach the ends. Lock into this value until the user retouches.
+    if (value_ < 0) {
+      value_ = 0;
+    } else if (value_ > 1) {
+      value_ = 1;
     }
   }
 }
 
-void SoundSlider::TouchesEnded(GamePoint offset, vector<Touch> touches) {
-  for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].identifier() == grabbed_touch_) {
-      game_engine_->sound()->SetGlobalVolume(value_);
-      game_engine_->persistence_module()->SetDouble(value_, kLocalStoreVolume);
-      grabbed_touch_ = NULL;
-      return;
-    }
+void SoundSlider::TouchEnded(GamePoint offset, Touch touch) {
+  if (touch.identifier() == grabbed_touch_) {
+    game_engine_->sound()->SetGlobalVolume(value_);
+    game_engine_->persistence_module()->SetDouble(value_, kLocalStoreVolume);
+    grabbed_touch_ = NULL;
   }
 }

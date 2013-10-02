@@ -202,56 +202,40 @@ void RoundThing::Render(GamePoint offset) {
   }
 }
 
-bool RoundThing::TouchesBegan(GamePoint offset, vector<Touch> touches) {
+bool RoundThing::TouchBegan(GamePoint offset, Touch touch) {
   if (!IsGrabbable() || !is_active() || is_grabbed()) {
     return false;
   }
-  for (int i = 0; i < touches.size(); i++) {
-    if (ContainsPoint(touches[i].location() - offset)) {
-      grabbed_ = true;
-      grabbed_touch_ = touches[i].identifier();
-      TouchesMoved(offset, touches);
-      vx_ = 0;
-      vy_ = 0;
-      // Set oldX_ and oldY_ here so that the velocity stays around 0.
-      // This is when you touch the outside of the RoundThing and it
-      // snaps to center on your touch, it doesn't have a really high
-      // initial velocity.
-      old_x_ = x_;
-      old_y_ = y_;
-      return true;
-    }
+  if (ContainsPoint(touch.location() - offset)) {
+    grabbed_ = true;
+    grabbed_touch_ = touch.identifier();
+    TouchMoved(offset, touch);
+    vx_ = 0;
+    vy_ = 0;
+    // Set oldX_ and oldY_ here so that the velocity stays around 0.
+    // This is when you touch the outside of the RoundThing and it
+    // snaps to center on your touch, it doesn't have a really high
+    // initial velocity.
+    old_x_ = x_;
+    old_y_ = y_;
+    return true;
   }
   return false;
 }
 
-void RoundThing::TouchesMoved(GamePoint offset, vector<Touch> touches) {
+void RoundThing::TouchMoved(GamePoint offset, Touch touch) {
   if (!IsMovable()) {
     return;
   }
-  Touch *correctTouch = NULL;
-  for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].identifier() == grabbed_touch_) {
-      correctTouch = &touches[i];
-      break;
-    }
-  }
-  if (is_grabbed() && correctTouch != NULL) {
-    GamePoint p = correctTouch->location() - offset;
+  if (is_grabbed() && touch.identifier() == grabbed_touch_) {
+    GamePoint p = touch.location() - offset;
     x_ = p.x;
     y_ = p.y;
   }
 }
 
-void RoundThing::TouchesEnded(GamePoint offset, vector<Touch> touches) {
-  Touch *correctTouch = NULL;
-  for (int i = 0; i < touches.size(); i++) {
-    if (touches[i].identifier() == grabbed_touch_) {
-      correctTouch = &touches[i];
-      break;
-    }
-  }
-  if (is_grabbed() && correctTouch != NULL) {
+void RoundThing::TouchEnded(GamePoint offset, Touch touch) {
+  if (is_grabbed() && touch.identifier() == grabbed_touch_) {
     grabbed_ = false;
     grabbed_touch_ = NULL;
   }

@@ -27,9 +27,9 @@ class SoundSlider : public ViewEntity {
   // ViewEntity
   void Update();
   void Render(GamePoint offset);
-  bool TouchesBegan(GamePoint offset, std::vector<Touch> touches);
-  void TouchesMoved(GamePoint offset, std::vector<Touch> touches);
-  void TouchesEnded(GamePoint offset, std::vector<Touch> touches);
+  bool TouchBegan(GamePoint offset, Touch touch);
+  void TouchMoved(GamePoint offset, Touch touch);
+  void TouchEnded(GamePoint offset, Touch touch);
 
  private:
   GameEngine *game_engine_;  // weak
