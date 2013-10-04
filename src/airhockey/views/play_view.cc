@@ -361,7 +361,7 @@ void PlayView::RematchPressed() {
 
 void PlayView::MenuPressed() {
   game_engine()->PopView();
-  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
+  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine(), true /*showAd*/)));
 }
 
 void PlayView::ContinuePressed() {
@@ -415,7 +415,7 @@ void PlayView::SetUpNewGame() {
   game_engine()->persistence_module()->SetInteger(num_matches, kLocalStoreMatchCount);
   bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
-  if (show_full_screen_ad) {
+  if (false && show_full_screen_ad) {
     game_engine()->ad_module()->ShowFullScreenAd();
   }
   state_ = kPlayViewStateGetReady;

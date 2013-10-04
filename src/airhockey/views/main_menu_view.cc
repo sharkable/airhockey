@@ -27,6 +27,8 @@ using std::string;
 #include "airhockey/views/settings_view.h"
 #include "airhockey/views/story_view.h"
 
+#include "gameengine/modules/ad_module.h"
+
 static const int kAnimateOutTicks = 15;
 
 // Local Store keys
@@ -48,7 +50,7 @@ void fade_out(Animatable *entity) {
   entity->AnimateToAlpha(0, kAnimationTypeLinear, 15);
 }
 
-MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
+MainMenuView::MainMenuView(GameEngine *game_engine, bool show_ad) : EngineView(game_engine) {
   show_upgrade_button_ = game_engine->app_store_module()->IsImplemented();
   supports_2_player_ = game_engine->platform_type() != kPlatformTypePC;
 
@@ -142,6 +144,8 @@ MainMenuView::MainMenuView(GameEngine *game_engine) : EngineView(game_engine) {
   sound_slider_.reset(new SoundSlider(game_engine,
                                       game_engine->position("sound_slider_main_menu")));
   AddEntity(sound_slider_);
+  if(show_ad)
+    game_engine->ad_module()->ShowFullScreenAd();
 }
 
 

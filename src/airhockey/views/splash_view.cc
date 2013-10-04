@@ -11,7 +11,6 @@
 #include "gameengine/modules/sound_player.h"
 #include "gameengine/engine_view.h"
 #include "gameengine/game_engine.h"
-
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/views/main_menu_view.h"
 
@@ -24,5 +23,5 @@ void SplashView::Update() {
   SoundPlayer::instance()->initialize();  // TODO this is a dumb place for this.
   SoundPlayer::instance()->setSoundEffectsOn(true);
   game_engine()->PopView();
-  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine())));
+  game_engine()->PushView(sp<EngineView>(new MainMenuView(game_engine(), false /*showAd*/)));
 }

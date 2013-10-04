@@ -29,7 +29,7 @@ extern const std::string kLocalStoreUpgraded;
 
 class MainMenuView : public EngineView, private AppStoreModuleDelegate, private ButtonDelegate {
  public:
-  MainMenuView(GameEngine *game_engine);
+  MainMenuView(GameEngine *game_engine, bool showAd);
 
   // EngineView
   void ViewDidGainFocus();
