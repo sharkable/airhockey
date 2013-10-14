@@ -61,7 +61,7 @@ bool StoryView::IsCapturingTouches() {
   return about_->position().x >= resting_image_position_.x;
 }
 
-void StoryView::TouchesBegan(vector<Touch> touches) {
+void StoryView::TouchesBegan(vector<Touch> &touches) {
   MoveForward();
 }
 

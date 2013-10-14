@@ -26,7 +26,7 @@ class StoryView : public EngineView, private AnimatableDelegate {
 
   // EngineView
   bool IsCapturingTouches();
-  void TouchesBegan(std::vector<Touch> touches);
+  void TouchesBegan(std::vector<Touch> &touches);
   bool HandleBackButton();
 
   // AnimatableDelegate
