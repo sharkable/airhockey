@@ -11,6 +11,7 @@
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/platform.h"
 #include "gameengine/sprite.h"
 #include "sharksound/sound.h"
 #include "sharksound/sound_controller.h"
@@ -22,11 +23,11 @@ using std::vector;
 static const int kAnimateTicks = 30;
 
 StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
-  bool use_pc = game_engine->platform_type() == kPlatformTypePC;
+  bool use_pc = game_engine->platform().input_group() == Platform::kInputGroupPC;
   Sprite story_image = Sprite(game_engine, use_pc ? "story_pc" : "story");
   Sprite about_image = Sprite(game_engine, use_pc ? "about_pc" : "about");
 
-  GameSize rink_size = RinkView::RinkSizeForPlatformType(game_engine->platform_type());
+  GameSize rink_size = RinkView::RinkSizeForTextureGroup(game_engine->platform().texture_group());
   GameSize image_size = story_image.content_size();
   double zoom = rink_size.width / image_size.width;
 

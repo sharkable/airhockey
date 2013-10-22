@@ -12,6 +12,7 @@
 
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/platform.h"
 #include "gameengine/resource_loader.h"
 
 #include "airhockey/entities/puck.h"
@@ -68,7 +69,7 @@ Paddle::Paddle(GameEngine *game_engine, Rink &rink, PlayerId player_id, PaddleSi
   radius_ = kPaddleRadii[size];
   mass_ = kPaddleMass;
   friction_ = player_controlled_ ? kPaddleFriction : kPaddleAIFriction;
-  always_grabbed_ = game_engine->platform_type() == kPlatformTypePC;
+  always_grabbed_ = game_engine->platform().input_group() == Platform::kInputGroupPC;
 }
 
 void Paddle::SetInitialPosition() {

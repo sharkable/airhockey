@@ -12,6 +12,7 @@
 #include "gameengine/coordinate_types.h"
 #include "gameengine/engine_view.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/platform.h"
 
 class GameEngine;
 
@@ -19,7 +20,7 @@ class RinkView : public EngineView {
  public:
   RinkView(GameEngine *game_engine);
 
-  static GameSize RinkSizeForPlatformType(PlatformType platform_type);
+  static GameSize RinkSizeForTextureGroup(Platform::TextureGroup texture_group);
 };
 
 #endif

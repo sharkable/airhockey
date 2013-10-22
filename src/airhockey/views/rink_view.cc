@@ -20,12 +20,18 @@ RinkView::RinkView(GameEngine *game_engine) : EngineView(game_engine) {
   AddEntity(background);
 }
 
-GameSize RinkView::RinkSizeForPlatformType(PlatformType platform_type) {
-  switch (platform_type) {
-    case kPlatformTypePhone:
+GameSize RinkView::RinkSizeForTextureGroup(Platform::TextureGroup texture_group) {
+  switch (texture_group) {
+    case Platform::kTextureGroupIPhone35cmLowRes:
+    case Platform::kTextureGroupIPhone35cmHighRes:
+    case Platform::kTextureGroupIPhone40cmHighRes:
+    case Platform::kTextureGroupAndroidLowRes:
+    case Platform::kTextureGroupAndroidHighRes:
       return game_size_make(768, 1152);
-    case kPlatformTypeTablet:
-    case kPlatformTypePC:
+    case Platform::kTextureGroupIPadLowRes:
+    case Platform::kTextureGroupIPadHighRes:
+    case Platform::kTextureGroupPCHighRes:
+    case Platform::kTextureGroupPCUltraHighRes:
       return game_size_make(768, 1024);
   }
 }

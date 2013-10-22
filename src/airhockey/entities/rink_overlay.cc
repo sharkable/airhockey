@@ -11,11 +11,13 @@ using std::string;
 
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/resource_loader.h"
 
 #include "airhockey/entities/rink_overlay.h"
 
 RinkOverlay::RinkOverlay(GameEngine *game_engine) {
-  if (game_engine->platform_type() == kPlatformTypePhone) {
+  string extention = game_engine->resource_loader().texture_name_extention();
+  if (extention == "_iphone" || extention == "_iphone@2x") {
     // Add rink top and bottom pieces.
 
     Sprite rink_top_sprite(game_engine, "rink_top");

@@ -10,6 +10,7 @@
 
 #include "gameengine/modules/persistence_module.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/platform.h"
 #include "gameengine/touch.h"
 
 #include "sharksound/sound_controller.h"
@@ -31,13 +32,19 @@ SoundSlider::SoundSlider(GameEngine *game_engine, GamePoint position)
       empty_sprite_(game_engine, "sound_empty"),
       full_sprite_(game_engine, "sound_full"),
       thumb_sprite_(game_engine, "sound_thumb") {
-  switch (game_engine->platform_type()) {
-    case kPlatformTypePhone:
+  switch (game_engine->platform().texture_group()) {
+    case Platform::kTextureGroupIPhone35cmLowRes:
+    case Platform::kTextureGroupAndroidLowRes:
+    case Platform::kTextureGroupIPhone35cmHighRes:
+    case Platform::kTextureGroupIPhone40cmHighRes:
+    case Platform::kTextureGroupAndroidHighRes:
       left_marin_ = kLeftMarginPhone;
       slider_width_ = kSliderWidthPhone;
       break;
-    case kPlatformTypeTablet:
-    case kPlatformTypePC:
+    case Platform::kTextureGroupIPadLowRes:
+    case Platform::kTextureGroupIPadHighRes:
+    case Platform::kTextureGroupPCHighRes:
+    case Platform::kTextureGroupPCUltraHighRes:
       left_marin_ = kLeftMarginTablet;
       slider_width_ = kSliderWidthTablet;
       break;

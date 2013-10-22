@@ -19,6 +19,7 @@ using std::string;
 #include "gameengine/modules/persistence_module.h"
 #include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/platform.h"
 #include "gameengine/sprite.h"
 
 #include "airhockey/entities/rink_overlay.h"
@@ -59,7 +60,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
       upgrade_button_(NULL),
       sound_slider_(NULL) {
   show_upgrade_button_ = game_engine->app_store_module()->IsImplemented();
-  supports_2_player_ = game_engine->platform_type() != kPlatformTypePC;
+  supports_2_player_ = game_engine->platform().input_group() == Platform::kInputGroupTouchScreen;
 
   InitializeSettings();
   state_ = kMainMenuStateRunning;
@@ -214,7 +215,7 @@ void MainMenuView::InitializeSettings() {
   if (!game_engine()->persistence_module()->HasEntryForKey(kLocalStoreDifficulty)) {
     game_engine()->persistence_module()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
     PaddleSize default_size = kPaddleSizeMedium;
-    if (game_engine()->platform_type() == kPlatformTypePhone) {
+    if (game_engine()->platform().screen_size_group() == Platform::kScreenSizeGroupPhone) {
       default_size = kPaddleSizeLarge;
     }
     game_engine()->persistence_module()->SetInteger(default_size, kLocalStorePaddleSize);
@@ -240,10 +241,6 @@ void MainMenuView::AnimateOut() {
 }
 
 void MainMenuView::PressedStart(int num_players) {
-  if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_module()->RemoveAd();
-  }
-
   // The stored number of pucks is one less than the desired value. Not ideal. This is for:
   // 1) Legacy.
   // 2) Defaults to 0, which means 1 puck.
@@ -274,9 +271,6 @@ void MainMenuView::PressedSettings() {
 
 void MainMenuView::PressedStory() {
   game_engine()->analytics_module()->LogEvent("STORY_PRESSED");
-  if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_module()->RemoveAd();
-  }
   game_engine()->PushView(new StoryView(game_engine()));
 }
 

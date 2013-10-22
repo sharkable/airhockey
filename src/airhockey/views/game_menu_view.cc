@@ -61,9 +61,6 @@ void GameMenuView::HandlePauseButton() {
 #pragma mark - ButtonDelegate
 
 void GameMenuView::ButtonUp(Button *button) {
-  if (game_engine()->platform_type() == kPlatformTypeTablet) {
-    game_engine()->ad_module()->RemoveAd();
-  }
   game_engine()->PopView();
   if (button == rematch_button_) {
     delegate_->RematchPressed();

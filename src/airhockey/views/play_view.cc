@@ -14,6 +14,7 @@
 #include "gameengine/modules/input_module.h"
 #include "gameengine/modules/persistence_module.h"
 #include "gameengine/game_engine.h"
+#include "gameengine/platform.h"
 #include "gameengine/resource_loader.h"
 #include "sharksound/sound.h"
 #include "sharksound/sound_controller.h"
@@ -44,7 +45,7 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
       pause_button_2_(NULL) {
   num_players_ = num_players;
 
-  rink_ = new Rink(RinkView::RinkSizeForPlatformType(game_engine->platform_type()));
+  rink_ = new Rink(RinkView::RinkSizeForTextureGroup(game_engine->platform().texture_group()));
   AddEntity(rink_, false);
 
   paddle_1_ = new Paddle(game_engine, *rink_, kPlayerId1, paddle_size, true, kComputerAIBad,
@@ -135,7 +136,7 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
 
   // For the PC version, hide the mouse during play. Rely on the keyboard to pause, and have no
   // buttons.
-  if (game_engine->platform_type() != kPlatformTypePC) {
+  if (game_engine->platform().input_group() != Platform::kInputGroupPC) {
     Sprite pause_button_sprite(game_engine, "pause_button");
     Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
