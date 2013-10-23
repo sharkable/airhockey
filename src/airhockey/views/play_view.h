@@ -48,6 +48,7 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   void NotifyPause();
   bool HandleBackButton();
   void HandlePauseButton();
+  void KeysPressed(std::vector<int> const &keys);
 
   // ButtonDelegate
   void ButtonUp(Button *button);

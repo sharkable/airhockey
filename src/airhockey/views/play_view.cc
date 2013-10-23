@@ -367,6 +367,10 @@ void PlayView::HandlePauseButton() {
   PausePressed();
 }
 
+void PlayView::KeysPressed(std::vector<int> const &keys) {
+  PausePressed();
+}
+
 
 #pragma mark - ButtonDelegate
 
