@@ -52,10 +52,10 @@ void sharkengine_init(GameEngine *game_engine) {
       break;
     case Platform::kTextureGroupIPadLowRes:
     case Platform::kTextureGroupPCHighRes:
-    case Platform::kTextureGroupPCUltraHighRes:
       game_engine->resource_loader().set_texture_name_extention("");
       break;
     case Platform::kTextureGroupIPadHighRes:
+    case Platform::kTextureGroupPCUltraHighRes:
       game_engine->resource_loader().set_texture_name_extention("@2x");
       break;
   }
