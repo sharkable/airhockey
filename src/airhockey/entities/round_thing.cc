@@ -250,6 +250,14 @@ void RoundThing::HandleMouseDelta(float delta_x, float delta_y) {
   if (!IsGrabbable() || !is_active() || !IsMovable()) {
     return;
   }
+  static const float kMaxDelta = 80.f;
+  float length = sqrt(delta_x * delta_x + delta_y * delta_y);
+  if (length > kMaxDelta) {
+    delta_x *= kMaxDelta;
+    delta_x /= length;
+    delta_y *= kMaxDelta;
+    delta_y /= length;
+  }
   x_ += delta_x;
   y_ += delta_y;
 }
