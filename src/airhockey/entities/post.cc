@@ -13,7 +13,7 @@
 
 #include "airhockey/entities/puck.h"
 
-Post::Post(GameEngine *game_engine, double x, double y) : RoundThing(game_engine) {
+Post::Post(GameEngine &game_engine, double x, double y) : RoundThing(game_engine) {
   set_x(x);
   set_y(y);
   set_radius(1);

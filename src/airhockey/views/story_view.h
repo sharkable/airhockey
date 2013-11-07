@@ -22,7 +22,7 @@ namespace SharkSound {
 
 class StoryView : public EngineView, private AnimatableDelegate {
  public:
-  StoryView(GameEngine *game_engine);
+  StoryView(GameEngine &game_engine);
 
   // EngineView
   bool IsCapturingTouches();

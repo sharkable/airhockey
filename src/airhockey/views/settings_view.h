@@ -27,7 +27,7 @@ extern const std::string kLocalStorePaddleSize;
 
 class SettingsView : public EngineView, private AnimatableDelegate, private ButtonDelegate {
  public:
-  SettingsView(GameEngine *game_engine);
+  SettingsView(GameEngine &game_engine);
 
   // EngineView
   bool IsCapturingTouches();

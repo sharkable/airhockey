@@ -22,12 +22,12 @@ using std::vector;
 
 static const int kAnimateTicks = 30;
 
-StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
-  bool use_pc = game_engine->platform().input_group() == Platform::kInputGroupPC;
+StoryView::StoryView(GameEngine &game_engine) : EngineView(game_engine) {
+  bool use_pc = game_engine.platform().input_group() == Platform::kInputGroupPC;
   Sprite story_image = Sprite(game_engine, use_pc ? "story_pc" : "story");
   Sprite about_image = Sprite(game_engine, use_pc ? "about_pc" : "about");
 
-  GameSize rink_size = RinkView::RinkSizeForTextureGroup(game_engine->platform().texture_group());
+  GameSize rink_size = RinkView::RinkSizeForTextureGroup(game_engine.platform().texture_group());
   GameSize image_size = story_image.content_size();
   double zoom = rink_size.width / image_size.width;
 
@@ -52,7 +52,7 @@ StoryView::StoryView(GameEngine *game_engine) : EngineView(game_engine) {
   about_->set_position(starting_image_position_);
   AddEntity(about_);
 
-  beep_sound_ = game_engine->sound()->GetSound("sounds/beep.wav");
+  beep_sound_ = game_engine.sound()->GetSound("sounds/beep.wav");
 }
 
 
@@ -76,7 +76,7 @@ bool StoryView::HandleBackButton() {
 
 void StoryView::AnimationFinished(Animatable *animatable) {
   if (about_->position().x == ending_image_position_.x) {
-    game_engine()->RemoveView(this);
+    game_engine().RemoveView(this);
   }
 }
 

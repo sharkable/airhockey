@@ -24,7 +24,7 @@ class GameMenuViewDelegate {
 
 class GameMenuView : public EngineView, private ButtonDelegate {
  public:
-  GameMenuView(GameEngine *game_engine, GameMenuViewDelegate *delegate, bool match_finished);
+  GameMenuView(GameEngine &game_engine, GameMenuViewDelegate *delegate, bool match_finished);
   ~GameMenuView();
 
   // EngineView

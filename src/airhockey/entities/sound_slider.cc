@@ -26,13 +26,13 @@ const int kSliderWidthPhone = 506;
 // Locale Store key
 static const string kLocalStoreVolume = "ls_volume";
 
-SoundSlider::SoundSlider(GameEngine *game_engine, GamePoint position)
+SoundSlider::SoundSlider(GameEngine &game_engine, GamePoint position)
     : game_engine_(game_engine),
       position_(position),
       empty_sprite_(game_engine, "sound_empty"),
       full_sprite_(game_engine, "sound_full"),
       thumb_sprite_(game_engine, "sound_thumb") {
-  switch (game_engine->platform().texture_group()) {
+  switch (game_engine.platform().texture_group()) {
     case Platform::kTextureGroupIPhone35cmLowRes:
     case Platform::kTextureGroupAndroidLowRes:
     case Platform::kTextureGroupIPhone35cmHighRes:
@@ -49,12 +49,12 @@ SoundSlider::SoundSlider(GameEngine *game_engine, GamePoint position)
       slider_width_ = kSliderWidthTablet;
       break;
   }
-  if (game_engine->persistence_module()->HasEntryForKey(kLocalStoreVolume)) {
-    value_ = game_engine->persistence_module()->DoubleForKey(kLocalStoreVolume);
+  if (game_engine.persistence_module()->HasEntryForKey(kLocalStoreVolume)) {
+    value_ = game_engine.persistence_module()->DoubleForKey(kLocalStoreVolume);
   } else {
     value_ = 0.75;
   }
-  game_engine->sound()->SetGlobalVolume(value_);
+  game_engine.sound()->SetGlobalVolume(value_);
 }
 
 GamePoint SoundSlider::ThumbPoint() {
@@ -111,8 +111,8 @@ void SoundSlider::TouchMoved(GamePoint offset, Touch touch) {
 
 void SoundSlider::TouchEnded(GamePoint offset, Touch touch) {
   if (touch.identifier() == grabbed_touch_) {
-    game_engine_->sound()->SetGlobalVolume(value_);
-    game_engine_->persistence_module()->SetDouble(value_, kLocalStoreVolume);
+    game_engine_.sound()->SetGlobalVolume(value_);
+    game_engine_.persistence_module()->SetDouble(value_, kLocalStoreVolume);
     grabbed_touch_ = NULL;
   }
 }

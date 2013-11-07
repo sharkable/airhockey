@@ -16,7 +16,7 @@ class SoundPlayer;
 
 class SplashView : public EngineView {
  public:
-  SplashView(GameEngine *game_engine);
+  SplashView(GameEngine &game_engine);
 
   // EngineView
   void Update();

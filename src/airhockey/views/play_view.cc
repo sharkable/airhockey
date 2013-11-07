@@ -38,14 +38,14 @@ static const int kWinScore = 7;
 static const int kFullScreenAdFrequency = 3;
 static const string kLocalStoreMatchCount = "ls_match_count";
 
-PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, ComputerAI difficulty,
+PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                    PaddleSize paddle_size)
     : EngineView(game_engine),
       pause_button_1_(NULL),
       pause_button_2_(NULL) {
   num_players_ = num_players;
 
-  rink_ = new Rink(RinkView::RinkSizeForTextureGroup(game_engine->platform().texture_group()));
+  rink_ = new Rink(RinkView::RinkSizeForTextureGroup(game_engine.platform().texture_group()));
   AddEntity(rink_, false);
 
   paddle_1_ = new Paddle(game_engine, *rink_, kPlayerId1, paddle_size, true, kComputerAIBad,
@@ -65,15 +65,15 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
     Sprite sprite(game_engine, pointsstr);
     // TODO: This is just to bump the use count of the texture since it's being used twice.
     // Rethink how we handle textures.
-    game_engine->resource_loader().TextureWithName(pointsstr);
+    game_engine.resource_loader().TextureWithName(pointsstr);
     scoreSprites.push_back(sprite);
   }
   player_1_score_ = new SimpleItem();
   player_1_score_->set_sprites(scoreSprites);
-  player_1_score_->set_position(game_engine->position("player_1_score"));
+  player_1_score_->set_position(game_engine.position("player_1_score"));
   player_2_score_ = new SimpleItem();
   player_2_score_->set_sprites(scoreSprites);
-  player_2_score_->set_position(game_engine->position("player_2_score"));
+  player_2_score_->set_position(game_engine.position("player_2_score"));
   AddEntity(player_1_score_, false);
   AddEntity(player_2_score_, false);
 
@@ -136,11 +136,11 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
 
   // For the PC version, hide the mouse during play. Rely on the keyboard to pause, and have no
   // buttons.
-  if (game_engine->platform().input_group() != Platform::kInputGroupPC) {
+  if (game_engine.platform().input_group() != Platform::kInputGroupPC) {
     Sprite pause_button_sprite(game_engine, "pause_button");
     Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
-    GameSize game_size = game_engine->screen_size_to_game_size(game_engine->screen_size());
+    GameSize game_size = game_engine.screen_size_to_game_size(game_engine.screen_size());
     double y_margin = (game_size.height - rink_->TotalHeight()) / 2;
     GamePoint pause_button_pos_1 =
         game_point_make(game_size.width - pause_button_sprite.content_size().width,
@@ -167,10 +167,10 @@ PlayView::PlayView(GameEngine *game_engine, int num_players, int num_pucks, Comp
     }
   }
 
-  get_ready_sound_ = game_engine->sound()->GetSound("sounds/get_ready.wav");
-  go_sound_ = game_engine->sound()->GetSound("sounds/start.wav");
-  score_sound_ = game_engine->sound()->GetSound("sounds/score.wav");
-  score_final_sound_ = game_engine->sound()->GetSound("sounds/score_final.wav");
+  get_ready_sound_ = game_engine.sound()->GetSound("sounds/get_ready.wav");
+  go_sound_ = game_engine.sound()->GetSound("sounds/start.wav");
+  score_sound_ = game_engine.sound()->GetSound("sounds/score.wav");
+  score_final_sound_ = game_engine.sound()->GetSound("sounds/score_final.wav");
 
   give_extra_puck_to_player_ = kPlayerId1;
   player_1_win_count_ = 0;
@@ -204,11 +204,11 @@ PlayView::~PlayView() {
 #pragma mark - EngineView
 
 void PlayView::ViewDidGainFocus() {
-  game_engine()->input_module()->HidePointer();
+  game_engine().input_module()->HidePointer();
 }
 
 void PlayView::ViewDidLoseFocus() {
-  game_engine()->input_module()->ShowPointer();
+  game_engine().input_module()->ShowPointer();
 }
 
 void PlayView::Update() {
@@ -386,13 +386,13 @@ void PlayView::ButtonUp(Button *button) {
 #pragma mark - GameMenuViewDelegate
 
 void PlayView::RematchPressed() {
-  game_engine()->analytics_module()->LogEvent("REMATCH");
+  game_engine().analytics_module()->LogEvent("REMATCH");
   SetUpNewGame();
 }
 
 void PlayView::MenuPressed() {
-  game_engine()->PopView();
-  game_engine()->PushView(new MainMenuView(game_engine()));
+  game_engine().PopView();
+  game_engine().PushView(new MainMenuView(game_engine()));
 }
 
 void PlayView::ContinuePressed() {
@@ -441,13 +441,13 @@ void PlayView::SetUpNewGame() {
   num_active_pucks_ = num_pucks_;
   num_player_1_scores_last_round_ = 0;
 
-  bool app_upgraded = game_engine()->persistence_module()->BoolForKey(kLocalStoreUpgraded);
-  int num_matches = game_engine()->persistence_module()->IntegerForKey(kLocalStoreMatchCount) + 1;
-  game_engine()->persistence_module()->SetInteger(num_matches, kLocalStoreMatchCount);
+  bool app_upgraded = game_engine().persistence_module()->BoolForKey(kLocalStoreUpgraded);
+  int num_matches = game_engine().persistence_module()->IntegerForKey(kLocalStoreMatchCount) + 1;
+  game_engine().persistence_module()->SetInteger(num_matches, kLocalStoreMatchCount);
   bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
   if (show_full_screen_ad) {
-    game_engine()->ad_module()->ShowFullScreenAd();
+    game_engine().ad_module()->ShowFullScreenAd();
   }
   state_ = kPlayViewStateGetReady;
   get_ready_ticks_left_ = kGetReadyTicksTotal;
@@ -505,13 +505,13 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
   lose_->AnimateToAlpha(1, kAnimationTypeLinear, 3 * 60);
   lose_->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 3 * 60);
 
-  game_engine()->PushView(new GameMenuView(game_engine(), this, true));
+  game_engine().PushView(new GameMenuView(game_engine(), this, true));
 }
 
 void PlayView::PausePressed() {
   if (state_ != kPlayViewStateFinished && state_ != kPlayViewStatePaused) {
     pre_pause_state_ = state_;
     state_ = kPlayViewStatePaused;
-    game_engine()->PushView(new GameMenuView(game_engine(), this, false));
+    game_engine().PushView(new GameMenuView(game_engine(), this, false));
   }
 }

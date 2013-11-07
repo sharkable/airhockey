@@ -28,7 +28,7 @@ static const double kPuckMass = 10;
 static const double kPuckFriction = 0.995;
 static const double kPuckRadius = 43.5;
 
-Puck::Puck(GameEngine *game_engine, Rink &rink) : RoundThing(game_engine, "puck"), rink_(rink) {
+Puck::Puck(GameEngine &game_engine, Rink &rink) : RoundThing(game_engine, "puck"), rink_(rink) {
   radius_ = kPuckRadius;
   mass_ = kPuckMass;
   friction_ = kPuckFriction;
@@ -41,9 +41,9 @@ Puck::Puck(GameEngine *game_engine, Rink &rink) : RoundThing(game_engine, "puck"
   hit_rink_last_time_ = false;
   hit_rink_this_time_ = false;
 
-  two_puck_hit_sound_ = game_engine->sound()->GetSound("sounds/puck_puck_hit.wav");
-  paddle_hit_sound_ = game_engine->sound()->GetSound("sounds/paddle_hit.wav");
-  puck_rink_bounce_sound_ = game_engine->sound()->GetSound("sounds/puck_rink_bounce.wav");
+  two_puck_hit_sound_ = game_engine.sound()->GetSound("sounds/puck_puck_hit.wav");
+  paddle_hit_sound_ = game_engine.sound()->GetSound("sounds/paddle_hit.wav");
+  puck_rink_bounce_sound_ = game_engine.sound()->GetSound("sounds/puck_rink_bounce.wav");
 }
 
 void Puck::PlaceForPlayer(PlayerId player_id, const vector<RoundThing *> &round_things,

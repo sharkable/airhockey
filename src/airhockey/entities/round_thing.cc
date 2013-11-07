@@ -18,7 +18,7 @@ using std::vector;
 
 static const double kMaxSpeed = 60;
 
-RoundThing::RoundThing(GameEngine *game_engine)
+RoundThing::RoundThing(GameEngine &game_engine)
     : sprite_(game_engine),
       x_(0),
       y_(0),
@@ -34,7 +34,7 @@ RoundThing::RoundThing(GameEngine *game_engine)
       active_(true) {
 }
 
-RoundThing::RoundThing(GameEngine *game_engine, string texture_name)
+RoundThing::RoundThing(GameEngine &game_engine, string texture_name)
     : sprite_(game_engine, texture_name),
       x_(0),
       y_(0),

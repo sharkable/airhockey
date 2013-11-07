@@ -15,12 +15,12 @@
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/views/main_menu_view.h"
 
-SplashView::SplashView(GameEngine *game_engine) : EngineView(game_engine) {
+SplashView::SplashView(GameEngine &game_engine) : EngineView(game_engine) {
   AddEntity(new RinkOverlay(game_engine));
 }
 
 void SplashView::Update() {
   EngineView::Update();
-  game_engine()->PopView();
-  game_engine()->PushView(new MainMenuView(game_engine()));
+  game_engine().PopView();
+  game_engine().PushView(new MainMenuView(game_engine()));
 }

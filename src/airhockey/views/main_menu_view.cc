@@ -49,7 +49,7 @@ void fade_out(Animatable *entity) {
   entity->AnimateToAlpha(0, kAnimationTypeLinear, 15);
 }
 
-MainMenuView::MainMenuView(GameEngine *game_engine)
+MainMenuView::MainMenuView(GameEngine &game_engine)
     : EngineView(game_engine),
       rink_overlay_(NULL),
       title_(NULL),
@@ -59,8 +59,8 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
       story_button_(NULL),
       upgrade_button_(NULL),
       sound_slider_(NULL) {
-  show_upgrade_button_ = game_engine->app_store_module()->IsImplemented();
-  supports_2_player_ = game_engine->platform().input_group() == Platform::kInputGroupTouchScreen;
+  show_upgrade_button_ = game_engine.app_store_module()->IsImplemented();
+  supports_2_player_ = game_engine.platform().input_group() == Platform::kInputGroupTouchScreen;
 
   InitializeSettings();
   state_ = kMainMenuStateRunning;
@@ -69,7 +69,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
   AddEntity(rink_overlay_);
 
   Sprite title_sprite(game_engine, "title");
-  title_ = new SimpleItem(title_sprite, game_engine->position("title"));
+  title_ = new SimpleItem(title_sprite, game_engine.position("title"));
   AddEntity(title_);
   title_->set_zoom(1.3);
   title_->AnimateToZoom(1, kAnimationTypeCubicEaseOut, 900);
@@ -90,7 +90,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
   start_1_player_button_ = new Button(game_engine);
   start_1_player_button_->set_normal_sprite(start_1_player_button_image);
   start_1_player_button_->set_pressed_sprite(start_1_player_button_pressed_image);
-  GamePoint player_1_position = game_engine->position("start_1_player_button");
+  GamePoint player_1_position = game_engine.position("start_1_player_button");
   if (!show_upgrade_button_) {
     player_1_position.y += 90;
   }
@@ -105,7 +105,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
     start_2_player_button_ = new Button(game_engine);
     start_2_player_button_->set_normal_sprite(start_2_player_button_image);
     start_2_player_button_->set_pressed_sprite(start_2_player_button_pressed_image);
-    GamePoint player_2_position = game_engine->position("start_2_player_button");
+    GamePoint player_2_position = game_engine.position("start_2_player_button");
     if (!show_upgrade_button_) {
       player_2_position.y += 90;
     }
@@ -120,7 +120,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
   settings_button_ = new Button(game_engine);
   settings_button_->set_normal_sprite(settings_button_image);
   settings_button_->set_pressed_sprite(settings_button_pressed_image);
-  settings_button_->set_position(game_engine->position("settings_button"));
+  settings_button_->set_position(game_engine.position("settings_button"));
   settings_button_->set_delegate(this);
   AddEntity(settings_button_);
   fade_in(settings_button_);
@@ -130,7 +130,7 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
   story_button_ = new Button(game_engine);
   story_button_->set_normal_sprite(story_button_image);
   story_button_->set_pressed_sprite(story_button_pressed_image);
-  story_button_->set_position(game_engine->position("story_button"));
+  story_button_->set_position(game_engine.position("story_button"));
   story_button_->set_delegate(this);
   AddEntity(story_button_);
   fade_in(story_button_);
@@ -141,15 +141,15 @@ MainMenuView::MainMenuView(GameEngine *game_engine)
     upgrade_button_ = new Button(game_engine);
     upgrade_button_->set_normal_sprite(upgrade_button_image);
     upgrade_button_->set_pressed_sprite(upgrade_button_pressed_image);
-    upgrade_button_->set_position(game_engine->position("upgrade_button"));
+    upgrade_button_->set_position(game_engine.position("upgrade_button"));
     upgrade_button_->set_delegate(this);
-    if (!game_engine->persistence_module()->BoolForKey(kLocalStoreUpgraded)) {
+    if (!game_engine.persistence_module()->BoolForKey(kLocalStoreUpgraded)) {
       AddEntity(upgrade_button_);
     }
     fade_in(upgrade_button_);
   }
 
-  sound_slider_ = new SoundSlider(game_engine, game_engine->position("sound_slider_main_menu"));
+  sound_slider_ = new SoundSlider(game_engine, game_engine.position("sound_slider_main_menu"));
   AddEntity(sound_slider_);
 }
 
@@ -160,9 +160,9 @@ void MainMenuView::ViewDidGainFocus() {
   if (show_upgrade_button_) {
     // Force the popup for rating and upgrading just once.
     int main_menu_view_count =
-        game_engine()->persistence_module()->IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
-    game_engine()->persistence_module()->SetInteger(main_menu_view_count,
-                                                    kLocalStoreMainMenuViewCount);
+        game_engine().persistence_module()->IntegerForKey(kLocalStoreMainMenuViewCount) + 1;
+    game_engine().persistence_module()->SetInteger(main_menu_view_count,
+                                                  kLocalStoreMainMenuViewCount);
     if (main_menu_view_count == 10) {
       PressedUpgrade();
     }
@@ -178,7 +178,7 @@ void MainMenuView::Update() {
       RemoveEntity(rink_overlay_);
     }
     if (animating_out_ticks_left_ <= 0) {
-      game_engine()->RemoveView(this);
+      game_engine().RemoveView(this);
     }
   }
 }
@@ -187,7 +187,7 @@ void MainMenuView::Update() {
 #pragma mark - AppStoreModuleDelegate
 
 void MainMenuView::UpgradeSucceeded() {
-  game_engine()->persistence_module()->SetBool(true, kLocalStoreUpgraded);
+  game_engine().persistence_module()->SetBool(true, kLocalStoreUpgraded);
   RemoveEntity(upgrade_button_);
 }
 
@@ -212,13 +212,13 @@ void MainMenuView::ButtonUp(Button *button) {
 #pragma mark - private
 
 void MainMenuView::InitializeSettings() {
-  if (!game_engine()->persistence_module()->HasEntryForKey(kLocalStoreDifficulty)) {
-    game_engine()->persistence_module()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
+  if (!game_engine().persistence_module()->HasEntryForKey(kLocalStoreDifficulty)) {
+    game_engine().persistence_module()->SetInteger(kComputerAIBad, kLocalStoreDifficulty);
     PaddleSize default_size = kPaddleSizeMedium;
-    if (game_engine()->platform().screen_size_group() == Platform::kScreenSizeGroupPhone) {
+    if (game_engine().platform().screen_size_group() == Platform::kScreenSizeGroupPhone) {
       default_size = kPaddleSizeLarge;
     }
-    game_engine()->persistence_module()->SetInteger(default_size, kLocalStorePaddleSize);
+    game_engine().persistence_module()->SetInteger(default_size, kLocalStorePaddleSize);
   }
 }
 
@@ -244,17 +244,17 @@ void MainMenuView::PressedStart(int num_players) {
   // The stored number of pucks is one less than the desired value. Not ideal. This is for:
   // 1) Legacy.
   // 2) Defaults to 0, which means 1 puck.
-  int num_pucks = game_engine()->persistence_module()->IntegerForKey(kLocalStoreNumPucks) + 1;
+  int num_pucks = game_engine().persistence_module()->IntegerForKey(kLocalStoreNumPucks) + 1;
   ComputerAI difficulty =
-      (ComputerAI)game_engine()->persistence_module()->IntegerForKey(kLocalStoreDifficulty);
+      (ComputerAI)game_engine().persistence_module()->IntegerForKey(kLocalStoreDifficulty);
   PaddleSize paddle_size =
-      (PaddleSize)game_engine()->persistence_module()->IntegerForKey(kLocalStorePaddleSize);
+      (PaddleSize)game_engine().persistence_module()->IntegerForKey(kLocalStorePaddleSize);
   map<string, string> analytics_params;
   analytics_params["NumPlayers"] = to_string(num_players);
   analytics_params["NumPucks"] = to_string(num_pucks);
   analytics_params["Difficulty"] = to_string(difficulty);
   analytics_params["PaddleSize"] = to_string(paddle_size);
-  game_engine()->analytics_module()->LogEvent("START_GAME", analytics_params);
+  game_engine().analytics_module()->LogEvent("START_GAME", analytics_params);
 
   PlayView *play_view = new PlayView(game_engine(),
                                      num_players,
@@ -262,21 +262,21 @@ void MainMenuView::PressedStart(int num_players) {
                                      difficulty,
                                      paddle_size);
   AnimateOut();
-  game_engine()->PushView(play_view);
+  game_engine().PushView(play_view);
 }
 
 void MainMenuView::PressedSettings() {
-  game_engine()->PushView(new SettingsView(game_engine()));
+  game_engine().PushView(new SettingsView(game_engine()));
 }
 
 void MainMenuView::PressedStory() {
-  game_engine()->analytics_module()->LogEvent("STORY_PRESSED");
-  game_engine()->PushView(new StoryView(game_engine()));
+  game_engine().analytics_module()->LogEvent("STORY_PRESSED");
+  game_engine().PushView(new StoryView(game_engine()));
 }
 
 void MainMenuView::PressedUpgrade() {
-  if (!game_engine()->persistence_module()->BoolForKey(kLocalStoreUpgraded)) {
-    game_engine()->app_store_module()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade",
+  if (!game_engine().persistence_module()->BoolForKey(kLocalStoreUpgraded)) {
+    game_engine().app_store_module()->AskForUpgrade("Glide Hockey HD", "GlideHockeyHDUpgrade",
                                                      this);
   }
 }

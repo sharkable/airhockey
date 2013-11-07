@@ -25,10 +25,10 @@ const string kLocalStoreDifficulty = "ls_difficulty";
 const string kLocalStoreNumPucks = "ls_num_pucks";
 const string kLocalStorePaddleSize = "ls_paddle_size";
 
-SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
-  sp<PersistenceModule> persistence = game_engine->persistence_module();
+SettingsView::SettingsView(GameEngine &game_engine) : EngineView(game_engine) {
+  sp<PersistenceModule> persistence = game_engine.persistence_module();
 
-  double width = game_engine->screen_size_to_game_size(game_engine->screen_size()).width;
+  double width = game_engine.screen_size_to_game_size(game_engine.screen_size()).width;
   ending_position_ = game_point_make(-width, 0);
 
   entities_ = new CompositeEntity();
@@ -38,7 +38,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   AddEntity(entities_);
 
   Sprite background_image(game_engine, "settings_bg");
-  background_ = new SimpleItem(background_image, game_engine->position("settings_bg"));
+  background_ = new SimpleItem(background_image, game_engine.position("settings_bg"));
   entities_->AddEntity(background_);
 
   num_pucks_select_ = new MultiSelect(game_engine);
@@ -50,7 +50,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
 
     Sprite num_pucks_image(game_engine, pucks_str);
     Sprite num_pucks_selected_image(game_engine, pucks_selected_str);
-    GamePoint num_pucks_position = game_engine->position(pucks_str);
+    GamePoint num_pucks_position = game_engine.position(pucks_str);
     num_pucks_select_->Add(num_pucks_image, num_pucks_selected_image, num_pucks_position);
   }
   num_pucks_select_->set_selected_value(persistence->IntegerForKey(kLocalStoreNumPucks));
@@ -65,11 +65,11 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   Sprite amazing_image(game_engine, "amazing");
   Sprite amazing_image_selected(game_engine, "amazing_selected");
   difficulty_select_ = new MultiSelect(game_engine);
-  difficulty_select_->Add(bad_image, bad_image_selected, game_engine->position("bad"));
-  difficulty_select_->Add(good_image, good_image_selected, game_engine->position("good"));
+  difficulty_select_->Add(bad_image, bad_image_selected, game_engine.position("bad"));
+  difficulty_select_->Add(good_image, good_image_selected, game_engine.position("good"));
   difficulty_select_->Add(excellent_image, excellent_image_selected,
-                          game_engine->position("excellent"));
-  difficulty_select_->Add(amazing_image, amazing_image_selected, game_engine->position("amazing"));
+                          game_engine.position("excellent"));
+  difficulty_select_->Add(amazing_image, amazing_image_selected, game_engine.position("amazing"));
   difficulty_select_->set_selected_value(persistence->IntegerForKey(kLocalStoreDifficulty));
   entities_->AddEntity(difficulty_select_);
 
@@ -80,9 +80,9 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   Sprite large_image(game_engine, "large");
   Sprite large_image_selected(game_engine, "large_selected");
   paddle_size_select_ = new MultiSelect(game_engine);
-  paddle_size_select_->Add(small_image, small_image_selected, game_engine->position("small"));
-  paddle_size_select_->Add(medium_image, medium_image_selected, game_engine->position("medium"));
-  paddle_size_select_->Add(large_image, large_image_selected, game_engine->position("large"));
+  paddle_size_select_->Add(small_image, small_image_selected, game_engine.position("small"));
+  paddle_size_select_->Add(medium_image, medium_image_selected, game_engine.position("medium"));
+  paddle_size_select_->Add(large_image, large_image_selected, game_engine.position("large"));
   paddle_size_select_->set_selected_value(persistence->IntegerForKey(kLocalStorePaddleSize));
   entities_->AddEntity(paddle_size_select_);
 
@@ -91,7 +91,7 @@ SettingsView::SettingsView(GameEngine *game_engine) : EngineView(game_engine) {
   ok_button_ = new Button(game_engine);
   ok_button_->set_normal_sprite(ok_button_image);
   ok_button_->set_pressed_sprite(ok_button_pressed_image);
-  ok_button_->set_position(game_engine->position("ok_button"));
+  ok_button_->set_position(game_engine.position("ok_button"));
   ok_button_->set_delegate(this);
   entities_->AddEntity(ok_button_);
 }
@@ -113,7 +113,7 @@ bool SettingsView::HandleBackButton() {
 
 void SettingsView::AnimationFinished(Animatable *animatable) {
   if (entities_->position().x < 0) {
-    game_engine()->RemoveView(this);
+    game_engine().RemoveView(this);
   }
 }
 
@@ -121,7 +121,7 @@ void SettingsView::AnimationFinished(Animatable *animatable) {
 #pragma mark - ButtonDelegate
 
 void SettingsView::ButtonUp(Button *button) {
-  sp<PersistenceModule> persistence = game_engine()->persistence_module();
+  sp<PersistenceModule> persistence = game_engine().persistence_module();
   persistence->SetInteger(num_pucks_select_->selected_value(), kLocalStoreNumPucks);
   persistence->SetInteger(difficulty_select_->selected_value(), kLocalStoreDifficulty);
   persistence->SetInteger(paddle_size_select_->selected_value(), kLocalStorePaddleSize);

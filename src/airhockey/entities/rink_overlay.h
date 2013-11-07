@@ -16,7 +16,7 @@ class GameEngine;
 
 class RinkOverlay : public ViewEntity {
  public:
-  RinkOverlay(GameEngine *game_engine);
+  RinkOverlay(GameEngine &game_engine);
 
   // ViewEntity
   void Update();

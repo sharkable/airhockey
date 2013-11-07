@@ -15,7 +15,7 @@
 
 #include "airhockey/entities/sound_slider.h"
 
-GameMenuView::GameMenuView(GameEngine *game_engine, GameMenuViewDelegate *delegate,
+GameMenuView::GameMenuView(GameEngine &game_engine, GameMenuViewDelegate *delegate,
                            bool match_finished)
     : EngineView(game_engine),
       delegate_(delegate),
@@ -61,7 +61,7 @@ void GameMenuView::HandlePauseButton() {
 #pragma mark - ButtonDelegate
 
 void GameMenuView::ButtonUp(Button *button) {
-  game_engine()->PopView();
+  game_engine().PopView();
   if (button == rematch_button_) {
     delegate_->RematchPressed();
   } else if (button == menu_button_) {
@@ -78,10 +78,10 @@ void GameMenuView::Init(bool match_finished) {
   Sprite menu_background_sprite(game_engine(), "game_menu_bg");
   menu_background_ = new SimpleItem();
   menu_background_->add_sprite(menu_background_sprite);
-  menu_background_->set_position(game_engine()->position("game_menu_bg"));
+  menu_background_->set_position(game_engine().position("game_menu_bg"));
   AddEntity(menu_background_, false);
 
-  GamePoint sound_slider_position = game_engine()->position("sound_slider_game_menu");
+  GamePoint sound_slider_position = game_engine().position("sound_slider_game_menu");
   sound_slider_ = new SoundSlider(game_engine(), sound_slider_position);
   AddEntity(sound_slider_, false);
 
@@ -91,7 +91,7 @@ void GameMenuView::Init(bool match_finished) {
     rematch_button_ = new Button(game_engine());
     rematch_button_->set_normal_sprite(rematch_button_sprite);
     rematch_button_->set_pressed_sprite(rematch_button_pressed_sprite);
-    rematch_button_->set_position(game_engine()->position("rematch_button"));
+    rematch_button_->set_position(game_engine().position("rematch_button"));
     rematch_button_->set_delegate(this);
     AddEntity(rematch_button_, false);
   } else {
@@ -100,7 +100,7 @@ void GameMenuView::Init(bool match_finished) {
     continue_button_ = new Button(game_engine());
     continue_button_->set_normal_sprite(continue_button_sprite);
     continue_button_->set_pressed_sprite(continue_button_pressed_sprite);
-    continue_button_->set_position(game_engine()->position("continue_button"));
+    continue_button_->set_position(game_engine().position("continue_button"));
     continue_button_->set_delegate(this);
     AddEntity(continue_button_, false);
   }
@@ -110,7 +110,7 @@ void GameMenuView::Init(bool match_finished) {
   menu_button_ = new Button(game_engine());
   menu_button_->set_normal_sprite(menu_button_sprite);
   menu_button_->set_pressed_sprite(menu_button_pressed_sprite);
-  menu_button_->set_position(game_engine()->position("menu_button"));
+  menu_button_->set_position(game_engine().position("menu_button"));
   menu_button_->set_delegate(this);
   AddEntity(menu_button_, false);
 }

@@ -18,7 +18,7 @@ class GameEngine;
 
 class RinkView : public EngineView {
  public:
-  RinkView(GameEngine *game_engine);
+  RinkView(GameEngine &game_engine);
 
   static GameSize RinkSizeForTextureGroup(Platform::TextureGroup texture_group);
 };
