@@ -6,11 +6,11 @@
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 
-#include "gameengine/modules/ad_module.h"
-#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/platform.h"
 #include "gameengine/resource_loader.h"
+#include "gameengine/coordinates/coordinate_types.h"
+#include "gameengine/modules/ad_module.h"
 
 #include "airhockey/views/rink_view.h"
 #include "airhockey/views/splash_view.h"
@@ -75,7 +75,7 @@ void sharkengine_init(GameEngine &game_engine) {
                                               screen_size.width / game_size.width);
   double y_offset =
       (screen_size.height - game_engine.game_size_to_screen_size(game_size).height) / 2;
-  game_engine.set_screen_offset(screen_point_make(0, y_offset));
+  game_engine.set_screen_offset(ScreenPoint(0, y_offset));
 
   game_engine.SetRootView(new RinkView(game_engine));
   game_engine.PushView(new SplashView(game_engine));

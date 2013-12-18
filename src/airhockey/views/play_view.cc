@@ -109,27 +109,26 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   Sprite winSprite(game_engine, "win");
   win_ = new SimpleItem();
   win_->add_sprite(winSprite);
-  win_->set_position(game_point_make(0, 0));
+  win_->set_position(kGamePointZero);
 
   Sprite loseSprite(game_engine, "lose");
   lose_ = new SimpleItem();
   lose_->add_sprite(loseSprite);
-  lose_->set_position(game_point_make(0, 0));
+  lose_->set_position(kGamePointZero);
 
   Sprite get_ready_sprite(game_engine, "get_ready");
-  GameSize rink_size = game_size_make(rink_->TotalWidth(), rink_->TotalHeight());
+  GameSize rink_size = GameSize(rink_->TotalWidth(), rink_->TotalHeight());
   GameSize get_ready_size = get_ready_sprite.content_size();
-  GamePoint get_ready_position =
-      game_point_make(floorf((rink_size.width - get_ready_size.width) / 2),
-                      floorf((rink_size.height - get_ready_size.height) / 2));
+  GamePoint get_ready_position = GamePoint(floorf((rink_size.width - get_ready_size.width) / 2),
+                                           floorf((rink_size.height - get_ready_size.height) / 2));
   get_ready_ = new SimpleItem();
   get_ready_->add_sprite(get_ready_sprite);
   get_ready_->set_position(get_ready_position);
 
   Sprite go_sprite(game_engine, "go");
   GameSize go_size = go_sprite.content_size();
-  GamePoint go_position = game_point_make(floorf((rink_size.width - go_size.width) / 2),
-                                          floorf((rink_size.height - go_size.height) / 2));
+  GamePoint go_position = GamePoint(floorf((rink_size.width - go_size.width) / 2),
+                                    floorf((rink_size.height - go_size.height) / 2));
   go_ = new SimpleItem();
   go_->add_sprite(go_sprite);
   go_->set_position(go_position);
@@ -143,8 +142,8 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
     GameSize game_size = game_engine.screen_size_to_game_size(game_engine.screen_size());
     double y_margin = (game_size.height - rink_->TotalHeight()) / 2;
     GamePoint pause_button_pos_1 =
-        game_point_make(game_size.width - pause_button_sprite.content_size().width,
-                        game_size.height - pause_button_sprite.content_size().height - y_margin);
+        GamePoint(game_size.width - pause_button_sprite.content_size().width,
+                  game_size.height - pause_button_sprite.content_size().height - y_margin);
     pause_button_1_ = new Button(game_engine);
     pause_button_1_->set_normal_sprite(pause_button_sprite);
     pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
@@ -157,7 +156,7 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
       Sprite pause_button_sprite_2(game_engine, "pause_button");
       Sprite pause_button_pressed_sprite_2(game_engine, "pause_button_pressed");
 
-      GamePoint pause_button_pos_2 = game_point_make(0, -y_margin);
+      GamePoint pause_button_pos_2 = GamePoint(0, -y_margin);
       pause_button_2_ = new Button(game_engine);
       pause_button_2_->set_normal_sprite(pause_button_sprite_2);
       pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite_2);
@@ -222,7 +221,7 @@ void PlayView::Update() {
     get_ready_ticks_left_--;
     if (get_ready_ticks_left_ == kShowGetReadyMessageTicks) {
       GamePoint position = get_ready_->position();
-      GamePoint start_position = game_point_make(position.x, position.y - 40);
+      GamePoint start_position(position.x, position.y - 40);
       get_ready_->set_position(start_position);
       get_ready_->set_alpha(0);
       get_ready_->AnimateToPosition(position, kAnimationTypeLinear, kShowGetReadyMessageTicks);
@@ -464,12 +463,12 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
     case kPlayerId1: {
       player_1_win_count_++;
 
-      win_->set_position(game_point_make(winX, bottomY));
+      win_->set_position(GamePoint(winX, bottomY));
       win_->set_angle(0);
       AddEntity(win_, false);
 
       if (num_players_ == 2) {
-        lose_->set_position(game_point_make(loseX, topY));
+        lose_->set_position(GamePoint(loseX, topY));
         lose_->set_angle(180);
         AddEntity(lose_, false);
       }
@@ -482,12 +481,12 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
       player_2_win_count_++;
 
       if (num_players_ == 2) {
-        win_->set_position(game_point_make(winX, topY));
+        win_->set_position(GamePoint(winX, topY));
         win_->set_angle(180);
         AddEntity(win_, false);
       }
 
-      lose_->set_position(game_point_make(loseX, bottomY));
+      lose_->set_position(GamePoint(loseX, bottomY));
       lose_->set_angle(0);
       AddEntity(lose_, false);
 

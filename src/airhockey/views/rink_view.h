@@ -9,10 +9,10 @@
 #ifndef AIRHOCKEY_VIEWS_RINKVIEW_H_
 #define AIRHOCKEY_VIEWS_RINKVIEW_H_
 
-#include "gameengine/coordinate_types.h"
 #include "gameengine/engine_view.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/platform.h"
+#include "gameengine/coordinates/coordinate_types.h"
 
 class GameEngine;
 

@@ -29,11 +29,11 @@ SettingsView::SettingsView(GameEngine &game_engine) : EngineView(game_engine) {
   sp<PersistenceModule> persistence = game_engine.persistence_module();
 
   double width = game_engine.screen_size_to_game_size(game_engine.screen_size()).width;
-  ending_position_ = game_point_make(-width, 0);
+  ending_position_ = GamePoint(-width, 0);
 
   entities_ = new CompositeEntity();
   entities_->set_animatable_delegate(this);
-  entities_->set_position(game_point_make(width, 0));
+  entities_->set_position(GamePoint(width, 0));
   entities_->AnimateToPosition(kGamePointZero, kAnimationTypeCubicEaseOut, kAnimateTicks);
   AddEntity(entities_);
 

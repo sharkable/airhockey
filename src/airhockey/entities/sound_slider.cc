@@ -58,9 +58,9 @@ SoundSlider::SoundSlider(GameEngine &game_engine, GamePoint position)
 }
 
 GamePoint SoundSlider::ThumbPoint() {
-  return game_point_make(position_.x + left_marin_ +
-                             (slider_width_ - thumb_sprite_.content_size().width) * value_,
-                         position_.y);
+  return GamePoint(position_.x + left_marin_ +
+                       (slider_width_ - thumb_sprite_.content_size().width) * value_,
+                   position_.y);
 }
 
 

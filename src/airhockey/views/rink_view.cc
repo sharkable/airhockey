@@ -27,11 +27,11 @@ GameSize RinkView::RinkSizeForTextureGroup(Platform::TextureGroup texture_group)
     case Platform::kTextureGroupIPhone40cmHighRes:
     case Platform::kTextureGroupAndroidLowRes:
     case Platform::kTextureGroupAndroidHighRes:
-      return game_size_make(768, 1152);
+      return GameSize(768, 1152);
     case Platform::kTextureGroupIPadLowRes:
     case Platform::kTextureGroupIPadHighRes:
     case Platform::kTextureGroupPCHighRes:
     case Platform::kTextureGroupPCUltraHighRes:
-      return game_size_make(768, 1024);
+      return GameSize(768, 1024);
   }
 }

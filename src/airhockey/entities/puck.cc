@@ -125,8 +125,8 @@ void Puck::Update() {
 
 void Puck::Render(GamePoint offset) {
   if (is_active()) {
-    sprite_.Draw(game_point_make(x_ - sprite_.content_size().width / 2 + offset.x,
-                                 y_ - sprite_.content_size().height / 2 + offset.y),
+    sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2 + offset.x,
+                           y_ - sprite_.content_size().height / 2 + offset.y),
                  0, alpha_, 1);
   }
 }

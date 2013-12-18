@@ -8,10 +8,10 @@
 
 #include "airhockey/entities/round_thing.h"
 
-#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
 #include "gameengine/touch.h"
+#include "gameengine/coordinates/coordinate_types.h"
 
 using std::string;
 using std::vector;
@@ -197,8 +197,8 @@ void RoundThing::Update() {
 
 void RoundThing::Render(GamePoint offset) {
   if (active_) {
-    sprite_.DrawAtPoint(game_point_make(x_ - sprite_.content_size().width / 2 + offset.x,
-                                        y_ - sprite_.content_size().height / 2 + offset.y));
+    sprite_.DrawAtPoint(GamePoint(x_ - sprite_.content_size().width / 2 + offset.x,
+                                  y_ - sprite_.content_size().height / 2 + offset.y));
   }
 }
 

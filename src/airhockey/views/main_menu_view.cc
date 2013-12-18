@@ -13,11 +13,11 @@
 using std::map;
 using std::string;
 
+#include "gameengine/coordinates/coordinate_types.h"
 #include "gameengine/entities/simple_item.h"
 #include "gameengine/modules/ad_module.h"
 #include "gameengine/modules/analytics_module.h"
 #include "gameengine/modules/persistence_module.h"
-#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/platform.h"
 #include "gameengine/sprite.h"

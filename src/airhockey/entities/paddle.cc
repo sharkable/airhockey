@@ -10,10 +10,10 @@
 
 #include <cmath>
 
-#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/platform.h"
 #include "gameengine/resource_loader.h"
+#include "gameengine/coordinates/coordinate_types.h"
 
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/rink.h"
@@ -133,8 +133,8 @@ void Paddle::Update() {
 }
 
 void Paddle::Render(GamePoint offset) {
-  sprite_.Draw(game_point_make(x_ - sprite_.content_size().width / 2 + offset.x,
-                               y_ - sprite_.content_size().height / 2 + offset.y),
+  sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2 + offset.x,
+                         y_ - sprite_.content_size().height / 2 + offset.y),
                0, (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1);
 }
 

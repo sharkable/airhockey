@@ -8,11 +8,11 @@
 
 #include "airhockey/views/story_view.h"
 
-#include "gameengine/entities/simple_item.h"
-#include "gameengine/coordinate_types.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/platform.h"
 #include "gameengine/sprite.h"
+#include "gameengine/coordinates/coordinate_types.h"
+#include "gameengine/entities/simple_item.h"
 #include "sharksound/sound.h"
 #include "sharksound/sound_controller.h"
 
@@ -31,8 +31,8 @@ StoryView::StoryView(GameEngine &game_engine) : EngineView(game_engine) {
   GameSize image_size = story_image.content_size();
   double zoom = rink_size.width / image_size.width;
 
-  resting_image_position_ = game_point_make((rink_size.width - image_size.width) / 2,
-                                            (rink_size.height - image_size.height) / 2);
+  resting_image_position_ = GamePoint((rink_size.width - image_size.width) / 2,
+                                      (rink_size.height - image_size.height) / 2);
   starting_image_position_ = resting_image_position_;
   starting_image_position_.x += image_size.width * zoom;
   ending_image_position_ = resting_image_position_;
