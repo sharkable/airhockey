@@ -6,24 +6,16 @@
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 
-#ifndef AIRHOCKEY_ENTITIES_RINKOVERLAY_
-#define AIRHOCKEY_ENTITIES_RINKOVERLAY_
+#ifndef AIRHOCKEY_ENTITIES_RINKOVERLAY_H_
+#define AIRHOCKEY_ENTITIES_RINKOVERLAY_H_
 
-#include "gameengine/entities/composite_entity.h"
-#include "gameengine/view_entity.h"
+#include "gameengine/render/group_renderer.h"
 
 class GameEngine;
 
-class RinkOverlay : public ViewEntity {
+class RinkOverlay : public GroupRenderer {
  public:
   RinkOverlay(GameEngine &game_engine);
-
-  // ViewEntity
-  void Update();
-  void Render(GamePoint offset);
-
- private:
-  CompositeEntity rink_pieces_;
 };
 
 #endif

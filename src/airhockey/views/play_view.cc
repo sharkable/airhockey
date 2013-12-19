@@ -103,8 +103,8 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   AddEntity(post_4_, false);
   round_things_.push_back(post_4_);
 
-  RinkOverlay *rink_overlay = new RinkOverlay(game_engine);
-  AddEntity(rink_overlay, false);
+//  RinkOverlay *rink_overlay = new RinkOverlay(game_engine);
+//  AddEntity(rink_overlay, false);
 
   Sprite winSprite(game_engine, "win");
   win_ = new SimpleItem();
@@ -391,7 +391,7 @@ void PlayView::RematchPressed() {
 
 void PlayView::MenuPressed() {
   game_engine().PopView();
-  game_engine().PushView(new MainMenuView(game_engine()));
+// TODO NOW  game_engine().PushView(new MainMenuView(game_engine()));
 }
 
 void PlayView::ContinuePressed() {

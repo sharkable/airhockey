@@ -13,9 +13,12 @@
 
 #include "gameengine/entities/button.h"
 #include "gameengine/modules/app_store_module.h"
-#include "gameengine/engine_view.h"
+#include "gameengine/render/renderer.h"
+#include "gameengine/simulation/simulator.h"
 
-class RinkOverlay;
+#include "airhockey/views/settings_view.h"
+
+class GameEngine;
 class SimpleItem;
 class SoundSlider;
 
@@ -27,13 +30,20 @@ typedef enum {
 // Local Store keys
 extern const std::string kLocalStoreUpgraded;
 
-class MainMenuView : public EngineView, private AppStoreModuleDelegate, private ButtonDelegate {
+class MainMenuView : public Simulator, public Renderer, private AppStoreModuleDelegate,
+    private ButtonDelegate {
  public:
   MainMenuView(GameEngine &game_engine);
+  ~MainMenuView();
 
-  // EngineView
+  // TODO?
   void ViewDidGainFocus();
-  void Update();
+
+  // Simulator
+  virtual void SimulateStep();
+
+  // Renderer
+  virtual void Render(CoordinateSystem const &coordinate_system);
 
   // AppStoreModuleDelegate
   void UpgradeSucceeded();
@@ -49,7 +59,10 @@ class MainMenuView : public EngineView, private AppStoreModuleDelegate, private 
   void PressedStory();
   void PressedUpgrade();
 
-  RinkOverlay *rink_overlay_;
+  GameEngine &game_engine_;
+
+  SettingsView settings_view_;
+
   SimpleItem *title_;
   Button *start_1_player_button_;
   Button *start_2_player_button_;

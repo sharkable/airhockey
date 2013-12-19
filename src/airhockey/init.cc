@@ -12,8 +12,8 @@
 #include "gameengine/coordinates/coordinate_types.h"
 #include "gameengine/modules/ad_module.h"
 
+#include "airhockey/views/game_view.h"
 #include "airhockey/views/rink_view.h"
-#include "airhockey/views/splash_view.h"
 
 void sharkengine_init(GameEngine &game_engine) {
   switch (game_engine.platform().texture_group()) {
@@ -77,6 +77,5 @@ void sharkengine_init(GameEngine &game_engine) {
       (screen_size.height - game_engine.game_size_to_screen_size(game_size).height) / 2;
   game_engine.set_screen_offset(ScreenPoint(0, y_offset));
 
-  game_engine.SetRootView(new RinkView(game_engine));
-  game_engine.PushView(new SplashView(game_engine));
+  game_engine.SetRootView(new GameView(game_engine));
 }
