@@ -13,27 +13,45 @@
 
 #include "gameengine/coordinates/coordinate_types.h"
 #include "gameengine/entities/animatable.h"
-#include "gameengine/engine_view.h"
+#include "gameengine/input/input_handler.h"
+#include "gameengine/render/renderer.h"
+#include "gameengine/simulation/simulator.h"
+
+class GameEngine;
 
 class SimpleItem;
 namespace SharkSound {
   class Sound;
 }
 
-class StoryView : public EngineView, private AnimatableDelegate {
+class StoryViewDelegate {
  public:
-  StoryView(GameEngine &game_engine);
+  virtual void StoryViewFinished() = 0;
+};
 
-  // EngineView
-  bool IsCapturingTouches();
-  void TouchesBegan(std::vector<Touch> &touches);
-  bool HandleBackButton();
+class StoryView : public Simulator, public Renderer, public InputHandler,
+    private AnimatableDelegate {
+ public:
+  StoryView(GameEngine &game_engine, StoryViewDelegate &delegate);
+
+// TODO  bool HandleBackButton();
+
+  // Simulator
+  virtual void SimulateStep();
+
+  // Renderer
+  virtual void Render(CoordinateSystem const &coordinate_system);
+
+  // InputHandler
+  virtual bool HandleEvent(InputEvent const &event);
 
   // AnimatableDelegate
   void AnimationFinished(Animatable *animatable);
 
  private:
   void MoveForward();
+
+  StoryViewDelegate &delegate_;
 
   SimpleItem *story_;  // weak
   SimpleItem *about_;  // weak

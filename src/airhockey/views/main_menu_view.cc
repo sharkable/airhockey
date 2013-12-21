@@ -51,6 +51,7 @@ void fade_out(Animatable *entity) {
 
 MainMenuView::MainMenuView(GameEngine &game_engine)
     : game_engine_(game_engine),
+      story_view_(NULL),
       settings_view_(game_engine),
       title_(NULL),
       start_1_player_button_(NULL),
@@ -205,6 +206,10 @@ void MainMenuView::SimulateStep() {
   if (sound_slider_) {
     sound_slider_->Update();
   }
+
+  if (story_view_) {
+    story_view_->SimulateStep();
+  }
 }
 
 
@@ -224,12 +229,18 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
   if (sound_slider_) {
     sound_slider_->Render(kGamePointZero);
   }
+  if (story_view_) {
+    story_view_->Render(coordinate_system);
+  }
 }
 
 
 #pragma mark - InputHandler
 
 bool MainMenuView::HandleEvent(InputEvent const &event) {
+  if (story_view_ && story_view_->HandleEvent(event)) {
+    return true;
+  }
   if (start_1_player_button_->HandleEvent(event)) {
     return true;
   }
@@ -249,6 +260,14 @@ bool MainMenuView::HandleEvent(InputEvent const &event) {
     return true;
   }
   return false;
+}
+
+
+// StoryViewDelegate
+
+void MainMenuView::StoryViewFinished() {
+  delete story_view_;
+  story_view_ = NULL;
 }
 
 
@@ -345,7 +364,7 @@ void MainMenuView::PressedSettings() {
 
 void MainMenuView::PressedStory() {
   game_engine_.analytics_module()->LogEvent("STORY_PRESSED");
-  game_engine_.PushView(new StoryView(game_engine_));
+  story_view_ = new StoryView(game_engine_, *this);
 }
 
 void MainMenuView::PressedUpgrade() {

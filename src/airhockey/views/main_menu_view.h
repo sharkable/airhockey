@@ -18,6 +18,7 @@
 #include "gameengine/simulation/simulator.h"
 
 #include "airhockey/views/settings_view.h"
+#include "airhockey/views/story_view.h"
 
 class GameEngine;
 class SimpleItem;
@@ -32,7 +33,7 @@ typedef enum {
 extern const std::string kLocalStoreUpgraded;
 
 class MainMenuView : public Simulator, public Renderer, public InputHandler,
-    private AppStoreModuleDelegate, private ButtonDelegate {
+    private StoryViewDelegate, private AppStoreModuleDelegate, private ButtonDelegate {
  public:
   MainMenuView(GameEngine &game_engine);
   ~MainMenuView();
@@ -49,8 +50,11 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
   // InputHandler
   virtual bool HandleEvent(InputEvent const &event);
 
+  // StoryViewDelegate
+  virtual void StoryViewFinished();
+
   // AppStoreModuleDelegate
-  void UpgradeSucceeded();
+  virtual void UpgradeSucceeded();
 
   // ButtonDelegate
   void ButtonUp(Button *button);
@@ -66,6 +70,7 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
   GameEngine &game_engine_;
 
   SettingsView settings_view_;
+  StoryView *story_view_;
 
   SimpleItem *title_;
   Button *start_1_player_button_;

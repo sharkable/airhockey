@@ -22,7 +22,7 @@ using std::vector;
 
 static const int kAnimateTicks = 30;
 
-StoryView::StoryView(GameEngine &game_engine) : EngineView(game_engine) {
+StoryView::StoryView(GameEngine &game_engine, StoryViewDelegate &delegate) : delegate_(delegate) {
   bool use_pc = game_engine.platform().input_group() == Platform::kInputGroupPC;
   Sprite story_image = Sprite(game_engine, use_pc ? "story_pc" : "story");
   Sprite about_image = Sprite(game_engine, use_pc ? "about_pc" : "about");
@@ -43,40 +43,54 @@ StoryView::StoryView(GameEngine &game_engine) : EngineView(game_engine) {
   story_->set_zoom(zoom);
   story_->set_position(starting_image_position_);
   story_->AnimateToPosition(resting_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
-  AddEntity(story_);
 
   about_ = new SimpleItem();
   about_->set_animatable_delegate(this);
   about_->add_sprite(about_image);
   about_->set_zoom(zoom);
   about_->set_position(starting_image_position_);
-  AddEntity(about_);
 
   beep_sound_ = game_engine.sound()->GetSound("sounds/beep.wav");
 }
 
 
-#pragma mark - EngineView
+#pragma mark - Simulator
 
-bool StoryView::IsCapturingTouches() {
-  return about_->position().x >= resting_image_position_.x;
+void StoryView::SimulateStep() {
+  story_->Update();
+  about_->Update();
 }
 
-void StoryView::TouchesBegan(vector<Touch> &touches) {
-  MoveForward();
+
+#pragma mark - Renderer
+
+void StoryView::Render(CoordinateSystem const &coordinate_system) {
+  story_->Render(coordinate_system);
+  about_->Render(coordinate_system);
 }
 
-bool StoryView::HandleBackButton() {
-  MoveForward();
+
+#pragma mark - InputHandler
+
+bool StoryView::HandleEvent(InputEvent const &event) {
+  if (event.Action() == kInputActionDown && about_->position().x >= resting_image_position_.x) {
+    MoveForward();
+  }
   return true;
 }
+
+// TODO
+//bool StoryView::HandleBackButton() {
+//  MoveForward();
+//  return true;
+//}
 
 
 #pragma mark - AnimatableDelegate
 
 void StoryView::AnimationFinished(Animatable *animatable) {
   if (about_->position().x == ending_image_position_.x) {
-    game_engine().RemoveView(this);
+    delegate_.StoryViewFinished();
   }
 }
 
