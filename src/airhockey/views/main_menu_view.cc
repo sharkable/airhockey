@@ -245,6 +245,9 @@ bool MainMenuView::HandleEvent(InputEvent const &event) {
   if (upgrade_button_ && upgrade_button_->HandleEvent(event)) {
     return true;
   }
+  if (sound_slider_->HandleEvent(event)) {
+    return true;
+  }
   return false;
 }
 

@@ -79,40 +79,43 @@ void SoundSlider::Render(GamePoint offset) {
   thumb_sprite_.DrawAtPoint(ThumbPoint() + offset);
 }
 
-bool SoundSlider::TouchBegan(GamePoint offset, Touch touch) {
-  GamePoint touchP = touch.location() - offset;
-  GamePoint thumbP = ThumbPoint();
-  double thumbWidth = thumb_sprite_.content_size().width;
-  double thumbHeight = thumb_sprite_.content_size().height;
-  if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
+
+#pragma mark - InputHandler
+
+bool SoundSlider::HandleEvent(InputEvent const &event) {
+  if (event.Action() == kInputActionDown) {
+    GamePoint touchP = event.Location();
+    GamePoint thumbP = ThumbPoint();
+    double thumbWidth = thumb_sprite_.content_size().width;
+    double thumbHeight = thumb_sprite_.content_size().height;
+    if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
         touchP.x < thumbP.x + 2 * thumbWidth &&
         touchP.y < thumbP.y + 2 * thumbHeight) {
-    grabbed_touch_ = touch.identifier();
-    start_touch_position_ = touchP;
-    start_value_ = value_;
-    return true;
-  }
-  return false;
-}
-
-void SoundSlider::TouchMoved(GamePoint offset, Touch touch) {
-  if (touch.identifier() == grabbed_touch_) {
-    GamePoint touchP = touch.location() - offset;
-    value_ = start_value_ + (touchP.x - start_touch_position_.x) /
-        (slider_width_ - thumb_sprite_.content_size().width);
-    // Stop moving when we reach the ends. Lock into this value until the user retouches.
-    if (value_ < 0) {
-      value_ = 0;
-    } else if (value_ > 1) {
-      value_ = 1;
+      grabbed_touch_ = event.Id();
+      start_touch_position_ = touchP;
+      start_value_ = value_;
+      return true;
+    }
+  } else if (event.Action() == kInputActionMove) {
+    if (event.Id() == grabbed_touch_) {
+      GamePoint touchP = event.Location();
+      value_ = start_value_ + (touchP.x - start_touch_position_.x) /
+      (slider_width_ - thumb_sprite_.content_size().width);
+      // Stop moving when we reach the ends. Lock into this value until the user retouches.
+      if (value_ < 0) {
+        value_ = 0;
+      } else if (value_ > 1) {
+        value_ = 1;
+      }
+      return true;
+    }
+  } else if (event.Action() == kInputActionUp) {
+    if (event.Id() == grabbed_touch_) {
+      game_engine_.sound()->SetGlobalVolume(value_);
+      game_engine_.persistence_module()->SetDouble(value_, kLocalStoreVolume);
+      grabbed_touch_ = NULL;
+      return true;
     }
   }
-}
-
-void SoundSlider::TouchEnded(GamePoint offset, Touch touch) {
-  if (touch.identifier() == grabbed_touch_) {
-    game_engine_.sound()->SetGlobalVolume(value_);
-    game_engine_.persistence_module()->SetDouble(value_, kLocalStoreVolume);
-    grabbed_touch_ = NULL;
-  }
+  return false;
 }

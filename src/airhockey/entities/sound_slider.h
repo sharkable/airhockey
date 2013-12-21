@@ -14,11 +14,12 @@
 #include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
 #include "gameengine/coordinates/coordinate_types.h"
+#include "gameengine/input/input_handler.h"
 
 class GameEngine;
 class Touch;
 
-class SoundSlider : public ViewEntity {
+class SoundSlider : public ViewEntity, public InputHandler {
  public:
   SoundSlider(GameEngine &game_engine, GamePoint position);
 
@@ -27,9 +28,9 @@ class SoundSlider : public ViewEntity {
   // ViewEntity
   void Update();
   void Render(GamePoint offset);
-  bool TouchBegan(GamePoint offset, Touch touch);
-  void TouchMoved(GamePoint offset, Touch touch);
-  void TouchEnded(GamePoint offset, Touch touch);
+
+  // InputHandler
+  virtual bool HandleEvent(InputEvent const &event);
 
  private:
   GameEngine &game_engine_;
@@ -40,7 +41,7 @@ class SoundSlider : public ViewEntity {
   int left_marin_;
   int slider_width_;
   double value_;
-  void *grabbed_touch_;
+  int grabbed_touch_;
   GamePoint start_touch_position_;
   double start_value_;
 };
