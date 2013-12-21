@@ -227,6 +227,28 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
 }
 
 
+#pragma mark - InputHandler
+
+bool MainMenuView::HandleEvent(InputEvent const &event) {
+  if (start_1_player_button_->HandleEvent(event)) {
+    return true;
+  }
+  if (start_2_player_button_ && start_2_player_button_->HandleEvent(event)) {
+    return true;
+  }
+  if (settings_button_->HandleEvent(event)) {
+    return true;
+  }
+  if (story_button_->HandleEvent(event)) {
+    return true;
+  }
+  if (upgrade_button_ && upgrade_button_->HandleEvent(event)) {
+    return true;
+  }
+  return false;
+}
+
+
 #pragma mark - AppStoreModuleDelegate
 
 void MainMenuView::UpgradeSucceeded() {

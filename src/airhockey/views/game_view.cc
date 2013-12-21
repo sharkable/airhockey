@@ -32,3 +32,29 @@ void GameView::Render() {
     main_menu_view_->Render(CoordinateSystem::BaseSystem());
   }
 }
+
+void GameView::TouchesBegan(std::vector<Touch> &touches) {
+  for (Touch touch : touches) {
+    InputEvent event(kInputActionDown, kInputIdTouch0, touch.location());
+    main_menu_view_->HandleEvent(event);
+  }
+}
+
+void GameView::TouchesMoved(std::vector<Touch> const &touches) {
+  for (Touch touch : touches) {
+    InputEvent event(kInputActionMove, kInputIdTouch0, touch.location());
+    main_menu_view_->HandleEvent(event);
+  }
+}
+
+void GameView::TouchesEnded(std::vector<Touch> const &touches) {
+  for (Touch touch : touches) {
+    InputEvent event(kInputActionUp, kInputIdTouch0, touch.location());
+    main_menu_view_->HandleEvent(event);
+  }
+}
+
+void GameView::ClearTouches() {
+  InputEvent event(kInputActionCancelAll, kInputIdCancelAll);
+  main_menu_view_->HandleEvent(event);
+}

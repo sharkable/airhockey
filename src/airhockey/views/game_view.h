@@ -24,6 +24,10 @@ class GameView : public EngineView {
   // EngineView
   virtual void Update();
   virtual void Render();
+  virtual void TouchesBegan(std::vector<Touch> &touches);
+  virtual void TouchesMoved(std::vector<Touch> const &touches);
+  virtual void TouchesEnded(std::vector<Touch> const &touches);
+  virtual void ClearTouches();
 
  private:
   RinkView rink_background_;

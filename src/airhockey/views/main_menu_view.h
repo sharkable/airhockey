@@ -12,6 +12,7 @@
 #include <string>
 
 #include "gameengine/entities/button.h"
+#include "gameengine/input/input_handler.h"
 #include "gameengine/modules/app_store_module.h"
 #include "gameengine/render/renderer.h"
 #include "gameengine/simulation/simulator.h"
@@ -30,8 +31,8 @@ typedef enum {
 // Local Store keys
 extern const std::string kLocalStoreUpgraded;
 
-class MainMenuView : public Simulator, public Renderer, private AppStoreModuleDelegate,
-    private ButtonDelegate {
+class MainMenuView : public Simulator, public Renderer, public InputHandler,
+    private AppStoreModuleDelegate, private ButtonDelegate {
  public:
   MainMenuView(GameEngine &game_engine);
   ~MainMenuView();
@@ -44,6 +45,9 @@ class MainMenuView : public Simulator, public Renderer, private AppStoreModuleDe
 
   // Renderer
   virtual void Render(CoordinateSystem const &coordinate_system);
+
+  // InputHandler
+  virtual bool HandleEvent(InputEvent const &event);
 
   // AppStoreModuleDelegate
   void UpgradeSucceeded();
