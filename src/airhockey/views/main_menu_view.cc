@@ -271,7 +271,15 @@ bool MainMenuView::HandleEvent(InputEvent const &event) {
 }
 
 
-// StoryViewDelegate
+#pragma mark - SettingsViewDelegate
+
+void MainMenuView::SettingsViewFinished() {
+  delete settings_view_;
+  settings_view_ = NULL;
+}
+
+
+#pragma mark - StoryViewDelegate
 
 void MainMenuView::StoryViewFinished() {
   delete story_view_;
@@ -370,9 +378,7 @@ void MainMenuView::PressedSettings() {
   if (settings_view_) {
     delete settings_view_;
   }
-  if (!settings_view_) {
-    settings_view_ = new SettingsView(game_engine_);
-  }
+  settings_view_ = new SettingsView(game_engine_, *this);
 }
 
 void MainMenuView::PressedStory() {

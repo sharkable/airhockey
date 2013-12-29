@@ -33,7 +33,8 @@ typedef enum {
 extern const std::string kLocalStoreUpgraded;
 
 class MainMenuView : public Simulator, public Renderer, public InputHandler,
-    private StoryViewDelegate, private AppStoreModuleDelegate, private ButtonDelegate {
+    private StoryViewDelegate, private SettingsViewDelegate, private AppStoreModuleDelegate,
+    private ButtonDelegate {
  public:
   MainMenuView(GameEngine &game_engine);
   ~MainMenuView();
@@ -49,6 +50,9 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
 
   // InputHandler
   virtual bool HandleEvent(InputEvent const &event);
+
+  // SettingsViewDelegate
+  virtual void SettingsViewFinished();
 
   // StoryViewDelegate
   virtual void StoryViewFinished();

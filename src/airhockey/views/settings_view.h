@@ -11,7 +11,6 @@
 
 #include <string>
 
-#include "gameengine/entities/animatable.h"
 #include "gameengine/entities/button.h"
 #include "gameengine/entities/composite_entity.h"
 #include "gameengine/input/input_handler.h"
@@ -27,10 +26,15 @@ extern const std::string kLocalStoreDifficulty;
 extern const std::string kLocalStoreNumPucks;
 extern const std::string kLocalStorePaddleSize;
 
-class SettingsView : public Simulator, public Renderer, public InputHandler,
-    private AnimatableDelegate, private ButtonDelegate {
+class SettingsViewDelegate {
  public:
-  SettingsView(GameEngine &game_engine);
+  virtual void SettingsViewFinished() = 0;
+};
+
+class SettingsView : public Simulator, public Renderer, public InputHandler,
+    private ButtonDelegate {
+ public:
+  SettingsView(GameEngine &game_engine, SettingsViewDelegate &delegate);
 
   // TODO bool HandleBackButton();
 
@@ -43,14 +47,12 @@ class SettingsView : public Simulator, public Renderer, public InputHandler,
   // InputHandler
   bool HandleEvent(InputEvent const &event);
 
-  // Animatable
-  void AnimationFinished(Animatable *animatable);
-
   // ButtonDelegate
   void ButtonUp(Button *button);
 
  private:
   GameEngine &game_engine_;
+  SettingsViewDelegate &delegate_;
   float x_position_;
   Animation x_position_animation_;
   SimpleItem *background_;

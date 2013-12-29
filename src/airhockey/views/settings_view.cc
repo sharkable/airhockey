@@ -25,7 +25,9 @@ const string kLocalStoreDifficulty = "ls_difficulty";
 const string kLocalStoreNumPucks = "ls_num_pucks";
 const string kLocalStorePaddleSize = "ls_paddle_size";
 
-SettingsView::SettingsView(GameEngine &game_engine) : game_engine_(game_engine) {
+SettingsView::SettingsView(GameEngine &game_engine, SettingsViewDelegate &delegate)
+    : game_engine_(game_engine),
+      delegate_(delegate) {
   sp<PersistenceModule> persistence = game_engine.persistence_module();
 
   double width = game_engine.screen_size_to_game_size(game_engine.screen_size()).width;
@@ -99,6 +101,10 @@ SettingsView::SettingsView(GameEngine &game_engine) : game_engine_(game_engine) 
 void SettingsView::SimulateStep() {
   if (x_position_animation_.IsActive()) {
     x_position_ = x_position_animation_.Update();
+  } else {
+    if (x_position_ < 0) {
+      delegate_.SettingsViewFinished();
+    }
   }
 }
 
@@ -122,16 +128,6 @@ bool SettingsView::HandleEvent(InputEvent const &event) {
   // TODO NOW support event handling in MultiSelect.
   ok_button_->HandleEvent(event);
   return x_position_ >= 0;
-}
-
-
-#pragma mark - Animatable
-
-void SettingsView::AnimationFinished(Animatable *animatable) {
-  // TODO NOW ADD A DELEGATE CALL
-//  if (entities_->position().x < 0) {
-//    game_engine().RemoveView(this);
-//  }
 }
 
 
