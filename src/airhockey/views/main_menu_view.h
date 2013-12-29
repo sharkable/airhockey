@@ -69,7 +69,7 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
 
   GameEngine &game_engine_;
 
-  SettingsView settings_view_;
+  SettingsView *settings_view_;
   StoryView *story_view_;
 
   SimpleItem *title_;

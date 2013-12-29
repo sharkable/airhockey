@@ -52,7 +52,7 @@ void fade_out(Animatable *entity) {
 MainMenuView::MainMenuView(GameEngine &game_engine)
     : game_engine_(game_engine),
       story_view_(NULL),
-      settings_view_(game_engine),
+      settings_view_(NULL),
       title_(NULL),
       start_1_player_button_(NULL),
       start_2_player_button_(NULL),
@@ -206,9 +206,11 @@ void MainMenuView::SimulateStep() {
   if (sound_slider_) {
     sound_slider_->Update();
   }
-
   if (story_view_) {
     story_view_->SimulateStep();
+  }
+  if (settings_view_) {
+    settings_view_->SimulateStep();
   }
 }
 
@@ -232,6 +234,9 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
   if (story_view_) {
     story_view_->Render(coordinate_system);
   }
+  if (settings_view_) {
+    settings_view_->Render(coordinate_system);
+  }
 }
 
 
@@ -239,6 +244,9 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
 
 bool MainMenuView::HandleEvent(InputEvent const &event) {
   if (story_view_ && story_view_->HandleEvent(event)) {
+    return true;
+  }
+  if (settings_view_ && settings_view_->HandleEvent(event)) {
     return true;
   }
   if (start_1_player_button_->HandleEvent(event)) {
@@ -359,7 +367,12 @@ void MainMenuView::PressedStart(int num_players) {
 }
 
 void MainMenuView::PressedSettings() {
-  game_engine_.PushView(new SettingsView(game_engine_));
+  if (settings_view_) {
+    delete settings_view_;
+  }
+  if (!settings_view_) {
+    settings_view_ = new SettingsView(game_engine_);
+  }
 }
 
 void MainMenuView::PressedStory() {

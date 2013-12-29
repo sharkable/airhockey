@@ -14,7 +14,9 @@
 #include "gameengine/entities/animatable.h"
 #include "gameengine/entities/button.h"
 #include "gameengine/entities/composite_entity.h"
-#include "gameengine/engine_view.h"
+#include "gameengine/input/input_handler.h"
+#include "gameengine/render/renderer.h"
+#include "gameengine/simulation/simulator.h"
 
 class GameEngine;
 class MultiSelect;
@@ -25,13 +27,21 @@ extern const std::string kLocalStoreDifficulty;
 extern const std::string kLocalStoreNumPucks;
 extern const std::string kLocalStorePaddleSize;
 
-class SettingsView : public EngineView, private AnimatableDelegate, private ButtonDelegate {
+class SettingsView : public Simulator, public Renderer, public InputHandler,
+    private AnimatableDelegate, private ButtonDelegate {
  public:
   SettingsView(GameEngine &game_engine);
 
-  // EngineView
-  bool IsCapturingTouches();
-  bool HandleBackButton();
+  // TODO bool HandleBackButton();
+
+  // Simulator
+  void SimulateStep();
+
+  // Renderer
+  void Render(CoordinateSystem const &coordinate_system);
+
+  // InputHandler
+  bool HandleEvent(InputEvent const &event);
 
   // Animatable
   void AnimationFinished(Animatable *animatable);
@@ -40,12 +50,14 @@ class SettingsView : public EngineView, private AnimatableDelegate, private Butt
   void ButtonUp(Button *button);
 
  private:
-  CompositeEntity *entities_;  // weak
-  SimpleItem *background_;  // weak
-  MultiSelect *num_pucks_select_;  // weak
-  MultiSelect *difficulty_select_;  // weak
-  MultiSelect *paddle_size_select_;  // weak
-  Button *ok_button_;  // weak
+  GameEngine &game_engine_;
+  float x_position_;
+  Animation x_position_animation_;
+  SimpleItem *background_;
+  MultiSelect *num_pucks_select_;
+  MultiSelect *difficulty_select_;
+  MultiSelect *paddle_size_select_;
+  Button *ok_button_;
   GamePoint ending_position_;
 };
 
