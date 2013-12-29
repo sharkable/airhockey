@@ -54,6 +54,11 @@ void GameView::TouchesEnded(std::vector<Touch> const &touches) {
   }
 }
 
+void GameView::KeysPressed(std::vector<int> const &keys) {
+  InputEvent event(kInputActionDown, kInputIdKeyboardOther);
+  main_menu_view_->HandleEvent(event);
+}
+
 void GameView::ClearTouches() {
   InputEvent event(kInputActionCancelAll, kInputIdCancelAll);
   main_menu_view_->HandleEvent(event);

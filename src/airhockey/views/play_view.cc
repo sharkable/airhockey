@@ -372,7 +372,11 @@ void PlayView::SimulateStep() {
 #pragma mark - InputHandler
 
 bool PlayView::HandleEvent(InputEvent const &event) {
-  return paddle_1_->HandleEvent(event);
+  paddle_1_->HandleEvent(event);
+  if (event.IsKey()) {
+    PausePressed();
+  }
+  return true;
 }
 
 // TODO NOW

@@ -27,6 +27,7 @@ class GameView : public EngineView {
   virtual void TouchesBegan(std::vector<Touch> &touches);
   virtual void TouchesMoved(std::vector<Touch> const &touches);
   virtual void TouchesEnded(std::vector<Touch> const &touches);
+  virtual void KeysPressed(std::vector<int> const &keys);
   virtual void ClearTouches();
 
  private:

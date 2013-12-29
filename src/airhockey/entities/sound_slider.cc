@@ -83,6 +83,9 @@ void SoundSlider::Render(GamePoint offset) {
 #pragma mark - InputHandler
 
 bool SoundSlider::HandleEvent(InputEvent const &event) {
+  if (!event.HasLocation()) {
+    return false;
+  }
   if (event.Action() == kInputActionDown) {
     GamePoint touchP = event.Location();
     GamePoint thumbP = ThumbPoint();
