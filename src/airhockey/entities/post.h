@@ -19,7 +19,7 @@ class Post : public RoundThing {
   Post(GameEngine &game_engine, double x, double y);
 
   // RoundThing
-  void DidBounceOff(ViewEntity *other, double total_velocity);
+  void DidBounceOff(void *other, double total_velocity);
   bool IsMovable();
 
   // ViewEntity

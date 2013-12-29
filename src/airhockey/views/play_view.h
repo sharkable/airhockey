@@ -11,8 +11,10 @@
 
 #include <vector>
 
-#include "gameengine/engine_view.h"
 #include "gameengine/entities/button.h"
+#include "gameengine/input/input_handler.h"
+#include "gameengine/render/group_renderer.h"
+#include "gameengine/simulation/group_simulator.h"
 
 #include "airhockey/entities/paddle.h"
 #include "airhockey/views/game_menu_view.h"
@@ -35,20 +37,26 @@ typedef enum {
   kPlayViewStatePaused
 } PlayViewState;
 
-class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate {
+class PlayView : public GroupSimulator, public GroupRenderer, public InputHandler,
+    private ButtonDelegate, GameMenuViewDelegate {
  public:
   PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
            PaddleSize paddle_size);
   ~PlayView();
 
   // EngineView
-  void ViewDidGainFocus();
-  void ViewDidLoseFocus();
-  void Update();
-  void NotifyPause();
-  bool HandleBackButton();
-  void HandlePauseButton();
-  void KeysPressed(std::vector<int> const &keys);
+//  void ViewDidGainFocus();
+//  void ViewDidLoseFocus();
+//  void NotifyPause();
+//  bool HandleBackButton();
+//  void HandlePauseButton();
+//  void KeysPressed(std::vector<int> const &keys);
+
+  // GroupSimulator
+  virtual void SimulateStep();
+
+  // InputHandler
+  bool HandleEvent(InputEvent const &event);
 
   // ButtonDelegate
   void ButtonUp(Button *button);
@@ -63,6 +71,7 @@ class PlayView : public EngineView, private ButtonDelegate, GameMenuViewDelegate
   void FinishGameWithWinner(PlayerId player_id);
   void PausePressed();
 
+  GameEngine &game_engine_;
   int num_players_;
   int num_pucks_;
   int num_active_pucks_;

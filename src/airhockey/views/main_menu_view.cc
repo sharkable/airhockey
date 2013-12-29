@@ -53,6 +53,7 @@ MainMenuView::MainMenuView(GameEngine &game_engine)
     : game_engine_(game_engine),
       story_view_(NULL),
       settings_view_(NULL),
+      play_view_(NULL),
       title_(NULL),
       start_1_player_button_(NULL),
       start_2_player_button_(NULL),
@@ -212,6 +213,9 @@ void MainMenuView::SimulateStep() {
   if (settings_view_) {
     settings_view_->SimulateStep();
   }
+  if (play_view_) {
+    play_view_->SimulateStep();
+  }
 }
 
 
@@ -237,6 +241,9 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
   if (settings_view_) {
     settings_view_->Render(coordinate_system);
   }
+  if (play_view_) {
+    play_view_->Render(coordinate_system);
+  }
 }
 
 
@@ -247,6 +254,9 @@ bool MainMenuView::HandleEvent(InputEvent const &event) {
     return true;
   }
   if (settings_view_ && settings_view_->HandleEvent(event)) {
+    return true;
+  }
+  if (play_view_ && play_view_->HandleEvent(event)) {
     return true;
   }
   if (start_1_player_button_->HandleEvent(event)) {
@@ -264,7 +274,7 @@ bool MainMenuView::HandleEvent(InputEvent const &event) {
   if (upgrade_button_ && upgrade_button_->HandleEvent(event)) {
     return true;
   }
-  if (sound_slider_->HandleEvent(event)) {
+  if (sound_slider_ && sound_slider_->HandleEvent(event)) {
     return true;
   }
   return false;
@@ -365,13 +375,8 @@ void MainMenuView::PressedStart(int num_players) {
   analytics_params["PaddleSize"] = to_string(paddle_size);
   game_engine_.analytics_module()->LogEvent("START_GAME", analytics_params);
 
-  PlayView *play_view = new PlayView(game_engine_,
-                                     num_players,
-                                     num_pucks,
-                                     difficulty,
-                                     paddle_size);
+  play_view_ = new PlayView(game_engine_, num_players, num_pucks, difficulty, paddle_size);
   AnimateOut();
-  game_engine_.PushView(play_view);
 }
 
 void MainMenuView::PressedSettings() {

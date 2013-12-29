@@ -90,9 +90,9 @@ void Puck::FadeIn() {
 }
 
 
-#pragma mark - ViewEntity
+#pragma mark - Simulator
 
-void Puck::Update() {
+void Puck::SimulateStep() {
   if (!hit_puck_this_time_) {
     hit_puck_last_time_ = false;
   }
@@ -108,7 +108,7 @@ void Puck::Update() {
   }
   hit_rink_this_time_ = false;
 
-  RoundThing::Update();
+  RoundThing::SimulateStep();
 
   // Stop the puck from getting stuck in the goal.
   if (y() < rink_.TopY() && fabs(vy()) < kPuckGoalMinDropSpeed) {
@@ -123,10 +123,13 @@ void Puck::Update() {
   }
 }
 
-void Puck::Render(GamePoint offset) {
+
+#pragma mark - Renderer
+
+void Puck::Render(CoordinateSystem const &coordinate_system) {
   if (is_active()) {
-    sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2 + offset.x,
-                           y_ - sprite_.content_size().height / 2 + offset.y),
+    sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2,
+                           y_ - sprite_.content_size().height / 2),
                  0, alpha_, 1);
   }
 }
@@ -134,7 +137,7 @@ void Puck::Render(GamePoint offset) {
 
 #pragma mark - RoundThing
 
-void Puck::DidBounceOff(ViewEntity *other, double total_velocity) {
+void Puck::DidBounceOff(void *other, double total_velocity) {
   float volume = (float)(total_velocity / 50.0);
   if (volume > 1.8) volume = 1.8;
   else if (volume < 0.4) volume = 0.4;

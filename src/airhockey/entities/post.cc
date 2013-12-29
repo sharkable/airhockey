@@ -24,7 +24,7 @@ Post::Post(GameEngine &game_engine, double x, double y) : RoundThing(game_engine
 
 #pragma mark - RoundThing
 
-void Post::DidBounceOff(ViewEntity *other, double total_velocity) {
+void Post::DidBounceOff(void *other, double total_velocity) {
   if (typeid(*other) == typeid(Puck)) {
     ((Puck *)other)->DidBounceOff(this, total_velocity);
   }

@@ -118,9 +118,9 @@ void Paddle::SetReadyToPlay(bool ready) {
 }
 
 
-#pragma mark - ViewEntity
+#pragma mark - Simulator
 
-void Paddle::Update() {
+void Paddle::SimulateStep() {
   // Computer AI
   if (!player_controlled_ && ready_to_play_) {
     if (ai_initial_pause_ticks_) {
@@ -129,19 +129,22 @@ void Paddle::Update() {
     }
     RunAITick();
   }
-  RoundThing::Update();
+  RoundThing::SimulateStep();
 }
 
-void Paddle::Render(GamePoint offset) {
-  sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2 + offset.x,
-                         y_ - sprite_.content_size().height / 2 + offset.y),
+
+#pragma mark - Renderer
+
+void Paddle::Render(CoordinateSystem const &coordinate_system) {
+  sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2,
+                         y_ - sprite_.content_size().height / 2),
                0, (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1);
 }
 
 
 #pragma mark - RoundThing
 
-void Paddle::DidBounceOff(ViewEntity *other, double total_velocity) {
+void Paddle::DidBounceOff(void *other, double total_velocity) {
   if (typeid(*other) == typeid(Puck)) {
     ((Puck *)other)->DidBounceOff(this, total_velocity);
   }

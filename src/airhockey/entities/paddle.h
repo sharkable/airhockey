@@ -46,12 +46,14 @@ class Paddle : public RoundThing {
   // Accessors
   std::vector<Puck *> &pucks() { return pucks_; }
 
-  // ViewEntity
-  void Update();
-  void Render(GamePoint offset);
+  // Simulator
+  virtual void SimulateStep();
+
+  // Renderer
+  virtual void Render(CoordinateSystem const &coordinate_system);
 
   // RoundThing
-  void DidBounceOff(ViewEntity *other, double total_velocity);
+  void DidBounceOff(void *other, double total_velocity);
   bool ContainsPoint(GamePoint p);
   bool IsGrabbable();
   bool IsMovable();

@@ -27,12 +27,14 @@ class Puck : public RoundThing {
                       bool center);
   void FadeIn();
 
-  // ViewEntity
-  void Update();
-  void Render(GamePoint offset);
+  // Simulator
+  virtual void SimulateStep();
+
+  // Renderer
+  virtual void Render(CoordinateSystem const &coordinate_system);
 
   // RoundThing
-  void DidBounceOff(ViewEntity *other, double total_velocity);
+  virtual void DidBounceOff(void *other, double total_velocity);
 
  private:
   Rink &rink_;

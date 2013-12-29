@@ -13,10 +13,13 @@
 
 #include "gameengine/sprite.h"
 #include "gameengine/view_entity.h"
+#include "gameengine/input/input_handler.h"
+#include "gameengine/render/renderer.h"
+#include "gameengine/simulation/simulator.h"
 
 class GameEngine;
 
-class RoundThing : public ViewEntity {
+class RoundThing : public Simulator, public Renderer, public InputHandler {
  public:
   RoundThing(GameEngine &game_engine);
   RoundThing(GameEngine &game_engine, std::string texture_name);
@@ -25,7 +28,7 @@ class RoundThing : public ViewEntity {
   void ApplyFriction();
   void MaybeBounceOff(RoundThing *other);
   // Will get called for one of the two round things when they bounce.
-  virtual void DidBounceOff(ViewEntity *other, double total_velocity) {};
+  virtual void DidBounceOff(void *other, double total_velocity) {};
   virtual bool ContainsPoint(GamePoint point);
   bool Overlaps(RoundThing *thing);
   virtual bool IsGrabbable();
@@ -49,15 +52,15 @@ class RoundThing : public ViewEntity {
   bool is_active() { return active_; }
   void set_active(bool active) { active_ = active; }
 
-  // ViewEntity
-  void Update();
-  void Render(GamePoint offset);
-  bool TouchBegan(GamePoint offset, Touch touch);
-  void TouchMoved(GamePoint offset, Touch touch);
-  void TouchEnded(GamePoint offset, Touch touch);
-  void ClearTouches();
-  void HandleMouseDelta(float delta_x, float delta_y);
+  // Simulator
+  virtual void SimulateStep();
 
+  // Renderer
+  virtual void Render(CoordinateSystem const &coordinate_system);
+
+  // InputHandler
+  virtual bool HandleEvent(InputEvent const &event);
+  
  protected:
   Sprite sprite_;
   double x_;
@@ -70,7 +73,7 @@ class RoundThing : public ViewEntity {
   double mass_;
   double friction_;
   bool grabbed_;
-  void *grabbed_touch_;
+  InputId grabbed_touch_;
   bool active_;
 };
 

@@ -30,7 +30,7 @@ RoundThing::RoundThing(GameEngine &game_engine)
       mass_(0),
       friction_(0),
       grabbed_(false),
-      grabbed_touch_(NULL),
+      grabbed_touch_(kInputIdCancelAll),
       active_(true) {
 }
 
@@ -46,7 +46,7 @@ RoundThing::RoundThing(GameEngine &game_engine, string texture_name)
       mass_(0),
       friction_(0),
       grabbed_(false),
-      grabbed_touch_(NULL),
+      grabbed_touch_(kInputIdCancelAll),
       active_(true) {
 }
 
@@ -177,9 +177,9 @@ bool RoundThing::IsMovable() {
 }
 
 
-#pragma mark - ViewEntity
+#pragma mark - Simulator
 
-void RoundThing::Update() {
+void RoundThing::SimulateStep() {
   if (!IsMovable() || !is_active()) {
     return;
   }
@@ -195,72 +195,81 @@ void RoundThing::Update() {
   }
 }
 
-void RoundThing::Render(GamePoint offset) {
-  if (active_) {
-    sprite_.DrawAtPoint(GamePoint(x_ - sprite_.content_size().width / 2 + offset.x,
-                                  y_ - sprite_.content_size().height / 2 + offset.y));
-  }
+
+#pragma mark - Renderer
+
+void RoundThing::Render(CoordinateSystem const &coordinate_system) {
+//  if (active_) {
+//    sprite_.DrawAtPoint(GamePoint(x_ - sprite_.content_size().width / 2,
+//                                  y_ - sprite_.content_size().height / 2));
+//  }
 }
 
-bool RoundThing::TouchBegan(GamePoint offset, Touch touch) {
-  if (!IsGrabbable() || !is_active() || is_grabbed()) {
+
+#pragma mark - InputHandler
+
+bool RoundThing::HandleEvent(InputEvent const &event) {
+  if (!IsGrabbable() || !is_active() || is_grabbed() || !event.HasLocation()) {
     return false;
   }
-  if (ContainsPoint(touch.location() - offset)) {
-    grabbed_ = true;
-    grabbed_touch_ = touch.identifier();
-    TouchMoved(offset, touch);
-    vx_ = 0;
-    vy_ = 0;
-    // Set oldX_ and oldY_ here so that the velocity stays around 0.
-    // This is when you touch the outside of the RoundThing and it
-    // snaps to center on your touch, it doesn't have a really high
-    // initial velocity.
-    old_x_ = x_;
-    old_y_ = y_;
-    return true;
+  if (event.Action() == kInputActionDown) {
+    if (ContainsPoint(event.Location())) {
+      grabbed_ = true;
+      grabbed_touch_ = event.Id();
+// TODO NOW      TouchMoved(offset, touch);
+      vx_ = 0;
+      vy_ = 0;
+      // Set oldX_ and oldY_ here so that the velocity stays around 0.
+      // This is when you touch the outside of the RoundThing and it
+      // snaps to center on your touch, it doesn't have a really high
+      // initial velocity.
+      old_x_ = x_;
+      old_y_ = y_;
+      return true;
+    }
+    return false;
+  }
+  if (event.Action() == kInputActionMove) {
+    if (!IsMovable()) {
+      return false;
+    }
+    if (is_grabbed() && event.Id() == grabbed_touch_) {
+      GamePoint p = event.Location();
+      x_ = p.x;
+      y_ = p.y;
+      return true;
+    }
+  }
+  if (event.Action() == kInputActionUp) {
+    if (is_grabbed() && event.Id() == grabbed_touch_) {
+      grabbed_ = false;
+      grabbed_touch_ = kInputIdCancelAll;
+      return true;
+    }
+  }
+  if (event.Action() == kInputActionCancelAll) {
+    grabbed_ = false;
+    grabbed_touch_ = kInputIdCancelAll;
   }
   return false;
 }
 
-void RoundThing::TouchMoved(GamePoint offset, Touch touch) {
-  if (!IsMovable()) {
-    return;
-  }
-  if (is_grabbed() && touch.identifier() == grabbed_touch_) {
-    GamePoint p = touch.location() - offset;
-    x_ = p.x;
-    y_ = p.y;
-  }
-}
-
-void RoundThing::TouchEnded(GamePoint offset, Touch touch) {
-  if (is_grabbed() && touch.identifier() == grabbed_touch_) {
-    grabbed_ = false;
-    grabbed_touch_ = NULL;
-  }
-}
-
-void RoundThing::ClearTouches() {
-  grabbed_ = false;
-  grabbed_touch_ = NULL;
-}
-
-void RoundThing::HandleMouseDelta(float delta_x, float delta_y) {
-  if (!IsGrabbable() || !is_active() || !IsMovable()) {
-    return;
-  }
-  static const float kMaxDelta = 80.f;
-  float length = sqrt(delta_x * delta_x + delta_y * delta_y);
-  if (length > kMaxDelta) {
-    delta_x *= kMaxDelta;
-    delta_x /= length;
-    delta_y *= kMaxDelta;
-    delta_y /= length;
-  }
-  x_ += delta_x;
-  y_ += delta_y;
-}
+// TODO NOW
+//void RoundThing::HandleMouseDelta(float delta_x, float delta_y) {
+//  if (!IsGrabbable() || !is_active() || !IsMovable()) {
+//    return;
+//  }
+//  static const float kMaxDelta = 80.f;
+//  float length = sqrt(delta_x * delta_x + delta_y * delta_y);
+//  if (length > kMaxDelta) {
+//    delta_x *= kMaxDelta;
+//    delta_x /= length;
+//    delta_y *= kMaxDelta;
+//    delta_y /= length;
+//  }
+//  x_ += delta_x;
+//  y_ += delta_y;
+//}
 
 //bool RoundThing::isGrabbable() {
 //  return false;

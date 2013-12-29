@@ -17,6 +17,7 @@
 #include "gameengine/render/renderer.h"
 #include "gameengine/simulation/simulator.h"
 
+#include "airhockey/views/play_view.h"
 #include "airhockey/views/settings_view.h"
 #include "airhockey/views/story_view.h"
 
@@ -75,6 +76,7 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
 
   SettingsView *settings_view_;
   StoryView *story_view_;
+  PlayView *play_view_;
 
   SimpleItem *title_;
   Button *start_1_player_button_;

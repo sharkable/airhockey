@@ -40,13 +40,13 @@ static const string kLocalStoreMatchCount = "ls_match_count";
 
 PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                    PaddleSize paddle_size)
-    : EngineView(game_engine),
+    : game_engine_(game_engine),
       pause_button_1_(NULL),
       pause_button_2_(NULL) {
   num_players_ = num_players;
 
   rink_ = new Rink(RinkView::RinkSizeForTextureGroup(game_engine.platform().texture_group()));
-  AddEntity(rink_, false);
+// TODO NOW  AddRenderer(rink_);
 
   paddle_1_ = new Paddle(game_engine, *rink_, kPlayerId1, paddle_size, true, kComputerAIBad,
                          pucks_);
@@ -74,33 +74,41 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   player_2_score_ = new SimpleItem();
   player_2_score_->set_sprites(scoreSprites);
   player_2_score_->set_position(game_engine.position("player_2_score"));
-  AddEntity(player_1_score_, false);
-  AddEntity(player_2_score_, false);
+  AddRenderer(player_1_score_);
+  AddSimulator(player_1_score_);
+  AddRenderer(player_2_score_);
 
   num_pucks_ = num_pucks;
   num_active_pucks_ = num_pucks_;
   for (int i = 0; i < num_pucks_; i++) {
     pucks_.push_back(new Puck(game_engine, *rink_));
-    AddEntity(pucks_[i], false);
+    AddRenderer(pucks_[i]);
+    AddSimulator(pucks_[i]);
     round_things_.push_back(pucks_[i]);
   }
 
-  AddEntity(paddle_1_, false);
+  AddRenderer(paddle_1_);
+  AddSimulator(paddle_1_);
   round_things_.push_back(paddle_1_);
 
-  AddEntity(paddle_2_, false);
+  AddRenderer(paddle_2_);
+  AddSimulator(paddle_2_);
   round_things_.push_back(paddle_2_);
 
-  AddEntity(post_1_, false);
+  AddRenderer(post_1_);
+  AddSimulator(post_1_);
   round_things_.push_back(post_1_);
 
-  AddEntity(post_2_, false);
+  AddRenderer(post_2_);
+  AddSimulator(post_2_);
   round_things_.push_back(post_2_);
 
-  AddEntity(post_3_, false);
+  AddRenderer(post_3_);
+  AddSimulator(post_3_);
   round_things_.push_back(post_3_);
 
-  AddEntity(post_4_, false);
+  AddRenderer(post_4_);
+  AddSimulator(post_4_);
   round_things_.push_back(post_4_);
 
 //  RinkOverlay *rink_overlay = new RinkOverlay(game_engine);
@@ -149,7 +157,8 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
     pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
     pause_button_1_->set_position(pause_button_pos_1);
     pause_button_1_->set_delegate(this);
-    AddEntity(pause_button_1_, false);
+    AddRenderer(pause_button_1_);
+    AddSimulator(pause_button_1_);
 
     if (num_players == 2) {
       // TODO: This is needed because of crappy texture management.
@@ -162,7 +171,8 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
       pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite_2);
       pause_button_2_->set_position(pause_button_pos_2);
       pause_button_2_->set_delegate(this);
-      AddEntity(pause_button_2_, false);
+      AddRenderer(pause_button_2_);
+      AddSimulator(pause_button_2_);
     }
   }
 
@@ -199,23 +209,24 @@ PlayView::~PlayView() {
   }
 }
 
+// TODO NOW
+//void PlayView::ViewDidGainFocus() {
+//  game_engine().input_module()->HidePointer();
+//}
+//
+//void PlayView::ViewDidLoseFocus() {
+//  game_engine().input_module()->ShowPointer();
+//}
 
-#pragma mark - EngineView
 
-void PlayView::ViewDidGainFocus() {
-  game_engine().input_module()->HidePointer();
-}
+#pragma mark - GroupSimulator
 
-void PlayView::ViewDidLoseFocus() {
-  game_engine().input_module()->ShowPointer();
-}
-
-void PlayView::Update() {
+void PlayView::SimulateStep() {
   if (state_ == kPlayViewStatePaused) {
     return;
   }
 
-  EngineView::Update();
+  GroupSimulator::SimulateStep();
 
   if (state_ == kPlayViewStateGetReady) {
     get_ready_ticks_left_--;
@@ -226,11 +237,14 @@ void PlayView::Update() {
       get_ready_->set_alpha(0);
       get_ready_->AnimateToPosition(position, kAnimationTypeLinear, kShowGetReadyMessageTicks);
       get_ready_->AnimateToAlpha(1, kAnimationTypeLinear, kShowGoMessageTicks);
-      AddEntity(get_ready_, false);
+      AddRenderer(get_ready_);
+      AddSimulator(get_ready_);
       get_ready_sound_->Play();
     } else if (get_ready_ticks_left_ == 0) {
-      RemoveEntity(get_ready_);
-      AddEntity(go_, false);
+      RemoveSimulator(get_ready_);
+      RemoveRenderer(get_ready_);
+      AddSimulator(go_);
+      AddRenderer(go_);
       go_->set_zoom(1);
       go_->set_alpha(1);
       go_->AnimateToZoom(5, kAnimationTypeCubicEaseOut, kShowGoMessageTicks);
@@ -248,7 +262,8 @@ void PlayView::Update() {
   if (go_ticks_left_ > 0) {
     go_ticks_left_--;
     if (go_ticks_left_ == 0) {
-      RemoveEntity(go_);
+      RemoveSimulator(go_);
+      RemoveRenderer(go_);
     }
   }
 
@@ -353,22 +368,31 @@ void PlayView::Update() {
   }
 }
 
-void PlayView::NotifyPause() {
-  PausePressed();
+
+#pragma mark - InputHandler
+
+bool PlayView::HandleEvent(InputEvent const &event) {
+  return paddle_1_->HandleEvent(event);
 }
 
-bool PlayView::HandleBackButton() {
-  PausePressed();
-  return true;
-}
-
-void PlayView::HandlePauseButton() {
-  PausePressed();
-}
-
-void PlayView::KeysPressed(std::vector<int> const &keys) {
-  PausePressed();
-}
+// TODO NOW
+//void PlayView::NotifyPause() {
+//  PausePressed();
+//}
+//
+//bool PlayView::HandleBackButton() {
+//  PausePressed();
+//  return true;
+//}
+//
+// TODO NOW
+//void PlayView::HandlePauseButton() {
+//  PausePressed();
+//}
+//
+//void PlayView::KeysPressed(std::vector<int> const &keys) {
+//  PausePressed();
+//}
 
 
 #pragma mark - ButtonDelegate
@@ -385,12 +409,12 @@ void PlayView::ButtonUp(Button *button) {
 #pragma mark - GameMenuViewDelegate
 
 void PlayView::RematchPressed() {
-  game_engine().analytics_module()->LogEvent("REMATCH");
+  game_engine_.analytics_module()->LogEvent("REMATCH");
   SetUpNewGame();
 }
 
 void PlayView::MenuPressed() {
-  game_engine().PopView();
+  game_engine_.PopView();
 // TODO NOW  game_engine().PushView(new MainMenuView(game_engine()));
 }
 
@@ -434,19 +458,21 @@ void PlayView::SetUpNewGame() {
 
   player_1_score_->set_sprite(0);
   player_2_score_->set_sprite(0);
-  RemoveEntity(win_);
-  RemoveEntity(lose_);
+  RemoveSimulator(win_);
+  RemoveRenderer(win_);
+  RemoveSimulator(lose_);
+  RemoveRenderer(lose_);
 
   num_active_pucks_ = num_pucks_;
   num_player_1_scores_last_round_ = 0;
 
-  bool app_upgraded = game_engine().persistence_module()->BoolForKey(kLocalStoreUpgraded);
-  int num_matches = game_engine().persistence_module()->IntegerForKey(kLocalStoreMatchCount) + 1;
-  game_engine().persistence_module()->SetInteger(num_matches, kLocalStoreMatchCount);
+  bool app_upgraded = game_engine_.persistence_module()->BoolForKey(kLocalStoreUpgraded);
+  int num_matches = game_engine_.persistence_module()->IntegerForKey(kLocalStoreMatchCount) + 1;
+  game_engine_.persistence_module()->SetInteger(num_matches, kLocalStoreMatchCount);
   bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
   if (show_full_screen_ad) {
-    game_engine().ad_module()->ShowFullScreenAd();
+    game_engine_.ad_module()->ShowFullScreenAd();
   }
   state_ = kPlayViewStateGetReady;
   get_ready_ticks_left_ = kGetReadyTicksTotal;
@@ -465,12 +491,14 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
 
       win_->set_position(GamePoint(winX, bottomY));
       win_->set_angle(0);
-      AddEntity(win_, false);
+      AddSimulator(win_);
+      AddRenderer(win_);
 
       if (num_players_ == 2) {
         lose_->set_position(GamePoint(loseX, topY));
         lose_->set_angle(180);
-        AddEntity(lose_, false);
+        AddSimulator(lose_);
+        AddRenderer(lose_);
       }
 
       give_extra_puck_to_player_ = kPlayerId2;
@@ -483,12 +511,14 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
       if (num_players_ == 2) {
         win_->set_position(GamePoint(winX, topY));
         win_->set_angle(180);
-        AddEntity(win_, false);
+        AddSimulator(win_);
+        AddRenderer(win_);
       }
 
       lose_->set_position(GamePoint(loseX, bottomY));
       lose_->set_angle(0);
-      AddEntity(lose_, false);
+      AddSimulator(lose_);
+      AddRenderer(lose_);
 
       give_extra_puck_to_player_ = kPlayerId1;
 
@@ -504,13 +534,13 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
   lose_->AnimateToAlpha(1, kAnimationTypeLinear, 3 * 60);
   lose_->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 3 * 60);
 
-  game_engine().PushView(new GameMenuView(game_engine(), this, true));
+  game_engine_.PushView(new GameMenuView(game_engine_, this, true));
 }
 
 void PlayView::PausePressed() {
   if (state_ != kPlayViewStateFinished && state_ != kPlayViewStatePaused) {
     pre_pause_state_ = state_;
     state_ = kPlayViewStatePaused;
-    game_engine().PushView(new GameMenuView(game_engine(), this, false));
+    game_engine_.PushView(new GameMenuView(game_engine_, this, false));
   }
 }
