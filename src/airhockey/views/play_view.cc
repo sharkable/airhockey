@@ -428,7 +428,6 @@ void PlayView::RematchPressed() {
 }
 
 void PlayView::MenuPressed() {
-  game_engine_.PopView();
 // TODO NOW  game_engine().PushView(new MainMenuView(game_engine()));
   RemoveRenderer(game_menu_view_);
   delete game_menu_view_;

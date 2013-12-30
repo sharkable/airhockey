@@ -60,7 +60,6 @@ void sharkengine_init(GameEngine &game_engine) {
       break;
   }
 
-
   if (game_engine.platform().os_group() == Platform::kOSGroupAndroid) {
     game_engine.ad_module()->SetPublisherId("a151d05623e3477");
   } else {
@@ -77,5 +76,8 @@ void sharkengine_init(GameEngine &game_engine) {
       (screen_size.height - game_engine.game_size_to_screen_size(game_size).height) / 2;
   game_engine.set_screen_offset(ScreenPoint(0, y_offset));
 
-  game_engine.SetRootView(new GameView(game_engine));
+  GameView *view = new GameView(game_engine);
+  game_engine.SetSimulator(view);
+  game_engine.SetRenderer(view);
+  game_engine.SetInputHandler(view);
 }

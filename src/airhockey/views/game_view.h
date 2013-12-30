@@ -9,7 +9,9 @@
 #ifndef AIRHOCKEY_VIEWS_GAMEVIEW_H_
 #define AIRHOCKEY_VIEWS_GAMEVIEW_H_
 
-#include "gameengine/engine_view.h"
+#include "gameengine/input/input_handler.h"
+#include "gameengine/render/renderer.h"
+#include "gameengine/simulation/simulator.h"
 
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/views/rink_view.h"
@@ -17,18 +19,18 @@
 
 class GameEngine;
 
-class GameView : public EngineView {
+class GameView : public Simulator, public Renderer, public InputHandler {
  public:
   GameView(GameEngine &game_engine);
 
-  // EngineView
-  virtual void Update();
-  virtual void Render();
-  virtual void TouchesBegan(std::vector<Touch> &touches);
-  virtual void TouchesMoved(std::vector<Touch> const &touches);
-  virtual void TouchesEnded(std::vector<Touch> const &touches);
-  virtual void KeysPressed(std::vector<int> const &keys);
-  virtual void ClearTouches();
+  // Simulator
+  virtual void SimulateStep();
+
+  // Renderer
+  virtual void Render(CoordinateSystem const &coordinate_system);
+
+  // InputHandler
+  virtual bool HandleEvent(InputEvent const &event);
 
  private:
   RinkView rink_background_;
