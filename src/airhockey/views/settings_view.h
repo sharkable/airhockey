@@ -44,7 +44,7 @@ class SettingsView : public Simulator, public Renderer, public InputHandler,
   void Render(CoordinateSystem const &coordinate_system);
 
   // InputHandler
-  bool HandleEvent(InputEvent const &event);
+  bool HandleInputEvent(InputEvent const &event);
 
   // ButtonDelegate
   void ButtonUp(Button *button);

@@ -38,7 +38,7 @@ void GameView::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool GameView::HandleEvent(InputEvent const &event) {
-  main_menu_view_->HandleEvent(event);
+bool GameView::HandleInputEvent(InputEvent const &event) {
+  main_menu_view_->HandleInputEvent(event);
   return true;
 }

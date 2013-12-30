@@ -208,7 +208,7 @@ void RoundThing::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool RoundThing::HandleEvent(InputEvent const &event) {
+bool RoundThing::HandleInputEvent(InputEvent const &event) {
   if (!IsGrabbable() || !is_active() || is_grabbed() || !event.HasLocation()) {
     return false;
   }

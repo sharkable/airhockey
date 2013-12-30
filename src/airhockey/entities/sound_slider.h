@@ -30,7 +30,7 @@ class SoundSlider : public ViewEntity, public InputHandler {
   void Render(GamePoint offset);
 
   // InputHandler
-  virtual bool HandleEvent(InputEvent const &event);
+  virtual bool HandleInputEvent(InputEvent const &event);
 
  private:
   GameEngine &game_engine_;

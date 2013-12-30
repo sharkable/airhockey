@@ -82,7 +82,7 @@ void SoundSlider::Render(GamePoint offset) {
 
 #pragma mark - InputHandler
 
-bool SoundSlider::HandleEvent(InputEvent const &event) {
+bool SoundSlider::HandleInputEvent(InputEvent const &event) {
   if (!event.HasLocation()) {
     return false;
   }

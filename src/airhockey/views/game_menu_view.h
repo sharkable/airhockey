@@ -40,7 +40,7 @@ class GameMenuView : public Simulator, public Renderer, public InputHandler,
   virtual void Render(CoordinateSystem const &coordinate_system);
 
   // InputHandler
-  virtual bool HandleEvent(InputEvent const &event);
+  virtual bool HandleInputEvent(InputEvent const &event);
 
   // ButtonDelegate
   void ButtonUp(Button *button);

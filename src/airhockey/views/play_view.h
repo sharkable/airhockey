@@ -56,7 +56,7 @@ class PlayView : public GroupSimulator, public GroupRenderer, public InputHandle
   virtual void SimulateStep();
 
   // InputHandler
-  bool HandleEvent(InputEvent const &event);
+  bool HandleInputEvent(InputEvent const &event);
 
   // ButtonDelegate
   void ButtonUp(Button *button);

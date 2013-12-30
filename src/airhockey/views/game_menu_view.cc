@@ -75,11 +75,11 @@ void GameMenuView::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool GameMenuView::HandleEvent(InputEvent const &event) {
-  sound_slider_->HandleEvent(event);
-  if (rematch_button_) rematch_button_->HandleEvent(event);
-  if (menu_button_) menu_button_->HandleEvent(event);
-  if (continue_button_) continue_button_->HandleEvent(event);
+bool GameMenuView::HandleInputEvent(InputEvent const &event) {
+  sound_slider_->HandleInputEvent(event);
+  if (rematch_button_) rematch_button_->HandleInputEvent(event);
+  if (menu_button_) menu_button_->HandleInputEvent(event);
+  if (continue_button_) continue_button_->HandleInputEvent(event);
   return true;
 }
 

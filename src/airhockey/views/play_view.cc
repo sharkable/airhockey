@@ -375,12 +375,12 @@ void PlayView::SimulateStep() {
 
 #pragma mark - InputHandler
 
-bool PlayView::HandleEvent(InputEvent const &event) {
+bool PlayView::HandleInputEvent(InputEvent const &event) {
   if (game_menu_view_) {
-    game_menu_view_->HandleEvent(event);
+    game_menu_view_->HandleInputEvent(event);
     return true;
   }
-  paddle_1_->HandleEvent(event);
+  paddle_1_->HandleInputEvent(event);
   if (event.IsKey()) {
     PausePressed();
   }

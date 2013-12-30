@@ -249,32 +249,32 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool MainMenuView::HandleEvent(InputEvent const &event) {
-  if (story_view_ && story_view_->HandleEvent(event)) {
+bool MainMenuView::HandleInputEvent(InputEvent const &event) {
+  if (story_view_ && story_view_->HandleInputEvent(event)) {
     return true;
   }
-  if (settings_view_ && settings_view_->HandleEvent(event)) {
+  if (settings_view_ && settings_view_->HandleInputEvent(event)) {
     return true;
   }
-  if (play_view_ && play_view_->HandleEvent(event)) {
+  if (play_view_ && play_view_->HandleInputEvent(event)) {
     return true;
   }
-  if (start_1_player_button_->HandleEvent(event)) {
+  if (start_1_player_button_->HandleInputEvent(event)) {
     return true;
   }
-  if (start_2_player_button_ && start_2_player_button_->HandleEvent(event)) {
+  if (start_2_player_button_ && start_2_player_button_->HandleInputEvent(event)) {
     return true;
   }
-  if (settings_button_->HandleEvent(event)) {
+  if (settings_button_->HandleInputEvent(event)) {
     return true;
   }
-  if (story_button_->HandleEvent(event)) {
+  if (story_button_->HandleInputEvent(event)) {
     return true;
   }
-  if (upgrade_button_ && upgrade_button_->HandleEvent(event)) {
+  if (upgrade_button_ && upgrade_button_->HandleInputEvent(event)) {
     return true;
   }
-  if (sound_slider_ && sound_slider_->HandleEvent(event)) {
+  if (sound_slider_ && sound_slider_->HandleInputEvent(event)) {
     return true;
   }
   return false;
