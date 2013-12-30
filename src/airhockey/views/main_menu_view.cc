@@ -194,18 +194,15 @@ void MainMenuView::SimulateStep() {
     }
   }
 
-  title_->Update();
-  start_1_player_button_->Update();
+  title_->SimulateStep();
+  start_1_player_button_->SimulateStep();
   if (start_2_player_button_) {
-    start_2_player_button_->Update();
+    start_2_player_button_->SimulateStep();
   }
-  settings_button_->Update();
-  story_button_->Update();
+  settings_button_->SimulateStep();
+  story_button_->SimulateStep();
   if (upgrade_button_) {
-    upgrade_button_->Update();
-  }
-  if (sound_slider_) {
-    sound_slider_->Update();
+    upgrade_button_->SimulateStep();
   }
   if (story_view_) {
     story_view_->SimulateStep();
@@ -223,17 +220,17 @@ void MainMenuView::SimulateStep() {
 
 void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
   title_->Render(coordinate_system);
-  start_1_player_button_->Render(kGamePointZero, 0.f);
+  start_1_player_button_->Render(coordinate_system);
   if (start_2_player_button_) {
-    start_2_player_button_->Render(kGamePointZero, 0.f);
+    start_2_player_button_->Render(coordinate_system);
   }
-  settings_button_->Render(kGamePointZero, 0.f);
-  story_button_->Render(kGamePointZero, 0.f);
+  settings_button_->Render(coordinate_system);
+  story_button_->Render(coordinate_system);
   if (upgrade_button_) {
-    upgrade_button_->Render(kGamePointZero, 0.f);
+    upgrade_button_->Render(coordinate_system);
   }
   if (sound_slider_) {
-    sound_slider_->Render(kGamePointZero);
+    sound_slider_->Render(coordinate_system);
   }
   if (story_view_) {
     story_view_->Render(coordinate_system);

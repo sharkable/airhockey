@@ -66,7 +66,7 @@ void GameMenuView::SimulateStep() {
 
 void GameMenuView::Render(CoordinateSystem const &coordinate_system) {
   menu_background_->Render(coordinate_system);
-  sound_slider_->Render(coordinate_system.origin());
+  sound_slider_->Render(coordinate_system);
   if (rematch_button_) rematch_button_->Render(coordinate_system);
   if (menu_button_) menu_button_->Render(coordinate_system);
   if (continue_button_) continue_button_->Render(coordinate_system);

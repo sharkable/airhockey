@@ -118,7 +118,7 @@ void SettingsView::Render(CoordinateSystem const &coordinate_system) {
   num_pucks_select_->Render(offset);
   difficulty_select_->Render(offset);
   paddle_size_select_->Render(offset);
-  ok_button_->Render(offset, 0.f);
+  ok_button_->Render(coordinate_system);
 }
 
 

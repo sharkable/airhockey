@@ -57,8 +57,8 @@ StoryView::StoryView(GameEngine &game_engine, StoryViewDelegate &delegate) : del
 #pragma mark - Simulator
 
 void StoryView::SimulateStep() {
-  story_->Update();
-  about_->Update();
+  story_->SimulateStep();
+  about_->SimulateStep();
 }
 
 

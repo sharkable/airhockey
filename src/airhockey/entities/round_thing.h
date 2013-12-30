@@ -12,7 +12,6 @@
 #include <cmath>
 
 #include "gameengine/sprite.h"
-#include "gameengine/view_entity.h"
 #include "gameengine/input/input_handler.h"
 #include "gameengine/render/renderer.h"
 #include "gameengine/simulation/simulator.h"

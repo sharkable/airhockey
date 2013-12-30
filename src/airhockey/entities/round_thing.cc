@@ -10,7 +10,6 @@
 
 #include "gameengine/game_engine.h"
 #include "gameengine/resource_loader.h"
-#include "gameengine/touch.h"
 #include "gameengine/coordinates/coordinate_types.h"
 
 using std::string;

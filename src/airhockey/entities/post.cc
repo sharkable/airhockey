@@ -9,7 +9,6 @@
 #include "airhockey/entities/post.h"
 
 #include "gameengine/game_engine.h"
-#include "gameengine/view_entity.h"
 
 #include "airhockey/entities/puck.h"
 

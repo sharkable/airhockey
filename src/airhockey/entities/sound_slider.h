@@ -12,22 +12,21 @@
 #include <vector>
 
 #include "gameengine/sprite.h"
-#include "gameengine/view_entity.h"
 #include "gameengine/coordinates/coordinate_types.h"
 #include "gameengine/input/input_handler.h"
+#include "gameengine/render/renderer.h"
 
 class GameEngine;
 class Touch;
 
-class SoundSlider : public ViewEntity, public InputHandler {
+class SoundSlider : public Renderer, public InputHandler {
  public:
   SoundSlider(GameEngine &game_engine, GamePoint position);
 
   GamePoint ThumbPoint();
 
-  // ViewEntity
-  void Update();
-  void Render(GamePoint offset);
+  // Renderer
+  void Render(CoordinateSystem const &coordinate_system);
 
   // InputHandler
   virtual bool HandleInputEvent(InputEvent const &event);

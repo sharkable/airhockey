@@ -11,7 +11,6 @@
 #include "gameengine/modules/persistence_module.h"
 #include "gameengine/game_engine.h"
 #include "gameengine/platform.h"
-#include "gameengine/touch.h"
 
 #include "sharksound/sound_controller.h"
 
@@ -64,19 +63,16 @@ GamePoint SoundSlider::ThumbPoint() {
 }
 
 
-#pragma mark - ViewEntity
+#pragma mark - Renderer
 
-void SoundSlider::Update() {
-}
-
-void SoundSlider::Render(GamePoint offset) {
+void SoundSlider::Render(CoordinateSystem const &coordinate_system) {
   double sprite_width = full_sprite_.content_size().width;
   double draw_ratio = (slider_width_ - thumb_sprite_.content_size().width) / sprite_width * value_ +
       (left_marin_ + thumb_sprite_.content_size().width / 2) / sprite_width;
-  GamePoint draw_position = position_ + offset;
+  GamePoint draw_position = position_ + coordinate_system.origin();
   full_sprite_.DrawAtPointLeftRatio(draw_position, draw_ratio);
   empty_sprite_.DrawAtPointRightRatio(draw_position, 1 - draw_ratio);
-  thumb_sprite_.DrawAtPoint(ThumbPoint() + offset);
+  thumb_sprite_.DrawAtPoint(ThumbPoint() + coordinate_system.origin());
 }
 
 

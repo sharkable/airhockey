@@ -118,11 +118,3 @@ void Rink::MoveInFromEdge(RoundThing *thing) {
   }
 }
 
-
-#pragma mark - ViewEntity
-
-void Rink::Update() {
-}
-
-void Rink::Render(GamePoint offset) {
-}

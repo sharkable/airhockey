@@ -9,12 +9,11 @@
 #ifndef AIRHOCKEY_ENTITIES_RINK_H_
 #define AIRHOCKEY_ENTITIES_RINK_H_
 
-#include "gameengine/view_entity.h"
 #include "gameengine/coordinates/coordinate_types.h"
 
 class RoundThing;
 
-class Rink : public ViewEntity {
+class Rink {
  public:
   Rink(GameSize size);
 
@@ -32,10 +31,6 @@ class Rink : public ViewEntity {
 
   void BounceOff(RoundThing *thing);
   void MoveInFromEdge(RoundThing *thing);
-
-  // ViewEntity
-  void Update();
-  void Render(GamePoint offset);
 
  private:
   GameSize size_;
