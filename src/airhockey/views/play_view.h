@@ -72,6 +72,8 @@ class PlayView : public GroupSimulator, public GroupRenderer, public InputHandle
   void PausePressed();
 
   GameEngine &game_engine_;
+  GameMenuView *game_menu_view_;
+
   int num_players_;
   int num_pucks_;
   int num_active_pucks_;

@@ -41,6 +41,7 @@ static const string kLocalStoreMatchCount = "ls_match_count";
 PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
                    PaddleSize paddle_size)
     : game_engine_(game_engine),
+      game_menu_view_(NULL),
       pause_button_1_(NULL),
       pause_button_2_(NULL) {
   num_players_ = num_players;
@@ -188,6 +189,9 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
 }
 
 PlayView::~PlayView() {
+  if (game_menu_view_) {
+    delete game_menu_view_;
+  }
   delete rink_;
   delete post_1_;
   delete post_2_;
@@ -372,6 +376,10 @@ void PlayView::SimulateStep() {
 #pragma mark - InputHandler
 
 bool PlayView::HandleEvent(InputEvent const &event) {
+  if (game_menu_view_) {
+    game_menu_view_->HandleEvent(event);
+    return true;
+  }
   paddle_1_->HandleEvent(event);
   if (event.IsKey()) {
     PausePressed();
@@ -415,15 +423,23 @@ void PlayView::ButtonUp(Button *button) {
 void PlayView::RematchPressed() {
   game_engine_.analytics_module()->LogEvent("REMATCH");
   SetUpNewGame();
+  delete game_menu_view_;
+  game_menu_view_ = NULL;
 }
 
 void PlayView::MenuPressed() {
   game_engine_.PopView();
 // TODO NOW  game_engine().PushView(new MainMenuView(game_engine()));
+  RemoveRenderer(game_menu_view_);
+  delete game_menu_view_;
+  game_menu_view_ = NULL;
 }
 
 void PlayView::ContinuePressed() {
   state_ = pre_pause_state_;
+  RemoveRenderer(game_menu_view_);
+  delete game_menu_view_;
+  game_menu_view_ = NULL;
 }
 
 
@@ -538,13 +554,18 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
   lose_->AnimateToAlpha(1, kAnimationTypeLinear, 3 * 60);
   lose_->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 3 * 60);
 
-  game_engine_.PushView(new GameMenuView(game_engine_, this, true));
+  shark_assert(!game_menu_view_, "game_menu_view_ should be NULL.");
+  game_menu_view_ = new GameMenuView(game_engine_, this, true);
+  AddRenderer(game_menu_view_);
 }
 
 void PlayView::PausePressed() {
   if (state_ != kPlayViewStateFinished && state_ != kPlayViewStatePaused) {
     pre_pause_state_ = state_;
     state_ = kPlayViewStatePaused;
-    game_engine_.PushView(new GameMenuView(game_engine_, this, false));
+
+    shark_assert(!game_menu_view_, "game_menu_view_ should be NULL.");
+    game_menu_view_ = new GameMenuView(game_engine_, this, true);
+    AddRenderer(game_menu_view_);
   }
 }

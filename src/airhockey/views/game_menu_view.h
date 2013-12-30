@@ -10,7 +10,9 @@
 #define AIRHOCKEY_VIEWS_GAMEMENUVIEW_H_
 
 #include "gameengine/entities/button.h"
-#include "gameengine/engine_view.h"
+#include "gameengine/input/input_handler.h"
+#include "gameengine/render/renderer.h"
+#include "gameengine/simulation/simulator.h"
 
 class SimpleItem;
 class SoundSlider;
@@ -22,14 +24,23 @@ class GameMenuViewDelegate {
   virtual void ContinuePressed() = 0;
 };
 
-class GameMenuView : public EngineView, private ButtonDelegate {
+class GameMenuView : public Simulator, public Renderer, public InputHandler,
+    private ButtonDelegate {
  public:
   GameMenuView(GameEngine &game_engine, GameMenuViewDelegate *delegate, bool match_finished);
   ~GameMenuView();
 
-  // EngineView
-  bool HandleBackButton();
-  void HandlePauseButton();
+//  bool HandleBackButton();
+//  void HandlePauseButton();
+
+  // Simulator
+  virtual void SimulateStep();
+
+  // Renderer
+  virtual void Render(CoordinateSystem const &coordinate_system);
+
+  // InputHandler
+  virtual bool HandleEvent(InputEvent const &event);
 
   // ButtonDelegate
   void ButtonUp(Button *button);
@@ -37,6 +48,7 @@ class GameMenuView : public EngineView, private ButtonDelegate {
  private:
   void Init(bool match_finished);
 
+  GameEngine &game_engine_;
   GameMenuViewDelegate *delegate_;
   SoundSlider *sound_slider_;
   SimpleItem *menu_background_;
