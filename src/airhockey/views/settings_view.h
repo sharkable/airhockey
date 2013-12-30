@@ -12,7 +12,6 @@
 #include <string>
 
 #include "gameengine/entities/button.h"
-#include "gameengine/entities/composite_entity.h"
 #include "gameengine/input/input_handler.h"
 #include "gameengine/render/renderer.h"
 #include "gameengine/simulation/simulator.h"
