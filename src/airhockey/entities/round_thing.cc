@@ -30,7 +30,7 @@ RoundThing::RoundThing(GameEngine &game_engine)
       mass_(0),
       friction_(0),
       grabbed_(false),
-      grabbed_touch_(kInputIdCancelAll),
+      grabbed_touch_(InputEvent::kIdCancelAll),
       active_(true) {
 }
 
@@ -46,7 +46,7 @@ RoundThing::RoundThing(GameEngine &game_engine, string texture_name)
       mass_(0),
       friction_(0),
       grabbed_(false),
-      grabbed_touch_(kInputIdCancelAll),
+      grabbed_touch_(InputEvent::kIdCancelAll),
       active_(true) {
 }
 
@@ -212,10 +212,10 @@ bool RoundThing::HandleEvent(InputEvent const &event) {
   if (!IsGrabbable() || !is_active() || is_grabbed() || !event.HasLocation()) {
     return false;
   }
-  if (event.Action() == kInputActionDown) {
-    if (ContainsPoint(event.Location())) {
+  if (event.action() == InputEvent::kActionDown) {
+    if (ContainsPoint(event.location())) {
       grabbed_ = true;
-      grabbed_touch_ = event.Id();
+      grabbed_touch_ = event.id();
 // TODO NOW      TouchMoved(offset, touch);
       vx_ = 0;
       vy_ = 0;
@@ -229,27 +229,27 @@ bool RoundThing::HandleEvent(InputEvent const &event) {
     }
     return false;
   }
-  if (event.Action() == kInputActionMove) {
+  if (event.action() == InputEvent::kActionMove) {
     if (!IsMovable()) {
       return false;
     }
-    if (is_grabbed() && event.Id() == grabbed_touch_) {
-      GamePoint p = event.Location();
+    if (is_grabbed() && event.id() == grabbed_touch_) {
+      GamePoint p = event.location();
       x_ = p.x;
       y_ = p.y;
       return true;
     }
   }
-  if (event.Action() == kInputActionUp) {
-    if (is_grabbed() && event.Id() == grabbed_touch_) {
+  if (event.action() == InputEvent::kActionUp) {
+    if (is_grabbed() && event.id() == grabbed_touch_) {
       grabbed_ = false;
-      grabbed_touch_ = kInputIdCancelAll;
+      grabbed_touch_ = InputEvent::kIdCancelAll;
       return true;
     }
   }
-  if (event.Action() == kInputActionCancelAll) {
+  if (event.action() == InputEvent::kActionCancelAll) {
     grabbed_ = false;
-    grabbed_touch_ = kInputIdCancelAll;
+    grabbed_touch_ = InputEvent::kIdCancelAll;
   }
   return false;
 }

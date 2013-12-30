@@ -73,7 +73,7 @@ void StoryView::Render(CoordinateSystem const &coordinate_system) {
 #pragma mark - InputHandler
 
 bool StoryView::HandleEvent(InputEvent const &event) {
-  if (event.Action() == kInputActionDown && about_->position().x >= resting_image_position_.x) {
+  if (event.action() == InputEvent::kActionDown && about_->position().x >= resting_image_position_.x) {
     MoveForward();
   }
   return true;

@@ -125,10 +125,10 @@ void SettingsView::Render(CoordinateSystem const &coordinate_system) {
 #pragma mark - InputHandler
 
 bool SettingsView::HandleEvent(InputEvent const &event) {
-  if (event.Location().y < background_->position().y) {
+  if (event.location().y < background_->position().y) {
     return false;
   }
-  InputEvent new_event(event.Action(), event.Id(), event.Location() + GamePoint(x_position_, 0));
+  InputEvent new_event(event.action(), event.id(), event.location() + GamePoint(x_position_, 0));
   ok_button_->HandleEvent(new_event);
   num_pucks_select_->HandleEvent(new_event);
   difficulty_select_->HandleEvent(new_event);

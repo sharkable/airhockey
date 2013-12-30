@@ -73,7 +73,7 @@ class RoundThing : public Simulator, public Renderer, public InputHandler {
   double mass_;
   double friction_;
   bool grabbed_;
-  InputId grabbed_touch_;
+  InputEvent::Id grabbed_touch_;
   bool active_;
 };
 

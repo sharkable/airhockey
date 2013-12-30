@@ -86,22 +86,22 @@ bool SoundSlider::HandleEvent(InputEvent const &event) {
   if (!event.HasLocation()) {
     return false;
   }
-  if (event.Action() == kInputActionDown) {
-    GamePoint touchP = event.Location();
+  if (event.action() == InputEvent::kActionDown) {
+    GamePoint touchP = event.location();
     GamePoint thumbP = ThumbPoint();
     double thumbWidth = thumb_sprite_.content_size().width;
     double thumbHeight = thumb_sprite_.content_size().height;
     if (touchP.x >= thumbP.x - thumbWidth && touchP.y >= thumbP.y - thumbHeight &&
         touchP.x < thumbP.x + 2 * thumbWidth &&
         touchP.y < thumbP.y + 2 * thumbHeight) {
-      grabbed_touch_ = event.Id();
+      grabbed_touch_ = event.id();
       start_touch_position_ = touchP;
       start_value_ = value_;
       return true;
     }
-  } else if (event.Action() == kInputActionMove) {
-    if (event.Id() == grabbed_touch_) {
-      GamePoint touchP = event.Location();
+  } else if (event.action() == InputEvent::kActionMove) {
+    if (event.id() == grabbed_touch_) {
+      GamePoint touchP = event.location();
       value_ = start_value_ + (touchP.x - start_touch_position_.x) /
       (slider_width_ - thumb_sprite_.content_size().width);
       // Stop moving when we reach the ends. Lock into this value until the user retouches.
@@ -112,8 +112,8 @@ bool SoundSlider::HandleEvent(InputEvent const &event) {
       }
       return true;
     }
-  } else if (event.Action() == kInputActionUp) {
-    if (event.Id() == grabbed_touch_) {
+  } else if (event.action() == InputEvent::kActionUp) {
+    if (event.id() == grabbed_touch_) {
       game_engine_.sound()->SetGlobalVolume(value_);
       game_engine_.persistence_module()->SetDouble(value_, kLocalStoreVolume);
       grabbed_touch_ = NULL;
