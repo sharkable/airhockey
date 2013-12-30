@@ -115,10 +115,10 @@ void SettingsView::Render(CoordinateSystem const &coordinate_system) {
   GamePoint offset(x_position_, 0);
   CoordinateSystem local_system = coordinate_system.Subsystem(0.f, offset);
   background_->Render(local_system);
-  num_pucks_select_->Render(offset);
-  difficulty_select_->Render(offset);
-  paddle_size_select_->Render(offset);
-  ok_button_->Render(coordinate_system);
+  num_pucks_select_->Render(local_system);
+  difficulty_select_->Render(local_system);
+  paddle_size_select_->Render(local_system);
+  ok_button_->Render(local_system);
 }
 
 

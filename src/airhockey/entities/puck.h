@@ -14,7 +14,6 @@
 #include "airhockey/entities/round_thing.h"
 
 class GameEngine;
-class ViewEntity;
 namespace SharkSound {
   class Sound;
 }

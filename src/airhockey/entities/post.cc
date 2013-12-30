@@ -32,9 +32,3 @@ void Post::DidBounceOff(void *other, double total_velocity) {
 bool Post::IsMovable() {
   return false;
 }
-
-
-#pragma mark - ViewEntity
-
-void Post::Render(GamePoint offset) {
-}

@@ -12,7 +12,6 @@
 #include "airhockey/entities/round_thing.h"
 
 class GameEngine;
-class ViewEntity;
 
 class Post : public RoundThing {
  public:
@@ -21,9 +20,6 @@ class Post : public RoundThing {
   // RoundThing
   void DidBounceOff(void *other, double total_velocity);
   bool IsMovable();
-
-  // ViewEntity
-  void Render(GamePoint offset);
 };
 
 #endif
