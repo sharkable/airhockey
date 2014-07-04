@@ -134,10 +134,8 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
   get_ready_->add_sprite(get_ready_sprite);
   get_ready_->set_position(get_ready_position);
 
-  Sprite go_sprite(game_engine, "go");
-  GameSize go_size = go_sprite.content_size();
-  GamePoint go_position = GamePoint(floorf((rink_size.width - go_size.width) / 2),
-                                    floorf((rink_size.height - go_size.height) / 2));
+  Sprite go_sprite(game_engine, "go", Sprite::kAnchorCenter);
+  GamePoint go_position = GamePoint(rink_size) / 2;
   go_ = new SimpleItem();
   go_->add_sprite(go_sprite);
   go_->set_position(go_position);
