@@ -68,8 +68,9 @@ MainMenuView::MainMenuView(GameEngine &game_engine)
   InitializeSettings();
   state_ = kMainMenuStateRunning;
 
-  Sprite title_sprite(game_engine, "title");
-  title_ = new SimpleItem(title_sprite, game_engine.position("title"));
+  Sprite title_sprite(game_engine, "title", Sprite::kAnchorCenter);
+  title_ = new SimpleItem(title_sprite,
+                          game_engine.position("title") + GamePoint(title_sprite.content_size()) / 2);
   title_->set_scale(1.3);
   title_->AnimateToScale(1, kAnimationTypeCubicEaseOut, 900);
   title_->set_alpha(0);
