@@ -209,7 +209,7 @@ void RoundThing::Render(CoordinateSystem const &coordinate_system) {
 
 bool RoundThing::HandleInputEvent(InputEvent const &event,
                                    CoordinateSystem const &coordinate_ssytem) {
-  if (!IsGrabbable() || !is_active() || is_grabbed() || !event.HasLocation()) {
+  if (!IsGrabbable() || !is_active() || !event.HasLocation()) {
     return false;
   }
   if (event.action() == InputEvent::kActionDown) {
@@ -229,47 +229,46 @@ bool RoundThing::HandleInputEvent(InputEvent const &event,
     }
     return false;
   }
-  if (event.action() == InputEvent::kActionMove) {
+  if (event.IsMouse()) {
+    HandleMouseDelta(event.location().x, event.location().y);
+  } else if (event.action() == InputEvent::kActionMove) {
     if (!IsMovable()) {
       return false;
     }
-    if (is_grabbed() && event.id() == grabbed_touch_) {
+    if (is_grabbed() && (event.id() == grabbed_touch_)) {
       GamePoint p = event.location();
       x_ = p.x;
       y_ = p.y;
       return true;
     }
-  }
-  if (event.action() == InputEvent::kActionUp) {
+  } else if (event.action() == InputEvent::kActionUp) {
     if (is_grabbed() && event.id() == grabbed_touch_) {
       grabbed_ = false;
       grabbed_touch_ = InputEvent::kIdNone;
       return true;
     }
-  }
-  if (event.action() == InputEvent::kActionCancel) {
+  } else if (event.action() == InputEvent::kActionCancel) {
     grabbed_ = false;
     grabbed_touch_ = InputEvent::kIdNone;
   }
   return false;
 }
 
-// TODO NOW
-//void RoundThing::HandleMouseDelta(float delta_x, float delta_y) {
-//  if (!IsGrabbable() || !is_active() || !IsMovable()) {
-//    return;
-//  }
-//  static const float kMaxDelta = 80.f;
-//  float length = sqrt(delta_x * delta_x + delta_y * delta_y);
-//  if (length > kMaxDelta) {
-//    delta_x *= kMaxDelta;
-//    delta_x /= length;
-//    delta_y *= kMaxDelta;
-//    delta_y /= length;
-//  }
-//  x_ += delta_x;
-//  y_ += delta_y;
-//}
+void RoundThing::HandleMouseDelta(float delta_x, float delta_y) {
+  if (!IsGrabbable() || !is_active() || !IsMovable()) {
+    return;
+  }
+  static const float kMaxDelta = 80.f;
+  float length = sqrt(delta_x * delta_x + delta_y * delta_y);
+  if (length > kMaxDelta) {
+    delta_x *= kMaxDelta;
+    delta_x /= length;
+    delta_y *= kMaxDelta;
+    delta_y /= length;
+  }
+  x_ += delta_x;
+  y_ += delta_y;
+}
 
 //bool RoundThing::isGrabbable() {
 //  return false;

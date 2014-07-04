@@ -32,6 +32,7 @@ class RoundThing : public Simulator, public Renderer, public InputHandler {
   bool Overlaps(RoundThing *thing);
   virtual bool IsGrabbable();
   virtual bool IsMovable();
+  void HandleMouseDelta(float delta_x, float delta_y);
 
   double x() { return x_; }
   void set_x(double x) { x_ = x; }
