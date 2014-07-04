@@ -29,7 +29,7 @@ RoundThing::RoundThing(GameEngine &game_engine)
       mass_(0),
       friction_(0),
       grabbed_(false),
-      grabbed_touch_(InputEvent::kIdCancelAll),
+      grabbed_touch_(InputEvent::kIdNone),
       active_(true) {
 }
 
@@ -45,7 +45,7 @@ RoundThing::RoundThing(GameEngine &game_engine, string texture_name)
       mass_(0),
       friction_(0),
       grabbed_(false),
-      grabbed_touch_(InputEvent::kIdCancelAll),
+      grabbed_touch_(InputEvent::kIdNone),
       active_(true) {
 }
 
@@ -207,7 +207,8 @@ void RoundThing::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool RoundThing::HandleInputEvent(InputEvent const &event) {
+bool RoundThing::HandleInputEvent(InputEvent const &event,
+                                   CoordinateSystem const &coordinate_ssytem) {
   if (!IsGrabbable() || !is_active() || is_grabbed() || !event.HasLocation()) {
     return false;
   }
@@ -242,13 +243,13 @@ bool RoundThing::HandleInputEvent(InputEvent const &event) {
   if (event.action() == InputEvent::kActionUp) {
     if (is_grabbed() && event.id() == grabbed_touch_) {
       grabbed_ = false;
-      grabbed_touch_ = InputEvent::kIdCancelAll;
+      grabbed_touch_ = InputEvent::kIdNone;
       return true;
     }
   }
-  if (event.action() == InputEvent::kActionCancelAll) {
+  if (event.action() == InputEvent::kActionCancel) {
     grabbed_ = false;
-    grabbed_touch_ = InputEvent::kIdCancelAll;
+    grabbed_touch_ = InputEvent::kIdNone;
   }
   return false;
 }

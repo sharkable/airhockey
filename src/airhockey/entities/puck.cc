@@ -128,9 +128,9 @@ void Puck::SimulateStep() {
 
 void Puck::Render(CoordinateSystem const &coordinate_system) {
   if (is_active()) {
-    sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2,
-                           y_ - sprite_.content_size().height / 2),
-                 0, alpha_, 1);
+    sprite_.set_alpha(alpha_);
+    sprite_.Draw(coordinate_system.Translate(GamePoint(x_ - sprite_.content_size().width / 2,
+                                                       y_ - sprite_.content_size().height / 2)));
   }
 }
 

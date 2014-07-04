@@ -66,19 +66,20 @@ GamePoint SoundSlider::ThumbPoint() {
 #pragma mark - Renderer
 
 void SoundSlider::Render(CoordinateSystem const &coordinate_system) {
-  double sprite_width = full_sprite_.content_size().width;
-  double draw_ratio = (slider_width_ - thumb_sprite_.content_size().width) / sprite_width * value_ +
-      (left_marin_ + thumb_sprite_.content_size().width / 2) / sprite_width;
-  GamePoint draw_position = position_ + coordinate_system.origin();
-  full_sprite_.DrawAtPointLeftRatio(draw_position, draw_ratio);
-  empty_sprite_.DrawAtPointRightRatio(draw_position, 1 - draw_ratio);
-  thumb_sprite_.DrawAtPoint(ThumbPoint() + coordinate_system.origin());
+//  double sprite_width = full_sprite_.content_size().width;
+//  double draw_ratio = (slider_width_ - thumb_sprite_.content_size().width) / sprite_width * value_ +
+//      (left_marin_ + thumb_sprite_.content_size().width / 2) / sprite_width;
+// TODO  GamePoint draw_position = position_ + coordinate_system.origin();
+// TODO  full_sprite_.DrawAtPointLeftRatio(draw_position, draw_ratio);
+// TODO  empty_sprite_.DrawAtPointRightRatio(draw_position, 1 - draw_ratio);
+  thumb_sprite_.Draw(coordinate_system.Translate(ThumbPoint()));
 }
 
 
 #pragma mark - InputHandler
 
-bool SoundSlider::HandleInputEvent(InputEvent const &event) {
+bool SoundSlider::HandleInputEvent(InputEvent const &event,
+                                   CoordinateSystem const &coordinate_system) {
   if (!event.HasLocation()) {
     return false;
   }

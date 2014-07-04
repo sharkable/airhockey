@@ -148,7 +148,7 @@ PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, Comp
     Sprite pause_button_sprite(game_engine, "pause_button");
     Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
 
-    GameSize game_size = game_engine.screen_size_to_game_size(game_engine.screen_size());
+    GameSize game_size = game_engine.screen_size();
     double y_margin = (game_size.height - rink_->TotalHeight()) / 2;
     GamePoint pause_button_pos_1 =
         GamePoint(game_size.width - pause_button_sprite.content_size().width,
@@ -249,9 +249,9 @@ void PlayView::SimulateStep() {
       RemoveRenderer(get_ready_);
       AddSimulator(go_);
       AddRenderer(go_);
-      go_->set_zoom(1);
+      go_->set_scale(1);
       go_->set_alpha(1);
-      go_->AnimateToZoom(5, kAnimationTypeCubicEaseOut, kShowGoMessageTicks);
+      go_->AnimateToScale(5, kAnimationTypeCubicEaseOut, kShowGoMessageTicks);
       go_->AnimateToAlpha(0, kAnimationTypeLinear, kShowGoMessageTicks);
       go_ticks_left_ = kShowGoMessageTicks;
       state_ = kPlayViewStatePlaying;
@@ -375,12 +375,13 @@ void PlayView::SimulateStep() {
 
 #pragma mark - InputHandler
 
-bool PlayView::HandleInputEvent(InputEvent const &event) {
+bool PlayView::HandleInputEvent(InputEvent const &event,
+                                CoordinateSystem const &coordinate_system) {
   if (game_menu_view_) {
-    game_menu_view_->HandleInputEvent(event);
+    game_menu_view_->HandleInputEvent(event, coordinate_system);
     return true;
   }
-  paddle_1_->HandleInputEvent(event);
+  paddle_1_->HandleInputEvent(event, coordinate_system);
   if (event.IsKey()) {
     PausePressed();
   }
@@ -545,13 +546,13 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
     }
   }
   win_->set_alpha(0);
-  win_->set_zoom(4);
+  win_->set_scale(4);
   win_->AnimateToAlpha(1, kAnimationTypeLinear, 2 * 60);
-  win_->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 2 * 60);
+  win_->AnimateToScale(1, kAnimationTypeBounceEaseOut, 2 * 60);
   lose_->set_alpha(0);
-  lose_->set_zoom(4);
+  lose_->set_scale(4);
   lose_->AnimateToAlpha(1, kAnimationTypeLinear, 3 * 60);
-  lose_->AnimateToZoom(1, kAnimationTypeBounceEaseOut, 3 * 60);
+  lose_->AnimateToScale(1, kAnimationTypeBounceEaseOut, 3 * 60);
 
   shark_assert(!game_menu_view_, "game_menu_view_ should be NULL.");
   game_menu_view_ = new GameMenuView(game_engine_, this, true);

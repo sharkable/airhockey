@@ -40,14 +40,14 @@ StoryView::StoryView(GameEngine &game_engine, StoryViewDelegate &delegate) : del
 
   story_ = new SimpleItem();
   story_->add_sprite(story_image);
-  story_->set_zoom(zoom);
+  story_->set_scale(zoom);
   story_->set_position(starting_image_position_);
   story_->AnimateToPosition(resting_image_position_, kAnimationTypeCubicEaseOut, kAnimateTicks);
 
   about_ = new SimpleItem();
   about_->set_animatable_delegate(this);
   about_->add_sprite(about_image);
-  about_->set_zoom(zoom);
+  about_->set_scale(zoom);
   about_->set_position(starting_image_position_);
 
   beep_sound_ = game_engine.sound()->GetSound("sounds/beep.wav");
@@ -72,8 +72,10 @@ void StoryView::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool StoryView::HandleInputEvent(InputEvent const &event) {
-  if (event.action() == InputEvent::kActionDown && about_->position().x >= resting_image_position_.x) {
+bool StoryView::HandleInputEvent(InputEvent const &event,
+                                 CoordinateSystem const &coordinate_system) {
+  if (event.action() == InputEvent::kActionDown &&
+      about_->position().x >= resting_image_position_.x) {
     MoveForward();
   }
   return true;

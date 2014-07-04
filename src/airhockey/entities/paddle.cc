@@ -136,9 +136,9 @@ void Paddle::SimulateStep() {
 #pragma mark - Renderer
 
 void Paddle::Render(CoordinateSystem const &coordinate_system) {
-  sprite_.Draw(GamePoint(x_ - sprite_.content_size().width / 2,
-                         y_ - sprite_.content_size().height / 2),
-               0, (is_grabbed() || !player_controlled_ ? 1.0 : 0.5), 1);
+  sprite_.set_alpha(is_grabbed() || !player_controlled_ ? 1.0 : 0.5);
+  sprite_.Draw(coordinate_system.Translate(GamePoint(x_ - sprite_.content_size().width / 2,
+                                                     y_ - sprite_.content_size().height / 2)));
 }
 
 

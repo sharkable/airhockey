@@ -30,7 +30,7 @@ SettingsView::SettingsView(GameEngine &game_engine, SettingsViewDelegate &delega
       delegate_(delegate) {
   sp<PersistenceModule> persistence = game_engine.persistence_module();
 
-  double width = game_engine.screen_size_to_game_size(game_engine.screen_size()).width;
+  double width = game_engine.screen_size().width;
   ending_position_ = GamePoint(-width, 0);
 
   x_position_animation_.Reset(width, 0, kAnimateTicks, kAnimationTypeCubicEaseOut);
@@ -113,7 +113,7 @@ void SettingsView::SimulateStep() {
 
 void SettingsView::Render(CoordinateSystem const &coordinate_system) {
   GamePoint offset(x_position_, 0);
-  CoordinateSystem local_system = coordinate_system.Subsystem(0.f, offset);
+  CoordinateSystem local_system = coordinate_system.Translate(offset);
   background_->Render(local_system);
   num_pucks_select_->Render(local_system);
   difficulty_select_->Render(local_system);
@@ -124,15 +124,16 @@ void SettingsView::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool SettingsView::HandleInputEvent(InputEvent const &event) {
+bool SettingsView::HandleInputEvent(InputEvent const &event,
+                                    CoordinateSystem const &coordinate_system) {
   if (event.location().y < background_->position().y) {
     return false;
   }
   InputEvent new_event(event.action(), event.id(), event.location() + GamePoint(x_position_, 0));
-  ok_button_->HandleInputEvent(new_event);
-  num_pucks_select_->HandleInputEvent(new_event);
-  difficulty_select_->HandleInputEvent(new_event);
-  paddle_size_select_->HandleInputEvent(new_event);
+  ok_button_->HandleInputEvent(new_event, coordinate_system);
+  num_pucks_select_->HandleInputEvent(new_event, coordinate_system);
+  difficulty_select_->HandleInputEvent(new_event, coordinate_system);
+  paddle_size_select_->HandleInputEvent(new_event, coordinate_system);
   return x_position_ >= 0;
 }
 

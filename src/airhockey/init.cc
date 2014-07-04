@@ -67,7 +67,7 @@ void sharkengine_init(GameEngine &game_engine) {
   }
   game_engine.ad_module()->PrepareFullScreenAd();
 
-  ScreenSize screen_size = game_engine.screen_size();
+  GameSize screen_size = game_engine.screen_size();
   GameSize game_size = RinkView::RinkSizeForTextureGroup(game_engine.platform().texture_group());
 
   game_engine.set_screen_to_game_point_ratios(screen_size.width / game_size.width,

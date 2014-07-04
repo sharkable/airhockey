@@ -70,8 +70,8 @@ MainMenuView::MainMenuView(GameEngine &game_engine)
 
   Sprite title_sprite(game_engine, "title");
   title_ = new SimpleItem(title_sprite, game_engine.position("title"));
-  title_->set_zoom(1.3);
-  title_->AnimateToZoom(1, kAnimationTypeCubicEaseOut, 900);
+  title_->set_scale(1.3);
+  title_->AnimateToScale(1, kAnimationTypeCubicEaseOut, 900);
   title_->set_alpha(0);
   title_->AnimateToAlpha(1, kAnimationTypeCubicEaseOut, 900);
 
@@ -246,32 +246,34 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
 
 #pragma mark - InputHandler
 
-bool MainMenuView::HandleInputEvent(InputEvent const &event) {
-  if (story_view_ && story_view_->HandleInputEvent(event)) {
+bool MainMenuView::HandleInputEvent(InputEvent const &event,
+                                    CoordinateSystem const &coordinate_system) {
+  if (story_view_ && story_view_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (settings_view_ && settings_view_->HandleInputEvent(event)) {
+  if (settings_view_ && settings_view_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (play_view_ && play_view_->HandleInputEvent(event)) {
+  if (play_view_ && play_view_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (start_1_player_button_->HandleInputEvent(event)) {
+  if (start_1_player_button_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (start_2_player_button_ && start_2_player_button_->HandleInputEvent(event)) {
+  if (start_2_player_button_ &&
+      start_2_player_button_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (settings_button_->HandleInputEvent(event)) {
+  if (settings_button_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (story_button_->HandleInputEvent(event)) {
+  if (story_button_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (upgrade_button_ && upgrade_button_->HandleInputEvent(event)) {
+  if (upgrade_button_ && upgrade_button_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
-  if (sound_slider_ && sound_slider_->HandleInputEvent(event)) {
+  if (sound_slider_ && sound_slider_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
   return false;
@@ -338,7 +340,7 @@ void MainMenuView::InitializeSettings() {
 void MainMenuView::AnimateOut() {
   state_ = kMainMenuStateAnimatingOut;
 
-  title_->AnimateToZoom(0, kAnimationTypeLinear, 15);
+  title_->AnimateToScale(0, kAnimationTypeLinear, 15);
   fade_out(start_1_player_button_);
   if (supports_2_player_) {
     fade_out(start_2_player_button_);
