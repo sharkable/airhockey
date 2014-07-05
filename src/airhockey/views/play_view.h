@@ -46,8 +46,6 @@ class PlayView : public GroupSimulator, public GroupRenderer, public InputHandle
   ~PlayView();
 
   // EngineView
-//  void ViewDidGainFocus();
-//  void ViewDidLoseFocus();
 //  void NotifyPause();
 //  bool HandleBackButton();
 //  void HandlePauseButton();

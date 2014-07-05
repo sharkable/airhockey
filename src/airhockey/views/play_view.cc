@@ -186,6 +186,8 @@ PlayView::PlayView(GameEngine &game_engine, GameView &game_view, int num_players
   player_1_win_count_ = 0;
   player_2_win_count_ = 0;
   SetUpNewGame();
+
+  game_engine.input_module()->HidePointer();
 }
 
 PlayView::~PlayView() {
@@ -212,15 +214,6 @@ PlayView::~PlayView() {
     delete pause_button_2_;
   }
 }
-
-// TODO NOW
-//void PlayView::ViewDidGainFocus() {
-//  game_engine().input_module()->HidePointer();
-//}
-//
-//void PlayView::ViewDidLoseFocus() {
-//  game_engine().input_module()->ShowPointer();
-//}
 
 
 #pragma mark - GroupSimulator
@@ -426,6 +419,7 @@ void PlayView::RematchPressed() {
   SetUpNewGame();
   delete game_menu_view_;
   game_menu_view_ = NULL;
+  game_engine_.input_module()->HidePointer();
 }
 
 void PlayView::MenuPressed() {
@@ -441,6 +435,7 @@ void PlayView::ContinuePressed() {
   RemoveRenderer(game_menu_view_);
   delete game_menu_view_;
   game_menu_view_ = NULL;
+  game_engine_.input_module()->HidePointer();
 }
 
 
@@ -558,6 +553,7 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
   shark_assert(!game_menu_view_, "game_menu_view_ should be NULL.");
   game_menu_view_ = new GameMenuView(game_engine_, this, true);
   AddRenderer(game_menu_view_);
+  game_engine_.input_module()->ShowPointer();
 }
 
 void PlayView::PausePressed() {
@@ -568,5 +564,6 @@ void PlayView::PausePressed() {
     shark_assert(!game_menu_view_, "game_menu_view_ should be NULL.");
     game_menu_view_ = new GameMenuView(game_engine_, this, true);
     AddRenderer(game_menu_view_);
+    game_engine_.input_module()->ShowPointer();
   }
 }
