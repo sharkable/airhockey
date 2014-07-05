@@ -13,15 +13,22 @@
 #include "gameengine/render/renderer.h"
 #include "gameengine/simulation/simulator.h"
 
+#include "airhockey/entities/paddle.h"
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/views/rink_view.h"
-#include "airhockey/views/main_menu_view.h"
 
 class GameEngine;
+class MainMenuView;
+class PlayView;
 
 class GameView : public Simulator, public Renderer, public InputHandler {
  public:
   GameView(GameEngine &game_engine);
+
+  void ShowMainMenu();
+  void RemoveMainMenu();
+  void ShowPlay(int num_players, int num_pucks, ComputerAI difficulty, PaddleSize paddle_size);
+  void RemovePlay();
 
   // Simulator
   virtual void SimulateStep();
@@ -34,9 +41,11 @@ class GameView : public Simulator, public Renderer, public InputHandler {
                                 CoordinateSystem const &coordinate_system);
 
  private:
+  GameEngine &game_engine_;
   RinkView rink_background_;
   RinkOverlay rink_overlay_;
   MainMenuView *main_menu_view_;
+  PlayView *play_view_;
 };
 
 #endif

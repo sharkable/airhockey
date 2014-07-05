@@ -22,6 +22,7 @@
 #include "airhockey/views/story_view.h"
 
 class GameEngine;
+class GameView;
 class SimpleItem;
 class SoundSlider;
 
@@ -37,7 +38,7 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
     private StoryViewDelegate, private SettingsViewDelegate, private AppStoreModuleDelegate,
     private ButtonDelegate {
  public:
-  MainMenuView(GameEngine &game_engine);
+  MainMenuView(GameEngine &game_engine, GameView &game_view);
   ~MainMenuView();
 
   // TODO?
@@ -73,10 +74,10 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
   void PressedUpgrade();
 
   GameEngine &game_engine_;
+  GameView &game_view_;
 
   SettingsView *settings_view_;
   StoryView *story_view_;
-  PlayView *play_view_;
 
   SimpleItem *title_;
   Button *start_1_player_button_;

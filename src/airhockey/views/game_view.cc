@@ -8,10 +8,43 @@
 
 #include "airhockey/views/game_view.h"
 
+#include "airhockey/views/main_menu_view.h"
+#include "airhockey/views/play_view.h"
+
 GameView::GameView(GameEngine &game_engine)
-    : rink_background_(game_engine),
-      rink_overlay_(game_engine) {
-  main_menu_view_ = new MainMenuView(game_engine);
+    : game_engine_(game_engine),
+      rink_background_(game_engine),
+      rink_overlay_(game_engine),
+      main_menu_view_(nullptr),
+      play_view_(nullptr) {
+  ShowMainMenu();
+}
+
+void GameView::ShowMainMenu() {
+  if (!main_menu_view_) {
+    main_menu_view_ = new MainMenuView{game_engine_, *this};
+  }
+}
+
+void GameView::RemoveMainMenu() {
+  if (main_menu_view_) {
+    delete main_menu_view_;
+    main_menu_view_ = nullptr;
+  }
+}
+
+void GameView::ShowPlay(int num_players, int num_pucks, ComputerAI difficulty,
+                        PaddleSize paddle_size) {
+  if (!play_view_) {
+    play_view_ = new PlayView{game_engine_, *this, num_players, num_pucks, difficulty, paddle_size};
+  }
+}
+
+void GameView::RemovePlay() {
+  if (play_view_) {
+    delete play_view_;
+    play_view_ = nullptr;
+  }
 }
 
 
@@ -20,6 +53,9 @@ GameView::GameView(GameEngine &game_engine)
 void GameView::SimulateStep() {
   if (main_menu_view_) {
     main_menu_view_->SimulateStep();
+  }
+  if (play_view_) {
+    play_view_->SimulateStep();
   }
 }
 
@@ -33,6 +69,9 @@ void GameView::Render(CoordinateSystem const &coordinate_system) {
   if (main_menu_view_) {
     main_menu_view_->Render(CoordinateSystem::BaseSystem());
   }
+  if (play_view_) {
+    play_view_->Render(CoordinateSystem::BaseSystem());
+  }
 }
 
 
@@ -40,6 +79,11 @@ void GameView::Render(CoordinateSystem const &coordinate_system) {
 
 bool GameView::HandleInputEvent(InputEvent const &event,
                                 CoordinateSystem const &coordinate_system) {
-  main_menu_view_->HandleInputEvent(event, coordinate_system);
+  if (main_menu_view_) {
+    main_menu_view_->HandleInputEvent(event, coordinate_system);
+  }
+  if (play_view_) {
+    play_view_->HandleInputEvent(event, coordinate_system);
+  }
   return true;
 }

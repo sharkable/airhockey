@@ -24,6 +24,7 @@
 #include "airhockey/entities/rink.h"
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/entities/round_thing.h"
+#include "airhockey/views/game_view.h"
 #include "airhockey/views/main_menu_view.h"
 #include "airhockey/views/rink_view.h"
 
@@ -38,9 +39,10 @@ static const int kWinScore = 7;
 static const int kFullScreenAdFrequency = 3;
 static const string kLocalStoreMatchCount = "ls_match_count";
 
-PlayView::PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
-                   PaddleSize paddle_size)
+PlayView::PlayView(GameEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
+                   ComputerAI difficulty, PaddleSize paddle_size)
     : game_engine_(game_engine),
+      game_view_(game_view),
       game_menu_view_(NULL),
       pause_button_1_(NULL),
       pause_button_2_(NULL) {
@@ -427,10 +429,11 @@ void PlayView::RematchPressed() {
 }
 
 void PlayView::MenuPressed() {
-// TODO NOW  game_engine().PushView(new MainMenuView(game_engine()));
+  game_view_.ShowMainMenu();
   RemoveRenderer(game_menu_view_);
   delete game_menu_view_;
   game_menu_view_ = NULL;
+  game_view_.RemovePlay();
 }
 
 void PlayView::ContinuePressed() {

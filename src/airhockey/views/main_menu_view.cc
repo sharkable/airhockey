@@ -24,7 +24,7 @@ using std::string;
 
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/entities/sound_slider.h"
-#include "airhockey/views/play_view.h"
+#include "airhockey/views/game_view.h"
 #include "airhockey/views/settings_view.h"
 #include "airhockey/views/story_view.h"
 
@@ -49,11 +49,11 @@ void fade_out(Animatable *entity) {
   entity->AnimateToAlpha(0, kAnimationTypeLinear, 15);
 }
 
-MainMenuView::MainMenuView(GameEngine &game_engine)
+MainMenuView::MainMenuView(GameEngine &game_engine, GameView &game_view)
     : game_engine_(game_engine),
+      game_view_(game_view),
       story_view_(NULL),
       settings_view_(NULL),
-      play_view_(NULL),
       title_(NULL),
       start_1_player_button_(NULL),
       start_2_player_button_(NULL),
@@ -191,7 +191,8 @@ void MainMenuView::SimulateStep() {
 //      RemoveEntity(rink_overlay_);
     }
     if (animating_out_ticks_left_ <= 0) {
-// TODO NOW      game_engine_.RemoveView(this);
+      game_view_.RemoveMainMenu();
+      return;
     }
   }
 
@@ -210,9 +211,6 @@ void MainMenuView::SimulateStep() {
   }
   if (settings_view_) {
     settings_view_->SimulateStep();
-  }
-  if (play_view_) {
-    play_view_->SimulateStep();
   }
 }
 
@@ -239,9 +237,6 @@ void MainMenuView::Render(CoordinateSystem const &coordinate_system) {
   if (settings_view_) {
     settings_view_->Render(coordinate_system);
   }
-  if (play_view_) {
-    play_view_->Render(coordinate_system);
-  }
 }
 
 
@@ -253,9 +248,6 @@ bool MainMenuView::HandleInputEvent(InputEvent const &event,
     return true;
   }
   if (settings_view_ && settings_view_->HandleInputEvent(event, coordinate_system)) {
-    return true;
-  }
-  if (play_view_ && play_view_->HandleInputEvent(event, coordinate_system)) {
     return true;
   }
   if (start_1_player_button_->HandleInputEvent(event, coordinate_system)) {
@@ -375,7 +367,7 @@ void MainMenuView::PressedStart(int num_players) {
   analytics_params["PaddleSize"] = to_string(paddle_size);
   game_engine_.analytics_module()->LogEvent("START_GAME", analytics_params);
 
-  play_view_ = new PlayView(game_engine_, num_players, num_pucks, difficulty, paddle_size);
+  game_view_.ShowPlay(num_players, num_pucks, difficulty, paddle_size);
   AnimateOut();
 }
 

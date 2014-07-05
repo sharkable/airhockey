@@ -20,6 +20,7 @@
 #include "airhockey/views/game_menu_view.h"
 
 class GameEngine;
+class GameView;
 class Post;
 class Puck;
 class Rink;
@@ -40,8 +41,8 @@ typedef enum {
 class PlayView : public GroupSimulator, public GroupRenderer, public InputHandler,
     private ButtonDelegate, GameMenuViewDelegate {
  public:
-  PlayView(GameEngine &game_engine, int num_players, int num_pucks, ComputerAI difficulty,
-           PaddleSize paddle_size);
+  PlayView(GameEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
+           ComputerAI difficulty, PaddleSize paddle_size);
   ~PlayView();
 
   // EngineView
@@ -72,6 +73,8 @@ class PlayView : public GroupSimulator, public GroupRenderer, public InputHandle
   void PausePressed();
 
   GameEngine &game_engine_;
+  GameView &game_view_;
+
   GameMenuView *game_menu_view_;
 
   int num_players_;
