@@ -69,9 +69,11 @@ void SoundSlider::Render(CoordinateSystem const &coordinate_system) {
 //  double sprite_width = full_sprite_.content_size().width;
 //  double draw_ratio = (slider_width_ - thumb_sprite_.content_size().width) / sprite_width * value_ +
 //      (left_marin_ + thumb_sprite_.content_size().width / 2) / sprite_width;
-// TODO  GamePoint draw_position = position_ + coordinate_system.origin();
-// TODO  full_sprite_.DrawAtPointLeftRatio(draw_position, draw_ratio);
-// TODO  empty_sprite_.DrawAtPointRightRatio(draw_position, 1 - draw_ratio);
+  GamePoint draw_position = position_ + coordinate_system.origin();
+  GameRect subtexture(kGamePointZero, full_sprite_.content_size());
+  shark_log("texture: %s", to_string(subtexture).c_str());
+  full_sprite_.Draw(coordinate_system.Translate(draw_position), subtexture);
+//  empty_sprite_.Draw(coordinate_system.Translate(draw_position), 1, 1 - draw_ratio, 0, 1);
   thumb_sprite_.Draw(coordinate_system.Translate(ThumbPoint()));
 }
 
