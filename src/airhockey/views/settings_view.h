@@ -33,7 +33,7 @@ class SettingsViewDelegate {
 class SettingsView : public Simulator, public Renderer, public InputHandler,
     private ButtonDelegate {
  public:
-  SettingsView(SharkEngine &game_engine, SettingsViewDelegate &delegate);
+  SettingsView(SharkEngine &shark_engine, SettingsViewDelegate &delegate);
 
   // TODO bool HandleBackButton();
 
@@ -50,7 +50,7 @@ class SettingsView : public Simulator, public Renderer, public InputHandler,
   void ButtonUp(Button *button);
 
  private:
-  SharkEngine &game_engine_;
+  SharkEngine &shark_engine_;
   SettingsViewDelegate &delegate_;
   float x_position_;
   Animation x_position_animation_;

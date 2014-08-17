@@ -21,7 +21,7 @@ class Touch;
 
 class SoundSlider : public Renderer, public InputHandler {
  public:
-  SoundSlider(SharkEngine &game_engine, GamePoint position);
+  SoundSlider(SharkEngine &shark_engine, GamePoint position);
 
   GamePoint ThumbPoint();
 
@@ -32,7 +32,7 @@ class SoundSlider : public Renderer, public InputHandler {
   virtual bool HandleInputEvent(InputEvent const &event, CoordinateSystem const &coordinate_system);
 
  private:
-  SharkEngine &game_engine_;
+  SharkEngine &shark_engine_;
   GamePoint position_;
   Sprite empty_sprite_;
   Sprite full_sprite_;

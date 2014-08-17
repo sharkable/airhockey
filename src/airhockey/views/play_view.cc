@@ -39,44 +39,44 @@ static const int kWinScore = 7;
 static const int kFullScreenAdFrequency = 3;
 static const string kLocalStoreMatchCount = "ls_match_count";
 
-PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
+PlayView::PlayView(SharkEngine &shark_engine, GameView &game_view, int num_players, int num_pucks,
                    ComputerAI difficulty, PaddleSize paddle_size)
-    : game_engine_(game_engine),
+    : shark_engine_(shark_engine),
       game_view_(game_view),
       game_menu_view_(NULL),
       pause_button_1_(NULL),
       pause_button_2_(NULL) {
   num_players_ = num_players;
 
-  rink_ = new Rink(RinkView::RinkSizeForTextureGroup(game_engine.platform().texture_group()));
+  rink_ = new Rink(RinkView::RinkSizeForTextureGroup(shark_engine.platform().texture_group()));
 // TODO NOW  AddRenderer(rink_);
 
-  paddle_1_ = new Paddle(game_engine, *rink_, kPlayerId1, paddle_size, true, kComputerAIBad,
+  paddle_1_ = new Paddle(shark_engine, *rink_, kPlayerId1, paddle_size, true, kComputerAIBad,
                          pucks_);
-  paddle_2_ = new Paddle(game_engine, *rink_, kPlayerId2, paddle_size, num_players == 2, difficulty,
-                         pucks_);
+  paddle_2_ = new Paddle(shark_engine, *rink_, kPlayerId2, paddle_size, num_players == 2,
+                         difficulty, pucks_);
 
-  post_1_ = new Post(game_engine, rink_->GoalLeftX(), rink_->TopY());
-  post_2_ = new Post(game_engine, rink_->GoalLeftX(), rink_->BottomY() + 1);
-  post_3_ = new Post(game_engine, rink_->GoalRightX() + 1, rink_->TopY());
-  post_4_ = new Post(game_engine, rink_->GoalRightX() + 1, rink_->BottomY() + 1);
+  post_1_ = new Post(shark_engine, rink_->GoalLeftX(), rink_->TopY());
+  post_2_ = new Post(shark_engine, rink_->GoalLeftX(), rink_->BottomY() + 1);
+  post_3_ = new Post(shark_engine, rink_->GoalRightX() + 1, rink_->TopY());
+  post_4_ = new Post(shark_engine, rink_->GoalRightX() + 1, rink_->BottomY() + 1);
 
   vector<Sprite> scoreSprites;
   for (int i = 0; i <= kWinScore; i++) {
     char pointsstr[15];
     sprintf(pointsstr, "%d_points", i);
-    Sprite sprite(game_engine, pointsstr);
+    Sprite sprite(shark_engine, pointsstr);
     // TODO: This is just to bump the use count of the texture since it's being used twice.
     // Rethink how we handle textures.
-    game_engine.resource_loader().TextureWithName(pointsstr);
+    shark_engine.resource_loader().TextureWithName(pointsstr);
     scoreSprites.push_back(sprite);
   }
   player_1_score_ = new SimpleItem();
   player_1_score_->set_sprites(scoreSprites);
-  player_1_score_->set_position(game_engine.position("player_1_score"));
+  player_1_score_->set_position(shark_engine.position("player_1_score"));
   player_2_score_ = new SimpleItem();
   player_2_score_->set_sprites(scoreSprites);
-  player_2_score_->set_position(game_engine.position("player_2_score"));
+  player_2_score_->set_position(shark_engine.position("player_2_score"));
   AddRenderer(player_1_score_);
   AddSimulator(player_1_score_);
   AddRenderer(player_2_score_);
@@ -84,7 +84,7 @@ PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_player
   num_pucks_ = num_pucks;
   num_active_pucks_ = num_pucks_;
   for (int i = 0; i < num_pucks_; i++) {
-    pucks_.push_back(new Puck(game_engine, *rink_));
+    pucks_.push_back(new Puck(shark_engine, *rink_));
     AddRenderer(pucks_[i]);
     AddSimulator(pucks_[i]);
     round_things_.push_back(pucks_[i]);
@@ -114,20 +114,20 @@ PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_player
   AddSimulator(post_4_);
   round_things_.push_back(post_4_);
 
-//  RinkOverlay *rink_overlay = new RinkOverlay(game_engine);
+//  RinkOverlay *rink_overlay = new RinkOverlay(shark_engine);
 //  AddEntity(rink_overlay, false);
 
-  Sprite winSprite(game_engine, "win");
+  Sprite winSprite(shark_engine, "win");
   win_ = new SimpleItem();
   win_->add_sprite(winSprite);
   win_->set_position(kGamePointZero);
 
-  Sprite loseSprite(game_engine, "lose");
+  Sprite loseSprite(shark_engine, "lose");
   lose_ = new SimpleItem();
   lose_->add_sprite(loseSprite);
   lose_->set_position(kGamePointZero);
 
-  Sprite get_ready_sprite(game_engine, "get_ready");
+  Sprite get_ready_sprite(shark_engine, "get_ready");
   GameSize rink_size = GameSize(rink_->TotalWidth(), rink_->TotalHeight());
   GameSize get_ready_size = get_ready_sprite.content_size();
   GamePoint get_ready_position = GamePoint(floorf((rink_size.width - get_ready_size.width) / 2),
@@ -136,7 +136,7 @@ PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_player
   get_ready_->add_sprite(get_ready_sprite);
   get_ready_->set_position(get_ready_position);
 
-  Sprite go_sprite(game_engine, "go", Sprite::kAnchorCenter);
+  Sprite go_sprite(shark_engine, "go", Sprite::kAnchorCenter);
   GamePoint go_position = GamePoint(rink_size) / 2;
   go_ = new SimpleItem();
   go_->add_sprite(go_sprite);
@@ -144,16 +144,16 @@ PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_player
 
   // For the PC version, hide the mouse during play. Rely on the keyboard to pause, and have no
   // buttons.
-  if (game_engine.platform().input_group() != Platform::kInputGroupPC) {
-    Sprite pause_button_sprite(game_engine, "pause_button");
-    Sprite pause_button_pressed_sprite(game_engine, "pause_button_pressed");
+  if (shark_engine.platform().input_group() != Platform::kInputGroupPC) {
+    Sprite pause_button_sprite(shark_engine, "pause_button");
+    Sprite pause_button_pressed_sprite(shark_engine, "pause_button_pressed");
 
-    GameSize game_size = game_engine.screen_size();
+    GameSize game_size = shark_engine.screen_size();
     double y_margin = (game_size.height - rink_->TotalHeight()) / 2;
     GamePoint pause_button_pos_1 =
         GamePoint(game_size.width - pause_button_sprite.content_size().width,
                   game_size.height - pause_button_sprite.content_size().height - y_margin);
-    pause_button_1_ = new Button(game_engine);
+    pause_button_1_ = new Button(shark_engine);
     pause_button_1_->set_normal_sprite(pause_button_sprite);
     pause_button_1_->set_pressed_sprite(pause_button_pressed_sprite);
     pause_button_1_->set_position(pause_button_pos_1);
@@ -163,11 +163,11 @@ PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_player
 
     if (num_players == 2) {
       // TODO: This is needed because of crappy texture management.
-      Sprite pause_button_sprite_2(game_engine, "pause_button");
-      Sprite pause_button_pressed_sprite_2(game_engine, "pause_button_pressed");
+      Sprite pause_button_sprite_2(shark_engine, "pause_button");
+      Sprite pause_button_pressed_sprite_2(shark_engine, "pause_button_pressed");
 
       GamePoint pause_button_pos_2 = GamePoint(0, -y_margin);
-      pause_button_2_ = new Button(game_engine);
+      pause_button_2_ = new Button(shark_engine);
       pause_button_2_->set_normal_sprite(pause_button_sprite_2);
       pause_button_2_->set_pressed_sprite(pause_button_pressed_sprite_2);
       pause_button_2_->set_position(pause_button_pos_2);
@@ -177,17 +177,17 @@ PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_player
     }
   }
 
-  get_ready_sound_ = game_engine.sound()->GetSound("sounds/get_ready.wav");
-  go_sound_ = game_engine.sound()->GetSound("sounds/start.wav");
-  score_sound_ = game_engine.sound()->GetSound("sounds/score.wav");
-  score_final_sound_ = game_engine.sound()->GetSound("sounds/score_final.wav");
+  get_ready_sound_ = shark_engine.sound()->GetSound("sounds/get_ready.wav");
+  go_sound_ = shark_engine.sound()->GetSound("sounds/start.wav");
+  score_sound_ = shark_engine.sound()->GetSound("sounds/score.wav");
+  score_final_sound_ = shark_engine.sound()->GetSound("sounds/score_final.wav");
 
   give_extra_puck_to_player_ = kPlayerId1;
   player_1_win_count_ = 0;
   player_2_win_count_ = 0;
   SetUpNewGame();
 
-  game_engine.input_module()->HidePointer();
+  shark_engine.input_module()->HidePointer();
 }
 
 PlayView::~PlayView() {
@@ -415,11 +415,11 @@ void PlayView::ButtonUp(Button *button) {
 #pragma mark - GameMenuViewDelegate
 
 void PlayView::RematchPressed() {
-  game_engine_.analytics_module()->LogEvent("REMATCH");
+  shark_engine_.analytics_module()->LogEvent("REMATCH");
   SetUpNewGame();
   delete game_menu_view_;
   game_menu_view_ = NULL;
-  game_engine_.input_module()->HidePointer();
+  shark_engine_.input_module()->HidePointer();
 }
 
 void PlayView::MenuPressed() {
@@ -435,7 +435,7 @@ void PlayView::ContinuePressed() {
   RemoveRenderer(game_menu_view_);
   delete game_menu_view_;
   game_menu_view_ = NULL;
-  game_engine_.input_module()->HidePointer();
+  shark_engine_.input_module()->HidePointer();
 }
 
 
@@ -482,13 +482,13 @@ void PlayView::SetUpNewGame() {
   num_active_pucks_ = num_pucks_;
   num_player_1_scores_last_round_ = 0;
 
-  bool app_upgraded = game_engine_.persistence_module()->BoolForKey(kLocalStoreUpgraded);
-  int num_matches = game_engine_.persistence_module()->IntegerForKey(kLocalStoreMatchCount) + 1;
-  game_engine_.persistence_module()->SetInteger(num_matches, kLocalStoreMatchCount);
+  bool app_upgraded = shark_engine_.persistence_module()->BoolForKey(kLocalStoreUpgraded);
+  int num_matches = shark_engine_.persistence_module()->IntegerForKey(kLocalStoreMatchCount) + 1;
+  shark_engine_.persistence_module()->SetInteger(num_matches, kLocalStoreMatchCount);
   bool show_full_screen_ad = !app_upgraded && (num_matches % kFullScreenAdFrequency == 0);
 
   if (show_full_screen_ad) {
-    game_engine_.ad_module()->ShowFullScreenAd();
+    shark_engine_.ad_module()->ShowFullScreenAd();
   }
   state_ = kPlayViewStateGetReady;
   get_ready_ticks_left_ = kGetReadyTicksTotal;
@@ -551,9 +551,9 @@ void PlayView::FinishGameWithWinner(PlayerId playerId) {
   lose_->AnimateToScale(1, kAnimationTypeBounceEaseOut, 3 * 60);
 
   shark_assert(!game_menu_view_, "game_menu_view_ should be NULL.");
-  game_menu_view_ = new GameMenuView(game_engine_, this, true);
+  game_menu_view_ = new GameMenuView(shark_engine_, this, true);
   AddRenderer(game_menu_view_);
-  game_engine_.input_module()->ShowPointer();
+  shark_engine_.input_module()->ShowPointer();
 }
 
 void PlayView::PausePressed() {
@@ -562,8 +562,8 @@ void PlayView::PausePressed() {
     state_ = kPlayViewStatePaused;
 
     shark_assert(!game_menu_view_, "game_menu_view_ should be NULL.");
-    game_menu_view_ = new GameMenuView(game_engine_, this, true);
+    game_menu_view_ = new GameMenuView(shark_engine_, this, true);
     AddRenderer(game_menu_view_);
-    game_engine_.input_module()->ShowPointer();
+    shark_engine_.input_module()->ShowPointer();
   }
 }

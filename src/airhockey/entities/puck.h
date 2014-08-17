@@ -20,7 +20,7 @@ namespace SharkSound {
 
 class Puck : public RoundThing {
  public:
-  Puck(SharkEngine &game_engine, Rink &rink);
+  Puck(SharkEngine &shark_engine, Rink &rink);
 
   void PlaceForPlayer(PlayerId player_id, const std::vector<RoundThing *> &round_things,
                       bool center);

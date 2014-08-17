@@ -15,7 +15,7 @@ class SharkEngine;
 
 class Post : public RoundThing {
  public:
-  Post(SharkEngine &game_engine, double x, double y);
+  Post(SharkEngine &shark_engine, double x, double y);
 
   // RoundThing
   void DidBounceOff(void *other, double total_velocity);

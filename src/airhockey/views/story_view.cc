@@ -22,12 +22,12 @@ using std::vector;
 
 static const int kAnimateTicks = 30;
 
-StoryView::StoryView(SharkEngine &game_engine, StoryViewDelegate &delegate) : delegate_(delegate) {
-  bool use_pc = game_engine.platform().input_group() == Platform::kInputGroupPC;
-  Sprite story_image = Sprite(game_engine, use_pc ? "story_pc" : "story");
-  Sprite about_image = Sprite(game_engine, use_pc ? "about_pc" : "about");
+StoryView::StoryView(SharkEngine &shark_engine, StoryViewDelegate &delegate) : delegate_(delegate) {
+  bool use_pc = shark_engine.platform().input_group() == Platform::kInputGroupPC;
+  Sprite story_image = Sprite(shark_engine, use_pc ? "story_pc" : "story");
+  Sprite about_image = Sprite(shark_engine, use_pc ? "about_pc" : "about");
 
-  GameSize rink_size = RinkView::RinkSizeForTextureGroup(game_engine.platform().texture_group());
+  GameSize rink_size = RinkView::RinkSizeForTextureGroup(shark_engine.platform().texture_group());
   GameSize image_size = story_image.content_size();
   double zoom = rink_size.width / image_size.width;
 
@@ -50,7 +50,7 @@ StoryView::StoryView(SharkEngine &game_engine, StoryViewDelegate &delegate) : de
   about_->set_scale(zoom);
   about_->set_position(starting_image_position_);
 
-  beep_sound_ = game_engine.sound()->GetSound("sounds/beep.wav");
+  beep_sound_ = shark_engine.sound()->GetSound("sounds/beep.wav");
 }
 
 

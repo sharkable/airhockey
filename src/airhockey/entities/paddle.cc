@@ -27,9 +27,9 @@ static const double kPaddleFriction = 0.1;
 static const double kPaddleAIFriction = 0.999;
 static const int kPaddleAIInitialPauseTicks = 30;
 
-Paddle::Paddle(SharkEngine &game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
+Paddle::Paddle(SharkEngine &shark_engine, Rink &rink, PlayerId player_id, PaddleSize size,
                bool player_controlled, ComputerAI ai_level, vector<Puck *> &pucks)
-    : RoundThing(game_engine),
+    : RoundThing(shark_engine),
       rink_(rink),
       player_id_(player_id),
       player_controlled_(player_controlled),
@@ -43,25 +43,25 @@ Paddle::Paddle(SharkEngine &game_engine, Rink &rink, PlayerId player_id, PaddleS
   if (player_id == kPlayerId1) {
     switch (size) {
       case kPaddleSizeSmall:
-        sprite_.set_texture(game_engine.resource_loader().TextureWithName("paddle_1_small"));
+        sprite_.set_texture(shark_engine.resource_loader().TextureWithName("paddle_1_small"));
         break;
       case kPaddleSizeMedium:
-        sprite_.set_texture(game_engine.resource_loader().TextureWithName("paddle_1_medium"));
+        sprite_.set_texture(shark_engine.resource_loader().TextureWithName("paddle_1_medium"));
         break;
       case kPaddleSizeLarge:
-        sprite_.set_texture(game_engine.resource_loader().TextureWithName("paddle_1_large"));
+        sprite_.set_texture(shark_engine.resource_loader().TextureWithName("paddle_1_large"));
         break;
     }
   } else {
     switch (size) {
       case kPaddleSizeSmall:
-        sprite_.set_texture(game_engine.resource_loader().TextureWithName("paddle_2_small"));
+        sprite_.set_texture(shark_engine.resource_loader().TextureWithName("paddle_2_small"));
         break;
       case kPaddleSizeMedium:
-        sprite_.set_texture(game_engine.resource_loader().TextureWithName("paddle_2_medium"));
+        sprite_.set_texture(shark_engine.resource_loader().TextureWithName("paddle_2_medium"));
         break;
       case kPaddleSizeLarge:
-        sprite_.set_texture(game_engine.resource_loader().TextureWithName("paddle_2_large"));
+        sprite_.set_texture(shark_engine.resource_loader().TextureWithName("paddle_2_large"));
         break;
     }
   }
@@ -69,7 +69,7 @@ Paddle::Paddle(SharkEngine &game_engine, Rink &rink, PlayerId player_id, PaddleS
   radius_ = kPaddleRadii[size];
   mass_ = kPaddleMass;
   friction_ = player_controlled_ ? kPaddleFriction : kPaddleAIFriction;
-  always_grabbed_ = game_engine.platform().input_group() == Platform::kInputGroupPC;
+  always_grabbed_ = shark_engine.platform().input_group() == Platform::kInputGroupPC;
 }
 
 void Paddle::SetInitialPosition() {

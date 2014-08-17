@@ -25,13 +25,13 @@ const int kSliderWidthPhone = 506;
 // Locale Store key
 static const string kLocalStoreVolume = "ls_volume";
 
-SoundSlider::SoundSlider(SharkEngine &game_engine, GamePoint position)
-    : game_engine_(game_engine),
+SoundSlider::SoundSlider(SharkEngine &shark_engine, GamePoint position)
+    : shark_engine_(shark_engine),
       position_(position),
-      empty_sprite_(game_engine, "sound_empty"),
-      full_sprite_(game_engine, "sound_full"),
-      thumb_sprite_(game_engine, "sound_thumb") {
-  switch (game_engine.platform().texture_group()) {
+      empty_sprite_(shark_engine, "sound_empty"),
+      full_sprite_(shark_engine, "sound_full"),
+      thumb_sprite_(shark_engine, "sound_thumb") {
+  switch (shark_engine.platform().texture_group()) {
     case Platform::kTextureGroupIPhone35cmLowRes:
     case Platform::kTextureGroupAndroidLowRes:
     case Platform::kTextureGroupIPhone35cmHighRes:
@@ -48,12 +48,12 @@ SoundSlider::SoundSlider(SharkEngine &game_engine, GamePoint position)
       slider_width_ = kSliderWidthTablet;
       break;
   }
-  if (game_engine.persistence_module()->HasEntryForKey(kLocalStoreVolume)) {
-    value_ = game_engine.persistence_module()->DoubleForKey(kLocalStoreVolume);
+  if (shark_engine.persistence_module()->HasEntryForKey(kLocalStoreVolume)) {
+    value_ = shark_engine.persistence_module()->DoubleForKey(kLocalStoreVolume);
   } else {
     value_ = 0.75;
   }
-  game_engine.sound()->SetGlobalVolume(value_);
+  shark_engine.sound()->SetGlobalVolume(value_);
 }
 
 GamePoint SoundSlider::ThumbPoint() {
@@ -113,8 +113,8 @@ bool SoundSlider::HandleInputEvent(InputEvent const &event,
     }
   } else if (event.action() == InputEvent::kActionUp) {
     if (event.id() == grabbed_touch_) {
-      game_engine_.sound()->SetGlobalVolume(value_);
-      game_engine_.persistence_module()->SetDouble(value_, kLocalStoreVolume);
+      shark_engine_.sound()->SetGlobalVolume(value_);
+      shark_engine_.persistence_module()->SetDouble(value_, kLocalStoreVolume);
       grabbed_touch_ = NULL;
       return true;
     }

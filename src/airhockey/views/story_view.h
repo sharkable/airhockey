@@ -32,7 +32,7 @@ class StoryViewDelegate {
 class StoryView : public Simulator, public Renderer, public InputHandler,
     private AnimatableDelegate {
  public:
-  StoryView(SharkEngine &game_engine, StoryViewDelegate &delegate);
+  StoryView(SharkEngine &shark_engine, StoryViewDelegate &delegate);
 
 // TODO  bool HandleBackButton();
 

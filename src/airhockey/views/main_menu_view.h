@@ -38,7 +38,7 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
     private StoryViewDelegate, private SettingsViewDelegate, private AppStoreModuleDelegate,
     private ButtonDelegate {
  public:
-  MainMenuView(SharkEngine &game_engine, GameView &game_view);
+  MainMenuView(SharkEngine &shark_engine, GameView &game_view);
   ~MainMenuView();
 
   // TODO?
@@ -73,7 +73,7 @@ class MainMenuView : public Simulator, public Renderer, public InputHandler,
   void PressedStory();
   void PressedUpgrade();
 
-  SharkEngine &game_engine_;
+  SharkEngine &shark_engine_;
   GameView &game_view_;
 
   SettingsView *settings_view_;

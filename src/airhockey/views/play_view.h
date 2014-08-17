@@ -41,7 +41,7 @@ typedef enum {
 class PlayView : public GroupSimulator, public GroupRenderer, public InputHandler,
     private ButtonDelegate, GameMenuViewDelegate {
  public:
-  PlayView(SharkEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
+  PlayView(SharkEngine &shark_engine, GameView &game_view, int num_players, int num_pucks,
            ComputerAI difficulty, PaddleSize paddle_size);
   ~PlayView();
 
@@ -70,7 +70,7 @@ class PlayView : public GroupSimulator, public GroupRenderer, public InputHandle
   void FinishGameWithWinner(PlayerId player_id);
   void PausePressed();
 
-  SharkEngine &game_engine_;
+  SharkEngine &shark_engine_;
   GameView &game_view_;
 
   GameMenuView *game_menu_view_;

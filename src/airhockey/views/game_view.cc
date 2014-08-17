@@ -11,10 +11,10 @@
 #include "airhockey/views/main_menu_view.h"
 #include "airhockey/views/play_view.h"
 
-GameView::GameView(SharkEngine &game_engine)
-    : game_engine_(game_engine),
-      rink_background_(game_engine),
-      rink_overlay_(game_engine),
+GameView::GameView(SharkEngine &shark_engine)
+    : shark_engine_(shark_engine),
+      rink_background_(shark_engine),
+      rink_overlay_(shark_engine),
       main_menu_view_(nullptr),
       play_view_(nullptr) {
   ShowMainMenu();
@@ -22,7 +22,7 @@ GameView::GameView(SharkEngine &game_engine)
 
 void GameView::ShowMainMenu() {
   if (!main_menu_view_) {
-    main_menu_view_ = new MainMenuView{game_engine_, *this};
+    main_menu_view_ = new MainMenuView{shark_engine_, *this};
   }
 }
 
@@ -36,7 +36,8 @@ void GameView::RemoveMainMenu() {
 void GameView::ShowPlay(int num_players, int num_pucks, ComputerAI difficulty,
                         PaddleSize paddle_size) {
   if (!play_view_) {
-    play_view_ = new PlayView{game_engine_, *this, num_players, num_pucks, difficulty, paddle_size};
+    play_view_ =
+        new PlayView{shark_engine_, *this, num_players, num_pucks, difficulty, paddle_size};
   }
 }
 

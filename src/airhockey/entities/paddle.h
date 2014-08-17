@@ -36,7 +36,7 @@ typedef enum {
 
 class Paddle : public RoundThing {
  public:
-  Paddle(SharkEngine &game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
+  Paddle(SharkEngine &shark_engine, Rink &rink, PlayerId player_id, PaddleSize size,
          bool player_controlled, ComputerAI ai_level, std::vector<Puck *> &pucks);
 
   void SetInitialPosition();

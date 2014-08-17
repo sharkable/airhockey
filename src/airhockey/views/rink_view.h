@@ -18,7 +18,7 @@ class SharkEngine;
 
 class RinkView : public GroupRenderer {
  public:
-  RinkView(SharkEngine &game_engine);
+  RinkView(SharkEngine &shark_engine);
 
   static GameSize RinkSizeForTextureGroup(Platform::TextureGroup texture_group);
 };

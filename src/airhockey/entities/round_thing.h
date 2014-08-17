@@ -20,8 +20,8 @@ class SharkEngine;
 
 class RoundThing : public Simulator, public Renderer, public InputHandler {
  public:
-  RoundThing(SharkEngine &game_engine);
-  RoundThing(SharkEngine &game_engine, std::string texture_name);
+  RoundThing(SharkEngine &shark_engine);
+  RoundThing(SharkEngine &shark_engine, std::string texture_name);
   ~RoundThing();
 
   void ApplyFriction();

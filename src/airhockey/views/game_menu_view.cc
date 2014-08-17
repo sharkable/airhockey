@@ -15,9 +15,9 @@
 
 #include "airhockey/entities/sound_slider.h"
 
-GameMenuView::GameMenuView(SharkEngine &game_engine, GameMenuViewDelegate *delegate,
+GameMenuView::GameMenuView(SharkEngine &shark_engine, GameMenuViewDelegate *delegate,
                            bool match_finished)
-    : game_engine_(game_engine),
+    : shark_engine_(shark_engine),
       delegate_(delegate),
       sound_slider_(NULL),
       menu_background_(NULL),
@@ -101,37 +101,37 @@ void GameMenuView::ButtonUp(Button *button) {
 #pragma mark - private
 
 void GameMenuView::Init(bool match_finished) {
-  Sprite menu_background_sprite(game_engine_, "game_menu_bg");
+  Sprite menu_background_sprite(shark_engine_, "game_menu_bg");
   menu_background_ = new SimpleItem();
   menu_background_->add_sprite(menu_background_sprite);
-  menu_background_->set_position(game_engine_.position("game_menu_bg"));
+  menu_background_->set_position(shark_engine_.position("game_menu_bg"));
 
-  GamePoint sound_slider_position = game_engine_.position("sound_slider_game_menu");
-  sound_slider_ = new SoundSlider(game_engine_, sound_slider_position);
+  GamePoint sound_slider_position = shark_engine_.position("sound_slider_game_menu");
+  sound_slider_ = new SoundSlider(shark_engine_, sound_slider_position);
 
   if (match_finished) {
-    Sprite rematch_button_sprite(game_engine_, "rematch_button");
-    Sprite rematch_button_pressed_sprite(game_engine_, "rematch_button_pressed");
-    rematch_button_ = new Button(game_engine_);
+    Sprite rematch_button_sprite(shark_engine_, "rematch_button");
+    Sprite rematch_button_pressed_sprite(shark_engine_, "rematch_button_pressed");
+    rematch_button_ = new Button(shark_engine_);
     rematch_button_->set_normal_sprite(rematch_button_sprite);
     rematch_button_->set_pressed_sprite(rematch_button_pressed_sprite);
-    rematch_button_->set_position(game_engine_.position("rematch_button"));
+    rematch_button_->set_position(shark_engine_.position("rematch_button"));
     rematch_button_->set_delegate(this);
   } else {
-    Sprite continue_button_sprite(game_engine_, "continue_button");
-    Sprite continue_button_pressed_sprite(game_engine_, "continue_button_pressed");
-    continue_button_ = new Button(game_engine_);
+    Sprite continue_button_sprite(shark_engine_, "continue_button");
+    Sprite continue_button_pressed_sprite(shark_engine_, "continue_button_pressed");
+    continue_button_ = new Button(shark_engine_);
     continue_button_->set_normal_sprite(continue_button_sprite);
     continue_button_->set_pressed_sprite(continue_button_pressed_sprite);
-    continue_button_->set_position(game_engine_.position("continue_button"));
+    continue_button_->set_position(shark_engine_.position("continue_button"));
     continue_button_->set_delegate(this);
   }
 
-  Sprite menu_button_sprite(game_engine_, "menu_button");
-  Sprite menu_button_pressed_sprite(game_engine_, "menu_button_pressed");
-  menu_button_ = new Button(game_engine_);
+  Sprite menu_button_sprite(shark_engine_, "menu_button");
+  Sprite menu_button_pressed_sprite(shark_engine_, "menu_button_pressed");
+  menu_button_ = new Button(shark_engine_);
   menu_button_->set_normal_sprite(menu_button_sprite);
   menu_button_->set_pressed_sprite(menu_button_pressed_sprite);
-  menu_button_->set_position(game_engine_.position("menu_button"));
+  menu_button_->set_position(shark_engine_.position("menu_button"));
   menu_button_->set_delegate(this);
 }

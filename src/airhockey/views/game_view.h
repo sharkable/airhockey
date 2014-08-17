@@ -23,7 +23,7 @@ class SharkEngine;
 
 class GameView : public Simulator, public Renderer, public InputHandler {
  public:
-  GameView(SharkEngine &game_engine);
+  GameView(SharkEngine &shark_engine);
 
   void ShowMainMenu();
   void RemoveMainMenu();
@@ -41,7 +41,7 @@ class GameView : public Simulator, public Renderer, public InputHandler {
                                 CoordinateSystem const &coordinate_system);
 
  private:
-  SharkEngine &game_engine_;
+  SharkEngine &shark_engine_;
   RinkView rink_background_;
   RinkOverlay rink_overlay_;
   MainMenuView *main_menu_view_;

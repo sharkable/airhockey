@@ -14,9 +14,9 @@ using std::string;
 #include "sharkengine/entities/simple_item.h"
 #include "sharkengine/sprite.h"
 
-RinkView::RinkView(SharkEngine &game_engine) {
-  Sprite background_sprite(game_engine, "rink_bg");
-  SimpleItem *background = new SimpleItem(background_sprite, game_engine.position("rink_bg"));
+RinkView::RinkView(SharkEngine &shark_engine) {
+  Sprite background_sprite(shark_engine, "rink_bg");
+  SimpleItem *background = new SimpleItem(background_sprite, shark_engine.position("rink_bg"));
   AddRenderer(background);
 }
 

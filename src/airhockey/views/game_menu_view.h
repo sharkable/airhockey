@@ -27,7 +27,7 @@ class GameMenuViewDelegate {
 class GameMenuView : public Simulator, public Renderer, public InputHandler,
     private ButtonDelegate {
  public:
-  GameMenuView(SharkEngine &game_engine, GameMenuViewDelegate *delegate, bool match_finished);
+  GameMenuView(SharkEngine &shark_engine, GameMenuViewDelegate *delegate, bool match_finished);
   ~GameMenuView();
 
 //  bool HandleBackButton();
@@ -48,7 +48,7 @@ class GameMenuView : public Simulator, public Renderer, public InputHandler,
  private:
   void Init(bool match_finished);
 
-  SharkEngine &game_engine_;
+  SharkEngine &shark_engine_;
   GameMenuViewDelegate *delegate_;
   SoundSlider *sound_slider_;
   SimpleItem *menu_background_;

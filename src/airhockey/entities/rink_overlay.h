@@ -15,7 +15,7 @@ class SharkEngine;
 
 class RinkOverlay : public GroupRenderer {
  public:
-  RinkOverlay(SharkEngine &game_engine);
+  RinkOverlay(SharkEngine &shark_engine);
 };
 
 #endif
