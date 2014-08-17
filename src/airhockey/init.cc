@@ -15,7 +15,7 @@
 #include "airhockey/views/game_view.h"
 #include "airhockey/views/rink_view.h"
 
-void sharkengine_init(GameEngine &game_engine) {
+void sharkengine_init(SharkEngine &game_engine) {
   switch (game_engine.platform().texture_group()) {
     case Platform::kTextureGroupIPhone35cmLowRes:
     case Platform::kTextureGroupIPhone35cmHighRes:

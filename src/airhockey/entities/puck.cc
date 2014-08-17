@@ -28,7 +28,7 @@ static const double kPuckMass = 10;
 static const double kPuckFriction = 0.995;
 static const double kPuckRadius = 43.5;
 
-Puck::Puck(GameEngine &game_engine, Rink &rink) : RoundThing(game_engine, "puck"), rink_(rink) {
+Puck::Puck(SharkEngine &game_engine, Rink &rink) : RoundThing(game_engine, "puck"), rink_(rink) {
   radius_ = kPuckRadius;
   mass_ = kPuckMass;
   friction_ = kPuckFriction;

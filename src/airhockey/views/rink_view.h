@@ -14,11 +14,11 @@
 #include "sharkengine/coordinates/coordinate_types.h"
 #include "sharkengine/render/group_renderer.h"
 
-class GameEngine;
+class SharkEngine;
 
 class RinkView : public GroupRenderer {
  public:
-  RinkView(GameEngine &game_engine);
+  RinkView(SharkEngine &game_engine);
 
   static GameSize RinkSizeForTextureGroup(Platform::TextureGroup texture_group);
 };

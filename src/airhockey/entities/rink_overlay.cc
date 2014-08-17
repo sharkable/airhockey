@@ -15,7 +15,7 @@ using std::string;
 
 #include "airhockey/entities/rink_overlay.h"
 
-RinkOverlay::RinkOverlay(GameEngine &game_engine) {
+RinkOverlay::RinkOverlay(SharkEngine &game_engine) {
   string extention = game_engine.resource_loader().texture_name_extention();
   if (extention == "_iphone" || extention == "_iphone@2x") {
     // Add rink top and bottom pieces.

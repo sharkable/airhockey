@@ -17,7 +17,7 @@
 #include "sharkengine/render/renderer.h"
 #include "sharkengine/simulation/simulator.h"
 
-class GameEngine;
+class SharkEngine;
 
 class SimpleItem;
 namespace SharkSound {
@@ -32,7 +32,7 @@ class StoryViewDelegate {
 class StoryView : public Simulator, public Renderer, public InputHandler,
     private AnimatableDelegate {
  public:
-  StoryView(GameEngine &game_engine, StoryViewDelegate &delegate);
+  StoryView(SharkEngine &game_engine, StoryViewDelegate &delegate);
 
 // TODO  bool HandleBackButton();
 

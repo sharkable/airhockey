@@ -25,7 +25,7 @@ const string kLocalStoreDifficulty = "ls_difficulty";
 const string kLocalStoreNumPucks = "ls_num_pucks";
 const string kLocalStorePaddleSize = "ls_paddle_size";
 
-SettingsView::SettingsView(GameEngine &game_engine, SettingsViewDelegate &delegate)
+SettingsView::SettingsView(SharkEngine &game_engine, SettingsViewDelegate &delegate)
     : game_engine_(game_engine),
       delegate_(delegate) {
   sp<PersistenceModule> persistence = game_engine.persistence_module();

@@ -25,7 +25,7 @@ const int kSliderWidthPhone = 506;
 // Locale Store key
 static const string kLocalStoreVolume = "ls_volume";
 
-SoundSlider::SoundSlider(GameEngine &game_engine, GamePoint position)
+SoundSlider::SoundSlider(SharkEngine &game_engine, GamePoint position)
     : game_engine_(game_engine),
       position_(position),
       empty_sprite_(game_engine, "sound_empty"),

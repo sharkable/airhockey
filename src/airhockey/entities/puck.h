@@ -13,14 +13,14 @@
 #include "airhockey/entities/rink.h"
 #include "airhockey/entities/round_thing.h"
 
-class GameEngine;
+class SharkEngine;
 namespace SharkSound {
   class Sound;
 }
 
 class Puck : public RoundThing {
  public:
-  Puck(GameEngine &game_engine, Rink &rink);
+  Puck(SharkEngine &game_engine, Rink &rink);
 
   void PlaceForPlayer(PlayerId player_id, const std::vector<RoundThing *> &round_things,
                       bool center);

@@ -22,7 +22,7 @@ using std::vector;
 
 static const int kAnimateTicks = 30;
 
-StoryView::StoryView(GameEngine &game_engine, StoryViewDelegate &delegate) : delegate_(delegate) {
+StoryView::StoryView(SharkEngine &game_engine, StoryViewDelegate &delegate) : delegate_(delegate) {
   bool use_pc = game_engine.platform().input_group() == Platform::kInputGroupPC;
   Sprite story_image = Sprite(game_engine, use_pc ? "story_pc" : "story");
   Sprite about_image = Sprite(game_engine, use_pc ? "about_pc" : "about");

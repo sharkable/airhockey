@@ -11,11 +11,11 @@
 
 #include "sharkengine/render/group_renderer.h"
 
-class GameEngine;
+class SharkEngine;
 
 class RinkOverlay : public GroupRenderer {
  public:
-  RinkOverlay(GameEngine &game_engine);
+  RinkOverlay(SharkEngine &game_engine);
 };
 
 #endif

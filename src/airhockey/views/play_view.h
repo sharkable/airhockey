@@ -19,12 +19,12 @@
 #include "airhockey/entities/paddle.h"
 #include "airhockey/views/game_menu_view.h"
 
-class GameEngine;
 class GameView;
 class Post;
 class Puck;
 class Rink;
 class RoundThing;
+class SharkEngine;
 class SimpleItem;
 namespace SharkSound {
   class Sound;
@@ -41,7 +41,7 @@ typedef enum {
 class PlayView : public GroupSimulator, public GroupRenderer, public InputHandler,
     private ButtonDelegate, GameMenuViewDelegate {
  public:
-  PlayView(GameEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
+  PlayView(SharkEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
            ComputerAI difficulty, PaddleSize paddle_size);
   ~PlayView();
 
@@ -70,7 +70,7 @@ class PlayView : public GroupSimulator, public GroupRenderer, public InputHandle
   void FinishGameWithWinner(PlayerId player_id);
   void PausePressed();
 
-  GameEngine &game_engine_;
+  SharkEngine &game_engine_;
   GameView &game_view_;
 
   GameMenuView *game_menu_view_;

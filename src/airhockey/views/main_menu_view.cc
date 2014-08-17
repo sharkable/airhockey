@@ -49,7 +49,7 @@ void fade_out(Animatable *entity) {
   entity->AnimateToAlpha(0, kAnimationTypeLinear, 15);
 }
 
-MainMenuView::MainMenuView(GameEngine &game_engine, GameView &game_view)
+MainMenuView::MainMenuView(SharkEngine &game_engine, GameView &game_view)
     : game_engine_(game_engine),
       game_view_(game_view),
       story_view_(NULL),

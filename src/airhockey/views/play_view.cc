@@ -39,7 +39,7 @@ static const int kWinScore = 7;
 static const int kFullScreenAdFrequency = 3;
 static const string kLocalStoreMatchCount = "ls_match_count";
 
-PlayView::PlayView(GameEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
+PlayView::PlayView(SharkEngine &game_engine, GameView &game_view, int num_players, int num_pucks,
                    ComputerAI difficulty, PaddleSize paddle_size)
     : game_engine_(game_engine),
       game_view_(game_view),

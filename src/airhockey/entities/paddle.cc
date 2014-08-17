@@ -27,7 +27,7 @@ static const double kPaddleFriction = 0.1;
 static const double kPaddleAIFriction = 0.999;
 static const int kPaddleAIInitialPauseTicks = 30;
 
-Paddle::Paddle(GameEngine &game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
+Paddle::Paddle(SharkEngine &game_engine, Rink &rink, PlayerId player_id, PaddleSize size,
                bool player_controlled, ComputerAI ai_level, vector<Puck *> &pucks)
     : RoundThing(game_engine),
       rink_(rink),

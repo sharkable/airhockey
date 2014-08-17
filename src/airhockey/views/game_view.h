@@ -17,13 +17,13 @@
 #include "airhockey/entities/rink_overlay.h"
 #include "airhockey/views/rink_view.h"
 
-class GameEngine;
 class MainMenuView;
 class PlayView;
+class SharkEngine;
 
 class GameView : public Simulator, public Renderer, public InputHandler {
  public:
-  GameView(GameEngine &game_engine);
+  GameView(SharkEngine &game_engine);
 
   void ShowMainMenu();
   void RemoveMainMenu();
@@ -41,7 +41,7 @@ class GameView : public Simulator, public Renderer, public InputHandler {
                                 CoordinateSystem const &coordinate_system);
 
  private:
-  GameEngine &game_engine_;
+  SharkEngine &game_engine_;
   RinkView rink_background_;
   RinkOverlay rink_overlay_;
   MainMenuView *main_menu_view_;

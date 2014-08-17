@@ -16,12 +16,12 @@
 #include "sharkengine/render/renderer.h"
 #include "sharkengine/simulation/simulator.h"
 
-class GameEngine;
+class SharkEngine;
 
 class RoundThing : public Simulator, public Renderer, public InputHandler {
  public:
-  RoundThing(GameEngine &game_engine);
-  RoundThing(GameEngine &game_engine, std::string texture_name);
+  RoundThing(SharkEngine &game_engine);
+  RoundThing(SharkEngine &game_engine, std::string texture_name);
   ~RoundThing();
 
   void ApplyFriction();

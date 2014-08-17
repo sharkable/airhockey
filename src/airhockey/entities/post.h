@@ -11,11 +11,11 @@
 
 #include "airhockey/entities/round_thing.h"
 
-class GameEngine;
+class SharkEngine;
 
 class Post : public RoundThing {
  public:
-  Post(GameEngine &game_engine, double x, double y);
+  Post(SharkEngine &game_engine, double x, double y);
 
   // RoundThing
   void DidBounceOff(void *other, double total_velocity);

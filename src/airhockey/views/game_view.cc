@@ -11,7 +11,7 @@
 #include "airhockey/views/main_menu_view.h"
 #include "airhockey/views/play_view.h"
 
-GameView::GameView(GameEngine &game_engine)
+GameView::GameView(SharkEngine &game_engine)
     : game_engine_(game_engine),
       rink_background_(game_engine),
       rink_overlay_(game_engine),
