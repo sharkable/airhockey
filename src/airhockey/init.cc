@@ -6,11 +6,11 @@
 //  Copyright 2013 Sharkable. All rights reserved.
 //
 
-#include "gameengine/game_engine.h"
-#include "gameengine/platform.h"
-#include "gameengine/resource_loader.h"
-#include "gameengine/coordinates/coordinate_types.h"
-#include "gameengine/modules/ad_module.h"
+#include "sharkengine/platform.h"
+#include "sharkengine/resource_loader.h"
+#include "sharkengine/shark_engine.h"
+#include "sharkengine/coordinates/coordinate_types.h"
+#include "sharkengine/modules/ad_module.h"
 
 #include "airhockey/views/game_view.h"
 #include "airhockey/views/rink_view.h"

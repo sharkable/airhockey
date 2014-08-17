@@ -9,7 +9,7 @@
 #ifndef AIRHOCKEY_ENTITIES_RINK_H_
 #define AIRHOCKEY_ENTITIES_RINK_H_
 
-#include "gameengine/coordinates/coordinate_types.h"
+#include "sharkengine/coordinates/coordinate_types.h"
 
 class RoundThing;
 

@@ -9,7 +9,7 @@
 #ifndef AIRHOCKEY_ENTITIES_RINKOVERLAY_H_
 #define AIRHOCKEY_ENTITIES_RINKOVERLAY_H_
 
-#include "gameengine/render/group_renderer.h"
+#include "sharkengine/render/group_renderer.h"
 
 class GameEngine;
 

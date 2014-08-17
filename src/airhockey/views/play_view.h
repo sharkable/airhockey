@@ -11,10 +11,10 @@
 
 #include <vector>
 
-#include "gameengine/entities/button.h"
-#include "gameengine/input/input_handler.h"
-#include "gameengine/render/group_renderer.h"
-#include "gameengine/simulation/group_simulator.h"
+#include "sharkengine/entities/button.h"
+#include "sharkengine/input/input_handler.h"
+#include "sharkengine/render/group_renderer.h"
+#include "sharkengine/simulation/group_simulator.h"
 
 #include "airhockey/entities/paddle.h"
 #include "airhockey/views/game_menu_view.h"

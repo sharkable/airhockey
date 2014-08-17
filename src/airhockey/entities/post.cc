@@ -8,7 +8,7 @@
 
 #include "airhockey/entities/post.h"
 
-#include "gameengine/game_engine.h"
+#include "sharkengine/shark_engine.h"
 
 #include "airhockey/entities/puck.h"
 

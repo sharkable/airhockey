@@ -9,9 +9,9 @@
 #ifndef AIRHOCKEY_VIEWS_GAMEVIEW_H_
 #define AIRHOCKEY_VIEWS_GAMEVIEW_H_
 
-#include "gameengine/input/input_handler.h"
-#include "gameengine/render/renderer.h"
-#include "gameengine/simulation/simulator.h"
+#include "sharkengine/input/input_handler.h"
+#include "sharkengine/render/renderer.h"
+#include "sharkengine/simulation/simulator.h"
 
 #include "airhockey/entities/paddle.h"
 #include "airhockey/entities/rink_overlay.h"

@@ -10,10 +10,10 @@
 
 #include <cmath>
 
-#include "gameengine/game_engine.h"
-#include "gameengine/platform.h"
-#include "gameengine/resource_loader.h"
-#include "gameengine/coordinates/coordinate_types.h"
+#include "sharkengine/platform.h"
+#include "sharkengine/resource_loader.h"
+#include "sharkengine/shark_engine.h"
+#include "sharkengine/coordinates/coordinate_types.h"
 
 #include "airhockey/entities/puck.h"
 #include "airhockey/entities/rink.h"

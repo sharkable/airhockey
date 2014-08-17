@@ -8,9 +8,9 @@
 
 #include "airhockey/entities/sound_slider.h"
 
-#include "gameengine/modules/persistence_module.h"
-#include "gameengine/game_engine.h"
-#include "gameengine/platform.h"
+#include "sharkengine/modules/persistence_module.h"
+#include "sharkengine/platform.h"
+#include "sharkengine/shark_engine.h"
 
 #include "sharksound/sound_controller.h"
 

@@ -11,11 +11,11 @@
 
 #include <string>
 
-#include "gameengine/entities/button.h"
-#include "gameengine/input/input_handler.h"
-#include "gameengine/modules/app_store_module.h"
-#include "gameengine/render/renderer.h"
-#include "gameengine/simulation/simulator.h"
+#include "sharkengine/entities/button.h"
+#include "sharkengine/input/input_handler.h"
+#include "sharkengine/modules/app_store_module.h"
+#include "sharkengine/render/renderer.h"
+#include "sharkengine/simulation/simulator.h"
 
 #include "airhockey/views/play_view.h"
 #include "airhockey/views/settings_view.h"

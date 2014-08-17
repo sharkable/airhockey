@@ -9,9 +9,9 @@
 #include <string>
 using std::string;
 
-#include "gameengine/entities/simple_item.h"
-#include "gameengine/game_engine.h"
-#include "gameengine/resource_loader.h"
+#include "sharkengine/entities/simple_item.h"
+#include "sharkengine/resource_loader.h"
+#include "sharkengine/shark_engine.h"
 
 #include "airhockey/entities/rink_overlay.h"
 

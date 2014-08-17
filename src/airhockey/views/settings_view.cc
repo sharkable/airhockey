@@ -8,10 +8,10 @@
 
 #include "airhockey/views/settings_view.h"
 
-#include "gameengine/entities/multi_select.h"
-#include "gameengine/entities/simple_item.h"
-#include "gameengine/modules/persistence_module.h"
-#include "gameengine/game_engine.h"
+#include "sharkengine/shark_engine.h"
+#include "sharkengine/entities/multi_select.h"
+#include "sharkengine/entities/simple_item.h"
+#include "sharkengine/modules/persistence_module.h"
 
 #include "airhockey/entities/paddle.h"
 

@@ -8,9 +8,9 @@
 
 #include "airhockey/entities/round_thing.h"
 
-#include "gameengine/game_engine.h"
-#include "gameengine/resource_loader.h"
-#include "gameengine/coordinates/coordinate_types.h"
+#include "sharkengine/resource_loader.h"
+#include "sharkengine/shark_engine.h"
+#include "sharkengine/coordinates/coordinate_types.h"
 
 using std::string;
 using std::vector;

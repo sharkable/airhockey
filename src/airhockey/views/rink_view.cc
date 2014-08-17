@@ -11,8 +11,8 @@
 #include <string>
 using std::string;
 
-#include "gameengine/entities/simple_item.h"
-#include "gameengine/sprite.h"
+#include "sharkengine/entities/simple_item.h"
+#include "sharkengine/sprite.h"
 
 RinkView::RinkView(GameEngine &game_engine) {
   Sprite background_sprite(game_engine, "rink_bg");

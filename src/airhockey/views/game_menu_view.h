@@ -9,10 +9,10 @@
 #ifndef AIRHOCKEY_VIEWS_GAMEMENUVIEW_H_
 #define AIRHOCKEY_VIEWS_GAMEMENUVIEW_H_
 
-#include "gameengine/entities/button.h"
-#include "gameengine/input/input_handler.h"
-#include "gameengine/render/renderer.h"
-#include "gameengine/simulation/simulator.h"
+#include "sharkengine/entities/button.h"
+#include "sharkengine/input/input_handler.h"
+#include "sharkengine/render/renderer.h"
+#include "sharkengine/simulation/simulator.h"
 
 class SimpleItem;
 class SoundSlider;

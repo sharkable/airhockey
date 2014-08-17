@@ -8,11 +8,11 @@
 
 #include "airhockey/views/story_view.h"
 
-#include "gameengine/game_engine.h"
-#include "gameengine/platform.h"
-#include "gameengine/sprite.h"
-#include "gameengine/coordinates/coordinate_types.h"
-#include "gameengine/entities/simple_item.h"
+#include "sharkengine/platform.h"
+#include "sharkengine/shark_engine.h"
+#include "sharkengine/sprite.h"
+#include "sharkengine/coordinates/coordinate_types.h"
+#include "sharkengine/entities/simple_item.h"
 #include "sharksound/sound.h"
 #include "sharksound/sound_controller.h"
 

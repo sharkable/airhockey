@@ -8,14 +8,14 @@
 
 #include "airhockey/views/play_view.h"
 
-#include "gameengine/entities/simple_item.h"
-#include "gameengine/modules/ad_module.h"
-#include "gameengine/modules/analytics_module.h"
-#include "gameengine/modules/input_module.h"
-#include "gameengine/modules/persistence_module.h"
-#include "gameengine/game_engine.h"
-#include "gameengine/platform.h"
-#include "gameengine/resource_loader.h"
+#include "sharkengine/entities/simple_item.h"
+#include "sharkengine/modules/ad_module.h"
+#include "sharkengine/modules/analytics_module.h"
+#include "sharkengine/modules/input_module.h"
+#include "sharkengine/modules/persistence_module.h"
+#include "sharkengine/platform.h"
+#include "sharkengine/resource_loader.h"
+#include "sharkengine/shark_engine.h"
 #include "sharksound/sound.h"
 #include "sharksound/sound_controller.h"
 

@@ -11,7 +11,7 @@
 #include <cmath>
 #include <vector>
 
-#include "gameengine/game_engine.h"
+#include "sharkengine/shark_engine.h"
 #include "sharksound/sound_controller.h"
 #include "sharksound/sound.h"
 
